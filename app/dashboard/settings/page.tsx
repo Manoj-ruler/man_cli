@@ -47,18 +47,28 @@ export default function SettingsPage() {
 
   const generateToken = async () => {
     setGenerating(true);
+    
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+
     const token = `ta_${crypto.randomUUID().replace(/-/g, "")}`;
 
     // Delete existing tokens
     await supabase.from("api_tokens").delete().gt("created_at", "2000-01-01");
 
     // Insert new token
-    await supabase.from("api_tokens").insert({ token });
+    const { error } = await supabase.from("api_tokens").insert({ 
+      token,
+      user_id: user.id
+    });
 
-    setApiToken(token);
+    if (!error) {
+      setApiToken(token);
+      setMessage("New API token generated. Update your CLI config.");
+      setTimeout(() => setMessage(""), 5000);
+    }
+    
     setGenerating(false);
-    setMessage("New API token generated. Update your CLI config.");
-    setTimeout(() => setMessage(""), 5000);
   };
 
   const copyToken = async () => {
