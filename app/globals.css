@@ -1,26 +1,249 @@
 @import "tailwindcss";
 
+/* ============================================
+   TERMINAL ASSISTANT — DESIGN SYSTEM
+   "Brutalist Terminal meets Premium SaaS"
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-bg: #0A0A0F;
+  --color-surface: #111118;
+  --color-surface-2: #16161F;
+  --color-border: #1E1E2E;
+  --color-border-hover: #2A2A3E;
+  --color-text: #F0F0FF;
+  --color-muted: #6B6B8A;
+  --color-pink: #FF2D6B;
+  --color-pink-hover: #FF1A5C;
+  --color-pink-glow: rgba(255, 45, 107, 0.15);
+  --color-green: #00F5A0;
+  --color-green-muted: #4EC9B0;
+  --color-red: #FF4444;
+  --color-terminal-bg: #080810;
+  --color-terminal-header: #1A1A2E;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-border: var(--color-border);
+  --color-border-hover: var(--color-border-hover);
+  --color-text: var(--color-text);
+  --color-muted: var(--color-muted);
+  --color-pink: var(--color-pink);
+  --color-pink-hover: var(--color-pink-hover);
+  --color-pink-glow: var(--color-pink-glow);
+  --color-green: var(--color-green);
+  --color-green-muted: var(--color-green-muted);
+  --color-red: var(--color-red);
+  --color-terminal-bg: var(--color-terminal-bg);
+  --color-terminal-header: var(--color-terminal-header);
+
+  --font-syne: "Syne", var(--font-geist-sans), system-ui, sans-serif;
+  --font-dm-sans: "DM Sans", var(--font-geist-sans), system-ui, sans-serif;
+  --font-jetbrains: "JetBrains Mono", var(--font-geist-mono), monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-dm-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-pink);
+  color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes pulse-pink {
+  0%, 100% {
+    box-shadow: 0 0 0 0 var(--color-pink-glow);
+  }
+  50% {
+    box-shadow: 0 0 20px 5px var(--color-pink-glow);
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Utility classes */
+.animate-fade-up {
+  animation: fadeUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-pulse-pink {
+  animation: pulse-pink 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Staggered delays */
+.delay-1 { animation-delay: 0.06s; }
+.delay-2 { animation-delay: 0.12s; }
+.delay-3 { animation-delay: 0.18s; }
+.delay-4 { animation-delay: 0.24s; }
+.delay-5 { animation-delay: 0.3s; }
+.delay-6 { animation-delay: 0.36s; }
+.delay-7 { animation-delay: 0.42s; }
+.delay-8 { animation-delay: 0.48s; }
+
+/* ============================================
+   NOISE TEXTURE OVERLAY
+   ============================================ */
+
+.noise-overlay {
+  position: relative;
+}
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ============================================
+   CARD GLOW EFFECT
+   ============================================ */
+
+.card-glow {
+  transition: all 0.2s ease-out;
+}
+.card-glow:hover {
+  border-color: var(--color-pink);
+  box-shadow: 0 0 0 1px var(--color-pink), 0 0 20px var(--color-pink-glow);
+}
+
+/* ============================================
+   PINK GLOW BORDER
+   ============================================ */
+
+.pink-glow-border {
+  box-shadow: 0 0 15px var(--color-pink-glow), 0 0 30px rgba(255, 45, 107, 0.08);
+}
+
+/* ============================================
+   BUTTON PRESS EFFECT
+   ============================================ */
+
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* ============================================
+   GRADIENT TEXT
+   ============================================ */
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-text) 0%, var(--color-muted) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pink-gradient-text {
+  background: linear-gradient(135deg, var(--color-pink) 0%, #FF6B9D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
