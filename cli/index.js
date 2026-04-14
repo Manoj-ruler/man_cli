@@ -35,7 +35,7 @@ try {
   // Call Python embedding + search
   const result = execSync(`python "${embedScript}" "${query}"`, {
     encoding: 'utf-8',
-    timeout: 30000,
+    timeout: 120000,
     stdio: ['pipe', 'pipe', 'pipe'],
   }).trim();
 
