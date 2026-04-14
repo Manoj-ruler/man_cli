@@ -16,7 +16,7 @@ import numpy as np
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(SCRIPT_DIR, 'data')
-INDEX_PATH = os.path.join(DATA_DIR, 'index.faiss')
+INDEX_PATH = os.path.join(DATA_DIR, 'index.npy')
 COMMANDS_PATH = os.path.join(DATA_DIR, 'commands.json')
 MODEL_NAME = 'all-MiniLM-L6-v2'
 
@@ -28,9 +28,7 @@ def load_model():
 
 
 def build_index():
-    """Build FAISS index from commands.json."""
-    import faiss
-
+    """Build normalized NumPy index from commands.json."""
     print(f"Loading model: {MODEL_NAME}...")
     model = load_model()
 
@@ -43,35 +41,29 @@ def build_index():
     print(f"Encoding {len(intents)} commands...")
     embeddings = model.encode(intents, normalize_embeddings=True, show_progress_bar=True)
 
-    # Build FAISS index (Inner Product on normalized vectors = cosine similarity)
-    dim = embeddings.shape[1]
-    index = faiss.IndexFlatIP(dim)
-    index.add(embeddings.astype(np.float32))
-
-    # Save index
-    faiss.write_index(index, INDEX_PATH)
-    print(f"Index saved to {INDEX_PATH} ({index.ntotal} vectors, {dim} dimensions)")
+    # Save index as an NPY array
+    np.save(INDEX_PATH, embeddings.astype(np.float32))
+    print(f"Index saved to {INDEX_PATH} ({embeddings.shape[0]} vectors, {embeddings.shape[1]} dimensions)")
     print("Done!")
 
 
 def search(query):
-    """Search for the best matching command."""
-    import faiss
-
+    """Search for the best matching command using NumPy cosine similarity."""
     model = load_model()
 
     # Load index and commands
-    index = faiss.read_index(INDEX_PATH)
+    index = np.load(INDEX_PATH)
     with open(COMMANDS_PATH, 'r') as f:
         commands = json.load(f)
 
     # Encode query
-    vec = model.encode([query], normalize_embeddings=True)
+    vec = model.encode([query], normalize_embeddings=True).astype(np.float32)
 
-    # Search
-    D, I = index.search(vec.astype(np.float32), k=1)
-    score = float(D[0][0])
-    match = commands[I[0][0]]
+    # Calculate inner product (cosine similarity since vectors are normalized)
+    similarities = np.dot(index, vec[0])
+    best_idx = np.argmax(similarities)
+    score = float(similarities[best_idx])
+    match = commands[best_idx]
 
     result = {
         'command': match['command'],
