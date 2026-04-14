@@ -33,7 +33,7 @@ const embedScript = path.join(__dirname, 'embed.py');
 
 try {
   // Call Python embedding + search
-  const result = execSync(`python3 "${embedScript}" "${query}"`, {
+  const result = execSync(`python "${embedScript}" "${query}"`, {
     encoding: 'utf-8',
     timeout: 30000,
     stdio: ['pipe', 'pipe', 'pipe'],
@@ -65,7 +65,7 @@ try {
 
 } catch (err) {
   // Check if Python/FAISS not installed
-  if (err.message && err.message.includes('python3')) {
+  if (err.message && err.message.includes('python')) {
     console.log(`\n${MUTED}Error: Python 3 is required. Install it and try again.${RESET}`);
     console.log(`${MUTED}Also install: pip install sentence-transformers faiss-cpu${RESET}\n`);
   } else {
