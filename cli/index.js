@@ -79,12 +79,27 @@ async function main() {
         }, conf).catch(() => {});
       }
 
-      // Execute exactly what was asked for
+      // Allow user to edit the mapped command before executing
+      const { input } = require('@inquirer/prompts');
+      let finalCommand = '';
+      
       try {
-        console.log(`\n${PINK}🚀 Executing:${RESET} ${commandToExecute}\n`);
-        execSync(commandToExecute, { stdio: 'inherit' });
-      } catch (err) {
-        console.error(`\n${PINK}Command failed to execute or was aborted.${RESET}\n`);
+        finalCommand = await input({
+          message: '🚀 Ready to execute (Edit if needed):',
+          default: commandToExecute
+        });
+      } catch (promptErr) {
+        if (promptErr.name === 'ExitPromptError') {
+          process.exit(0);
+        }
+      }
+
+      if (finalCommand) {
+        try {
+          execSync(finalCommand, { stdio: 'inherit' });
+        } catch (err) {
+          console.error(`\n${PINK}Command failed to execute or was aborted.${RESET}\n`);
+        }
       }
     }
 
