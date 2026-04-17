@@ -9,8 +9,10 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@inquirer/prompts": "^8.4.1",
     "@supabase/ssr": "^0.10.2",
     "@supabase/supabase-js": "^2.103.0",
+    "chalk": "^4.1.2",
     "lucide-react": "^1.8.0",
     "next": "16.2.3",
     "react": "19.2.4",

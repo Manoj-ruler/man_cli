@@ -126,4 +126,60 @@ function search(query) {
   };
 }
 
-module.exports = { search };
+function searchMany(query, limit = 7) {
+  const { commands, tfVectors, idf } = buildIndex(); 
+  
+  if (!query) {
+      return commands.slice(0, limit).map(cmd => ({
+          name: `${cmd.command}  - ${cmd.description || cmd.intent}`,
+          value: cmd.command
+      }));
+  }
+
+  const queryTokens = tokenize(query);
+  if (queryTokens.length === 0) {
+      return commands.slice(0, limit).map(cmd => ({
+          name: `${cmd.command}  - ${cmd.description || cmd.intent}`,
+          value: cmd.command
+      }));
+  }
+  
+  // BM25 Tuning Parameters
+  const k1 = 1.2;
+  const b = 0.75;
+  const avgdl = tfVectors.reduce((sum, tf) => sum + Object.values(tf).reduce((s, c) => s + c, 0), 0) / tfVectors.length;
+  const queryTokensSet = new Set(queryTokens);
+
+  const scoredCommands = commands.map((cmd, index) => {
+    let score = 0;
+    const docTf = tfVectors[index];
+    const docLength = Object.values(docTf).reduce((s, c) => s + c, 0);
+
+    queryTokensSet.forEach(token => {
+      if (docTf[token]) {
+        const tf = docTf[token];
+        const tokenIdf = idf[token] || 0;
+        const num = tf * (k1 + 1);
+        const den = tf + k1 * (1 - b + b * (docLength / avgdl));
+        score += tokenIdf * (num / den);
+      }
+    });
+
+    const exactIntent = cmd.intent.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const cleanQuery = query.toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (exactIntent.includes(cleanQuery) || cleanQuery.includes(exactIntent)) {
+        score += 15.0;
+    }
+
+    return { cmd, score };
+  });
+
+  scoredCommands.sort((a, b) => b.score - a.score);
+
+  return scoredCommands.slice(0, limit).map(item => ({
+      name: `${item.cmd.command}  - ${item.cmd.description || item.cmd.intent}`,
+      value: item.cmd.command
+  }));
+}
+
+module.exports = { search, searchMany };
