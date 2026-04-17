@@ -29,36 +29,34 @@ if (args.length === 0) {
 }
 
 const query = args.join(' ');
-const embedScript = path.join(__dirname, 'embed.py');
 
 try {
-  // Call Python embedding + search
-  const result = execSync(`python "${embedScript}" "${query}"`, {
-    encoding: 'utf-8',
-    timeout: 120000,
-    stdio: ['pipe', 'pipe', 'pipe'],
-  }).trim();
+  // Import the new native JS search engine
+  const searchEngine = require('./search');
 
-  const parsed = JSON.parse(result);
-  const { command, score, category } = parsed;
+  // Execute BM25 search algorithms instantly (under 10ms usually)
+  const startTime = Date.now();
+  const match = searchEngine.search(query);
+  const responseTimeMs = Date.now() - startTime;
 
-  if (score < 0.6) {
+  if (match.confidence < 30 || !match.command) {
     console.log(`\n${MUTED}No confident match found. Try rephrasing.${RESET}\n`);
     process.exit(1);
   }
 
-  // Print result cleanly
+  // Formatting output variables
+  const { command, category, confidence } = match;
   console.log(`\n${BOLD}${PINK}${command}${RESET}`);
-  console.log(`${MUTED}category: ${category}  •  confidence: ${(score * 100).toFixed(0)}%${RESET}\n`);
+  console.log(`${MUTED}category: ${category}  •  confidence: ${confidence}%${RESET}\n`);
 
-  // Sync to dashboard (fire-and-forget)
+  // Sync to web dashboard if token is configured
   const conf = config.load();
   if (conf.sync_enabled && conf.api_token) {
     sync.logQuery({
       query_text: query,
       matched_command: command,
       category,
-      response_time_ms: 0, // TODO: measure actual time
+      response_time_ms: responseTimeMs, // Record exactly how fast it was!
       success: true,
     }, conf).catch(() => {}); // silent fail
   }
