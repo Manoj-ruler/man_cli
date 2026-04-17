@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const COMMANDS_PATH = path.join(__dirname, 'data', 'commands.json');
+const CUSTOM_SNIPPETS_PATH = path.join(__dirname, 'data', 'custom_snippets.json');
 
 // Words to ignore to prevent false matches on generic phrasing
 const ignoreWords = new Set(['how', 'to', 'do', 'i', 'a', 'an', 'the', 'is', 'in', 'and', 'for', 'of', 'with', 'on', 'can', 'you']);
@@ -11,7 +12,18 @@ function tokenize(text) {
 }
 
 function buildIndex() {
-  const commands = JSON.parse(fs.readFileSync(COMMANDS_PATH, 'utf-8'));
+  let commands = JSON.parse(fs.readFileSync(COMMANDS_PATH, 'utf-8'));
+  
+  if (fs.existsSync(CUSTOM_SNIPPETS_PATH)) {
+    try {
+      const custom = JSON.parse(fs.readFileSync(CUSTOM_SNIPPETS_PATH, 'utf-8'));
+      if (Array.isArray(custom)) {
+        commands = commands.concat(custom);
+      }
+    } catch(err) {
+      // Ignore if corrupt
+    }
+  }
   
   // Tokenize documents by combining intent + description for denser matches
   const docs = commands.map(cmd => {

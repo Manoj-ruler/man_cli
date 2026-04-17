@@ -30,44 +30,56 @@ if (args.length === 0) {
 
 const query = args.join(' ');
 
-try {
-  // Import the new native JS search engine
-  const searchEngine = require('./search');
+if (query === 'sync' || query === '--sync') {
+  const conf = config.load();
+  console.log(`\n${MUTED}Syncing custom snippets from dashboard...${RESET}`);
+  sync.pullSnippets(conf).then((count) => {
+    console.log(`${GREEN}Successfully synced ${count} snippets.${RESET}\n`);
+    process.exit(0);
+  }).catch((err) => {
+    console.error(`\n${PINK}Sync failed: ${err.message}${RESET}\n`);
+    process.exit(1);
+  });
+} else {
+  try {
+    // Import the new native JS search engine
+    const searchEngine = require('./search');
 
-  // Execute BM25 search algorithms instantly (under 10ms usually)
-  const startTime = Date.now();
-  const match = searchEngine.search(query);
-  const responseTimeMs = Date.now() - startTime;
+    // Execute BM25 search algorithms instantly (under 10ms usually)
+    const startTime = Date.now();
+    const match = searchEngine.search(query);
+    const responseTimeMs = Date.now() - startTime;
 
-  if (match.confidence < 30 || !match.command) {
-    console.log(`\n${MUTED}No confident match found. Try rephrasing.${RESET}\n`);
+    if (match.confidence < 30 || !match.command) {
+      console.log(`\n${MUTED}No confident match found. Try rephrasing.${RESET}\n`);
+      process.exit(1);
+    }
+
+    // Formatting output variables
+    const { command, category, confidence } = match;
+    console.log(`\n${BOLD}${PINK}${command}${RESET}`);
+    console.log(`${MUTED}category: ${category}  •  confidence: ${confidence}%${RESET}\n`);
+
+    // Sync to web dashboard if token is configured
+    const conf = config.load();
+    if (conf.sync_enabled && conf.api_token) {
+      sync.logQuery({
+        query_text: query,
+        matched_command: command,
+        category,
+        response_time_ms: responseTimeMs, // Record exactly how fast it was!
+        success: true,
+      }, conf).catch(() => {}); // silent fail
+    }
+
+  } catch (err) {
+    // Check if Python/FAISS not installed
+    if (err.message && err.message.includes('python')) {
+      console.log(`\n${MUTED}Error: Python 3 is required. Install it and try again.${RESET}`);
+      console.log(`${MUTED}Also install: pip install sentence-transformers faiss-cpu${RESET}\n`);
+    } else {
+      console.error(`\n${MUTED}Error: ${err.message || 'Unknown error'}${RESET}\n`);
+    }
     process.exit(1);
   }
-
-  // Formatting output variables
-  const { command, category, confidence } = match;
-  console.log(`\n${BOLD}${PINK}${command}${RESET}`);
-  console.log(`${MUTED}category: ${category}  •  confidence: ${confidence}%${RESET}\n`);
-
-  // Sync to web dashboard if token is configured
-  const conf = config.load();
-  if (conf.sync_enabled && conf.api_token) {
-    sync.logQuery({
-      query_text: query,
-      matched_command: command,
-      category,
-      response_time_ms: responseTimeMs, // Record exactly how fast it was!
-      success: true,
-    }, conf).catch(() => {}); // silent fail
-  }
-
-} catch (err) {
-  // Check if Python/FAISS not installed
-  if (err.message && err.message.includes('python')) {
-    console.log(`\n${MUTED}Error: Python 3 is required. Install it and try again.${RESET}`);
-    console.log(`${MUTED}Also install: pip install sentence-transformers faiss-cpu${RESET}\n`);
-  } else {
-    console.error(`\n${MUTED}Error: ${err.message || 'Unknown error'}${RESET}\n`);
-  }
-  process.exit(1);
 }

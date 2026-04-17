@@ -1,0 +1,8 @@
+[
+  {
+    "intent": "force quit out of all node instances",
+    "command": "killall -9 node",
+    "category": "system",
+    "description": ""
+  }
+]

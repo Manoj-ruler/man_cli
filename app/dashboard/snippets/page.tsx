@@ -70,10 +70,17 @@ export default function SnippetsPage() {
         );
       }
     } else {
+      // Get current user to satisfy RLS
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        setSaving(false);
+        return;
+      }
+
       // Create
       const { data: created } = await supabase
         .from("custom_snippets")
-        .insert(data)
+        .insert({ ...data, user_id: user.id })
         .select()
         .single();
 
