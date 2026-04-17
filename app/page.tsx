@@ -301,6 +301,84 @@ export default function LandingPage() {
       </section>
 
       {/* ============================================
+          KNOWLEDGE BASE / BLOG
+          ============================================ */}
+      <section id="blog" className="py-24 sm:py-32 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6 animate-fade-up">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-bold font-[family-name:var(--font-syne)] mb-4">
+                Latest from our <span className="text-pink">Knowledge Base</span>
+              </h2>
+              <p className="text-muted max-w-xl">
+                Deep dives into terminal productivity, security best practices, and 
+                the technology behind TermAssist.
+              </p>
+            </div>
+            <Link href="/blog">
+              <Button variant="ghost" className="hidden md:flex">
+                View All Articles
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                title: "Mastering the TermAssist CLI",
+                desc: "An in-depth guide on installation and natural language querying.",
+                slug: "mastering-cli",
+                tag: "Guide",
+              },
+              {
+                title: "NPM Packages Deep Dive",
+                desc: "Technical overview of the local-first MiniLM embedding engine.",
+                slug: "packages-deep-dive",
+                tag: "Technology",
+              },
+              {
+                title: "Dashboard Masterclass",
+                desc: "Tutorial on syncing the CLI with the analytics dashboard.",
+                slug: "dashboard-guide",
+                tag: "Tutorial",
+              },
+            ].map((post, i) => (
+              <Card
+                key={post.slug}
+                glow
+                className={`animate-fade-up delay-${i + 1} flex flex-col h-full group`}
+              >
+                <div className="flex justify-between items-start mb-4">
+                  <span className="text-[10px] font-bold tracking-widest text-pink uppercase py-1 px-2 bg-pink/10 rounded">
+                    {post.tag}
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold font-[family-name:var(--font-syne)] mb-3 group-hover:text-pink transition-colors">
+                  {post.title}
+                </h3>
+                <p className="text-sm text-muted leading-relaxed mb-6 flex-grow">
+                  {post.desc}
+                </p>
+                <Link href={`/blog/${post.slug}`} className="mt-auto">
+                  <Button variant="ghost" size="sm" className="w-full">
+                    Read More
+                  </Button>
+                </Link>
+              </Card>
+            ))}
+          </div>
+
+          <Link href="/blog" className="mt-12 md:hidden block">
+            <Button variant="ghost" className="w-full">
+              View All Articles
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* ============================================
           FOOTER
           ============================================ */}
       <footer className="border-t border-border py-10 relative z-10">

@@ -1,8 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
+const rateMap = new Map<string, { count: number; reset: number }>();
+const LIMIT = 60; // 60 requests
+const WINDOW = 60_000; // per minute
+
+function isRateLimited(ip: string) {
+  const now = Date.now();
+  const entry = rateMap.get(ip) ?? { count: 0, reset: now + WINDOW };
+
+  if (now > entry.reset) {
+    entry.count = 0;
+    entry.reset = now + WINDOW;
+  }
+
+  entry.count++;
+  rateMap.set(ip, entry);
+  return entry.count > LIMIT;
+}
+
 export async function POST(req: NextRequest) {
   try {
+    const ip = req.headers.get("x-forwarded-for") ?? "unknown";
+    if (isRateLimited(ip)) {
+      return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+    }
+
     const token = req.headers.get("authorization")?.replace("Bearer ", "");
     if (!token) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

@@ -51,6 +51,12 @@ export function Navbar() {
               GitHub
             </Link>
             <Link
+              href="/blog"
+              className="text-sm text-muted hover:text-text transition-colors duration-200"
+            >
+              Blog
+            </Link>
+            <Link
               href="/dashboard"
               className="text-sm text-muted hover:text-text transition-colors duration-200"
             >
@@ -87,6 +93,13 @@ export function Navbar() {
               className="text-sm text-muted hover:text-text transition-colors py-2"
             >
               GitHub
+            </Link>
+            <Link
+              href="/blog"
+              className="text-sm text-muted hover:text-text transition-colors py-2"
+              onClick={() => setMobileOpen(false)}
+            >
+              Blog
             </Link>
             <Link
               href="/dashboard"
