@@ -37,7 +37,7 @@ export default function DashboardOverviewPage() {
         .select("*", { count: 'exact', head: true });
         
       const { count: snippetsCount } = await supabase
-        .from("snippets")
+        .from("custom_snippets")
         .select("*", { count: 'exact', head: true });
 
       const { data: lastQueryData } = await supabase
