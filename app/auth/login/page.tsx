@@ -133,42 +133,6 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          {/* Divider */}
-          <div className="flex items-center gap-3 mb-6">
-            <div className="flex-1 h-px bg-border" />
-            <span className="text-xs text-muted">or continue with email</span>
-            <div className="flex-1 h-px bg-border" />
-          </div>
-
-          {/* Email form */}
-          <form onSubmit={handleEmailLogin} className="flex flex-col gap-4">
-            <Input
-              label="Email"
-              type="email"
-              placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <Input
-              label="Password"
-              type="password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-
-            {error && (
-              <p className="text-sm text-red bg-red/10 border border-red/20 rounded px-3 py-2">
-                {error}
-              </p>
-            )}
-
-            <Button type="submit" loading={loading} className="w-full mt-1">
-              Sign In
-            </Button>
-          </form>
 
           <p className="text-center text-sm text-muted mt-6">
             Don&apos;t have an account?{" "}

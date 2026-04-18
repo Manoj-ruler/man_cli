@@ -17,12 +17,6 @@ export default function SignupPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleGitHubSignup = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "github",
-      options: { redirectTo: `${window.location.origin}/dashboard/commands` },
-    });
-  };
 
   const handleGoogleSignup = async () => {
     await supabase.auth.signInWithOAuth({
