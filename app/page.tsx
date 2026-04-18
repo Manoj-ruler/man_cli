@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
-import { TerminalDemo } from "@/components/terminal/TerminalDemo";
+import { HeroVideoBackground } from "@/components/terminal/HeroVideoBackground";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { CodeBlock } from "@/components/ui/CodeBlock";
@@ -84,9 +84,9 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Right: Terminal */}
-            <div className="animate-fade-up delay-3 animate-float relative z-10">
-              <TerminalDemo loop={true} />
+            {/* Right: Video Background */}
+            <div className="relative animate-fade-up delay-3">
+              <HeroVideoBackground videoSrc="/TermAssist_Intent_to_Command_Demo.mp4" />
             </div>
           </div>
         </div>
