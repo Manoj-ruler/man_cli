@@ -12,7 +12,8 @@ import {
   Bookmark, 
   Calendar, 
   Clock,
-  Sparkles
+  Sparkles,
+  ArrowRight
 } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -52,6 +53,13 @@ const POSTS: Record<string, PostContent> = {
           <code>termassist init</code>
         </pre>
 
+        <div className="blog-callout blog-callout-info font-[family-name:var(--font-dm-sans)]">
+           <Terminal className="w-5 h-5 mt-1 shrink-0" />
+           <div>
+              <strong>Pro Tip:</strong> You can set up an alias like <code>??</code> in your <code>.zshrc</code> or <code>.bashrc</code> to call termassist with even fewer keystrokes.
+           </div>
+        </div>
+
         <h2>How to Query</h2>
         <p>
           With TermAssist, you don&apos;t need to remember flags. Just speak your
@@ -80,6 +88,11 @@ const POSTS: Record<string, PostContent> = {
         <pre>
           <code>termassist interactive</code>
         </pre>
+
+        <p>
+           In interactive mode, you get a beautiful UI right in your shell, 
+           complete with syntax highlighting and instant fuzzy search results.
+        </p>
       </>
     ),
   },
@@ -122,6 +135,13 @@ const result = await matchQuery("git undo last commit");
 console.log(result.command); // "git reset --soft HEAD~1"`}
           </code>
         </pre>
+
+        <div className="blog-callout blog-callout-info">
+           <Sparkles className="w-5 h-5 mt-1 shrink-0 text-pink" />
+           <div>
+              <strong>Under the hood:</strong> All embedding generation is handled by <code>ONNX Runtime</code>, allowing us to leverage hardware acceleration without heavy Python dependencies.
+           </div>
+        </div>
 
         <h2>Privacy Guarantee</h2>
         <p>
@@ -174,8 +194,6 @@ console.log(result.command); // "git reset --soft HEAD~1"`}
           instantly available in your CLI via <code>termassist snippets</code>.
         </p>
 
-        <img src="/dashboard-preview.png" alt="TermAssist Dashboard Preview" />
-
         <p>
           The dashboard is fully responsive and supports both light and dark
           modes, following the same Brutalist design aesthetic as our landing
@@ -190,66 +208,104 @@ export default function BlogPostPage() {
   const params = useParams();
   const slug = params?.slug as string;
   const post = POSTS[slug];
+  const [scrollProgress, setScrollProgress] = React.useState(0);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const currentScroll = window.scrollY;
+      setScrollProgress((totalScroll <= 0) ? 0 : (currentScroll / totalScroll) * 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   if (!post) {
     notFound();
   }
 
+  // Related posts logic
+  const relatedPosts = Object.entries(POSTS)
+    .filter(([s]) => s !== slug)
+    .map(([s, p]) => ({ slug: s, ...p }))
+    .slice(0, 2);
+
   return (
-    <div className="min-h-screen bg-bg text-text noise-overlay">
+    <div className="min-h-screen bg-bg text-text noise-overlay selection:bg-pink selection:text-white">
+      {/* Reading Progress Bar */}
+      <div 
+        className="fixed top-0 left-0 h-1 bg-pink z-[100] transition-all duration-150 ease-out shadow-[0_0_10px_var(--color-pink)]" 
+        style={{ width: `${scrollProgress}%` }}
+      />
+      
       <Navbar />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
-        {/* Back Link */}
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-2 text-sm text-muted hover:text-pink transition-colors mb-12 group"
-        >
-          <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-          Back to Knowledge Base
-        </Link>
-
-        {/* Global Badge */}
-        <div className="animate-fade-up">
-          <span className="inline-flex items-center gap-2 px-3 py-1 bg-pink/10 border border-pink/20 rounded text-xs text-pink font-[family-name:var(--font-dm-sans)] mb-6">
-            <Sparkles className="w-3 h-3" />
-            Official {post.category}
-          </span>
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-40 relative z-10">
+        {/* Background Accents */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-full -z-10 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-pink/5 blur-[120px] rounded-full" />
+          <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-pink/5 blur-[120px] rounded-full" />
         </div>
 
-        {/* Header */}
-        <header className="mb-16 animate-fade-up delay-1">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-[family-name:var(--font-syne)] mb-8 leading-[1.1] tracking-tight">
+        {/* Back Link */}
+        <div className="animate-fade-up">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-muted hover:text-pink transition-all mb-16 group p-2 -ml-2 rounded-lg hover:bg-pink/5"
+          >
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+            Knowledge Base
+          </Link>
+        </div>
+
+        {/* Header Section */}
+        <header className="mb-20 animate-fade-up delay-1">
+          <div className="flex items-center gap-2 mb-8">
+            <span className="px-3 py-1 bg-pink text-white text-[10px] font-bold rounded uppercase tracking-wider shadow-lg shadow-pink/20">
+              {post.category}
+            </span>
+            <div className="h-[1px] w-8 bg-border" />
+            <span className="text-[10px] text-muted font-bold uppercase tracking-widest">
+              TermAssist Intelligence
+            </span>
+          </div>
+
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-[family-name:var(--font-syne)] mb-12 leading-[1.05] tracking-tighter">
             {post.title}
           </h1>
 
-          <div className="flex flex-wrap items-center justify-between gap-6 py-6 border-y border-border">
+          <div className="flex flex-wrap items-center justify-between gap-8 py-8 border-y border-border/50">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded bg-surface border border-border flex items-center justify-center">
-                <Terminal className="w-5 h-5 text-pink" />
+              <div className="w-12 h-12 rounded-xl bg-surface border border-border flex items-center justify-center shadow-lg relative group overflow-hidden">
+                <div className="absolute inset-0 bg-pink opacity-0 group-hover:opacity-10 transition-opacity" />
+                <Terminal className="w-6 h-6 text-pink" />
               </div>
               <div className="flex flex-col">
-                <span className="text-sm font-bold font-[family-name:var(--font-syne)]">
+                <span className="text-sm font-bold font-[family-name:var(--font-syne)] uppercase tracking-tight">
                   TermAssist Team
                 </span>
-                <span className="text-xs text-muted">Core Contributors</span>
+                <span className="text-[10px] text-muted font-bold uppercase tracking-widest">
+                  Engineering Hub
+                </span>
               </div>
             </div>
 
-            <div className="flex items-center gap-6 text-xs text-muted font-[family-name:var(--font-dm-sans)]">
-              <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-pink" />
+            <div className="flex items-center gap-8 text-[11px] font-bold text-muted font-[family-name:var(--font-jetbrains)] uppercase tracking-widest">
+              <div className="flex items-center gap-2.5">
+                <Calendar className="w-4 h-4 text-pink/50" />
                 {post.date}
               </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-pink" />
-                {post.readTime} reading
+              <div className="flex items-center gap-2.5">
+                <Clock className="w-4 h-4 text-pink/50" />
+                {post.readTime}
               </div>
-              <div className="flex items-center gap-4 ml-4">
-                <button className="hover:text-pink transition-colors">
+              <div className="h-6 w-[1px] bg-border hidden sm:block" />
+              <div className="flex items-center gap-5">
+                <button className="hover:text-pink transition-all hover:scale-110 active:scale-95">
                   <Share2 className="w-4 h-4" />
                 </button>
-                <button className="hover:text-pink transition-colors">
+                <button className="hover:text-pink transition-all hover:scale-110 active:scale-95">
                   <Bookmark className="w-4 h-4" />
                 </button>
               </div>
@@ -257,43 +313,104 @@ export default function BlogPostPage() {
           </div>
         </header>
 
-        {/* Content */}
-        <article className="lp-article animate-fade-up delay-2">
+        {/* Article Body */}
+        <article className="lp-article animate-fade-up delay-2 selection:bg-pink/30 selection:text-white">
           {post.content}
         </article>
 
-        {/* Bottom CTA */}
-        <Card glow className="mt-24 p-10 text-center animate-fade-up delay-3">
-          <h3 className="text-2xl font-bold font-[family-name:var(--font-syne)] mb-4">
-            Master your terminal today.
-          </h3>
-          <p className="text-muted mb-8 max-w-md mx-auto leading-relaxed">
-            Stop searching and start building. Secure your local workflow with 100% private command assistance.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button size="lg">Get TermAssist</Button>
-            <Link href="/dashboard">
-              <Button variant="ghost" size="lg">
-                Go to Dashboard
-              </Button>
+        {/* Related Posts Section */}
+        <div className="mt-32 pt-24 border-t border-border animate-fade-up delay-3">
+          <div className="flex items-center justify-between mb-12">
+            <h4 className="text-3xl font-extrabold font-[family-name:var(--font-syne)] tracking-tight">
+              Related <span className="text-muted">Reading</span>
+            </h4>
+            <Link href="/blog" className="text-[10px] font-bold uppercase tracking-widest text-pink hover:underline underline-offset-4">
+              View all posts
             </Link>
+          </div>
+          
+          <div className="grid sm:grid-cols-2 gap-8">
+            {relatedPosts.map((related) => (
+              <Link key={related.slug} href={`/blog/${related.slug}`} className="group">
+                <Card glow className="h-full bg-surface/20 border-border group-hover:border-pink/30 p-8 transition-all duration-500">
+                  <span className="text-[9px] font-bold text-pink uppercase tracking-widest mb-4 block">
+                    {related.category}
+                  </span>
+                  <h5 className="text-xl font-bold font-[family-name:var(--font-syne)] group-hover:text-pink transition-colors mb-6 leading-tight">
+                    {related.title}
+                  </h5>
+                  <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-muted group-hover:text-pink transition-colors mt-auto">
+                    <span>Read More</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+                  </div>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Global CTA */}
+        <Card glow className="mt-32 !p-0 overflow-hidden animate-fade-up delay-4 border-pink/10">
+          <div className="grid md:grid-cols-2">
+            <div className="p-10 sm:p-14 border-b md:border-b-0 md:border-r border-border bg-surface/30 backdrop-blur-sm">
+               <h3 className="text-3xl font-extrabold font-[family-name:var(--font-syne)] mb-6 tracking-tight">
+                  Master your terminal <span className="pink-gradient-text">today.</span>
+               </h3>
+               <p className="text-muted mb-10 leading-relaxed font-[family-name:var(--font-dm-sans)]">
+                  Stop searching and start building. Secure your local workflow with 
+                  the assistant that puts your privacy and productivity first.
+               </p>
+               <div className="flex flex-col sm:flex-row gap-4">
+                  <Button size="lg" className="w-full sm:w-auto">Get TermAssist</Button>
+                  <Link href="/dashboard" className="w-full sm:w-auto">
+                    <Button variant="ghost" size="lg" className="w-full">Dashboard</Button>
+                  </Link>
+               </div>
+            </div>
+            <div className="bg-terminal-bg/50 p-10 flex flex-col items-center justify-center relative group">
+               <div className="absolute inset-0 bg-pink/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+               <Terminal className="w-32 h-32 text-pink/5 mb-6 group-hover:scale-110 transition-transform duration-700" />
+               <div className="text-center font-[family-name:var(--font-jetbrains)] relative z-10">
+                  <div className="text-sm text-pink mb-2 font-bold">$ termassist --init</div>
+                  <div className="text-[10px] text-muted/60 uppercase tracking-widest font-bold">Local intelligence ready</div>
+               </div>
+            </div>
           </div>
         </Card>
       </main>
 
-      <footer className="border-t border-border py-10 mt-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <Terminal className="w-4 h-4 text-pink" />
-              <span className="text-sm font-semibold text-text font-[family-name:var(--font-syne)]">
-                term<span className="text-pink">assist</span>
-              </span>
-            </div>
-            <p className="text-xs text-muted">
-              © 2026 TermAssist. All rights reserved.
-            </p>
-          </div>
+      <footer className="border-t border-border py-20 mt-32 bg-surface/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+           <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+              <div className="flex flex-col gap-4 items-center md:items-start text-center md:text-left">
+                  <div className="flex items-center gap-2">
+                    <Terminal className="w-6 h-6 text-pink" />
+                    <span className="text-2xl font-bold font-[family-name:var(--font-syne)] tracking-tight">
+                      term<span className="text-pink">assist</span>
+                    </span>
+                  </div>
+                  <p className="text-sm text-muted max-w-xs leading-relaxed">
+                    Engineering the future of terminal productivity with local-first AI.
+                  </p>
+              </div>
+              
+              <div className="flex flex-wrap items-center justify-center gap-8 text-[11px] font-bold uppercase tracking-widest">
+                 <Link href="/" className="text-muted hover:text-pink transition-colors">Home</Link>
+                 <Link href="/blog" className="text-pink transition-colors underline decoration-2 underline-offset-8">Knowledge</Link>
+                 <Link href="/dashboard" className="text-muted hover:text-pink transition-colors">Dashboard</Link>
+                 <Link href="/auth/signup" className="text-muted hover:text-pink transition-colors">Join Now</Link>
+              </div>
+           </div>
+           
+           <div className="mt-20 pt-10 border-t border-border/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <p className="text-[10px] text-muted font-bold uppercase tracking-widest">
+                © 2026 TermAssist. Engineered by developers.
+              </p>
+              <div className="flex gap-6 opacity-40 grayscale group-hover:grayscale-0 transition-all">
+                 <div className="h-4 w-12 bg-muted rounded-sm" />
+                 <div className="h-4 w-12 bg-muted rounded-sm" />
+              </div>
+           </div>
         </div>
       </footer>
     </div>
