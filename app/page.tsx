@@ -326,20 +326,20 @@ export default function LandingPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                title: "Mastering the TermAssist CLI",
-                desc: "An in-depth guide on installation and natural language querying.",
+                title: "The Complete Beginner's Guide to TermAssist",
+                desc: "Learn everything from scratch: installation, configuration, account setup, and using every feature step-by-step.",
                 slug: "mastering-cli",
                 tag: "Guide",
               },
               {
-                title: "NPM Packages Deep Dive",
-                desc: "Technical overview of the local-first MiniLM embedding engine.",
+                title: "How Does TermAssist Work?",
+                desc: "Understand the BM25 algorithm, why it's so fast, how command matching works, and privacy features explained simply.",
                 slug: "packages-deep-dive",
                 tag: "Technology",
               },
               {
-                title: "Dashboard Masterclass",
-                desc: "Tutorial on syncing the CLI with the analytics dashboard.",
+                title: "The Complete Dashboard Guide",
+                desc: "Master every dashboard feature: query history, custom snippets, analytics, API tokens, and sync settings.",
                 slug: "dashboard-guide",
                 tag: "Tutorial",
               },
