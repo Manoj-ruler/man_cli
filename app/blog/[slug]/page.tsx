@@ -13,7 +13,9 @@ import {
   Calendar, 
   Clock,
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  RefreshCw,
+  Shield
 } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -28,181 +30,145 @@ interface PostContent {
 
 const POSTS: Record<string, PostContent> = {
   "mastering-cli": {
-    title: "Mastering the TermAssist CLI: English to Bash in Seconds",
+    title: "The Ultimate Getting Started Guide: Zero to ?? in 5 Minutes",
     category: "Guide",
     date: "Apr 17, 2026",
-    readTime: "6 min",
+    readTime: "7 min",
     content: (
       <>
         <p>
-          The terminal is one of the most powerful tools in a developer&apos;s
-          arsenal, yet it remains one of the most intimidating. How many times
-          have you searched for &quot;how to kill process on port 3000&quot; only
-          to find a complex <code>lsof</code> command that you forget five
-          minutes later?
+          Welcome to TermAssist. This guide is built for external developers setting up their terminal for a 100% private, AI-powered workflow. We will cover every minor step to ensure you are up and running immediately.
         </p>
 
-        <h2>Installation</h2>
-        <p>Get started by installing the companion CLI globally via NPM:</p>
+        <h2>Step 1: Web Onboarding</h2>
+        <p>
+          Before touching the terminal, you need a secure bridge to your snippets.
+        </p>
+        <ol>
+          <li>Create an account at <strong>auth/signup</strong>.</li>
+          <li>Navigate to your <strong>Dashboard &gt; Settings</strong>.</li>
+          <li>Click &quot;Generate Token&quot; and copy the <code>ta_...</code> key to a safe place.</li>
+        </ol>
+
+        <h2>Step 2: CLI Installation</h2>
+        <p>Clone the repository to your local machine and install the core dependencies:</p>
         <pre>
-          <code>npm install -g termassist</code>
+          <code>git clone https://github.com/your-username/termassist.git{'\n'}cd termassist{'\n'}npm install</code>
         </pre>
 
-        <p>Once installed, you can initialize your local environment with:</p>
+        <h2>Step 3: Manual Configuration</h2>
+        <p>
+          TermAssist expects a configuration file in your home directory. Create the folder and config file manually:
+        </p>
+        <ul>
+          <li><strong>Windows</strong>: <code>C:\Users\YourName\.termassist\config.json</code></li>
+          <li><strong>Mac/Linux</strong>: <code>~/.termassist/config.json</code></li>
+        </ul>
+        <p>Populate the file with your token and the local dev URL:</p>
         <pre>
-          <code>termassist init</code>
+          <code>{`{
+  "api_token": "YOUR_GENERATED_TOKEN",
+  "api_url": "http://localhost:3000",
+  "sync_enabled": true
+}`}</code>
         </pre>
 
-        <div className="blog-callout blog-callout-info font-[family-name:var(--font-dm-sans)]">
+        <div className="blog-callout blog-callout-info">
            <Terminal className="w-5 h-5 mt-1 shrink-0" />
            <div>
-              <strong>Pro Tip:</strong> You can set up an alias like <code>??</code> in your <code>.zshrc</code> or <code>.bashrc</code> to call termassist with even fewer keystrokes.
+              <strong>No Alias? No Problem.</strong> If you haven’t set up a shortcut yet, you can run TermAssist directly from the root folder: <code>node cli/index.js &quot;query&quot;</code>.
            </div>
         </div>
 
-        <h2>How to Query</h2>
+        <h2>Step 4: Setting Up the ?? Shortcut</h2>
         <p>
-          With TermAssist, you don&apos;t need to remember flags. Just speak your
-          mind. Use the <code>-q</code> or <code>--query</code> flag followed by
-          your request in plain English.
+          To use the tool from any directory with the <code>??</code> shortcut, follow these steps:
         </p>
+        <h3>On Windows (PowerShell)</h3>
+        <p>Run <code>notepad $PROFILE</code> and add this function:</p>
         <pre>
-          <code>termassist -q &quot;find all large files in current dir&quot;</code>
+          <code>{`function ?? { node "C:/path/to/termassist/cli/index.js" @args }`}</code>
         </pre>
-        <p>
-          TermAssist will instantly output the correct bash command:{" "}
-          <code>find . -type f -size +100M</code>.
-        </p>
-
-        <blockquote>
-          &quot;TermAssist doesn&apos;t just give you commands; it gives you
-          context. It matching is based on local vector embeddings, meaning it
-          understands intent, not just keywords.&quot;
-        </blockquote>
-
-        <h2>Interactive Mode</h2>
-        <p>
-          Need to refine your query? Enter interactive mode to search and
-          preview commands live:
-        </p>
+        <h3>On macOS/Linux (Bash/Zsh)</h3>
+        <p>Add this to your <code>.zshrc</code> or <code>.bashrc</code>:</p>
         <pre>
-          <code>termassist interactive</code>
+          <code>alias ??=&apos;node /path/to/termassist/cli/index.js&apos;</code>
         </pre>
-
-        <p>
-           In interactive mode, you get a beautiful UI right in your shell, 
-           complete with syntax highlighting and instant fuzzy search results.
-        </p>
       </>
     ),
   },
   "packages-deep-dive": {
-    title: "NPM Packages Deep Dive: The Tech Behind the Scenes",
+    title: "Under the Hood: Why BM25 Beats Cloud AI for Speed",
     category: "Technology",
     date: "Apr 16, 2026",
     readTime: "8 min",
     content: (
       <>
         <p>
-          TermAssist is built on a philosophy of local-first AI. We believe your
-          terminal queries shouldn&apos;t require a round-trip to the cloud.
-          Here&apos;s how we achieve sub-50ms response times on consumer
-          hardware.
+          Privacy is the backbone of TermAssist. To achieve zero-latency matching without sending your data to a cloud LLM, we implemented the **BM25 (Best Matching 25)** algorithm in pure JavaScript.
         </p>
 
-        <h2>The Embedding Engine</h2>
+        <h2>The Performance Benchmark</h2>
         <p>
-          At the core of our package ecosystem is a highly optimized version of{" "}
-          <strong>MiniLM-L6-v2</strong>. We&apos;ve quantized our models to ensure
-          they stay under 10MB while maintaining 98%+ accuracy on bash syntax
-          mappings.
+          Most terminal assistants require a network round-trip of 2-5 seconds. TermAssist matches queries in <strong>under 5ms</strong>. Here&apos;s why:
         </p>
+        <ul>
+          <li><strong>Native TF-IDF Scoring</strong>: We calculate the statistical relevance of your query against local command datasets in real-time.</li>
+          <li><strong>No "Boot-up" Penalty</strong>: Unlike Python-based vector search, our JS engine doesn&apos;t need to load gigabytes of AI model weights.</li>
+          <li><strong>Independently Secure</strong>: All logic resides in <code>cli/search.js</code>. Your query text never leaves your RAM/CPU during the search.</li>
+        </ul>
 
-        <h2>FAISS Local Index</h2>
+        <h2>Search Heuristics</h2>
         <p>
-          Instead of a remote vector database, we use a local FAISS index
-          bundled within the <code>termassist-core</code> package. When you run
-          a query, we generate a vector embedding in-memory and perform a
-          nearest-neighbor search locally.
-        </p>
-
-        <pre>
-          <code>
-            {`// Internal matching logic
-import { matchQuery } from '@termassist/core';
-
-const result = await matchQuery("git undo last commit");
-console.log(result.command); // "git reset --soft HEAD~1"`}
-          </code>
-        </pre>
-
-        <div className="blog-callout blog-callout-info">
-           <Sparkles className="w-5 h-5 mt-1 shrink-0 text-pink" />
-           <div>
-              <strong>Under the hood:</strong> All embedding generation is handled by <code>ONNX Runtime</code>, allowing us to leverage hardware acceleration without heavy Python dependencies.
-           </div>
-        </div>
-
-        <h2>Privacy Guarantee</h2>
-        <p>
-          Because these packages include the full index and embedding logic,{" "}
-          <strong>zero bytes</strong> are transmitted to external servers. Your
-          command history and intent stay entirely on your machine.
+          Our engine combines BM25 scores with custom substring heuristics to ensure that even partial flag matches (like <code>-rf</code> or <code>--force</code>) are accurately weighted.
         </p>
       </>
     ),
   },
   "dashboard-guide": {
-    title: "TermAssist Dashboard: Visualizing Your Terminal Analytics",
+    title: "Mastering the Dashboard: Sync, Telemetry, and Privacy",
     category: "Tutorial",
     date: "Apr 15, 2026",
     readTime: "5 min",
     content: (
       <>
         <p>
-          While the CLI is where the work happens, the TermAssist Dashboard is
-          where you manage your productivity. It provides a visual overview of
-          your command usage, success rates, and favorite snippets.
+          The Dashboard is the command center that turns TermAssist into a cross-machine intelligence suite.
         </p>
 
-        <h2>Connecting your CLI</h2>
+        <h2>Syncing Custom Snippets</h2>
         <p>
-          To sync your CLI data with the dashboard, you need to generate an API
-          token from the <strong>Settings</strong> page.
+          When you add a snippet in the **Web Dashboard**, it doesn&apos;t automatically appear offline. You must trigger a pull:
         </p>
-        <ol>
-          <li>Navigate to the Dashboard &gt; Settings.</li>
-          <li>Click &quot;Generate New Token&quot;.</li>
-          <li>
-            Run <code>termassist login</code> in your terminal and paste the
-            token.
-          </li>
-        </ol>
-
-        <h2>Command Analytics</h2>
+        <pre>
+          <code>?? sync</code>
+        </pre>
         <p>
-          The <strong>Commands</strong> view shows you which categories of
-          commands you use most frequently (Git, File System, Networking, etc.).
-          This helps you identify areas where you might want to create custom
-          aliases or snippets.
+          This fetches data from our secure endpoint and updates your local <code>custom_snippets.json</code> in the background.
         </p>
 
-        <h2>Managing Snippets</h2>
+        <h2>Telemetry & Privacy Toggles</h2>
         <p>
-          The <strong>Snippets</strong> feature allows you to save frequently
-          used commands with natural language descriptions. These snippets are
-          instantly available in your CLI via <code>termassist snippets</code>.
+          By setting <code>sync_enabled: true</code> in your config, TermAssist sends executed query data to your dashboard for visual analytics. 
         </p>
+        <div className="blog-callout blog-callout-warning">
+           <Shield className="w-5 h-5 mt-1 shrink-0 text-pink" />
+           <div>
+              <strong>Go Dark Mode:</strong> If you are working on a highly classified project, set <code>sync_enabled: false</code>. This kills all outgoing traffic, making TermAssist 100% air-gapped.
+           </div>
+        </div>
 
+        <h2>Managing the Danger Zone</h2>
         <p>
-          The dashboard is fully responsive and supports both light and dark
-          modes, following the same Brutalist design aesthetic as our landing
-          page.
+           In **Settings**, you have a &quot;Delete All Data&quot; option. This wipes your tokens, snippets, and query history from our servers instantly, giving you total ownership over your terminal history.
         </p>
       </>
     ),
   },
 };
+
+
+
 
 export default function BlogPostPage() {
   const params = useParams();
