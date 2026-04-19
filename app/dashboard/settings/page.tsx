@@ -160,7 +160,7 @@ export default function SettingsPage() {
                 </button>
               </div>
               <CodeBlock
-                code={`# Add to ~/.termassist/config.json\n{\n  "api_token": "${apiToken}",\n  "api_url": "${typeof window !== "undefined" ? window.location.origin : "https://termassist.dev"}",\n  "sync_enabled": true\n}`}
+                code={`# Add to ~/.termassist/config.json\n{\n  "api_token": "${apiToken}",\n  "api_url": "${typeof window !== "undefined" ? window.location.origin : "https://termassist.vercel.app"}",\n  "sync_enabled": true\n}`}
                 language="json"
               />
             </div>

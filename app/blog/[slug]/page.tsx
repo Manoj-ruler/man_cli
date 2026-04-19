@@ -177,7 +177,7 @@ const POSTS: Record<string, PostContent> = {
         <pre>
           <code>{`{
   "api_token": "PASTE_YOUR_TOKEN_HERE",
-  "api_url": "https://termassist.dev",
+  "api_url": "https://termassist.vercel.app",
   "sync_enabled": true
 }`}</code>
         </pre>
@@ -207,7 +207,7 @@ const POSTS: Record<string, PostContent> = {
         <pre>
           <code>{`{
   "api_token": "PASTE_YOUR_TOKEN_HERE",
-  "api_url": "https://termassist.dev",
+  "api_url": "https://termassist.vercel.app",
   "sync_enabled": true
 }`}</code>
         </pre>

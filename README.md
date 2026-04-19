@@ -259,7 +259,7 @@ nano ~/.termassist/config.json
 ```json
 {
   "api_token": "YOUR_TOKEN_HERE",
-  "api_url": "https://termassist.dev",
+  "api_url": "https://termassist.vercel.app",
   "sync_enabled": true
 }
 ```
@@ -467,7 +467,7 @@ If you're not sure what you need, use interactive mode:
 │  # Add to ~/.termassist/config.json                 │
 │  {                                                   │
 │    "api_token": "ta_abc123...",                     │
-│    "api_url": "https://termassist.dev",             │
+│    "api_url": "https://termassist.vercel.app",             │
 │    "sync_enabled": true                             │
 │  }                                                   │
 │                                                     │
@@ -565,7 +565,7 @@ Set `sync_enabled: false` in your config:
 ```json
 {
   "api_token": "",
-  "api_url": "https://termassist.dev",
+  "api_url": "https://termassist.vercel.app",
   "sync_enabled": false
 }
 ```
@@ -729,10 +729,10 @@ If you find TermAssist helpful, please consider:
 
 ## 📞 Contact
 
-- **Website**: https://termassist.dev
-- **Documentation**: https://termassist.dev/blog
-- **Dashboard**: https://termassist.dev/dashboard
-- **GitHub**: https://github.com/your-username/termassist
+- **Website**: https://termassist.vercel.app
+- **Documentation**: https://termassist.vercel.app/blog
+- **Dashboard**: https://termassist.vercel.app/dashboard
+- **GitHub**: https://github.com/Manoj-ruler/man_cli
 
 ---
 

@@ -38,12 +38,12 @@ export const metadata: Metadata = {
     "privacy",
     "vector search",
   ],
-  metadataBase: new URL("https://termassist.dev"),
+  metadataBase: new URL("https://termassist.vercel.app"),
   openGraph: {
     title: "TermAssist — The Terminal That Understands English",
     description:
       "Map natural language to bash commands instantly. 100% offline, 100% private.",
-    url: "https://termassist.dev",
+    url: "https://termassist.vercel.app",
     siteName: "TermAssist",
     type: "website",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],

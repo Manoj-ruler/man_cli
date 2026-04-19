@@ -13,7 +13,7 @@ const CONFIG_FILE = path.join(CONFIG_DIR, 'config.json');
 
 const DEFAULT_CONFIG = {
   api_token: '',
-  api_url: 'https://termassist.dev',
+  api_url: 'https://termassist.vercel.app',
   sync_enabled: false,
 };
 
