@@ -338,7 +338,7 @@ export default function LandingPage() {
             {[
               {
                 title: "Install TermAssist Step by Step",
-                desc: "The shortest path: Node.js, one npm install command, verify, optional website token. Windows, Mac, and Linux.",
+                desc: "Where config.json really lives (home .termassist folder), how the dashboard token works, and termassist sync — spelled out for Windows, Mac, and Linux.",
                 slug: "quick-install-guide",
                 tag: "Setup",
               },
@@ -356,7 +356,7 @@ export default function LandingPage() {
               },
               {
                 title: "The Complete Dashboard Guide",
-                desc: "Master every dashboard feature: query history, custom snippets, analytics, API tokens, and sync settings.",
+                desc: "Overview, Commands, Snippets, Settings — plus why your API token must live in ~/.termassist/config.json for history and sync.",
                 slug: "dashboard-guide",
                 tag: "Tutorial",
               },

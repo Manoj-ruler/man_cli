@@ -38,7 +38,7 @@ const POSTS: Record<string, PostContent> = {
     title: "Install TermAssist Step by Step (The Super Simple Guide)",
     category: "Setup",
     date: "Apr 19, 2026",
-    readTime: "8 min",
+    readTime: "12 min",
     content: (
       <>
         <h2>What you are doing (in one sentence)</h2>
@@ -102,37 +102,85 @@ const POSTS: Record<string, PostContent> = {
         </pre>
         <p>TermAssist will show a suggested command and ask if you want to run it. You can edit the line before you press Enter.</p>
 
+        <h2>Very important: where <code>config.json</code> must live (dashboard + snippets)</h2>
+        <p>
+          If you only use TermAssist <strong>offline</strong>, you can skip this whole section. If you want <strong>query history</strong> on this website or <strong>custom snippets</strong> from the dashboard, read every bullet below.
+        </p>
+
+        <div className="blog-callout blog-callout-warning">
+          <Shield className="w-5 h-5 mt-1 shrink-0 text-pink" />
+          <div>
+            <strong>Not inside your project folder:</strong> Do <strong>not</strong> put <code>config.json</code> only inside a repo like{" "}
+            <code>callover/config.json</code> or next to your app code. TermAssist <strong>does not</strong> read that. It only reads the file under your{" "}
+            <strong>user home directory</strong> (see paths below).
+          </div>
+        </div>
+
+        <p>
+          <strong>“Home directory”</strong> means the folder Windows/Mac/Linux gives <em>your user</em> — not <code>C:\</code>, not your <code>Desktop</code> unless that is literally your home path, and not a random project root.
+        </p>
+
+        <ul className="space-y-3 list-none pl-0">
+          <li>
+            <strong>Windows:</strong> create the folder <code className="text-pink">%USERPROFILE%\.termassist</code> — for example{" "}
+            <code className="text-pink">C:\Users\YourName\.termassist</code>. Put <code>config.json</code> <strong>inside</strong> that folder.
+          </li>
+          <li>
+            <strong>Mac / Linux:</strong> create <code className="text-pink">~/.termassist</code> (the tilde <code>~</code> means your home folder). The full file path is{" "}
+            <code className="text-pink">~/.termassist/config.json</code>.
+          </li>
+        </ul>
+
+        <p>
+          <strong>One file does everything:</strong> the <strong>same</strong> <code>config.json</code> holds your dashboard <code>api_token</code>, <code>api_url</code>, and{" "}
+          <code>sync_enabled</code>. When <code>sync_enabled</code> is <code>true</code> and your token is valid:
+        </p>
+        <ul>
+          <li>Your <strong>queries can appear</strong> on the dashboard after you run commands in the terminal.</li>
+          <li><strong><code>termassist sync</code></strong> can <strong>download snippets</strong> from the dashboard into your local TermAssist install.</li>
+        </ul>
+
+        <p>
+          <strong>Works from any folder:</strong> after this file exists, you can <code>cd</code> into any project — <code>callover</code>, work, Desktop — and run{" "}
+          <code>termassist &quot;…&quot;</code> or <code>termassist sync</code>. TermAssist always looks at <strong>home</strong> <code>~/.termassist/config.json</code>, not at your current directory.
+        </p>
+
         <h2>Step 6 — (Optional) Use the short name <code>??</code></h2>
         <p>
           After you are comfortable, you can add a shortcut so you type <code>??</code> instead of <code>termassist</code>. That is a small setup step in your shell profile — the full walkthrough is in{" "}
           <Link href="/blog/mastering-cli" className="text-pink hover:underline">the complete beginner&apos;s guide</Link>.
         </p>
 
-        <h2>Step 7 — (Optional) Use the website and dashboard</h2>
-        <p>This part is only if you want history in the browser or custom commands saved online.</p>
+        <h2>Step 7 — (Optional) Connect the dashboard with <code>config.json</code></h2>
+        <p>Only if you want <strong>history in the browser</strong> and/or <strong>snippets</strong> you manage on this site. The file always goes in <strong>home</strong> <code>.termassist/</code> — see the big section above.</p>
         <ol>
           <li>Go to <Link href="/auth/signup" className="text-pink hover:underline">Sign up</Link> on this site and create an account.</li>
           <li>Open <Link href="/dashboard/settings" className="text-pink hover:underline">Dashboard → Settings</Link>.</li>
           <li>Click <strong>Generate Token</strong>. Copy the token (it often starts with <code>ta_</code>).</li>
           <li>
-            Create a file named <code>config.json</code> inside a folder named <code>.termassist</code> in your home folder.
-            Put your token and this site&apos;s URL inside — the Settings page shows a ready-to-copy example.
+            On your computer, create <code>~/.termassist/config.json</code> (Windows: <code>%USERPROFILE%\.termassist\config.json</code>). Paste the JSON block from Settings — it includes <code>api_token</code>, <code>api_url</code>, and <code>sync_enabled</code>.
           </li>
-          <li>Set <code>&quot;sync_enabled&quot;: true</code> only if you want to send query history to your dashboard.</li>
+          <li>
+            Set <code>&quot;sync_enabled&quot;: true</code> if you want the CLI to <strong>talk to this website</strong> (query logging and <code>termassist sync</code>). If you set <code>false</code>, TermAssist stays local-only; the dashboard will not receive new queries.
+          </li>
         </ol>
 
-        <h2>Step 8 — (Optional) Download your custom snippets</h2>
-        <p>After you save snippets on the dashboard, run:</p>
+        <h2>Step 8 — (Optional) Pull snippets: <code>termassist sync</code></h2>
+        <p>
+          Snippets are edited on the <Link href="/dashboard/snippets" className="text-pink hover:underline">dashboard</Link>. They are <strong>not</strong> downloaded automatically just because you saved them in the browser. You must use the <strong>same</strong> <code>config.json</code> as above (token + <code>sync_enabled: true</code>), then run from <strong>any</strong> directory:
+        </p>
         <pre>
           <code>termassist sync</code>
         </pre>
-        <p>That downloads them to your computer so TermAssist can match them like built-in commands.</p>
+        <p>
+          That command uses your token to fetch snippets and saves them for local matching. Run it again whenever you add or change snippets online.
+        </p>
 
         <h2>If something goes wrong</h2>
         <ul>
           <li><strong>“command not found”:</strong> Node might not be on your PATH, or the global npm folder is not on PATH. Reinstall Node LTS and open a new terminal window.</li>
           <li><strong>Wrong package:</strong> The name on npm is <code>{TERMASSIST_NPM_PACKAGE}</code> — not plain <code>termassist</code> alone.</li>
-          <li><strong>Sync errors:</strong> Check <code>api_token</code>, <code>api_url</code>, and that <code>sync_enabled</code> is true in <code>~/.termassist/config.json</code> (Windows: <code>%USERPROFILE%\.termassist\config.json</code>).</li>
+          <li><strong>Sync errors or empty dashboard:</strong> Confirm the file is really at <strong>home</strong> <code>~/.termassist/config.json</code> (Windows: <code>%USERPROFILE%\.termassist\config.json</code>), not in a project folder. Check <code>api_token</code>, <code>api_url</code>, and <code>&quot;sync_enabled&quot;: true</code>.</li>
         </ul>
 
         <div className="blog-callout blog-callout-info">
@@ -178,13 +226,13 @@ const POSTS: Record<string, PostContent> = {
         <div className="blog-callout blog-callout-info">
            <Terminal className="w-5 h-5 mt-1 shrink-0" />
            <div>
-              <strong>Important:</strong> TermAssist works 100% on your computer. It does not send your questions to the internet. This means it's fast and private.
+              <strong>Important:</strong> Finding a command happens <strong>on your computer</strong> (no cloud for the search). If you turn on dashboard sync in <code>~/.termassist/config.json</code>, a <em>short summary</em> can be sent <em>after</em> you run a command — only if you choose to enable that.
            </div>
         </div>
 
-        <h2>Part 1: Creating Your Account (The Website)</h2>
+        <h2>Part 1: Creating Your Account (The Website) — optional</h2>
         <p>
-          Before using TermAssist in your terminal, you need to create an account on our website. This account lets you save your favorite commands and see your usage history.
+          You do <strong>not</strong> need an account to use TermAssist locally. Create an account only if you want the <strong>dashboard</strong> (history, snippets, API token). Everything below about tokens and <code>config.json</code> applies only if you use those features.
         </p>
 
         <h3>Step 1: Go to the Signup Page</h3>
@@ -208,7 +256,7 @@ const POSTS: Record<string, PostContent> = {
 
         <h2>Part 2: Getting Your API Token</h2>
         <p>
-          An API token is like a special key that connects your terminal to your website account. You need this key so TermAssist knows who you are.
+          Skip Parts 2–4 if you only want local TermAssist with no dashboard. Otherwise: an API token is the key that connects your <strong>home</strong> <code>config.json</code> to your account on this website.
         </p>
 
         <h3>Step 1: Go to Dashboard Settings</h3>
@@ -270,8 +318,18 @@ const POSTS: Record<string, PostContent> = {
         </p>
 
         <h2>Part 4: Setting Up the Configuration File</h2>
+
+        <div className="blog-callout blog-callout-warning">
+           <Shield className="w-5 h-5 mt-1 shrink-0 text-pink" />
+           <div>
+              <strong>One place only — your user home folder:</strong> The config file must be at{" "}
+              <code>~/.termassist/config.json</code> on Mac/Linux, or{" "}
+              <code>%USERPROFILE%\.termassist\config.json</code> on Windows. It is <strong>not</strong> read from your project directory (for example <em>not</em> from <code>my-app/config.json</code> or <code>callover/.termassist</code> only). Putting the file in the wrong place is the most common reason the dashboard stays empty or <code>termassist sync</code> fails.
+           </div>
+        </div>
+
         <p>
-          TermAssist needs a configuration file to know your API token and settings. This file is stored in a hidden folder on your computer.
+          TermAssist needs this file only if you use the <strong>dashboard</strong>: API token, optional query logging, and <code>termassist sync</code> for snippets. Same file controls all of that.
         </p>
 
         <h3>For Windows Users:</h3>
@@ -302,6 +360,9 @@ const POSTS: Record<string, PostContent> = {
         </pre>
         <p>
           <strong>Step 6:</strong> Replace <code>PASTE_YOUR_TOKEN_HERE</code> with the token you copied earlier. Save the file.
+        </p>
+        <p>
+          After this works once, you can open a terminal in <strong>any</strong> folder — a project named <code>callover</code>, your Desktop, anywhere — and TermAssist will still use this same <code>config.json</code> in your home directory.
         </p>
 
         <h3>For Mac/Linux Users:</h3>
@@ -335,6 +396,9 @@ const POSTS: Record<string, PostContent> = {
         </p>
         <p>
           <strong>Step 6:</strong> Press <code>Ctrl + X</code>, then <code>Y</code>, then <code>Enter</code> to save and exit.
+        </p>
+        <p>
+          Same rule as Windows: always <code>~/.termassist/config.json</code> — never only inside a project folder.
         </p>
 
         <h2>Part 5: Using TermAssist - The Basics</h2>
@@ -780,8 +844,30 @@ const POSTS: Record<string, PostContent> = {
 
         <h2>Custom Snippets</h2>
         <p>
-          You can add your own commands! When you create a custom snippet in the dashboard and sync it, TermAssist saves it in a file called <code>custom_snippets.json</code>. These custom commands work exactly the same way as the built-in ones.
+          You can add your own commands! When you create a custom snippet in the dashboard and run <code>termassist sync</code>, TermAssist saves them locally (alongside the installed CLI) in <code>custom_snippets.json</code>. Those snippets behave like built-in commands during search.
         </p>
+
+        <h2>Dashboard link: one <code>config.json</code> in your home folder</h2>
+        <p>
+          This is the same for <strong>every</strong> feature that talks to the website: query logging, token auth, and <code>termassist sync</code> all read <strong>one</strong> file:
+        </p>
+        <ul>
+          <li><strong>Mac / Linux:</strong> <code>~/.termassist/config.json</code></li>
+          <li><strong>Windows:</strong> <code>%USERPROFILE%\.termassist\config.json</code> (for example <code>C:\Users\You\.termassist\config.json</code>)</li>
+        </ul>
+        <p>
+          <strong>Not</strong> your project root. If you only create <code>config.json</code> inside a folder like <code>callover/</code> or next to <code>package.json</code>, TermAssist will <strong>ignore</strong> it for sync and the dashboard. Install the CLI with <code>{TERMASSIST_INSTALL_COMMAND}</code>, then put the JSON from <Link href="/dashboard/settings" className="text-pink hover:underline">Settings</Link> into the <strong>home</strong> path above.
+        </p>
+        <p>
+          With <code>&quot;sync_enabled&quot;: true</code> and a valid <code>api_token</code>, you can run <code>termassist</code> and <code>termassist sync</code> from <strong>any</strong> working directory — the CLI does not care which folder you are in.
+        </p>
+
+        <div className="blog-callout blog-callout-info">
+          <Check className="w-5 h-5 mt-1 shrink-0 text-pink" />
+          <div>
+            <strong>Remember:</strong> Local BM25 search never needs this file. You only need <code>config.json</code> when you want the dashboard or synced snippets.
+          </div>
+        </div>
 
         <h2>Privacy and Security</h2>
         <p>
@@ -795,7 +881,7 @@ const POSTS: Record<string, PostContent> = {
 
         <h3>Optional Telemetry</h3>
         <p>
-          If you enable sync (by setting <code>sync_enabled: true</code> in your config), TermAssist sends some information to the dashboard after running a command:
+          If you enable sync (by setting <code>sync_enabled: true</code> in <strong>home</strong> <code>~/.termassist/config.json</code>), TermAssist sends some information to the dashboard after running a command:
         </p>
         <ul>
           <li>What you typed (the query)</li>
@@ -859,10 +945,23 @@ const POSTS: Record<string, PostContent> = {
           <li>Manage your API token and settings</li>
         </ul>
 
-        <h2>Before the dashboard: install the CLI</h2>
+        <h2>Before the dashboard: install the CLI + know where config lives</h2>
         <p>
-          The website does not replace the terminal tool. Install TermAssist once on your computer with{" "}
-          <code>{TERMASSIST_INSTALL_COMMAND}</code>, then use this site to sign in, create snippets, and copy your API token into <code>~/.termassist/config.json</code>.
+          The website does not replace the terminal tool. Install TermAssist once with{" "}
+          <code>{TERMASSIST_INSTALL_COMMAND}</code>. Sign in here, generate a token under Settings, then save that token on your computer in <strong>exactly one place</strong>:
+        </p>
+        <ul>
+          <li><strong>Mac / Linux:</strong> <code>~/.termassist/config.json</code></li>
+          <li><strong>Windows:</strong> <code>%USERPROFILE%\.termassist\config.json</code></li>
+        </ul>
+        <div className="blog-callout blog-callout-warning">
+          <Shield className="w-5 h-5 mt-1 shrink-0 text-pink" />
+          <div>
+            <strong>Common mistake:</strong> Putting <code>config.json</code> only inside a project folder (e.g. your app <code>callover</code>) will <strong>not</strong> connect the CLI to this dashboard. The path must be under your <strong>user home</strong> directory, in a folder named <code>.termassist</code>.
+          </div>
+        </div>
+        <p>
+          That same file powers: (1) <strong>query history</strong> you see under Commands, (2) <strong><code>termassist sync</code></strong> to download snippets you created in Snippets. Set <code>&quot;sync_enabled&quot;: true</code> when you want those features. You can run commands from any project folder after setup — TermAssist always reads home <code>config.json</code>.
         </p>
 
         <h2>Part 1: Logging Into the Dashboard</h2>

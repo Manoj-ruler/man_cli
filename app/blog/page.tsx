@@ -11,9 +11,9 @@ const BLOG_POSTS = [
   {
     title: "Install TermAssist Step by Step (The Super Simple Guide)",
     description:
-      "One page: install Node.js, run one npm command, check that it worked, then (optional) connect the website. Written so anyone can follow along on Windows, Mac, or Linux.",
+      "Install Node.js and the npm package, then learn exactly where ~/.termassist/config.json must go (home folder, not your project). Dashboard + termassist sync explained in plain language.",
     date: "Apr 19, 2026",
-    readTime: "8 min",
+    readTime: "12 min",
     slug: "quick-install-guide",
     category: "Setup",
   },
