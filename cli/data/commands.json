@@ -1,1 +1,4033 @@
-[{"intent":"undo last git commit but keep changes","command":"git reset --soft HEAD~1","category":"git","description":"Undo the last commit, keeping all changes staged","os":["all"]},{"intent":"find all python files modified today","command":"find . -name '*.py' -mtime -1","category":"find","description":"Find Python files modified in the last 24 hours","os":["linux","darwin"]},{"intent":"find all python files modified today","command":"Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }","category":"find","description":"Find Python files modified in the last 24 hours","os":["win32"]},{"intent":"search for TODO comments in all javascript files","command":"grep -rn 'TODO' --include='*.js' .","category":"grep","description":"Recursively search for TODO comments in JS files","os":["linux","darwin"]},{"intent":"search for TODO comments in all javascript files","command":"Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'","category":"grep","description":"Recursively search for TODO comments in JS files","os":["win32"]},{"intent":"compress a directory into a tar.gz archive","command":"tar -czf archive.tar.gz directory/","category":"tar","description":"Create a gzipped tar archive of a directory","os":["linux","darwin"]},{"intent":"extract a tar.gz file","command":"tar -xzf archive.tar.gz","category":"tar","description":"Extract a gzipped tar archive","os":["linux","darwin"]},{"intent":"connect to a remote server via ssh","command":"ssh user@hostname","category":"ssh","description":"Open an SSH connection to a remote server","os":["all"]},{"intent":"copy file to remote server via scp","command":"scp file.txt user@hostname:/path/to/destination","category":"ssh","description":"Securely copy a file to a remote server","os":["all"]},{"intent":"download a file from a url","command":"curl -O https://example.com/file.zip","category":"curl","description":"Download a file from a URL using curl","os":["all"]},{"intent":"make an api post request with json data","command":"curl -X POST -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/endpoint","category":"curl","description":"Send a POST request with JSON body","os":["all"]},{"intent":"list all running docker containers","command":"docker ps","category":"docker","description":"List all currently running Docker containers","os":["all"]},{"intent":"stop all running docker containers","command":"docker stop $(docker ps -q)","category":"docker","description":"Stop all running Docker containers","os":["all"]},{"intent":"remove all unused docker images","command":"docker image prune -a","category":"docker","description":"Remove all unused Docker images","os":["all"]},{"intent":"install npm packages from package.json","command":"npm install","category":"npm","description":"Install all dependencies from package.json","os":["all"]},{"intent":"list all globally installed npm packages","command":"npm list -g --depth=0","category":"npm","description":"List globally installed npm packages","os":["all"]},{"intent":"find large files bigger than 100mb","command":"find / -type f -size +100M 2>/dev/null","category":"find","description":"Find files larger than 100MB","os":["linux","darwin"]},{"intent":"find large files bigger than 100mb","command":"Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }","category":"find","description":"Find files larger than 100MB","os":["win32"]},{"intent":"show disk usage of current directory sorted by size","command":"du -sh * | sort -hr","category":"disk","description":"Show disk usage sorted by size descending","os":["linux","darwin"]},{"intent":"show disk usage of current directory sorted by size","command":"Get-ChildItem | ForEach-Object { [PSCustomObject]@{Name=$_.Name; Size=(Get-ChildItem $_.FullName -Recurse -File | Measure-Object -Property Length -Sum).Sum} } | Sort-Object Size -Descending","category":"disk","description":"Show disk usage sorted by size descending","os":["win32"]},{"intent":"kill a process by name","command":"pkill -f process_name","category":"process","description":"Kill all processes matching a name","os":["linux","darwin"]},{"intent":"kill a process by name","command":"Stop-Process -Name 'process_name' -Force","category":"process","description":"Kill all processes matching a name","os":["win32"]},{"intent":"show all listening ports","command":"ss -tlnp","category":"network","description":"List all TCP ports currently listening","os":["linux","darwin"]},{"intent":"show all listening ports","command":"Get-NetTCPConnection -State Listen","category":"network","description":"List all TCP ports currently listening","os":["win32"]},{"intent":"create a git branch and switch to it","command":"git checkout -b branch-name","category":"git","description":"Create a new branch and switch to it","os":["all"]},{"intent":"view git log with one line per commit","command":"git log --oneline -20","category":"git","description":"Show last 20 commits in compact format","os":["all"]},{"intent":"replace text in all files recursively","command":"find . -type f -exec sed -i 's/old_text/new_text/g' {} +","category":"sed","description":"Find and replace text across all files","os":["linux","darwin"]},{"intent":"replace text in all files recursively","command":"Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }","category":"sed","description":"Find and replace text across all files","os":["win32"]},{"intent":"count lines of code in a project","command":"find . -name '*.py' -o -name '*.js' | xargs wc -l | tail -1","category":"find","description":"Count total lines of code in Python and JS files","os":["linux","darwin"]},{"intent":"count lines of code in a project","command":"(Get-ChildItem -Recurse -Include '*.py','*.js' | Get-Content | Measure-Object -Line).Lines","category":"find","description":"Count total lines of code in Python and JS files","os":["win32"]},{"intent":"monitor system resources in real time","command":"top -o %CPU","category":"process","description":"Show processes sorted by CPU usage","os":["linux","darwin"]},{"intent":"monitor system resources in real time","command":"Get-Process | Sort-Object CPU -Descending","category":"process","description":"Show processes sorted by CPU usage","os":["win32"]},{"intent":"generate ssh key pair","command":"ssh-keygen -t ed25519 -C 'your_email@example.com'","category":"ssh","description":"Generate a new ED25519 SSH key pair","os":["all"]},{"intent":"make a file executable","command":"chmod +x script.sh","category":"permissions","description":"Add execute permission to a file","os":["linux","darwin"]},{"intent":"make a file executable","command":"Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass","category":"permissions","description":"Add execute permission to a file","os":["win32"]},{"intent":"show git status of current repository","command":"git status","category":"git","description":"Show the working tree status","os":["all"]},{"intent":"stage all changes for git commit","command":"git add -A","category":"git","description":"Stage all modified, deleted, and new files","os":["all"]},{"intent":"commit staged changes with a message","command":"git commit -m 'Your commit message'","category":"git","description":"Create a commit with a message","os":["all"]},{"intent":"push changes to remote repository","command":"git push origin branch-name","category":"git","description":"Push local branch to remote origin","os":["all"]},{"intent":"pull latest changes from remote","command":"git pull origin main","category":"git","description":"Fetch and merge changes from remote main branch","os":["all"]},{"intent":"stash uncommitted changes","command":"git stash","category":"git","description":"Temporarily save uncommitted changes","os":["all"]},{"intent":"apply stashed changes","command":"git stash pop","category":"git","description":"Restore the most recently stashed changes","os":["all"]},{"intent":"view all git branches","command":"git branch -a","category":"git","description":"List all local and remote branches","os":["all"]},{"intent":"delete a local git branch","command":"git branch -d branch-name","category":"git","description":"Delete a local branch (safe, merged only)","os":["all"]},{"intent":"force delete a local git branch","command":"git branch -D branch-name","category":"git","description":"Force delete a local branch regardless of merge status","os":["all"]},{"intent":"merge a branch into current branch","command":"git merge branch-name","category":"git","description":"Merge the specified branch into the current branch","os":["all"]},{"intent":"rebase current branch onto another","command":"git rebase main","category":"git","description":"Rebase current branch onto main","os":["all"]},{"intent":"view diff of unstaged changes","command":"git diff","category":"git","description":"Show unstaged changes in the working directory","os":["all"]},{"intent":"view diff of staged changes","command":"git diff --cached","category":"git","description":"Show changes staged for the next commit","os":["all"]},{"intent":"clone a git repository","command":"git clone https://github.com/user/repo.git","category":"git","description":"Clone a remote repository locally","os":["all"]},{"intent":"tag a git commit","command":"git tag -a v1.0.0 -m 'Version 1.0.0'","category":"git","description":"Create an annotated tag on the current commit","os":["all"]},{"intent":"show who last modified each line of a file","command":"git blame filename.txt","category":"git","description":"Show commit and author info per line of a file","os":["all"]},{"intent":"search git history for a string","command":"git log -S 'search_string' --oneline","category":"git","description":"Find commits that introduced or removed a string","os":["all"]},{"intent":"amend the last git commit message","command":"git commit --amend -m 'New commit message'","category":"git","description":"Rewrite the most recent commit message","os":["all"]},{"intent":"reset working directory to last commit","command":"git checkout -- .","category":"git","description":"Discard all unstaged changes in working directory","os":["all"]},{"intent":"show remote repository urls","command":"git remote -v","category":"git","description":"List all remote connections with their URLs","os":["all"]},{"intent":"fetch all remote branches","command":"git fetch --all","category":"git","description":"Download all branches from all remotes","os":["all"]},{"intent":"cherry pick a commit","command":"git cherry-pick commit-hash","category":"git","description":"Apply a specific commit onto the current branch","os":["all"]},{"intent":"find files by name in current directory","command":"find . -name 'filename.txt'","category":"find","description":"Search for a file by exact name","os":["linux","darwin"]},{"intent":"find files by name in current directory","command":"Get-ChildItem -Recurse -Filter 'filename.txt'","category":"find","description":"Search for a file by exact name","os":["win32"]},{"intent":"find files by extension recursively","command":"find . -name '*.log'","category":"find","description":"Find all files with a given extension","os":["linux","darwin"]},{"intent":"find files by extension recursively","command":"Get-ChildItem -Recurse -Filter '*.log'","category":"find","description":"Find all files with a given extension","os":["win32"]},{"intent":"find and delete all .DS_Store files","command":"find . -name '.DS_Store' -delete","category":"find","description":"Recursively delete all .DS_Store files","os":["linux","darwin"]},{"intent":"find and delete all .DS_Store files","command":"Get-ChildItem -Recurse -Filter '.DS_Store' | Remove-Item","category":"find","description":"Recursively delete all .DS_Store files","os":["win32"]},{"intent":"find empty directories","command":"find . -type d -empty","category":"find","description":"List all empty directories","os":["linux","darwin"]},{"intent":"find empty directories","command":"Get-ChildItem -Recurse -Directory | Where-Object { (Get-ChildItem $_.FullName).Count -eq 0 }","category":"find","description":"List all empty directories","os":["win32"]},{"intent":"find files modified in the last 7 days","command":"find . -mtime -7 -type f","category":"find","description":"Find files modified within the past week","os":["linux","darwin"]},{"intent":"find files modified in the last 7 days","command":"Get-ChildItem -Recurse -File | Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-7) }","category":"find","description":"Find files modified within the past week","os":["win32"]},{"intent":"find files owned by a specific user","command":"find / -user username","category":"find","description":"Find all files owned by a given user","os":["linux","darwin"]},{"intent":"find files owned by a specific user","command":"Get-ChildItem -Recurse | Where-Object { $_.GetAccessControl().Owner -like '*username*' }","category":"find","description":"Find all files owned by a given user","os":["win32"]},{"intent":"find files with specific permissions","command":"find . -perm 777","category":"find","description":"Find files with 777 permissions","os":["linux","darwin"]},{"intent":"find and compress log files older than 30 days","command":"find /var/log -name '*.log' -mtime +30 -exec gzip {} \\;","category":"find","description":"Compress log files older than 30 days","os":["linux","darwin"]},{"intent":"search for a string in files recursively","command":"grep -rn 'search_string' .","category":"grep","description":"Search recursively for a string in all files","os":["linux","darwin"]},{"intent":"search for a string in files recursively","command":"Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'","category":"grep","description":"Search recursively for a string in all files","os":["win32"]},{"intent":"search for a pattern case insensitively","command":"grep -ri 'pattern' .","category":"grep","description":"Case-insensitive recursive search","os":["linux","darwin"]},{"intent":"search for a pattern case insensitively","command":"Get-ChildItem -Recurse -File | Select-String -Pattern 'pattern' -CaseSensitive:$false","category":"grep","description":"Case-insensitive recursive search","os":["win32"]},{"intent":"grep and show only filenames with matches","command":"grep -rl 'pattern' .","category":"grep","description":"List only filenames that contain the pattern","os":["linux","darwin"]},{"intent":"grep and show only filenames with matches","command":"Get-ChildItem -Recurse -File | Where-Object { Select-String -Path $_.FullName -Pattern 'pattern' -Quiet }","category":"grep","description":"List only filenames that contain the pattern","os":["win32"]},{"intent":"grep with context lines around match","command":"grep -n -A 3 -B 3 'pattern' file.txt","category":"grep","description":"Show 3 lines before and after each match","os":["linux","darwin"]},{"intent":"grep with context lines around match","command":"Select-String -Path 'file.txt' -Pattern 'pattern' -Context 3,3","category":"grep","description":"Show 3 lines before and after each match","os":["win32"]},{"intent":"grep for lines not matching a pattern","command":"grep -v 'pattern' file.txt","category":"grep","description":"Show lines that do NOT match the pattern","os":["linux","darwin"]},{"intent":"grep for lines not matching a pattern","command":"Get-Content 'file.txt' | Where-Object { $_ -notmatch 'pattern' }","category":"grep","description":"Show lines that do NOT match the pattern","os":["win32"]},{"intent":"count number of matches in a file","command":"grep -c 'pattern' file.txt","category":"grep","description":"Count the number of matching lines","os":["linux","darwin"]},{"intent":"count number of matches in a file","command":"(Select-String -Path 'file.txt' -Pattern 'pattern').Count","category":"grep","description":"Count the number of matching lines","os":["win32"]},{"intent":"search for whole word matches only","command":"grep -w 'word' file.txt","category":"grep","description":"Match only complete words","os":["linux","darwin"]},{"intent":"search for whole word matches only","command":"Select-String -Path 'file.txt' -Pattern '\\bword\\b'","category":"grep","description":"Match only complete words","os":["win32"]},{"intent":"grep using extended regular expressions","command":"grep -E 'pattern1|pattern2' file.txt","category":"grep","description":"Search for multiple patterns with extended regex","os":["linux","darwin"]},{"intent":"grep using extended regular expressions","command":"Select-String -Path 'file.txt' -Pattern 'pattern1|pattern2'","category":"grep","description":"Search for multiple patterns with extended regex","os":["win32"]},{"intent":"build a docker image from dockerfile","command":"docker build -t image-name:tag .","category":"docker","description":"Build a Docker image from the current directory","os":["all"]},{"intent":"run a docker container interactively","command":"docker run -it image-name /bin/bash","category":"docker","description":"Start an interactive shell in a new container","os":["all"]},{"intent":"run a docker container in background","command":"docker run -d -p 8080:80 image-name","category":"docker","description":"Run a container detached with port mapping","os":["all"]},{"intent":"view docker container logs","command":"docker logs -f container-name","category":"docker","description":"Follow live logs from a running container","os":["all"]},{"intent":"exec into a running docker container","command":"docker exec -it container-name /bin/bash","category":"docker","description":"Open a shell inside a running container","os":["all"]},{"intent":"remove a stopped docker container","command":"docker rm container-name","category":"docker","description":"Delete a stopped container","os":["all"]},{"intent":"remove a docker image","command":"docker rmi image-name","category":"docker","description":"Delete a Docker image from local storage","os":["all"]},{"intent":"list all docker images","command":"docker images","category":"docker","description":"Show all locally available Docker images","os":["all"]},{"intent":"pull a docker image from docker hub","command":"docker pull ubuntu:22.04","category":"docker","description":"Download a Docker image from Docker Hub","os":["all"]},{"intent":"start docker compose services","command":"docker compose up -d","category":"docker","description":"Start all services defined in docker-compose.yml detached","os":["all"]},{"intent":"stop docker compose services","command":"docker compose down","category":"docker","description":"Stop and remove all docker-compose containers","os":["all"]},{"intent":"view docker compose logs","command":"docker compose logs -f","category":"docker","description":"Follow logs from all docker-compose services","os":["all"]},{"intent":"copy file from container to host","command":"docker cp container-name:/path/in/container ./local-path","category":"docker","description":"Copy a file out of a running container","os":["all"]},{"intent":"inspect a docker container","command":"docker inspect container-name","category":"docker","description":"Show detailed info about a container","os":["all"]},{"intent":"prune all stopped containers","command":"docker container prune","category":"docker","description":"Remove all stopped containers","os":["all"]},{"intent":"show docker system disk usage","command":"docker system df","category":"docker","description":"Show Docker disk usage summary","os":["all"]},{"intent":"make a get request with curl","command":"curl -s https://api.example.com/data","category":"curl","description":"Send a silent GET request","os":["all"]},{"intent":"follow redirects with curl","command":"curl -L https://example.com","category":"curl","description":"Follow HTTP redirects automatically","os":["all"]},{"intent":"save curl output to file","command":"curl -o output.html https://example.com","category":"curl","description":"Save the response body to a file","os":["all"]},{"intent":"send custom headers with curl","command":"curl -H 'Authorization: Bearer token' https://api.example.com","category":"curl","description":"Add a custom header to a curl request","os":["all"]},{"intent":"make a put request with curl","command":"curl -X PUT -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/resource/1","category":"curl","description":"Send a PUT request with a JSON body","os":["all"]},{"intent":"make a delete request with curl","command":"curl -X DELETE https://api.example.com/resource/1","category":"curl","description":"Send a DELETE request to an API endpoint","os":["all"]},{"intent":"check http response code with curl","command":"curl -o /dev/null -s -w '%{http_code}' https://example.com","category":"curl","description":"Get only the HTTP status code of a request","os":["all"]},{"intent":"resume an interrupted curl download","command":"curl -C - -O https://example.com/largefile.zip","category":"curl","description":"Continue a partially downloaded file","os":["all"]},{"intent":"run npm script","command":"npm run script-name","category":"npm","description":"Execute a script defined in package.json","os":["all"]},{"intent":"install a specific npm package","command":"npm install package-name","category":"npm","description":"Install and save a package as a dependency","os":["all"]},{"intent":"install npm package as dev dependency","command":"npm install --save-dev package-name","category":"npm","description":"Install a package as a development dependency","os":["all"]},{"intent":"uninstall an npm package","command":"npm uninstall package-name","category":"npm","description":"Remove a package and update package.json","os":["all"]},{"intent":"update all npm packages","command":"npm update","category":"npm","description":"Update all packages to their latest allowed versions","os":["all"]},{"intent":"check for outdated npm packages","command":"npm outdated","category":"npm","description":"List packages that have newer versions available","os":["all"]},{"intent":"audit npm packages for vulnerabilities","command":"npm audit","category":"npm","description":"Scan dependencies for known vulnerabilities","os":["all"]},{"intent":"fix npm audit vulnerabilities","command":"npm audit fix","category":"npm","description":"Automatically fix compatible audit vulnerabilities","os":["all"]},{"intent":"create new npm project","command":"npm init -y","category":"npm","description":"Initialize a new package.json with defaults","os":["all"]},{"intent":"install pip package","command":"pip install package-name","category":"pip","description":"Install a Python package with pip","os":["all"]},{"intent":"install specific version of pip package","command":"pip install package-name==1.2.3","category":"pip","description":"Install a specific version of a package","os":["all"]},{"intent":"list installed pip packages","command":"pip list","category":"pip","description":"Show all installed Python packages","os":["all"]},{"intent":"save pip requirements to file","command":"pip freeze > requirements.txt","category":"pip","description":"Export installed packages to requirements.txt","os":["all"]},{"intent":"install packages from requirements file","command":"pip install -r requirements.txt","category":"pip","description":"Install all packages listed in requirements.txt","os":["all"]},{"intent":"uninstall a pip package","command":"pip uninstall package-name","category":"pip","description":"Remove an installed Python package","os":["all"]},{"intent":"upgrade a pip package","command":"pip install --upgrade package-name","category":"pip","description":"Upgrade a package to its latest version","os":["all"]},{"intent":"create a python virtual environment","command":"python -m venv venv","category":"pip","description":"Create a new Python virtual environment","os":["all"]},{"intent":"activate python virtual environment on linux","command":"source venv/bin/activate","category":"pip","description":"Activate a Python virtual environment on Linux/macOS","os":["linux","darwin"]},{"intent":"deactivate python virtual environment","command":"deactivate","category":"pip","description":"Exit the current virtual environment","os":["linux","darwin"]},{"intent":"list all files including hidden","command":"ls -la","category":"filesystem","description":"List all files with details including hidden files","os":["linux","darwin"]},{"intent":"list all files including hidden","command":"Get-ChildItem -Force","category":"filesystem","description":"List all files with details including hidden files","os":["win32"]},{"intent":"create a new directory","command":"mkdir -p path/to/directory","category":"filesystem","description":"Create directory and any missing parent directories","os":["linux","darwin"]},{"intent":"create a new directory","command":"New-Item -ItemType Directory -Path 'path/to/directory' -Force","category":"filesystem","description":"Create directory and any missing parent directories","os":["win32"]},{"intent":"remove a directory and its contents","command":"rm -rf directory/","category":"filesystem","description":"Recursively force delete a directory","os":["linux","darwin"]},{"intent":"remove a directory and its contents","command":"Remove-Item -Recurse -Force 'directory/'","category":"filesystem","description":"Recursively force delete a directory","os":["win32"]},{"intent":"copy a directory recursively","command":"cp -r source/ destination/","category":"filesystem","description":"Copy a directory and all its contents","os":["linux","darwin"]},{"intent":"copy a directory recursively","command":"Copy-Item -Recurse 'source/' 'destination/'","category":"filesystem","description":"Copy a directory and all its contents","os":["win32"]},{"intent":"move or rename a file","command":"mv oldname.txt newname.txt","category":"filesystem","description":"Rename or move a file or directory","os":["linux","darwin"]},{"intent":"move or rename a file","command":"Move-Item 'oldname.txt' 'newname.txt'","category":"filesystem","description":"Rename or move a file or directory","os":["win32"]},{"intent":"create an empty file","command":"touch filename.txt","category":"filesystem","description":"Create a new empty file or update timestamps","os":["linux","darwin"]},{"intent":"create an empty file","command":"New-Item -ItemType File 'filename.txt'","category":"filesystem","description":"Create a new empty file or update timestamps","os":["win32"]},{"intent":"view file contents","command":"cat filename.txt","category":"filesystem","description":"Print the contents of a file to stdout","os":["linux","darwin"]},{"intent":"view file contents","command":"Get-Content 'filename.txt'","category":"filesystem","description":"Print the contents of a file to stdout","os":["win32"]},{"intent":"view file with pagination","command":"less filename.txt","category":"filesystem","description":"View a file with scrollable pagination","os":["linux","darwin"]},{"intent":"view file with pagination","command":"Get-Content 'filename.txt' | Out-Host -Paging","category":"filesystem","description":"View a file with scrollable pagination","os":["win32"]},{"intent":"view first 10 lines of a file","command":"head -n 10 filename.txt","category":"filesystem","description":"Print the first 10 lines of a file","os":["linux","darwin"]},{"intent":"view first 10 lines of a file","command":"Get-Content 'filename.txt' -TotalCount 10","category":"filesystem","description":"Print the first 10 lines of a file","os":["win32"]},{"intent":"view last 10 lines of a file","command":"tail -n 10 filename.txt","category":"filesystem","description":"Print the last 10 lines of a file","os":["linux","darwin"]},{"intent":"view last 10 lines of a file","command":"Get-Content 'filename.txt' -Tail 10","category":"filesystem","description":"Print the last 10 lines of a file","os":["win32"]},{"intent":"follow a file live as it updates","command":"tail -f /var/log/syslog","category":"filesystem","description":"Continuously display new lines appended to a file","os":["linux","darwin"]},{"intent":"follow a file live as it updates","command":"Get-Content 'C:\\path\\to\\file.log' -Wait -Tail 10","category":"filesystem","description":"Continuously display new lines appended to a file","os":["win32"]},{"intent":"show current directory path","command":"pwd","category":"filesystem","description":"Print the full path of the current directory","os":["linux","darwin"]},{"intent":"show current directory path","command":"Get-Location","category":"filesystem","description":"Print the full path of the current directory","os":["win32"]},{"intent":"count lines words and characters in file","command":"wc -lwc filename.txt","category":"filesystem","description":"Show line, word, and character counts for a file","os":["linux","darwin"]},{"intent":"count lines words and characters in file","command":"(Get-Content 'filename.txt' | Measure-Object -Line -Word -Character) | Select-Object Lines, Words, Characters","category":"filesystem","description":"Show line, word, and character counts for a file","os":["win32"]},{"intent":"sort lines of a file alphabetically","command":"sort filename.txt","category":"filesystem","description":"Sort lines of a text file alphabetically","os":["linux","darwin"]},{"intent":"sort lines of a file alphabetically","command":"Get-Content 'filename.txt' | Sort-Object","category":"filesystem","description":"Sort lines of a text file alphabetically","os":["win32"]},{"intent":"remove duplicate lines from a file","command":"sort filename.txt | uniq","category":"filesystem","description":"Sort and remove duplicate lines","os":["linux","darwin"]},{"intent":"remove duplicate lines from a file","command":"Get-Content 'filename.txt' | Sort-Object -Unique","category":"filesystem","description":"Sort and remove duplicate lines","os":["win32"]},{"intent":"compare two files","command":"diff file1.txt file2.txt","category":"filesystem","description":"Show line-by-line differences between two files","os":["linux","darwin"]},{"intent":"compare two files","command":"Compare-Object (Get-Content 'file1.txt') (Get-Content 'file2.txt')","category":"filesystem","description":"Show line-by-line differences between two files","os":["win32"]},{"intent":"create a symbolic link","command":"ln -s /path/to/target /path/to/link","category":"filesystem","description":"Create a symbolic (soft) link","os":["linux","darwin"]},{"intent":"create a symbolic link","command":"New-Item -ItemType SymbolicLink -Path '/path/to/link' -Target '/path/to/target'","category":"filesystem","description":"Create a symbolic (soft) link","os":["win32"]},{"intent":"show file or directory permissions","command":"stat filename.txt","category":"filesystem","description":"Display detailed file metadata including permissions","os":["linux","darwin"]},{"intent":"show file or directory permissions","command":"Get-Item 'filename.txt' | Select-Object *","category":"filesystem","description":"Display detailed file metadata including permissions","os":["win32"]},{"intent":"change file owner","command":"chown user:group filename.txt","category":"permissions","description":"Change the owner and group of a file","os":["linux","darwin"]},{"intent":"change file owner","command":"icacls 'filename.txt' /setowner 'user'","category":"permissions","description":"Change the owner and group of a file","os":["win32"]},{"intent":"change permissions recursively","command":"chmod -R 755 directory/","category":"permissions","description":"Set permissions on a directory and all contents","os":["linux","darwin"]},{"intent":"change permissions recursively","command":"icacls 'directory/' /grant 'user:(OI)(CI)F' /T","category":"permissions","description":"Set permissions on a directory and all contents","os":["win32"]},{"intent":"give read write permissions to owner only","command":"chmod 600 filename.txt","category":"permissions","description":"Set file to owner read/write only","os":["linux","darwin"]},{"intent":"give read write permissions to owner only","command":"icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"","category":"permissions","description":"Set file to owner read/write only","os":["win32"]},{"intent":"give read only permissions to everyone","command":"chmod 444 filename.txt","category":"permissions","description":"Make a file read-only for all users","os":["linux","darwin"]},{"intent":"give read only permissions to everyone","command":"icacls 'filename.txt' /inheritance:r /grant:r 'Everyone:R'","category":"permissions","description":"Make a file read-only for all users","os":["win32"]},{"intent":"check current user","command":"whoami","category":"permissions","description":"Print the name of the current user","os":["linux","darwin"]},{"intent":"check current user","command":"$env:USERNAME","category":"permissions","description":"Print the name of the current user","os":["win32"]},{"intent":"switch to another user","command":"su - username","category":"permissions","description":"Switch to another user account","os":["linux","darwin"]},{"intent":"switch to another user","command":"runas /user:username cmd","category":"permissions","description":"Switch to another user account","os":["win32"]},{"intent":"run command as superuser","command":"sudo command","category":"permissions","description":"Execute a command with root privileges","os":["linux","darwin"]},{"intent":"run command as superuser","command":"Start-Process powershell -Verb RunAs","category":"permissions","description":"Execute a command with root privileges","os":["win32"]},{"intent":"show all users on the system","command":"cat /etc/passwd | cut -d: -f1","category":"permissions","description":"List all user accounts on the system","os":["linux","darwin"]},{"intent":"show all users on the system","command":"Get-LocalUser | Select-Object Name","category":"permissions","description":"List all user accounts on the system","os":["win32"]},{"intent":"check ip address of machine","command":"ip addr show","category":"network","description":"Show all network interfaces and their IP addresses","os":["linux","darwin"]},{"intent":"check ip address of machine","command":"Get-NetIPAddress","category":"network","description":"Show all network interfaces and their IP addresses","os":["win32"]},{"intent":"ping a host to check connectivity","command":"ping -c 4 google.com","category":"network","description":"Send 4 ICMP packets to test network connectivity","os":["linux","darwin"]},{"intent":"ping a host to check connectivity","command":"Test-Connection -ComputerName google.com -Count 4","category":"network","description":"Send 4 ICMP packets to test network connectivity","os":["win32"]},{"intent":"trace the network route to a host","command":"traceroute google.com","category":"network","description":"Show the network path packets take to a host","os":["linux","darwin"]},{"intent":"trace the network route to a host","command":"Test-NetConnection -ComputerName google.com -TraceRoute","category":"network","description":"Show the network path packets take to a host","os":["win32"]},{"intent":"check dns resolution for a domain","command":"nslookup example.com","category":"network","description":"Query DNS to resolve a domain name","os":["linux","darwin"]},{"intent":"check dns resolution for a domain","command":"Resolve-DnsName example.com","category":"network","description":"Query DNS to resolve a domain name","os":["win32"]},{"intent":"look up dns records for a domain","command":"dig example.com","category":"network","description":"Detailed DNS lookup for a domain","os":["linux","darwin"]},{"intent":"look up dns records for a domain","command":"Resolve-DnsName example.com -Type ALL","category":"network","description":"Detailed DNS lookup for a domain","os":["win32"]},{"intent":"show active network connections","command":"netstat -an","category":"network","description":"Display all active network connections and sockets","os":["linux","darwin"]},{"intent":"show active network connections","command":"Get-NetTCPConnection","category":"network","description":"Display all active network connections and sockets","os":["win32"]},{"intent":"show network interface statistics","command":"ifconfig","category":"network","description":"Display network interface configuration","os":["linux","darwin"]},{"intent":"show network interface statistics","command":"Get-NetAdapter","category":"network","description":"Display network interface configuration","os":["win32"]},{"intent":"test if a port is open on a host","command":"nc -zv hostname 80","category":"network","description":"Check if a specific port is open using netcat","os":["linux","darwin"]},{"intent":"test if a port is open on a host","command":"Test-NetConnection -ComputerName hostname -Port 80","category":"network","description":"Check if a specific port is open using netcat","os":["win32"]},{"intent":"scan open ports on a host","command":"nmap -sV hostname","category":"network","description":"Scan for open ports and service versions","os":["linux","darwin"]},{"intent":"monitor network traffic in real time","command":"iftop -i eth0","category":"network","description":"Display real-time network bandwidth usage","os":["linux","darwin"]},{"intent":"monitor network traffic in real time","command":"Get-NetAdapterStatistics","category":"network","description":"Display real-time network bandwidth usage","os":["win32"]},{"intent":"flush dns cache on linux","command":"sudo systemd-resolve --flush-caches","category":"network","description":"Clear the system DNS resolver cache","os":["all"]},{"intent":"show routing table","command":"ip route show","category":"network","description":"Display the IP routing table","os":["linux","darwin"]},{"intent":"show routing table","command":"Get-NetRoute","category":"network","description":"Display the IP routing table","os":["win32"]},{"intent":"block an ip address with firewall","command":"sudo iptables -A INPUT -s 192.168.1.100 -j DROP","category":"network","description":"Add a firewall rule to drop packets from an IP","os":["linux","darwin"]},{"intent":"block an ip address with firewall","command":"New-NetFirewallRule -DisplayName 'Block IP' -Direction Inbound -RemoteAddress '192.168.1.100' -Action Block","category":"network","description":"Add a firewall rule to drop packets from an IP","os":["win32"]},{"intent":"show all running processes","command":"ps aux","category":"process","description":"Display all running processes with details","os":["linux","darwin"]},{"intent":"show all running processes","command":"Get-Process","category":"process","description":"Display all running processes with details","os":["win32"]},{"intent":"show process tree","command":"pstree","category":"process","description":"Display processes in a tree hierarchy","os":["linux","darwin"]},{"intent":"show process tree","command":"Get-Process | Select-Object Id, ProcessName, @{N='Parent';E={(Get-Process -Id $_.Parent.Id -ErrorAction SilentlyContinue).ProcessName}}","category":"process","description":"Display processes in a tree hierarchy","os":["win32"]},{"intent":"kill a process by pid","command":"kill -9 PID","category":"process","description":"Force kill a process by its process ID","os":["linux","darwin"]},{"intent":"kill a process by pid","command":"Stop-Process -Id PID -Force","category":"process","description":"Force kill a process by its process ID","os":["win32"]},{"intent":"find process id by name","command":"pgrep process_name","category":"process","description":"Get the PID of a process by name","os":["linux","darwin"]},{"intent":"find process id by name","command":"Get-Process -Name 'process_name' | Select-Object Id","category":"process","description":"Get the PID of a process by name","os":["win32"]},{"intent":"show memory usage","command":"free -h","category":"process","description":"Display total, used, and free memory in human-readable form","os":["linux","darwin"]},{"intent":"show memory usage","command":"Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory","category":"process","description":"Display total, used, and free memory in human-readable form","os":["win32"]},{"intent":"show cpu info","command":"lscpu","category":"process","description":"Display CPU architecture and processor information","os":["linux","darwin"]},{"intent":"show cpu info","command":"Get-CimInstance Win32_Processor","category":"process","description":"Display CPU architecture and processor information","os":["win32"]},{"intent":"monitor processes with htop","command":"htop","category":"process","description":"Interactive process viewer and manager","os":["linux","darwin"]},{"intent":"monitor processes with htop","command":"Get-Process | Sort-Object CPU -Descending | Select-Object -First 20","category":"process","description":"Interactive process viewer and manager","os":["win32"]},{"intent":"run a command in background","command":"command &","category":"process","description":"Execute a command as a background process","os":["linux","darwin"]},{"intent":"run a command in background","command":"Start-Job -ScriptBlock { command }","category":"process","description":"Execute a command as a background process","os":["win32"]},{"intent":"bring background process to foreground","command":"fg %1","category":"process","description":"Bring job 1 back to the foreground","os":["linux","darwin"]},{"intent":"bring background process to foreground","command":"Receive-Job -Id 1 -Wait","category":"process","description":"Bring job 1 back to the foreground","os":["win32"]},{"intent":"check system uptime","command":"uptime","category":"process","description":"Show how long the system has been running","os":["linux","darwin"]},{"intent":"check system uptime","command":"(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime","category":"process","description":"Show how long the system has been running","os":["win32"]},{"intent":"show system load averages","command":"cat /proc/loadavg","category":"process","description":"Display the system load averages for 1, 5, 15 minutes","os":["linux","darwin"]},{"intent":"show system load averages","command":"Get-CimInstance Win32_Processor | Select-Object LoadPercentage","category":"process","description":"Display the system load averages for 1, 5, 15 minutes","os":["win32"]},{"intent":"run command at scheduled time","command":"at 10:00 AM tomorrow","category":"process","description":"Schedule a one-time command to run at a specific time","os":["all"]},{"intent":"list cron jobs for current user","command":"crontab -l","category":"process","description":"Display the current user's cron schedule","os":["all"]},{"intent":"edit cron jobs","command":"crontab -e","category":"process","description":"Open the cron table for editing","os":["all"]},{"intent":"show total disk space","command":"df -h","category":"disk","description":"Display disk space usage on all mounted filesystems","os":["linux","darwin"]},{"intent":"show total disk space","command":"Get-PSDrive -PSProvider FileSystem","category":"disk","description":"Display disk space usage on all mounted filesystems","os":["win32"]},{"intent":"show disk usage of a specific directory","command":"du -sh /path/to/dir","category":"disk","description":"Show total disk usage of a directory","os":["linux","darwin"]},{"intent":"show disk usage of a specific directory","command":"(Get-ChildItem '/path/to/dir' -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB","category":"disk","description":"Show total disk usage of a directory","os":["win32"]},{"intent":"list mounted filesystems","command":"mount | column -t","category":"disk","description":"Show all mounted filesystems in a readable table","os":["linux","darwin"]},{"intent":"list mounted filesystems","command":"Get-Volume","category":"disk","description":"Show all mounted filesystems in a readable table","os":["win32"]},{"intent":"check disk health with smartctl","command":"sudo smartctl -a /dev/sda","category":"disk","description":"Display SMART health data for a disk","os":["linux","darwin"]},{"intent":"synchronize files between directories","command":"rsync -avz source/ destination/","category":"disk","description":"Sync files with verbose output and compression","os":["all"]},{"intent":"rsync files to remote server","command":"rsync -avz -e ssh source/ user@host:/destination/","category":"disk","description":"Sync files to a remote server over SSH","os":["all"]},{"intent":"substitute text in a file with sed","command":"sed -i 's/old/new/g' filename.txt","category":"sed","description":"Replace all occurrences of old with new in a file","os":["linux","darwin"]},{"intent":"substitute text in a file with sed","command":"(Get-Content 'filename.txt') -replace 'old','new' | Set-Content 'filename.txt'","category":"sed","description":"Replace all occurrences of old with new in a file","os":["win32"]},{"intent":"delete lines matching a pattern with sed","command":"sed -i '/pattern/d' filename.txt","category":"sed","description":"Remove all lines matching a pattern from a file","os":["linux","darwin"]},{"intent":"delete lines matching a pattern with sed","command":"Get-Content 'filename.txt' | Where-Object { $_ -notmatch 'pattern' } | Set-Content 'filename.txt'","category":"sed","description":"Remove all lines matching a pattern from a file","os":["win32"]},{"intent":"print specific line number with sed","command":"sed -n '5p' filename.txt","category":"sed","description":"Print only line 5 of a file","os":["linux","darwin"]},{"intent":"print specific line number with sed","command":"(Get-Content 'filename.txt')[4]","category":"sed","description":"Print only line 5 of a file","os":["win32"]},{"intent":"insert line before pattern with sed","command":"sed -i '/pattern/i\\new line text' filename.txt","category":"sed","description":"Insert a new line before lines matching a pattern","os":["linux","darwin"]},{"intent":"extract column from csv with awk","command":"awk -F',' '{print $2}' file.csv","category":"awk","description":"Print the second column of a comma-separated file","os":["linux","darwin"]},{"intent":"extract column from csv with awk","command":"Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName","category":"awk","description":"Print the second column of a comma-separated file","os":["win32"]},{"intent":"sum a column of numbers with awk","command":"awk '{sum += $1} END {print sum}' file.txt","category":"awk","description":"Sum all values in the first column of a file","os":["linux","darwin"]},{"intent":"sum a column of numbers with awk","command":"(Import-Csv 'file.txt' -Header Val | Measure-Object -Property Val -Sum).Sum","category":"awk","description":"Sum all values in the first column of a file","os":["win32"]},{"intent":"filter rows by field value with awk","command":"awk -F',' '$3 > 100' file.csv","category":"awk","description":"Print rows where the third column is greater than 100","os":["linux","darwin"]},{"intent":"filter rows by field value with awk","command":"Import-Csv 'file.csv' | Where-Object { [int]$_.Column3 -gt 100 }","category":"awk","description":"Print rows where the third column is greater than 100","os":["win32"]},{"intent":"print number of fields per line with awk","command":"awk '{print NF}' file.txt","category":"awk","description":"Print the number of fields on each line","os":["linux","darwin"]},{"intent":"print number of fields per line with awk","command":"Get-Content 'file.txt' | ForEach-Object { ($_ -split '\\s+').Count }","category":"awk","description":"Print the number of fields on each line","os":["win32"]},{"intent":"create a compressed zip archive","command":"zip -r archive.zip directory/","category":"archive","description":"Compress a directory into a zip file","os":["linux","darwin"]},{"intent":"create a compressed zip archive","command":"Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'","category":"archive","description":"Compress a directory into a zip file","os":["win32"]},{"intent":"extract a zip archive","command":"unzip archive.zip","category":"archive","description":"Extract the contents of a zip file","os":["linux","darwin"]},{"intent":"extract a zip archive","command":"Expand-Archive -Path 'archive.zip' -DestinationPath '.'","category":"archive","description":"Extract the contents of a zip file","os":["win32"]},{"intent":"list contents of a zip archive","command":"unzip -l archive.zip","category":"archive","description":"Preview contents of a zip file without extracting","os":["linux","darwin"]},{"intent":"list contents of a zip archive","command":"Expand-Archive -Path 'archive.zip' -WhatIf","category":"archive","description":"Preview contents of a zip file without extracting","os":["win32"]},{"intent":"list contents of a tar archive","command":"tar -tzf archive.tar.gz","category":"tar","description":"List files inside a tar.gz without extracting","os":["linux","darwin"]},{"intent":"extract tar to specific directory","command":"tar -xzf archive.tar.gz -C /target/dir/","category":"tar","description":"Extract a tar.gz archive to a specific path","os":["linux","darwin"]},{"intent":"create a tar archive without compression","command":"tar -cf archive.tar directory/","category":"tar","description":"Create an uncompressed tar archive","os":["linux","darwin"]},{"intent":"encode a file to base64","command":"base64 filename.txt","category":"encoding","description":"Encode a file's contents to base64","os":["linux","darwin"]},{"intent":"encode a file to base64","command":"[Convert]::ToBase64String([IO.File]::ReadAllBytes('filename.txt'))","category":"encoding","description":"Encode a file's contents to base64","os":["win32"]},{"intent":"decode a base64 file","command":"base64 -d encoded.txt > decoded.txt","category":"encoding","description":"Decode a base64-encoded file","os":["linux","darwin"]},{"intent":"decode a base64 file","command":"[IO.File]::WriteAllBytes('decoded.txt', [Convert]::FromBase64String((Get-Content 'encoded.txt')))","category":"encoding","description":"Decode a base64-encoded file","os":["win32"]},{"intent":"generate an md5 checksum","command":"md5sum filename.txt","category":"encoding","description":"Generate the MD5 hash of a file","os":["linux","darwin"]},{"intent":"generate an md5 checksum","command":"Get-FileHash 'filename.txt' -Algorithm MD5","category":"encoding","description":"Generate the MD5 hash of a file","os":["win32"]},{"intent":"generate a sha256 checksum","command":"sha256sum filename.txt","category":"encoding","description":"Generate the SHA-256 hash of a file","os":["linux","darwin"]},{"intent":"generate a sha256 checksum","command":"Get-FileHash 'filename.txt' -Algorithm SHA256","category":"encoding","description":"Generate the SHA-256 hash of a file","os":["win32"]},{"intent":"set an environment variable","command":"export VAR_NAME='value'","category":"shell","description":"Set an environment variable for the current session","os":["linux","darwin"]},{"intent":"set an environment variable","command":"$env:VAR_NAME = 'value'","category":"shell","description":"Set an environment variable for the current session","os":["win32"]},{"intent":"print an environment variable","command":"echo $VAR_NAME","category":"shell","description":"Print the value of an environment variable","os":["linux","darwin"]},{"intent":"print an environment variable","command":"$env:VAR_NAME","category":"shell","description":"Print the value of an environment variable","os":["win32"]},{"intent":"list all environment variables","command":"env","category":"shell","description":"Print all environment variables","os":["linux","darwin"]},{"intent":"list all environment variables","command":"Get-ChildItem Env:","category":"shell","description":"Print all environment variables","os":["win32"]},{"intent":"run previous command with sudo","command":"sudo !!","category":"shell","description":"Re-run the last command with sudo prefix","os":["all"]},{"intent":"create an alias for a command","command":"alias ll='ls -la'","category":"shell","description":"Create a shortcut alias for a command","os":["linux","darwin"]},{"intent":"create an alias for a command","command":"Set-Alias -Name ll -Value Get-ChildItem","category":"shell","description":"Create a shortcut alias for a command","os":["win32"]},{"intent":"show command history","command":"history","category":"shell","description":"Display the list of previously run commands","os":["linux","darwin"]},{"intent":"show command history","command":"Get-History","category":"shell","description":"Display the list of previously run commands","os":["win32"]},{"intent":"search command history","command":"history | grep 'keyword'","category":"shell","description":"Find a previously run command by keyword","os":["linux","darwin"]},{"intent":"search command history","command":"Get-History | Where-Object { $_.CommandLine -match 'keyword' }","category":"shell","description":"Find a previously run command by keyword","os":["win32"]},{"intent":"repeat last matching command from history","command":"!keyword","category":"shell","description":"Re-run the most recent command starting with keyword","os":["all"]},{"intent":"redirect stdout to a file","command":"command > output.txt","category":"shell","description":"Write command output to a file, overwriting it","os":["linux","darwin"]},{"intent":"redirect stdout to a file","command":"command | Out-File 'output.txt'","category":"shell","description":"Write command output to a file, overwriting it","os":["win32"]},{"intent":"append stdout to a file","command":"command >> output.txt","category":"shell","description":"Append command output to a file","os":["linux","darwin"]},{"intent":"append stdout to a file","command":"command | Out-File 'output.txt' -Append","category":"shell","description":"Append command output to a file","os":["win32"]},{"intent":"redirect stderr to a file","command":"command 2> error.txt","category":"shell","description":"Write error output to a file","os":["linux","darwin"]},{"intent":"redirect stderr to a file","command":"command 2>'error.txt'","category":"shell","description":"Write error output to a file","os":["win32"]},{"intent":"redirect both stdout and stderr to a file","command":"command > output.txt 2>&1","category":"shell","description":"Capture all output including errors to a file","os":["linux","darwin"]},{"intent":"redirect both stdout and stderr to a file","command":"command *>'output.txt'","category":"shell","description":"Capture all output including errors to a file","os":["win32"]},{"intent":"pipe output of one command to another","command":"command1 | command2","category":"shell","description":"Send output of command1 as input to command2","os":["all"]},{"intent":"run multiple commands sequentially","command":"command1 && command2","category":"shell","description":"Run command2 only if command1 succeeds","os":["all"]},{"intent":"run command and discard all output","command":"command > /dev/null 2>&1","category":"shell","description":"Execute a command silently with no output","os":["linux","darwin"]},{"intent":"run command and discard all output","command":"command | Out-Null","category":"shell","description":"Execute a command silently with no output","os":["win32"]},{"intent":"time how long a command takes","command":"time command","category":"shell","description":"Measure the execution time of a command","os":["linux","darwin"]},{"intent":"time how long a command takes","command":"Measure-Command { command }","category":"shell","description":"Measure the execution time of a command","os":["win32"]},{"intent":"repeat a command every 2 seconds","command":"watch -n 2 command","category":"shell","description":"Execute a command repeatedly at an interval","os":["linux","darwin"]},{"intent":"repeat a command every 2 seconds","command":"while ($true) { command; Start-Sleep 2 }","category":"shell","description":"Execute a command repeatedly at an interval","os":["win32"]},{"intent":"open a manual page for a command","command":"man command","category":"shell","description":"Open the manual page for a command","os":["linux","darwin"]},{"intent":"open a manual page for a command","command":"Get-Help command -Full","category":"shell","description":"Open the manual page for a command","os":["win32"]},{"intent":"find where a binary is located","command":"which python3","category":"shell","description":"Show the full path of a command's executable","os":["linux","darwin"]},{"intent":"find where a binary is located","command":"Get-Command python3 | Select-Object -ExpandProperty Source","category":"shell","description":"Show the full path of a command's executable","os":["win32"]},{"intent":"show all instances of a binary in path","command":"whereis python3","category":"shell","description":"Locate binary, source, and man pages for a command","os":["linux","darwin"]},{"intent":"show all instances of a binary in path","command":"where.exe python3","category":"shell","description":"Locate binary, source, and man pages for a command","os":["win32"]},{"intent":"add a line to a file without opening it","command":"echo 'new line' >> filename.txt","category":"shell","description":"Append a line of text to a file","os":["linux","darwin"]},{"intent":"add a line to a file without opening it","command":"Add-Content 'filename.txt' 'new line'","category":"shell","description":"Append a line of text to a file","os":["win32"]},{"intent":"start a new named screen session","command":"screen -S session-name","category":"terminal","description":"Create a named screen multiplexer session","os":["all"]},{"intent":"list all screen sessions","command":"screen -ls","category":"terminal","description":"Show all active screen sessions","os":["all"]},{"intent":"reattach to a screen session","command":"screen -r session-name","category":"terminal","description":"Reconnect to a detached screen session","os":["all"]},{"intent":"start a new tmux session","command":"tmux new -s session-name","category":"terminal","description":"Create a new named tmux session","os":["all"]},{"intent":"list tmux sessions","command":"tmux ls","category":"terminal","description":"Show all active tmux sessions","os":["all"]},{"intent":"attach to a tmux session","command":"tmux attach -t session-name","category":"terminal","description":"Connect to an existing tmux session","os":["all"]},{"intent":"kill a tmux session","command":"tmux kill-session -t session-name","category":"terminal","description":"Terminate a named tmux session","os":["all"]},{"intent":"clear the terminal screen","command":"clear","category":"terminal","description":"Clear all text from the terminal window","os":["linux","darwin"]},{"intent":"clear the terminal screen","command":"Clear-Host","category":"terminal","description":"Clear all text from the terminal window","os":["win32"]},{"intent":"set hostname of the machine","command":"sudo hostnamectl set-hostname new-hostname","category":"system","description":"Change the system hostname permanently","os":["linux","darwin"]},{"intent":"set hostname of the machine","command":"Rename-Computer -NewName 'new-hostname' -Force","category":"system","description":"Change the system hostname permanently","os":["win32"]},{"intent":"show current hostname","command":"hostname","category":"system","description":"Print the system's hostname","os":["linux","darwin"]},{"intent":"show current hostname","command":"$env:COMPUTERNAME","category":"system","description":"Print the system's hostname","os":["win32"]},{"intent":"view system logs","command":"journalctl -xe","category":"system","description":"View recent system logs with details","os":["linux","darwin"]},{"intent":"view system logs","command":"Get-EventLog -LogName System -Newest 50","category":"system","description":"View recent system logs with details","os":["win32"]},{"intent":"follow system logs in real time","command":"journalctl -f","category":"system","description":"Continuously stream new system log entries","os":["linux","darwin"]},{"intent":"follow system logs in real time","command":"Get-WinEvent -LogName System -MaxEvents 1 -Wait","category":"system","description":"Continuously stream new system log entries","os":["win32"]},{"intent":"check status of a systemd service","command":"systemctl status service-name","category":"system","description":"Show the status of a systemd service","os":["linux","darwin"]},{"intent":"check status of a systemd service","command":"Get-Service -Name 'service-name'","category":"system","description":"Show the status of a systemd service","os":["win32"]},{"intent":"start a systemd service","command":"sudo systemctl start service-name","category":"system","description":"Start a systemd service","os":["linux","darwin"]},{"intent":"start a systemd service","command":"Start-Service -Name 'service-name'","category":"system","description":"Start a systemd service","os":["win32"]},{"intent":"stop a systemd service","command":"sudo systemctl stop service-name","category":"system","description":"Stop a running systemd service","os":["linux","darwin"]},{"intent":"stop a systemd service","command":"Stop-Service -Name 'service-name'","category":"system","description":"Stop a running systemd service","os":["win32"]},{"intent":"restart a systemd service","command":"sudo systemctl restart service-name","category":"system","description":"Restart a systemd service","os":["linux","darwin"]},{"intent":"restart a systemd service","command":"Restart-Service -Name 'service-name'","category":"system","description":"Restart a systemd service","os":["win32"]},{"intent":"enable a service to start on boot","command":"sudo systemctl enable service-name","category":"system","description":"Configure a service to start automatically at boot","os":["linux","darwin"]},{"intent":"enable a service to start on boot","command":"Set-Service -Name 'service-name' -StartupType Automatic","category":"system","description":"Configure a service to start automatically at boot","os":["win32"]},{"intent":"disable a service from starting on boot","command":"sudo systemctl disable service-name","category":"system","description":"Prevent a service from starting at boot","os":["linux","darwin"]},{"intent":"disable a service from starting on boot","command":"Set-Service -Name 'service-name' -StartupType Disabled","category":"system","description":"Prevent a service from starting at boot","os":["win32"]},{"intent":"show os and kernel version","command":"uname -a","category":"system","description":"Display kernel name, version, and system info","os":["linux","darwin"]},{"intent":"show os and kernel version","command":"[System.Environment]::OSVersion","category":"system","description":"Display kernel name, version, and system info","os":["win32"]},{"intent":"show linux distribution info","command":"cat /etc/os-release","category":"system","description":"Display the Linux distribution name and version","os":["linux","darwin"]},{"intent":"show linux distribution info","command":"winver","category":"system","description":"Display the Linux distribution name and version","os":["win32"]},{"intent":"reboot the system","command":"sudo reboot","category":"system","description":"Restart the operating system","os":["all"]},{"intent":"shut down the system","command":"sudo shutdown -h now","category":"system","description":"Power off the machine immediately","os":["all"]},{"intent":"update apt package list","command":"sudo apt update","category":"package","description":"Refresh the list of available packages","os":["linux","darwin"]},{"intent":"update apt package list","command":"winget upgrade --all --include-unknown","category":"package","description":"Refresh the list of available packages","os":["win32"]},{"intent":"upgrade all apt packages","command":"sudo apt upgrade -y","category":"package","description":"Upgrade all installed packages to latest versions","os":["linux","darwin"]},{"intent":"upgrade all apt packages","command":"winget upgrade --all","category":"package","description":"Upgrade all installed packages to latest versions","os":["win32"]},{"intent":"install a package with apt","command":"sudo apt install package-name -y","category":"package","description":"Install a package via apt package manager","os":["linux","darwin"]},{"intent":"install a package with apt","command":"winget install package-name","category":"package","description":"Install a package via apt package manager","os":["win32"]},{"intent":"remove a package with apt","command":"sudo apt remove package-name","category":"package","description":"Uninstall a package but keep config files","os":["linux","darwin"]},{"intent":"remove a package with apt","command":"winget uninstall package-name","category":"package","description":"Uninstall a package but keep config files","os":["win32"]},{"intent":"purge a package and config with apt","command":"sudo apt purge package-name","category":"package","description":"Uninstall a package and remove its config files","os":["linux","darwin"]},{"intent":"purge a package and config with apt","command":"winget uninstall package-name --purge","category":"package","description":"Uninstall a package and remove its config files","os":["win32"]},{"intent":"search for a package in apt","command":"apt search package-name","category":"package","description":"Search for packages by name in apt","os":["linux","darwin"]},{"intent":"search for a package in apt","command":"winget search package-name","category":"package","description":"Search for packages by name in apt","os":["win32"]},{"intent":"show info about an apt package","command":"apt show package-name","category":"package","description":"Display detailed info about an apt package","os":["linux","darwin"]},{"intent":"show info about an apt package","command":"winget show package-name","category":"package","description":"Display detailed info about an apt package","os":["win32"]},{"intent":"install a snap package","command":"sudo snap install package-name","category":"package","description":"Install a snap package","os":["linux","darwin"]},{"intent":"list installed snap packages","command":"snap list","category":"package","description":"Show all installed snap packages","os":["linux","darwin"]},{"intent":"generate a random password","command":"openssl rand -base64 32","category":"security","description":"Generate a 32-byte random base64 password","os":["all"]},{"intent":"encrypt a file with gpg","command":"gpg -c filename.txt","category":"security","description":"Symmetrically encrypt a file with a passphrase","os":["all"]},{"intent":"decrypt a gpg file","command":"gpg -d filename.txt.gpg","category":"security","description":"Decrypt a GPG-encrypted file","os":["all"]},{"intent":"check ssl certificate of a domain","command":"openssl s_client -connect example.com:443 -showcerts","category":"security","description":"Inspect the SSL certificate of a remote server","os":["all"]},{"intent":"generate a self signed ssl certificate","command":"openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes","category":"security","description":"Create a self-signed TLS certificate valid for 1 year","os":["all"]},{"intent":"scan a file for viruses with clamscan","command":"clamscan -r /path/to/scan","category":"security","description":"Recursively scan a directory with ClamAV","os":["all"]},{"intent":"copy ssh public key to remote server","command":"ssh-copy-id user@hostname","category":"ssh","description":"Install your SSH public key on a remote server","os":["all"]},{"intent":"use ssh tunnel to forward a port","command":"ssh -L 8080:localhost:80 user@hostname","category":"ssh","description":"Forward local port 8080 to remote port 80 via SSH","os":["all"]},{"intent":"use ssh reverse tunnel","command":"ssh -R 9090:localhost:3000 user@hostname","category":"ssh","description":"Expose a local port to a remote server via SSH","os":["all"]},{"intent":"run a command on remote server via ssh","command":"ssh user@hostname 'command'","category":"ssh","description":"Execute a single command on a remote server","os":["all"]},{"intent":"add remote origin to git repo","command":"git remote add origin https://github.com/user/repo.git","category":"git","description":"Link a local repo to a remote repository","os":["all"]},{"intent":"show git config settings","command":"git config --list","category":"git","description":"List all git configuration values","os":["all"]},{"intent":"set git username globally","command":"git config --global user.name 'Your Name'","category":"git","description":"Set the global git commit author name","os":["all"]},{"intent":"set git email globally","command":"git config --global user.email 'email@example.com'","category":"git","description":"Set the global git commit author email","os":["all"]},{"intent":"show git stash list","command":"git stash list","category":"git","description":"List all stashed changes","os":["all"]},{"intent":"drop a specific git stash","command":"git stash drop stash@{0}","category":"git","description":"Delete a specific stash entry","os":["all"]},{"intent":"show graph of git branches","command":"git log --oneline --graph --all","category":"git","description":"Display a visual branch graph in the terminal","os":["all"]},{"intent":"undo all uncommitted changes and clean","command":"git reset --hard HEAD && git clean -fd","category":"git","description":"Wipe all uncommitted changes and untracked files","os":["all"]}]
+[
+  {
+    "intent": "undo last git commit but keep changes",
+    "command": "git reset --soft HEAD~1",
+    "category": "git",
+    "description": "Undo the last commit, keeping all changes staged",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "find all python files modified today",
+    "command": "find . -name '*.py' -mtime -1",
+    "category": "find",
+    "description": "Find Python files modified in the last 24 hours",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "find all python files modified today",
+    "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+    "category": "find",
+    "description": "Find Python files modified in the last 24 hours",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "search for TODO comments in all javascript files",
+    "command": "grep -rn 'TODO' --include='*.js' .",
+    "category": "grep",
+    "description": "Recursively search for TODO comments in JS files",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "search for TODO comments in all javascript files",
+    "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+    "category": "grep",
+    "description": "Recursively search for TODO comments in JS files",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "compress a directory into a tar.gz archive",
+    "command": "tar -czf archive.tar.gz directory/",
+    "category": "tar",
+    "description": "Create a gzipped tar archive of a directory",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "extract a tar.gz file",
+    "command": "tar -xzf archive.tar.gz",
+    "category": "tar",
+    "description": "Extract a gzipped tar archive",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "connect to a remote server via ssh",
+    "command": "ssh user@hostname",
+    "category": "ssh",
+    "description": "Open an SSH connection to a remote server",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "copy file to remote server via scp",
+    "command": "scp file.txt user@hostname:/path/to/destination",
+    "category": "ssh",
+    "description": "Securely copy a file to a remote server",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "download a file from a url",
+    "command": "curl -O https://example.com/file.zip",
+    "category": "curl",
+    "description": "Download a file from a URL using curl",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "make an api post request with json data",
+    "command": "curl -X POST -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/endpoint",
+    "category": "curl",
+    "description": "Send a POST request with JSON body",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "list all running docker containers",
+    "command": "docker ps",
+    "category": "docker",
+    "description": "List all currently running Docker containers",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "stop all running docker containers",
+    "command": "docker stop $(docker ps -q)",
+    "category": "docker",
+    "description": "Stop all running Docker containers",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "remove all unused docker images",
+    "command": "docker image prune -a",
+    "category": "docker",
+    "description": "Remove all unused Docker images",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "install npm packages from package.json",
+    "command": "npm install",
+    "category": "npm",
+    "description": "Install all dependencies from package.json",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "list all globally installed npm packages",
+    "command": "npm list -g --depth=0",
+    "category": "npm",
+    "description": "List globally installed npm packages",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "find large files bigger than 100mb",
+    "command": "find / -type f -size +100M 2>/dev/null",
+    "category": "find",
+    "description": "Find files larger than 100MB",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "find large files bigger than 100mb",
+    "command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
+    "category": "find",
+    "description": "Find files larger than 100MB",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show disk usage of current directory sorted by size",
+    "command": "du -sh * | sort -hr",
+    "category": "disk",
+    "description": "Show disk usage sorted by size descending",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show disk usage of current directory sorted by size",
+    "command": "Get-ChildItem | ForEach-Object { [PSCustomObject]@{Name=$_.Name; Size=(Get-ChildItem $_.FullName -Recurse -File | Measure-Object -Property Length -Sum).Sum} } | Sort-Object Size -Descending",
+    "category": "disk",
+    "description": "Show disk usage sorted by size descending",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "kill a process by name",
+    "command": "pkill -f process_name",
+    "category": "process",
+    "description": "Kill all processes matching a name",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "kill a process by name",
+    "command": "Stop-Process -Name 'process_name' -Force",
+    "category": "process",
+    "description": "Kill all processes matching a name",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show all listening ports",
+    "command": "ss -tlnp",
+    "category": "network",
+    "description": "List all TCP ports currently listening",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show all listening ports",
+    "command": "Get-NetTCPConnection -State Listen",
+    "category": "network",
+    "description": "List all TCP ports currently listening",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "create a git branch and switch to it",
+    "command": "git checkout -b branch-name",
+    "category": "git",
+    "description": "Create a new branch and switch to it",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "view git log with one line per commit",
+    "command": "git log --oneline -20",
+    "category": "git",
+    "description": "Show last 20 commits in compact format",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "replace text in all files recursively",
+    "command": "find . -type f -exec sed -i 's/old_text/new_text/g' {} +",
+    "category": "sed",
+    "description": "Find and replace text across all files",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "replace text in all files recursively",
+    "command": "Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }",
+    "category": "sed",
+    "description": "Find and replace text across all files",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "count lines of code in a project",
+    "command": "find . -name '*.py' -o -name '*.js' | xargs wc -l | tail -1",
+    "category": "find",
+    "description": "Count total lines of code in Python and JS files",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "count lines of code in a project",
+    "command": "(Get-ChildItem -Recurse -Include '*.py','*.js' | Get-Content | Measure-Object -Line).Lines",
+    "category": "find",
+    "description": "Count total lines of code in Python and JS files",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "monitor system resources in real time",
+    "command": "top -o %CPU",
+    "category": "process",
+    "description": "Show processes sorted by CPU usage",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "monitor system resources in real time",
+    "command": "Get-Process | Sort-Object CPU -Descending",
+    "category": "process",
+    "description": "Show processes sorted by CPU usage",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "generate ssh key pair",
+    "command": "ssh-keygen -t ed25519 -C 'your_email@example.com'",
+    "category": "ssh",
+    "description": "Generate a new ED25519 SSH key pair",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "make a file executable",
+    "command": "chmod +x script.sh",
+    "category": "permissions",
+    "description": "Add execute permission to a file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "make a file executable",
+    "command": "Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass",
+    "category": "permissions",
+    "description": "Add execute permission to a file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show git status of current repository",
+    "command": "git status",
+    "category": "git",
+    "description": "Show the working tree status",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "stage all changes for git commit",
+    "command": "git add -A",
+    "category": "git",
+    "description": "Stage all modified, deleted, and new files",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "commit staged changes with a message",
+    "command": "git commit -m 'Your commit message'",
+    "category": "git",
+    "description": "Create a commit with a message",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "push changes to remote repository",
+    "command": "git push origin branch-name",
+    "category": "git",
+    "description": "Push local branch to remote origin",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "pull latest changes from remote",
+    "command": "git pull origin main",
+    "category": "git",
+    "description": "Fetch and merge changes from remote main branch",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "stash uncommitted changes",
+    "command": "git stash",
+    "category": "git",
+    "description": "Temporarily save uncommitted changes",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "apply stashed changes",
+    "command": "git stash pop",
+    "category": "git",
+    "description": "Restore the most recently stashed changes",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "view all git branches",
+    "command": "git branch -a",
+    "category": "git",
+    "description": "List all local and remote branches",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "delete a local git branch",
+    "command": "git branch -d branch-name",
+    "category": "git",
+    "description": "Delete a local branch (safe, merged only)",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "force delete a local git branch",
+    "command": "git branch -D branch-name",
+    "category": "git",
+    "description": "Force delete a local branch regardless of merge status",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "merge a branch into current branch",
+    "command": "git merge branch-name",
+    "category": "git",
+    "description": "Merge the specified branch into the current branch",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "rebase current branch onto another",
+    "command": "git rebase main",
+    "category": "git",
+    "description": "Rebase current branch onto main",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "view diff of unstaged changes",
+    "command": "git diff",
+    "category": "git",
+    "description": "Show unstaged changes in the working directory",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "view diff of staged changes",
+    "command": "git diff --cached",
+    "category": "git",
+    "description": "Show changes staged for the next commit",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "clone a git repository",
+    "command": "git clone https://github.com/user/repo.git",
+    "category": "git",
+    "description": "Clone a remote repository locally",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "tag a git commit",
+    "command": "git tag -a v1.0.0 -m 'Version 1.0.0'",
+    "category": "git",
+    "description": "Create an annotated tag on the current commit",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "show who last modified each line of a file",
+    "command": "git blame filename.txt",
+    "category": "git",
+    "description": "Show commit and author info per line of a file",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "search git history for a string",
+    "command": "git log -S 'search_string' --oneline",
+    "category": "git",
+    "description": "Find commits that introduced or removed a string",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "amend the last git commit message",
+    "command": "git commit --amend -m 'New commit message'",
+    "category": "git",
+    "description": "Rewrite the most recent commit message",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "reset working directory to last commit",
+    "command": "git checkout -- .",
+    "category": "git",
+    "description": "Discard all unstaged changes in working directory",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "show remote repository urls",
+    "command": "git remote -v",
+    "category": "git",
+    "description": "List all remote connections with their URLs",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "fetch all remote branches",
+    "command": "git fetch --all",
+    "category": "git",
+    "description": "Download all branches from all remotes",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "cherry pick a commit",
+    "command": "git cherry-pick commit-hash",
+    "category": "git",
+    "description": "Apply a specific commit onto the current branch",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "find files by name in current directory",
+    "command": "find . -name 'filename.txt'",
+    "category": "find",
+    "description": "Search for a file by exact name",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "find files by name in current directory",
+    "command": "Get-ChildItem -Recurse -Filter 'filename.txt'",
+    "category": "find",
+    "description": "Search for a file by exact name",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "find files by extension recursively",
+    "command": "find . -name '*.log'",
+    "category": "find",
+    "description": "Find all files with a given extension",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "find files by extension recursively",
+    "command": "Get-ChildItem -Recurse -Filter '*.log'",
+    "category": "find",
+    "description": "Find all files with a given extension",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "find and delete all .DS_Store files",
+    "command": "find . -name '.DS_Store' -delete",
+    "category": "find",
+    "description": "Recursively delete all .DS_Store files",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "find and delete all .DS_Store files",
+    "command": "Get-ChildItem -Recurse -Filter '.DS_Store' | Remove-Item",
+    "category": "find",
+    "description": "Recursively delete all .DS_Store files",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "find empty directories",
+    "command": "find . -type d -empty",
+    "category": "find",
+    "description": "List all empty directories",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "find empty directories",
+    "command": "Get-ChildItem -Recurse -Directory | Where-Object { (Get-ChildItem $_.FullName).Count -eq 0 }",
+    "category": "find",
+    "description": "List all empty directories",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "find files modified in the last 7 days",
+    "command": "find . -mtime -7 -type f",
+    "category": "find",
+    "description": "Find files modified within the past week",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "find files modified in the last 7 days",
+    "command": "Get-ChildItem -Recurse -File | Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-7) }",
+    "category": "find",
+    "description": "Find files modified within the past week",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "find files owned by a specific user",
+    "command": "find / -user username",
+    "category": "find",
+    "description": "Find all files owned by a given user",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "find files owned by a specific user",
+    "command": "Get-ChildItem -Recurse | Where-Object { $_.GetAccessControl().Owner -like '*username*' }",
+    "category": "find",
+    "description": "Find all files owned by a given user",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "find files with specific permissions",
+    "command": "find . -perm 777",
+    "category": "find",
+    "description": "Find files with 777 permissions",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "find and compress log files older than 30 days",
+    "command": "find /var/log -name '*.log' -mtime +30 -exec gzip {} \\;",
+    "category": "find",
+    "description": "Compress log files older than 30 days",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "search for a string in files recursively",
+    "command": "grep -rn 'search_string' .",
+    "category": "grep",
+    "description": "Search recursively for a string in all files",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "search for a string in files recursively",
+    "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+    "category": "grep",
+    "description": "Search recursively for a string in all files",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "search for a pattern case insensitively",
+    "command": "grep -ri 'pattern' .",
+    "category": "grep",
+    "description": "Case-insensitive recursive search",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "search for a pattern case insensitively",
+    "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'pattern' -CaseSensitive:$false",
+    "category": "grep",
+    "description": "Case-insensitive recursive search",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "grep and show only filenames with matches",
+    "command": "grep -rl 'pattern' .",
+    "category": "grep",
+    "description": "List only filenames that contain the pattern",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "grep and show only filenames with matches",
+    "command": "Get-ChildItem -Recurse -File | Where-Object { Select-String -Path $_.FullName -Pattern 'pattern' -Quiet }",
+    "category": "grep",
+    "description": "List only filenames that contain the pattern",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "grep with context lines around match",
+    "command": "grep -n -A 3 -B 3 'pattern' file.txt",
+    "category": "grep",
+    "description": "Show 3 lines before and after each match",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "grep with context lines around match",
+    "command": "Select-String -Path 'file.txt' -Pattern 'pattern' -Context 3,3",
+    "category": "grep",
+    "description": "Show 3 lines before and after each match",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "grep for lines not matching a pattern",
+    "command": "grep -v 'pattern' file.txt",
+    "category": "grep",
+    "description": "Show lines that do NOT match the pattern",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "grep for lines not matching a pattern",
+    "command": "Get-Content 'file.txt' | Where-Object { $_ -notmatch 'pattern' }",
+    "category": "grep",
+    "description": "Show lines that do NOT match the pattern",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "count number of matches in a file",
+    "command": "grep -c 'pattern' file.txt",
+    "category": "grep",
+    "description": "Count the number of matching lines",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "count number of matches in a file",
+    "command": "(Select-String -Path 'file.txt' -Pattern 'pattern').Count",
+    "category": "grep",
+    "description": "Count the number of matching lines",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "search for whole word matches only",
+    "command": "grep -w 'word' file.txt",
+    "category": "grep",
+    "description": "Match only complete words",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "search for whole word matches only",
+    "command": "Select-String -Path 'file.txt' -Pattern '\\bword\\b'",
+    "category": "grep",
+    "description": "Match only complete words",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "grep using extended regular expressions",
+    "command": "grep -E 'pattern1|pattern2' file.txt",
+    "category": "grep",
+    "description": "Search for multiple patterns with extended regex",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "grep using extended regular expressions",
+    "command": "Select-String -Path 'file.txt' -Pattern 'pattern1|pattern2'",
+    "category": "grep",
+    "description": "Search for multiple patterns with extended regex",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "build a docker image from dockerfile",
+    "command": "docker build -t image-name:tag .",
+    "category": "docker",
+    "description": "Build a Docker image from the current directory",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "run a docker container interactively",
+    "command": "docker run -it image-name /bin/bash",
+    "category": "docker",
+    "description": "Start an interactive shell in a new container",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "run a docker container in background",
+    "command": "docker run -d -p 8080:80 image-name",
+    "category": "docker",
+    "description": "Run a container detached with port mapping",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "view docker container logs",
+    "command": "docker logs -f container-name",
+    "category": "docker",
+    "description": "Follow live logs from a running container",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "exec into a running docker container",
+    "command": "docker exec -it container-name /bin/bash",
+    "category": "docker",
+    "description": "Open a shell inside a running container",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "remove a stopped docker container",
+    "command": "docker rm container-name",
+    "category": "docker",
+    "description": "Delete a stopped container",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "remove a docker image",
+    "command": "docker rmi image-name",
+    "category": "docker",
+    "description": "Delete a Docker image from local storage",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "list all docker images",
+    "command": "docker images",
+    "category": "docker",
+    "description": "Show all locally available Docker images",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "pull a docker image from docker hub",
+    "command": "docker pull ubuntu:22.04",
+    "category": "docker",
+    "description": "Download a Docker image from Docker Hub",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "start docker compose services",
+    "command": "docker compose up -d",
+    "category": "docker",
+    "description": "Start all services defined in docker-compose.yml detached",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "stop docker compose services",
+    "command": "docker compose down",
+    "category": "docker",
+    "description": "Stop and remove all docker-compose containers",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "view docker compose logs",
+    "command": "docker compose logs -f",
+    "category": "docker",
+    "description": "Follow logs from all docker-compose services",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "copy file from container to host",
+    "command": "docker cp container-name:/path/in/container ./local-path",
+    "category": "docker",
+    "description": "Copy a file out of a running container",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "inspect a docker container",
+    "command": "docker inspect container-name",
+    "category": "docker",
+    "description": "Show detailed info about a container",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "prune all stopped containers",
+    "command": "docker container prune",
+    "category": "docker",
+    "description": "Remove all stopped containers",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "show docker system disk usage",
+    "command": "docker system df",
+    "category": "docker",
+    "description": "Show Docker disk usage summary",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "make a get request with curl",
+    "command": "curl -s https://api.example.com/data",
+    "category": "curl",
+    "description": "Send a silent GET request",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "follow redirects with curl",
+    "command": "curl -L https://example.com",
+    "category": "curl",
+    "description": "Follow HTTP redirects automatically",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "save curl output to file",
+    "command": "curl -o output.html https://example.com",
+    "category": "curl",
+    "description": "Save the response body to a file",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "send custom headers with curl",
+    "command": "curl -H 'Authorization: Bearer token' https://api.example.com",
+    "category": "curl",
+    "description": "Add a custom header to a curl request",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "make a put request with curl",
+    "command": "curl -X PUT -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/resource/1",
+    "category": "curl",
+    "description": "Send a PUT request with a JSON body",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "make a delete request with curl",
+    "command": "curl -X DELETE https://api.example.com/resource/1",
+    "category": "curl",
+    "description": "Send a DELETE request to an API endpoint",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "check http response code with curl",
+    "command": "curl -o /dev/null -s -w '%{http_code}' https://example.com",
+    "category": "curl",
+    "description": "Get only the HTTP status code of a request",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "resume an interrupted curl download",
+    "command": "curl -C - -O https://example.com/largefile.zip",
+    "category": "curl",
+    "description": "Continue a partially downloaded file",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "run npm script",
+    "command": "npm run script-name",
+    "category": "npm",
+    "description": "Execute a script defined in package.json",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "install a specific npm package",
+    "command": "npm install package-name",
+    "category": "npm",
+    "description": "Install and save a package as a dependency",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "install npm package as dev dependency",
+    "command": "npm install --save-dev package-name",
+    "category": "npm",
+    "description": "Install a package as a development dependency",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "uninstall an npm package",
+    "command": "npm uninstall package-name",
+    "category": "npm",
+    "description": "Remove a package and update package.json",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "update all npm packages",
+    "command": "npm update",
+    "category": "npm",
+    "description": "Update all packages to their latest allowed versions",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "check for outdated npm packages",
+    "command": "npm outdated",
+    "category": "npm",
+    "description": "List packages that have newer versions available",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "audit npm packages for vulnerabilities",
+    "command": "npm audit",
+    "category": "npm",
+    "description": "Scan dependencies for known vulnerabilities",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "fix npm audit vulnerabilities",
+    "command": "npm audit fix",
+    "category": "npm",
+    "description": "Automatically fix compatible audit vulnerabilities",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "create new npm project",
+    "command": "npm init -y",
+    "category": "npm",
+    "description": "Initialize a new package.json with defaults",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "install pip package",
+    "command": "pip install package-name",
+    "category": "pip",
+    "description": "Install a Python package with pip",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "install specific version of pip package",
+    "command": "pip install package-name==1.2.3",
+    "category": "pip",
+    "description": "Install a specific version of a package",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "list installed pip packages",
+    "command": "pip list",
+    "category": "pip",
+    "description": "Show all installed Python packages",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "save pip requirements to file",
+    "command": "pip freeze > requirements.txt",
+    "category": "pip",
+    "description": "Export installed packages to requirements.txt",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "install packages from requirements file",
+    "command": "pip install -r requirements.txt",
+    "category": "pip",
+    "description": "Install all packages listed in requirements.txt",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "uninstall a pip package",
+    "command": "pip uninstall package-name",
+    "category": "pip",
+    "description": "Remove an installed Python package",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "upgrade a pip package",
+    "command": "pip install --upgrade package-name",
+    "category": "pip",
+    "description": "Upgrade a package to its latest version",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "create a python virtual environment",
+    "command": "python -m venv venv",
+    "category": "pip",
+    "description": "Create a new Python virtual environment",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "activate python virtual environment on linux",
+    "command": "source venv/bin/activate",
+    "category": "pip",
+    "description": "Activate a Python virtual environment on Linux/macOS",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "deactivate python virtual environment",
+    "command": "deactivate",
+    "category": "pip",
+    "description": "Exit the current virtual environment",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "list all files including hidden",
+    "command": "ls -la",
+    "category": "filesystem",
+    "description": "List all files with details including hidden files",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "list all files including hidden",
+    "command": "Get-ChildItem -Force",
+    "category": "filesystem",
+    "description": "List all files with details including hidden files",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "create a new directory",
+    "command": "mkdir -p path/to/directory",
+    "category": "filesystem",
+    "description": "Create directory and any missing parent directories",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "create a new directory",
+    "command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+    "category": "filesystem",
+    "description": "Create directory and any missing parent directories",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "remove a directory and its contents",
+    "command": "rm -rf directory/",
+    "category": "filesystem",
+    "description": "Recursively force delete a directory",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "remove a directory and its contents",
+    "command": "Remove-Item -Recurse -Force 'directory/'",
+    "category": "filesystem",
+    "description": "Recursively force delete a directory",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "copy a directory recursively",
+    "command": "cp -r source/ destination/",
+    "category": "filesystem",
+    "description": "Copy a directory and all its contents",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "copy a directory recursively",
+    "command": "Copy-Item -Recurse 'source/' 'destination/'",
+    "category": "filesystem",
+    "description": "Copy a directory and all its contents",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "move or rename a file",
+    "command": "mv oldname.txt newname.txt",
+    "category": "filesystem",
+    "description": "Rename or move a file or directory",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "move or rename a file",
+    "command": "Move-Item 'oldname.txt' 'newname.txt'",
+    "category": "filesystem",
+    "description": "Rename or move a file or directory",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "create an empty file",
+    "command": "touch filename.txt",
+    "category": "filesystem",
+    "description": "Create a new empty file or update timestamps",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "create an empty file",
+    "command": "New-Item -ItemType File 'filename.txt'",
+    "category": "filesystem",
+    "description": "Create a new empty file or update timestamps",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "view file contents",
+    "command": "cat filename.txt",
+    "category": "filesystem",
+    "description": "Print the contents of a file to stdout",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "view file contents",
+    "command": "Get-Content 'filename.txt'",
+    "category": "filesystem",
+    "description": "Print the contents of a file to stdout",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "view file with pagination",
+    "command": "less filename.txt",
+    "category": "filesystem",
+    "description": "View a file with scrollable pagination",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "view file with pagination",
+    "command": "Get-Content 'filename.txt' | Out-Host -Paging",
+    "category": "filesystem",
+    "description": "View a file with scrollable pagination",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "view first 10 lines of a file",
+    "command": "head -n 10 filename.txt",
+    "category": "filesystem",
+    "description": "Print the first 10 lines of a file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "view first 10 lines of a file",
+    "command": "Get-Content 'filename.txt' -TotalCount 10",
+    "category": "filesystem",
+    "description": "Print the first 10 lines of a file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "view last 10 lines of a file",
+    "command": "tail -n 10 filename.txt",
+    "category": "filesystem",
+    "description": "Print the last 10 lines of a file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "view last 10 lines of a file",
+    "command": "Get-Content 'filename.txt' -Tail 10",
+    "category": "filesystem",
+    "description": "Print the last 10 lines of a file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "follow a file live as it updates",
+    "command": "tail -f /var/log/syslog",
+    "category": "filesystem",
+    "description": "Continuously display new lines appended to a file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "follow a file live as it updates",
+    "command": "Get-Content 'C:\\path\\to\\file.log' -Wait -Tail 10",
+    "category": "filesystem",
+    "description": "Continuously display new lines appended to a file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show current directory path",
+    "command": "pwd",
+    "category": "filesystem",
+    "description": "Print the full path of the current directory",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show current directory path",
+    "command": "Get-Location",
+    "category": "filesystem",
+    "description": "Print the full path of the current directory",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "count lines words and characters in file",
+    "command": "wc -lwc filename.txt",
+    "category": "filesystem",
+    "description": "Show line, word, and character counts for a file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "count lines words and characters in file",
+    "command": "(Get-Content 'filename.txt' | Measure-Object -Line -Word -Character) | Select-Object Lines, Words, Characters",
+    "category": "filesystem",
+    "description": "Show line, word, and character counts for a file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "sort lines of a file alphabetically",
+    "command": "sort filename.txt",
+    "category": "filesystem",
+    "description": "Sort lines of a text file alphabetically",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "sort lines of a file alphabetically",
+    "command": "Get-Content 'filename.txt' | Sort-Object",
+    "category": "filesystem",
+    "description": "Sort lines of a text file alphabetically",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "remove duplicate lines from a file",
+    "command": "sort filename.txt | uniq",
+    "category": "filesystem",
+    "description": "Sort and remove duplicate lines",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "remove duplicate lines from a file",
+    "command": "Get-Content 'filename.txt' | Sort-Object -Unique",
+    "category": "filesystem",
+    "description": "Sort and remove duplicate lines",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "compare two files",
+    "command": "diff file1.txt file2.txt",
+    "category": "filesystem",
+    "description": "Show line-by-line differences between two files",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "compare two files",
+    "command": "Compare-Object (Get-Content 'file1.txt') (Get-Content 'file2.txt')",
+    "category": "filesystem",
+    "description": "Show line-by-line differences between two files",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "create a symbolic link",
+    "command": "ln -s /path/to/target /path/to/link",
+    "category": "filesystem",
+    "description": "Create a symbolic (soft) link",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "create a symbolic link",
+    "command": "New-Item -ItemType SymbolicLink -Path '/path/to/link' -Target '/path/to/target'",
+    "category": "filesystem",
+    "description": "Create a symbolic (soft) link",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show file or directory permissions",
+    "command": "stat filename.txt",
+    "category": "filesystem",
+    "description": "Display detailed file metadata including permissions",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show file or directory permissions",
+    "command": "Get-Item 'filename.txt' | Select-Object *",
+    "category": "filesystem",
+    "description": "Display detailed file metadata including permissions",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "change file owner",
+    "command": "chown user:group filename.txt",
+    "category": "permissions",
+    "description": "Change the owner and group of a file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "change file owner",
+    "command": "icacls 'filename.txt' /setowner 'user'",
+    "category": "permissions",
+    "description": "Change the owner and group of a file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "change permissions recursively",
+    "command": "chmod -R 755 directory/",
+    "category": "permissions",
+    "description": "Set permissions on a directory and all contents",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "change permissions recursively",
+    "command": "icacls 'directory/' /grant 'user:(OI)(CI)F' /T",
+    "category": "permissions",
+    "description": "Set permissions on a directory and all contents",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "give read write permissions to owner only",
+    "command": "chmod 600 filename.txt",
+    "category": "permissions",
+    "description": "Set file to owner read/write only",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "give read write permissions to owner only",
+    "command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
+    "category": "permissions",
+    "description": "Set file to owner read/write only",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "give read only permissions to everyone",
+    "command": "chmod 444 filename.txt",
+    "category": "permissions",
+    "description": "Make a file read-only for all users",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "give read only permissions to everyone",
+    "command": "icacls 'filename.txt' /inheritance:r /grant:r 'Everyone:R'",
+    "category": "permissions",
+    "description": "Make a file read-only for all users",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "check current user",
+    "command": "whoami",
+    "category": "permissions",
+    "description": "Print the name of the current user",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "check current user",
+    "command": "$env:USERNAME",
+    "category": "permissions",
+    "description": "Print the name of the current user",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "switch to another user",
+    "command": "su - username",
+    "category": "permissions",
+    "description": "Switch to another user account",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "switch to another user",
+    "command": "runas /user:username cmd",
+    "category": "permissions",
+    "description": "Switch to another user account",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "run command as superuser",
+    "command": "sudo command",
+    "category": "permissions",
+    "description": "Execute a command with root privileges",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "run command as superuser",
+    "command": "Start-Process powershell -Verb RunAs",
+    "category": "permissions",
+    "description": "Execute a command with root privileges",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show all users on the system",
+    "command": "cat /etc/passwd | cut -d: -f1",
+    "category": "permissions",
+    "description": "List all user accounts on the system",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show all users on the system",
+    "command": "Get-LocalUser | Select-Object Name",
+    "category": "permissions",
+    "description": "List all user accounts on the system",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "check ip address of machine",
+    "command": "ip addr show",
+    "category": "network",
+    "description": "Show all network interfaces and their IP addresses",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "check ip address of machine",
+    "command": "Get-NetIPAddress",
+    "category": "network",
+    "description": "Show all network interfaces and their IP addresses",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "ping a host to check connectivity",
+    "command": "ping -c 4 google.com",
+    "category": "network",
+    "description": "Send 4 ICMP packets to test network connectivity",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "ping a host to check connectivity",
+    "command": "Test-Connection -ComputerName google.com -Count 4",
+    "category": "network",
+    "description": "Send 4 ICMP packets to test network connectivity",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "trace the network route to a host",
+    "command": "traceroute google.com",
+    "category": "network",
+    "description": "Show the network path packets take to a host",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "trace the network route to a host",
+    "command": "Test-NetConnection -ComputerName google.com -TraceRoute",
+    "category": "network",
+    "description": "Show the network path packets take to a host",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "check dns resolution for a domain",
+    "command": "nslookup example.com",
+    "category": "network",
+    "description": "Query DNS to resolve a domain name",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "check dns resolution for a domain",
+    "command": "Resolve-DnsName example.com",
+    "category": "network",
+    "description": "Query DNS to resolve a domain name",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "look up dns records for a domain",
+    "command": "dig example.com",
+    "category": "network",
+    "description": "Detailed DNS lookup for a domain",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "look up dns records for a domain",
+    "command": "Resolve-DnsName example.com -Type ALL",
+    "category": "network",
+    "description": "Detailed DNS lookup for a domain",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show active network connections",
+    "command": "netstat -an",
+    "category": "network",
+    "description": "Display all active network connections and sockets",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show active network connections",
+    "command": "Get-NetTCPConnection",
+    "category": "network",
+    "description": "Display all active network connections and sockets",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show network interface statistics",
+    "command": "ifconfig",
+    "category": "network",
+    "description": "Display network interface configuration",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show network interface statistics",
+    "command": "Get-NetAdapter",
+    "category": "network",
+    "description": "Display network interface configuration",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "test if a port is open on a host",
+    "command": "nc -zv hostname 80",
+    "category": "network",
+    "description": "Check if a specific port is open using netcat",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "test if a port is open on a host",
+    "command": "Test-NetConnection -ComputerName hostname -Port 80",
+    "category": "network",
+    "description": "Check if a specific port is open using netcat",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "scan open ports on a host",
+    "command": "nmap -sV hostname",
+    "category": "network",
+    "description": "Scan for open ports and service versions",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "monitor network traffic in real time",
+    "command": "iftop -i eth0",
+    "category": "network",
+    "description": "Display real-time network bandwidth usage",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "monitor network traffic in real time",
+    "command": "Get-NetAdapterStatistics",
+    "category": "network",
+    "description": "Display real-time network bandwidth usage",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "flush dns cache on linux",
+    "command": "sudo systemd-resolve --flush-caches",
+    "category": "network",
+    "description": "Clear the system DNS resolver cache",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "show routing table",
+    "command": "ip route show",
+    "category": "network",
+    "description": "Display the IP routing table",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show routing table",
+    "command": "Get-NetRoute",
+    "category": "network",
+    "description": "Display the IP routing table",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "block an ip address with firewall",
+    "command": "sudo iptables -A INPUT -s 192.168.1.100 -j DROP",
+    "category": "network",
+    "description": "Add a firewall rule to drop packets from an IP",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "block an ip address with firewall",
+    "command": "New-NetFirewallRule -DisplayName 'Block IP' -Direction Inbound -RemoteAddress '192.168.1.100' -Action Block",
+    "category": "network",
+    "description": "Add a firewall rule to drop packets from an IP",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show all running processes",
+    "command": "ps aux",
+    "category": "process",
+    "description": "Display all running processes with details",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show all running processes",
+    "command": "Get-Process",
+    "category": "process",
+    "description": "Display all running processes with details",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show process tree",
+    "command": "pstree",
+    "category": "process",
+    "description": "Display processes in a tree hierarchy",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show process tree",
+    "command": "Get-Process | Select-Object Id, ProcessName, @{N='Parent';E={(Get-Process -Id $_.Parent.Id -ErrorAction SilentlyContinue).ProcessName}}",
+    "category": "process",
+    "description": "Display processes in a tree hierarchy",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "kill a process by pid",
+    "command": "kill -9 PID",
+    "category": "process",
+    "description": "Force kill a process by its process ID",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "kill a process by pid",
+    "command": "Stop-Process -Id PID -Force",
+    "category": "process",
+    "description": "Force kill a process by its process ID",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "find process id by name",
+    "command": "pgrep process_name",
+    "category": "process",
+    "description": "Get the PID of a process by name",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "find process id by name",
+    "command": "Get-Process -Name 'process_name' | Select-Object Id",
+    "category": "process",
+    "description": "Get the PID of a process by name",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show memory usage",
+    "command": "free -h",
+    "category": "process",
+    "description": "Display total, used, and free memory in human-readable form",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show memory usage",
+    "command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory",
+    "category": "process",
+    "description": "Display total, used, and free memory in human-readable form",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show cpu info",
+    "command": "lscpu",
+    "category": "process",
+    "description": "Display CPU architecture and processor information",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show cpu info",
+    "command": "Get-CimInstance Win32_Processor",
+    "category": "process",
+    "description": "Display CPU architecture and processor information",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "monitor processes with htop",
+    "command": "htop",
+    "category": "process",
+    "description": "Interactive process viewer and manager",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "monitor processes with htop",
+    "command": "Get-Process | Sort-Object CPU -Descending | Select-Object -First 20",
+    "category": "process",
+    "description": "Interactive process viewer and manager",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "run a command in background",
+    "command": "command &",
+    "category": "process",
+    "description": "Execute a command as a background process",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "run a command in background",
+    "command": "Start-Job -ScriptBlock { command }",
+    "category": "process",
+    "description": "Execute a command as a background process",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "bring background process to foreground",
+    "command": "fg %1",
+    "category": "process",
+    "description": "Bring job 1 back to the foreground",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "bring background process to foreground",
+    "command": "Receive-Job -Id 1 -Wait",
+    "category": "process",
+    "description": "Bring job 1 back to the foreground",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "check system uptime",
+    "command": "uptime",
+    "category": "process",
+    "description": "Show how long the system has been running",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "check system uptime",
+    "command": "(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime",
+    "category": "process",
+    "description": "Show how long the system has been running",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show system load averages",
+    "command": "cat /proc/loadavg",
+    "category": "process",
+    "description": "Display the system load averages for 1, 5, 15 minutes",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show system load averages",
+    "command": "Get-CimInstance Win32_Processor | Select-Object LoadPercentage",
+    "category": "process",
+    "description": "Display the system load averages for 1, 5, 15 minutes",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "run command at scheduled time",
+    "command": "at 10:00 AM tomorrow",
+    "category": "process",
+    "description": "Schedule a one-time command to run at a specific time",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "list cron jobs for current user",
+    "command": "crontab -l",
+    "category": "process",
+    "description": "Display the current user's cron schedule",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "edit cron jobs",
+    "command": "crontab -e",
+    "category": "process",
+    "description": "Open the cron table for editing",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "show total disk space",
+    "command": "df -h",
+    "category": "disk",
+    "description": "Display disk space usage on all mounted filesystems",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show total disk space",
+    "command": "Get-PSDrive -PSProvider FileSystem",
+    "category": "disk",
+    "description": "Display disk space usage on all mounted filesystems",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show disk usage of a specific directory",
+    "command": "du -sh /path/to/dir",
+    "category": "disk",
+    "description": "Show total disk usage of a directory",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show disk usage of a specific directory",
+    "command": "(Get-ChildItem '/path/to/dir' -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB",
+    "category": "disk",
+    "description": "Show total disk usage of a directory",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "list mounted filesystems",
+    "command": "mount | column -t",
+    "category": "disk",
+    "description": "Show all mounted filesystems in a readable table",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "list mounted filesystems",
+    "command": "Get-Volume",
+    "category": "disk",
+    "description": "Show all mounted filesystems in a readable table",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "check disk health with smartctl",
+    "command": "sudo smartctl -a /dev/sda",
+    "category": "disk",
+    "description": "Display SMART health data for a disk",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "synchronize files between directories",
+    "command": "rsync -avz source/ destination/",
+    "category": "disk",
+    "description": "Sync files with verbose output and compression",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "rsync files to remote server",
+    "command": "rsync -avz -e ssh source/ user@host:/destination/",
+    "category": "disk",
+    "description": "Sync files to a remote server over SSH",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "substitute text in a file with sed",
+    "command": "sed -i 's/old/new/g' filename.txt",
+    "category": "sed",
+    "description": "Replace all occurrences of old with new in a file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "substitute text in a file with sed",
+    "command": "(Get-Content 'filename.txt') -replace 'old','new' | Set-Content 'filename.txt'",
+    "category": "sed",
+    "description": "Replace all occurrences of old with new in a file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "delete lines matching a pattern with sed",
+    "command": "sed -i '/pattern/d' filename.txt",
+    "category": "sed",
+    "description": "Remove all lines matching a pattern from a file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "delete lines matching a pattern with sed",
+    "command": "Get-Content 'filename.txt' | Where-Object { $_ -notmatch 'pattern' } | Set-Content 'filename.txt'",
+    "category": "sed",
+    "description": "Remove all lines matching a pattern from a file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "print specific line number with sed",
+    "command": "sed -n '5p' filename.txt",
+    "category": "sed",
+    "description": "Print only line 5 of a file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "print specific line number with sed",
+    "command": "(Get-Content 'filename.txt')[4]",
+    "category": "sed",
+    "description": "Print only line 5 of a file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "insert line before pattern with sed",
+    "command": "sed -i '/pattern/i\\new line text' filename.txt",
+    "category": "sed",
+    "description": "Insert a new line before lines matching a pattern",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "extract column from csv with awk",
+    "command": "awk -F',' '{print $2}' file.csv",
+    "category": "awk",
+    "description": "Print the second column of a comma-separated file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "extract column from csv with awk",
+    "command": "Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName",
+    "category": "awk",
+    "description": "Print the second column of a comma-separated file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "sum a column of numbers with awk",
+    "command": "awk '{sum += $1} END {print sum}' file.txt",
+    "category": "awk",
+    "description": "Sum all values in the first column of a file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "sum a column of numbers with awk",
+    "command": "(Import-Csv 'file.txt' -Header Val | Measure-Object -Property Val -Sum).Sum",
+    "category": "awk",
+    "description": "Sum all values in the first column of a file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "filter rows by field value with awk",
+    "command": "awk -F',' '$3 > 100' file.csv",
+    "category": "awk",
+    "description": "Print rows where the third column is greater than 100",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "filter rows by field value with awk",
+    "command": "Import-Csv 'file.csv' | Where-Object { [int]$_.Column3 -gt 100 }",
+    "category": "awk",
+    "description": "Print rows where the third column is greater than 100",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "print number of fields per line with awk",
+    "command": "awk '{print NF}' file.txt",
+    "category": "awk",
+    "description": "Print the number of fields on each line",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "print number of fields per line with awk",
+    "command": "Get-Content 'file.txt' | ForEach-Object { ($_ -split '\\s+').Count }",
+    "category": "awk",
+    "description": "Print the number of fields on each line",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "create a compressed zip archive",
+    "command": "zip -r archive.zip directory/",
+    "category": "archive",
+    "description": "Compress a directory into a zip file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "create a compressed zip archive",
+    "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+    "category": "archive",
+    "description": "Compress a directory into a zip file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "extract a zip archive",
+    "command": "unzip archive.zip",
+    "category": "archive",
+    "description": "Extract the contents of a zip file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "extract a zip archive",
+    "command": "Expand-Archive -Path 'archive.zip' -DestinationPath '.'",
+    "category": "archive",
+    "description": "Extract the contents of a zip file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "list contents of a zip archive",
+    "command": "unzip -l archive.zip",
+    "category": "archive",
+    "description": "Preview contents of a zip file without extracting",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "list contents of a zip archive",
+    "command": "Expand-Archive -Path 'archive.zip' -WhatIf",
+    "category": "archive",
+    "description": "Preview contents of a zip file without extracting",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "list contents of a tar archive",
+    "command": "tar -tzf archive.tar.gz",
+    "category": "tar",
+    "description": "List files inside a tar.gz without extracting",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "extract tar to specific directory",
+    "command": "tar -xzf archive.tar.gz -C /target/dir/",
+    "category": "tar",
+    "description": "Extract a tar.gz archive to a specific path",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "create a tar archive without compression",
+    "command": "tar -cf archive.tar directory/",
+    "category": "tar",
+    "description": "Create an uncompressed tar archive",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "encode a file to base64",
+    "command": "base64 filename.txt",
+    "category": "encoding",
+    "description": "Encode a file's contents to base64",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "encode a file to base64",
+    "command": "[Convert]::ToBase64String([IO.File]::ReadAllBytes('filename.txt'))",
+    "category": "encoding",
+    "description": "Encode a file's contents to base64",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "decode a base64 file",
+    "command": "base64 -d encoded.txt > decoded.txt",
+    "category": "encoding",
+    "description": "Decode a base64-encoded file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "decode a base64 file",
+    "command": "[IO.File]::WriteAllBytes('decoded.txt', [Convert]::FromBase64String((Get-Content 'encoded.txt')))",
+    "category": "encoding",
+    "description": "Decode a base64-encoded file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "generate an md5 checksum",
+    "command": "md5sum filename.txt",
+    "category": "encoding",
+    "description": "Generate the MD5 hash of a file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "generate an md5 checksum",
+    "command": "Get-FileHash 'filename.txt' -Algorithm MD5",
+    "category": "encoding",
+    "description": "Generate the MD5 hash of a file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "generate a sha256 checksum",
+    "command": "sha256sum filename.txt",
+    "category": "encoding",
+    "description": "Generate the SHA-256 hash of a file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "generate a sha256 checksum",
+    "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+    "category": "encoding",
+    "description": "Generate the SHA-256 hash of a file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "set an environment variable",
+    "command": "export VAR_NAME='value'",
+    "category": "shell",
+    "description": "Set an environment variable for the current session",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "set an environment variable",
+    "command": "$env:VAR_NAME = 'value'",
+    "category": "shell",
+    "description": "Set an environment variable for the current session",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "print an environment variable",
+    "command": "echo $VAR_NAME",
+    "category": "shell",
+    "description": "Print the value of an environment variable",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "print an environment variable",
+    "command": "$env:VAR_NAME",
+    "category": "shell",
+    "description": "Print the value of an environment variable",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "list all environment variables",
+    "command": "env",
+    "category": "shell",
+    "description": "Print all environment variables",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "list all environment variables",
+    "command": "Get-ChildItem Env:",
+    "category": "shell",
+    "description": "Print all environment variables",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "run previous command with sudo",
+    "command": "sudo !!",
+    "category": "shell",
+    "description": "Re-run the last command with sudo prefix",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "create an alias for a command",
+    "command": "alias ll='ls -la'",
+    "category": "shell",
+    "description": "Create a shortcut alias for a command",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "create an alias for a command",
+    "command": "Set-Alias -Name ll -Value Get-ChildItem",
+    "category": "shell",
+    "description": "Create a shortcut alias for a command",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show command history",
+    "command": "history",
+    "category": "shell",
+    "description": "Display the list of previously run commands",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show command history",
+    "command": "Get-History",
+    "category": "shell",
+    "description": "Display the list of previously run commands",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "search command history",
+    "command": "history | grep 'keyword'",
+    "category": "shell",
+    "description": "Find a previously run command by keyword",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "search command history",
+    "command": "Get-History | Where-Object { $_.CommandLine -match 'keyword' }",
+    "category": "shell",
+    "description": "Find a previously run command by keyword",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "repeat last matching command from history",
+    "command": "!keyword",
+    "category": "shell",
+    "description": "Re-run the most recent command starting with keyword",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "redirect stdout to a file",
+    "command": "command > output.txt",
+    "category": "shell",
+    "description": "Write command output to a file, overwriting it",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "redirect stdout to a file",
+    "command": "command | Out-File 'output.txt'",
+    "category": "shell",
+    "description": "Write command output to a file, overwriting it",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "append stdout to a file",
+    "command": "command >> output.txt",
+    "category": "shell",
+    "description": "Append command output to a file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "append stdout to a file",
+    "command": "command | Out-File 'output.txt' -Append",
+    "category": "shell",
+    "description": "Append command output to a file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "redirect stderr to a file",
+    "command": "command 2> error.txt",
+    "category": "shell",
+    "description": "Write error output to a file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "redirect stderr to a file",
+    "command": "command 2>'error.txt'",
+    "category": "shell",
+    "description": "Write error output to a file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "redirect both stdout and stderr to a file",
+    "command": "command > output.txt 2>&1",
+    "category": "shell",
+    "description": "Capture all output including errors to a file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "redirect both stdout and stderr to a file",
+    "command": "command *>'output.txt'",
+    "category": "shell",
+    "description": "Capture all output including errors to a file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "pipe output of one command to another",
+    "command": "command1 | command2",
+    "category": "shell",
+    "description": "Send output of command1 as input to command2",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "run multiple commands sequentially",
+    "command": "command1 && command2",
+    "category": "shell",
+    "description": "Run command2 only if command1 succeeds",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "run command and discard all output",
+    "command": "command > /dev/null 2>&1",
+    "category": "shell",
+    "description": "Execute a command silently with no output",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "run command and discard all output",
+    "command": "command | Out-Null",
+    "category": "shell",
+    "description": "Execute a command silently with no output",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "time how long a command takes",
+    "command": "time command",
+    "category": "shell",
+    "description": "Measure the execution time of a command",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "time how long a command takes",
+    "command": "Measure-Command { command }",
+    "category": "shell",
+    "description": "Measure the execution time of a command",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "repeat a command every 2 seconds",
+    "command": "watch -n 2 command",
+    "category": "shell",
+    "description": "Execute a command repeatedly at an interval",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "repeat a command every 2 seconds",
+    "command": "while ($true) { command; Start-Sleep 2 }",
+    "category": "shell",
+    "description": "Execute a command repeatedly at an interval",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "open a manual page for a command",
+    "command": "man command",
+    "category": "shell",
+    "description": "Open the manual page for a command",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "open a manual page for a command",
+    "command": "Get-Help command -Full",
+    "category": "shell",
+    "description": "Open the manual page for a command",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "find where a binary is located",
+    "command": "which python3",
+    "category": "shell",
+    "description": "Show the full path of a command's executable",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "find where a binary is located",
+    "command": "Get-Command python3 | Select-Object -ExpandProperty Source",
+    "category": "shell",
+    "description": "Show the full path of a command's executable",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show all instances of a binary in path",
+    "command": "whereis python3",
+    "category": "shell",
+    "description": "Locate binary, source, and man pages for a command",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show all instances of a binary in path",
+    "command": "where.exe python3",
+    "category": "shell",
+    "description": "Locate binary, source, and man pages for a command",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "add a line to a file without opening it",
+    "command": "echo 'new line' >> filename.txt",
+    "category": "shell",
+    "description": "Append a line of text to a file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "add a line to a file without opening it",
+    "command": "Add-Content 'filename.txt' 'new line'",
+    "category": "shell",
+    "description": "Append a line of text to a file",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "start a new named screen session",
+    "command": "screen -S session-name",
+    "category": "terminal",
+    "description": "Create a named screen multiplexer session",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "list all screen sessions",
+    "command": "screen -ls",
+    "category": "terminal",
+    "description": "Show all active screen sessions",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "reattach to a screen session",
+    "command": "screen -r session-name",
+    "category": "terminal",
+    "description": "Reconnect to a detached screen session",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "start a new tmux session",
+    "command": "tmux new -s session-name",
+    "category": "terminal",
+    "description": "Create a new named tmux session",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "list tmux sessions",
+    "command": "tmux ls",
+    "category": "terminal",
+    "description": "Show all active tmux sessions",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "attach to a tmux session",
+    "command": "tmux attach -t session-name",
+    "category": "terminal",
+    "description": "Connect to an existing tmux session",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "kill a tmux session",
+    "command": "tmux kill-session -t session-name",
+    "category": "terminal",
+    "description": "Terminate a named tmux session",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "clear the terminal screen",
+    "command": "clear",
+    "category": "terminal",
+    "description": "Clear all text from the terminal window",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "clear the terminal screen",
+    "command": "Clear-Host",
+    "category": "terminal",
+    "description": "Clear all text from the terminal window",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "set hostname of the machine",
+    "command": "sudo hostnamectl set-hostname new-hostname",
+    "category": "system",
+    "description": "Change the system hostname permanently",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "set hostname of the machine",
+    "command": "Rename-Computer -NewName 'new-hostname' -Force",
+    "category": "system",
+    "description": "Change the system hostname permanently",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show current hostname",
+    "command": "hostname",
+    "category": "system",
+    "description": "Print the system's hostname",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show current hostname",
+    "command": "$env:COMPUTERNAME",
+    "category": "system",
+    "description": "Print the system's hostname",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "view system logs",
+    "command": "journalctl -xe",
+    "category": "system",
+    "description": "View recent system logs with details",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "view system logs",
+    "command": "Get-EventLog -LogName System -Newest 50",
+    "category": "system",
+    "description": "View recent system logs with details",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "follow system logs in real time",
+    "command": "journalctl -f",
+    "category": "system",
+    "description": "Continuously stream new system log entries",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "follow system logs in real time",
+    "command": "Get-WinEvent -LogName System -MaxEvents 1 -Wait",
+    "category": "system",
+    "description": "Continuously stream new system log entries",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "check status of a systemd service",
+    "command": "systemctl status service-name",
+    "category": "system",
+    "description": "Show the status of a systemd service",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "check status of a systemd service",
+    "command": "Get-Service -Name 'service-name'",
+    "category": "system",
+    "description": "Show the status of a systemd service",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "start a systemd service",
+    "command": "sudo systemctl start service-name",
+    "category": "system",
+    "description": "Start a systemd service",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "start a systemd service",
+    "command": "Start-Service -Name 'service-name'",
+    "category": "system",
+    "description": "Start a systemd service",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "stop a systemd service",
+    "command": "sudo systemctl stop service-name",
+    "category": "system",
+    "description": "Stop a running systemd service",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "stop a systemd service",
+    "command": "Stop-Service -Name 'service-name'",
+    "category": "system",
+    "description": "Stop a running systemd service",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "restart a systemd service",
+    "command": "sudo systemctl restart service-name",
+    "category": "system",
+    "description": "Restart a systemd service",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "restart a systemd service",
+    "command": "Restart-Service -Name 'service-name'",
+    "category": "system",
+    "description": "Restart a systemd service",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "enable a service to start on boot",
+    "command": "sudo systemctl enable service-name",
+    "category": "system",
+    "description": "Configure a service to start automatically at boot",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "enable a service to start on boot",
+    "command": "Set-Service -Name 'service-name' -StartupType Automatic",
+    "category": "system",
+    "description": "Configure a service to start automatically at boot",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "disable a service from starting on boot",
+    "command": "sudo systemctl disable service-name",
+    "category": "system",
+    "description": "Prevent a service from starting at boot",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "disable a service from starting on boot",
+    "command": "Set-Service -Name 'service-name' -StartupType Disabled",
+    "category": "system",
+    "description": "Prevent a service from starting at boot",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show os and kernel version",
+    "command": "uname -a",
+    "category": "system",
+    "description": "Display kernel name, version, and system info",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show os and kernel version",
+    "command": "[System.Environment]::OSVersion",
+    "category": "system",
+    "description": "Display kernel name, version, and system info",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show linux distribution info",
+    "command": "cat /etc/os-release",
+    "category": "system",
+    "description": "Display the Linux distribution name and version",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show linux distribution info",
+    "command": "winver",
+    "category": "system",
+    "description": "Display the Linux distribution name and version",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "reboot the system",
+    "command": "sudo reboot",
+    "category": "system",
+    "description": "Restart the operating system",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "shut down the system",
+    "command": "sudo shutdown -h now",
+    "category": "system",
+    "description": "Power off the machine immediately",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "update apt package list",
+    "command": "sudo apt update",
+    "category": "package",
+    "description": "Refresh the list of available packages",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "update apt package list",
+    "command": "winget upgrade --all --include-unknown",
+    "category": "package",
+    "description": "Refresh the list of available packages",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "upgrade all apt packages",
+    "command": "sudo apt upgrade -y",
+    "category": "package",
+    "description": "Upgrade all installed packages to latest versions",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "upgrade all apt packages",
+    "command": "winget upgrade --all",
+    "category": "package",
+    "description": "Upgrade all installed packages to latest versions",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "install a package with apt",
+    "command": "sudo apt install package-name -y",
+    "category": "package",
+    "description": "Install a package via apt package manager",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "install a package with apt",
+    "command": "winget install package-name",
+    "category": "package",
+    "description": "Install a package via apt package manager",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "remove a package with apt",
+    "command": "sudo apt remove package-name",
+    "category": "package",
+    "description": "Uninstall a package but keep config files",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "remove a package with apt",
+    "command": "winget uninstall package-name",
+    "category": "package",
+    "description": "Uninstall a package but keep config files",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "purge a package and config with apt",
+    "command": "sudo apt purge package-name",
+    "category": "package",
+    "description": "Uninstall a package and remove its config files",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "purge a package and config with apt",
+    "command": "winget uninstall package-name --purge",
+    "category": "package",
+    "description": "Uninstall a package and remove its config files",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "search for a package in apt",
+    "command": "apt search package-name",
+    "category": "package",
+    "description": "Search for packages by name in apt",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "search for a package in apt",
+    "command": "winget search package-name",
+    "category": "package",
+    "description": "Search for packages by name in apt",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "show info about an apt package",
+    "command": "apt show package-name",
+    "category": "package",
+    "description": "Display detailed info about an apt package",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show info about an apt package",
+    "command": "winget show package-name",
+    "category": "package",
+    "description": "Display detailed info about an apt package",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "install a snap package",
+    "command": "sudo snap install package-name",
+    "category": "package",
+    "description": "Install a snap package",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "list installed snap packages",
+    "command": "snap list",
+    "category": "package",
+    "description": "Show all installed snap packages",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "generate a random password",
+    "command": "openssl rand -base64 32",
+    "category": "security",
+    "description": "Generate a 32-byte random base64 password",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "encrypt a file with gpg",
+    "command": "gpg -c filename.txt",
+    "category": "security",
+    "description": "Symmetrically encrypt a file with a passphrase",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "decrypt a gpg file",
+    "command": "gpg -d filename.txt.gpg",
+    "category": "security",
+    "description": "Decrypt a GPG-encrypted file",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "check ssl certificate of a domain",
+    "command": "openssl s_client -connect example.com:443 -showcerts",
+    "category": "security",
+    "description": "Inspect the SSL certificate of a remote server",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "generate a self signed ssl certificate",
+    "command": "openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes",
+    "category": "security",
+    "description": "Create a self-signed TLS certificate valid for 1 year",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "scan a file for viruses with clamscan",
+    "command": "clamscan -r /path/to/scan",
+    "category": "security",
+    "description": "Recursively scan a directory with ClamAV",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "copy ssh public key to remote server",
+    "command": "ssh-copy-id user@hostname",
+    "category": "ssh",
+    "description": "Install your SSH public key on a remote server",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "use ssh tunnel to forward a port",
+    "command": "ssh -L 8080:localhost:80 user@hostname",
+    "category": "ssh",
+    "description": "Forward local port 8080 to remote port 80 via SSH",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "use ssh reverse tunnel",
+    "command": "ssh -R 9090:localhost:3000 user@hostname",
+    "category": "ssh",
+    "description": "Expose a local port to a remote server via SSH",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "run a command on remote server via ssh",
+    "command": "ssh user@hostname 'command'",
+    "category": "ssh",
+    "description": "Execute a single command on a remote server",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "add remote origin to git repo",
+    "command": "git remote add origin https://github.com/user/repo.git",
+    "category": "git",
+    "description": "Link a local repo to a remote repository",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "show git config settings",
+    "command": "git config --list",
+    "category": "git",
+    "description": "List all git configuration values",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "set git username globally",
+    "command": "git config --global user.name 'Your Name'",
+    "category": "git",
+    "description": "Set the global git commit author name",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "set git email globally",
+    "command": "git config --global user.email 'email@example.com'",
+    "category": "git",
+    "description": "Set the global git commit author email",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "show git stash list",
+    "command": "git stash list",
+    "category": "git",
+    "description": "List all stashed changes",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "drop a specific git stash",
+    "command": "git stash drop stash@{0}",
+    "category": "git",
+    "description": "Delete a specific stash entry",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "show graph of git branches",
+    "command": "git log --oneline --graph --all",
+    "category": "git",
+    "description": "Display a visual branch graph in the terminal",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "undo all uncommitted changes and clean",
+    "command": "git reset --hard HEAD && git clean -fd",
+    "category": "git",
+    "description": "Wipe all uncommitted changes and untracked files",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "find the commit that introduced a bug using bisect",
+    "command": "git bisect start && git bisect bad HEAD && git bisect good <good-commit>",
+    "category": "git",
+    "description": "Start a binary search through commit history to find the first bad commit",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "mark current bisect commit as good",
+    "command": "git bisect good",
+    "category": "git",
+    "description": "Mark the current commit as working during a git bisect session",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "mark current bisect commit as bad",
+    "command": "git bisect bad",
+    "category": "git",
+    "description": "Mark the current commit as broken during a git bisect session",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "end a git bisect session and return to original HEAD",
+    "command": "git bisect reset",
+    "category": "git",
+    "description": "Terminate the bisect session and restore the original branch state",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "view all recent HEAD movements including deleted branches",
+    "command": "git reflog",
+    "category": "git",
+    "description": "Show a log of all HEAD reference changes, useful for recovering lost commits",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "recover a dropped stash or lost commit by hash",
+    "command": "git checkout -b recovery-branch <commit-hash>",
+    "category": "git",
+    "description": "Create a new branch from a dangling commit hash found in reflog",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "rebase interactively to squash the last 5 commits",
+    "command": "git rebase -i HEAD~5",
+    "category": "git",
+    "description": "Open an interactive rebase editor to squash, reorder, or edit the last 5 commits",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "apply only the changes from a specific file from another branch",
+    "command": "git checkout feature-branch -- path/to/file.txt",
+    "category": "git",
+    "description": "Check out a single file from another branch without switching to it",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "list all git tags sorted by version",
+    "command": "git tag --sort=-version:refname",
+    "category": "git",
+    "description": "Display all tags sorted in descending semantic version order",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "show all kubernetes pods in all namespaces",
+    "command": "kubectl get pods --all-namespaces",
+    "category": "kubernetes",
+    "description": "List every pod running across all namespaces in the cluster",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "stream logs from a kubernetes pod",
+    "command": "kubectl logs -f pod-name -n namespace",
+    "category": "kubernetes",
+    "description": "Continuously stream stdout logs from a specific pod in a namespace",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "forward a local port to a kubernetes pod",
+    "command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+    "category": "kubernetes",
+    "description": "Tunnel local port 8080 to port 80 on a Kubernetes pod",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "exec into a running kubernetes pod shell",
+    "command": "kubectl exec -it pod-name -n namespace -- /bin/sh",
+    "category": "kubernetes",
+    "description": "Open an interactive shell session inside a running Kubernetes pod",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "describe a kubernetes deployment for diagnostics",
+    "command": "kubectl describe deployment deployment-name -n namespace",
+    "category": "kubernetes",
+    "description": "Show detailed state, events, and conditions for a Kubernetes deployment",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "scale a kubernetes deployment to 3 replicas",
+    "command": "kubectl scale deployment deployment-name --replicas=3 -n namespace",
+    "category": "kubernetes",
+    "description": "Set the desired replica count for a Kubernetes deployment",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "get kubernetes events sorted by timestamp",
+    "command": "kubectl get events --sort-by='.lastTimestamp' -n namespace",
+    "category": "kubernetes",
+    "description": "List cluster events in chronological order for a given namespace",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "delete all completed or failed pods in a namespace",
+    "command": "kubectl delete pods --field-selector=status.phase=Failed -n namespace",
+    "category": "kubernetes",
+    "description": "Remove all pods in a Failed phase from the specified namespace",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "apply a kubernetes manifest file",
+    "command": "kubectl apply -f manifest.yaml",
+    "category": "kubernetes",
+    "description": "Create or update Kubernetes resources defined in a YAML manifest",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "extract a specific field from json output using jq",
+    "command": "cat data.json | jq '.users[].name'",
+    "category": "jq",
+    "description": "Extract the name field from every object in the users array",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "extract a specific field from json output using jq",
+    "command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
+    "category": "jq",
+    "description": "Extract the name field from every object in the users array",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "filter json array by field value using jq",
+    "command": "cat data.json | jq '[.users[] | select(.age > 30)]'",
+    "category": "jq",
+    "description": "Return only objects from the users array where age exceeds 30",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "filter json array by field value using jq",
+    "command": "(Get-Content data.json | ConvertFrom-Json).users | Where-Object { _.age -gt 30 }",
+    "category": "jq",
+    "description": "Return only objects from the users array where age exceeds 30",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "count items in a json array using jq",
+    "command": "cat data.json | jq '.users | length'",
+    "category": "jq",
+    "description": "Return the count of elements in the users array",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "count items in a json array using jq",
+    "command": "(Get-Content data.json | ConvertFrom-Json).users.Count",
+    "category": "jq",
+    "description": "Return the count of elements in the users array",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "pretty print and sort json keys using jq",
+    "command": "cat data.json | jq -S '.'",
+    "category": "jq",
+    "description": "Output JSON with keys sorted alphabetically and formatted",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "pretty print and sort json keys using jq",
+    "command": "Get-Content data.json | ConvertFrom-Json | ConvertTo-Json -Depth 10 | ConvertFrom-Json | Get-Member -MemberType NoteProperty | Sort-Object Name",
+    "category": "jq",
+    "description": "Output JSON with keys sorted alphabetically and formatted",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "convert a video to h264 mp4 using ffmpeg",
+    "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+    "category": "ffmpeg",
+    "description": "Transcode a video to H.264/AAC MP4 with quality level 23",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "extract audio from a video file using ffmpeg",
+    "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+    "category": "ffmpeg",
+    "description": "Strip video and copy the audio stream from an MP4 into an AAC file",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "trim a video to a specific time range using ffmpeg",
+    "command": "ffmpeg -i input.mp4 -ss 00:01:00 -to 00:02:30 -c copy trimmed.mp4",
+    "category": "ffmpeg",
+    "description": "Extract a 90-second clip from a video without re-encoding",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "convert video to gif using ffmpeg",
+    "command": "ffmpeg -i input.mp4 -vf \"fps=10,scale=640:-1\" -loop 0 output.gif",
+    "category": "ffmpeg",
+    "description": "Convert an MP4 to an animated GIF at 10fps scaled to 640px wide",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "batch convert all wav files to mp3 using ffmpeg",
+    "command": "for f in *.wav; do ffmpeg -i \"f\" -codec:a libmp3lame -q:a 2 \"{f%.wav}.mp3\"; done",
+    "category": "ffmpeg",
+    "description": "Loop over all WAV files in the current directory and convert each to MP3",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "batch convert all wav files to mp3 using ffmpeg",
+    "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+    "category": "ffmpeg",
+    "description": "Loop over all WAV files in the current directory and convert each to MP3",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "sync a local directory to an s3 bucket",
+    "command": "aws s3 sync ./local-dir s3://my-bucket/prefix/ --delete",
+    "category": "aws",
+    "description": "Upload local directory to S3, deleting remote files not present locally",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "download an entire s3 bucket prefix to a local directory",
+    "command": "aws s3 cp s3://my-bucket/prefix/ ./local-dir --recursive",
+    "category": "aws",
+    "description": "Recursively download all objects under an S3 prefix to a local path",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "list all s3 buckets in the aws account",
+    "command": "aws s3 ls",
+    "category": "aws",
+    "description": "Display all S3 buckets accessible in the current AWS profile",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "get the public ip of a running ec2 instance",
+    "command": "aws ec2 describe-instances --instance-ids i-1234567890abcdef0 --query 'Reservations[0].Instances[0].PublicIpAddress' --output text",
+    "category": "aws",
+    "description": "Query the public IPv4 address of a specific EC2 instance",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "create a docker volume",
+    "command": "docker volume create my-volume",
+    "category": "docker",
+    "description": "Create a named Docker volume for persistent container storage",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "list all docker volumes",
+    "command": "docker volume ls",
+    "category": "docker",
+    "description": "Show all Docker volumes on the local host",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "remove all unused docker volumes",
+    "command": "docker volume prune -f",
+    "category": "docker",
+    "description": "Delete all volumes not referenced by any container",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "create a docker network",
+    "command": "docker network create my-network",
+    "category": "docker",
+    "description": "Create a user-defined bridge network for container communication",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "connect a running container to a docker network",
+    "command": "docker network connect my-network container-name",
+    "category": "docker",
+    "description": "Attach a running container to an existing Docker network",
+    "os": [
+      "all"
+    ]
+  },
+  {
+    "intent": "show open file handles for a running process",
+    "command": "lsof -p <PID>",
+    "category": "system",
+    "description": "List all files and file descriptors opened by a specific process ID",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "show open file handles for a running process",
+    "command": "Get-Process -Id <PID> | Select-Object -ExpandProperty Modules",
+    "category": "system",
+    "description": "List all modules and handles loaded by a specific process ID",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "capture network traffic on a port and write to pcap",
+    "command": "sudo tcpdump -i eth0 port 443 -w capture.pcap",
+    "category": "network",
+    "description": "Record all HTTPS traffic on eth0 to a packet capture file",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "display real time per process network usage",
+    "command": "nethogs eth0",
+    "category": "network",
+    "description": "Show live per-process network bandwidth consumption on an interface",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "check which process is using a specific port",
+    "command": "lsof -i :3000",
+    "category": "network",
+    "description": "Identify the process currently bound to TCP or UDP port 3000",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "check which process is using a specific port",
+    "command": "Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }",
+    "category": "network",
+    "description": "Identify the process currently bound to TCP port 3000",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "display system memory map and check for overcommit",
+    "command": "cat /proc/meminfo",
+    "category": "system",
+    "description": "Show detailed kernel memory statistics including free, cached, and swap",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "display system memory map and check for overcommit",
+    "command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVirtualMemorySize,FreeVirtualMemory,TotalVisibleMemorySize,FreePhysicalMemory",
+    "category": "system",
+    "description": "Show detailed memory statistics including virtual and physical memory",
+    "os": [
+      "win32"
+    ]
+  },
+  {
+    "intent": "trace system calls made by a running process",
+    "command": "strace -p <PID> -e trace=network",
+    "category": "system",
+    "description": "Attach to a process and log all network-related system calls it makes",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  },
+  {
+    "intent": "merge multiple pdf files into one",
+    "command": "pdfunite input1.pdf input2.pdf output.pdf",
+    "category": "system",
+    "description": "Concatenate multiple PDF files into a single output PDF using poppler",
+    "os": [
+      "linux",
+      "darwin"
+    ]
+  }
+]
