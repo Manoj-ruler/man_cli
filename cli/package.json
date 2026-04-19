@@ -1,6 +1,6 @@
 {
   "name": "@manoj-ruler/termassist",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A privacy-first terminal assistant that maps natural language to bash commands — 100% offline, 100% private",
   "main": "index.js",
   "publishConfig": {
