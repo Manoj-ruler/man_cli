@@ -1,0 +1,49 @@
+{
+  "name": "@manoj-ruler/termassist",
+  "version": "1.0.0",
+  "description": "A privacy-first terminal assistant that maps natural language to bash commands — 100% offline, 100% private",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "termassist": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"No tests yet\"",
+    "patch": "npm version patch",
+    "minor": "npm version minor",
+    "major": "npm version major"
+  },
+  "keywords": [
+    "terminal",
+    "cli",
+    "bash",
+    "commands",
+    "assistant",
+    "productivity",
+    "offline",
+    "privacy",
+    "shell",
+    "natural-language",
+    "vector-search",
+    "bm25"
+  ],
+  "author": "Manoj Gaddam",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manoj/termassist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/manoj/termassist/issues"
+  },
+  "homepage": "https://termassist.vercel.app",
+  "dependencies": {
+    "@inquirer/prompts": "^8.4.1",
+    "chalk": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
