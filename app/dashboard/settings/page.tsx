@@ -8,7 +8,9 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { CodeBlock } from "@/components/ui/CodeBlock";
 import { Spinner } from "@/components/ui/Spinner";
-import { Key, RefreshCw, AlertTriangle, Copy, Check } from "lucide-react";
+import { Key, RefreshCw, AlertTriangle, Copy, Check, Terminal } from "lucide-react";
+import Link from "next/link";
+import { TERMASSIST_INSTALL_COMMAND } from "@/lib/termassist-npm";
 
 export default function SettingsPage() {
   const supabase = createClient();
@@ -129,6 +131,27 @@ export default function SettingsPage() {
           </div>
         </Card>
 
+        {/* Install CLI */}
+        <Card>
+          <div className="flex items-center gap-2 mb-4">
+            <Terminal className="w-5 h-5 text-pink" />
+            <h2 className="text-lg font-semibold text-text font-[family-name:var(--font-syne)]">
+              Install TermAssist on your computer
+            </h2>
+          </div>
+          <p className="text-sm text-muted mb-3">
+            The dashboard works together with the terminal app. Install it once with Node.js (LTS), then paste the command below in PowerShell, Terminal, or your Linux shell.
+          </p>
+          <CodeBlock code={TERMASSIST_INSTALL_COMMAND} language="bash" />
+          <p className="text-xs text-muted mt-3">
+            After installing, run <code className="text-pink">termassist &quot;list files&quot;</code> to try it. Full setup:{" "}
+            <Link href="/blog/quick-install-guide" className="text-pink hover:underline">
+              quick install guide
+            </Link>
+            .
+          </p>
+        </Card>
+
         {/* API Token */}
         <Card>
           <div className="flex items-center gap-2 mb-4">
@@ -138,7 +161,10 @@ export default function SettingsPage() {
             </h2>
           </div>
           <p className="text-sm text-muted mb-4">
-            Use this token to authenticate your CLI tool with the dashboard.
+            This token is the <strong className="text-text/90">password</strong> between your terminal and this dashboard.
+            Paste it into <code className="text-pink text-xs">~/.termassist/config.json</code> on your machine (see JSON below) —{" "}
+            <strong className="text-text/90">not</strong> into your app&apos;s Git repo. With <code className="text-pink text-xs">&quot;sync_enabled&quot;: true</code>, the CLI
+            can log queries here and you can run <code className="text-pink text-xs">termassist sync</code> for snippets.
           </p>
 
           {apiToken ? (

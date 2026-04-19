@@ -179,8 +179,8 @@ sequenceDiagram
 ### The Fastest Way (5 Minutes)
 
 ```bash
-# Step 1: Install TermAssist
-npm install -g termassist
+# Step 1: Install TermAssist (package name includes @manoj-ruler/)
+npm install -g @manoj-ruler/termassist
 
 # Step 2: Test it immediately
 termassist "how to list all files"
@@ -210,18 +210,18 @@ Before installing, make sure you have:
 #### Step 1: Install TermAssist
 
 ```bash
-npm install -g termassist
+npm install -g @manoj-ruler/termassist
 ```
 
-The `-g` means "global" - this lets you use TermAssist from any folder.
+The `-g` means "global" - this lets you use TermAssist from any folder. The package on npm is **scoped**: always use `@manoj-ruler/termassist`.
 
-#### Step 2: Verify Installation
+#### Step 2: Verify installation
 
 ```bash
-termassist --version
+npm list -g @manoj-ruler/termassist
 ```
 
-You should see: `0.1.0` (or higher)
+You should see the package name and a version number. You can also run `termassist "list files"` — if you get a suggested command, the install worked.
 
 #### Step 3: Create Account on Dashboard
 

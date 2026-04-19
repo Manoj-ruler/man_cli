@@ -9,6 +9,15 @@ import { Terminal, Calendar, Clock, ArrowRight } from "lucide-react";
 
 const BLOG_POSTS = [
   {
+    title: "Install TermAssist Step by Step (The Super Simple Guide)",
+    description:
+      "One page: install Node.js, run one npm command, check that it worked, then (optional) connect the website. Written so anyone can follow along on Windows, Mac, or Linux.",
+    date: "Apr 19, 2026",
+    readTime: "8 min",
+    slug: "quick-install-guide",
+    category: "Setup",
+  },
+  {
     title: "The Complete Beginner's Guide to TermAssist: From Zero to Hero",
     description: "Learn everything about TermAssist from scratch. This comprehensive guide covers what TermAssist is, how to install it, how to create an account, how to configure it, and how to use every feature step-by-step. Perfect for beginners!",
     date: "Apr 17, 2026",
@@ -113,7 +122,7 @@ export default function BlogListingPage() {
                        <div className="w-2 h-2 rounded-full bg-pink animate-pulse" />
                        <span className="opacity-50 text-[8px]">LOCAL_MATCH_LOG</span>
                     </div>
-                    <span className="text-white">$</span> termassist --analyze "{BLOG_POSTS[0].slug.replace(/-/g, ' ')}"
+                    <span className="text-white">$</span> termassist &quot;{BLOG_POSTS[0].title.slice(0, 42)}…&quot;
                   </div>
                 </div>
               </div>

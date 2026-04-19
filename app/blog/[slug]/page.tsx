@@ -20,6 +20,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import {
+  TERMASSIST_INSTALL_COMMAND,
+  TERMASSIST_NPM_PACKAGE,
+} from "@/lib/termassist-npm";
 
 interface PostContent {
   title: string;
@@ -30,6 +34,120 @@ interface PostContent {
 }
 
 const POSTS: Record<string, PostContent> = {
+  "quick-install-guide": {
+    title: "Install TermAssist Step by Step (The Super Simple Guide)",
+    category: "Setup",
+    date: "Apr 19, 2026",
+    readTime: "8 min",
+    content: (
+      <>
+        <h2>What you are doing (in one sentence)</h2>
+        <p>
+          You will install a small program called <strong>TermAssist</strong> from{" "}
+          <a href="https://www.npmjs.com/package/@manoj-ruler/termassist" target="_blank" rel="noopener noreferrer">npm</a>.
+          After that, you can type normal English in your terminal and TermAssist will suggest the right command. You do{" "}
+          <strong>not</strong> need the website to try it — the website is only for extras (history and custom snippets).
+        </p>
+
+        <div className="blog-callout blog-callout-info">
+          <Terminal className="w-5 h-5 mt-1 shrink-0" />
+          <div>
+            <strong>The install command you will use:</strong>{" "}
+            <code>{TERMASSIST_INSTALL_COMMAND}</code> — copy it exactly, including the <code>@</code> and the slash.
+          </div>
+        </div>
+
+        <h2>Step 1 — Install Node.js (the free “engine”)</h2>
+        <p>
+          TermAssist runs on <strong>Node.js</strong>. If you already have Node, skip to Step 2.
+        </p>
+        <ol>
+          <li>Open <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer">https://nodejs.org</a>.</li>
+          <li>Download the <strong>LTS</strong> version (those letters mean “long-term support” — the stable one).</li>
+          <li>Run the installer. Click “Next” until it finishes. Restart your terminal app after it is done.</li>
+        </ol>
+
+        <h2>Step 2 — Open a terminal</h2>
+        <ul>
+          <li><strong>Windows:</strong> Press the Windows key, type <code>PowerShell</code>, open “Windows PowerShell”.</li>
+          <li><strong>Mac:</strong> Open “Terminal” from Applications → Utilities (or press <code>Cmd + Space</code>, type Terminal).</li>
+          <li><strong>Linux:</strong> Open your usual terminal (often <code>Ctrl + Alt + T</code>).</li>
+        </ul>
+
+        <h2>Step 3 — Install TermAssist from npm (one line)</h2>
+        <p>Paste this line, then press Enter:</p>
+        <pre>
+          <code>{TERMASSIST_INSTALL_COMMAND}</code>
+        </pre>
+        <p>
+          <code>-g</code> means “install for the whole computer,” so you can run <code>termassist</code> from any folder.
+        </p>
+        <p>
+          If you see errors about permission, search for “npm global install permission” for your operating system, or run your terminal as an administrator only if your IT rules allow it.
+        </p>
+
+        <h2>Step 4 — Make sure it really installed</h2>
+        <p>Paste this and press Enter:</p>
+        <pre>
+          <code>npm list -g {TERMASSIST_NPM_PACKAGE}</code>
+        </pre>
+        <p>
+          You should see a line with <code>{TERMASSIST_NPM_PACKAGE}</code> and a version number. That means success.
+        </p>
+
+        <h2>Step 5 — Run your first question</h2>
+        <p>Paste one of these and press Enter:</p>
+        <pre>
+          <code>termassist &quot;how to list files&quot;</code>
+        </pre>
+        <p>TermAssist will show a suggested command and ask if you want to run it. You can edit the line before you press Enter.</p>
+
+        <h2>Step 6 — (Optional) Use the short name <code>??</code></h2>
+        <p>
+          After you are comfortable, you can add a shortcut so you type <code>??</code> instead of <code>termassist</code>. That is a small setup step in your shell profile — the full walkthrough is in{" "}
+          <Link href="/blog/mastering-cli" className="text-pink hover:underline">the complete beginner&apos;s guide</Link>.
+        </p>
+
+        <h2>Step 7 — (Optional) Use the website and dashboard</h2>
+        <p>This part is only if you want history in the browser or custom commands saved online.</p>
+        <ol>
+          <li>Go to <Link href="/auth/signup" className="text-pink hover:underline">Sign up</Link> on this site and create an account.</li>
+          <li>Open <Link href="/dashboard/settings" className="text-pink hover:underline">Dashboard → Settings</Link>.</li>
+          <li>Click <strong>Generate Token</strong>. Copy the token (it often starts with <code>ta_</code>).</li>
+          <li>
+            Create a file named <code>config.json</code> inside a folder named <code>.termassist</code> in your home folder.
+            Put your token and this site&apos;s URL inside — the Settings page shows a ready-to-copy example.
+          </li>
+          <li>Set <code>&quot;sync_enabled&quot;: true</code> only if you want to send query history to your dashboard.</li>
+        </ol>
+
+        <h2>Step 8 — (Optional) Download your custom snippets</h2>
+        <p>After you save snippets on the dashboard, run:</p>
+        <pre>
+          <code>termassist sync</code>
+        </pre>
+        <p>That downloads them to your computer so TermAssist can match them like built-in commands.</p>
+
+        <h2>If something goes wrong</h2>
+        <ul>
+          <li><strong>“command not found”:</strong> Node might not be on your PATH, or the global npm folder is not on PATH. Reinstall Node LTS and open a new terminal window.</li>
+          <li><strong>Wrong package:</strong> The name on npm is <code>{TERMASSIST_NPM_PACKAGE}</code> — not plain <code>termassist</code> alone.</li>
+          <li><strong>Sync errors:</strong> Check <code>api_token</code>, <code>api_url</code>, and that <code>sync_enabled</code> is true in <code>~/.termassist/config.json</code> (Windows: <code>%USERPROFILE%\.termassist\config.json</code>).</li>
+        </ul>
+
+        <div className="blog-callout blog-callout-info">
+          <Sparkles className="w-5 h-5 mt-1 shrink-0" />
+          <div>
+            <strong>Next read:</strong>{" "}
+            <Link href="/blog/mastering-cli" className="text-pink hover:underline">The complete beginner&apos;s guide</Link>{" "}
+            for aliases, interactive mode, and more examples — or{" "}
+            <Link href="/blog/packages-deep-dive" className="text-pink hover:underline">how TermAssist works</Link>{" "}
+            if you are curious about BM25 and privacy.
+          </div>
+        </div>
+      </>
+    ),
+  },
   "mastering-cli": {
     title: "The Complete Beginner's Guide to TermAssist: From Zero to Hero",
     category: "Guide",
@@ -129,26 +247,26 @@ const POSTS: Record<string, PostContent> = {
           <li><strong>Terminal Access</strong>: You need access to your computer's terminal application.</li>
         </ul>
 
-        <h3>Step 2: Install TermAssist</h3>
+        <h3>Step 2: Install TermAssist from npm</h3>
         <p>
-          Open your terminal and type this command, then press Enter:
+          Open your terminal and paste this <strong>exact</strong> command (the name includes <code>@manoj-ruler/</code>), then press Enter:
         </p>
         <pre>
-          <code>npm install -g termassist</code>
+          <code>{TERMASSIST_INSTALL_COMMAND}</code>
         </pre>
         <p>
-          The <code>-g</code> means "global", which lets you use TermAssist from any folder on your computer.
+          The <code>-g</code> means &quot;global,&quot; which lets you use the <code>termassist</code> command from any folder on your computer.
         </p>
 
-        <h3>Step 3: Verify Installation</h3>
+        <h3>Step 3: Verify installation</h3>
         <p>
-          To check if TermAssist installed correctly, type:
+          The CLI does not need a separate <code>--version</code> flag for you to know it worked. Run:
         </p>
         <pre>
-          <code>termassist --version</code>
+          <code>npm list -g {TERMASSIST_NPM_PACKAGE}</code>
         </pre>
         <p>
-          You should see a version number like "0.1.0". If you see this, congratulations! TermAssist is installed.
+          You should see your package name and a version number. Or run <code>termassist &quot;list files&quot;</code> — if TermAssist answers with a command, you are ready.
         </p>
 
         <h2>Part 4: Setting Up the Configuration File</h2>
@@ -267,17 +385,11 @@ const POSTS: Record<string, PostContent> = {
           <code>notepad $PROFILE</code>
         </pre>
         <p>
-          This opens a file in Notepad. If you get an error saying the file doesn't exist, that's okay - Notepad will ask if you want to create it. Click "Yes".
+          This opens a file in Notepad. If you get an error saying the file doesn&apos;t exist, that&apos;s okay — Notepad will ask if you want to create it. Click &quot;Yes&quot;.
         </p>
 
         <p>
-          <strong>Step 2:</strong> Add this line to the file:
-        </p>
-        <pre>
-          <code>{`function ?? { node (Join-Path $env:USERPROFILE '.termassist/cli-wrapper.js') @args }`}</code>
-        </pre>
-        <p>
-          Or, if you installed TermAssist globally with npm, use this instead:
+          <strong>Step 2:</strong> Add this line to the file (use this when you installed with <code>{TERMASSIST_INSTALL_COMMAND}</code>):
         </p>
         <pre>
           <code>{`function ?? { termassist @args }`}</code>
@@ -359,9 +471,9 @@ const POSTS: Record<string, PostContent> = {
           If you don't want to set up the shortcut, or if you're having trouble with it, you can still use TermAssist! Here's how:
         </p>
 
-        <h4>Method 1: Use the Full Command (If Installed Globally)</h4>
+        <h4>Method 1: Use the full command (if installed globally)</h4>
         <p>
-          If you installed TermAssist with <code>npm install -g termassist</code>, you can use:
+          If you installed TermAssist with <code>{TERMASSIST_INSTALL_COMMAND}</code>, you can use:
         </p>
         <pre>
           <code>termassist "your question here"</code>
@@ -456,41 +568,11 @@ const POSTS: Record<string, PostContent> = {
         <div className="blog-callout blog-callout-warning">
            <Shield className="w-5 h-5 mt-1 shrink-0 text-pink" />
            <div>
-              <strong>Important:</strong> If you can't get the alias to work, don't worry! Just use <code>termassist "your question"</code> instead. It works exactly the same way, you just type a few more characters.
+              <strong>Important:</strong> If you can&apos;t get the alias to work, don&apos;t worry! Just use <code>termassist &quot;your question&quot;</code> instead. It works exactly the same way; you only type a few more characters.
            </div>
         </div>
 
-        <h2>Part 7: Using TermAssist - The Basics</h2>
-
-        <h3>Your First Query</h3>
-        <p>
-          Now for the fun part! Open your terminal and type:
-        </p>
-        <pre>
-          <code>?? how to list all files</code>
-        </pre>
-        <p>
-          TermAssist will show you the command: <code>ls -la</code>
-        </p>
-        <p>
-          You'll see a prompt asking: "🚀 Ready to execute (Edit if needed):"
-        </p>
-        <ul>
-          <li>If the command looks good, just press <code>Enter</code> to run it.</li>
-          <li>If you want to change something, edit the command first, then press <code>Enter</code>.</li>
-          <li>If you don't want to run anything, press <code>Ctrl + C</code> to cancel.</li>
-        </ul>
-
-        <h3>More Example Queries</h3>
-        <p>Try these to see how TermAssist works:</p>
-        <ul>
-          <li><code>?? undo last git commit</code> → Shows: <code>git reset --soft HEAD~1</code></li>
-          <li><code>?? find large files bigger than 100mb</code> → Shows: <code>find / -type f -size +100M 2&gt;/dev/null</code></li>
-          <li><code>?? check ip address</code> → Shows: <code>ip addr show</code></li>
-          <li><code>?? compress a folder into zip</code> → Shows: <code>zip -r archive.zip directory/</code></li>
-        </ul>
-
-        <h2>Part 8: Interactive Mode</h2>
+        <h2>Part 7: Interactive Mode</h2>
         <p>
           If you're not sure what command you need, you can use interactive mode!
         </p>
@@ -501,21 +583,21 @@ const POSTS: Record<string, PostContent> = {
           You'll see a search box where you can type keywords. As you type, TermAssist shows matching commands. Use your arrow keys to navigate and press Enter to select a command.
         </p>
 
-        <h2>Part 9: Syncing Your Custom Snippets</h2>
+        <h2>Part 8: Syncing Your Custom Snippets</h2>
         <p>
           If you created custom snippets in the dashboard (we'll explain this later), you can download them to your computer.
         </p>
         <p>
-          In your terminal, type:
+          In your terminal, type (you can use <code>??</code> instead of <code>termassist</code> if you set up the shortcut):
         </p>
         <pre>
-          <code>?? sync</code>
+          <code>termassist sync</code>
         </pre>
         <p>
-          TermAssist will download all your custom snippets from the dashboard. You'll see a message like "Successfully synced 5 snippets."
+          TermAssist will download all your custom snippets from the dashboard. You&apos;ll see a message like &quot;Successfully synced 5 snippets.&quot;
         </p>
 
-        <h2>Part 10: What Commands Can TermAssist Understand?</h2>
+        <h2>Part 9: What Commands Can TermAssist Understand?</h2>
         <p>
           TermAssist comes with 250+ pre-built commands covering:
         </p>
@@ -560,7 +642,13 @@ const POSTS: Record<string, PostContent> = {
           Most AI tools send your questions to big computers in the cloud (the internet). TermAssist is different - it does everything on your own computer. This makes it faster and more private.
         </p>
         <p>
-          In this article, we'll explain exactly how TermAssist understands your English sentences and turns them into terminal commands. Don't worry - we'll explain everything in simple terms!
+          In this article, we&apos;ll explain exactly how TermAssist understands your English sentences and turns them into terminal commands. Don&apos;t worry — we&apos;ll explain everything in simple terms!
+        </p>
+
+        <h2>Where do I get TermAssist?</h2>
+        <p>
+          Install the CLI from npm with <code>{TERMASSIST_INSTALL_COMMAND}</code>. The published name is{" "}
+          <code>{TERMASSIST_NPM_PACKAGE}</code> — always use that full name when you install or upgrade. The command you type in the terminal is still <code>termassist</code>.
         </p>
 
         <h2>The Magic Behind the Scenes: BM25 Algorithm</h2>
@@ -771,11 +859,17 @@ const POSTS: Record<string, PostContent> = {
           <li>Manage your API token and settings</li>
         </ul>
 
+        <h2>Before the dashboard: install the CLI</h2>
+        <p>
+          The website does not replace the terminal tool. Install TermAssist once on your computer with{" "}
+          <code>{TERMASSIST_INSTALL_COMMAND}</code>, then use this site to sign in, create snippets, and copy your API token into <code>~/.termassist/config.json</code>.
+        </p>
+
         <h2>Part 1: Logging Into the Dashboard</h2>
 
         <h3>Step 1: Go to the Login Page</h3>
         <p>
-          Open your web browser and go to the TermAssist website. Click "Open Dashboard" or "Login" in the top menu.
+          Open your web browser and go to the TermAssist website. Click &quot;Open Dashboard&quot; or &quot;Login&quot; in the top menu.
         </p>
 
         <h3>Step 2: Sign In</h3>
@@ -994,7 +1088,7 @@ const POSTS: Record<string, PostContent> = {
         <div className="blog-callout blog-callout-warning">
            <Shield className="w-5 h-5 mt-1 shrink-0 text-pink" />
            <div>
-              <strong>Important:</strong> After creating or editing snippets in the dashboard, you need to run <code>?? sync</code> in your terminal to download them to your computer!
+              <strong>Important:</strong> After creating or editing snippets in the dashboard, run <code>termassist sync</code> in your terminal to download them to your computer!
            </div>
         </div>
 
@@ -1098,7 +1192,7 @@ const POSTS: Record<string, PostContent> = {
           <li>You go to Dashboard → Snippets</li>
           <li>You create a new snippet (like "Deploy to production")</li>
           <li>You save it in the dashboard</li>
-          <li>You open your terminal and type <code>?? sync</code></li>
+          <li>You open your terminal and type <code>termassist sync</code></li>
           <li>TermAssist downloads your new snippet</li>
           <li>Now you can use it: <code>?? deploy to production</code></li>
         </ol>
@@ -1126,7 +1220,7 @@ const POSTS: Record<string, PostContent> = {
 
         <h3>Q: Can I use TermAssist on multiple computers?</h3>
         <p>
-          A: Yes! Just install TermAssist on each computer and use the same API token. Run <code>?? sync</code> on each computer to get your custom snippets.
+          A: Yes! On each computer run <code>{TERMASSIST_INSTALL_COMMAND}</code>, copy the same <code>config.json</code> (or same token), then run <code>termassist sync</code> on each machine to pull your snippets.
         </p>
 
         <h3>Q: Why is my Commands page empty?</h3>
@@ -1136,7 +1230,7 @@ const POSTS: Record<string, PostContent> = {
 
         <h3>Q: How do I update my custom snippets in the terminal?</h3>
         <p>
-          A: Run <code>?? sync</code> in your terminal. This downloads the latest snippets from the dashboard.
+          A: Run <code>termassist sync</code> in your terminal (or <code>?? sync</code> if you created that shortcut). This downloads the latest snippets from the dashboard.
         </p>
 
         <div className="blog-callout blog-callout-info">
@@ -1310,7 +1404,9 @@ export default function BlogPostPage() {
                   the assistant that puts your privacy and productivity first.
                </p>
                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button size="lg" className="w-full sm:w-auto">Get TermAssist</Button>
+                  <Link href="/blog/quick-install-guide" className="w-full sm:w-auto">
+                    <Button size="lg" className="w-full sm:w-auto">Install guide</Button>
+                  </Link>
                   <Link href="/dashboard" className="w-full sm:w-auto">
                     <Button variant="ghost" size="lg" className="w-full">Dashboard</Button>
                   </Link>
@@ -1320,8 +1416,8 @@ export default function BlogPostPage() {
                <div className="absolute inset-0 bg-pink/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                <Terminal className="w-32 h-32 text-pink/5 mb-6 group-hover:scale-110 transition-transform duration-700" />
                <div className="text-center font-[family-name:var(--font-jetbrains)] relative z-10">
-                  <div className="text-sm text-pink mb-2 font-bold">$ termassist --init</div>
-                  <div className="text-[10px] text-muted/60 uppercase tracking-widest font-bold">Local intelligence ready</div>
+                  <div className="text-sm text-pink mb-2 font-bold">$ termassist &quot;find large files&quot;</div>
+                  <div className="text-[10px] text-muted/60 uppercase tracking-widest font-bold">Local match · edit · run</div>
                </div>
             </div>
           </div>

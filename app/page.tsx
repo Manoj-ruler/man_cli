@@ -7,6 +7,7 @@ import { HeroVideoBackground } from "@/components/terminal/HeroVideoBackground";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { CodeBlock } from "@/components/ui/CodeBlock";
+import { TERMASSIST_INSTALL_COMMAND } from "@/lib/termassist-npm";
 import {
   Zap,
   Shield,
@@ -27,7 +28,7 @@ export default function LandingPage() {
   const [copied, setCopied] = useState(false);
 
   const copyInstallCommand = () => {
-    navigator.clipboard.writeText('npm install -g termassist');
+    navigator.clipboard.writeText(TERMASSIST_INSTALL_COMMAND);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -46,7 +47,7 @@ export default function LandingPage() {
               <div className="animate-fade-up">
                 <span className="inline-flex items-center gap-2 px-3 py-1 bg-pink/10 border border-pink/20 rounded text-xs text-pink font-[family-name:var(--font-dm-sans)]">
                   <Sparkles className="w-3 h-3" />
-                  100% Offline Â· 100% Private
+                  100% Offline · 100% Private
                 </span>
               </div>
 
@@ -58,8 +59,8 @@ export default function LandingPage() {
 
               <p className="text-lg text-muted max-w-lg leading-relaxed animate-fade-up delay-2">
                 A local, privacy-first terminal assistant that maps natural
-                language to exact bash commands â€” no cloud, no GPU, no latency.
-                Powered by local vector search.
+                language to exact shell commands — no cloud AI, no GPU, no wait.
+                Matching runs on your machine with BM25 (no vectors needed).
               </p>
 
               <div className="flex flex-wrap gap-3 animate-fade-up delay-3">
@@ -76,7 +77,7 @@ export default function LandingPage() {
               <div className="flex flex-wrap gap-4 mt-2 animate-fade-up delay-4">
                 {[
                   { icon: Zap, label: "< 50ms response" },
-                  { icon: Shield, label: "0 API Keys" },
+                  { icon: Shield, label: "No cloud AI keys" },
                   { icon: HardDrive, label: "~10MB install" },
                 ].map((stat) => (
                   <div
@@ -126,12 +127,12 @@ export default function LandingPage() {
               {
                 icon: Clock,
                 title: "Cloud Latency",
-                desc: "AI-powered tools send your queries across the internet, adding seconds of delay per command.",
+                desc: "Cloud assistants send every question over the internet, which adds seconds of delay each time.",
               },
               {
                 icon: Shield,
                 title: "Privacy Risk",
-                desc: "Cloud-based copilots see every command you run â€” including paths, IPs, and credentials.",
+                desc: "Cloud-based copilots may see what you type — including paths, servers, and secrets.",
               },
               {
                 icon: Cpu,
@@ -185,8 +186,8 @@ export default function LandingPage() {
               {
                 step: "02",
                 icon: Search,
-                title: "Embed & Match",
-                desc: "MiniLM converts your query to a vector and searches a local FAISS index in < 5ms.",
+                title: "Match locally",
+                desc: "TermAssist scores your words against 250+ built-in commands with BM25 — usually under 50 ms, all offline.",
               },
               {
                 step: "03",
@@ -240,14 +241,14 @@ export default function LandingPage() {
                 desc: "Everything runs locally. No network calls, no waiting, no downtime. Results appear before you finish thinking.",
               },
               {
-                stat: "0 bytes",
-                title: "100% Private",
-                desc: "Your queries never leave your machine. No telemetry, no logging, no cloud. Your commands stay yours.",
+                stat: "Local",
+                title: "Private by default",
+                desc: "Finding the right command happens on your computer. Optional dashboard sync is off until you add a token and turn it on.",
               },
               {
                 stat: "~10MB",
                 title: "Universal Compatibility",
-                desc: "Works on any machine with Python and Node.js. No GPU required. No API keys. No vendor lock-in.",
+                desc: "Works anywhere you have Node.js (LTS is best). No GPU. No paid AI API for the built-in matcher.",
               },
             ].map((item, i) => (
               <Card
@@ -286,8 +287,15 @@ export default function LandingPage() {
           </div>
 
           <div className="animate-fade-up delay-2 pink-glow-border rounded">
-            <CodeBlock code="npm install -g termassist" language="bash" />
+            <CodeBlock code={TERMASSIST_INSTALL_COMMAND} language="bash" />
           </div>
+          <p className="text-sm text-muted mt-6 text-center max-w-lg mx-auto leading-relaxed">
+            New here? Follow the{" "}
+            <Link href="/blog/quick-install-guide" className="text-pink hover:underline underline-offset-2">
+              step-by-step install guide
+            </Link>{" "}
+            (Node.js, one command, then your first question).
+          </p>
 
           <div className="mt-8 flex justify-center gap-4 animate-fade-up delay-3">
             <Button size="lg" onClick={copyInstallCommand}>{copied ? (<><Check className="w-4 h-4" />Copied to Clipboard!</>) : (<><Terminal className="w-4 h-4" />Get Started</>)}</Button>
@@ -326,8 +334,14 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
             {[
+              {
+                title: "Install TermAssist Step by Step",
+                desc: "The shortest path: Node.js, one npm install command, verify, optional website token. Windows, Mac, and Linux.",
+                slug: "quick-install-guide",
+                tag: "Setup",
+              },
               {
                 title: "The Complete Beginner's Guide to TermAssist",
                 desc: "Learn everything from scratch: installation, configuration, account setup, and using every feature step-by-step.",

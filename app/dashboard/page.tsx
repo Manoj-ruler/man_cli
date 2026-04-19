@@ -83,8 +83,9 @@ export default function DashboardOverviewPage() {
               Welcome back, <span className="pink-gradient-text">{stats.userName}</span>.
             </h1>
             <p className="text-muted max-w-2xl leading-relaxed">
-              Your terminal intelligence is synchronized across your devices. 
-              Track your productivity, manage snippets, and refine your CLI workflow from one command center.
+              Charts and history appear here only after your computer&apos;s TermAssist app is{" "}
+              <strong className="text-text/90">linked with your API token</strong> from Settings. Matching commands still runs
+              offline; logging to this dashboard is optional.
             </p>
             <div className="flex flex-wrap gap-4 mt-4">
               <Link href="/dashboard/commands">
@@ -104,6 +105,53 @@ export default function DashboardOverviewPage() {
           {/* Decorative background terminal icon */}
           <Terminal className="absolute -bottom-10 -right-10 w-64 h-64 text-pink/5 rotate-12 pointer-events-none" />
         </div>
+
+        {/* How tracking works — token + local config */}
+        {stats.totalQueries === 0 && (
+          <Card className="border-pink/25 bg-pink/[0.06]">
+            <div className="flex flex-col gap-4">
+              <div className="flex items-start gap-3">
+                <Terminal className="w-5 h-5 text-pink shrink-0 mt-0.5" />
+                <div>
+                  <h2 className="text-lg font-semibold text-text font-[family-name:var(--font-syne)]">
+                    To track usage here, connect Settings → your computer
+                  </h2>
+                  <p className="text-sm text-muted mt-2 leading-relaxed">
+                    The dashboard does not watch your terminal by itself. You copy the{" "}
+                    <strong className="text-text/90">CLI API token</strong> from{" "}
+                    <Link href="/dashboard/settings" className="text-pink hover:underline">
+                      Settings
+                    </Link>{" "}
+                    into a small file on your machine — not into your project&apos;s code — so the TermAssist CLI can
+                    send each query summary (what you asked, what matched, timing) after you run a command.
+                  </p>
+                  <ol className="mt-4 space-y-2 text-sm text-text/90 list-decimal list-inside">
+                    <li>
+                      Install TermAssist: <code className="text-pink font-[family-name:var(--font-jetbrains)] text-xs">npm install -g @manoj-ruler/termassist</code>
+                    </li>
+                    <li>
+                      In Settings, click <strong>Generate Token</strong> and copy the <code className="text-pink text-xs">ta_…</code> value.
+                    </li>
+                    <li>
+                      Create or edit <code className="text-pink text-xs">~/.termassist/config.json</code> (Windows:{" "}
+                      <code className="text-pink text-xs">%USERPROFILE%\.termassist\config.json</code>) and paste the JSON
+                      block from Settings. Set <code className="text-pink text-xs">&quot;sync_enabled&quot;: true</code>.
+                    </li>
+                    <li>
+                      Run a query with <code className="text-pink text-xs">termassist &quot;…&quot;</code> — then refresh this page.
+                    </li>
+                  </ol>
+                  <Link href="/dashboard/settings">
+                    <Button className="mt-4" size="sm">
+                      Open Settings &amp; get token
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </Card>
+        )}
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -162,8 +210,8 @@ export default function DashboardOverviewPage() {
                   link: "/blog/mastering-cli"
                 },
                 {
-                  title: "Enable Telemetry",
-                  desc: "View your usage patterns and most used command categories by enabling sync in your config.",
+                  title: "Log usage to this dashboard",
+                  desc: "Put your API token from Settings into ~/.termassist/config.json with sync on so query history fills in here.",
                   link: "/dashboard/settings"
                 },
                 {
@@ -193,7 +241,9 @@ export default function DashboardOverviewPage() {
             <Card className="p-6 bg-surface-2">
               <div className="space-y-4">
                 <p className="text-sm text-muted">
-                  Your API Token is required to sync your terminal logs with this dashboard.
+                  Generate a token in Settings and save it in your machine&apos;s{" "}
+                  <code className="text-pink text-xs">config.json</code> — that file is how the CLI authenticates to this
+                  dashboard.
                 </p>
                 <Link href="/dashboard/settings" className="block w-full">
                   <Button variant="ghost" className="w-full">

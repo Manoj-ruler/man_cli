@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { TERMASSIST_INSTALL_COMMAND } from "@/lib/termassist-npm";
 import { Terminal, Menu, X, Check } from "lucide-react";
 
 export function Navbar() {
@@ -19,7 +20,7 @@ export function Navbar() {
   }, []);
 
   const copyInstallCommand = () => {
-    navigator.clipboard.writeText("npm install -g termassist");
+    navigator.clipboard.writeText(TERMASSIST_INSTALL_COMMAND);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
