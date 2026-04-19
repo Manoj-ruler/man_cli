@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/Button";
@@ -15,7 +15,8 @@ import {
   Sparkles,
   ArrowRight,
   RefreshCw,
-  Shield
+  Shield,
+  Check
 } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";

@@ -3,11 +3,12 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { Terminal, Menu, X } from "lucide-react";
+import { Terminal, Menu, X, Check } from "lucide-react";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +17,12 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const copyInstallCommand = () => {
+    navigator.clipboard.writeText("npm install -g termassist");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <nav
@@ -44,8 +51,9 @@ export function Navbar() {
               How It Works
             </Link>
             <Link
-              href="https://github.com"
+              href="https://github.com/manoj/termassist"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-muted hover:text-text transition-colors duration-200"
             >
               GitHub
@@ -62,7 +70,16 @@ export function Navbar() {
             >
               Dashboard
             </Link>
-            <Button size="sm">Install Now</Button>
+            <Button size="sm" onClick={copyInstallCommand}>
+              {copied ? (
+                <>
+                  <Check className="w-3 h-3" />
+                  Copied!
+                </>
+              ) : (
+                "Install Now"
+              )}
+            </Button>
           </div>
 
           {/* Mobile hamburger */}
@@ -88,8 +105,9 @@ export function Navbar() {
               How It Works
             </Link>
             <Link
-              href="https://github.com"
+              href="https://github.com/manoj/termassist"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-muted hover:text-text transition-colors py-2"
             >
               GitHub
@@ -107,8 +125,15 @@ export function Navbar() {
             >
               Dashboard
             </Link>
-            <Button size="sm" className="mt-1 w-full">
-              Install Now
+            <Button size="sm" className="mt-1 w-full" onClick={copyInstallCommand}>
+              {copied ? (
+                <>
+                  <Check className="w-3 h-3" />
+                  Copied!
+                </>
+              ) : (
+                "Install Now"
+              )}
             </Button>
           </div>
         </div>

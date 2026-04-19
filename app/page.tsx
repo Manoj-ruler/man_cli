@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { HeroVideoBackground } from "@/components/terminal/HeroVideoBackground";
@@ -18,10 +18,19 @@ import {
   Terminal,
   Sparkles,
   Search,
+  Check,
+  Copy,
   GitBranch,
 } from "lucide-react";
 
 export default function LandingPage() {
+  const [copied, setCopied] = useState(false);
+
+  const copyInstallCommand = () => {
+    navigator.clipboard.writeText('npm install -g termassist');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
   return (
     <div className="min-h-screen bg-bg text-text noise-overlay">
       <Navbar />
@@ -37,7 +46,7 @@ export default function LandingPage() {
               <div className="animate-fade-up">
                 <span className="inline-flex items-center gap-2 px-3 py-1 bg-pink/10 border border-pink/20 rounded text-xs text-pink font-[family-name:var(--font-dm-sans)]">
                   <Sparkles className="w-3 h-3" />
-                  100% Offline · 100% Private
+                  100% Offline Â· 100% Private
                 </span>
               </div>
 
@@ -49,15 +58,12 @@ export default function LandingPage() {
 
               <p className="text-lg text-muted max-w-lg leading-relaxed animate-fade-up delay-2">
                 A local, privacy-first terminal assistant that maps natural
-                language to exact bash commands — no cloud, no GPU, no latency.
+                language to exact bash commands â€” no cloud, no GPU, no latency.
                 Powered by local vector search.
               </p>
 
               <div className="flex flex-wrap gap-3 animate-fade-up delay-3">
-                <Button size="lg">
-                  <Terminal className="w-4 h-4" />
-                  Install Now
-                </Button>
+                <Button size="lg" onClick={copyInstallCommand}>{copied ? (<><Check className="w-4 h-4" />Copied!</>) : (<><Terminal className="w-4 h-4" />Install Now</>)}</Button>
                 <Link href="/dashboard">
                   <Button variant="ghost" size="lg">
                     Open Dashboard
@@ -84,8 +90,8 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Right: Video Background */}
-            <div className="relative animate-fade-up delay-3">
+            {/* Right: Video Background (Desktop Only) */}
+            <div className="relative hidden lg:block animate-fade-up delay-3">
               <HeroVideoBackground videoSrc="/TermAssist_Intent_to_Command_Demo.mp4" />
             </div>
           </div>
@@ -125,7 +131,7 @@ export default function LandingPage() {
               {
                 icon: Shield,
                 title: "Privacy Risk",
-                desc: "Cloud-based copilots see every command you run — including paths, IPs, and credentials.",
+                desc: "Cloud-based copilots see every command you run â€” including paths, IPs, and credentials.",
               },
               {
                 icon: Cpu,
@@ -284,10 +290,7 @@ export default function LandingPage() {
           </div>
 
           <div className="mt-8 flex justify-center gap-4 animate-fade-up delay-3">
-            <Button size="lg">
-              <Terminal className="w-4 h-4" />
-              Get Started
-            </Button>
+            <Button size="lg" onClick={copyInstallCommand}>{copied ? (<><Check className="w-4 h-4" />Copied to Clipboard!</>) : (<><Terminal className="w-4 h-4" />Get Started</>)}</Button>
             <Link href="/dashboard">
               <Button variant="ghost" size="lg">
                 View Dashboard
@@ -395,14 +398,15 @@ export default function LandingPage() {
             </div>
             <div className="flex items-center gap-6 text-sm text-muted">
               <Link
-                href="#"
+                href="/blog"
                 className="hover:text-text transition-colors duration-200"
               >
                 Docs
               </Link>
               <Link
-                href="https://github.com"
+                href="https://github.com/manoj"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-text transition-colors duration-200"
               >
                 GitHub
