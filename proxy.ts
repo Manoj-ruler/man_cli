@@ -45,10 +45,12 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // 2. Protect Auth Pages: Logged in -> Dashboard
-  if (user && request.nextUrl.pathname.startsWith("/auth")) {
+  // 2. Logged-in users: skip marketing auth pages (but always allow OAuth callback)
+  const path = request.nextUrl.pathname;
+  const isAuthCallback = path === "/auth/callback";
+  if (user && path.startsWith("/auth") && !isAuthCallback) {
     const url = request.nextUrl.clone();
-    url.pathname = "/dashboard/commands";
+    url.pathname = "/dashboard";
     return NextResponse.redirect(url);
   }
 

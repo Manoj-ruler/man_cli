@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { DEFAULT_AUTH_REDIRECT } from "@/lib/auth-redirect";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Terminal } from "lucide-react";
@@ -17,13 +18,14 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   const handleGoogleLogin = async () => {
+    const next = encodeURIComponent(DEFAULT_AUTH_REDIRECT);
     await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { 
-        redirectTo: `${window.location.origin}/auth/callback?next=/dashboard/commands`,
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback?next=${next}`,
         queryParams: {
-          access_type: 'offline',
-          prompt: 'consent',
+          access_type: "offline",
+          prompt: "consent",
         },
       },
     });
@@ -43,7 +45,7 @@ export default function LoginPage() {
       setError(authError.message);
       setLoading(false);
     } else {
-      router.push("/dashboard/commands");
+      router.push(DEFAULT_AUTH_REDIRECT);
       router.refresh();
     }
   };
