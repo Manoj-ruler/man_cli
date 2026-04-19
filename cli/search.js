@@ -1,3 +1,4 @@
+const os = require('os');
 const fs = require('fs');
 const path = require('path');
 
@@ -12,13 +13,19 @@ function tokenize(text) {
 }
 
 function buildIndex() {
-  let commands = JSON.parse(fs.readFileSync(COMMANDS_PATH, 'utf-8'));
+  const currentPlatform = os.platform();
   
+  // Load and filter core commands
+  let commands = JSON.parse(fs.readFileSync(COMMANDS_PATH, 'utf-8'))
+    .filter(cmd => !cmd.os || cmd.os.includes('all') || cmd.os.includes(currentPlatform));
+  
+  // Load and filter custom snippets
   if (fs.existsSync(CUSTOM_SNIPPETS_PATH)) {
     try {
       const custom = JSON.parse(fs.readFileSync(CUSTOM_SNIPPETS_PATH, 'utf-8'));
       if (Array.isArray(custom)) {
-        commands = commands.concat(custom);
+        const filteredCustom = custom.filter(cmd => !cmd.os || cmd.os.includes('all') || cmd.os.includes(currentPlatform));
+        commands = commands.concat(filteredCustom);
       }
     } catch(err) {
       // Ignore if corrupt

@@ -96,7 +96,8 @@ async function main() {
 
       if (finalCommand) {
         try {
-          execSync(finalCommand, { stdio: 'inherit' });
+          const shell = process.platform === 'win32' ? 'powershell.exe' : undefined;
+          execSync(finalCommand, { stdio: 'inherit', shell });
         } catch (err) {
           console.error(`\n${PINK}Command failed to execute or was aborted.${RESET}\n`);
         }
