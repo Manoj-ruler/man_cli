@@ -1,0 +1,1676 @@
+[
+  {
+    "idx": 0,
+    "intent": "undo last git commit but keep changes",
+    "command": "git reset --soft HEAD~1",
+    "category": "git"
+  },
+  {
+    "idx": 1,
+    "intent": "find all python files modified today",
+    "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+    "category": "find"
+  },
+  {
+    "idx": 2,
+    "intent": "search for TODO comments in all javascript files",
+    "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+    "category": "grep"
+  },
+  {
+    "idx": 3,
+    "intent": "connect to a remote server via ssh",
+    "command": "ssh user@hostname",
+    "category": "ssh"
+  },
+  {
+    "idx": 4,
+    "intent": "copy file to remote server via scp",
+    "command": "scp file.txt user@hostname:/path/to/destination",
+    "category": "ssh"
+  },
+  {
+    "idx": 5,
+    "intent": "download a file from a url",
+    "command": "curl -O https://example.com/file.zip",
+    "category": "curl"
+  },
+  {
+    "idx": 6,
+    "intent": "make an api post request with json data",
+    "command": "curl -X POST -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/endpoint",
+    "category": "curl"
+  },
+  {
+    "idx": 7,
+    "intent": "list all running docker containers",
+    "command": "docker ps",
+    "category": "docker"
+  },
+  {
+    "idx": 8,
+    "intent": "stop all running docker containers",
+    "command": "docker stop $(docker ps -q)",
+    "category": "docker"
+  },
+  {
+    "idx": 9,
+    "intent": "remove all unused docker images",
+    "command": "docker image prune -a",
+    "category": "docker"
+  },
+  {
+    "idx": 10,
+    "intent": "install npm packages from package.json",
+    "command": "npm install",
+    "category": "npm"
+  },
+  {
+    "idx": 11,
+    "intent": "list all globally installed npm packages",
+    "command": "npm list -g --depth=0",
+    "category": "npm"
+  },
+  {
+    "idx": 12,
+    "intent": "find large files bigger than 100mb",
+    "command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
+    "category": "find"
+  },
+  {
+    "idx": 13,
+    "intent": "show disk usage of current directory sorted by size",
+    "command": "Get-ChildItem | ForEach-Object { [PSCustomObject]@{Name=$_.Name; Size=(Get-ChildItem $_.FullName -Recurse -File | Measure-Object -Property Length -Sum).Sum} } | Sort-Object Size -Descending",
+    "category": "disk"
+  },
+  {
+    "idx": 14,
+    "intent": "kill a process by name",
+    "command": "Stop-Process -Name 'process_name' -Force",
+    "category": "process"
+  },
+  {
+    "idx": 15,
+    "intent": "show all listening ports",
+    "command": "Get-NetTCPConnection -State Listen",
+    "category": "network"
+  },
+  {
+    "idx": 16,
+    "intent": "create a git branch and switch to it",
+    "command": "git checkout -b branch-name",
+    "category": "git"
+  },
+  {
+    "idx": 17,
+    "intent": "view git log with one line per commit",
+    "command": "git log --oneline -20",
+    "category": "git"
+  },
+  {
+    "idx": 18,
+    "intent": "replace text in all files recursively",
+    "command": "Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }",
+    "category": "sed"
+  },
+  {
+    "idx": 19,
+    "intent": "count lines of code in a project",
+    "command": "(Get-ChildItem -Recurse -Include '*.py','*.js' | Get-Content | Measure-Object -Line).Lines",
+    "category": "find"
+  },
+  {
+    "idx": 20,
+    "intent": "monitor system resources in real time",
+    "command": "Get-Process | Sort-Object CPU -Descending",
+    "category": "process"
+  },
+  {
+    "idx": 21,
+    "intent": "generate ssh key pair",
+    "command": "ssh-keygen -t ed25519 -C 'your_email@example.com'",
+    "category": "ssh"
+  },
+  {
+    "idx": 22,
+    "intent": "make a file executable",
+    "command": "Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass",
+    "category": "permissions"
+  },
+  {
+    "idx": 23,
+    "intent": "show git status of current repository",
+    "command": "git status",
+    "category": "git"
+  },
+  {
+    "idx": 24,
+    "intent": "stage all changes for git commit",
+    "command": "git add -A",
+    "category": "git"
+  },
+  {
+    "idx": 25,
+    "intent": "commit staged changes with a message",
+    "command": "git commit -m 'Your commit message'",
+    "category": "git"
+  },
+  {
+    "idx": 26,
+    "intent": "push changes to remote repository",
+    "command": "git push origin branch-name",
+    "category": "git"
+  },
+  {
+    "idx": 27,
+    "intent": "pull latest changes from remote",
+    "command": "git pull origin main",
+    "category": "git"
+  },
+  {
+    "idx": 28,
+    "intent": "stash uncommitted changes",
+    "command": "git stash",
+    "category": "git"
+  },
+  {
+    "idx": 29,
+    "intent": "apply stashed changes",
+    "command": "git stash pop",
+    "category": "git"
+  },
+  {
+    "idx": 30,
+    "intent": "view all git branches",
+    "command": "git branch -a",
+    "category": "git"
+  },
+  {
+    "idx": 31,
+    "intent": "delete a local git branch",
+    "command": "git branch -d branch-name",
+    "category": "git"
+  },
+  {
+    "idx": 32,
+    "intent": "force delete a local git branch",
+    "command": "git branch -D branch-name",
+    "category": "git"
+  },
+  {
+    "idx": 33,
+    "intent": "merge a branch into current branch",
+    "command": "git merge branch-name",
+    "category": "git"
+  },
+  {
+    "idx": 34,
+    "intent": "rebase current branch onto another",
+    "command": "git rebase main",
+    "category": "git"
+  },
+  {
+    "idx": 35,
+    "intent": "view diff of unstaged changes",
+    "command": "git diff",
+    "category": "git"
+  },
+  {
+    "idx": 36,
+    "intent": "view diff of staged changes",
+    "command": "git diff --cached",
+    "category": "git"
+  },
+  {
+    "idx": 37,
+    "intent": "clone a git repository",
+    "command": "git clone https://github.com/user/repo.git",
+    "category": "git"
+  },
+  {
+    "idx": 38,
+    "intent": "tag a git commit",
+    "command": "git tag -a v1.0.0 -m 'Version 1.0.0'",
+    "category": "git"
+  },
+  {
+    "idx": 39,
+    "intent": "show who last modified each line of a file",
+    "command": "git blame filename.txt",
+    "category": "git"
+  },
+  {
+    "idx": 40,
+    "intent": "search git history for a string",
+    "command": "git log -S 'search_string' --oneline",
+    "category": "git"
+  },
+  {
+    "idx": 41,
+    "intent": "amend the last git commit message",
+    "command": "git commit --amend -m 'New commit message'",
+    "category": "git"
+  },
+  {
+    "idx": 42,
+    "intent": "reset working directory to last commit",
+    "command": "git checkout -- .",
+    "category": "git"
+  },
+  {
+    "idx": 43,
+    "intent": "show remote repository urls",
+    "command": "git remote -v",
+    "category": "git"
+  },
+  {
+    "idx": 44,
+    "intent": "fetch all remote branches",
+    "command": "git fetch --all",
+    "category": "git"
+  },
+  {
+    "idx": 45,
+    "intent": "cherry pick a commit",
+    "command": "git cherry-pick commit-hash",
+    "category": "git"
+  },
+  {
+    "idx": 46,
+    "intent": "find files by name in current directory",
+    "command": "Get-ChildItem -Recurse -Filter 'filename.txt'",
+    "category": "find"
+  },
+  {
+    "idx": 47,
+    "intent": "find files by extension recursively",
+    "command": "Get-ChildItem -Recurse -Filter '*.log'",
+    "category": "find"
+  },
+  {
+    "idx": 48,
+    "intent": "find and delete all .DS_Store files",
+    "command": "Get-ChildItem -Recurse -Filter '.DS_Store' | Remove-Item",
+    "category": "find"
+  },
+  {
+    "idx": 49,
+    "intent": "find empty directories",
+    "command": "Get-ChildItem -Recurse -Directory | Where-Object { (Get-ChildItem $_.FullName).Count -eq 0 }",
+    "category": "find"
+  },
+  {
+    "idx": 50,
+    "intent": "find files modified in the last 7 days",
+    "command": "Get-ChildItem -Recurse -File | Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-7) }",
+    "category": "find"
+  },
+  {
+    "idx": 51,
+    "intent": "find files owned by a specific user",
+    "command": "Get-ChildItem -Recurse | Where-Object { $_.GetAccessControl().Owner -like '*username*' }",
+    "category": "find"
+  },
+  {
+    "idx": 52,
+    "intent": "search for a string in files recursively",
+    "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+    "category": "grep"
+  },
+  {
+    "idx": 53,
+    "intent": "search for a pattern case insensitively",
+    "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'pattern' -CaseSensitive:$false",
+    "category": "grep"
+  },
+  {
+    "idx": 54,
+    "intent": "grep and show only filenames with matches",
+    "command": "Get-ChildItem -Recurse -File | Where-Object { Select-String -Path $_.FullName -Pattern 'pattern' -Quiet }",
+    "category": "grep"
+  },
+  {
+    "idx": 55,
+    "intent": "grep with context lines around match",
+    "command": "Select-String -Path 'file.txt' -Pattern 'pattern' -Context 3,3",
+    "category": "grep"
+  },
+  {
+    "idx": 56,
+    "intent": "grep for lines not matching a pattern",
+    "command": "Get-Content 'file.txt' | Where-Object { $_ -notmatch 'pattern' }",
+    "category": "grep"
+  },
+  {
+    "idx": 57,
+    "intent": "count number of matches in a file",
+    "command": "(Select-String -Path 'file.txt' -Pattern 'pattern').Count",
+    "category": "grep"
+  },
+  {
+    "idx": 58,
+    "intent": "search for whole word matches only",
+    "command": "Select-String -Path 'file.txt' -Pattern '\\bword\\b'",
+    "category": "grep"
+  },
+  {
+    "idx": 59,
+    "intent": "grep using extended regular expressions",
+    "command": "Select-String -Path 'file.txt' -Pattern 'pattern1|pattern2'",
+    "category": "grep"
+  },
+  {
+    "idx": 60,
+    "intent": "build a docker image from dockerfile",
+    "command": "docker build -t image-name:tag .",
+    "category": "docker"
+  },
+  {
+    "idx": 61,
+    "intent": "run a docker container interactively",
+    "command": "docker run -it image-name /bin/bash",
+    "category": "docker"
+  },
+  {
+    "idx": 62,
+    "intent": "run a docker container in background",
+    "command": "docker run -d -p 8080:80 image-name",
+    "category": "docker"
+  },
+  {
+    "idx": 63,
+    "intent": "view docker container logs",
+    "command": "docker logs -f container-name",
+    "category": "docker"
+  },
+  {
+    "idx": 64,
+    "intent": "exec into a running docker container",
+    "command": "docker exec -it container-name /bin/bash",
+    "category": "docker"
+  },
+  {
+    "idx": 65,
+    "intent": "remove a stopped docker container",
+    "command": "docker rm container-name",
+    "category": "docker"
+  },
+  {
+    "idx": 66,
+    "intent": "remove a docker image",
+    "command": "docker rmi image-name",
+    "category": "docker"
+  },
+  {
+    "idx": 67,
+    "intent": "list all docker images",
+    "command": "docker images",
+    "category": "docker"
+  },
+  {
+    "idx": 68,
+    "intent": "pull a docker image from docker hub",
+    "command": "docker pull ubuntu:22.04",
+    "category": "docker"
+  },
+  {
+    "idx": 69,
+    "intent": "start docker compose services",
+    "command": "docker compose up -d",
+    "category": "docker"
+  },
+  {
+    "idx": 70,
+    "intent": "stop docker compose services",
+    "command": "docker compose down",
+    "category": "docker"
+  },
+  {
+    "idx": 71,
+    "intent": "view docker compose logs",
+    "command": "docker compose logs -f",
+    "category": "docker"
+  },
+  {
+    "idx": 72,
+    "intent": "copy file from container to host",
+    "command": "docker cp container-name:/path/in/container ./local-path",
+    "category": "docker"
+  },
+  {
+    "idx": 73,
+    "intent": "inspect a docker container",
+    "command": "docker inspect container-name",
+    "category": "docker"
+  },
+  {
+    "idx": 74,
+    "intent": "prune all stopped containers",
+    "command": "docker container prune",
+    "category": "docker"
+  },
+  {
+    "idx": 75,
+    "intent": "show docker system disk usage",
+    "command": "docker system df",
+    "category": "docker"
+  },
+  {
+    "idx": 76,
+    "intent": "make a get request with curl",
+    "command": "curl -s https://api.example.com/data",
+    "category": "curl"
+  },
+  {
+    "idx": 77,
+    "intent": "follow redirects with curl",
+    "command": "curl -L https://example.com",
+    "category": "curl"
+  },
+  {
+    "idx": 78,
+    "intent": "save curl output to file",
+    "command": "curl -o output.html https://example.com",
+    "category": "curl"
+  },
+  {
+    "idx": 79,
+    "intent": "send custom headers with curl",
+    "command": "curl -H 'Authorization: Bearer token' https://api.example.com",
+    "category": "curl"
+  },
+  {
+    "idx": 80,
+    "intent": "make a put request with curl",
+    "command": "curl -X PUT -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/resource/1",
+    "category": "curl"
+  },
+  {
+    "idx": 81,
+    "intent": "make a delete request with curl",
+    "command": "curl -X DELETE https://api.example.com/resource/1",
+    "category": "curl"
+  },
+  {
+    "idx": 82,
+    "intent": "check http response code with curl",
+    "command": "curl -o /dev/null -s -w '%{http_code}' https://example.com",
+    "category": "curl"
+  },
+  {
+    "idx": 83,
+    "intent": "resume an interrupted curl download",
+    "command": "curl -C - -O https://example.com/largefile.zip",
+    "category": "curl"
+  },
+  {
+    "idx": 84,
+    "intent": "run npm script",
+    "command": "npm run script-name",
+    "category": "npm"
+  },
+  {
+    "idx": 85,
+    "intent": "install a specific npm package",
+    "command": "npm install package-name",
+    "category": "npm"
+  },
+  {
+    "idx": 86,
+    "intent": "install npm package as dev dependency",
+    "command": "npm install --save-dev package-name",
+    "category": "npm"
+  },
+  {
+    "idx": 87,
+    "intent": "uninstall an npm package",
+    "command": "npm uninstall package-name",
+    "category": "npm"
+  },
+  {
+    "idx": 88,
+    "intent": "update all npm packages",
+    "command": "npm update",
+    "category": "npm"
+  },
+  {
+    "idx": 89,
+    "intent": "check for outdated npm packages",
+    "command": "npm outdated",
+    "category": "npm"
+  },
+  {
+    "idx": 90,
+    "intent": "audit npm packages for vulnerabilities",
+    "command": "npm audit",
+    "category": "npm"
+  },
+  {
+    "idx": 91,
+    "intent": "fix npm audit vulnerabilities",
+    "command": "npm audit fix",
+    "category": "npm"
+  },
+  {
+    "idx": 92,
+    "intent": "create new npm project",
+    "command": "npm init -y",
+    "category": "npm"
+  },
+  {
+    "idx": 93,
+    "intent": "install pip package",
+    "command": "pip install package-name",
+    "category": "pip"
+  },
+  {
+    "idx": 94,
+    "intent": "install specific version of pip package",
+    "command": "pip install package-name==1.2.3",
+    "category": "pip"
+  },
+  {
+    "idx": 95,
+    "intent": "list installed pip packages",
+    "command": "pip list",
+    "category": "pip"
+  },
+  {
+    "idx": 96,
+    "intent": "save pip requirements to file",
+    "command": "pip freeze > requirements.txt",
+    "category": "pip"
+  },
+  {
+    "idx": 97,
+    "intent": "install packages from requirements file",
+    "command": "pip install -r requirements.txt",
+    "category": "pip"
+  },
+  {
+    "idx": 98,
+    "intent": "uninstall a pip package",
+    "command": "pip uninstall package-name",
+    "category": "pip"
+  },
+  {
+    "idx": 99,
+    "intent": "upgrade a pip package",
+    "command": "pip install --upgrade package-name",
+    "category": "pip"
+  },
+  {
+    "idx": 100,
+    "intent": "create a python virtual environment",
+    "command": "python -m venv venv",
+    "category": "pip"
+  },
+  {
+    "idx": 101,
+    "intent": "list all files including hidden",
+    "command": "Get-ChildItem -Force",
+    "category": "filesystem"
+  },
+  {
+    "idx": 102,
+    "intent": "create a new directory",
+    "command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+    "category": "filesystem"
+  },
+  {
+    "idx": 103,
+    "intent": "remove a directory and its contents",
+    "command": "Remove-Item -Recurse -Force 'directory/'",
+    "category": "filesystem"
+  },
+  {
+    "idx": 104,
+    "intent": "copy a directory recursively",
+    "command": "Copy-Item -Recurse 'source/' 'destination/'",
+    "category": "filesystem"
+  },
+  {
+    "idx": 105,
+    "intent": "move or rename a file",
+    "command": "Move-Item 'oldname.txt' 'newname.txt'",
+    "category": "filesystem"
+  },
+  {
+    "idx": 106,
+    "intent": "create an empty file",
+    "command": "New-Item -ItemType File 'filename.txt'",
+    "category": "filesystem"
+  },
+  {
+    "idx": 107,
+    "intent": "view file contents",
+    "command": "Get-Content 'filename.txt'",
+    "category": "filesystem"
+  },
+  {
+    "idx": 108,
+    "intent": "view file with pagination",
+    "command": "Get-Content 'filename.txt' | Out-Host -Paging",
+    "category": "filesystem"
+  },
+  {
+    "idx": 109,
+    "intent": "view first 10 lines of a file",
+    "command": "Get-Content 'filename.txt' -TotalCount 10",
+    "category": "filesystem"
+  },
+  {
+    "idx": 110,
+    "intent": "view last 10 lines of a file",
+    "command": "Get-Content 'filename.txt' -Tail 10",
+    "category": "filesystem"
+  },
+  {
+    "idx": 111,
+    "intent": "follow a file live as it updates",
+    "command": "Get-Content 'C:\\path\\to\\file.log' -Wait -Tail 10",
+    "category": "filesystem"
+  },
+  {
+    "idx": 112,
+    "intent": "show current directory path",
+    "command": "Get-Location",
+    "category": "filesystem"
+  },
+  {
+    "idx": 113,
+    "intent": "count lines words and characters in file",
+    "command": "(Get-Content 'filename.txt' | Measure-Object -Line -Word -Character) | Select-Object Lines, Words, Characters",
+    "category": "filesystem"
+  },
+  {
+    "idx": 114,
+    "intent": "sort lines of a file alphabetically",
+    "command": "Get-Content 'filename.txt' | Sort-Object",
+    "category": "filesystem"
+  },
+  {
+    "idx": 115,
+    "intent": "remove duplicate lines from a file",
+    "command": "Get-Content 'filename.txt' | Sort-Object -Unique",
+    "category": "filesystem"
+  },
+  {
+    "idx": 116,
+    "intent": "compare two files",
+    "command": "Compare-Object (Get-Content 'file1.txt') (Get-Content 'file2.txt')",
+    "category": "filesystem"
+  },
+  {
+    "idx": 117,
+    "intent": "create a symbolic link",
+    "command": "New-Item -ItemType SymbolicLink -Path '/path/to/link' -Target '/path/to/target'",
+    "category": "filesystem"
+  },
+  {
+    "idx": 118,
+    "intent": "show file or directory permissions",
+    "command": "Get-Item 'filename.txt' | Select-Object *",
+    "category": "filesystem"
+  },
+  {
+    "idx": 119,
+    "intent": "change file owner",
+    "command": "icacls 'filename.txt' /setowner 'user'",
+    "category": "permissions"
+  },
+  {
+    "idx": 120,
+    "intent": "change permissions recursively",
+    "command": "icacls 'directory/' /grant 'user:(OI)(CI)F' /T",
+    "category": "permissions"
+  },
+  {
+    "idx": 121,
+    "intent": "give read write permissions to owner only",
+    "command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
+    "category": "permissions"
+  },
+  {
+    "idx": 122,
+    "intent": "give read only permissions to everyone",
+    "command": "icacls 'filename.txt' /inheritance:r /grant:r 'Everyone:R'",
+    "category": "permissions"
+  },
+  {
+    "idx": 123,
+    "intent": "check current user",
+    "command": "$env:USERNAME",
+    "category": "permissions"
+  },
+  {
+    "idx": 124,
+    "intent": "switch to another user",
+    "command": "runas /user:username cmd",
+    "category": "permissions"
+  },
+  {
+    "idx": 125,
+    "intent": "run command as superuser",
+    "command": "Start-Process powershell -Verb RunAs",
+    "category": "permissions"
+  },
+  {
+    "idx": 126,
+    "intent": "show all users on the system",
+    "command": "Get-LocalUser | Select-Object Name",
+    "category": "permissions"
+  },
+  {
+    "idx": 127,
+    "intent": "check ip address of machine",
+    "command": "Get-NetIPAddress",
+    "category": "network"
+  },
+  {
+    "idx": 128,
+    "intent": "ping a host to check connectivity",
+    "command": "Test-Connection -ComputerName google.com -Count 4",
+    "category": "network"
+  },
+  {
+    "idx": 129,
+    "intent": "trace the network route to a host",
+    "command": "Test-NetConnection -ComputerName google.com -TraceRoute",
+    "category": "network"
+  },
+  {
+    "idx": 130,
+    "intent": "check dns resolution for a domain",
+    "command": "Resolve-DnsName example.com",
+    "category": "network"
+  },
+  {
+    "idx": 131,
+    "intent": "look up dns records for a domain",
+    "command": "Resolve-DnsName example.com -Type ALL",
+    "category": "network"
+  },
+  {
+    "idx": 132,
+    "intent": "show active network connections",
+    "command": "Get-NetTCPConnection",
+    "category": "network"
+  },
+  {
+    "idx": 133,
+    "intent": "show network interface statistics",
+    "command": "Get-NetAdapter",
+    "category": "network"
+  },
+  {
+    "idx": 134,
+    "intent": "test if a port is open on a host",
+    "command": "Test-NetConnection -ComputerName hostname -Port 80",
+    "category": "network"
+  },
+  {
+    "idx": 135,
+    "intent": "monitor network traffic in real time",
+    "command": "Get-NetAdapterStatistics",
+    "category": "network"
+  },
+  {
+    "idx": 136,
+    "intent": "flush dns cache on linux",
+    "command": "sudo systemd-resolve --flush-caches",
+    "category": "network"
+  },
+  {
+    "idx": 137,
+    "intent": "show routing table",
+    "command": "Get-NetRoute",
+    "category": "network"
+  },
+  {
+    "idx": 138,
+    "intent": "block an ip address with firewall",
+    "command": "New-NetFirewallRule -DisplayName 'Block IP' -Direction Inbound -RemoteAddress '192.168.1.100' -Action Block",
+    "category": "network"
+  },
+  {
+    "idx": 139,
+    "intent": "show all running processes",
+    "command": "Get-Process",
+    "category": "process"
+  },
+  {
+    "idx": 140,
+    "intent": "show process tree",
+    "command": "Get-Process | Select-Object Id, ProcessName, @{N='Parent';E={(Get-Process -Id $_.Parent.Id -ErrorAction SilentlyContinue).ProcessName}}",
+    "category": "process"
+  },
+  {
+    "idx": 141,
+    "intent": "kill a process by pid",
+    "command": "Stop-Process -Id PID -Force",
+    "category": "process"
+  },
+  {
+    "idx": 142,
+    "intent": "find process id by name",
+    "command": "Get-Process -Name 'process_name' | Select-Object Id",
+    "category": "process"
+  },
+  {
+    "idx": 143,
+    "intent": "show memory usage",
+    "command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory",
+    "category": "process"
+  },
+  {
+    "idx": 144,
+    "intent": "show cpu info",
+    "command": "Get-CimInstance Win32_Processor",
+    "category": "process"
+  },
+  {
+    "idx": 145,
+    "intent": "monitor processes with htop",
+    "command": "Get-Process | Sort-Object CPU -Descending | Select-Object -First 20",
+    "category": "process"
+  },
+  {
+    "idx": 146,
+    "intent": "run a command in background",
+    "command": "Start-Job -ScriptBlock { command }",
+    "category": "process"
+  },
+  {
+    "idx": 147,
+    "intent": "bring background process to foreground",
+    "command": "Receive-Job -Id 1 -Wait",
+    "category": "process"
+  },
+  {
+    "idx": 148,
+    "intent": "check system uptime",
+    "command": "(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime",
+    "category": "process"
+  },
+  {
+    "idx": 149,
+    "intent": "show system load averages",
+    "command": "Get-CimInstance Win32_Processor | Select-Object LoadPercentage",
+    "category": "process"
+  },
+  {
+    "idx": 150,
+    "intent": "run command at scheduled time",
+    "command": "at 10:00 AM tomorrow",
+    "category": "process"
+  },
+  {
+    "idx": 151,
+    "intent": "list cron jobs for current user",
+    "command": "crontab -l",
+    "category": "process"
+  },
+  {
+    "idx": 152,
+    "intent": "edit cron jobs",
+    "command": "crontab -e",
+    "category": "process"
+  },
+  {
+    "idx": 153,
+    "intent": "show total disk space",
+    "command": "Get-PSDrive -PSProvider FileSystem",
+    "category": "disk"
+  },
+  {
+    "idx": 154,
+    "intent": "show disk usage of a specific directory",
+    "command": "(Get-ChildItem '/path/to/dir' -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB",
+    "category": "disk"
+  },
+  {
+    "idx": 155,
+    "intent": "list mounted filesystems",
+    "command": "Get-Volume",
+    "category": "disk"
+  },
+  {
+    "idx": 156,
+    "intent": "synchronize files between directories",
+    "command": "rsync -avz source/ destination/",
+    "category": "disk"
+  },
+  {
+    "idx": 157,
+    "intent": "rsync files to remote server",
+    "command": "rsync -avz -e ssh source/ user@host:/destination/",
+    "category": "disk"
+  },
+  {
+    "idx": 158,
+    "intent": "substitute text in a file with sed",
+    "command": "(Get-Content 'filename.txt') -replace 'old','new' | Set-Content 'filename.txt'",
+    "category": "sed"
+  },
+  {
+    "idx": 159,
+    "intent": "delete lines matching a pattern with sed",
+    "command": "Get-Content 'filename.txt' | Where-Object { $_ -notmatch 'pattern' } | Set-Content 'filename.txt'",
+    "category": "sed"
+  },
+  {
+    "idx": 160,
+    "intent": "print specific line number with sed",
+    "command": "(Get-Content 'filename.txt')[4]",
+    "category": "sed"
+  },
+  {
+    "idx": 161,
+    "intent": "extract column from csv with awk",
+    "command": "Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName",
+    "category": "awk"
+  },
+  {
+    "idx": 162,
+    "intent": "sum a column of numbers with awk",
+    "command": "(Import-Csv 'file.txt' -Header Val | Measure-Object -Property Val -Sum).Sum",
+    "category": "awk"
+  },
+  {
+    "idx": 163,
+    "intent": "filter rows by field value with awk",
+    "command": "Import-Csv 'file.csv' | Where-Object { [int]$_.Column3 -gt 100 }",
+    "category": "awk"
+  },
+  {
+    "idx": 164,
+    "intent": "print number of fields per line with awk",
+    "command": "Get-Content 'file.txt' | ForEach-Object { ($_ -split '\\s+').Count }",
+    "category": "awk"
+  },
+  {
+    "idx": 165,
+    "intent": "create a compressed zip archive",
+    "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+    "category": "archive"
+  },
+  {
+    "idx": 166,
+    "intent": "extract a zip archive",
+    "command": "Expand-Archive -Path 'archive.zip' -DestinationPath '.'",
+    "category": "archive"
+  },
+  {
+    "idx": 167,
+    "intent": "list contents of a zip archive",
+    "command": "Expand-Archive -Path 'archive.zip' -WhatIf",
+    "category": "archive"
+  },
+  {
+    "idx": 168,
+    "intent": "encode a file to base64",
+    "command": "[Convert]::ToBase64String([IO.File]::ReadAllBytes('filename.txt'))",
+    "category": "encoding"
+  },
+  {
+    "idx": 169,
+    "intent": "decode a base64 file",
+    "command": "[IO.File]::WriteAllBytes('decoded.txt', [Convert]::FromBase64String((Get-Content 'encoded.txt')))",
+    "category": "encoding"
+  },
+  {
+    "idx": 170,
+    "intent": "generate an md5 checksum",
+    "command": "Get-FileHash 'filename.txt' -Algorithm MD5",
+    "category": "encoding"
+  },
+  {
+    "idx": 171,
+    "intent": "generate a sha256 checksum",
+    "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+    "category": "encoding"
+  },
+  {
+    "idx": 172,
+    "intent": "set an environment variable",
+    "command": "$env:VAR_NAME = 'value'",
+    "category": "shell"
+  },
+  {
+    "idx": 173,
+    "intent": "print an environment variable",
+    "command": "$env:VAR_NAME",
+    "category": "shell"
+  },
+  {
+    "idx": 174,
+    "intent": "list all environment variables",
+    "command": "Get-ChildItem Env:",
+    "category": "shell"
+  },
+  {
+    "idx": 175,
+    "intent": "run previous command with sudo",
+    "command": "sudo !!",
+    "category": "shell"
+  },
+  {
+    "idx": 176,
+    "intent": "create an alias for a command",
+    "command": "Set-Alias -Name ll -Value Get-ChildItem",
+    "category": "shell"
+  },
+  {
+    "idx": 177,
+    "intent": "show command history",
+    "command": "Get-History",
+    "category": "shell"
+  },
+  {
+    "idx": 178,
+    "intent": "search command history",
+    "command": "Get-History | Where-Object { $_.CommandLine -match 'keyword' }",
+    "category": "shell"
+  },
+  {
+    "idx": 179,
+    "intent": "repeat last matching command from history",
+    "command": "!keyword",
+    "category": "shell"
+  },
+  {
+    "idx": 180,
+    "intent": "redirect stdout to a file",
+    "command": "command | Out-File 'output.txt'",
+    "category": "shell"
+  },
+  {
+    "idx": 181,
+    "intent": "append stdout to a file",
+    "command": "command | Out-File 'output.txt' -Append",
+    "category": "shell"
+  },
+  {
+    "idx": 182,
+    "intent": "redirect stderr to a file",
+    "command": "command 2>'error.txt'",
+    "category": "shell"
+  },
+  {
+    "idx": 183,
+    "intent": "redirect both stdout and stderr to a file",
+    "command": "command *>'output.txt'",
+    "category": "shell"
+  },
+  {
+    "idx": 184,
+    "intent": "pipe output of one command to another",
+    "command": "command1 | command2",
+    "category": "shell"
+  },
+  {
+    "idx": 185,
+    "intent": "run multiple commands sequentially",
+    "command": "command1 && command2",
+    "category": "shell"
+  },
+  {
+    "idx": 186,
+    "intent": "run command and discard all output",
+    "command": "command | Out-Null",
+    "category": "shell"
+  },
+  {
+    "idx": 187,
+    "intent": "time how long a command takes",
+    "command": "Measure-Command { command }",
+    "category": "shell"
+  },
+  {
+    "idx": 188,
+    "intent": "repeat a command every 2 seconds",
+    "command": "while ($true) { command; Start-Sleep 2 }",
+    "category": "shell"
+  },
+  {
+    "idx": 189,
+    "intent": "open a manual page for a command",
+    "command": "Get-Help command -Full",
+    "category": "shell"
+  },
+  {
+    "idx": 190,
+    "intent": "find where a binary is located",
+    "command": "Get-Command python3 | Select-Object -ExpandProperty Source",
+    "category": "shell"
+  },
+  {
+    "idx": 191,
+    "intent": "show all instances of a binary in path",
+    "command": "where.exe python3",
+    "category": "shell"
+  },
+  {
+    "idx": 192,
+    "intent": "add a line to a file without opening it",
+    "command": "Add-Content 'filename.txt' 'new line'",
+    "category": "shell"
+  },
+  {
+    "idx": 193,
+    "intent": "start a new named screen session",
+    "command": "screen -S session-name",
+    "category": "terminal"
+  },
+  {
+    "idx": 194,
+    "intent": "list all screen sessions",
+    "command": "screen -ls",
+    "category": "terminal"
+  },
+  {
+    "idx": 195,
+    "intent": "reattach to a screen session",
+    "command": "screen -r session-name",
+    "category": "terminal"
+  },
+  {
+    "idx": 196,
+    "intent": "start a new tmux session",
+    "command": "tmux new -s session-name",
+    "category": "terminal"
+  },
+  {
+    "idx": 197,
+    "intent": "list tmux sessions",
+    "command": "tmux ls",
+    "category": "terminal"
+  },
+  {
+    "idx": 198,
+    "intent": "attach to a tmux session",
+    "command": "tmux attach -t session-name",
+    "category": "terminal"
+  },
+  {
+    "idx": 199,
+    "intent": "kill a tmux session",
+    "command": "tmux kill-session -t session-name",
+    "category": "terminal"
+  },
+  {
+    "idx": 200,
+    "intent": "clear the terminal screen",
+    "command": "Clear-Host",
+    "category": "terminal"
+  },
+  {
+    "idx": 201,
+    "intent": "set hostname of the machine",
+    "command": "Rename-Computer -NewName 'new-hostname' -Force",
+    "category": "system"
+  },
+  {
+    "idx": 202,
+    "intent": "show current hostname",
+    "command": "$env:COMPUTERNAME",
+    "category": "system"
+  },
+  {
+    "idx": 203,
+    "intent": "view system logs",
+    "command": "Get-EventLog -LogName System -Newest 50",
+    "category": "system"
+  },
+  {
+    "idx": 204,
+    "intent": "follow system logs in real time",
+    "command": "Get-WinEvent -LogName System -MaxEvents 1 -Wait",
+    "category": "system"
+  },
+  {
+    "idx": 205,
+    "intent": "check status of a systemd service",
+    "command": "Get-Service -Name 'service-name'",
+    "category": "system"
+  },
+  {
+    "idx": 206,
+    "intent": "start a systemd service",
+    "command": "Start-Service -Name 'service-name'",
+    "category": "system"
+  },
+  {
+    "idx": 207,
+    "intent": "stop a systemd service",
+    "command": "Stop-Service -Name 'service-name'",
+    "category": "system"
+  },
+  {
+    "idx": 208,
+    "intent": "restart a systemd service",
+    "command": "Restart-Service -Name 'service-name'",
+    "category": "system"
+  },
+  {
+    "idx": 209,
+    "intent": "enable a service to start on boot",
+    "command": "Set-Service -Name 'service-name' -StartupType Automatic",
+    "category": "system"
+  },
+  {
+    "idx": 210,
+    "intent": "disable a service from starting on boot",
+    "command": "Set-Service -Name 'service-name' -StartupType Disabled",
+    "category": "system"
+  },
+  {
+    "idx": 211,
+    "intent": "show os and kernel version",
+    "command": "[System.Environment]::OSVersion",
+    "category": "system"
+  },
+  {
+    "idx": 212,
+    "intent": "show linux distribution info",
+    "command": "winver",
+    "category": "system"
+  },
+  {
+    "idx": 213,
+    "intent": "reboot the system",
+    "command": "sudo reboot",
+    "category": "system"
+  },
+  {
+    "idx": 214,
+    "intent": "shut down the system",
+    "command": "sudo shutdown -h now",
+    "category": "system"
+  },
+  {
+    "idx": 215,
+    "intent": "update apt package list",
+    "command": "winget upgrade --all --include-unknown",
+    "category": "package"
+  },
+  {
+    "idx": 216,
+    "intent": "upgrade all apt packages",
+    "command": "winget upgrade --all",
+    "category": "package"
+  },
+  {
+    "idx": 217,
+    "intent": "install a package with apt",
+    "command": "winget install package-name",
+    "category": "package"
+  },
+  {
+    "idx": 218,
+    "intent": "remove a package with apt",
+    "command": "winget uninstall package-name",
+    "category": "package"
+  },
+  {
+    "idx": 219,
+    "intent": "purge a package and config with apt",
+    "command": "winget uninstall package-name --purge",
+    "category": "package"
+  },
+  {
+    "idx": 220,
+    "intent": "search for a package in apt",
+    "command": "winget search package-name",
+    "category": "package"
+  },
+  {
+    "idx": 221,
+    "intent": "show info about an apt package",
+    "command": "winget show package-name",
+    "category": "package"
+  },
+  {
+    "idx": 222,
+    "intent": "generate a random password",
+    "command": "openssl rand -base64 32",
+    "category": "security"
+  },
+  {
+    "idx": 223,
+    "intent": "encrypt a file with gpg",
+    "command": "gpg -c filename.txt",
+    "category": "security"
+  },
+  {
+    "idx": 224,
+    "intent": "decrypt a gpg file",
+    "command": "gpg -d filename.txt.gpg",
+    "category": "security"
+  },
+  {
+    "idx": 225,
+    "intent": "check ssl certificate of a domain",
+    "command": "openssl s_client -connect example.com:443 -showcerts",
+    "category": "security"
+  },
+  {
+    "idx": 226,
+    "intent": "generate a self signed ssl certificate",
+    "command": "openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes",
+    "category": "security"
+  },
+  {
+    "idx": 227,
+    "intent": "scan a file for viruses with clamscan",
+    "command": "clamscan -r /path/to/scan",
+    "category": "security"
+  },
+  {
+    "idx": 228,
+    "intent": "copy ssh public key to remote server",
+    "command": "ssh-copy-id user@hostname",
+    "category": "ssh"
+  },
+  {
+    "idx": 229,
+    "intent": "use ssh tunnel to forward a port",
+    "command": "ssh -L 8080:localhost:80 user@hostname",
+    "category": "ssh"
+  },
+  {
+    "idx": 230,
+    "intent": "use ssh reverse tunnel",
+    "command": "ssh -R 9090:localhost:3000 user@hostname",
+    "category": "ssh"
+  },
+  {
+    "idx": 231,
+    "intent": "run a command on remote server via ssh",
+    "command": "ssh user@hostname 'command'",
+    "category": "ssh"
+  },
+  {
+    "idx": 232,
+    "intent": "add remote origin to git repo",
+    "command": "git remote add origin https://github.com/user/repo.git",
+    "category": "git"
+  },
+  {
+    "idx": 233,
+    "intent": "show git config settings",
+    "command": "git config --list",
+    "category": "git"
+  },
+  {
+    "idx": 234,
+    "intent": "set git username globally",
+    "command": "git config --global user.name 'Your Name'",
+    "category": "git"
+  },
+  {
+    "idx": 235,
+    "intent": "set git email globally",
+    "command": "git config --global user.email 'email@example.com'",
+    "category": "git"
+  },
+  {
+    "idx": 236,
+    "intent": "show git stash list",
+    "command": "git stash list",
+    "category": "git"
+  },
+  {
+    "idx": 237,
+    "intent": "drop a specific git stash",
+    "command": "git stash drop stash@{0}",
+    "category": "git"
+  },
+  {
+    "idx": 238,
+    "intent": "show graph of git branches",
+    "command": "git log --oneline --graph --all",
+    "category": "git"
+  },
+  {
+    "idx": 239,
+    "intent": "undo all uncommitted changes and clean",
+    "command": "git reset --hard HEAD && git clean -fd",
+    "category": "git"
+  },
+  {
+    "idx": 240,
+    "intent": "find the commit that introduced a bug using bisect",
+    "command": "git bisect start && git bisect bad HEAD && git bisect good <good-commit>",
+    "category": "git"
+  },
+  {
+    "idx": 241,
+    "intent": "mark current bisect commit as good",
+    "command": "git bisect good",
+    "category": "git"
+  },
+  {
+    "idx": 242,
+    "intent": "mark current bisect commit as bad",
+    "command": "git bisect bad",
+    "category": "git"
+  },
+  {
+    "idx": 243,
+    "intent": "end a git bisect session and return to original HEAD",
+    "command": "git bisect reset",
+    "category": "git"
+  },
+  {
+    "idx": 244,
+    "intent": "view all recent HEAD movements including deleted branches",
+    "command": "git reflog",
+    "category": "git"
+  },
+  {
+    "idx": 245,
+    "intent": "recover a dropped stash or lost commit by hash",
+    "command": "git checkout -b recovery-branch <commit-hash>",
+    "category": "git"
+  },
+  {
+    "idx": 246,
+    "intent": "rebase interactively to squash the last 5 commits",
+    "command": "git rebase -i HEAD~5",
+    "category": "git"
+  },
+  {
+    "idx": 247,
+    "intent": "apply only the changes from a specific file from another branch",
+    "command": "git checkout feature-branch -- path/to/file.txt",
+    "category": "git"
+  },
+  {
+    "idx": 248,
+    "intent": "list all git tags sorted by version",
+    "command": "git tag --sort=-version:refname",
+    "category": "git"
+  },
+  {
+    "idx": 249,
+    "intent": "show all kubernetes pods in all namespaces",
+    "command": "kubectl get pods --all-namespaces",
+    "category": "kubernetes"
+  },
+  {
+    "idx": 250,
+    "intent": "stream logs from a kubernetes pod",
+    "command": "kubectl logs -f pod-name -n namespace",
+    "category": "kubernetes"
+  },
+  {
+    "idx": 251,
+    "intent": "forward a local port to a kubernetes pod",
+    "command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+    "category": "kubernetes"
+  },
+  {
+    "idx": 252,
+    "intent": "exec into a running kubernetes pod shell",
+    "command": "kubectl exec -it pod-name -n namespace -- /bin/sh",
+    "category": "kubernetes"
+  },
+  {
+    "idx": 253,
+    "intent": "describe a kubernetes deployment for diagnostics",
+    "command": "kubectl describe deployment deployment-name -n namespace",
+    "category": "kubernetes"
+  },
+  {
+    "idx": 254,
+    "intent": "scale a kubernetes deployment to 3 replicas",
+    "command": "kubectl scale deployment deployment-name --replicas=3 -n namespace",
+    "category": "kubernetes"
+  },
+  {
+    "idx": 255,
+    "intent": "get kubernetes events sorted by timestamp",
+    "command": "kubectl get events --sort-by='.lastTimestamp' -n namespace",
+    "category": "kubernetes"
+  },
+  {
+    "idx": 256,
+    "intent": "delete all completed or failed pods in a namespace",
+    "command": "kubectl delete pods --field-selector=status.phase=Failed -n namespace",
+    "category": "kubernetes"
+  },
+  {
+    "idx": 257,
+    "intent": "apply a kubernetes manifest file",
+    "command": "kubectl apply -f manifest.yaml",
+    "category": "kubernetes"
+  },
+  {
+    "idx": 258,
+    "intent": "extract a specific field from json output using jq",
+    "command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
+    "category": "jq"
+  },
+  {
+    "idx": 259,
+    "intent": "filter json array by field value using jq",
+    "command": "(Get-Content data.json | ConvertFrom-Json).users | Where-Object { _.age -gt 30 }",
+    "category": "jq"
+  },
+  {
+    "idx": 260,
+    "intent": "count items in a json array using jq",
+    "command": "(Get-Content data.json | ConvertFrom-Json).users.Count",
+    "category": "jq"
+  },
+  {
+    "idx": 261,
+    "intent": "pretty print and sort json keys using jq",
+    "command": "Get-Content data.json | ConvertFrom-Json | ConvertTo-Json -Depth 10 | ConvertFrom-Json | Get-Member -MemberType NoteProperty | Sort-Object Name",
+    "category": "jq"
+  },
+  {
+    "idx": 262,
+    "intent": "convert a video to h264 mp4 using ffmpeg",
+    "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+    "category": "ffmpeg"
+  },
+  {
+    "idx": 263,
+    "intent": "extract audio from a video file using ffmpeg",
+    "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+    "category": "ffmpeg"
+  },
+  {
+    "idx": 264,
+    "intent": "trim a video to a specific time range using ffmpeg",
+    "command": "ffmpeg -i input.mp4 -ss 00:01:00 -to 00:02:30 -c copy trimmed.mp4",
+    "category": "ffmpeg"
+  },
+  {
+    "idx": 265,
+    "intent": "convert video to gif using ffmpeg",
+    "command": "ffmpeg -i input.mp4 -vf \"fps=10,scale=640:-1\" -loop 0 output.gif",
+    "category": "ffmpeg"
+  },
+  {
+    "idx": 266,
+    "intent": "batch convert all wav files to mp3 using ffmpeg",
+    "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+    "category": "ffmpeg"
+  },
+  {
+    "idx": 267,
+    "intent": "sync a local directory to an s3 bucket",
+    "command": "aws s3 sync ./local-dir s3://my-bucket/prefix/ --delete",
+    "category": "aws"
+  },
+  {
+    "idx": 268,
+    "intent": "download an entire s3 bucket prefix to a local directory",
+    "command": "aws s3 cp s3://my-bucket/prefix/ ./local-dir --recursive",
+    "category": "aws"
+  },
+  {
+    "idx": 269,
+    "intent": "list all s3 buckets in the aws account",
+    "command": "aws s3 ls",
+    "category": "aws"
+  },
+  {
+    "idx": 270,
+    "intent": "get the public ip of a running ec2 instance",
+    "command": "aws ec2 describe-instances --instance-ids i-1234567890abcdef0 --query 'Reservations[0].Instances[0].PublicIpAddress' --output text",
+    "category": "aws"
+  },
+  {
+    "idx": 271,
+    "intent": "create a docker volume",
+    "command": "docker volume create my-volume",
+    "category": "docker"
+  },
+  {
+    "idx": 272,
+    "intent": "list all docker volumes",
+    "command": "docker volume ls",
+    "category": "docker"
+  },
+  {
+    "idx": 273,
+    "intent": "remove all unused docker volumes",
+    "command": "docker volume prune -f",
+    "category": "docker"
+  },
+  {
+    "idx": 274,
+    "intent": "create a docker network",
+    "command": "docker network create my-network",
+    "category": "docker"
+  },
+  {
+    "idx": 275,
+    "intent": "connect a running container to a docker network",
+    "command": "docker network connect my-network container-name",
+    "category": "docker"
+  },
+  {
+    "idx": 276,
+    "intent": "show open file handles for a running process",
+    "command": "Get-Process -Id <PID> | Select-Object -ExpandProperty Modules",
+    "category": "system"
+  },
+  {
+    "idx": 277,
+    "intent": "check which process is using a specific port",
+    "command": "Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }",
+    "category": "network"
+  },
+  {
+    "idx": 278,
+    "intent": "display system memory map and check for overcommit",
+    "command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVirtualMemorySize,FreeVirtualMemory,TotalVisibleMemorySize,FreePhysicalMemory",
+    "category": "system"
+  }
+]

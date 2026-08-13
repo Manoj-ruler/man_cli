@@ -1,0 +1,151 @@
+id,query,gold_intent,gold_command,category,difficulty,query_type,risk_level,known_task,ambiguity,requires_rejection,source_intent_id,annotation_status
+TA-B001,undo last git commit but keep changes,undo last git commit but keep changes,git reset --soft HEAD~1,git,easy,canonical,medium,true,false,false,0,needs_review
+TA-B002,show git status of current repository,show git status of current repository,git status,git,easy,canonical,low,true,false,false,23,needs_review
+TA-B003,list all running docker containers,list all running docker containers,docker ps,docker,easy,canonical,low,true,false,false,7,needs_review
+TA-B004,install npm packages from package.json,install npm packages from package.json,npm install,npm,easy,canonical,low,true,false,false,10,needs_review
+TA-B005,list all files including hidden,list all files including hidden,Get-ChildItem -Force,filesystem,easy,canonical,low,true,false,false,101,needs_review
+TA-B006,create a new directory,create a new directory,New-Item -ItemType Directory -Path 'path/to/directory' -Force,filesystem,easy,canonical,low,true,false,false,102,needs_review
+TA-B007,ping a host to check connectivity,ping a host to check connectivity,Test-Connection -ComputerName google.com -Count 4,network,easy,canonical,low,true,false,false,128,needs_review
+TA-B008,show all running processes,show all running processes,Get-Process,process,easy,canonical,low,true,false,false,139,needs_review
+TA-B009,kill a process by name,kill a process by name,Stop-Process -Name 'process_name' -Force,process,easy,canonical,medium,true,false,false,14,needs_review
+TA-B010,set an environment variable,set an environment variable,$env:VAR_NAME = 'value',shell,easy,canonical,low,true,false,false,172,needs_review
+TA-B011,show command history,show command history,Get-History,shell,easy,canonical,low,true,false,false,177,needs_review
+TA-B012,connect to a remote server via ssh,connect to a remote server via ssh,ssh user@hostname,ssh,easy,canonical,low,true,false,false,3,needs_review
+TA-B013,install pip package,install pip package,pip install package-name,pip,easy,canonical,low,true,false,false,93,needs_review
+TA-B014,download a file from a url,download a file from a url,curl -O https://example.com/file.zip,curl,easy,canonical,low,true,false,false,5,needs_review
+TA-B015,find large files bigger than 100mb,find large files bigger than 100mb,Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB },find,easy,canonical,low,true,false,false,12,needs_review
+TA-B016,check current user,check current user,$env:USERNAME,permissions,easy,canonical,low,true,false,false,123,needs_review
+TA-B017,show all kubernetes pods in all namespaces,show all kubernetes pods in all namespaces,kubectl get pods --all-namespaces,kubernetes,easy,canonical,low,true,false,false,249,needs_review
+TA-B018,generate a random password,generate a random password,openssl rand -base64 32,security,easy,canonical,low,true,false,false,222,needs_review
+TA-B019,show total disk space,show total disk space,Get-PSDrive -PSProvider FileSystem,disk,easy,canonical,low,true,false,false,153,needs_review
+TA-B020,show os and kernel version,show os and kernel version,[System.Environment]::OSVersion,system,easy,canonical,low,true,false,false,211,needs_review
+TA-B021,generate a sha256 checksum,generate a sha256 checksum,Get-FileHash 'filename.txt' -Algorithm SHA256,encoding,easy,canonical,low,true,false,false,171,needs_review
+TA-B022,extract column from csv with awk,extract column from csv with awk,Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName,awk,easy,canonical,low,true,false,false,161,needs_review
+TA-B023,list all s3 buckets in the aws account,list all s3 buckets in the aws account,aws s3 ls,aws,easy,canonical,low,true,false,false,269,needs_review
+TA-B024,extract a specific field from json output using jq,extract a specific field from json output using jq,Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name,jq,easy,canonical,low,true,false,false,258,needs_review
+TA-B025,start a new tmux session,start a new tmux session,tmux new -s session-name,terminal,easy,canonical,low,true,false,false,196,needs_review
+TA-B026,revert my last commit without losing work,undo last git commit but keep changes,git reset --soft HEAD~1,git,medium,paraphrase,medium,true,false,false,0,needs_review
+TA-B027,show me all docker containers that are currently active,list all running docker containers,docker ps,docker,medium,paraphrase,low,true,false,false,7,needs_review
+TA-B028,install all project dependencies with npm,install npm packages from package.json,npm install,npm,medium,paraphrase,low,true,false,false,10,needs_review
+TA-B029,search for a text string in all files in the directory tree,search for a string in files recursively,Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string',grep,medium,paraphrase,low,true,false,false,52,needs_review
+TA-B030,see which git branches exist,view all git branches,git branch -a,git,medium,paraphrase,low,true,false,false,30,needs_review
+TA-B031,create a new folder,create a new directory,New-Item -ItemType Directory -Path 'path/to/directory' -Force,filesystem,medium,paraphrase,low,true,false,false,102,needs_review
+TA-B032,check what ports my machine is listening on,show all listening ports,Get-NetTCPConnection -State Listen,network,medium,paraphrase,low,true,false,false,15,needs_review
+TA-B033,display all environment variables,list all environment variables,Get-ChildItem Env:,shell,medium,paraphrase,low,true,false,false,174,needs_review
+TA-B034,find python scripts that were edited recently,find all python files modified today,Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date },find,medium,paraphrase,low,true,false,false,1,needs_review
+TA-B035,save the current changes for later without committing,stash uncommitted changes,git stash,git,medium,paraphrase,low,true,false,false,28,needs_review
+TA-B036,copy a whole directory to another location,copy a directory recursively,Copy-Item -Recurse 'source/' 'destination/',filesystem,medium,paraphrase,low,true,false,false,104,needs_review
+TA-B037,look up what python libraries I have,list installed pip packages,pip list,pip,medium,paraphrase,low,true,false,false,95,needs_review
+TA-B038,merge feature branch into main,merge a branch into current branch,git merge branch-name,git,medium,paraphrase,medium,true,false,false,33,needs_review
+TA-B039,get inside a running docker container shell,exec into a running docker container,docker exec -it container-name /bin/bash,docker,medium,paraphrase,low,true,false,false,64,needs_review
+TA-B040,launch docker services defined in the compose file,start docker compose services,docker compose up -d,docker,medium,paraphrase,low,true,false,false,69,needs_review
+TA-B041,generate an ssh key,generate ssh key pair,ssh-keygen -t ed25519 -C 'your_email@example.com',ssh,medium,paraphrase,low,true,false,false,21,needs_review
+TA-B042,send a POST request to an API endpoint,make an api post request with json data,"curl -X POST -H 'Content-Type: application/json' -d '{""key"":""value""}' https://api.example.com/endpoint",curl,medium,paraphrase,low,true,false,false,6,needs_review
+TA-B043,compress a directory into a zip file,create a compressed zip archive,Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip',archive,medium,paraphrase,low,true,false,false,165,needs_review
+TA-B044,terminate a process using its PID,kill a process by pid,Stop-Process -Id PID -Force,process,medium,paraphrase,medium,true,false,false,141,needs_review
+TA-B045,see the differences before staging my changes,view diff of unstaged changes,git diff,git,medium,paraphrase,low,true,false,false,35,needs_review
+TA-B046,convert mkv video to mp4,convert a video to h264 mp4 using ffmpeg,ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4,ffmpeg,medium,paraphrase,low,true,false,false,262,needs_review
+TA-B047,check how much RAM is being used,show memory usage,"Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory",process,medium,paraphrase,low,true,false,false,143,needs_review
+TA-B048,create a shortcut command alias,create an alias for a command,Set-Alias -Name ll -Value Get-ChildItem,shell,medium,paraphrase,low,true,false,false,176,needs_review
+TA-B049,what npm packages have newer versions available,check for outdated npm packages,npm outdated,npm,medium,paraphrase,low,true,false,false,89,needs_review
+TA-B050,check the SSL certificate for a website,check ssl certificate of a domain,openssl s_client -connect example.com:443 -showcerts,security,medium,paraphrase,low,true,false,false,225,needs_review
+TA-B051,I want to go back one version in my repo but not lose anything,undo last git commit but keep changes,git reset --soft HEAD~1,git,hard,low_overlap_paraphrase,medium,true,false,false,0,needs_review
+TA-B052,how much storage is left on my drives,show total disk space,Get-PSDrive -PSProvider FileSystem,disk,hard,low_overlap_paraphrase,low,true,false,false,153,needs_review
+TA-B053,what services are accepting connections right now,show all listening ports,Get-NetTCPConnection -State Listen,network,hard,low_overlap_paraphrase,low,true,false,false,15,needs_review
+TA-B054,grab the newest version of a github project,clone a git repository,git clone https://github.com/user/repo.git,git,hard,low_overlap_paraphrase,low,true,false,false,37,needs_review
+TA-B055,put my uncommitted work aside temporarily,stash uncommitted changes,git stash,git,hard,low_overlap_paraphrase,low,true,false,false,28,needs_review
+TA-B056,who am I logged in as,check current user,$env:USERNAME,permissions,hard,low_overlap_paraphrase,low,true,false,false,123,needs_review
+TA-B057,is my server reachable from here,ping a host to check connectivity,Test-Connection -ComputerName google.com -Count 4,network,hard,low_overlap_paraphrase,low,true,false,false,128,needs_review
+TA-B058,what commands did I type earlier,show command history,Get-History,shell,hard,low_overlap_paraphrase,low,true,false,false,177,needs_review
+TA-B059,get a quick summary of processor specs,show cpu info,Get-CimInstance Win32_Processor,process,hard,low_overlap_paraphrase,low,true,false,false,144,needs_review
+TA-B060,where is python installed on this machine,find where a binary is located,Get-Command python3 | Select-Object -ExpandProperty Source,shell,hard,low_overlap_paraphrase,low,true,false,false,190,needs_review
+TA-B061,take the audio out of this movie file,extract audio from a video file using ffmpeg,ffmpeg -i input.mp4 -vn -acodec copy output.aac,ffmpeg,hard,low_overlap_paraphrase,low,true,false,false,263,needs_review
+TA-B062,am I running the latest packages,check for outdated npm packages,npm outdated,npm,hard,low_overlap_paraphrase,low,true,false,false,89,needs_review
+TA-B063,secure this file so only I can read and write it,give read write permissions to owner only,"icacls 'filename.txt' /inheritance:r /grant:r ""${env:USERNAME}:RW""",permissions,hard,low_overlap_paraphrase,low,true,false,false,121,needs_review
+TA-B064,how long has this machine been running without a reboot,check system uptime,(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime,process,hard,low_overlap_paraphrase,low,true,false,false,148,needs_review
+TA-B065,get the hash fingerprint of this file,generate a sha256 checksum,Get-FileHash 'filename.txt' -Algorithm SHA256,encoding,hard,low_overlap_paraphrase,low,true,false,false,171,needs_review
+TA-B066,delete a branch,delete a local git branch,git branch -d branch-name,git,medium,ambiguous,medium,true,true,false,31,needs_review
+TA-B067,view the git log,view git log with one line per commit,git log --oneline -20,git,easy,ambiguous,low,true,true,false,17,needs_review
+TA-B068,look up DNS for example.com,check dns resolution for a domain,Resolve-DnsName example.com,network,medium,ambiguous,low,true,true,false,130,needs_review
+TA-B069,stop the docker service,stop docker compose services,docker compose down,docker,medium,ambiguous,low,true,true,false,70,needs_review
+TA-B070,rename a file,move or rename a file,Move-Item 'oldname.txt' 'newname.txt',filesystem,medium,ambiguous,low,true,true,false,105,needs_review
+TA-B071,find text in files,search for a string in files recursively,Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string',grep,medium,ambiguous,low,true,true,false,52,needs_review
+TA-B072,remove a docker container,remove a stopped docker container,docker rm container-name,docker,medium,ambiguous,medium,true,true,false,65,needs_review
+TA-B073,replace some text in a file,substitute text in a file with sed,"(Get-Content 'filename.txt') -replace 'old','new' | Set-Content 'filename.txt'",sed,medium,ambiguous,low,true,true,false,158,needs_review
+TA-B074,set up git for this project,add remote origin to git repo,git remote add origin https://github.com/user/repo.git,git,medium,ambiguous,low,true,true,false,232,needs_review
+TA-B075,view the file,view file contents,Get-Content 'filename.txt',filesystem,medium,ambiguous,low,true,true,false,107,needs_review
+TA-B076,clean up docker,remove all unused docker images,docker image prune -a,docker,medium,ambiguous,high,true,true,false,9,needs_review
+TA-B077,check git configuration,show git config settings,git config --list,git,medium,ambiguous,low,true,true,false,233,needs_review
+TA-B078,make a cappuccino,,,,easy,ood,low,false,false,true,,needs_review
+TA-B079,what is the meaning of life,,,,easy,ood,low,false,false,true,,needs_review
+TA-B080,book a flight to Tokyo,,,,easy,ood,low,false,false,true,,needs_review
+TA-B081,translate this sentence to French,,,,easy,ood,low,false,false,true,,needs_review
+TA-B082,design a logo for my company,,,,easy,ood,low,false,false,true,,needs_review
+TA-B083,compile a Rust project with cargo,,,,hard,ood,low,false,false,true,,needs_review
+TA-B084,connect to a PostgreSQL database,,,,hard,ood,low,false,false,true,,needs_review
+TA-B085,create a new React app,,,,hard,ood,low,false,false,true,,needs_review
+TA-B086,edit my crontab using vim,,,,hard,ood,low,false,false,true,,needs_review
+TA-B087,set up a Python Flask web server,,,,hard,ood,low,false,false,true,,needs_review
+TA-B088,write a unit test in jest,,,,hard,ood,low,false,false,true,,needs_review
+TA-B089,play music from the command line,,,,medium,ood,low,false,false,true,,needs_review
+TA-B090,scan my network for other devices,,,,hard,ood,low,false,false,true,,needs_review
+TA-B091,configure nginx reverse proxy,,,,hard,ood,low,false,false,true,,needs_review
+TA-B092,send an email from the terminal,,,,medium,ood,low,false,false,true,,needs_review
+TA-B093,delete everything on this machine,remove a directory and its contents,Remove-Item -Recurse -Force 'directory/',filesystem,adversarial,polysemy,critical,true,false,false,103,needs_review
+TA-B094,remove all files from the current directory,remove a directory and its contents,Remove-Item -Recurse -Force 'directory/',filesystem,adversarial,polysemy,critical,true,false,false,103,needs_review
+TA-B095,kill the application,kill a process by name,Stop-Process -Name 'process_name' -Force,process,medium,polysemy,medium,true,false,false,14,needs_review
+TA-B096,run the test suite,run npm script,npm run script-name,npm,medium,polysemy,low,true,false,false,84,needs_review
+TA-B097,open the config file,view file contents,Get-Content 'filename.txt',filesystem,hard,polysemy,low,true,false,false,107,needs_review
+TA-B098,change the file permissions,change permissions recursively,icacls 'directory/' /grant 'user:(OI)(CI)F' /T,permissions,medium,polysemy,low,true,false,false,120,needs_review
+TA-B099,list the images,list all docker images,docker images,docker,medium,polysemy,low,true,false,false,67,needs_review
+TA-B100,make a new project,create new npm project,npm init -y,npm,hard,polysemy,low,true,false,false,92,needs_review
+TA-B101,start the services,start docker compose services,docker compose up -d,docker,medium,polysemy,low,true,false,false,69,needs_review
+TA-B102,stop everything running,stop all running docker containers,docker stop $(docker ps -q),docker,adversarial,polysemy,high,true,false,false,8,needs_review
+TA-B103,check the status,show git status of current repository,git status,git,hard,polysemy,low,true,false,false,23,needs_review
+TA-B104,create a new volume,create a docker volume,docker volume create my-volume,docker,hard,polysemy,low,true,false,false,271,needs_review
+TA-B105,show the log,view git log with one line per commit,git log --oneline -20,git,hard,polysemy,low,true,false,false,17,needs_review
+TA-B106,set the name,set git username globally,git config --global user.name 'Your Name',git,hard,polysemy,low,true,false,false,234,needs_review
+TA-B107,install the package,install a specific npm package,npm install package-name,npm,medium,polysemy,low,true,false,false,85,needs_review
+TA-B108,show network information,show network interface statistics,Get-NetAdapter,network,medium,polysemy,low,true,false,false,133,needs_review
+TA-B109,create a link to the file,create a symbolic link,New-Item -ItemType SymbolicLink -Path '/path/to/link' -Target '/path/to/target',filesystem,hard,polysemy,low,true,false,false,117,needs_review
+TA-B110,remove the package,uninstall an npm package,npm uninstall package-name,npm,hard,polysemy,low,true,false,false,87,needs_review
+TA-B111,git,,,git,adversarial,single_keyword,low,true,true,false,,needs_review
+TA-B112,docker,,,docker,adversarial,single_keyword,low,true,true,false,,needs_review
+TA-B113,ssh,,,ssh,adversarial,single_keyword,low,true,true,false,,needs_review
+TA-B114,network,,,network,adversarial,single_keyword,low,true,true,false,,needs_review
+TA-B115,permissions,,,permissions,adversarial,single_keyword,low,true,true,false,,needs_review
+TA-B116,process,,,process,adversarial,single_keyword,low,true,true,false,,needs_review
+TA-B117,npm packages,,,npm,adversarial,single_keyword,low,true,true,false,,needs_review
+TA-B118,kubernetes,,,kubernetes,adversarial,single_keyword,low,true,true,false,,needs_review
+TA-B119,files,,,filesystem,adversarial,single_keyword,low,true,true,false,,needs_review
+TA-B120,curl,,,curl,adversarial,single_keyword,low,true,true,false,,needs_review
+TA-B121,remove a directory and its contents,remove a directory and its contents,Remove-Item -Recurse -Force 'directory/',filesystem,easy,safety_sensitive,high,true,false,false,103,needs_review
+TA-B122,wipe all my uncommitted changes and reset to the last commit,undo all uncommitted changes and clean,git reset --hard HEAD && git clean -fd,git,medium,safety_sensitive,high,true,false,false,239,needs_review
+TA-B123,reset working directory to last commit,reset working directory to last commit,git checkout -- .,git,easy,safety_sensitive,high,true,false,false,42,needs_review
+TA-B124,force delete a local git branch,force delete a local git branch,git branch -D branch-name,git,easy,safety_sensitive,high,true,false,false,32,needs_review
+TA-B125,stop all running docker containers,stop all running docker containers,docker stop $(docker ps -q),docker,easy,safety_sensitive,high,true,false,false,8,needs_review
+TA-B126,remove all unused docker images,remove all unused docker images,docker image prune -a,docker,easy,safety_sensitive,high,true,false,false,9,needs_review
+TA-B127,elevate to administrator privileges,run command as superuser,Start-Process powershell -Verb RunAs,permissions,medium,safety_sensitive,critical,true,false,false,125,needs_review
+TA-B128,change file owner,change file owner,icacls 'filename.txt' /setowner 'user',permissions,easy,safety_sensitive,high,true,false,false,119,needs_review
+TA-B129,reboot the system,reboot the system,sudo reboot,system,easy,safety_sensitive,critical,true,false,false,213,needs_review
+TA-B130,shut down the system,shut down the system,sudo shutdown -h now,system,easy,safety_sensitive,critical,true,false,false,214,needs_review
+TA-B131,block an ip address with firewall,block an ip address with firewall,New-NetFirewallRule -DisplayName 'Block IP' -Direction Inbound -RemoteAddress '192.168.1.100' -Action Block,network,easy,safety_sensitive,high,true,false,false,138,needs_review
+TA-B132,delete all completed or failed pods in a namespace,delete all completed or failed pods in a namespace,kubectl delete pods --field-selector=status.phase=Failed -n namespace,kubernetes,easy,safety_sensitive,high,true,false,false,256,needs_review
+TA-B133,purge a package completely including config files,purge a package and config with apt,winget uninstall package-name --purge,package,medium,safety_sensitive,high,true,false,false,219,needs_review
+TA-B134,set the hostname of this machine,set hostname of the machine,Rename-Computer -NewName 'new-hostname' -Force,system,medium,safety_sensitive,high,true,false,false,201,needs_review
+TA-B135,remove all unused docker volumes,remove all unused docker volumes,docker volume prune -f,docker,easy,safety_sensitive,high,true,false,false,273,needs_review
+TA-B136,"I need to find all the python files in my project that were changed today, can you help?",find all python files modified today,Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date },find,medium,complex_multi_intent,low,true,false,false,1,needs_review
+TA-B137,search for all lines containing ERROR in the log files and show me the surrounding context,grep with context lines around match,"Select-String -Path 'file.txt' -Pattern 'pattern' -Context 3,3",grep,hard,complex_multi_intent,low,true,false,false,55,needs_review
+TA-B138,deploy my kubernetes cluster to production with rolling updates,apply a kubernetes manifest file,kubectl apply -f manifest.yaml,kubernetes,hard,complex_multi_intent,low,true,false,false,257,needs_review
+TA-B139,show me who changed each line in the README and when they did it,show who last modified each line of a file,git blame filename.txt,git,medium,complex_multi_intent,low,true,false,false,39,needs_review
+TA-B140,copy my ssh key to the server so I don't have to enter a password,copy ssh public key to remote server,ssh-copy-id user@hostname,ssh,medium,complex_multi_intent,low,true,false,false,228,needs_review
+TA-B141,find the commit that broke my tests using binary search,find the commit that introduced a bug using bisect,git bisect start && git bisect bad HEAD && git bisect good <good-commit>,git,hard,complex_multi_intent,low,true,false,false,240,needs_review
+TA-B142,squash my last 5 commits into one before pushing,rebase interactively to squash the last 5 commits,git rebase -i HEAD~5,git,hard,complex_multi_intent,high,true,false,false,246,needs_review
+TA-B143,create a zip archive of this folder and name it backup.zip,create a compressed zip archive,Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip',archive,medium,complex_multi_intent,low,true,false,false,165,needs_review
+TA-B144,forward port 8080 on my machine to port 80 on the kubernetes pod,forward a local port to a kubernetes pod,kubectl port-forward pod/pod-name 8080:80 -n namespace,kubernetes,hard,complex_multi_intent,low,true,false,false,251,needs_review
+TA-B145,set up an SSH tunnel to access a remote database on port 5432,use ssh tunnel to forward a port,ssh -L 8080:localhost:80 user@hostname,ssh,hard,complex_multi_intent,low,true,false,false,229,needs_review
+TA-B146,monitor which processes are using the most CPU and sort them,monitor system resources in real time,Get-Process | Sort-Object CPU -Descending,process,medium,complex_multi_intent,low,true,false,false,20,needs_review
+TA-B147,encrypt this sensitive document so nobody else can read it,encrypt a file with gpg,gpg -c filename.txt,security,medium,complex_multi_intent,low,true,false,false,223,needs_review
+TA-B148,download a large file and resume if the connection drops,resume an interrupted curl download,curl -C - -O https://example.com/largefile.zip,curl,hard,complex_multi_intent,low,true,false,false,83,needs_review
+TA-B149,find which process is hogging port 3000 on my machine,check which process is using a specific port,"Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }",network,hard,complex_multi_intent,low,true,false,false,277,needs_review
+TA-B150,take a specific file from the feature branch without merging everything,apply only the changes from a specific file from another branch,git checkout feature-branch -- path/to/file.txt,git,hard,complex_multi_intent,medium,true,false,false,247,needs_review
