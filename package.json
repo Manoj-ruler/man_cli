@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "research:probe": "node research/probe_baseline.js"
   },
   "dependencies": {
     "@inquirer/prompts": "^8.4.1",

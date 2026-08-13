@@ -1,0 +1,19 @@
+id,query,probe_category,predicted_command,predicted_category,raw_score,confidence,rejected_by_threshold,latency_ms
+P001,undo last git commit but keep changes,exact_intent_match,git reset --soft HEAD~1,git,42.6735,100,false,20.358
+P002,list all running docker containers,exact_intent_match,docker ps,docker,33.4215,100,false,8.317
+P003,revert my last commit without losing work,paraphrase,git reset --soft HEAD~1,git,7.5266,94,false,7.125
+P004,show me all docker containers that are currently active,paraphrase,docker ps,docker,15.5113,100,false,9.37
+P005,"I need to find all the python files in my project that were changed today, can you help?",natural_language_verbose,Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date },find,18.3764,100,false,12.055
+P006,how do I see which ports are open on my machine,natural_language_verbose,Get-NetTCPConnection -State Listen,network,7.1978,90,false,10.18
+P007,compress folder,terse_query,Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip',archive,5.4377,68,false,8.09
+P008,disk space,terse_query,Get-PSDrive -PSProvider FileSystem,disk,27.6054,100,false,6.644
+P009,deploy my kubernetes cluster to production with rolling updates,complex_specific,kubectl get events --sort-by='.lastTimestamp' -n namespace,kubernetes,8.578,100,false,7.334
+P010,make a cappuccino,out_of_domain,Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass,permissions,4.2414,53,false,7.751
+P011,what is the meaning of life,out_of_domain,git reset --soft HEAD~1,git,0,0,true,6.881
+P012,delete everything,ambiguous_risky,curl -X DELETE https://api.example.com/resource/1,curl,4.5114,56,false,4.821
+P013,remove all files,ambiguous_risky,docker image prune -a,docker,6.1016,76,false,4.097
+P014,ssh,single_keyword,ssh user@hostname,ssh,20.4988,100,false,4.197
+P015,git,single_keyword,git config --list,git,17.9907,100,false,3.765
+P016,convert video to mp4 format,synonym_wording,ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4,ffmpeg,14.8327,100,false,4.208
+P017,check network connectivity to google.com,synonym_wording,Test-Connection -ComputerName google.com -Count 4,network,13.7494,100,false,4.6
+P018,install npm packages from package.json,exact_intent_match,npm install,npm,36.3403,100,false,4.117

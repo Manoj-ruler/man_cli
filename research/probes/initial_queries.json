@@ -1,0 +1,119 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "description": "Initial probe set for TermAssist baseline measurement. DO NOT edit results generated from these probes.",
+    "created": "2026-08-13",
+    "author": "research-baseline",
+    "notes": "Each query is tagged with a probe_category indicating why it was selected. These categories are for experimental design purposes only and do not represent ground-truth labels."
+  },
+  "queries": [
+    {
+      "id": "P001",
+      "query": "undo last git commit but keep changes",
+      "probe_category": "exact_intent_match",
+      "notes": "Exact verbatim match to an intent in the corpus. Should produce maximum confidence."
+    },
+    {
+      "id": "P002",
+      "query": "list all running docker containers",
+      "probe_category": "exact_intent_match",
+      "notes": "Another exact intent match from a different category."
+    },
+    {
+      "id": "P003",
+      "query": "revert my last commit without losing work",
+      "probe_category": "paraphrase",
+      "notes": "Paraphrase of 'undo last git commit but keep changes'. Tests synonym handling."
+    },
+    {
+      "id": "P004",
+      "query": "show me all docker containers that are currently active",
+      "probe_category": "paraphrase",
+      "notes": "Paraphrase of 'list all running docker containers'. Different wording, same intent."
+    },
+    {
+      "id": "P005",
+      "query": "I need to find all the python files in my project that were changed today, can you help?",
+      "probe_category": "natural_language_verbose",
+      "notes": "Longer conversational phrasing. Tests robustness to verbose input."
+    },
+    {
+      "id": "P006",
+      "query": "how do I see which ports are open on my machine",
+      "probe_category": "natural_language_verbose",
+      "notes": "Natural question phrasing about network ports."
+    },
+    {
+      "id": "P007",
+      "query": "compress folder",
+      "probe_category": "terse_query",
+      "notes": "Very short query. Tests behavior with minimal token overlap."
+    },
+    {
+      "id": "P008",
+      "query": "disk space",
+      "probe_category": "terse_query",
+      "notes": "Two-word query. Tests minimal input handling."
+    },
+    {
+      "id": "P009",
+      "query": "deploy my kubernetes cluster to production with rolling updates",
+      "probe_category": "complex_specific",
+      "notes": "Specific multi-concept query mixing kubernetes concepts."
+    },
+    {
+      "id": "P010",
+      "query": "make a cappuccino",
+      "probe_category": "out_of_domain",
+      "notes": "Completely unrelated to terminal commands. Should get zero or near-zero confidence."
+    },
+    {
+      "id": "P011",
+      "query": "what is the meaning of life",
+      "probe_category": "out_of_domain",
+      "notes": "Philosophical question with no terminal relevance. Tests OOD rejection."
+    },
+    {
+      "id": "P012",
+      "query": "delete everything",
+      "probe_category": "ambiguous_risky",
+      "notes": "Ambiguous and potentially dangerous. Tests what the system matches."
+    },
+    {
+      "id": "P013",
+      "query": "remove all files",
+      "probe_category": "ambiguous_risky",
+      "notes": "Vague destructive request. May match rm or filesystem commands."
+    },
+    {
+      "id": "P014",
+      "query": "ssh",
+      "probe_category": "single_keyword",
+      "notes": "Single keyword matching a category and command name directly."
+    },
+    {
+      "id": "P015",
+      "query": "git",
+      "probe_category": "single_keyword",
+      "notes": "Single keyword matching the largest category. Tests which command surfaces."
+    },
+    {
+      "id": "P016",
+      "query": "convert video to mp4 format",
+      "probe_category": "synonym_wording",
+      "notes": "Should match ffmpeg commands. Tests cross-domain vocabulary."
+    },
+    {
+      "id": "P017",
+      "query": "check network connectivity to google.com",
+      "probe_category": "synonym_wording",
+      "notes": "Should relate to ping/network commands. Tests synonym resolution."
+    },
+    {
+      "id": "P018",
+      "query": "install npm packages from package.json",
+      "probe_category": "exact_intent_match",
+      "notes": "Exact intent match for npm install. Baseline verification across categories."
+    }
+  ]
+}
