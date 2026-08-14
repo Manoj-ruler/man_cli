@@ -1,0 +1,3782 @@
+[
+  {
+    "id": "TA-B001",
+    "query": "undo last git commit but keep changes",
+    "category": "git",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "medium",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git reset --soft HEAD~1",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git reset --soft HEAD~1",
+      "score": 42.6735,
+      "confidence": 100,
+      "latency_ms": 21.6023
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B002",
+    "query": "show git status of current repository",
+    "category": "git",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git status",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git status",
+      "score": 32.7568,
+      "confidence": 100,
+      "latency_ms": 4.3712
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B003",
+    "query": "list all running docker containers",
+    "category": "docker",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "docker ps",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker ps",
+      "score": 33.4215,
+      "confidence": 100,
+      "latency_ms": 3.663
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B004",
+    "query": "install npm packages from package.json",
+    "category": "npm",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "npm install",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm install",
+      "score": 36.3403,
+      "confidence": 100,
+      "latency_ms": 6.8729
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B005",
+    "query": "list all files including hidden",
+    "category": "filesystem",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-ChildItem -Force",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Force",
+      "score": 35.7364,
+      "confidence": 100,
+      "latency_ms": 3.1087
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B006",
+    "query": "create a new directory",
+    "category": "filesystem",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+      "score": 25.8392,
+      "confidence": 100,
+      "latency_ms": 3.3586
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B007",
+    "query": "ping a host to check connectivity",
+    "category": "network",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Test-Connection -ComputerName google.com -Count 4",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Test-Connection -ComputerName google.com -Count 4",
+      "score": 33.7898,
+      "confidence": 100,
+      "latency_ms": 3.5913
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B008",
+    "query": "show all running processes",
+    "category": "process",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-Process",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-Process",
+      "score": 28.6193,
+      "confidence": 100,
+      "latency_ms": 13.0445
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B009",
+    "query": "kill a process by name",
+    "category": "process",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "medium",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Stop-Process -Name 'process_name' -Force",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Stop-Process -Name 'process_name' -Force",
+      "score": 32.5554,
+      "confidence": 100,
+      "latency_ms": 5.5209
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B010",
+    "query": "set an environment variable",
+    "category": "shell",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "$env:VAR_NAME = 'value'",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "$env:VAR_NAME = 'value'",
+      "score": 33.0902,
+      "confidence": 100,
+      "latency_ms": 6.8174
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B011",
+    "query": "show command history",
+    "category": "shell",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-History",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-History",
+      "score": 24.0251,
+      "confidence": 100,
+      "latency_ms": 7.0132
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B012",
+    "query": "connect to a remote server via ssh",
+    "category": "ssh",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "ssh user@hostname",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ssh user@hostname",
+      "score": 37.5389,
+      "confidence": 100,
+      "latency_ms": 5.9927
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B013",
+    "query": "install pip package",
+    "category": "pip",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "pip install package-name",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "pip install package-name",
+      "score": 30.4667,
+      "confidence": 100,
+      "latency_ms": 4.7507
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B014",
+    "query": "download a file from a url",
+    "category": "curl",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "curl -O https://example.com/file.zip",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "curl -O https://example.com/file.zip",
+      "score": 33.2448,
+      "confidence": 100,
+      "latency_ms": 4.6704
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B015",
+    "query": "find large files bigger than 100mb",
+    "category": "find",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
+      "score": 46.3021,
+      "confidence": 100,
+      "latency_ms": 3.6919
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B016",
+    "query": "check current user",
+    "category": "permissions",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "$env:USERNAME",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "$env:USERNAME",
+      "score": 28.4136,
+      "confidence": 100,
+      "latency_ms": 5.4336
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B017",
+    "query": "show all kubernetes pods in all namespaces",
+    "category": "kubernetes",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "kubectl get pods --all-namespaces",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "kubectl get pods --all-namespaces",
+      "score": 33.4456,
+      "confidence": 100,
+      "latency_ms": 4.9163
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B018",
+    "query": "generate a random password",
+    "category": "security",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "openssl rand -base64 32",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "openssl rand -base64 32",
+      "score": 35.8727,
+      "confidence": 100,
+      "latency_ms": 3.4201
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B019",
+    "query": "show total disk space",
+    "category": "disk",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-PSDrive -PSProvider FileSystem",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-PSDrive -PSProvider FileSystem",
+      "score": 33.1759,
+      "confidence": 100,
+      "latency_ms": 5.3493
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B020",
+    "query": "show os and kernel version",
+    "category": "system",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "[System.Environment]::OSVersion",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "[System.Environment]::OSVersion",
+      "score": 34.4852,
+      "confidence": 100,
+      "latency_ms": 4.1757
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B021",
+    "query": "generate a sha256 checksum",
+    "category": "encoding",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+      "score": 32.0697,
+      "confidence": 100,
+      "latency_ms": 2.9245
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B022",
+    "query": "extract column from csv with awk",
+    "category": "awk",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName",
+      "score": 38.2529,
+      "confidence": 100,
+      "latency_ms": 3.5672
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B023",
+    "query": "list all s3 buckets in the aws account",
+    "category": "aws",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "aws s3 ls",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "aws s3 ls",
+      "score": 40.9761,
+      "confidence": 100,
+      "latency_ms": 2.4792
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B024",
+    "query": "extract a specific field from json output using jq",
+    "category": "jq",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
+      "score": 43.1845,
+      "confidence": 100,
+      "latency_ms": 3.0365
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B025",
+    "query": "start a new tmux session",
+    "category": "terminal",
+    "query_type": "canonical",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "tmux new -s session-name",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "tmux new -s session-name",
+      "score": 33.425,
+      "confidence": 100,
+      "latency_ms": 2.876
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B026",
+    "query": "revert my last commit without losing work",
+    "category": "git",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "medium",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git reset --soft HEAD~1",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git reset --soft HEAD~1",
+      "score": 7.5266,
+      "confidence": 94,
+      "latency_ms": 3.8821
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B027",
+    "query": "show me all docker containers that are currently active",
+    "category": "docker",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "docker ps",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker ps",
+      "score": 15.5113,
+      "confidence": 100,
+      "latency_ms": 6.4642
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B028",
+    "query": "install all project dependencies with npm",
+    "category": "npm",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "npm install",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm install",
+      "score": 15.4051,
+      "confidence": 100,
+      "latency_ms": 6.0092
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B029",
+    "query": "search for a text string in all files in the directory tree",
+    "category": "grep",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+      "score": 16.3985,
+      "confidence": 100,
+      "latency_ms": 3.324
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B030",
+    "query": "see which git branches exist",
+    "category": "git",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git branch -a",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git branch -a",
+      "score": 8.4692,
+      "confidence": 100,
+      "latency_ms": 3.3995
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B031",
+    "query": "create a new folder",
+    "category": "filesystem",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm init -y",
+      "score": 7.2974,
+      "confidence": 91,
+      "latency_ms": 2.556
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "overconfident_wrong",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B032",
+    "query": "check what ports my machine is listening on",
+    "category": "network",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-NetTCPConnection -State Listen",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-NetTCPConnection -State Listen",
+      "score": 14.3957,
+      "confidence": 100,
+      "latency_ms": 2.3615
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B033",
+    "query": "display all environment variables",
+    "category": "shell",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-ChildItem Env:",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem Env:",
+      "score": 15.7115,
+      "confidence": 100,
+      "latency_ms": 2.6339
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B034",
+    "query": "find python scripts that were edited recently",
+    "category": "find",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+      "score": 9.1154,
+      "confidence": 100,
+      "latency_ms": 2.4935
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B035",
+    "query": "save the current changes for later without committing",
+    "category": "git",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git stash",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git stash",
+      "score": 9.0711,
+      "confidence": 100,
+      "latency_ms": 2.5817
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B036",
+    "query": "copy a whole directory to another location",
+    "category": "filesystem",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Copy-Item -Recurse 'source/' 'destination/'",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Copy-Item -Recurse 'source/' 'destination/'",
+      "score": 9.6456,
+      "confidence": 100,
+      "latency_ms": 2.3205
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B037",
+    "query": "look up what python libraries I have",
+    "category": "pip",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "pip list",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Resolve-DnsName example.com -Type ALL",
+      "score": 10.8755,
+      "confidence": 100,
+      "latency_ms": 2.641
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "overconfident_wrong",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B038",
+    "query": "merge feature branch into main",
+    "category": "git",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "medium",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git merge branch-name",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git merge branch-name",
+      "score": 16.3452,
+      "confidence": 100,
+      "latency_ms": 2.5285
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B039",
+    "query": "get inside a running docker container shell",
+    "category": "docker",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "docker exec -it container-name /bin/bash",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker exec -it container-name /bin/bash",
+      "score": 19.093,
+      "confidence": 100,
+      "latency_ms": 2.4988
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B040",
+    "query": "launch docker services defined in the compose file",
+    "category": "docker",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "docker compose up -d",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker compose up -d",
+      "score": 18.164,
+      "confidence": 100,
+      "latency_ms": 3.1099
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B041",
+    "query": "generate an ssh key",
+    "category": "ssh",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "ssh-keygen -t ed25519 -C 'your_email@example.com'",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ssh-keygen -t ed25519 -C 'your_email@example.com'",
+      "score": 17.4047,
+      "confidence": 100,
+      "latency_ms": 2.7464
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B042",
+    "query": "send a POST request to an API endpoint",
+    "category": "curl",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "curl -X POST -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/endpoint",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "curl -X POST -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/endpoint",
+      "score": 20.1212,
+      "confidence": 100,
+      "latency_ms": 2.5559
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B043",
+    "query": "compress a directory into a zip file",
+    "category": "archive",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+      "score": 20.3473,
+      "confidence": 100,
+      "latency_ms": 2.7754
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B044",
+    "query": "terminate a process using its PID",
+    "category": "process",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "medium",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Stop-Process -Id PID -Force",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Stop-Process -Id PID -Force",
+      "score": 12.8838,
+      "confidence": 100,
+      "latency_ms": 2.7228
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B045",
+    "query": "see the differences before staging my changes",
+    "category": "git",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git diff",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Compare-Object (Get-Content 'file1.txt') (Get-Content 'file2.txt')",
+      "score": 5.4377,
+      "confidence": 68,
+      "latency_ms": 2.3763
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "semantic_mismatch",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B046",
+    "query": "convert mkv video to mp4",
+    "category": "ffmpeg",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+      "score": 14.8327,
+      "confidence": 100,
+      "latency_ms": 2.6765
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B047",
+    "query": "check how much RAM is being used",
+    "category": "process",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory",
+      "score": 5.2357,
+      "confidence": 65,
+      "latency_ms": 2.3408
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B048",
+    "query": "create a shortcut command alias",
+    "category": "shell",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Set-Alias -Name ll -Value Get-ChildItem",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Set-Alias -Name ll -Value Get-ChildItem",
+      "score": 21.9589,
+      "confidence": 100,
+      "latency_ms": 2.019
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B049",
+    "query": "what npm packages have newer versions available",
+    "category": "npm",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "npm outdated",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm outdated",
+      "score": 27.1308,
+      "confidence": 100,
+      "latency_ms": 3.4325
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B050",
+    "query": "check the SSL certificate for a website",
+    "category": "security",
+    "query_type": "paraphrase",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "openssl s_client -connect example.com:443 -showcerts",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "openssl s_client -connect example.com:443 -showcerts",
+      "score": 16.4854,
+      "confidence": 100,
+      "latency_ms": 2.8795
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B051",
+    "query": "I want to go back one version in my repo but not lose anything",
+    "category": "git",
+    "query_type": "low_overlap_paraphrase",
+    "difficulty": "hard",
+    "risk_level": "medium",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git reset --soft HEAD~1",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git remote add origin https://github.com/user/repo.git",
+      "score": 7.1978,
+      "confidence": 90,
+      "latency_ms": 2.2693
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "low_overlap_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B052",
+    "query": "how much storage is left on my drives",
+    "category": "disk",
+    "query_type": "low_overlap_paraphrase",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-PSDrive -PSProvider FileSystem",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker rmi image-name",
+      "score": 4.9069,
+      "confidence": 61,
+      "latency_ms": 2.9442
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "low_overlap_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B053",
+    "query": "what services are accepting connections right now",
+    "category": "network",
+    "query_type": "low_overlap_paraphrase",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-NetTCPConnection -State Listen",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-NetTCPConnection",
+      "score": 6.4952,
+      "confidence": 81,
+      "latency_ms": 2.2843
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "low_overlap_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B054",
+    "query": "grab the newest version of a github project",
+    "category": "git",
+    "query_type": "low_overlap_paraphrase",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git clone https://github.com/user/repo.git",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "pip install package-name==1.2.3",
+      "score": 5.5525,
+      "confidence": 69,
+      "latency_ms": 2.0466
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "low_overlap_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B055",
+    "query": "put my uncommitted work aside temporarily",
+    "category": "git",
+    "query_type": "low_overlap_paraphrase",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git stash",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git stash",
+      "score": 12.9269,
+      "confidence": 100,
+      "latency_ms": 2.3866
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B056",
+    "query": "who am I logged in as",
+    "category": "permissions",
+    "query_type": "low_overlap_paraphrase",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "$env:USERNAME",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm install --save-dev package-name",
+      "score": 4.692,
+      "confidence": 59,
+      "latency_ms": 2.6563
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "low_overlap_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B057",
+    "query": "is my server reachable from here",
+    "category": "network",
+    "query_type": "low_overlap_paraphrase",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Test-Connection -ComputerName google.com -Count 4",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ssh user@hostname",
+      "score": 4.9841,
+      "confidence": 62,
+      "latency_ms": 2.081
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "low_overlap_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B058",
+    "query": "what commands did I type earlier",
+    "category": "shell",
+    "query_type": "low_overlap_paraphrase",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-History",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-History",
+      "score": 4.7402,
+      "confidence": 59,
+      "latency_ms": 2.1738
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B059",
+    "query": "get a quick summary of processor specs",
+    "category": "process",
+    "query_type": "low_overlap_paraphrase",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-CimInstance Win32_Processor",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "curl -s https://api.example.com/data",
+      "score": 5.702,
+      "confidence": 71,
+      "latency_ms": 2.1319
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "low_overlap_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B060",
+    "query": "where is python installed on this machine",
+    "category": "shell",
+    "query_type": "low_overlap_paraphrase",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-Command python3 | Select-Object -ExpandProperty Source",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "pip list",
+      "score": 9.4665,
+      "confidence": 100,
+      "latency_ms": 2.2654
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "low_overlap_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B061",
+    "query": "take the audio out of this movie file",
+    "category": "ffmpeg",
+    "query_type": "low_overlap_paraphrase",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+      "score": 8.1321,
+      "confidence": 100,
+      "latency_ms": 2.186
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B062",
+    "query": "am I running the latest packages",
+    "category": "npm",
+    "query_type": "low_overlap_paraphrase",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "npm outdated",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "winget upgrade --all",
+      "score": 8.5326,
+      "confidence": 100,
+      "latency_ms": 2.0282
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "low_overlap_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B063",
+    "query": "secure this file so only I can read and write it",
+    "category": "permissions",
+    "query_type": "low_overlap_paraphrase",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
+      "score": 14.8697,
+      "confidence": 100,
+      "latency_ms": 2.7693
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B064",
+    "query": "how long has this machine been running without a reboot",
+    "category": "process",
+    "query_type": "low_overlap_paraphrase",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime",
+      "score": 18.9369,
+      "confidence": 100,
+      "latency_ms": 2.3604
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B065",
+    "query": "get the hash fingerprint of this file",
+    "category": "encoding",
+    "query_type": "low_overlap_paraphrase",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-FileHash 'filename.txt' -Algorithm MD5",
+      "score": 6.8938,
+      "confidence": 86,
+      "latency_ms": 2.0512
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "low_overlap_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B066",
+    "query": "delete a branch",
+    "category": "git",
+    "query_type": "ambiguous",
+    "difficulty": "medium",
+    "risk_level": "medium",
+    "expected": {
+      "classification": "AMBIGUOUS",
+      "gold_command": "git branch -d branch-name",
+      "acceptable_commands": [
+        "git branch -d branch-name",
+        "git branch -D branch-name"
+      ]
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git branch -d branch-name",
+      "score": 8.6775,
+      "confidence": 100,
+      "latency_ms": 2.1487
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B067",
+    "query": "view the git log",
+    "category": "git",
+    "query_type": "ambiguous",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "AMBIGUOUS",
+      "gold_command": "git log --oneline -20",
+      "acceptable_commands": [
+        "git log --oneline -20",
+        "git log --oneline --graph --all"
+      ]
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git log --oneline -20",
+      "score": 9.1332,
+      "confidence": 100,
+      "latency_ms": 2.255
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B068",
+    "query": "look up DNS for example.com",
+    "category": "network",
+    "query_type": "ambiguous",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "AMBIGUOUS",
+      "gold_command": "Resolve-DnsName example.com",
+      "acceptable_commands": [
+        "Resolve-DnsName example.com",
+        "Resolve-DnsName example.com -Type ALL"
+      ]
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Resolve-DnsName example.com -Type ALL",
+      "score": 17.066,
+      "confidence": 100,
+      "latency_ms": 2.0988
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B069",
+    "query": "stop the docker service",
+    "category": "docker",
+    "query_type": "ambiguous",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "docker compose down",
+      "acceptable_commands": [
+        "docker compose down"
+      ]
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Stop-Service -Name 'service-name'",
+      "score": 12.1439,
+      "confidence": 100,
+      "latency_ms": 2.5967
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "overconfident_wrong",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B070",
+    "query": "rename a file",
+    "category": "filesystem",
+    "query_type": "ambiguous",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Move-Item 'oldname.txt' 'newname.txt'",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Move-Item 'oldname.txt' 'newname.txt'",
+      "score": 24.5862,
+      "confidence": 100,
+      "latency_ms": 4.2741
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B071",
+    "query": "find text in files",
+    "category": "grep",
+    "query_type": "ambiguous",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+      "acceptable_commands": [
+        "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'"
+      ]
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }",
+      "score": 11.4575,
+      "confidence": 100,
+      "latency_ms": 2.151
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "overconfident_wrong",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B072",
+    "query": "remove a docker container",
+    "category": "docker",
+    "query_type": "ambiguous",
+    "difficulty": "medium",
+    "risk_level": "medium",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "docker rm container-name",
+      "acceptable_commands": [
+        "docker rm container-name"
+      ]
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker rm container-name",
+      "score": 11.7332,
+      "confidence": 100,
+      "latency_ms": 2.1093
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B073",
+    "query": "replace some text in a file",
+    "category": "sed",
+    "query_type": "ambiguous",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "(Get-Content 'filename.txt') -replace 'old','new' | Set-Content 'filename.txt'",
+      "acceptable_commands": [
+        "(Get-Content 'filename.txt') -replace 'old','new' | Set-Content 'filename.txt'"
+      ]
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }",
+      "score": 11.6093,
+      "confidence": 100,
+      "latency_ms": 2.7579
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "overconfident_wrong",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B074",
+    "query": "set up git for this project",
+    "category": "git",
+    "query_type": "ambiguous",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git remote add origin https://github.com/user/repo.git",
+      "acceptable_commands": [
+        "git remote add origin https://github.com/user/repo.git"
+      ]
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git config --global user.name 'Your Name'",
+      "score": 7.9165,
+      "confidence": 99,
+      "latency_ms": 2.6057
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "overconfident_wrong",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B075",
+    "query": "view the file",
+    "category": "filesystem",
+    "query_type": "ambiguous",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-Content 'filename.txt'",
+      "acceptable_commands": [
+        "Get-Content 'filename.txt'",
+        "Get-Content 'filename.txt' | Out-Host -Paging"
+      ]
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-Content 'filename.txt' | Out-Host -Paging",
+      "score": 7.2234,
+      "confidence": 90,
+      "latency_ms": 2.5915
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B076",
+    "query": "clean up docker",
+    "category": "docker",
+    "query_type": "ambiguous",
+    "difficulty": "medium",
+    "risk_level": "high",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "docker image prune -a",
+      "acceptable_commands": [
+        "docker image prune -a"
+      ]
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Resolve-DnsName example.com -Type ALL",
+      "score": 5.4377,
+      "confidence": 68,
+      "latency_ms": 2.576
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "semantic_mismatch",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B077",
+    "query": "check git configuration",
+    "category": "git",
+    "query_type": "ambiguous",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git config --list",
+      "acceptable_commands": [
+        "git config --list"
+      ]
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git config --list",
+      "score": 7.8976,
+      "confidence": 99,
+      "latency_ms": 2.3646
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B078",
+    "query": "make a cappuccino",
+    "category": "general",
+    "query_type": "ood",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "OOD",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass",
+      "score": 4.2414,
+      "confidence": 53,
+      "latency_ms": 2.0635
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT",
+      "error_category": "ood_false_acceptance",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B079",
+    "query": "what is the meaning of life",
+    "category": "general",
+    "query_type": "ood",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "OOD",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 2.2449
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B080",
+    "query": "book a flight to Tokyo",
+    "category": "general",
+    "query_type": "ood",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "OOD",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 3.2703
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B081",
+    "query": "translate this sentence to French",
+    "category": "general",
+    "query_type": "ood",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "OOD",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 2.5987
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B082",
+    "query": "design a logo for my company",
+    "category": "general",
+    "query_type": "ood",
+    "difficulty": "easy",
+    "risk_level": "low",
+    "expected": {
+      "classification": "OOD",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 1.9956
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B083",
+    "query": "compile a Rust project with cargo",
+    "category": "general",
+    "query_type": "ood",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "OOD",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm init -y",
+      "score": 5.1039,
+      "confidence": 64,
+      "latency_ms": 3.8905
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT",
+      "error_category": "ood_false_acceptance",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B084",
+    "query": "connect to a PostgreSQL database",
+    "category": "general",
+    "query_type": "ood",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "OOD",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "tmux attach -t session-name",
+      "score": 4.9385,
+      "confidence": 62,
+      "latency_ms": 2.2317
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT",
+      "error_category": "ood_false_acceptance",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B085",
+    "query": "create a new React app",
+    "category": "general",
+    "query_type": "ood",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "OOD",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm init -y",
+      "score": 7.2974,
+      "confidence": 91,
+      "latency_ms": 1.9863
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT",
+      "error_category": "ood_false_acceptance",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B086",
+    "query": "edit my crontab using vim",
+    "category": "general",
+    "query_type": "ood",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "OOD",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "crontab -e",
+      "score": 5.3174,
+      "confidence": 66,
+      "latency_ms": 2.9223
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT",
+      "error_category": "ood_false_acceptance",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B087",
+    "query": "set up a Python Flask web server",
+    "category": "general",
+    "query_type": "ood",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "OOD",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Resolve-DnsName example.com -Type ALL",
+      "score": 5.4377,
+      "confidence": 68,
+      "latency_ms": 3.0045
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT",
+      "error_category": "ood_false_acceptance",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B088",
+    "query": "write a unit test in jest",
+    "category": "general",
+    "query_type": "ood",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "OOD",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "command 2>'error.txt'",
+      "score": 4.9385,
+      "confidence": 62,
+      "latency_ms": 2.4418
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT",
+      "error_category": "ood_false_acceptance",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B089",
+    "query": "play music from the command line",
+    "category": "general",
+    "query_type": "ood",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "OOD",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "!keyword",
+      "score": 5.832,
+      "confidence": 73,
+      "latency_ms": 7.5284
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT",
+      "error_category": "ood_false_acceptance",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B090",
+    "query": "scan my network for other devices",
+    "category": "general",
+    "query_type": "ood",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "OOD",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "clamscan -r /path/to/scan",
+      "score": 6.8449,
+      "confidence": 86,
+      "latency_ms": 6.9153
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT",
+      "error_category": "ood_false_acceptance",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B091",
+    "query": "configure nginx reverse proxy",
+    "category": "general",
+    "query_type": "ood",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "OOD",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Set-Service -Name 'service-name' -StartupType Automatic",
+      "score": 5.2357,
+      "confidence": 65,
+      "latency_ms": 3.9226
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT",
+      "error_category": "ood_false_acceptance",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B092",
+    "query": "send an email from the terminal",
+    "category": "general",
+    "query_type": "ood",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "OOD",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Clear-Host",
+      "score": 7.8833,
+      "confidence": 99,
+      "latency_ms": 4.0411
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT",
+      "error_category": "ood_false_acceptance",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B093",
+    "query": "delete a directory and all its contents recursively",
+    "category": "filesystem",
+    "query_type": "polysemy",
+    "difficulty": "adversarial",
+    "risk_level": "critical",
+    "expected": {
+      "classification": "NEEDS_CORRECTION",
+      "gold_command": "Remove-Item -Recurse -Force 'directory/'",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Remove-Item -Recurse -Force 'directory/'",
+      "score": 19.119,
+      "confidence": 100,
+      "latency_ms": 2.5397
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "NEEDS_CORRECTION"
+    }
+  },
+  {
+    "id": "TA-B094",
+    "query": "remove all files from the current directory",
+    "category": "filesystem",
+    "query_type": "polysemy",
+    "difficulty": "adversarial",
+    "risk_level": "critical",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Remove-Item -Recurse -Force 'directory/'",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+      "score": 8.8038,
+      "confidence": 100,
+      "latency_ms": 3.5254
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "lexical_polysemy",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B095",
+    "query": "kill the application",
+    "category": "process",
+    "query_type": "polysemy",
+    "difficulty": "medium",
+    "risk_level": "medium",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Stop-Process -Name 'process_name' -Force",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Stop-Process -Name 'process_name' -Force",
+      "score": 6.1905,
+      "confidence": 77,
+      "latency_ms": 2.859
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B096",
+    "query": "run the test suite",
+    "category": "npm",
+    "query_type": "polysemy",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "npm run script-name",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Test-Connection -ComputerName google.com -Count 4",
+      "score": 4.5553,
+      "confidence": 57,
+      "latency_ms": 2.823
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "lexical_polysemy",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B097",
+    "query": "open the config file",
+    "category": "filesystem",
+    "query_type": "polysemy",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-Content 'filename.txt'",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "winget uninstall package-name --purge",
+      "score": 6.0324,
+      "confidence": 75,
+      "latency_ms": 3.2206
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "lexical_polysemy",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B098",
+    "query": "change the file permissions",
+    "category": "permissions",
+    "query_type": "polysemy",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "icacls 'directory/' /grant 'user:(OI)(CI)F' /T",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "icacls 'filename.txt' /setowner 'user'",
+      "score": 12.821,
+      "confidence": 100,
+      "latency_ms": 2.1886
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "lexical_polysemy",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B099",
+    "query": "list the images",
+    "category": "docker",
+    "query_type": "polysemy",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "docker images",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker images",
+      "score": 8.7849,
+      "confidence": 100,
+      "latency_ms": 2.2786
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B100",
+    "query": "make a new project",
+    "category": "npm",
+    "query_type": "polysemy",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "npm init -y",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm init -y",
+      "score": 9.4007,
+      "confidence": 100,
+      "latency_ms": 3.1621
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B101",
+    "query": "start the services",
+    "category": "docker",
+    "query_type": "polysemy",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "docker compose up -d",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker compose up -d",
+      "score": 11.0165,
+      "confidence": 100,
+      "latency_ms": 2.9415
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B102",
+    "query": "stop everything running",
+    "category": "docker",
+    "query_type": "polysemy",
+    "difficulty": "adversarial",
+    "risk_level": "high",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "docker stop $(docker ps -q)",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker stop $(docker ps -q)",
+      "score": 10.208,
+      "confidence": 100,
+      "latency_ms": 2.5597
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B103",
+    "query": "check the status",
+    "category": "git",
+    "query_type": "polysemy",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git status",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-Service -Name 'service-name'",
+      "score": 9.274,
+      "confidence": 100,
+      "latency_ms": 3.3488
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "lexical_polysemy",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B104",
+    "query": "create a new volume",
+    "category": "docker",
+    "query_type": "polysemy",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "docker volume create my-volume",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker volume create my-volume",
+      "score": 11.0165,
+      "confidence": 100,
+      "latency_ms": 2.1757
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B105",
+    "query": "show the log",
+    "category": "git",
+    "query_type": "polysemy",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "AMBIGUOUS",
+      "gold_command": "git log --oneline -20",
+      "acceptable_commands": [
+        "git log --oneline -20"
+      ]
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git log --oneline -20",
+      "score": 5.4242,
+      "confidence": 68,
+      "latency_ms": 2.35
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B106",
+    "query": "set the name",
+    "category": "git",
+    "query_type": "polysemy",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git config --global user.name 'Your Name'",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git config --global user.name 'Your Name'",
+      "score": 8.2728,
+      "confidence": 100,
+      "latency_ms": 3.0144
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B107",
+    "query": "install the package",
+    "category": "npm",
+    "query_type": "polysemy",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "npm install package-name",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "winget install package-name",
+      "score": 10.0356,
+      "confidence": 100,
+      "latency_ms": 2.4052
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "lexical_polysemy",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B108",
+    "query": "show network information",
+    "category": "network",
+    "query_type": "polysemy",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-NetAdapter",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-CimInstance Win32_Processor",
+      "score": 7.4288,
+      "confidence": 93,
+      "latency_ms": 2.0472
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "lexical_polysemy",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B109",
+    "query": "create a link to the file",
+    "category": "filesystem",
+    "query_type": "polysemy",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "New-Item -ItemType SymbolicLink -Path '/path/to/link' -Target '/path/to/target'",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "New-Item -ItemType SymbolicLink -Path '/path/to/link' -Target '/path/to/target'",
+      "score": 11.1698,
+      "confidence": 100,
+      "latency_ms": 3.4054
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B110",
+    "query": "remove the package",
+    "category": "npm",
+    "query_type": "polysemy",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "npm uninstall package-name",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "winget uninstall package-name",
+      "score": 7.8321,
+      "confidence": 98,
+      "latency_ms": 2.3777
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "lexical_polysemy",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B111",
+    "query": "git",
+    "category": "git",
+    "query_type": "single_keyword",
+    "difficulty": "adversarial",
+    "risk_level": "low",
+    "expected": {
+      "classification": "AMBIGUOUS",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git config --list",
+      "score": 17.9907,
+      "confidence": 100,
+      "latency_ms": 4.097
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT",
+      "error_category": "ambiguity_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B112",
+    "query": "docker",
+    "category": "docker",
+    "query_type": "single_keyword",
+    "difficulty": "adversarial",
+    "risk_level": "low",
+    "expected": {
+      "classification": "AMBIGUOUS",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker pull ubuntu:22.04",
+      "score": 19.2181,
+      "confidence": 100,
+      "latency_ms": 3.9786
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT",
+      "error_category": "ambiguity_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B113",
+    "query": "ssh",
+    "category": "ssh",
+    "query_type": "single_keyword",
+    "difficulty": "adversarial",
+    "risk_level": "low",
+    "expected": {
+      "classification": "AMBIGUOUS",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ssh user@hostname",
+      "score": 20.4988,
+      "confidence": 100,
+      "latency_ms": 2.8027
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT",
+      "error_category": "ambiguity_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B114",
+    "query": "network",
+    "category": "network",
+    "query_type": "single_keyword",
+    "difficulty": "adversarial",
+    "risk_level": "low",
+    "expected": {
+      "classification": "AMBIGUOUS",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-NetAdapter",
+      "score": 19.6367,
+      "confidence": 100,
+      "latency_ms": 3.8017
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT",
+      "error_category": "ambiguity_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B115",
+    "query": "permissions",
+    "category": "permissions",
+    "query_type": "single_keyword",
+    "difficulty": "adversarial",
+    "risk_level": "low",
+    "expected": {
+      "classification": "AMBIGUOUS",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "icacls 'directory/' /grant 'user:(OI)(CI)F' /T",
+      "score": 20.3759,
+      "confidence": 100,
+      "latency_ms": 2.5812
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT",
+      "error_category": "ambiguity_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B116",
+    "query": "process",
+    "category": "process",
+    "query_type": "single_keyword",
+    "difficulty": "adversarial",
+    "risk_level": "low",
+    "expected": {
+      "classification": "AMBIGUOUS",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Stop-Process -Id PID -Force",
+      "score": 19.5338,
+      "confidence": 100,
+      "latency_ms": 2.5845
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT",
+      "error_category": "ambiguity_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B117",
+    "query": "npm packages",
+    "category": "npm",
+    "query_type": "single_keyword",
+    "difficulty": "adversarial",
+    "risk_level": "low",
+    "expected": {
+      "classification": "AMBIGUOUS",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm list -g --depth=0",
+      "score": 24.2144,
+      "confidence": 100,
+      "latency_ms": 3.0486
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT",
+      "error_category": "ambiguity_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B118",
+    "query": "kubernetes",
+    "category": "kubernetes",
+    "query_type": "single_keyword",
+    "difficulty": "adversarial",
+    "risk_level": "low",
+    "expected": {
+      "classification": "AMBIGUOUS",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "kubectl describe deployment deployment-name -n namespace",
+      "score": 20.2224,
+      "confidence": 100,
+      "latency_ms": 2.6922
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT",
+      "error_category": "ambiguity_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B119",
+    "query": "files",
+    "category": "filesystem",
+    "query_type": "single_keyword",
+    "difficulty": "adversarial",
+    "risk_level": "low",
+    "expected": {
+      "classification": "AMBIGUOUS",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Force",
+      "score": 18.82,
+      "confidence": 100,
+      "latency_ms": 3.2683
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT",
+      "error_category": "ambiguity_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B120",
+    "query": "curl",
+    "category": "curl",
+    "query_type": "single_keyword",
+    "difficulty": "adversarial",
+    "risk_level": "low",
+    "expected": {
+      "classification": "AMBIGUOUS",
+      "gold_command": null,
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "curl -H 'Authorization: Bearer token' https://api.example.com",
+      "score": 20.2692,
+      "confidence": 100,
+      "latency_ms": 4.1529
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT",
+      "error_category": "ambiguity_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B121",
+    "query": "remove a directory and its contents",
+    "category": "filesystem",
+    "query_type": "safety_sensitive",
+    "difficulty": "easy",
+    "risk_level": "high",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Remove-Item -Recurse -Force 'directory/'",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Remove-Item -Recurse -Force 'directory/'",
+      "score": 30.3157,
+      "confidence": 100,
+      "latency_ms": 2.6292
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B122",
+    "query": "wipe all my uncommitted changes and reset to the last commit",
+    "category": "git",
+    "query_type": "safety_sensitive",
+    "difficulty": "medium",
+    "risk_level": "high",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git reset --hard HEAD && git clean -fd",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git reset --hard HEAD && git clean -fd",
+      "score": 17.3311,
+      "confidence": 100,
+      "latency_ms": 3.4508
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B123",
+    "query": "reset working directory to last commit",
+    "category": "git",
+    "query_type": "safety_sensitive",
+    "difficulty": "easy",
+    "risk_level": "high",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git checkout -- .",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git checkout -- .",
+      "score": 35.0601,
+      "confidence": 100,
+      "latency_ms": 2.6274
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B124",
+    "query": "force delete a local git branch",
+    "category": "git",
+    "query_type": "safety_sensitive",
+    "difficulty": "easy",
+    "risk_level": "high",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git branch -D branch-name",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git branch -D branch-name",
+      "score": 35.1808,
+      "confidence": 100,
+      "latency_ms": 2.6732
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B125",
+    "query": "stop all running docker containers",
+    "category": "docker",
+    "query_type": "safety_sensitive",
+    "difficulty": "easy",
+    "risk_level": "high",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "docker stop $(docker ps -q)",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker stop $(docker ps -q)",
+      "score": 36.7538,
+      "confidence": 100,
+      "latency_ms": 4.4661
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B126",
+    "query": "remove all unused docker images",
+    "category": "docker",
+    "query_type": "safety_sensitive",
+    "difficulty": "easy",
+    "risk_level": "high",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "docker image prune -a",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker image prune -a",
+      "score": 37.9268,
+      "confidence": 100,
+      "latency_ms": 2.6191
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B127",
+    "query": "elevate to administrator privileges",
+    "category": "permissions",
+    "query_type": "safety_sensitive",
+    "difficulty": "medium",
+    "risk_level": "critical",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Start-Process powershell -Verb RunAs",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Start-Process powershell -Verb RunAs",
+      "score": 5.656,
+      "confidence": 71,
+      "latency_ms": 3.0365
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B128",
+    "query": "change file owner",
+    "category": "permissions",
+    "query_type": "safety_sensitive",
+    "difficulty": "easy",
+    "risk_level": "high",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "icacls 'filename.txt' /setowner 'user'",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "icacls 'filename.txt' /setowner 'user'",
+      "score": 31.1539,
+      "confidence": 100,
+      "latency_ms": 3.1011
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B129",
+    "query": "reboot the system",
+    "category": "system",
+    "query_type": "safety_sensitive",
+    "difficulty": "easy",
+    "risk_level": "critical",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "sudo reboot",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "sudo reboot",
+      "score": 25.7513,
+      "confidence": 100,
+      "latency_ms": 2.4389
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B130",
+    "query": "shut down the system",
+    "category": "system",
+    "query_type": "safety_sensitive",
+    "difficulty": "easy",
+    "risk_level": "critical",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "sudo shutdown -h now",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "sudo shutdown -h now",
+      "score": 30.4816,
+      "confidence": 100,
+      "latency_ms": 2.7364
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B131",
+    "query": "block an ip address with firewall",
+    "category": "network",
+    "query_type": "safety_sensitive",
+    "difficulty": "easy",
+    "risk_level": "high",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "New-NetFirewallRule -DisplayName 'Block IP' -Direction Inbound -RemoteAddress '192.168.1.100' -Action Block",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "New-NetFirewallRule -DisplayName 'Block IP' -Direction Inbound -RemoteAddress '192.168.1.100' -Action Block",
+      "score": 36.8424,
+      "confidence": 100,
+      "latency_ms": 3.6611
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B132",
+    "query": "delete all completed or failed pods in a namespace",
+    "category": "kubernetes",
+    "query_type": "safety_sensitive",
+    "difficulty": "easy",
+    "risk_level": "high",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "kubectl delete pods --field-selector=status.phase=Failed -n namespace",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "kubectl delete pods --field-selector=status.phase=Failed -n namespace",
+      "score": 44.3501,
+      "confidence": 100,
+      "latency_ms": 2.4413
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B133",
+    "query": "purge a package completely including config files",
+    "category": "package",
+    "query_type": "safety_sensitive",
+    "difficulty": "medium",
+    "risk_level": "high",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "winget uninstall package-name --purge",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "winget uninstall package-name --purge",
+      "score": 18.4536,
+      "confidence": 100,
+      "latency_ms": 3.0033
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B134",
+    "query": "set the hostname of this machine",
+    "category": "system",
+    "query_type": "safety_sensitive",
+    "difficulty": "medium",
+    "risk_level": "high",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Rename-Computer -NewName 'new-hostname' -Force",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Rename-Computer -NewName 'new-hostname' -Force",
+      "score": 16.053,
+      "confidence": 100,
+      "latency_ms": 2.9804
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B135",
+    "query": "remove all unused docker volumes",
+    "category": "docker",
+    "query_type": "safety_sensitive",
+    "difficulty": "easy",
+    "risk_level": "high",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "docker volume prune -f",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker volume prune -f",
+      "score": 32.949,
+      "confidence": 100,
+      "latency_ms": 2.1568
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B136",
+    "query": "I need to find all the python files in my project that were changed today, can you help?",
+    "category": "find",
+    "query_type": "complex_multi_intent",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+      "score": 18.3764,
+      "confidence": 100,
+      "latency_ms": 2.749
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B137",
+    "query": "search for all lines containing ERROR in the log files and show me the surrounding context",
+    "category": "grep",
+    "query_type": "complex_multi_intent",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Select-String -Path 'file.txt' -Pattern 'pattern' -Context 3,3",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Select-String -Path 'file.txt' -Pattern 'pattern' -Context 3,3",
+      "score": 10.5834,
+      "confidence": 100,
+      "latency_ms": 3.268
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B138",
+    "query": "deploy my kubernetes cluster to production with rolling updates",
+    "category": "kubernetes",
+    "query_type": "complex_multi_intent",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "kubectl apply -f manifest.yaml",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "kubectl get events --sort-by='.lastTimestamp' -n namespace",
+      "score": 8.578,
+      "confidence": 100,
+      "latency_ms": 2.3389
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "complex_intent_failure",
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B139",
+    "query": "show me who changed each line in the README and when they did it",
+    "category": "git",
+    "query_type": "complex_multi_intent",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git blame filename.txt",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git blame filename.txt",
+      "score": 14.9068,
+      "confidence": 100,
+      "latency_ms": 2.3897
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B140",
+    "query": "copy my ssh key to the server so I don't have to enter a password",
+    "category": "ssh",
+    "query_type": "complex_multi_intent",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "ssh-copy-id user@hostname",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ssh-copy-id user@hostname",
+      "score": 19.3986,
+      "confidence": 100,
+      "latency_ms": 2.7845
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B141",
+    "query": "find the commit that broke my tests using binary search",
+    "category": "git",
+    "query_type": "complex_multi_intent",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git bisect start && git bisect bad HEAD && git bisect good <good-commit>",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git bisect start && git bisect bad HEAD && git bisect good <good-commit>",
+      "score": 18.8717,
+      "confidence": 100,
+      "latency_ms": 2.3712
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B142",
+    "query": "squash my last 5 commits into one before pushing",
+    "category": "git",
+    "query_type": "complex_multi_intent",
+    "difficulty": "hard",
+    "risk_level": "high",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git rebase -i HEAD~5",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git rebase -i HEAD~5",
+      "score": 19.7768,
+      "confidence": 100,
+      "latency_ms": 2.8914
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B143",
+    "query": "create a zip archive of this folder and name it backup.zip",
+    "category": "archive",
+    "query_type": "complex_multi_intent",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+      "score": 15.2659,
+      "confidence": 100,
+      "latency_ms": 2.825
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B144",
+    "query": "forward port 8080 on my machine to port 80 on the kubernetes pod",
+    "category": "kubernetes",
+    "query_type": "complex_multi_intent",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+      "score": 28.6582,
+      "confidence": 100,
+      "latency_ms": 2.4135
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B145",
+    "query": "set up an SSH tunnel to access a remote database on port 5432",
+    "category": "ssh",
+    "query_type": "complex_multi_intent",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "NEEDS_CORRECTION",
+      "gold_command": "ssh -L 5432:localhost:5432 user@hostname",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ssh -L 8080:localhost:80 user@hostname",
+      "score": 16.8841,
+      "confidence": 100,
+      "latency_ms": 2.4709
+    },
+    "evaluation": {
+      "status": "INCORRECT",
+      "error_category": "complex_intent_failure",
+      "gold_status": "NEEDS_CORRECTION"
+    }
+  },
+  {
+    "id": "TA-B146",
+    "query": "monitor which processes are using the most CPU and sort them",
+    "category": "process",
+    "query_type": "complex_multi_intent",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-Process | Sort-Object CPU -Descending",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-Process | Sort-Object CPU -Descending",
+      "score": 12.5807,
+      "confidence": 100,
+      "latency_ms": 2.7905
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B147",
+    "query": "encrypt this sensitive document so nobody else can read it",
+    "category": "security",
+    "query_type": "complex_multi_intent",
+    "difficulty": "medium",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "gpg -c filename.txt",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "gpg -c filename.txt",
+      "score": 7.7952,
+      "confidence": 97,
+      "latency_ms": 2.5789
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B148",
+    "query": "download a large file and resume if the connection drops",
+    "category": "curl",
+    "query_type": "complex_multi_intent",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "curl -C - -O https://example.com/largefile.zip",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "curl -C - -O https://example.com/largefile.zip",
+      "score": 11.7845,
+      "confidence": 100,
+      "latency_ms": 2.8681
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B149",
+    "query": "find which process is hogging port 3000 on my machine",
+    "category": "network",
+    "query_type": "complex_multi_intent",
+    "difficulty": "hard",
+    "risk_level": "low",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }",
+      "acceptable_commands": [
+        "netstat -ano | findstr :3000"
+      ]
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }",
+      "score": 17.709,
+      "confidence": 100,
+      "latency_ms": 2.8606
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  },
+  {
+    "id": "TA-B150",
+    "query": "take a specific file from the feature branch without merging everything",
+    "category": "git",
+    "query_type": "complex_multi_intent",
+    "difficulty": "hard",
+    "risk_level": "medium",
+    "expected": {
+      "classification": "CORRECT",
+      "gold_command": "git checkout feature-branch -- path/to/file.txt",
+      "acceptable_commands": []
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git checkout feature-branch -- path/to/file.txt",
+      "score": 13.8067,
+      "confidence": 100,
+      "latency_ms": 2.5847
+    },
+    "evaluation": {
+      "status": "CORRECT",
+      "error_category": null,
+      "gold_status": "VALIDATED"
+    }
+  }
+]

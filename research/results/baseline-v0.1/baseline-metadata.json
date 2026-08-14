@@ -1,0 +1,14 @@
+{
+  "git_commit": "4443ec016c87895ebbc1b9be831e5f80b9bd3b50",
+  "git_branch": "research/baseline",
+  "benchmark_name": "TermAssist-Bench",
+  "benchmark_version": "v0.1-validated",
+  "benchmark_sha256": "2a554d3c3c425192e0fa295f2dc2eae833f92a2ae77feaf0f3ef70996e8c02a0",
+  "node_version": "v24.2.0",
+  "platform": "win32",
+  "os_release": "10.0.26200",
+  "arch": "x64",
+  "timestamp": "2026-08-14T09:40:53.169Z",
+  "termassist_version": "0.1.0",
+  "total_queries": 150
+}
