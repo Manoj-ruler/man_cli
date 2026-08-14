@@ -1,0 +1,19 @@
+{
+  "benchmark_name": "TermAssist-Bench",
+  "version": "v0.1-validated",
+  "total_queries": 150,
+  "correct": 119,
+  "ambiguous": 14,
+  "ood": 15,
+  "needs_correction": 2,
+  "platform": "win32",
+  "production_code_modified": false,
+  "baseline_executed": false,
+  "validation_status": "frozen",
+  "validated_json_sha256": "2a554d3c3c425192e0fa295f2dc2eae833f92a2ae77feaf0f3ef70996e8c02a0",
+  "validated_csv_sha256": "749053eebb8809f8549e333f63a6639238c86931e39ee72c20fb2f2e0366407d",
+  "created_at": "2026-08-14T09:29:23.268Z",
+  "source_benchmark_version": "0.1.0",
+  "adjudication_report_path": "research/datasets/final_adjudication_report.md",
+  "validation_audit_path": "research/datasets/validation_audit.md"
+}
