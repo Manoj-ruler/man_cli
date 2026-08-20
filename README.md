@@ -1,745 +1,579 @@
 # TermAssist — The Terminal That Understands English
 
 <p align="center">
-  <strong>A local, privacy-first terminal assistant that maps natural language to exact bash commands.</strong>
+  <a href="https://termassist.vercel.app">
+    <img src="https://img.shields.io/badge/TermAssist-v1.0.1-FF2D6B?style=for-the-badge&logo=gnubash&logoColor=white" alt="TermAssist Version" />
+  </a>
+  <a href="https://www.npmjs.com/package/@manoj-ruler/termassist">
+    <img src="https://img.shields.io/npm/v/@manoj-ruler/termassist?color=00F5A0&label=npm%20package&style=for-the-badge&logo=npm" alt="npm package" />
+  </a>
+  <a href="https://github.com/Manoj-ruler/man_cli">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="License: MIT" />
+  </a>
+  <a href="https://termassist.vercel.app">
+    <img src="https://img.shields.io/badge/Cloud%20Dashboard-Next.js%2016-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js 16" />
+  </a>
+  <a href="https://supabase.com">
+    <img src="https://img.shields.io/badge/Database-Supabase%20Postgres-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" />
+  </a>
 </p>
 
 <p align="center">
-  <code>100% Offline</code> · <code>Zero Latency</code> · <code>Complete Privacy</code> · <code>~10MB Install</code>
+  <strong>A lightning-fast, privacy-first terminal assistant and developer dashboard that maps natural language intents to exact bash, zsh, and PowerShell commands.</strong>
+</p>
+
+<p align="center">
+  <code>⚡ &lt; 5ms Search Latency</code> · <code>🔒 100% Offline & Private</code> · <code>🚫 Zero Cloud AI Latency / Costs</code> · <code>📦 ~10MB Lightweight Footprint</code> · <code>🪟 Cross-Platform (Linux / macOS / Windows)</code>
 </p>
 
 ---
 
-## 📖 Table of Contents
+## 📑 Table of Contents
 
-- [What is TermAssist?](#-what-is-termassist)
-- [How It Works (Simple Explanation)](#-how-it-works-simple-explanation)
-- [Architecture Overview](#-architecture-overview)
-- [Quick Start](#-quick-start)
-- [Installation Guide](#-installation-guide)
-- [Usage Examples](#-usage-examples)
-- [Dashboard Features](#-dashboard-features)
-- [Custom Snippets](#-custom-snippets)
-- [Privacy & Security](#-privacy--security)
-- [Project Structure](#-project-structure)
-- [Tech Stack](#-tech-stack)
-- [Contributing](#-contributing)
-- [License](#-license)
-
----
-
-## 🎯 What is TermAssist?
-
-TermAssist is a tool that helps you use your computer's **terminal** (also called command prompt or console) by typing **normal English sentences** instead of complicated commands.
-
-### The Problem
-
-Normally, to use a terminal, you need to memorize complex commands:
-
-```
-❌ Hard to remember:  find . -name '*.py' -mtime -1
-❌ Complex syntax:     tar -czf archive.tar.gz directory/
-❌ Easy to typo:       git reset --soft HEAD~1
-```
-
-### The Solution
-
-With TermAssist, you just type what you want in English:
-
-```
-✅ Easy:  ?? find all python files modified today
-✅ Easy:  ?? compress a directory into a tar.gz archive
-✅ Easy:  ?? undo last git commit but keep changes
-```
-
-TermAssist understands what you mean and shows you the exact command to run!
+- [Overview](#-overview)
+- [Why TermAssist?](#-why-termassist)
+- [System Architecture](#-system-architecture)
+- [Search Engine Mechanics (BM25 + Heuristics)](#-search-engine-mechanics-bm25--heuristics)
+- [⚡ Quick Start & Installation](#-quick-start--installation)
+  - [1. Install via npm](#1-install-via-npm)
+  - [2. Instant Verification](#2-instant-verification)
+  - [3. Configure Shell Aliases (`??`)](#3-configure-shell-aliases-)
+  - [4. Optional: Connect Cloud Dashboard](#4-optional-connect-cloud-dashboard)
+- [🎮 CLI Modes & Usage](#-cli-modes--usage)
+  - [Natural Language Direct Match](#natural-language-direct-match)
+  - [Interactive Command Palette](#interactive-command-palette)
+  - [Edit-Before-Execute Safety Shield](#edit-before-execute-safety-shield)
+  - [Synchronizing Custom Snippets](#synchronizing-custom-snippets)
+- [💡 Example Command Mappings](#-example-command-mappings)
+- [🌐 Web Dashboard & Cloud Ecosystem](#-web-dashboard--cloud-ecosystem)
+- [🗄️ Database & Security Architecture](#-database--security-architecture)
+- [🔬 Research & Evaluation Benchmark](#-research--evaluation-benchmark)
+- [📁 Project Structure](#-project-structure)
+- [🛠️ Local Development & Setup](#-local-development--setup)
+- [🤝 Contributing](#-contributing)
+- [📄 License & Author](#-license--author)
 
 ---
 
-## 🚀 How It Works (Simple Explanation)
+## 🎯 Overview
 
+**TermAssist** bridges the gap between human thought and the command line. Instead of context-switching to browser tabs, man pages, or waiting on cloud LLMs with unpredictable formatting, TermAssist lets developers express terminal intent in plain English and returns deterministic, production-ready commands in under **5 milliseconds**.
+
+```text
+                                 TermAssist Pipeline
+   ┌──────────────────────┐      ┌─────────────────────────┐      ┌──────────────────────┐
+   │ "undo last commit    │ ───► │  In-Memory BM25 Index   │ ───► │ git reset --soft     │
+   │  and keep changes"   │      │  + Exact Intent Booster │      │ HEAD~1               │
+   └──────────────────────┘      └─────────────────────────┘      └──────────────────────┘
+                                           │ (< 5ms)                         │
+                                           ▼                                 ▼
+                                ┌─────────────────────┐          ┌──────────────────────┐
+                                │ Confidence: 100%    │          │ Interactive Edit &   │
+                                │ Category: git       │          │ Prompt Confirmation  │
+                                └─────────────────────┘          └──────────────────────┘
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                        YOUR QUESTION                             │
-│                   "find python files"                            │
-└─────────────────────────┬───────────────────────────────────────┘
-                          │
-                          ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    TERM ASSIST CLI                               │
-│                                                                  │
-│  Step 1: Break your question into words                         │
-│          ["find", "python", "files"]                             │
-│                                                                  │
-│  Step 2: Search through 250+ commands using BM25 algorithm      │
-│          (takes less than 50 milliseconds!)                      │
-│                                                                  │
-│  Step 3: Find the best match with confidence score              │
-│          Match: find . -name '*.py' -mtime -1                   │
-│          Confidence: 95%                                         │
-│                                                                  │
-│  Step 4: Show you the command and ask to run it                 │
-│          "🚀 Ready to execute (Edit if needed):"                 │
-└─────────────────────────┬───────────────────────────────────────┘
-                          │
-                          ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    YOUR DECISION                                 │
-│                                                                  │
-│  Option A: Press Enter → Command runs immediately               │
-│  Option B: Edit command → Your changes run                      │
-│  Option C: Press Ctrl+C → Cancel, nothing happens               │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-### Key Points:
-
-- ✅ **Everything happens on your computer** - no internet needed for searching
-- ✅ **Super fast** - less than 50 milliseconds (0.05 seconds)
-- ✅ **Private** - your questions never leave your machine during search
-- ✅ **250+ built-in commands** - covering git, docker, npm, networking, and more
 
 ---
 
-## 🏗️ Architecture Overview
+## 🌟 Why TermAssist?
 
-### High-Level System Flow
+| Capability | Cloud AI Terminal Wrappers | Generic Shell History (`Ctrl+R`) | TermAssist |
+| :--- | :--- | :--- | :--- |
+| **Search Latency** | 800ms – 3,000ms (Network + LLM) | < 1ms | **< 5ms (Local BM25)** |
+| **Privacy & Data Leakage** | ⚠️ Shell context sent to 3rd-party clouds | ✅ Fully Local | **🔒 100% Offline & Air-Gapped Search** |
+| **Operational Cost** | 💸 Monthly subscription or API tokens | 🆓 Free | **🆓 100% Free & Open Source (MIT)** |
+| **Execution Safety** | ⚠️ Can hallucinate destructive syntax | ✅ Exact past commands | **🛡️ Curated Corpus + Edit-Before-Run** |
+| **Cross-Platform OS** | ⚠️ Often POSIX-only | ⚠️ Machine-dependent | **🐧 Linux · 🍎 macOS · 🪟 Windows PowerShell** |
+| **Cloud Sync & Analytics**| ⚠️ Tied to proprietary servers | ❌ None | **🌐 Optional Next.js 16 + Supabase Sync** |
+
+---
+
+## 🏗️ System Architecture
+
+### High-Level Architecture
 
 ```mermaid
-graph TB
-    A[User Types Question] --> B[TermAssist CLI]
-    B --> C{Local Search}
-    C -->|< 50ms| D[Find Best Command Match]
-    D --> E[Show to User]
-    E --> F{User Decision}
-    F -->|Run| G[Execute Command]
-    F -->|Edit| H[Modified Command Runs]
-    F -->|Cancel| I[Nothing Happens]
-    G --> J{Sync Enabled?}
-    J -->|Yes| K[Send to Dashboard API]
-    J -->|No| L[Stay Offline]
-    K --> M[Dashboard Database]
-    M --> N[Analytics & History]
-```
+flowchart TD
+    subgraph Client Terminal ["💻 Client Terminal (Local Environment)"]
+        User["Developer Intent: '?? find large files'"]
+        CLI["TermAssist CLI Engine\n(@manoj-ruler/termassist)"]
+        BM25["BM25 Dynamic Inverted Index\n(cli/search.js)"]
+        Corpus[("250+ Curated Commands\n(cli/data/commands.json)")]
+        CustomLocal[("Local Custom Snippets\n(~/.termassist/custom_snippets.json)")]
+        Inquirer["Interactive Safety Prompt\n(@inquirer/prompts)"]
+        Executor["Child Process Spawn\n(POSIX Bash / Win32 PowerShell)"]
 
-### CLI ↔ Dashboard Sync Flow
+        User --> CLI
+        CLI --> BM25
+        Corpus --> BM25
+        CustomLocal --> BM25
+        BM25 --> Inquirer
+        Inquirer -->|Confirm / Edit| Executor
+    end
 
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant CLI as TermAssist CLI
-    participant CFG as Config File
-    participant API as Dashboard API
-    participant DB as Database
-    
-    U->>CLI: ?? find python files
-    CLI->>CLI: Local BM25 Search
-    CLI->>U: find . -name '*.py' -mtime -1
-    U->>CLI: Press Enter (runs command)
-    
-    alt Sync Enabled
-        CLI->>CFG: Read api_token & api_url
-        CLI->>API: POST /api/queries (with token)
-        API->>DB: Store query in command_queries
-        DB-->>API: Success
-        API-->>CLI: 201 Created
-    else Sync Disabled
-        CLI->>CLI: No network call
+    subgraph Cloud Ecosystem ["☁️ Optional Cloud Dashboard (Next.js 16 + Supabase)"]
+        API_Q["POST /api/queries\n(Telemetry Logging)"]
+        API_S["GET & POST /api/snippets\n(Custom Command Sync)"]
+        DB[(Supabase PostgreSQL\nRow Level Security)]
+        WebUI["Web Dashboard\n(App Router / Recharts / Tailwind v4)"]
+
+        CLI -.->|Silent Telemetry if Enabled| API_Q
+        CLI -.->|termassist sync| API_S
+        API_Q --> DB
+        API_S --> DB
+        DB --> WebUI
     end
 ```
 
-### Custom Snippets Sync Flow
+### Telemetry & Custom Snippet Sync Lifecycle
 
 ```mermaid
 sequenceDiagram
-    participant U as User
-    participant Dash as Dashboard Web
-    participant DB as Database
+    autonumber
+    actor Developer
     participant CLI as TermAssist CLI
-    participant File as Local File
-    
-    U->>Dash: Create snippet in browser
-    Dash->>DB: Save to custom_snippets table
-    
-    U->>CLI: ?? sync
-    CLI->>DB: GET /api/snippets (with token)
-    DB-->>CLI: Return all user snippets
-    CLI->>File: Save to custom_snippets.json
-    
-    Note over CLI: Now snippet works locally!
-    U->>CLI: ?? deploy to production
-    CLI->>CLI: Find custom snippet
-    CLI->>U: ssh user@prod 'cd /var/www && git pull'
+    participant LocalStore as ~/.termassist/
+    participant NextAPI as Next.js API Routes
+    participant Postgres as Supabase PostgreSQL (RLS)
+
+    Note over Developer,CLI: Offline Intent Execution
+    Developer->>CLI: ?? undo last commit
+    CLI->>CLI: Build BM25 TF-IDF Vector & Rank
+    CLI-->>Developer: git reset --soft HEAD~1 (Confidence: 100%)
+    Developer->>CLI: [Enter] Confirm & Execute
+
+    opt Telemetry Sync (if sync_enabled: true)
+        CLI-)NextAPI: POST /api/queries (Bearer Token)
+        NextAPI->>Postgres: INSERT into command_queries
+    end
+
+    Note over Developer,NextAPI: Bidirectional Snippet Sync
+    Developer->>CLI: termassist sync
+    CLI->>NextAPI: GET /api/snippets (Bearer Token)
+    NextAPI->>Postgres: SELECT * FROM custom_snippets WHERE user_id = auth.uid()
+    Postgres-->>NextAPI: User custom snippets
+    NextAPI-->>CLI: JSON Snippet Array
+    CLI->>LocalStore: Write to data/custom_snippets.json
+    CLI-->>Developer: Successfully synced N snippets!
 ```
 
 ---
 
-## ⚡ Quick Start
+## ⚙️ Search Engine Mechanics (BM25 + Heuristics)
 
-### The Fastest Way (5 Minutes)
+TermAssist uses a highly optimized in-memory implementation of the **BM25 (Best Matching 25)** information retrieval algorithm, enhanced with exact substring heuristics:
 
-```bash
-# Step 1: Install TermAssist (package name includes @manoj-ruler/)
-npm install -g @manoj-ruler/termassist
-
-# Step 2: Test it immediately
-termassist "how to list all files"
-
-# Step 3: Use it!
-termassist "find python files"
-termassist "undo last git commit"
-```
-
-That's it! You're using TermAssist. 🎉
+1. **Tokenization & Stopword Filtering**: Normalizes query strings, strips non-alphanumeric noise, and filters high-frequency conversational stop-words (`how`, `to`, `do`, `i`, `can`, `the`).
+2. **Dynamic Inverted Index**: Pre-computes Term Frequency ($TF$) and Inverse Document Frequency ($IDF$) with smoothing:
+   $$\text{IDF}(q_i) = \ln\left(1 + \frac{N - n(q_i) + 0.5}{n(q_i) + 0.5}\right)$$
+3. **BM25 Scoring Function**:
+   $$\text{Score}(D, Q) = \sum_{i=1}^{n} \text{IDF}(q_i) \cdot \frac{f(q_i, D) \cdot (k_1 + 1)}{f(q_i, D) + k_1 \cdot \left(1 - b + b \cdot \frac{|D|}{\text{avgdl}}\right)}$$
+   *(Calibrated with $k_1 = 1.2$, $b = 0.75$)*
+4. **Intent Boost Heuristic**: Grants an immediate $+15.0$ score bonus if the normalized user query contains or matches the command intent verbatim.
+5. **Confidence Calibration**: Synthetically maps the resulting BM25 score to a percentage scale ($0 - 100\%$). Queries with $\text{Score} < 2.0$ or $\text{Confidence} < 30\%$ are rejected to prevent unintended command execution.
 
 ---
 
-## 📦 Installation Guide
+## ⚡ Quick Start & Installation
 
-### Prerequisites
+### 1. Install via npm
 
-Before installing, make sure you have:
-
-- ✅ **Node.js** installed (version 16 or higher)
-  - Download from: https://nodejs.org
-  - Install the "LTS" (Long Term Support) version
-- ✅ **Terminal access** on your computer
-
-### Step-by-Step Installation
-
-#### Step 1: Install TermAssist
+TermAssist is published under the `@manoj-ruler` npm scope. Install it globally:
 
 ```bash
 npm install -g @manoj-ruler/termassist
 ```
 
-The `-g` means "global" - this lets you use TermAssist from any folder. The package on npm is **scoped**: always use `@manoj-ruler/termassist`.
+> **Requirements**: Node.js `>= 16.0.0` (Node.js 18+ recommended).
 
-#### Step 2: Verify installation
+### 2. Instant Verification
+
+Test the CLI directly from any terminal window:
 
 ```bash
-npm list -g @manoj-ruler/termassist
+# Query any command intent
+termassist "list all files with permissions"
+
+# Test interactive mode
+termassist
 ```
 
-You should see the package name and a version number. You can also run `termassist "list files"` — if you get a suggested command, the install worked.
+### 3. Configure Shell Aliases (`??`)
 
-#### Step 3: Create Account on Dashboard
+For the best experience, configure the `??` shortcut in your preferred shell:
 
-1. Go to the TermAssist website
-2. Click "Sign Up"
-3. Create account with Google or Email
-4. Go to Dashboard → Settings
-5. Click "Generate Token"
-6. Copy the token (starts with `ta_`)
+#### 🪟 Windows PowerShell
 
-#### Step 4: Create Configuration File
-
-**On Windows:**
+Add the function to your PowerShell `$PROFILE`:
 
 ```powershell
-# Create the folder
-mkdir $env:USERPROFILE\.termassist
-
-# Create and edit config file
-notepad $env:USERPROFILE\.termassist\config.json
+if (!(Test-Path $PROFILE)) { New-Item -Type File -Path $PROFILE -Force }
+Add-Content -Path $PROFILE -Value "`nfunction ?? { termassist @args }"
 ```
 
-**On Mac/Linux:**
+*Reload shell:* `. $PROFILE`
+
+#### 🍎 macOS (Zsh) & 🐧 Linux (Bash / Zsh)
+
+Append the alias to your shell configuration:
 
 ```bash
-# Create the folder
-mkdir -p ~/.termassist
+# For Zsh (default macOS / modern Linux)
+echo "alias ??='termassist'" >> ~/.zshrc && source ~/.zshrc
 
-# Create and edit config file
-nano ~/.termassist/config.json
+# For Bash (standard Linux / Git Bash)
+echo "alias ??='termassist'" >> ~/.bashrc && source ~/.bashrc
+
+# For Fish shell
+echo "alias ??='termassist'" >> ~/.config/fish/config.fish
 ```
 
-**Add this to the file:**
+Now you can invoke TermAssist directly with:
+
+```bash
+?? compress a directory into tar.gz
+```
+
+### 4. Optional: Connect Cloud Dashboard
+
+To sync custom snippets and monitor command analytics across your workstations:
+
+1. Visit [termassist.vercel.app](https://termassist.vercel.app) and sign in.
+2. Navigate to **Dashboard → Settings** and copy your **CLI API Token** (`ta_...`).
+3. Create or update `~/.termassist/config.json`:
 
 ```json
 {
-  "api_token": "YOUR_TOKEN_HERE",
+  "api_token": "ta_YOUR_GENERATED_TOKEN",
   "api_url": "https://termassist.vercel.app",
   "sync_enabled": true
 }
 ```
 
-Replace `YOUR_TOKEN_HERE` with the token you copied in Step 3.
-
-#### Step 5: Set Up the ?? Shortcut (Optional but Recommended)
-
-**On Windows (PowerShell):**
-
-```powershell
-# Open your profile
-notepad $PROFILE
-
-# Add this line:
-function ?? { termassist @args }
-
-# Save, close PowerShell, and reopen it
-```
-
-**On Mac/Linux:**
-
-```bash
-# For Zsh (default on newer Macs)
-echo "alias ??='termassist'" >> ~/.zshrc
-source ~/.zshrc
-
-# OR for Bash
-echo "alias ??='termassist'" >> ~/.bashrc
-source ~/.bashrc
-```
-
-#### Step 6: Test It!
-
-```bash
-?? how to list files
-```
-
-You should see: `ls -la`
-
-🎉 **Congratulations! TermAssist is fully set up!**
-
 ---
 
-## 💡 Usage Examples
+## 🎮 CLI Modes & Usage
 
-### Basic Usage
+### Natural Language Direct Match
+
+Pass any query as arguments to receive the matched command with category and confidence score:
 
 ```bash
-# Git commands
-?? undo last git commit
-?? create a new branch and switch to it
-?? view git log with one line per commit
+$ ?? undo last git commit but keep changes
 
-# File operations
-?? find all python files modified today
-?? search for TODO comments in all javascript files
-?? find large files bigger than 100mb
+git reset --soft HEAD~1
+category: git  •  confidence: 100%
 
-# Docker
-?? list all running docker containers
-?? stop all running docker containers
-?? build a docker image from dockerfile
-
-# Networking
-?? connect to a remote server via ssh
-?? check ip address of machine
-?? ping a host to check connectivity
-
-# System
-?? monitor system resources in real time
-?? show disk usage of current directory
-?? kill a process by name
+? 🚀 Ready to execute (Edit if needed): git reset --soft HEAD~1
 ```
 
-### Interactive Mode
+### Interactive Command Palette
 
-If you're not sure what you need, use interactive mode:
+Running `termassist` without arguments launches an interactive fuzzy-search prompt over the entire command database and your custom snippets:
 
 ```bash
-# Just type ?? with nothing after it
-??
+$ termassist
 
-# A search box appears - start typing keywords
-# Use arrow keys to navigate
-# Press Enter to select a command
+? 🔍 Search commands (type to filter):
+❯ git reset --soft HEAD~1  - Undo the last commit, keeping all changes staged
+  find . -name '*.py' -mtime -1  - Find Python files modified in the last 24 hours
+  tar -czf archive.tar.gz directory/  - Create a gzipped tar archive of a directory
+  docker system prune -a --volumes  - Remove all unused containers, networks, and images
 ```
 
-### Sync Custom Snippets
+### Edit-Before-Execute Safety Shield
+
+TermAssist never executes a command blindly. Every match is presented inside an interactive prompt:
+- **Press `[Enter]`**: Executes the exact suggested command.
+- **Use `[Left/Right Arrow]` & edit text**: Modify flags, parameters, file names, or ports before running.
+- **Press `[Ctrl + C]`**: Aborts immediately with zero system changes.
+
+### Synchronizing Custom Snippets
+
+Pull all custom commands created on your web dashboard into your local offline database:
 
 ```bash
-# Download your custom snippets from dashboard
+termassist sync
+# or
 ?? sync
 ```
 
 ---
 
-## 🎛️ Dashboard Features
+## 💡 Example Command Mappings
 
-### 1. Overview Page
+TermAssist includes over 250+ curated commands spanning Unix/macOS and Windows PowerShell:
 
-```
-┌─────────────────────────────────────────────────────┐
-│  Welcome back, [Your Name]                          │
-│                                                     │
-│  [Review Queries]  [Manage Snippets]                │
-│                                                     │
-│  ┌──────────┐  ┌──────────┐  ┌──────────────────┐  │
-│  │ Total    │  │ Personal │  │ Recent Query     │  │
-│  │ Queries  │  │ Snippets │  │ "find python..." │  │
-│  │   142    │  │    8     │  │                  │  │
-│  └──────────┘  └──────────┘  └──────────────────┘  │
-│                                                     │
-│  Productivity Tips  │  Configuration               │
-│  - Setup Aliasing   │  [Manage Access Tokens]      │
-│  - Enable Telemetry │                              │
-│  - Privacy First    │                              │
-└─────────────────────────────────────────────────────┘
-```
+### 🐙 Git Version Control
 
-**What you see:**
-- Total number of commands you've run
-- Number of custom snippets you've created
-- Your most recent query
-- Quick links to other pages
+| Natural Language Intent | Generated Command (POSIX) | Windows PowerShell Equivalent |
+| :--- | :--- | :--- |
+| *undo last commit keep changes* | `git reset --soft HEAD~1` | `git reset --soft HEAD~1` |
+| *discard all local changes* | `git reset --hard HEAD` | `git reset --hard HEAD` |
+| *create and switch branch* | `git checkout -b <branch_name>` | `git checkout -b <branch_name>` |
+| *squash last 3 commits* | `git rebase -i HEAD~3` | `git rebase -i HEAD~3` |
+| *delete remote branch* | `git push origin --delete <branch>` | `git push origin --delete <branch>` |
+| *view git commit history as graph* | `git log --graph --oneline --all` | `git log --graph --oneline --all` |
 
-### 2. Commands Page (Query History)
+### 🐳 Docker & Containers
 
-```
-┌─────────────────────────────────────────────────────┐
-│  Commands History                                    │
-│                                                     │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐         │
-│  │ Total    │  │ Top      │  │ Avg      │         │
-│  │ Queries  │  │ Category │  │ Response │         │
-│  │   142    │  │   git    │  │   12ms   │         │
-│  └──────────┘  └──────────┘  └──────────┘         │
-│                                                     │
-│  [Bar Chart - Last 30 Days Usage]                   │
-│  ████  ██  ██████  ███  █████  ██  ████  ██        │
-│                                                     │
-│  🔍 Search queries...                               │
-│                                                     │
-│  Time     │ Query           │ Command      │ Resp   │
-│  ─────────┼─────────────────┼──────────────┼────────│
-│  5m ago   │ find python     │ find . -nam… │ 12ms   │
-│  1h ago   │ undo git commit │ git reset    │ 8ms    │
-│  3h ago   │ list files      │ ls -la       │ 5ms    │
-│                                                     │
-│  Page 1 of 8  [<] [>]                              │
-└─────────────────────────────────────────────────────┘
-```
+| Natural Language Intent | Generated Command |
+| :--- | :--- |
+| *remove all stopped containers* | `docker container prune -f` |
+| *stop all running containers* | `docker stop $(docker ps -q)` |
+| *build image with tag* | `docker build -t <image_name> .` |
+| *inspect container logs with follow* | `docker logs -f <container_id>` |
+| *remove unused images volumes containers* | `docker system prune -a --volumes` |
 
-**What you can do:**
-- View all your past queries
-- Search through your history
-- Copy commands with one click
-- See usage patterns in the chart
+### 🔍 File System & Search
 
-### 3. Snippets Page (Custom Commands)
+| Natural Language Intent | Generated Command (POSIX) | Windows PowerShell Equivalent |
+| :--- | :--- | :--- |
+| *find python files modified today* | `find . -name '*.py' -mtime -1` | `Get-ChildItem -Recurse -Filter '*.py' \| Where-Object { $_.LastWriteTime -gt (Get-Date).Date }` |
+| *search TODO in javascript files* | `grep -rn 'TODO' --include='*.js' .` | `Get-ChildItem -Recurse -Filter '*.js' \| Select-String -Pattern 'TODO'` |
+| *find files larger than 100mb* | `find . -type f -size +100M` | `Get-ChildItem -Recurse \| Where-Object { $_.Length -gt 100MB }` |
+| *count lines of code in project* | `find . -name '*.ts' \| xargs wc -l` | `(Get-ChildItem -Recurse -Filter '*.ts' \| Get-Content \| Measure-Object -Line).Lines` |
 
-```
-┌─────────────────────────────────────────────────────┐
-│  My Snippets                        [+ New Snippet] │
-│                                                     │
-│  🔍 Search by label or tags...                      │
-│                                                     │
-│  ┌─────────────────────┐  ┌──────────────────────┐ │
-│  │ Deploy to Prod      │  │ Backup Database      │ │
-│  │ ssh user@prod...    │  │ pg_dump mydb > ...   │ │
-│  │ [deploy] [server]   │  │ [database] [backup]  │ │
-│  │ [✏️] [🗑️]            │  │ [✏️] [🗑️]              │ │
-│  └─────────────────────┘  └──────────────────────┘ │
-│                                                     │
-│  ┌─────────────────────┐  ┌──────────────────────┐ │
-│  │ Clean Docker        │  │ Install Dependencies │ │
-│  │ docker system prune │  │ npm install          │ │
-│  │ [docker] [cleanup]  │  │ [npm] [setup]        │ │
-│  │ [✏️] [🗑️]            │  │ [✏️] [🗑️]              │ │
-│  └─────────────────────┘  └──────────────────────┘ │
-└─────────────────────────────────────────────────────┘
-```
+### 🌐 Networking & Diagnostics
 
-**What you can do:**
-- Create custom commands
-- Edit existing snippets
-- Delete snippets you don't need
-- Add tags for easy searching
-- Search by label or tags
-
-### 4. Settings Page
-
-```
-┌─────────────────────────────────────────────────────┐
-│  Settings                                            │
-│                                                     │
-│  Account                                             │
-│  Email: user@example.com (read-only)                │
-│                                                     │
-│  ───────────────────────────────────────────────    │
-│  CLI API Token                                       │
-│                                                     │
-│  ta_abc123def456...  [📋 Copy]                      │
-│                                                     │
-│  # Add to ~/.termassist/config.json                 │
-│  {                                                   │
-│    "api_token": "ta_abc123...",                     │
-│    "api_url": "https://termassist.vercel.app",             │
-│    "sync_enabled": true                             │
-│  }                                                   │
-│                                                     │
-│  [🔄 Regenerate Token]                              │
-│                                                     │
-│  ───────────────────────────────────────────────    │
-│  Sync Preferences                                    │
-│                                                     │
-│  [✓] Auto-sync snippets to local CLI                │
-│                                                     │
-│  ───────────────────────────────────────────────    │
-│  ⚠️ Danger Zone                                      │
-│                                                     │
-│  Permanently delete all your data.                   │
-│  [🗑️ Delete All Data]                               │
-└─────────────────────────────────────────────────────┘
-```
-
-**What you can do:**
-- Generate API tokens
-- Copy token for config file
-- Toggle sync on/off
-- Delete all your data
+| Natural Language Intent | Generated Command (POSIX) | Windows PowerShell Equivalent |
+| :--- | :--- | :--- |
+| *find process listening on port 3000* | `lsof -i :3000` | `Get-NetTCPConnection -LocalPort 3000` |
+| *test port connection to remote host* | `nc -zv host 80` | `Test-NetConnection -ComputerName host -Port 80` |
+| *check public ip address* | `curl ifconfig.me` | `(Invoke-WebRequest -Uri "https://ifconfig.me/ip").Content` |
 
 ---
 
-## 📝 Custom Snippets
+## 🌐 Web Dashboard & Cloud Ecosystem
 
-### What Are Custom Snippets?
+The TermAssist web dashboard ([`app/`](file:///c:/Users/manoj/OneDrive/Desktop/MAN-CLI/termassist/app)) provides a companion experience built with **Next.js 16**, **React 19**, **Tailwind CSS v4**, and **Recharts**.
 
-Custom snippets are **your own commands** that you create and save. They work exactly like the built-in TermAssist commands, but you define them yourself.
-
-### How to Create a Snippet
-
-#### Method 1: Using the Dashboard
-
-1. Go to Dashboard → Snippets
-2. Click "New Snippet"
-3. Fill in the form:
-   - **Label**: "Deploy to production server"
-   - **Command**: `ssh user@production.example.com 'cd /var/www && git pull'`
-   - **Description** (optional): "Deploys latest code to production"
-   - **Tags** (optional): `deploy`, `production`, `server`
-4. Click "Save"
-
-#### Method 2: Directly in the JSON File
-
-You can also add snippets directly to `~/.termassist/custom_snippets.json`:
-
-```json
-[
-  {
-    "intent": "deploy to production server",
-    "command": "ssh user@production.example.com 'cd /var/www && git pull'",
-    "category": "custom",
-    "description": "Deploys latest code to production"
-  }
-]
+```text
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│  TERMASSIST DEVELOPER DASHBOARD                                                        │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                        │
+│   ┌─────────────────────┐  ┌─────────────────────┐  ┌──────────────────────────────┐   │
+│   │ Total Queries       │  │ Active Snippets     │  │ Avg Matching Latency         │   │
+│   │ 2,481               │  │ 18                  │  │ 4.2 ms                       │   │
+│   └─────────────────────┘  └─────────────────────┘  └──────────────────────────────┘   │
+│                                                                                        │
+│   📈 Query Frequency (Last 30 Days)           📊 Query Breakdown by Category           │
+│   │   ▄█▄   ▄█    ▄                           │   [■ Git: 42%]  [■ Docker: 28%]        │
+│   │ ▄█████▄████ ▄███▄                         │   [■ Files: 18%] [■ Network: 12%]      │
+│   └───────────────────────────────            └────────────────────────────────────    │
+│                                                                                        │
+│   🏷️ Custom Snippets Management               🔑 API Token Configuration               │
+│   • "Deploy Prod" → ssh prod 'git pull'       • Token: ta_9f82a1... [Copy]             │
+│   • "Purge Redis" → redis-cli flushall        • Auto-Sync: Enabled                     │
+└────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### How to Use Custom Snippets
+- **Analytics & Observability**: Real-time tracking of query trends, top command categories, and latency benchmarks.
+- **Custom Snippet Studio**: Create, edit, tag, and organize recurring company/personal scripts for immediate CLI propagation.
+- **Interactive Command Directory**: Full searchable web index of all standard commands supported by the search engine.
+- **API Token Security**: Issue, rotate, and revoke scoped API keys with instant invalidation.
 
-After creating snippets in the dashboard:
+---
+
+## 🗄️ Database & Security Architecture
+
+The application database schema is managed via Supabase PostgreSQL migrations ([`supabase/migrations/001_init.sql`](file:///c:/Users/manoj/OneDrive/Desktop/MAN-CLI/termassist/supabase/migrations/001_init.sql)) with strict **Row Level Security (RLS)**:
+
+```sql
+-- Query Telemetry Logs (Protected by RLS)
+create table command_queries (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references auth.users(id) on delete cascade not null,
+  query_text text not null,
+  matched_command text not null,
+  category text,
+  response_time_ms integer,
+  success boolean default true,
+  created_at timestamptz default now()
+);
+
+-- User Custom Snippets (Protected by RLS)
+create table custom_snippets (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references auth.users(id) on delete cascade not null,
+  label text not null,
+  command text not null,
+  description text,
+  tags text[] default '{}',
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+-- CLI Authentication Tokens
+create table api_tokens (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references auth.users(id) on delete cascade not null,
+  token text unique not null,
+  created_at timestamptz default now()
+);
+```
+
+### Security & Threat Model
+
+- 🔒 **Air-Gapped Matching**: Local search queries are executed purely in-memory via BM25; no outbound network requests occur during command resolution.
+- 🛡️ **RLS Enforced**: All Supabase database tables enforce strict `auth.uid() = user_id` isolation policies.
+- 🚦 **Rate Limiting**: Public API endpoints (`/api/queries`, `/api/snippets`) implement in-memory token bucket rate limiting (60 req/min per IP).
+- 🔑 **Bearer Token Auth**: CLI telemetry sync authenticates via unique hashed tokens mapped directly to user accounts.
+
+---
+
+## 🔬 Research & Evaluation Benchmark
+
+TermAssist includes an integrated baseline research probing and auditing suite located in [`research/`](file:///c:/Users/manoj/OneDrive/Desktop/MAN-CLI/termassist/research):
 
 ```bash
-# Step 1: Sync to your computer
-?? sync
-
-# Step 2: Use them like any other command
-?? deploy to production
+# Run the automated baseline benchmark probe
+npm run research:probe
 ```
 
----
+### Evaluation Methodology
 
-## 🔒 Privacy & Security
+The probe suite tests the untouched search system against structured probe categories:
+- **`exact_intent_match`**: Ground truth intent queries from `commands.json`.
+- **`paraphrase`**: Semantic variations testing vocabulary generalization.
+- **`natural_language_verbose`**: Conversational user inputs with conversational noise words.
+- **`terse_query`**: 1–2 word minimal queries.
+- **`out_of_domain`**: Non-terminal queries to verify threshold rejection safety.
+- **`ambiguous_risky`**: Potentially destructive commands to measure guardrail reliability.
 
-### What Stays Local (Never Leaves Your Computer)
-
-- ✅ Your search queries (during matching)
-- ✅ The command database
-- ✅ Your custom snippets (stored locally)
-- ✅ The BM25 search algorithm
-
-### What Can Be Synced (Only If You Enable It)
-
-- ⚠️ Query text (what you typed)
-- ⚠️ Matched command (what TermAssist gave you)
-- ⚠️ Response time (how long it took)
-- ⚠️ Success status (did it run?)
-
-### How to Go 100% Offline
-
-Set `sync_enabled: false` in your config:
-
-```json
-{
-  "api_token": "",
-  "api_url": "https://termassist.vercel.app",
-  "sync_enabled": false
-}
-```
-
-When sync is disabled:
-- ❌ No data leaves your computer
-- ❌ No API calls are made
-- ❌ Dashboard won't show new queries
-- ✅ All features still work locally
+Machine-readable evaluation summaries are generated directly to `research/results/baseline-probe.json` and `research/results/baseline-probe.csv` with full environment metadata (commit hash, platform, Node.js version, latency percentiles).
 
 ---
 
 ## 📁 Project Structure
 
-```
-termassist/
+```text
+MAN-CLI/termassist/
+├── 📱 app/                             # Next.js 16 Web Application (App Router)
+│   ├── layout.tsx                     # Root Layout & Typography (DM Sans, Syne, JetBrains Mono)
+│   ├── page.tsx                       # Landing Page with Interactive Hero & Video Demo
+│   ├── globals.css                    # Tailwind CSS v4 Theme & Custom Glassmorphism
+│   ├── proxy.ts                       # SSR Middleware for Route & Auth Protection
+│   ├── auth/                          # Supabase Authentication (Login, Signup, Callback)
+│   ├── blog/                          # Knowledge Base & Command Guides
+│   ├── dashboard/                     # Developer Dashboard
+│   │   ├── page.tsx                   # Overview & Analytics Graphs
+│   │   ├── commands/page.tsx          # Full Command Query History & Log Inspector
+│   │   ├── snippets/page.tsx          # Custom Snippet Studio (Create / Tag / Delete)
+│   │   └── settings/page.tsx          # API Tokens & Sync Preferences
+│   └── api/                           # REST API Endpoints
+│       ├── queries/route.ts           # Telemetry Query Ingestion
+│       └── snippets/route.ts          # Custom Snippet Retrieval & Sync
 │
-├── 📱 Web Application (Next.js)
-│   ├── app/
-│   │   ├── page.tsx                    # Landing page
-│   │   ├── layout.tsx                  # Root layout with fonts
-│   │   │
-│   │   ├── auth/                       # Authentication
-│   │   │   ├── login/page.tsx          # Login page
-│   │   │   ├── signup/page.tsx         # Signup page
-│   │   │   └── callback/route.ts       # OAuth callback
-│   │   │
-│   │   ├── dashboard/                  # Dashboard pages
-│   │   │   ├── page.tsx                # Overview
-│   │   │   ├── commands/page.tsx       # Query history
-│   │   │   ├── snippets/page.tsx       # Custom snippets
-│   │   │   ├── settings/page.tsx       # Settings & tokens
-│   │   │   └── layout.tsx              # Dashboard layout
-│   │   │
-│   │   ├── blog/                       # Knowledge base
-│   │   │   ├── page.tsx                # Blog listing
-│   │   │   └── [slug]/page.tsx         # Blog post
-│   │   │
-│   │   └── api/                        # API routes
-│   │       ├── queries/route.ts        # Log queries
-│   │       └── snippets/route.ts       # Get/create snippets
-│   │
-│   ├── components/                     # React components
-│   │   ├── layout/                     # Navigation
-│   │   ├── ui/                         # Reusable UI
-│   │   ├── terminal/                   # Terminal demo
-│   │   ├── charts/                     # Analytics charts
-│   │   └── snippets/                   # Snippet cards
-│   │
-│   ├── lib/supabase/                   # Database client
-│   └── types/database.ts               # TypeScript types
+├── 💻 cli/                             # Node.js Command Line Interface Package
+│   ├── index.js                       # CLI Binary Entrypoint & Argument Parser
+│   ├── search.js                      # BM25 Inverted Index & Search Algorithm
+│   ├── interactive.js                 # Interactive Terminal Search Mode
+│   ├── sync.js                        # Cloud Telemetry & Snippet Synchronization
+│   ├── config.js                      # Local Config Handler (~/.termassist/config.json)
+│   ├── package.json                   # CLI Package Manifest (@manoj-ruler/termassist)
+│   └── data/
+│       ├── commands.json              # Curated Corpus of 250+ Multi-Platform Commands
+│       └── custom_snippets.json       # Synced Local Custom Snippet Store
 │
-├── 💻 CLI Tool (Node.js)
-│   ├── cli/
-│   │   ├── index.js                    # Main entry point
-│   │   ├── search.js                   # BM25 search engine
-│   │   ├── sync.js                     # Dashboard sync
-│   │   ├── config.js                   # Config management
-│   │   ├── interactive.js              # Interactive mode
-│   │   │
-│   │   └── data/
-│   │       ├── commands.json           # 250+ built-in commands
-│   │       └── custom_snippets.json    # User's custom commands
-│   │
-│   └── config stored in: ~/.termassist/config.json
+├── 🔬 research/                        # Benchmark & Evaluation Infrastructure
+│   ├── README.md                      # Research Protocol & Experiment Guide
+│   ├── probe_baseline.js              # Automated Benchmark Prober
+│   ├── probes/initial_queries.json    # Standardized Evaluation Query Dataset
+│   └── results/                       # Generated Benchmark Results (JSON & CSV)
 │
-└── 🗄️ Database (Supabase)
-    └── supabase/migrations/001_init.sql
-        ├── command_queries             # Query logs
-        ├── custom_snippets             # User snippets
-        └── api_tokens                  # CLI authentication
+├── 🗄️ supabase/                        # Database Infrastructure
+│   └── migrations/
+│       └── 001_init.sql               # PostgreSQL Schema, RLS Policies, Indexes & Triggers
+│
+├── 🧩 components/                      # Reusable React Components
+│   ├── charts/                        # Recharts Visualizations (Area & Bar Charts)
+│   ├── landing/                       # Hero Video, Feature Cards, Comparison Grids
+│   ├── layout/                        # Responsive Navbar & Footer
+│   ├── snippets/                      # Snippet Cards & Tag Filters
+│   ├── terminal/                      # Interactive Terminal Simulator
+│   └── ui/                            # Buttons, Modals, Badges, CodeBlocks
+│
+├── 📦 package.json                     # Root Monorepo / Web Package Manifest
+├── 📄 tsconfig.json                    # TypeScript Configuration
+└── 🛡️ eslint.config.mjs                # Code Quality & Linter Configuration
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Local Development & Setup
 
-### Frontend (Web Dashboard)
-- **Framework**: Next.js 16
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS 4
-- **UI Components**: Custom with Lucide icons
-- **Charts**: Recharts
-- **Authentication**: Supabase Auth (Email + Google OAuth)
+### Prerequisites
+- **Node.js**: `>= 18.0.0`
+- **npm**: `>= 9.0.0`
+- **Supabase Project** (Optional, for dashboard development)
 
-### Backend (API)
-- **Runtime**: Next.js API Routes
-- **Database**: Supabase (PostgreSQL)
-- **Security**: Row Level Security (RLS), Bearer token auth
+### 1. Clone & Install Dependencies
 
-### CLI (Terminal Tool)
-- **Runtime**: Node.js
-- **Search Algorithm**: BM25 (Best Matching 25)
-- **Interactive UI**: @inquirer/prompts
-- **Terminal Styling**: Chalk (ANSI colors)
-- **Config Storage**: JSON files
+```bash
+git clone https://github.com/Manoj-ruler/man_cli.git
+cd man_cli/termassist
 
-### DevOps
-- **Database Migrations**: SQL
-- **Type Safety**: TypeScript + Supabase types
-- **Linting**: ESLint
-- **Package Manager**: npm
+# Install root & web dependencies
+npm install
+
+# Install CLI dependencies
+cd cli && npm install && cd ..
+```
+
+### 2. Environment Variables
+
+Create `.env.local` in the `termassist/` directory:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-supabase-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
+```
+
+### 3. Run Web Dashboard Locally
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### 4. Link CLI for Local Testing
+
+```bash
+cd cli
+npm link
+```
+
+You can now test local edits to `cli/` across your entire system via `termassist`.
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! Here's how you can help:
+Contributions make the open-source community an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**!
 
-### Ways to Contribute
-
-1. **Add More Commands**: Add new command mappings to `cli/data/commands.json`
-2. **Improve Search**: Enhance the BM25 algorithm in `cli/search.js`
-3. **UI Enhancements**: Improve the dashboard design
-4. **Documentation**: Write better guides and tutorials
-5. **Bug Fixes**: Fix issues and improve error handling
-
-### How to Contribute
-
-```bash
-# 1. Fork the repository
-# 2. Clone your fork
-git clone https://github.com/your-username/termassist.git
-
-# 3. Create a branch
-git checkout -b feature/amazing-feature
-
-# 4. Install dependencies
-npm install
-
-# 5. Make your changes
-
-# 6. Test locally
-npm run dev
-
-# 7. Commit and push
-git commit -m "Add amazing feature"
-git push origin feature/amazing-feature
-
-# 8. Open a Pull Request
-```
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Add command mappings to `cli/data/commands.json` or improve algorithms in `cli/search.js`
+4. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+5. Push to the Branch (`git push origin feature/AmazingFeature`)
+6. Open a Pull Request
 
 ---
 
-## 📄 License
+## 📄 License & Author
 
-This project is open source and available under the MIT License.
+Distributed under the **MIT License**. See `LICENSE` for more information.
 
----
-
-## 🙏 Support
-
-If you find TermAssist helpful, please consider:
-
-- ⭐ Starring the repository on GitHub
-- 🐛 Reporting bugs and issues
-- 💡 Suggesting new features
-- 📢 Sharing with other developers
-
----
-
-## 📞 Contact
-
-- **Website**: https://termassist.vercel.app
-- **Documentation**: https://termassist.vercel.app/blog
-- **Dashboard**: https://termassist.vercel.app/dashboard
-- **GitHub**: https://github.com/Manoj-ruler/man_cli
-
----
+**Created & Maintained by**:
+- **Author**: Manoj Gaddam
+- **GitHub**: [@Manoj-ruler](https://github.com/Manoj-ruler)
+- **Repository**: [Manoj-ruler/man_cli](https://github.com/Manoj-ruler/man_cli)
+- **Live Platform**: [termassist.vercel.app](https://termassist.vercel.app)
 
 <p align="center">
-  <strong>Made with ❤️ for developers who love the terminal</strong>
-</p>
-
-<p align="center">
-  <code>TermAssist</code> — The terminal that understands you.
+  <sub>Built with precision for developers who demand speed, privacy, and simplicity in their command line workflow.</sub>
 </p>
