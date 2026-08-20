@@ -1,0 +1,14 @@
+metric,value
+total_queries,150
+correct_queries,101
+failure_queries,49
+correct_with_bonus,37
+correct_without_bonus,64
+failures_with_bonus,10
+failures_without_bonus,39
+total_with_bonus,47
+total_without_bonus,103
+accuracy_with_bonus,78.7%
+accuracy_without_bonus,62.1%
+failures_where_bonus_removal_changes_top,0
+total_queries_where_bonus_removal_changes_top,0
