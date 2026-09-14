@@ -15,9 +15,17 @@ the same condition. A4–A6 require components not yet built (margin/OOD/calibra
 | A1 | BM25, no substring bonus | 71.9% | 7.7pp |
 | A2 | Dense only | 72.7% | 6.1pp |
 | A3 | Hybrid BM25+dense (nested-CV α) | **77.1%** | 4.1pp |
-| A4 | + margin-based rejection | PENDING (Phase 6/7) | — |
-| A5 | + margin + OOD detection | PENDING (Phase 7) | — |
+| A4 | + margin-based rejection | 88.5% selective acc. @ 70.8% coverage | see below |
+| A5 | + margin + OOD detection | 90.1% selective acc. @ 69.5% coverage | see below |
 | A6 | + margin + OOD + calibration | PENDING (Phase 8) | — |
+
+**A4/A5 use a different metric (selective accuracy + coverage, not unconditional-accept
+accuracy) because they can abstain — see `research/results/reliability/SELECTIVE_PREDICTION_NOTES.md`
+for the full writeup, thresholds, and the explicit caveat that these numbers are not directly
+comparable to A0-A3's.** Headline: rejecting on margin/top1_score (thresholds tuned on dev
+folds only, Phase 7) raises accuracy among answered queries from 77.1% (A3, 100% coverage) to
+90.1% (A5, 69.5% coverage) and roughly doubles the OOD catch rate (10/15 vs. baseline's 4/15),
+at the cost of 11 sacrificed correct answers turned into abstentions.
 
 **Sanity check:** A0's fold-aggregated mean (71.9%) matches the frozen baseline's single-split
 supported-task accuracy (71.9%) — consistent, as expected, since A0 is the identical condition

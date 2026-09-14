@@ -115,7 +115,14 @@ each phase completes — they are intentionally blank/pending until run.
 ## E6 — OOD / rejection
 - **Objective:** Evaluate whether margin/entropy/reliability-based rejection reduces the 73.3%
   OOD false-acceptance rate without destroying supported-task accuracy.
-- **Status:** PENDING (Phase 7).
+- **Status:** COMPLETE. Nested 5-fold CV, threshold tuned on dev folds only. Feature:
+  `top1_score` (evidence-driven choice, see Phase 6 stats). See
+  `research/results/reliability/SELECTIVE_PREDICTION_NOTES.md`.
+- **Actual result:** mean test AUROC 0.867. Pooled recall (OOD rejection rate) improves from
+  the frozen baseline's 26.7% to **46.7%** (+20pp); false-acceptance rate improves from 73.3%
+  to 53.3%. Cost: 6/135 legitimate queries (4.4%) falsely rejected (pooled precision 53.8%).
+- **Conclusion:** real, leakage-free improvement in OOD handling -- better, not solved. Honestly
+  reported alongside its cost (false-rejection rate), not just its benefit.
 
 ## Phase 6 — Margin, entropy, top-k candidate capture
 - **Objective:** Build the uncertainty signals (margin, relative margin, normalized entropy)
@@ -133,7 +140,24 @@ each phase completes — they are intentionally blank/pending until run.
 ## E7 — Ambiguity handling
 - **Objective:** Evaluate whether top-k/entropy signals correctly identify the 14 ambiguous
   benchmark queries as needing clarification rather than forced top-1 selection.
-- **Status:** PENDING (Phase 7, evaluated jointly with E6).
+- **Status:** COMPLETE (weak result, reported honestly). Feature: `margin` (evidence-driven).
+- **Actual result:** mean test AUROC 0.784 (real signal, weaker than OOD). Pooled: precision
+  0.205, recall 0.643, F1 0.310 -- margin alone over-triggers on the much larger CORRECT class
+  (35 false positives out of 44 flagged).
+- **Conclusion:** ambiguity detection via margin alone is NOT a strong result and must not be
+  oversold in the paper. A richer feature (margin+entropy combined, or learned) is noted as
+  future work, not attempted without evidence it would help.
+
+## Phase 7 continuation — Ablation A4/A5
+- A4 (hybrid + margin-rejection): 88.5% selective accuracy @ 70.8% coverage, 8/15 OOD caught.
+- A5 (+ OOD detection): 90.1% selective accuracy @ 69.5% coverage, 10/15 OOD caught, 11 correct
+  answers sacrificed to abstention across both. Not directly comparable to A0-A3's unconditional
+  accuracy -- see `research/results/ablation/ABLATION_NOTES.md`.
+
+## Risk-coverage curve
+- 100%-coverage risk (30.7%) exactly matches `1 - 104/150` from Phase 6's pooled hybrid hit
+  count -- consistency check passed. At 50% coverage, risk drops to 10.7%, demonstrating real
+  selective-prediction value using `top1_score` as the confidence ranking variable.
 
 ## E8 — Confidence calibration
 - **Objective:** Reduce the measured 86–88% mean confidence on wrong answers via post-hoc

@@ -5178,6 +5178,144 @@
         }
       ],
       "note": "reused verbatim from Phase 4 (research/results/hybrid/hybrid-nested-cv-results.json); alpha selected per fold via nested CV, never tuned on the fold it is scored on"
+    },
+    "A4": {
+      "name": "A4",
+      "per_fold": [
+        {
+          "fold": 0,
+          "margin_threshold": 0.0406,
+          "ood_threshold": null,
+          "coverage": 0.8065,
+          "selective_accuracy": 0.88,
+          "accepted": 25,
+          "accepted_hits": 22,
+          "rejected": 6,
+          "rejected_was_ood": 2,
+          "rejected_was_correct": 1
+        },
+        {
+          "fold": 1,
+          "margin_threshold": 0.0948,
+          "ood_threshold": null,
+          "coverage": 0.5161,
+          "selective_accuracy": 1,
+          "accepted": 16,
+          "accepted_hits": 16,
+          "rejected": 15,
+          "rejected_was_ood": 3,
+          "rejected_was_correct": 5
+        },
+        {
+          "fold": 2,
+          "margin_threshold": 0.0863,
+          "ood_threshold": null,
+          "coverage": 0.8,
+          "selective_accuracy": 0.7917,
+          "accepted": 24,
+          "accepted_hits": 19,
+          "rejected": 6,
+          "rejected_was_ood": 0,
+          "rejected_was_correct": 2
+        },
+        {
+          "fold": 3,
+          "margin_threshold": 0.0807,
+          "ood_threshold": null,
+          "coverage": 0.6667,
+          "selective_accuracy": 0.8,
+          "accepted": 20,
+          "accepted_hits": 16,
+          "rejected": 10,
+          "rejected_was_ood": 1,
+          "rejected_was_correct": 3
+        },
+        {
+          "fold": 4,
+          "margin_threshold": 0.0863,
+          "ood_threshold": null,
+          "coverage": 0.75,
+          "selective_accuracy": 0.9524,
+          "accepted": 21,
+          "accepted_hits": 20,
+          "rejected": 7,
+          "rejected_was_ood": 2,
+          "rejected_was_correct": 0
+        }
+      ],
+      "mean_coverage": 0.7079,
+      "mean_selective_accuracy": 0.8848,
+      "ood_caught_of_15": 8,
+      "correct_answers_sacrificed": 11
+    },
+    "A5": {
+      "name": "A5",
+      "per_fold": [
+        {
+          "fold": 0,
+          "margin_threshold": 0.0406,
+          "ood_threshold": 0.8327,
+          "coverage": 0.7742,
+          "selective_accuracy": 0.9167,
+          "accepted": 24,
+          "accepted_hits": 22,
+          "rejected": 7,
+          "rejected_was_ood": 3,
+          "rejected_was_correct": 1
+        },
+        {
+          "fold": 1,
+          "margin_threshold": 0.0948,
+          "ood_threshold": 0.8327,
+          "coverage": 0.5161,
+          "selective_accuracy": 1,
+          "accepted": 16,
+          "accepted_hits": 16,
+          "rejected": 15,
+          "rejected_was_ood": 3,
+          "rejected_was_correct": 5
+        },
+        {
+          "fold": 2,
+          "margin_threshold": 0.0863,
+          "ood_threshold": 0.8327,
+          "coverage": 0.8,
+          "selective_accuracy": 0.7917,
+          "accepted": 24,
+          "accepted_hits": 19,
+          "rejected": 6,
+          "rejected_was_ood": 0,
+          "rejected_was_correct": 2
+        },
+        {
+          "fold": 3,
+          "margin_threshold": 0.0807,
+          "ood_threshold": 0.8946,
+          "coverage": 0.6333,
+          "selective_accuracy": 0.8421,
+          "accepted": 19,
+          "accepted_hits": 16,
+          "rejected": 11,
+          "rejected_was_ood": 2,
+          "rejected_was_correct": 3
+        },
+        {
+          "fold": 4,
+          "margin_threshold": 0.0863,
+          "ood_threshold": 0.8946,
+          "coverage": 0.75,
+          "selective_accuracy": 0.9524,
+          "accepted": 21,
+          "accepted_hits": 20,
+          "rejected": 7,
+          "rejected_was_ood": 2,
+          "rejected_was_correct": 0
+        }
+      ],
+      "mean_coverage": 0.6947,
+      "mean_selective_accuracy": 0.9006,
+      "ood_caught_of_15": 10,
+      "correct_answers_sacrificed": 11
     }
   },
   "table": [
@@ -5208,16 +5346,16 @@
     {
       "condition": "A4",
       "description": "Hybrid + margin-based rejection",
-      "mean_non_ood_accuracy_pct": null,
-      "std_pp": null,
-      "status": "PENDING -- requires Phase 6/7/8 components, not yet implemented"
+      "mean_coverage_pct": 70.8,
+      "mean_selective_accuracy_pct": 88.5,
+      "ood_caught_of_15": 8
     },
     {
       "condition": "A5",
       "description": "Hybrid + margin + OOD detection",
-      "mean_non_ood_accuracy_pct": null,
-      "std_pp": null,
-      "status": "PENDING -- requires Phase 6/7/8 components, not yet implemented"
+      "mean_coverage_pct": 69.5,
+      "mean_selective_accuracy_pct": 90.1,
+      "ood_caught_of_15": 10
     },
     {
       "condition": "A6",
