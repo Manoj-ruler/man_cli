@@ -117,10 +117,23 @@ each phase completes — they are intentionally blank/pending until run.
   OOD false-acceptance rate without destroying supported-task accuracy.
 - **Status:** PENDING (Phase 7).
 
+## Phase 6 — Margin, entropy, top-k candidate capture
+- **Objective:** Build the uncertainty signals (margin, relative margin, normalized entropy)
+  that Phase 7's OOD/selective-prediction and A4's margin-based rejection depend on.
+- **Status:** COMPLETE. See `research/results/reliability/MARGIN_ENTROPY_NOTES.md` and
+  `candidates.json` (450 records: 150 queries x {lexical, dense, hybrid}).
+- **Actual result:** both margin and normalized entropy separate correct from incorrect
+  predictions in the expected direction for all three systems (e.g. hybrid mean margin: 0.284
+  correct vs. 0.057 incorrect, a 5.0x ratio; lexical: 16.1x ratio). OOD queries' margins sit
+  close to the incorrect-prediction distribution (e.g. hybrid OOD margin 0.126, well below the
+  0.284 correct-prediction mean), consistent with margin being a usable OOD signal.
+- **Conclusion:** descriptive evidence only -- no threshold has been tuned on any data yet.
+  Confirms Phase 7 has a real signal to build a rejection rule on top of, not an assumption.
+
 ## E7 — Ambiguity handling
 - **Objective:** Evaluate whether top-k/entropy signals correctly identify the 14 ambiguous
   benchmark queries as needing clarification rather than forced top-1 selection.
-- **Status:** PENDING (Phase 6/7, evaluated jointly with E6).
+- **Status:** PENDING (Phase 7, evaluated jointly with E6).
 
 ## E8 — Confidence calibration
 - **Objective:** Reduce the measured 86–88% mean confidence on wrong answers via post-hoc

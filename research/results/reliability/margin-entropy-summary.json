@@ -1,0 +1,41 @@
+{
+  "lexical": {
+    "correct_count": 97,
+    "incorrect_count": 38,
+    "mean_margin_correct": 12.0435,
+    "mean_margin_incorrect": 0.748,
+    "mean_margin_ood": 0.4556,
+    "mean_relative_margin_correct": 0.4711,
+    "mean_relative_margin_incorrect": 0.0744,
+    "mean_relative_margin_ood": 0.0782,
+    "mean_normalized_entropy_correct": 0.6068,
+    "mean_normalized_entropy_incorrect": 0.7857,
+    "mean_normalized_entropy_ood": 0.7237
+  },
+  "dense": {
+    "correct_count": 98,
+    "incorrect_count": 37,
+    "mean_margin_correct": 0.1431,
+    "mean_margin_incorrect": 0.0363,
+    "mean_margin_ood": 0.0471,
+    "mean_relative_margin_correct": 0.2153,
+    "mean_relative_margin_incorrect": 0.0735,
+    "mean_relative_margin_ood": 0.1597,
+    "mean_normalized_entropy_correct": 0.7608,
+    "mean_normalized_entropy_incorrect": 0.8378,
+    "mean_normalized_entropy_ood": 0.7738
+  },
+  "hybrid": {
+    "correct_count": 104,
+    "incorrect_count": 31,
+    "mean_margin_correct": 0.2844,
+    "mean_margin_incorrect": 0.0571,
+    "mean_margin_ood": 0.1258,
+    "mean_relative_margin_correct": 0.2849,
+    "mean_relative_margin_incorrect": 0.0598,
+    "mean_relative_margin_ood": 0.1378,
+    "mean_normalized_entropy_correct": 0.697,
+    "mean_normalized_entropy_incorrect": 0.822,
+    "mean_normalized_entropy_ood": 0.7689
+  }
+}
