@@ -80,7 +80,19 @@ each phase completes — they are intentionally blank/pending until run.
   and/or specific failure-mode subsets.
 - **Independent variable:** fusion weight α, swept 0.0–1.0.
 - **Dependent variables:** per-fold, per-query-type accuracy; OOD/ambiguity metrics.
-- **Status:** PENDING (Phase 4).
+- **Status:** COMPLETE. Protocol: nested 5-fold CV (seed 42, stratified folds), α selected per
+  test fold using only the other 4 folds (dev), never the test fold itself. See
+  `research/results/hybrid/HYBRID_FUSION_NOTES.md` and `hybrid-nested-cv-results.json`.
+- **Actual result:** mean held-out non-OOD accuracy **77.1% (std 4.1pp)** vs. frozen BM25
+  baseline's 71.9% supported-task accuracy -- a **+5.2pp** improvement with no test-fold
+  leakage. 4/5 folds independently selected α=0.3 on dev data; 1/5 selected α=0.5. Two
+  independent correctness checks pass exactly: α=1.0 reproduces the frozen baseline's 71.9%
+  exactly, and α=0.0 reproduces E3's dense-only 72.6% exactly, confirming the fusion/evaluation
+  pipeline introduces no discrepancy relative to already-verified ground truth.
+- **Conclusion:** Hybrid fusion measurably beats pure BM25 on supported-task accuracy under a
+  leakage-free protocol. This is a real, defensible result -- but it only covers accuracy, not
+  OOD/ambiguity/calibration/safety, so it is one input to the Phase 17 decision gate, not the
+  full research contribution on its own.
 
 ## E5 — Ablation (A0–A6)
 - **Objective:** Isolate which component (substring bonus, dense retrieval, margin, OOD gate,
