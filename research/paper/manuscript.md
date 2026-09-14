@@ -20,9 +20,13 @@ confidence calibration and margin-based rejection, can measurably improve both a
 reliability. Under a fully leakage-free nested 5-fold cross-validation protocol, hybrid fusion
 significantly improves supported-task accuracy over pure BM25 (71.9%→77.1%, exact McNemar's
 p=0.016), and isotonic-regression calibration reduces confidence miscalibration by up to 80.4%
-(Expected Calibration Error). Out-of-domain rejection improves substantially in magnitude
-(26.7%→46.7%) though this specific result is not statistically confirmed at our sample size
-(n=15, p=0.25). A fully deterministic, rule-based safety classifier achieves 95%/95%
+(Expected Calibration Error). Out-of-domain rejection improves substantially, and — on an
+expanded benchmark built specifically to test statistical power (`v0.2`, OOD subset grown from
+15 to 50 queries via the same adjudication methodology) — this improvement is statistically
+significant (34.0%→68.0% rejection rate, exact McNemar's p=0.000015); on the original 15-query
+OOD subset the same comparison did not reach significance (p=0.25), a finding we attribute to,
+and confirm as, insufficient sample size rather than a weak effect. A fully deterministic,
+rule-based safety classifier achieves 95%/95%
 precision/recall on distinguishing risky from safe commands with zero dangerous-direction misses.
 We report every weaker and null result alongside the positive ones — including a substring-
 matching heuristic in the original system shown to have zero measurable effect on accuracy — and
@@ -144,7 +148,12 @@ non-OOD, n=15 OOD).
 (±4.1pp across folds). **Accuracy by query type** (Figure 2): hybrid retains BM25's 100% on
 canonical/safety-sensitive while improving low-overlap-paraphrase. **OOD/ambiguity detection**:
 AUROC 0.867 (OOD, feature=absolute top-1 score) and 0.784 (ambiguity, feature=margin) — an
-evidence-driven feature choice (Section 9), not selected post-hoc. **Calibration** (Figure 3,
+evidence-driven feature choice (Section 9), not selected post-hoc. On benchmark v0.2 (OOD subset
+expanded 15→50 queries via the identical adjudication methodology, Section 6), OOD detection
+AUROC improves to 0.901 and the baseline-vs-tuned rejection-rate improvement (34.0%→68.0%)
+reaches statistical significance (exact McNemar's p=0.000015) — resolving the power limitation
+of the v0.1-scale result. Ambiguity detection F1 improves on v0.2 (0.310→0.496) though AUROC
+slightly decreases (0.784→0.723), reported as measured. **Calibration** (Figure 3,
 Table 3): ECE reduced 56.7–80.4% across four confidence variants tested, largest for the hybrid
 system's own fused-score signal. **Risk-coverage** (Figure 4): selective answering at 50%
 coverage achieves 10.7% error vs. 30.7% unconditional.
@@ -191,10 +200,14 @@ not an afterthought to accuracy.
 
 ## 16. Limitations
 
-See `research/paper/limitations.md` for the full, unabridged list: benchmark size (particularly
-the n=15 OOD subset), single-platform corpus, hand-authored queries, no human-preference study,
-fixed embedding-model choice, narrow (10%) functional-evaluation coverage, an unresolved
-ambiguity-detection weakness, and isotonic calibration's demonstrated small-sample sensitivity.
+See `research/paper/limitations.md` for the full, unabridged list: benchmark size (the OOD-
+significance gap identified on v0.1's 15-query subset was subsequently resolved via a targeted
+50-query expansion, v0.2 — see Section 6/11 — but v0.1's accuracy/calibration/safety/functional
+results were not re-run on v0.2 and remain the benchmark of record for those claims), single-
+platform corpus, hand-authored queries (v0.2's new queries additionally disclose AI-agent
+authorship under human direction — Section 6), no human-preference study, fixed embedding-model
+choice, narrow (10%) functional-evaluation coverage, an unresolved ambiguity-detection weakness,
+and isotonic calibration's demonstrated small-sample sensitivity.
 
 ## 17. Threats to Validity
 
@@ -213,15 +226,20 @@ simplification.
 A lightweight, fully offline, non-LLM hybrid retrieval architecture significantly improves
 accuracy (p=0.016) and substantially improves confidence calibration (up to −80.4% ECE) over a
 real, previously-shipped BM25 baseline, evaluated under a leakage-free nested cross-validation
-protocol throughout. Weaker and null results (dense-vs-hybrid significance, OOD significance at
-this sample size, ambiguity detection quality, the substring bonus's true effect) are reported
+protocol throughout. The initially underpowered OOD-detection result was subsequently confirmed
+significant (p=0.000015) on a targeted benchmark expansion built specifically to test whether
+the gap was one of sample size rather than effect — it was. Weaker and null results (dense-vs-
+hybrid significance, ambiguity detection quality, the substring bonus's true effect) are reported
 alongside the positive findings, not folded into an overstated headline claim.
 
 ## 19. Future Work
 
-A larger benchmark (particularly more OOD examples); a richer ambiguity-detection feature; a
-placeholder-substitution system to extend functional evaluation; an optional local-LLM comparator
-(explicitly deferred in this program); a human-preference study.
+Re-running the accuracy, calibration, safety, and functional experiments on v0.2's expanded
+query set (only the OOD/ambiguity/statistical analyses were re-run there to date); a richer
+ambiguity-detection feature (v0.2's larger ambiguous subset improved F1 but not AUROC, suggesting
+margin alone is an incomplete signal even with more data); a placeholder-substitution system to
+extend functional evaluation; an optional local-LLM comparator (explicitly deferred in this
+program); a human-preference study.
 
 ## 20. References
 

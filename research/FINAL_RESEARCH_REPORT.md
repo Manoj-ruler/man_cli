@@ -152,6 +152,17 @@ best story.
 | Functional evaluation (narrow subset) | 100% gold / 93.3% retrieved execute successfully | Positive but only 15/150 queries (10% coverage), stated as a limitation |
 | Safety classifier | 95%/95% precision/recall on risky binary, zero dangerous-direction misses | Strong, but evaluated on a small hand-labeled set (125 gold commands with defined risk labels) |
 
+> **Update (benchmark v0.2, added after this decision gate was originally written):** the OOD
+> row above is specific to `termassist_bench v0.1` (n=15 OOD queries) and remains historically
+> accurate for that benchmark. A follow-up expansion, `termassist_bench v0.2` (209 queries, OOD
+> grown to 50 via the same adjudication methodology — see
+> `research/datasets/v0.2_ADJUDICATION_REPORT.md`), was built specifically to test whether this
+> result was underpowered rather than weak. **It was underpowered**: on v0.2, the same comparison
+> (baseline 34.0% → tuned 68.0% OOD rejection) is statistically significant, exact McNemar's
+> **p=0.000015** (`research/results/v0.2/V0.2_RESULTS_NOTES.md`). The v0.1 finding above is left
+> unedited as the historical record of what was known at the time this decision gate was written;
+> the manuscript's current claims should cite the v0.2 result as the up-to-date, resolved finding.
+
 ### Classification: Outcome A, with explicitly scoped exceptions
 
 **This is Outcome A — a lightweight, reliability-aware hybrid retrieval architecture that
