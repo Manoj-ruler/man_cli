@@ -1,9 +1,9 @@
 # Reliability-Aware Hybrid Retrieval for Natural-Language-to-Shell-Command Assistance: A Non-LLM Study
 
 *Manuscript draft. All numbers in this document are pulled from `research/results/`,
-`research/figures/`, and `research/tables/` — generated artifacts of Phases 0–17 of this
-research program, not hand-typed. No number here may exceed what is stated in
-`research/FINAL_RESEARCH_REPORT.md`'s Phase 17 decision gate.*
+`research/figures/`, and `research/tables/` — generated artifacts of this research program, not
+hand-typed. No number here may exceed what is stated in `research/FINAL_RESEARCH_REPORT.md`'s
+corrected final contribution statement (post-v0.2).*
 
 ---
 
@@ -17,22 +17,28 @@ previously-shipped BM25 baseline (67.3% overall accuracy on a validated 150-quer
 with severe confidence miscalibration — 86.06% mean confidence on wrong answers), we test whether
 a lightweight hybrid lexical+local-semantic retrieval architecture, combined with post-hoc
 confidence calibration and margin-based rejection, can measurably improve both accuracy and
-reliability. Under a fully leakage-free nested 5-fold cross-validation protocol, hybrid fusion
-significantly improves supported-task accuracy over pure BM25 (71.9%→77.1%, exact McNemar's
-p=0.016), and isotonic-regression calibration reduces confidence miscalibration by up to 80.4%
-(Expected Calibration Error). Out-of-domain rejection improves substantially, and — on an
-expanded benchmark built specifically to test statistical power (`v0.2`, OOD subset grown from
-15 to 50 queries via the same adjudication methodology) — this improvement is statistically
-significant (34.0%→68.0% rejection rate, exact McNemar's p=0.000015); on the original 15-query
-OOD subset the same comparison did not reach significance (p=0.25), a finding we attribute to,
-and confirm as, insufficient sample size rather than a weak effect. A fully deterministic,
-rule-based safety classifier achieves 95%/95%
-precision/recall on distinguishing risky from safe commands with zero dangerous-direction misses.
-We report every weaker and null result alongside the positive ones — including a substring-
-matching heuristic in the original system shown to have zero measurable effect on accuracy — and
-position this as the first reported study, to our knowledge, of a lexical/BM25 retrieval baseline
-for this task family evaluated with nested-CV calibration, OOD detection, and selective
-prediction.
+reliability, evaluating on two versions of a benchmark we constructed: an original 150-query
+version and an expanded 209-query version built specifically to test statistical power on the
+original's smaller subsets. Under a fully leakage-free nested 5-fold cross-validation protocol,
+hybrid fusion improves supported-task accuracy over pure BM25 on both benchmarks (71.9%→77.1% on
+the original, 75.5%→79.3% on the expanded version); this improvement is statistically significant
+on the original benchmark (exact McNemar's p=0.016) but **does not replicate at the conventional
+significance threshold on the expanded, harder benchmark** (p=0.070) — a non-replication we
+verified is not a computation error and report as a central, not incidental, finding.
+Conversely, hybrid significantly beats dense retrieval alone on the expanded benchmark (p=0.013),
+where it did not on the original (p=0.146). Isotonic-regression calibration reduces confidence
+miscalibration substantially and consistently on both benchmarks (56.7–84.1% relative ECE
+reduction across four confidence signals). Out-of-domain rejection improves substantially in
+magnitude on both benchmarks, and on the expanded benchmark's larger OOD subset (50 vs. 15
+queries) this improvement is confirmed statistically significant (34.0%→68.0% rejection rate,
+p=0.000015), resolving a power limitation identified on the original, smaller subset (p=0.25). A
+fully deterministic, rule-based safety classifier achieves 95%/95% precision/recall on
+distinguishing risky from safe commands with zero dangerous-direction misses. We report every
+weaker, null, and non-replicating result alongside the positive ones — including a substring-
+matching heuristic shown to have zero measurable effect on accuracy on both benchmark versions —
+and position this as the first reported study, to our knowledge, of a lexical/BM25 retrieval
+baseline for this task family evaluated with nested-CV calibration, OOD detection, selective
+prediction, and an explicit benchmark-expansion replication check.
 
 ## 2. Introduction
 
@@ -105,6 +111,16 @@ ground-truth classification (119 CORRECT, 14 AMBIGUOUS, 15 OOD, 2 NEEDS_CORRECTI
 evaluation. Benchmark integrity independently verified (Phase 0): an apparent SHA-256 mismatch on
 Windows was root-caused to a CRLF/LF line-ending checkout artifact, not content tampering.
 
+A second benchmark version, **v0.2** (209 queries: the same 150 plus 35 new OOD and 24 new
+ambiguous queries), was built specifically to test whether the original's small OOD (15) and
+ambiguous (14) subsets were statistically underpowered. New queries were authored and adjudicated
+by an AI agent (Claude) under human direction — disclosed explicitly, following the identical
+design/verification methodology as v0.1 (queries checked against actual system retrieval output,
+not judged from intuition; 6 of 30 drafted ambiguous candidates were rejected for failing the
+ambiguity or novelty criteria — full detail in `research/datasets/v0.2_ADJUDICATION_REPORT.md`).
+We report results on both versions throughout, since — as Sections 11–12 show — they are not
+merely a larger sample of the same result.
+
 ## 7. Baseline Experimental Results
 
 Overall accuracy 67.3% (101/150); supported-task (non-OOD) accuracy 71.9%; OOD rejection 26.7%
@@ -144,8 +160,19 @@ non-OOD, n=15 OOD).
 
 ## 11. Results
 
-**Retrieval accuracy** (Figure 1, Table 1): BM25 71.9%, dense-only 72.6–72.7%, hybrid 77.1%
-(±4.1pp across folds). **Accuracy by query type** (Figure 2): hybrid retains BM25's 100% on
+**Retrieval accuracy** (Figure 1, Table 1): on v0.1, BM25 71.9%, dense-only 72.6–72.7%, hybrid
+77.1% (±4.1pp across folds), a significant improvement over BM25 (exact McNemar's p=0.0156). On
+v0.2, BM25 75.5%, dense-only 72.3–72.4%, hybrid 79.3% — numerically similar in magnitude
+(+3.8pp vs. +5.2pp) but **this specific comparison does not clear p<0.05 on v0.2 (p=0.070)**. We
+verified this at the per-query level: of 8 discordant non-OOD pairs on v0.2 (vs. 7 on v0.1), 7
+still favor hybrid but one (`TA-B194`, "sudo reboot" vs. "sudo shutdown -h now") now favors BM25,
+and the larger, harder query set is enough to push the p-value above the conventional threshold —
+not a computation error. Conversely, hybrid vs. dense-alone flips from not-significant on v0.1
+(p=0.146) to significant on v0.2 (p=0.0127). We attribute this shift, as an interpretation rather
+than a proven cause, to v0.2's 17 new short-technical-keyword ambiguous queries (`grep`, `sed`,
+`awk`, `tar`, etc.), where BM25's exact-token-match strength is plausibly more competitive than on
+v0.1's query mix — a hypothesis we did not further test and flag as future work (Section 19).
+**Accuracy by query type** (Figure 2): hybrid retains BM25's 100% on
 canonical/safety-sensitive while improving low-overlap-paraphrase. **OOD/ambiguity detection**:
 AUROC 0.867 (OOD, feature=absolute top-1 score) and 0.784 (ambiguity, feature=margin) — an
 evidence-driven feature choice (Section 9), not selected post-hoc. On benchmark v0.2 (OOD subset
@@ -160,12 +187,17 @@ coverage achieves 10.7% error vs. 30.7% unconditional.
 
 ## 12. Ablation Study
 
-(Table in `research/results/ablation/ablation-table.csv`, notes in `ABLATION_NOTES.md`.) A0
-(BM25)=71.9%, A1 (BM25, no bonus)=71.9% — **identical on all 150 queries, 0 command
-differences**: the substring bonus fires for 47/150 queries but never changes the top-1 winner.
-A2 (dense)=72.6–72.7%. A3 (hybrid, nested-CV)=77.0–77.1%. A4 (+margin rejection)=88.5% selective
-accuracy @ 70.8% coverage. A5 (+OOD detection)=90.1% @ 69.5% coverage, 10/15 OOD caught. A6
-(+calibration)=same decision as A5, confidence ECE 0.054 vs. 0.274 raw. Figure 5 visualizes A0–A6
+(Tables in `research/results/ablation/ablation-table.csv` (v0.1) and `research/results/v0.2/ablation-results.json`
+(v0.2), notes in `ABLATION_NOTES.md` and `V0.2_FULL_RESULTS_NOTES.md`.) v0.1: A0 (BM25)=71.9%, A1
+(BM25, no bonus)=71.9% — **identical on all 150 queries, 0 command differences**: the substring
+bonus fires for 47/150 queries but never changes the top-1 winner. A2 (dense)=72.6–72.7%. A3
+(hybrid, nested-CV)=77.0–77.1%. A4 (+margin rejection)=88.5% selective accuracy @ 70.8% coverage.
+A5 (+OOD detection)=90.1% @ 69.5% coverage, 10/15 OOD caught. A6 (+calibration)=same decision as
+A5, confidence ECE 0.054 vs. 0.274 raw. **v0.2 replicates the substring-bonus null result exactly**
+(A0=A1=75.4%) and shows A2=72.4%, A3=79.3%, but A4/A5 selective accuracy is *lower* at *lower*
+coverage than v0.1 (A5: 82.2% @ 58.9% coverage, 38/50 OOD caught vs. v0.1's 90.1% @ 69.5%) —
+reported plainly as the harder v0.2 query mix making the accept/reject decision more difficult,
+not as a regression in the underlying method. Figure 5 visualizes A0–A6 for v0.1
 (noting A4–A6 use a different, selective-accuracy metric, not directly comparable to A0–A3's
 unconditional accuracy).
 
@@ -186,28 +218,45 @@ evaluated against the benchmark's pre-existing `risk_level` ground truth: 89.6% 
 accuracy (112/125 gold commands), 95%/95% precision/recall on the actionable risky-vs-not-risky
 binary, zero dangerous-direction misses (no CRITICAL/HIGH command ever tagged safe). On retrieved
 commands, accuracy holds (90.0%) but risky-binary precision drops to 0.826 — a retrieval-error
-artifact (wrong commands can trigger unrelated risk patterns), not a classifier defect.
+artifact (wrong commands can trigger unrelated risk patterns), not a classifier defect. On v0.2,
+exact accuracy and recall shift modestly downward (83.9% exact, 0.864 recall) because the
+classifier — deliberately not re-tuned against new benchmark examples — was authored before v0.2's
+new gold commands existed; this surfaces the same documented gaps from the original evaluation,
+not new ones.
 
 ## 15. Discussion
 
-The central, statistically defensible finding is that hybrid retrieval measurably improves both
-*what* the system gets right and *how honestly* it communicates uncertainty about what it gets
-wrong — two related but distinct problems, requiring two different interventions (fusion for
-accuracy, calibration for confidence), neither of which alone was sufficient (Section 8's error
-taxonomy shows 84.8% of the hybrid system's remaining errors are still high-confidence). This
+The central finding is nuanced, not a clean win, and we report it that way. Hybrid retrieval
+measurably improves both *what* the system gets right and *how honestly* it communicates
+uncertainty about what it gets wrong — two related but distinct problems, requiring two different
+interventions (fusion for accuracy, calibration for confidence), neither of which alone was
+sufficient (Section 8's error taxonomy shows 84.8% of the hybrid system's remaining errors on v0.1
+are still high-confidence, improving only modestly to 67.5% on v0.2). But the accuracy
+improvement's statistical significance is benchmark-composition-sensitive: it holds on the
+original 150-query benchmark and does not replicate on the expanded, harder 209-query version,
+while a different comparison (hybrid vs. dense-alone) becomes significant only on the expanded
+version. We interpret this as evidence that a single benchmark, however carefully constructed,
+can support a significance claim that is real but fragile to the specific mix of query difficulty
+sampled — precisely the concern raised by Card et al. (2020) about NLP benchmark power, and
+precisely why this program is reporting both benchmark versions' results rather than only the more
+favorable one. The calibration and OOD results, by contrast, are robust across both versions —
+strengthening our confidence that reliability, not raw accuracy, is this study's most defensible
+individual contribution. This
 argues for treating calibration as a first-class research target in retrieval-based assistants,
 not an afterthought to accuracy.
 
 ## 16. Limitations
 
-See `research/paper/limitations.md` for the full, unabridged list: benchmark size (the OOD-
-significance gap identified on v0.1's 15-query subset was subsequently resolved via a targeted
-50-query expansion, v0.2 — see Section 6/11 — but v0.1's accuracy/calibration/safety/functional
-results were not re-run on v0.2 and remain the benchmark of record for those claims), single-
-platform corpus, hand-authored queries (v0.2's new queries additionally disclose AI-agent
-authorship under human direction — Section 6), no human-preference study, fixed embedding-model
-choice, narrow (10%) functional-evaluation coverage, an unresolved ambiguity-detection weakness,
-and isotonic calibration's demonstrated small-sample sensitivity.
+See `research/paper/limitations.md` for the full, unabridged list: benchmark composition
+sensitivity (the full ablation/calibration/safety suite was re-run on both v0.1 and v0.2; the OOD-
+significance gap on v0.1's 15-query subset was resolved on v0.2's 50-query expansion, but the
+core BM25-vs-hybrid accuracy significance did NOT replicate on v0.2 — Section 11/15 — meaning
+neither benchmark version alone should be treated as definitive), single-platform corpus, hand-
+authored queries (v0.2's new queries additionally disclose AI-agent authorship under human
+direction — Section 6), no human-preference study, fixed embedding-model choice, narrow (10%)
+functional-evaluation coverage (confirmed unchanged between benchmark versions without
+re-executing identical sandboxed commands), an unresolved ambiguity-detection weakness, and
+isotonic calibration's demonstrated small-sample sensitivity.
 
 ## 17. Threats to Validity
 
@@ -223,19 +272,31 @@ simplification.
 
 ## 18. Conclusion
 
-A lightweight, fully offline, non-LLM hybrid retrieval architecture significantly improves
-accuracy (p=0.016) and substantially improves confidence calibration (up to −80.4% ECE) over a
-real, previously-shipped BM25 baseline, evaluated under a leakage-free nested cross-validation
-protocol throughout. The initially underpowered OOD-detection result was subsequently confirmed
-significant (p=0.000015) on a targeted benchmark expansion built specifically to test whether
-the gap was one of sample size rather than effect — it was. Weaker and null results (dense-vs-
-hybrid significance, ambiguity detection quality, the substring bonus's true effect) are reported
-alongside the positive findings, not folded into an overstated headline claim.
+A lightweight, fully offline, non-LLM hybrid retrieval architecture improves accuracy and
+substantially improves confidence calibration (56.7–84.1% relative ECE reduction, consistent
+across both benchmark versions) over a real, previously-shipped BM25 baseline, evaluated under a
+leakage-free nested cross-validation protocol throughout, and re-run in full on two independently
+constructed benchmark versions rather than one. The initially underpowered OOD-detection result
+was subsequently confirmed significant (p=0.000015) on a targeted benchmark expansion built
+specifically to test whether the gap was one of sample size rather than effect — it was. The
+headline BM25-vs-hybrid accuracy significance, by contrast, did **not** replicate on the expanded
+benchmark (p=0.016→0.070), while dense-vs-hybrid significance newly appeared there (p=0.146→
+0.0127) — reported as a central finding, not a footnote, because a study whose validated
+improvement disappears the moment the benchmark composition changes is exactly the failure mode
+the underlying literature on benchmark power (Card et al., 2020) warns about, and burying it would
+defeat the purpose of having built a second benchmark at all. The most defensible, replication-
+tested claims from this program are therefore the calibration improvement and the (now
+significance-confirmed) OOD detection improvement, not the raw accuracy gain in isolation. Weaker
+and non-replicating results (dense-vs-hybrid significance flipping across benchmark versions,
+ambiguity detection quality, the substring bonus's true effect, and the accuracy-significance
+non-replication itself) are reported alongside the positive findings, not folded into an
+overstated headline claim.
 
 ## 19. Future Work
 
-Re-running the accuracy, calibration, safety, and functional experiments on v0.2's expanded
-query set (only the OOD/ambiguity/statistical analyses were re-run there to date); a richer
+A direct follow-up investigation of why v0.2's new short-technical-keyword ambiguous queries
+shift the BM25-vs-hybrid and dense-vs-hybrid significance patterns (Section 11/15) — the current
+manuscript offers an interpretation, not a tested cause; a richer
 ambiguity-detection feature (v0.2's larger ambiguous subset improved F1 but not AUROC, suggesting
 margin alone is an incomplete signal even with more data); a placeholder-substitution system to
 extend functional evaluation; an optional local-LLM comparator (explicitly deferred in this
@@ -262,4 +323,6 @@ program); a human-preference study.
 9. Husain, H. et al. (2019). CodeSearchNet. arXiv:1909.09436.
 10. Notaro, P., Haeri, S., Cardoso, J., Gerndt, M. (2024). Command-line Risk Classification using
     Transformer-based Neural Architectures. arXiv:2412.01655.
-11. Full related-work matrix (15 entries): `research/paper/related-work-matrix.csv`.
+11. Card, D., Henderson, P., Khandelwal, U., Jia, R., Mahowald, K., Jurafsky, D. (2020). With
+    Little Power Comes Great Responsibility. EMNLP. arXiv:2010.06595.
+12. Full related-work matrix (15 entries): `research/paper/related-work-matrix.csv`.

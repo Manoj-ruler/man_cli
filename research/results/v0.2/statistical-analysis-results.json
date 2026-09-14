@@ -42,5 +42,80 @@
     "v0_2_p_value": 0.000015,
     "v0_2_significant": true
   },
-  "generated_at": "2026-09-14T13:30:55.370Z"
+  "generated_at": "2026-09-14T13:30:55.370Z",
+  "accuracy_comparisons": [
+    {
+      "comparison": "A0 vs A1",
+      "n": 159,
+      "accuracy_A": 0.7547,
+      "accuracy_B": 0.7547,
+      "absolute_diff": 0,
+      "mcnemar_exact": {
+        "b": 0,
+        "c": 0,
+        "n_discordant": 0,
+        "p_value": 1
+      },
+      "significant_at_0_05": false
+    },
+    {
+      "comparison": "A0 vs A2",
+      "n": 159,
+      "accuracy_A": 0.7547,
+      "accuracy_B": 0.7233,
+      "absolute_diff": -0.0314,
+      "mcnemar_exact": {
+        "b": 15,
+        "c": 10,
+        "n_discordant": 25,
+        "p_value": 0.424356
+      },
+      "significant_at_0_05": false
+    },
+    {
+      "comparison": "A0 vs A3",
+      "n": 159,
+      "accuracy_A": 0.7547,
+      "accuracy_B": 0.7925,
+      "absolute_diff": 0.0377,
+      "mcnemar_exact": {
+        "b": 1,
+        "c": 7,
+        "n_discordant": 8,
+        "p_value": 0.070313
+      },
+      "significant_at_0_05": false
+    },
+    {
+      "comparison": "A2 vs A3",
+      "n": 159,
+      "accuracy_A": 0.7233,
+      "accuracy_B": 0.7925,
+      "absolute_diff": 0.0692,
+      "mcnemar_exact": {
+        "b": 3,
+        "c": 14,
+        "n_discordant": 17,
+        "p_value": 0.012726
+      },
+      "significant_at_0_05": true
+    }
+  ],
+  "confidence_intervals_95pct_accuracy": {
+    "A0_bm25_accuracy": {
+      "point": 0.7547,
+      "lower": 0.6824,
+      "upper": 0.8151
+    },
+    "A2_dense_accuracy": {
+      "point": 0.7233,
+      "lower": 0.6491,
+      "upper": 0.7869
+    },
+    "A3_hybrid_accuracy": {
+      "point": 0.7925,
+      "lower": 0.7229,
+      "upper": 0.8482
+    }
+  }
 }

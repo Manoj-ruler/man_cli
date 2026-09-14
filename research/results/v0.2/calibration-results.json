@@ -1,0 +1,52 @@
+{
+  "experiment_id": "E8-v0.2-confidence-calibration",
+  "benchmark_version": "v0.2",
+  "protocol": "nested 5-fold CV isotonic regression (PAV)",
+  "variants": {
+    "baseline_confidence": {
+      "name": "baseline_confidence",
+      "before_calibration": {
+        "ece": 0.2576,
+        "brier": 0.2342
+      },
+      "after_calibration": {
+        "ece": 0.041,
+        "brier": 0.1536
+      }
+    },
+    "margin_confidence": {
+      "name": "margin_confidence",
+      "before_calibration": {
+        "ece": 0.2951,
+        "brier": 0.2597
+      },
+      "after_calibration": {
+        "ece": 0.0495,
+        "brier": 0.1696
+      }
+    },
+    "semantic_confidence": {
+      "name": "semantic_confidence",
+      "before_calibration": {
+        "ece": 0.0972,
+        "brier": 0.1402
+      },
+      "after_calibration": {
+        "ece": 0.0393,
+        "brier": 0.1281
+      }
+    },
+    "hybrid_reliability": {
+      "name": "hybrid_reliability",
+      "before_calibration": {
+        "ece": 0.3237,
+        "brier": 0.2855
+      },
+      "after_calibration": {
+        "ece": 0.0738,
+        "brier": 0.1315
+      }
+    }
+  },
+  "generated_at": "2026-09-14T13:53:19.574Z"
+}

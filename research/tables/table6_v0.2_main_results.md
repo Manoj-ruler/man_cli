@@ -1,0 +1,8 @@
+# Table 6 -- v0.2 Main Results
+
+| System | Non-OOD Accuracy (%) | Std (pp) |
+| --- | --- | --- |
+| A0 | 75.4 | 6.3 |
+| A1 | 75.4 | 6.3 |
+| A2 | 72.4 | 3.4 |
+| A3 | 79.3 | 5.7 |

@@ -334,3 +334,26 @@ each phase completes — they are intentionally blank/pending until run.
   not statistically confirmed at n=15") is now resolved on the expanded benchmark. Provenance of
   the new 59 queries (AI-agent-authored under human direction, verified against actual retrieval
   output) is disclosed explicitly, not hidden.
+
+## v0.2 Full Pipeline Re-Run (Ablation, Calibration, Safety, Error Taxonomy)
+- **Objective:** full parity re-run of the entire experiment suite (not just OOD/ambiguity) on
+  benchmark v0.2, per explicit user request.
+- **Status:** COMPLETE. See `research/results/v0.2/V0.2_FULL_RESULTS_NOTES.md`.
+- **CRITICAL, prominently-reported finding: the headline BM25-vs-hybrid significance result does
+  NOT replicate on v0.2.** A0 vs A3: p=0.0156 (v0.1, significant) -> p=0.0703 (v0.2, NOT
+  significant), verified at the per-query level (8 discordant pairs, 7 favor hybrid, 1 now favors
+  BM25 -- not a computation bug). Simultaneously, A2 vs A3 (dense vs hybrid) flips from not
+  significant (p=0.146, v0.1) to significant (p=0.0127, v0.2). Plausible explanation offered (the
+  24 new hard technical-keyword ambiguous queries favor BM25's exact-match strength), stated as
+  interpretation, not proven.
+- **Other results:** substring-bonus null result replicates exactly (A0=A1 on v0.2 too).
+  Calibration improves substantially on all 4 variants (3 by more than v0.1, one by slightly
+  less). A4/A5 selective accuracy is lower on v0.2 (82.2%/58.9% coverage vs 90.1%/69.5%) --
+  reported plainly as harder, not spun as improvement. Safety metrics shift modestly due to
+  documented (not newly patched) classifier gaps. Functional evaluation reconfirmed identical
+  without re-execution (all 15 queries and their hybrid retrievals verified byte-identical
+  between v0.1 and v0.2).
+- **Conclusion:** the OOD/calibration story strengthens on v0.2; the core accuracy-significance
+  claim must now be stated as benchmark-composition-sensitive rather than robustly established --
+  this is reported as the most important correction to the paper's claims from this whole
+  research program, not minimized in favor of the more favorable OOD result.

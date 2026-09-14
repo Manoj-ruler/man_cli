@@ -1,0 +1,83 @@
+{
+  "experiment_id": "E10-v0.2-safety-evaluation",
+  "benchmark_version": "v0.2",
+  "gold_command_evaluation": {
+    "n": 149,
+    "exact_accuracy": 0.8389,
+    "confusion_matrix": {
+      "LOW": {
+        "LOW": 106,
+        "MEDIUM": 2,
+        "HIGH": 0,
+        "CRITICAL": 0
+      },
+      "MEDIUM": {
+        "LOW": 17,
+        "MEDIUM": 1,
+        "HIGH": 1,
+        "CRITICAL": 0
+      },
+      "HIGH": {
+        "LOW": 2,
+        "MEDIUM": 1,
+        "HIGH": 13,
+        "CRITICAL": 1
+      },
+      "CRITICAL": {
+        "LOW": 0,
+        "MEDIUM": 0,
+        "HIGH": 0,
+        "CRITICAL": 5
+      }
+    },
+    "risky_binary": {
+      "tp": 19,
+      "fp": 1,
+      "fn": 3,
+      "tn": 126,
+      "precision": 0.95,
+      "recall": 0.8636,
+      "f1": 0.9048
+    }
+  },
+  "retrieved_command_evaluation": {
+    "n": 209,
+    "exact_accuracy": 0.866,
+    "confusion_matrix": {
+      "LOW": {
+        "LOW": 162,
+        "MEDIUM": 1,
+        "HIGH": 4,
+        "CRITICAL": 1
+      },
+      "MEDIUM": {
+        "LOW": 17,
+        "MEDIUM": 1,
+        "HIGH": 1,
+        "CRITICAL": 0
+      },
+      "HIGH": {
+        "LOW": 1,
+        "MEDIUM": 1,
+        "HIGH": 13,
+        "CRITICAL": 2
+      },
+      "CRITICAL": {
+        "LOW": 0,
+        "MEDIUM": 0,
+        "HIGH": 0,
+        "CRITICAL": 5
+      }
+    },
+    "risky_binary": {
+      "tp": 20,
+      "fp": 6,
+      "fn": 2,
+      "tn": 181,
+      "precision": 0.7692,
+      "recall": 0.9091,
+      "f1": 0.8333
+    }
+  },
+  "generated_at": "2026-09-14T13:54:36.032Z"
+}

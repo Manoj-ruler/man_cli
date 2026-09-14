@@ -62,11 +62,21 @@ hybrid fusion 77.1% vs. baseline 71.9% (significant, p=0.016); calibration ECE �
 hybrid confidence signal; OOD rejection 26.7%→46.7% (large but not significant at n=15); selective
 prediction reaches 90.1% accuracy at 69.5% coverage.
 
+> **v0.2 update:** on the expanded benchmark, OOD rejection significance is resolved (34.0%→68.0%,
+> p=0.000015) — but the BM25-vs-hybrid accuracy significance does NOT replicate (p=0.0156→0.0703),
+> while dense-vs-hybrid significance newly appears (p=0.146→0.0127). See the Phase 17 section's
+> second update above and `research/results/v0.2/V0.2_FULL_RESULTS_NOTES.md` for full detail —
+> this is the single most important correction to this report's original framing.
+
 ### 9. What failed?
-The substring bonus ablation (A0 vs. A1): zero measured effect, a clean null result. Ambiguity
-detection via margin alone: weak (F1=0.31). Hybrid-vs-dense-alone significance: not established
-(p=0.146). Two real bugs were found and fixed before any number was reported (Phase 8's isotonic
-tie-handling bug, Phase 13's OOD-inclusive accuracy-denominator bug) — both documented, not
+The substring bonus ablation (A0 vs. A1): zero measured effect, a clean null result (replicates
+exactly on v0.2). Ambiguity detection via margin alone: weak (F1=0.31, improves to 0.496 on v0.2
+but AUROC slightly decreases). Hybrid-vs-dense-alone significance: not established on v0.1
+(p=0.146) but IS established on v0.2 (p=0.0127) — one of several findings that changed direction
+between benchmark versions, underscoring that single-benchmark significance claims in this
+program should be read as benchmark-specific, not universal. Two real bugs were found and fixed
+before any number was reported (Phase 8's isotonic tie-handling bug, Phase 13's OOD-inclusive
+accuracy-denominator bug) — both documented, not
 hidden.
 
 ### 10. What improved?
@@ -163,6 +173,21 @@ best story.
 > unedited as the historical record of what was known at the time this decision gate was written;
 > the manuscript's current claims should cite the v0.2 result as the up-to-date, resolved finding.
 
+> **Second, more consequential update (benchmark v0.2, full pipeline re-run):** the full ablation
+> and statistical suite was subsequently re-run on v0.2 (`research/results/v0.2/V0.2_FULL_RESULTS_NOTES.md`).
+> **This surfaced a non-replication that must be weighed at least as heavily as the OOD win above:
+> the headline A0-vs-A3 (BM25 vs. hybrid) significance result does NOT replicate on v0.2**
+> (p=0.0156 on v0.1 → p=0.0703 on v0.2, verified at the per-query level, not a bug — 8 discordant
+> pairs, 7 favor hybrid, 1 now favors BM25). Simultaneously, A2-vs-A3 (dense vs. hybrid) flips
+> from not-significant on v0.1 (p=0.146) to significant on v0.2 (p=0.0127). The accuracy
+> improvement itself remains directionally consistent and similar in magnitude (+5.2pp v0.1,
+> +3.8pp v0.2) — what changed is whether it clears the conventional significance threshold, which
+> is sensitive to the harder, more diverse v0.2 query mix (24 new adversarial short-technical-
+> keyword ambiguous queries, e.g. `grep`/`sed`/`awk`/`tar`, where BM25's exact-match strength is
+> plausibly more competitive). **The manuscript must state the BM25-vs-hybrid claim as
+> benchmark-composition-sensitive, not robustly established, going forward** — this correction
+> takes priority over the more favorable OOD framing above wherever the two are discussed together.
+
 ### Classification: Outcome A, with explicitly scoped exceptions
 
 **This is Outcome A — a lightweight, reliability-aware hybrid retrieval architecture that
@@ -211,15 +236,38 @@ improvement, reframe as negative result) clearly does not fit either — there a
 statistically or practically strong positive results (the A0-vs-A3 accuracy gain and the
 calibration ECE reduction), not merely a null or negative finding across the board.
 
-### Final contribution statement (this determines the manuscript's Abstract/Introduction claims)
+### Final contribution statement — SUPERSEDED, see below
 
-> A lightweight hybrid lexical+semantic retrieval architecture, combined with post-hoc confidence
+*(The paragraph immediately below was the original Phase 17 statement, written before the v0.2
+full pipeline re-run. It is left visible, struck through in spirit but not in text, as the
+historical record — the corrected statement follows it and is the one Phase 18's manuscript must
+be built from.)*
+
+> ~~A lightweight hybrid lexical+semantic retrieval architecture, combined with post-hoc confidence
 > calibration, statistically significantly improves both retrieval accuracy (+5.2pp, p=0.016) and
 > confidence reliability (−80.4% ECE) over a frozen production BM25 baseline for natural-language-
 > to-shell-command retrieval — evaluated under a fully leakage-free nested cross-validation
 > protocol, with every individually weaker or null sub-result (dense-vs-hybrid significance, OOD
 > detection significance at small N, ambiguity detection quality, the substring bonus's actual
-> effect) reported explicitly rather than folded into an overstated headline claim.
+> effect) reported explicitly rather than folded into an overstated headline claim.~~
 
-This statement is what Phase 18's manuscript Abstract/Introduction must be built from — no
-number in it, or in the manuscript, may exceed what is written in the evidence table above.
+### Corrected final contribution statement (post-v0.2, current)
+
+> A lightweight hybrid lexical+semantic retrieval architecture, combined with post-hoc confidence
+> calibration, improves retrieval accuracy (+3.8 to +5.2pp depending on benchmark version) and
+> substantially improves confidence reliability (−59.6% to −84.1% ECE across four confidence
+> signals and two benchmark versions) over a frozen production BM25 baseline for natural-language-
+> to-shell-command retrieval. The BM25-vs-hybrid accuracy improvement is statistically significant
+> on the original 150-query benchmark (p=0.016) but does not replicate at p<0.05 on an expanded,
+> harder 209-query benchmark (p=0.070); conversely, hybrid significantly beats dense retrieval
+> alone on the expanded benchmark (p=0.013) where it did not on the original (p=0.146). Out-of-
+> domain rejection improves substantially and, on the expanded benchmark's larger OOD subset (50
+> vs. 15 queries), this improvement is confirmed statistically significant (p=0.000015) — resolving
+> an initial power limitation. Every individually weaker, null, or non-replicating sub-result
+> (the substring bonus's true effect, ambiguity detection quality, and the benchmark-composition-
+> sensitivity of the core accuracy claim itself) is reported explicitly, evaluated under a fully
+> leakage-free nested cross-validation protocol throughout both benchmark versions.
+
+This corrected statement is what Phase 18's manuscript Abstract/Introduction must be built from —
+no number in it, or in the manuscript, may exceed what is written in the evidence tables in this
+report and in `research/results/v0.2/V0.2_FULL_RESULTS_NOTES.md`.

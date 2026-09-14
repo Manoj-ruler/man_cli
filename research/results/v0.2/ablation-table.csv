@@ -1,0 +1,8 @@
+condition,description,mean_non_ood_accuracy_pct,std_pp,status
+A0,"BM25 only (production baseline)",75.4,6.3,complete
+A1,"BM25, no substring bonus",75.4,6.3,complete
+A2,"Dense only",72.4,3.4,complete
+A3,"Hybrid BM25+dense, nested-CV alpha",79.3,5.7,complete
+A4,"Hybrid + margin-based rejection",,,PENDING -- run_ablation_A4_A5_v0_2.js / calibration
+A5,"Hybrid + margin + OOD detection",,,PENDING -- run_ablation_A4_A5_v0_2.js / calibration
+A6,"Hybrid + margin + OOD + calibration",,,PENDING -- run_ablation_A4_A5_v0_2.js / calibration
