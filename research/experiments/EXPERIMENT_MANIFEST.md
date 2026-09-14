@@ -274,3 +274,19 @@ each phase completes — they are intentionally blank/pending until run.
   strengthen the paper's evaluation-methodology framing and reliability-tradeoff context.
 - **Conclusion:** no paper found reports a BM25 retrieval baseline evaluated under nested-CV
   calibration/OOD/selective-prediction on the NL2Bash/NLC2CMD task family -- novelty claim holds.
+
+## Phase 16 — Final error taxonomy (hybrid/A3)
+- **Objective:** automated, deterministic multi-label error tagging (CORRECT/SEMANTIC_MISMATCH/
+  LEXICAL_POLYSEMY/OOD_FALSE_ACCEPTANCE/AMBIGUITY_FAILURE/OVERMATCH/WRONG_ACTION/WRONG_SCOPE/
+  WRONG_PLATFORM/LOW_OVERLAP_FAILURE/HIGH_CONFIDENCE_WRONG) for all 150 hybrid predictions.
+- **Status:** COMPLETE. See `research/analysis/FINAL_ERROR_ANALYSIS_NOTES.md` and
+  `final-error-analysis.{json,csv}`.
+- **Actual result:** CORRECT=104, OOD_FALSE_ACCEPTANCE=15, AMBIGUITY_FAILURE=10,
+  LOW_OVERLAP_FAILURE=8, LEXICAL_POLYSEMY=6, SEMANTIC_MISMATCH=5, WRONG_SCOPE=2,
+  HIGH_CONFIDENCE_WRONG=39 (co-occurring tag). OVERMATCH/WRONG_ACTION/WRONG_PLATFORM are all
+  legitimately zero, each explained (single-keyword queries are also labeled AMBIGUOUS by
+  benchmark design; all 15 safety-sensitive queries are answered correctly; platform mismatch is
+  structurally impossible given the pre-filter in cli/search.js), not silently omitted.
+- **Key finding:** all 10 single-keyword failures are HIGH_CONFIDENCE_WRONG, and 39/46 (84.8%)
+  of all wrong predictions overall are high-confidence -- concrete evidence that accuracy
+  improvement (A0->A3) alone did not fix the calibration problem Phase 8 separately addressed.

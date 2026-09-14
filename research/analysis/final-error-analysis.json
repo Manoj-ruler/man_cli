@@ -1,0 +1,1706 @@
+{
+  "generated_at": "2026-09-14T11:11:54.227Z",
+  "n": 150,
+  "tag_counts": {
+    "CORRECT": 104,
+    "SEMANTIC_MISMATCH": 5,
+    "HIGH_CONFIDENCE_WRONG": 39,
+    "LOW_OVERLAP_FAILURE": 8,
+    "OOD_FALSE_ACCEPTANCE": 15,
+    "LEXICAL_POLYSEMY": 6,
+    "AMBIGUITY_FAILURE": 10,
+    "WRONG_SCOPE": 2
+  },
+  "wrong_platform_structural_note": "WRONG_PLATFORM count is 0 by construction: cli/search.js filters the corpus to the benchmark platform (win32) before any scoring happens, so a cross-platform-mismatched command can never be returned. This is stated explicitly as a structural guarantee, not a detection gap.",
+  "rows": [
+    {
+      "id": "TA-B001",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "git reset --soft HEAD~1",
+      "retrieved_command": "git reset --soft HEAD~1",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B002",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "git status",
+      "retrieved_command": "git status",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B003",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "docker ps",
+      "retrieved_command": "docker ps",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B004",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "npm install",
+      "retrieved_command": "npm install",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B005",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-ChildItem -Force",
+      "retrieved_command": "Get-ChildItem -Force",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B006",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+      "retrieved_command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B007",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "Test-Connection -ComputerName google.com -Count 4",
+      "retrieved_command": "Test-Connection -ComputerName google.com -Count 4",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B008",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-Process",
+      "retrieved_command": "Get-Process",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B009",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "Stop-Process -Name 'process_name' -Force",
+      "retrieved_command": "Stop-Process -Name 'process_name' -Force",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B010",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "$env:VAR_NAME = 'value'",
+      "retrieved_command": "$env:VAR_NAME = 'value'",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B011",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-History",
+      "retrieved_command": "Get-History",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B012",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "ssh user@hostname",
+      "retrieved_command": "ssh user@hostname",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B013",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "pip install package-name",
+      "retrieved_command": "pip install package-name",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B014",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "curl -O https://example.com/file.zip",
+      "retrieved_command": "curl -O https://example.com/file.zip",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B015",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
+      "retrieved_command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B016",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "$env:USERNAME",
+      "retrieved_command": "$env:USERNAME",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B017",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "kubectl get pods --all-namespaces",
+      "retrieved_command": "kubectl get pods --all-namespaces",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B018",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "openssl rand -base64 32",
+      "retrieved_command": "openssl rand -base64 32",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B019",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-PSDrive -PSProvider FileSystem",
+      "retrieved_command": "Get-PSDrive -PSProvider FileSystem",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B020",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "[System.Environment]::OSVersion",
+      "retrieved_command": "[System.Environment]::OSVersion",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B021",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+      "retrieved_command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B022",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName",
+      "retrieved_command": "Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B023",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "aws s3 ls",
+      "retrieved_command": "aws s3 ls",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B024",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
+      "retrieved_command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B025",
+      "query_type": "canonical",
+      "expected_classification": "CORRECT",
+      "gold_command": "tmux new -s session-name",
+      "retrieved_command": "tmux new -s session-name",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B026",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "git reset --soft HEAD~1",
+      "retrieved_command": "git reset --soft HEAD~1",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B027",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "docker ps",
+      "retrieved_command": "docker ps",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B028",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "npm install",
+      "retrieved_command": "npm install",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B029",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+      "retrieved_command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B030",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "git branch -a",
+      "retrieved_command": "git branch -a",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B031",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+      "retrieved_command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+      "top1_score": 0.9877,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B032",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-NetTCPConnection -State Listen",
+      "retrieved_command": "Get-NetTCPConnection -State Listen",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B033",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-ChildItem Env:",
+      "retrieved_command": "Get-ChildItem Env:",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B034",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+      "retrieved_command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B035",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "git stash",
+      "retrieved_command": "git stash",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B036",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "Copy-Item -Recurse 'source/' 'destination/'",
+      "retrieved_command": "Copy-Item -Recurse 'source/' 'destination/'",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B037",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "pip list",
+      "retrieved_command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+      "top1_score": 0.8327,
+      "tags": [
+        "SEMANTIC_MISMATCH",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B038",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "git merge branch-name",
+      "retrieved_command": "git merge branch-name",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B039",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "docker exec -it container-name /bin/bash",
+      "retrieved_command": "docker exec -it container-name /bin/bash",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B040",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "docker compose up -d",
+      "retrieved_command": "docker compose up -d",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B041",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "ssh-keygen -t ed25519 -C 'your_email@example.com'",
+      "retrieved_command": "ssh-keygen -t ed25519 -C 'your_email@example.com'",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B042",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "curl -X POST -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/endpoint",
+      "retrieved_command": "curl -X POST -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/endpoint",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B043",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+      "retrieved_command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B044",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "Stop-Process -Id PID -Force",
+      "retrieved_command": "Stop-Process -Id PID -Force",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B045",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "git diff",
+      "retrieved_command": "git diff --cached",
+      "top1_score": 0.8847,
+      "tags": [
+        "SEMANTIC_MISMATCH",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B046",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+      "retrieved_command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B047",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory",
+      "retrieved_command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory",
+      "top1_score": 0.9623,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B048",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "Set-Alias -Name ll -Value Get-ChildItem",
+      "retrieved_command": "Set-Alias -Name ll -Value Get-ChildItem",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B049",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "npm outdated",
+      "retrieved_command": "npm outdated",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B050",
+      "query_type": "paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "openssl s_client -connect example.com:443 -showcerts",
+      "retrieved_command": "openssl s_client -connect example.com:443 -showcerts",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B051",
+      "query_type": "low_overlap_paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "git reset --soft HEAD~1",
+      "retrieved_command": "git remote add origin https://github.com/user/repo.git",
+      "top1_score": 0.8591,
+      "tags": [
+        "LOW_OVERLAP_FAILURE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B052",
+      "query_type": "low_overlap_paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-PSDrive -PSProvider FileSystem",
+      "retrieved_command": "docker volume create my-volume",
+      "top1_score": 0.7006,
+      "tags": [
+        "LOW_OVERLAP_FAILURE"
+      ]
+    },
+    {
+      "id": "TA-B053",
+      "query_type": "low_overlap_paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-NetTCPConnection -State Listen",
+      "retrieved_command": "Get-NetTCPConnection",
+      "top1_score": 1,
+      "tags": [
+        "LOW_OVERLAP_FAILURE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B054",
+      "query_type": "low_overlap_paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "git clone https://github.com/user/repo.git",
+      "retrieved_command": "git tag --sort=-version:refname",
+      "top1_score": 0.9592,
+      "tags": [
+        "LOW_OVERLAP_FAILURE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B055",
+      "query_type": "low_overlap_paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "git stash",
+      "retrieved_command": "git stash",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B056",
+      "query_type": "low_overlap_paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "$env:USERNAME",
+      "retrieved_command": "Get-LocalUser | Select-Object Name",
+      "top1_score": 0.7,
+      "tags": [
+        "LOW_OVERLAP_FAILURE"
+      ]
+    },
+    {
+      "id": "TA-B057",
+      "query_type": "low_overlap_paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "Test-Connection -ComputerName google.com -Count 4",
+      "retrieved_command": "ssh user@hostname",
+      "top1_score": 0.9784,
+      "tags": [
+        "LOW_OVERLAP_FAILURE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B058",
+      "query_type": "low_overlap_paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-History",
+      "retrieved_command": "Get-History",
+      "top1_score": 0.9895,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B059",
+      "query_type": "low_overlap_paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-CimInstance Win32_Processor",
+      "retrieved_command": "Get-CimInstance Win32_Processor",
+      "top1_score": 0.9976,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B060",
+      "query_type": "low_overlap_paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-Command python3 | Select-Object -ExpandProperty Source",
+      "retrieved_command": "pip list",
+      "top1_score": 0.8851,
+      "tags": [
+        "LOW_OVERLAP_FAILURE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B061",
+      "query_type": "low_overlap_paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+      "retrieved_command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B062",
+      "query_type": "low_overlap_paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "npm outdated",
+      "retrieved_command": "winget upgrade --all",
+      "top1_score": 0.9807,
+      "tags": [
+        "LOW_OVERLAP_FAILURE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B063",
+      "query_type": "low_overlap_paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
+      "retrieved_command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
+      "top1_score": 0.9373,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B064",
+      "query_type": "low_overlap_paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime",
+      "retrieved_command": "(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B065",
+      "query_type": "low_overlap_paraphrase",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+      "retrieved_command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B066",
+      "query_type": "ambiguous",
+      "expected_classification": "AMBIGUOUS",
+      "gold_command": "git branch -d branch-name",
+      "retrieved_command": "git branch -d branch-name",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B067",
+      "query_type": "ambiguous",
+      "expected_classification": "AMBIGUOUS",
+      "gold_command": "git log --oneline -20",
+      "retrieved_command": "git log --oneline -20",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B068",
+      "query_type": "ambiguous",
+      "expected_classification": "AMBIGUOUS",
+      "gold_command": "Resolve-DnsName example.com",
+      "retrieved_command": "Resolve-DnsName example.com -Type ALL",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B069",
+      "query_type": "ambiguous",
+      "expected_classification": "CORRECT",
+      "gold_command": "docker compose down",
+      "retrieved_command": "docker stop $(docker ps -q)",
+      "top1_score": 0.9063,
+      "tags": [
+        "SEMANTIC_MISMATCH",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B070",
+      "query_type": "ambiguous",
+      "expected_classification": "CORRECT",
+      "gold_command": "Move-Item 'oldname.txt' 'newname.txt'",
+      "retrieved_command": "Move-Item 'oldname.txt' 'newname.txt'",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B071",
+      "query_type": "ambiguous",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+      "retrieved_command": "Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }",
+      "top1_score": 0.8978,
+      "tags": [
+        "SEMANTIC_MISMATCH",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B072",
+      "query_type": "ambiguous",
+      "expected_classification": "CORRECT",
+      "gold_command": "docker rm container-name",
+      "retrieved_command": "docker rm container-name",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B073",
+      "query_type": "ambiguous",
+      "expected_classification": "CORRECT",
+      "gold_command": "(Get-Content 'filename.txt') -replace 'old','new' | Set-Content 'filename.txt'",
+      "retrieved_command": "(Get-Content 'filename.txt') -replace 'old','new' | Set-Content 'filename.txt'",
+      "top1_score": 0.9855,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B074",
+      "query_type": "ambiguous",
+      "expected_classification": "CORRECT",
+      "gold_command": "git remote add origin https://github.com/user/repo.git",
+      "retrieved_command": "git config --global user.name 'Your Name'",
+      "top1_score": 0.9219,
+      "tags": [
+        "SEMANTIC_MISMATCH",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B075",
+      "query_type": "ambiguous",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-Content 'filename.txt'",
+      "retrieved_command": "Get-Content 'filename.txt' | Out-Host -Paging",
+      "top1_score": 0.9961,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B076",
+      "query_type": "ambiguous",
+      "expected_classification": "CORRECT",
+      "gold_command": "docker image prune -a",
+      "retrieved_command": "docker image prune -a",
+      "top1_score": 0.9116,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B077",
+      "query_type": "ambiguous",
+      "expected_classification": "CORRECT",
+      "gold_command": "git config --list",
+      "retrieved_command": "git config --list",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B078",
+      "query_type": "ood",
+      "expected_classification": "OOD",
+      "gold_command": null,
+      "retrieved_command": "npm update",
+      "top1_score": 0.7,
+      "tags": [
+        "OOD_FALSE_ACCEPTANCE"
+      ]
+    },
+    {
+      "id": "TA-B079",
+      "query_type": "ood",
+      "expected_classification": "OOD",
+      "gold_command": null,
+      "retrieved_command": "winver",
+      "top1_score": 0.7,
+      "tags": [
+        "OOD_FALSE_ACCEPTANCE"
+      ]
+    },
+    {
+      "id": "TA-B080",
+      "query_type": "ood",
+      "expected_classification": "OOD",
+      "gold_command": null,
+      "retrieved_command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+      "top1_score": 0.7,
+      "tags": [
+        "OOD_FALSE_ACCEPTANCE"
+      ]
+    },
+    {
+      "id": "TA-B081",
+      "query_type": "ood",
+      "expected_classification": "OOD",
+      "gold_command": null,
+      "retrieved_command": "git commit --amend -m 'New commit message'",
+      "top1_score": 0.7,
+      "tags": [
+        "OOD_FALSE_ACCEPTANCE"
+      ]
+    },
+    {
+      "id": "TA-B082",
+      "query_type": "ood",
+      "expected_classification": "OOD",
+      "gold_command": null,
+      "retrieved_command": "openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes",
+      "top1_score": 0.5,
+      "tags": [
+        "OOD_FALSE_ACCEPTANCE"
+      ]
+    },
+    {
+      "id": "TA-B083",
+      "query_type": "ood",
+      "expected_classification": "OOD",
+      "gold_command": null,
+      "retrieved_command": "npm init -y",
+      "top1_score": 0.8134,
+      "tags": [
+        "OOD_FALSE_ACCEPTANCE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B084",
+      "query_type": "ood",
+      "expected_classification": "OOD",
+      "gold_command": null,
+      "retrieved_command": "ssh user@hostname",
+      "top1_score": 0.9646,
+      "tags": [
+        "OOD_FALSE_ACCEPTANCE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B085",
+      "query_type": "ood",
+      "expected_classification": "OOD",
+      "gold_command": null,
+      "retrieved_command": "npm init -y",
+      "top1_score": 1,
+      "tags": [
+        "OOD_FALSE_ACCEPTANCE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B086",
+      "query_type": "ood",
+      "expected_classification": "OOD",
+      "gold_command": null,
+      "retrieved_command": "crontab -e",
+      "top1_score": 1,
+      "tags": [
+        "OOD_FALSE_ACCEPTANCE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B087",
+      "query_type": "ood",
+      "expected_classification": "OOD",
+      "gold_command": null,
+      "retrieved_command": "python -m venv venv",
+      "top1_score": 0.9889,
+      "tags": [
+        "OOD_FALSE_ACCEPTANCE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B088",
+      "query_type": "ood",
+      "expected_classification": "OOD",
+      "gold_command": null,
+      "retrieved_command": "Test-Connection -ComputerName google.com -Count 4",
+      "top1_score": 0.8258,
+      "tags": [
+        "OOD_FALSE_ACCEPTANCE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B089",
+      "query_type": "ood",
+      "expected_classification": "OOD",
+      "gold_command": null,
+      "retrieved_command": "Set-Alias -Name ll -Value Get-ChildItem",
+      "top1_score": 0.888,
+      "tags": [
+        "OOD_FALSE_ACCEPTANCE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B090",
+      "query_type": "ood",
+      "expected_classification": "OOD",
+      "gold_command": null,
+      "retrieved_command": "Test-NetConnection -ComputerName google.com -TraceRoute",
+      "top1_score": 0.8922,
+      "tags": [
+        "OOD_FALSE_ACCEPTANCE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B091",
+      "query_type": "ood",
+      "expected_classification": "OOD",
+      "gold_command": null,
+      "retrieved_command": "ssh -R 9090:localhost:3000 user@hostname",
+      "top1_score": 0.9702,
+      "tags": [
+        "OOD_FALSE_ACCEPTANCE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B092",
+      "query_type": "ood",
+      "expected_classification": "OOD",
+      "gold_command": null,
+      "retrieved_command": "git config --global user.email 'email@example.com'",
+      "top1_score": 0.9739,
+      "tags": [
+        "OOD_FALSE_ACCEPTANCE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B093",
+      "query_type": "polysemy",
+      "expected_classification": "NEEDS_CORRECTION",
+      "gold_command": "Remove-Item -Recurse -Force 'directory/'",
+      "retrieved_command": "Remove-Item -Recurse -Force 'directory/'",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B094",
+      "query_type": "polysemy",
+      "expected_classification": "CORRECT",
+      "gold_command": "Remove-Item -Recurse -Force 'directory/'",
+      "retrieved_command": "Remove-Item -Recurse -Force 'directory/'",
+      "top1_score": 0.9436,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B095",
+      "query_type": "polysemy",
+      "expected_classification": "CORRECT",
+      "gold_command": "Stop-Process -Name 'process_name' -Force",
+      "retrieved_command": "Stop-Process -Name 'process_name' -Force",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B096",
+      "query_type": "polysemy",
+      "expected_classification": "CORRECT",
+      "gold_command": "npm run script-name",
+      "retrieved_command": "Test-Connection -ComputerName google.com -Count 4",
+      "top1_score": 0.9324,
+      "tags": [
+        "LEXICAL_POLYSEMY",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B097",
+      "query_type": "polysemy",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-Content 'filename.txt'",
+      "retrieved_command": "winget uninstall package-name --purge",
+      "top1_score": 0.935,
+      "tags": [
+        "LEXICAL_POLYSEMY",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B098",
+      "query_type": "polysemy",
+      "expected_classification": "CORRECT",
+      "gold_command": "icacls 'directory/' /grant 'user:(OI)(CI)F' /T",
+      "retrieved_command": "icacls 'filename.txt' /setowner 'user'",
+      "top1_score": 1,
+      "tags": [
+        "LEXICAL_POLYSEMY",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B099",
+      "query_type": "polysemy",
+      "expected_classification": "CORRECT",
+      "gold_command": "docker images",
+      "retrieved_command": "docker images",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B100",
+      "query_type": "polysemy",
+      "expected_classification": "CORRECT",
+      "gold_command": "npm init -y",
+      "retrieved_command": "npm init -y",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B101",
+      "query_type": "polysemy",
+      "expected_classification": "CORRECT",
+      "gold_command": "docker compose up -d",
+      "retrieved_command": "docker compose up -d",
+      "top1_score": 0.9029,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B102",
+      "query_type": "polysemy",
+      "expected_classification": "CORRECT",
+      "gold_command": "docker stop $(docker ps -q)",
+      "retrieved_command": "docker stop $(docker ps -q)",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B103",
+      "query_type": "polysemy",
+      "expected_classification": "CORRECT",
+      "gold_command": "git status",
+      "retrieved_command": "Get-Service -Name 'service-name'",
+      "top1_score": 0.998,
+      "tags": [
+        "LEXICAL_POLYSEMY",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B104",
+      "query_type": "polysemy",
+      "expected_classification": "CORRECT",
+      "gold_command": "docker volume create my-volume",
+      "retrieved_command": "docker volume create my-volume",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B105",
+      "query_type": "polysemy",
+      "expected_classification": "AMBIGUOUS",
+      "gold_command": "git log --oneline -20",
+      "retrieved_command": "git log --oneline -20",
+      "top1_score": 0.9395,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B106",
+      "query_type": "polysemy",
+      "expected_classification": "CORRECT",
+      "gold_command": "git config --global user.name 'Your Name'",
+      "retrieved_command": "git config --global user.name 'Your Name'",
+      "top1_score": 0.8946,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B107",
+      "query_type": "polysemy",
+      "expected_classification": "CORRECT",
+      "gold_command": "npm install package-name",
+      "retrieved_command": "winget install package-name",
+      "top1_score": 1,
+      "tags": [
+        "LEXICAL_POLYSEMY",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B108",
+      "query_type": "polysemy",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-NetAdapter",
+      "retrieved_command": "Get-NetAdapter",
+      "top1_score": 0.9588,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B109",
+      "query_type": "polysemy",
+      "expected_classification": "CORRECT",
+      "gold_command": "New-Item -ItemType SymbolicLink -Path '/path/to/link' -Target '/path/to/target'",
+      "retrieved_command": "New-Item -ItemType SymbolicLink -Path '/path/to/link' -Target '/path/to/target'",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B110",
+      "query_type": "polysemy",
+      "expected_classification": "CORRECT",
+      "gold_command": "npm uninstall package-name",
+      "retrieved_command": "winget uninstall package-name",
+      "top1_score": 0.9943,
+      "tags": [
+        "LEXICAL_POLYSEMY",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B111",
+      "query_type": "single_keyword",
+      "expected_classification": "AMBIGUOUS",
+      "gold_command": null,
+      "retrieved_command": "git add -A",
+      "top1_score": 0.9919,
+      "tags": [
+        "AMBIGUITY_FAILURE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B112",
+      "query_type": "single_keyword",
+      "expected_classification": "AMBIGUOUS",
+      "gold_command": null,
+      "retrieved_command": "docker inspect container-name",
+      "top1_score": 0.9894,
+      "tags": [
+        "AMBIGUITY_FAILURE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B113",
+      "query_type": "single_keyword",
+      "expected_classification": "AMBIGUOUS",
+      "gold_command": null,
+      "retrieved_command": "ssh user@hostname",
+      "top1_score": 1,
+      "tags": [
+        "AMBIGUITY_FAILURE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B114",
+      "query_type": "single_keyword",
+      "expected_classification": "AMBIGUOUS",
+      "gold_command": null,
+      "retrieved_command": "Get-NetTCPConnection",
+      "top1_score": 0.9972,
+      "tags": [
+        "AMBIGUITY_FAILURE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B115",
+      "query_type": "single_keyword",
+      "expected_classification": "AMBIGUOUS",
+      "gold_command": null,
+      "retrieved_command": "icacls 'directory/' /grant 'user:(OI)(CI)F' /T",
+      "top1_score": 1,
+      "tags": [
+        "AMBIGUITY_FAILURE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B116",
+      "query_type": "single_keyword",
+      "expected_classification": "AMBIGUOUS",
+      "gold_command": null,
+      "retrieved_command": "Get-Process | Sort-Object CPU -Descending | Select-Object -First 20",
+      "top1_score": 0.9926,
+      "tags": [
+        "AMBIGUITY_FAILURE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B117",
+      "query_type": "single_keyword",
+      "expected_classification": "AMBIGUOUS",
+      "gold_command": null,
+      "retrieved_command": "npm update",
+      "top1_score": 0.9617,
+      "tags": [
+        "AMBIGUITY_FAILURE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B118",
+      "query_type": "single_keyword",
+      "expected_classification": "AMBIGUOUS",
+      "gold_command": null,
+      "retrieved_command": "kubectl describe deployment deployment-name -n namespace",
+      "top1_score": 1,
+      "tags": [
+        "AMBIGUITY_FAILURE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B119",
+      "query_type": "single_keyword",
+      "expected_classification": "AMBIGUOUS",
+      "gold_command": null,
+      "retrieved_command": "rsync -avz source/ destination/",
+      "top1_score": 0.9959,
+      "tags": [
+        "AMBIGUITY_FAILURE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B120",
+      "query_type": "single_keyword",
+      "expected_classification": "AMBIGUOUS",
+      "gold_command": null,
+      "retrieved_command": "curl -s https://api.example.com/data",
+      "top1_score": 0.9905,
+      "tags": [
+        "AMBIGUITY_FAILURE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B121",
+      "query_type": "safety_sensitive",
+      "expected_classification": "CORRECT",
+      "gold_command": "Remove-Item -Recurse -Force 'directory/'",
+      "retrieved_command": "Remove-Item -Recurse -Force 'directory/'",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B122",
+      "query_type": "safety_sensitive",
+      "expected_classification": "CORRECT",
+      "gold_command": "git reset --hard HEAD && git clean -fd",
+      "retrieved_command": "git reset --hard HEAD && git clean -fd",
+      "top1_score": 0.9991,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B123",
+      "query_type": "safety_sensitive",
+      "expected_classification": "CORRECT",
+      "gold_command": "git checkout -- .",
+      "retrieved_command": "git checkout -- .",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B124",
+      "query_type": "safety_sensitive",
+      "expected_classification": "CORRECT",
+      "gold_command": "git branch -D branch-name",
+      "retrieved_command": "git branch -D branch-name",
+      "top1_score": 0.9817,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B125",
+      "query_type": "safety_sensitive",
+      "expected_classification": "CORRECT",
+      "gold_command": "docker stop $(docker ps -q)",
+      "retrieved_command": "docker stop $(docker ps -q)",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B126",
+      "query_type": "safety_sensitive",
+      "expected_classification": "CORRECT",
+      "gold_command": "docker image prune -a",
+      "retrieved_command": "docker image prune -a",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B127",
+      "query_type": "safety_sensitive",
+      "expected_classification": "CORRECT",
+      "gold_command": "Start-Process powershell -Verb RunAs",
+      "retrieved_command": "Start-Process powershell -Verb RunAs",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B128",
+      "query_type": "safety_sensitive",
+      "expected_classification": "CORRECT",
+      "gold_command": "icacls 'filename.txt' /setowner 'user'",
+      "retrieved_command": "icacls 'filename.txt' /setowner 'user'",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B129",
+      "query_type": "safety_sensitive",
+      "expected_classification": "CORRECT",
+      "gold_command": "sudo reboot",
+      "retrieved_command": "sudo reboot",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B130",
+      "query_type": "safety_sensitive",
+      "expected_classification": "CORRECT",
+      "gold_command": "sudo shutdown -h now",
+      "retrieved_command": "sudo shutdown -h now",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B131",
+      "query_type": "safety_sensitive",
+      "expected_classification": "CORRECT",
+      "gold_command": "New-NetFirewallRule -DisplayName 'Block IP' -Direction Inbound -RemoteAddress '192.168.1.100' -Action Block",
+      "retrieved_command": "New-NetFirewallRule -DisplayName 'Block IP' -Direction Inbound -RemoteAddress '192.168.1.100' -Action Block",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B132",
+      "query_type": "safety_sensitive",
+      "expected_classification": "CORRECT",
+      "gold_command": "kubectl delete pods --field-selector=status.phase=Failed -n namespace",
+      "retrieved_command": "kubectl delete pods --field-selector=status.phase=Failed -n namespace",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B133",
+      "query_type": "safety_sensitive",
+      "expected_classification": "CORRECT",
+      "gold_command": "winget uninstall package-name --purge",
+      "retrieved_command": "winget uninstall package-name --purge",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B134",
+      "query_type": "safety_sensitive",
+      "expected_classification": "CORRECT",
+      "gold_command": "Rename-Computer -NewName 'new-hostname' -Force",
+      "retrieved_command": "Rename-Computer -NewName 'new-hostname' -Force",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B135",
+      "query_type": "safety_sensitive",
+      "expected_classification": "CORRECT",
+      "gold_command": "docker volume prune -f",
+      "retrieved_command": "docker volume prune -f",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B136",
+      "query_type": "complex_multi_intent",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+      "retrieved_command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B137",
+      "query_type": "complex_multi_intent",
+      "expected_classification": "CORRECT",
+      "gold_command": "Select-String -Path 'file.txt' -Pattern 'pattern' -Context 3,3",
+      "retrieved_command": "Select-String -Path 'file.txt' -Pattern 'pattern' -Context 3,3",
+      "top1_score": 0.9631,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B138",
+      "query_type": "complex_multi_intent",
+      "expected_classification": "CORRECT",
+      "gold_command": "kubectl apply -f manifest.yaml",
+      "retrieved_command": "kubectl describe deployment deployment-name -n namespace",
+      "top1_score": 0.8826,
+      "tags": [
+        "WRONG_SCOPE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B139",
+      "query_type": "complex_multi_intent",
+      "expected_classification": "CORRECT",
+      "gold_command": "git blame filename.txt",
+      "retrieved_command": "git blame filename.txt",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B140",
+      "query_type": "complex_multi_intent",
+      "expected_classification": "CORRECT",
+      "gold_command": "ssh-copy-id user@hostname",
+      "retrieved_command": "ssh-copy-id user@hostname",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B141",
+      "query_type": "complex_multi_intent",
+      "expected_classification": "CORRECT",
+      "gold_command": "git bisect start && git bisect bad HEAD && git bisect good <good-commit>",
+      "retrieved_command": "git bisect start && git bisect bad HEAD && git bisect good <good-commit>",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B142",
+      "query_type": "complex_multi_intent",
+      "expected_classification": "CORRECT",
+      "gold_command": "git rebase -i HEAD~5",
+      "retrieved_command": "git rebase -i HEAD~5",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B143",
+      "query_type": "complex_multi_intent",
+      "expected_classification": "CORRECT",
+      "gold_command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+      "retrieved_command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B144",
+      "query_type": "complex_multi_intent",
+      "expected_classification": "CORRECT",
+      "gold_command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+      "retrieved_command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B145",
+      "query_type": "complex_multi_intent",
+      "expected_classification": "NEEDS_CORRECTION",
+      "gold_command": "ssh -L 5432:localhost:5432 user@hostname",
+      "retrieved_command": "ssh -R 9090:localhost:3000 user@hostname",
+      "top1_score": 0.9842,
+      "tags": [
+        "WRONG_SCOPE",
+        "HIGH_CONFIDENCE_WRONG"
+      ]
+    },
+    {
+      "id": "TA-B146",
+      "query_type": "complex_multi_intent",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-Process | Sort-Object CPU -Descending",
+      "retrieved_command": "Get-Process | Sort-Object CPU -Descending",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B147",
+      "query_type": "complex_multi_intent",
+      "expected_classification": "CORRECT",
+      "gold_command": "gpg -c filename.txt",
+      "retrieved_command": "gpg -c filename.txt",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B148",
+      "query_type": "complex_multi_intent",
+      "expected_classification": "CORRECT",
+      "gold_command": "curl -C - -O https://example.com/largefile.zip",
+      "retrieved_command": "curl -C - -O https://example.com/largefile.zip",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B149",
+      "query_type": "complex_multi_intent",
+      "expected_classification": "CORRECT",
+      "gold_command": "Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }",
+      "retrieved_command": "Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    },
+    {
+      "id": "TA-B150",
+      "query_type": "complex_multi_intent",
+      "expected_classification": "CORRECT",
+      "gold_command": "git checkout feature-branch -- path/to/file.txt",
+      "retrieved_command": "git checkout feature-branch -- path/to/file.txt",
+      "top1_score": 1,
+      "tags": [
+        "CORRECT"
+      ]
+    }
+  ]
+}
