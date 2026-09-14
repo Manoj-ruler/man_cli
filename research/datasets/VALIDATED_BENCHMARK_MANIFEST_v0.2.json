@@ -1,0 +1,18 @@
+{
+  "benchmark_name": "TermAssist-Bench",
+  "version": "v0.2-validated",
+  "total_queries": 209,
+  "correct": 119,
+  "ood": 50,
+  "ambiguous": 38,
+  "needs_correction": 2,
+  "platform": "win32",
+  "production_code_modified": false,
+  "parent_benchmark": "v0.1-validated (unmodified)",
+  "validation_status": "frozen",
+  "validated_json_sha256_lf_normalized": "9a19406e69c51979ead2c466814d7f3a662c75d47754c37259aa5da1a71b63b8",
+  "validated_csv_sha256_lf_normalized": "ef1069b67fb5ed1b6a6a09cb6bfdf7cc4cd96226bbc98a9a48c0112fa75f7d03",
+  "created_at": "2026-09-14T13:21:13.571Z",
+  "provenance_disclosure": "New v0.2 queries (TA-B151 to TA-B209) were authored and adjudicated by an AI agent (Claude) under human direction, verified against actual system retrieval output (see v0.2_ADJUDICATION_REPORT.md), following the identical design/inclusion/exclusion criteria documented in TERMASSIST_BENCH_DESIGN.md for v0.1.",
+  "adjudication_report_path": "research/datasets/v0.2_ADJUDICATION_REPORT.md"
+}

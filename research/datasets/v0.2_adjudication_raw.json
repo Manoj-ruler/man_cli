@@ -1,0 +1,3711 @@
+{
+  "ood": [
+    {
+      "query": "recommend me a good recipe for dinner",
+      "lexical_top5": [
+        {
+          "command": "git bisect good",
+          "intent": "mark current bisect commit as good",
+          "score": 4.42
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "ssh-keygen -t ed25519 -C 'your_email@example.com'",
+          "intent": "generate ssh key pair",
+          "sim": 0.1747
+        },
+        {
+          "command": "ssh -L 8080:localhost:80 user@hostname",
+          "intent": "use ssh tunnel to forward a port",
+          "sim": 0.1628
+        },
+        {
+          "command": "at 10:00 AM tomorrow",
+          "intent": "run command at scheduled time",
+          "sim": 0.155
+        },
+        {
+          "command": "Get-Content data.json | ConvertFrom-Json | ConvertTo-Json -Depth 10 | ConvertFrom-Json | Get-Member -MemberType NoteProperty | Sort-Object Name",
+          "intent": "pretty print and sort json keys using jq",
+          "sim": 0.155
+        },
+        {
+          "command": "ssh -R 9090:localhost:3000 user@hostname",
+          "intent": "use ssh reverse tunnel",
+          "sim": 0.1497
+        }
+      ]
+    },
+    {
+      "query": "tell me a joke",
+      "lexical_top5": [
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        },
+        {
+          "command": "scp file.txt user@hostname:/path/to/destination",
+          "intent": "copy file to remote server via scp",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "openssl rand -base64 32",
+          "intent": "generate a random password",
+          "sim": 0.1365
+        },
+        {
+          "command": "while ($true) { command; Start-Sleep 2 }",
+          "intent": "repeat a command every 2 seconds",
+          "sim": 0.1345
+        },
+        {
+          "command": "command1 && command2",
+          "intent": "run multiple commands sequentially",
+          "sim": 0.1268
+        },
+        {
+          "command": "Set-Alias -Name ll -Value Get-ChildItem",
+          "intent": "create an alias for a command",
+          "sim": 0.1199
+        },
+        {
+          "command": "Start-Process powershell -Verb RunAs",
+          "intent": "run command as superuser",
+          "sim": 0.1164
+        }
+      ]
+    },
+    {
+      "query": "what's the weather like today",
+      "lexical_top5": [
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 4.71
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        },
+        {
+          "command": "scp file.txt user@hostname:/path/to/destination",
+          "intent": "copy file to remote server via scp",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-7) }",
+          "intent": "find files modified in the last 7 days",
+          "sim": 0.1625
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "sim": 0.1618
+        },
+        {
+          "command": "Get-EventLog -LogName System -Newest 50",
+          "intent": "view system logs",
+          "sim": 0.0916
+        },
+        {
+          "command": "kubectl describe deployment deployment-name -n namespace",
+          "intent": "describe a kubernetes deployment for diagnostics",
+          "sim": 0.0891
+        },
+        {
+          "command": "docker logs -f container-name",
+          "intent": "view docker container logs",
+          "sim": 0.0851
+        }
+      ]
+    },
+    {
+      "query": "help me write a poem about the ocean",
+      "lexical_top5": [
+        {
+          "command": "winget show package-name",
+          "intent": "show info about an apt package",
+          "score": 6.33
+        },
+        {
+          "command": "docker inspect container-name",
+          "intent": "inspect a docker container",
+          "score": 5.1
+        },
+        {
+          "command": "command 2>'error.txt'",
+          "intent": "redirect stderr to a file",
+          "score": 4.94
+        },
+        {
+          "command": "command | Out-File 'output.txt'",
+          "intent": "redirect stdout to a file",
+          "score": 4.56
+        },
+        {
+          "command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
+          "intent": "give read write permissions to owner only",
+          "score": 4.23
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "docker compose logs -f",
+          "intent": "view docker compose logs",
+          "sim": 0.1689
+        },
+        {
+          "command": "kubectl logs -f pod-name -n namespace",
+          "intent": "stream logs from a kubernetes pod",
+          "sim": 0.1677
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "sim": 0.1628
+        },
+        {
+          "command": "$env:VAR_NAME",
+          "intent": "print an environment variable",
+          "sim": 0.1596
+        },
+        {
+          "command": "Get-ChildItem Env:",
+          "intent": "list all environment variables",
+          "sim": 0.1593
+        }
+      ]
+    },
+    {
+      "query": "calculate my monthly budget",
+      "lexical_top5": [
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        },
+        {
+          "command": "scp file.txt user@hostname:/path/to/destination",
+          "intent": "copy file to remote server via scp",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Get-CimInstance Win32_Processor | Select-Object LoadPercentage",
+          "intent": "show system load averages",
+          "sim": 0.2197
+        },
+        {
+          "command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory",
+          "intent": "show memory usage",
+          "sim": 0.1947
+        },
+        {
+          "command": "(Import-Csv 'file.txt' -Header Val | Measure-Object -Property Val -Sum).Sum",
+          "intent": "sum a column of numbers with awk",
+          "sim": 0.1327
+        },
+        {
+          "command": "(Get-ChildItem -Recurse -Include '*.py','*.js' | Get-Content | Measure-Object -Line).Lines",
+          "intent": "count lines of code in a project",
+          "sim": 0.1315
+        },
+        {
+          "command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVirtualMemorySize,FreeVirtualMemory,TotalVisibleMemorySize,FreePhysicalMemory",
+          "intent": "display system memory map and check for overcommit",
+          "sim": 0.1255
+        }
+      ]
+    },
+    {
+      "query": "find me a good doctor nearby",
+      "lexical_top5": [
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.log'",
+          "intent": "find files by extension recursively",
+          "score": 4.55
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
+          "intent": "find large files bigger than 100mb",
+          "score": 4.47
+        },
+        {
+          "command": "git bisect good",
+          "intent": "mark current bisect commit as good",
+          "score": 4.42
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-7) }",
+          "intent": "find files modified in the last 7 days",
+          "score": 4.38
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Directory | Where-Object { (Get-ChildItem $_.FullName).Count -eq 0 }",
+          "intent": "find empty directories",
+          "score": 4.32
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "clamscan -r /path/to/scan",
+          "intent": "scan a file for viruses with clamscan",
+          "sim": 0.1777
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'pattern' -CaseSensitive:$false",
+          "intent": "search for a pattern case insensitively",
+          "sim": 0.1213
+        },
+        {
+          "command": "Get-Content 'filename.txt' | Sort-Object -Unique",
+          "intent": "remove duplicate lines from a file",
+          "sim": 0.1037
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+          "intent": "search for a string in files recursively",
+          "sim": 0.1031
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Directory | Where-Object { (Get-ChildItem $_.FullName).Count -eq 0 }",
+          "intent": "find empty directories",
+          "sim": 0.0953
+        }
+      ]
+    },
+    {
+      "query": "book a hotel room in Paris",
+      "lexical_top5": [
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        },
+        {
+          "command": "scp file.txt user@hostname:/path/to/destination",
+          "intent": "copy file to remote server via scp",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "openssl rand -base64 32",
+          "intent": "generate a random password",
+          "sim": 0.094
+        },
+        {
+          "command": "ssh-copy-id user@hostname",
+          "intent": "copy ssh public key to remote server",
+          "sim": 0.0607
+        },
+        {
+          "command": "screen -S session-name",
+          "intent": "start a new named screen session",
+          "sim": 0.0601
+        },
+        {
+          "command": "gpg -c filename.txt",
+          "intent": "encrypt a file with gpg",
+          "sim": 0.0589
+        },
+        {
+          "command": "screen -r session-name",
+          "intent": "reattach to a screen session",
+          "sim": 0.0531
+        }
+      ]
+    },
+    {
+      "query": "order a pizza for delivery",
+      "lexical_top5": [
+        {
+          "command": "kubectl get events --sort-by='.lastTimestamp' -n namespace",
+          "intent": "get kubernetes events sorted by timestamp",
+          "score": 4.25
+        },
+        {
+          "command": "git tag --sort=-version:refname",
+          "intent": "list all git tags sorted by version",
+          "score": 3.98
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "npm install",
+          "intent": "install npm packages from package.json",
+          "sim": 0.1679
+        },
+        {
+          "command": "Get-Content data.json | ConvertFrom-Json | ConvertTo-Json -Depth 10 | ConvertFrom-Json | Get-Member -MemberType NoteProperty | Sort-Object Name",
+          "intent": "pretty print and sort json keys using jq",
+          "sim": 0.1396
+        },
+        {
+          "command": "npm install package-name",
+          "intent": "install a specific npm package",
+          "sim": 0.1353
+        },
+        {
+          "command": "npm run script-name",
+          "intent": "run npm script",
+          "sim": 0.1342
+        },
+        {
+          "command": "winget install package-name",
+          "intent": "install a package with apt",
+          "sim": 0.1341
+        }
+      ]
+    },
+    {
+      "query": "teach me how to play guitar",
+      "lexical_top5": [
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        },
+        {
+          "command": "scp file.txt user@hostname:/path/to/destination",
+          "intent": "copy file to remote server via scp",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Start-Process powershell -Verb RunAs",
+          "intent": "run command as superuser",
+          "sim": 0.1258
+        },
+        {
+          "command": "(Get-Content data.json | ConvertFrom-Json).users.Count",
+          "intent": "count items in a json array using jq",
+          "sim": 0.1048
+        },
+        {
+          "command": "Get-Help command -Full",
+          "intent": "open a manual page for a command",
+          "sim": 0.1016
+        },
+        {
+          "command": "Get-NetTCPConnection -State Listen",
+          "intent": "show all listening ports",
+          "sim": 0.0986
+        },
+        {
+          "command": "sudo !!",
+          "intent": "run previous command with sudo",
+          "sim": 0.0939
+        }
+      ]
+    },
+    {
+      "query": "give me legal advice about my lease",
+      "lexical_top5": [
+        {
+          "command": "winget show package-name",
+          "intent": "show info about an apt package",
+          "score": 6.33
+        },
+        {
+          "command": "docker inspect container-name",
+          "intent": "inspect a docker container",
+          "score": 5.1
+        },
+        {
+          "command": "icacls 'filename.txt' /inheritance:r /grant:r 'Everyone:R'",
+          "intent": "give read only permissions to everyone",
+          "score": 4.72
+        },
+        {
+          "command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
+          "intent": "give read write permissions to owner only",
+          "score": 4.56
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "intent": "create a compressed zip archive",
+          "sim": 0.1398
+        },
+        {
+          "command": "openssl rand -base64 32",
+          "intent": "generate a random password",
+          "sim": 0.1289
+        },
+        {
+          "command": "Expand-Archive -Path 'archive.zip' -DestinationPath '.'",
+          "intent": "extract a zip archive",
+          "sim": 0.1257
+        },
+        {
+          "command": "Expand-Archive -Path 'archive.zip' -WhatIf",
+          "intent": "list contents of a zip archive",
+          "sim": 0.1189
+        },
+        {
+          "command": "Get-PSDrive -PSProvider FileSystem",
+          "intent": "show total disk space",
+          "sim": 0.118
+        }
+      ]
+    },
+    {
+      "query": "help me meditate for stress relief",
+      "lexical_top5": [
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        },
+        {
+          "command": "scp file.txt user@hostname:/path/to/destination",
+          "intent": "copy file to remote server via scp",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "kubectl delete pods --field-selector=status.phase=Failed -n namespace",
+          "intent": "delete all completed or failed pods in a namespace",
+          "sim": 0.1451
+        },
+        {
+          "command": "docker cp container-name:/path/in/container ./local-path",
+          "intent": "copy file from container to host",
+          "sim": 0.1362
+        },
+        {
+          "command": "git clone https://github.com/user/repo.git",
+          "intent": "clone a git repository",
+          "sim": 0.1351
+        },
+        {
+          "command": "npm update",
+          "intent": "update all npm packages",
+          "sim": 0.1351
+        },
+        {
+          "command": "git stash pop",
+          "intent": "apply stashed changes",
+          "sim": 0.1307
+        }
+      ]
+    },
+    {
+      "query": "plan a birthday party for my friend",
+      "lexical_top5": [
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        },
+        {
+          "command": "scp file.txt user@hostname:/path/to/destination",
+          "intent": "copy file to remote server via scp",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "openssl rand -base64 32",
+          "intent": "generate a random password",
+          "sim": 0.1028
+        },
+        {
+          "command": "git tag -a v1.0.0 -m 'Version 1.0.0'",
+          "intent": "tag a git commit",
+          "sim": 0.0873
+        },
+        {
+          "command": "git config --global user.name 'Your Name'",
+          "intent": "set git username globally",
+          "sim": 0.0837
+        },
+        {
+          "command": "gpg -c filename.txt",
+          "intent": "encrypt a file with gpg",
+          "sim": 0.0651
+        },
+        {
+          "command": "git clone https://github.com/user/repo.git",
+          "intent": "clone a git repository",
+          "sim": 0.0617
+        }
+      ]
+    },
+    {
+      "query": "write my resume for a software job",
+      "lexical_top5": [
+        {
+          "command": "curl -C - -O https://example.com/largefile.zip",
+          "intent": "resume an interrupted curl download",
+          "score": 5.66
+        },
+        {
+          "command": "Receive-Job -Id 1 -Wait",
+          "intent": "bring background process to foreground",
+          "score": 5.44
+        },
+        {
+          "command": "command 2>'error.txt'",
+          "intent": "redirect stderr to a file",
+          "score": 4.94
+        },
+        {
+          "command": "command | Out-File 'output.txt'",
+          "intent": "redirect stdout to a file",
+          "score": 4.56
+        },
+        {
+          "command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
+          "intent": "give read write permissions to owner only",
+          "score": 4.23
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "crontab -e",
+          "intent": "edit cron jobs",
+          "sim": 0.2591
+        },
+        {
+          "command": "crontab -l",
+          "intent": "list cron jobs for current user",
+          "sim": 0.2565
+        },
+        {
+          "command": "(Get-ChildItem -Recurse -Include '*.py','*.js' | Get-Content | Measure-Object -Line).Lines",
+          "intent": "count lines of code in a project",
+          "sim": 0.2467
+        },
+        {
+          "command": "pip freeze > requirements.txt",
+          "intent": "save pip requirements to file",
+          "sim": 0.224
+        },
+        {
+          "command": "command | Out-File 'output.txt'",
+          "intent": "redirect stdout to a file",
+          "sim": 0.2077
+        }
+      ]
+    },
+    {
+      "query": "give me stock market predictions",
+      "lexical_top5": [
+        {
+          "command": "icacls 'filename.txt' /inheritance:r /grant:r 'Everyone:R'",
+          "intent": "give read only permissions to everyone",
+          "score": 4.72
+        },
+        {
+          "command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
+          "intent": "give read write permissions to owner only",
+          "score": 4.56
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-7) }",
+          "intent": "find files modified in the last 7 days",
+          "sim": 0.087
+        },
+        {
+          "command": "docker ps",
+          "intent": "list all running docker containers",
+          "sim": 0.0809
+        },
+        {
+          "command": "git stash list",
+          "intent": "show git stash list",
+          "sim": 0.0748
+        },
+        {
+          "command": "npm outdated",
+          "intent": "check for outdated npm packages",
+          "sim": 0.0746
+        },
+        {
+          "command": "ssh -L 8080:localhost:80 user@hostname",
+          "intent": "use ssh tunnel to forward a port",
+          "sim": 0.0729
+        }
+      ]
+    },
+    {
+      "query": "help me learn Spanish",
+      "lexical_top5": [
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        },
+        {
+          "command": "scp file.txt user@hostname:/path/to/destination",
+          "intent": "copy file to remote server via scp",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "clamscan -r /path/to/scan",
+          "intent": "scan a file for viruses with clamscan",
+          "sim": 0.1603
+        },
+        {
+          "command": "command1 | command2",
+          "intent": "pipe output of one command to another",
+          "sim": 0.1041
+        },
+        {
+          "command": "sudo reboot",
+          "intent": "reboot the system",
+          "sim": 0.0992
+        },
+        {
+          "command": "ssh -L 8080:localhost:80 user@hostname",
+          "intent": "use ssh tunnel to forward a port",
+          "sim": 0.0797
+        },
+        {
+          "command": "git branch -a",
+          "intent": "view all git branches",
+          "sim": 0.0794
+        }
+      ]
+    },
+    {
+      "query": "draw a picture of a cat",
+      "lexical_top5": [
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        },
+        {
+          "command": "scp file.txt user@hostname:/path/to/destination",
+          "intent": "copy file to remote server via scp",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Get-Content 'filename.txt' -TotalCount 10",
+          "intent": "view first 10 lines of a file",
+          "sim": 0.2921
+        },
+        {
+          "command": "(Get-Content 'filename.txt' | Measure-Object -Line -Word -Character) | Select-Object Lines, Words, Characters",
+          "intent": "count lines words and characters in file",
+          "sim": 0.2733
+        },
+        {
+          "command": "Get-Content 'filename.txt' -Tail 10",
+          "intent": "view last 10 lines of a file",
+          "sim": 0.2697
+        },
+        {
+          "command": "git log --oneline --graph --all",
+          "intent": "show graph of git branches",
+          "sim": 0.2657
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -vf \"fps=10,scale=640:-1\" -loop 0 output.gif",
+          "intent": "convert video to gif using ffmpeg",
+          "sim": 0.2587
+        }
+      ]
+    },
+    {
+      "query": "compose a song in the style of jazz",
+      "lexical_top5": [
+        {
+          "command": "docker compose down",
+          "intent": "stop docker compose services",
+          "score": 4.56
+        },
+        {
+          "command": "docker compose up -d",
+          "intent": "start docker compose services",
+          "score": 4.39
+        },
+        {
+          "command": "docker compose logs -f",
+          "intent": "view docker compose logs",
+          "score": 4.39
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "command1 | command2",
+          "intent": "pipe output of one command to another",
+          "sim": 0.1745
+        },
+        {
+          "command": "command | Out-File 'output.txt'",
+          "intent": "redirect stdout to a file",
+          "sim": 0.1637
+        },
+        {
+          "command": "docker compose logs -f",
+          "intent": "view docker compose logs",
+          "sim": 0.1609
+        },
+        {
+          "command": "Get-Content data.json | ConvertFrom-Json | ConvertTo-Json -Depth 10 | ConvertFrom-Json | Get-Member -MemberType NoteProperty | Sort-Object Name",
+          "intent": "pretty print and sort json keys using jq",
+          "sim": 0.1587
+        },
+        {
+          "command": "docker compose down",
+          "intent": "stop docker compose services",
+          "sim": 0.1557
+        }
+      ]
+    },
+    {
+      "query": "give me a tarot card reading",
+      "lexical_top5": [
+        {
+          "command": "icacls 'filename.txt' /inheritance:r /grant:r 'Everyone:R'",
+          "intent": "give read only permissions to everyone",
+          "score": 4.72
+        },
+        {
+          "command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
+          "intent": "give read write permissions to owner only",
+          "score": 4.56
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "clamscan -r /path/to/scan",
+          "intent": "scan a file for viruses with clamscan",
+          "sim": 0.1778
+        },
+        {
+          "command": "gpg -d filename.txt.gpg",
+          "intent": "decrypt a gpg file",
+          "sim": 0.1705
+        },
+        {
+          "command": "Expand-Archive -Path 'archive.zip' -WhatIf",
+          "intent": "list contents of a zip archive",
+          "sim": 0.1611
+        },
+        {
+          "command": "gpg -c filename.txt",
+          "intent": "encrypt a file with gpg",
+          "sim": 0.1529
+        },
+        {
+          "command": "npm audit",
+          "intent": "audit npm packages for vulnerabilities",
+          "sim": 0.1354
+        }
+      ]
+    },
+    {
+      "query": "interpret my dream about flying",
+      "lexical_top5": [
+        {
+          "command": "winget show package-name",
+          "intent": "show info about an apt package",
+          "score": 6.33
+        },
+        {
+          "command": "docker inspect container-name",
+          "intent": "inspect a docker container",
+          "score": 5.1
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "openssl rand -base64 32",
+          "intent": "generate a random password",
+          "sim": 0.1792
+        },
+        {
+          "command": "Test-NetConnection -ComputerName google.com -TraceRoute",
+          "intent": "trace the network route to a host",
+          "sim": 0.1664
+        },
+        {
+          "command": "Get-NetRoute",
+          "intent": "show routing table",
+          "sim": 0.1315
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -vf \"fps=10,scale=640:-1\" -loop 0 output.gif",
+          "intent": "convert video to gif using ffmpeg",
+          "sim": 0.1226
+        },
+        {
+          "command": "Test-NetConnection -ComputerName hostname -Port 80",
+          "intent": "test if a port is open on a host",
+          "sim": 0.1216
+        }
+      ]
+    },
+    {
+      "query": "recommend a good movie to watch tonight",
+      "lexical_top5": [
+        {
+          "command": "git bisect good",
+          "intent": "mark current bisect commit as good",
+          "score": 4.42
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "rsync -avz -e ssh source/ user@host:/destination/",
+          "intent": "rsync files to remote server",
+          "sim": 0.1439
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -ss 00:01:00 -to 00:02:30 -c copy trimmed.mp4",
+          "intent": "trim a video to a specific time range using ffmpeg",
+          "sim": 0.1198
+        },
+        {
+          "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+          "intent": "convert a video to h264 mp4 using ffmpeg",
+          "sim": 0.1192
+        },
+        {
+          "command": "!keyword",
+          "intent": "repeat last matching command from history",
+          "sim": 0.1129
+        },
+        {
+          "command": "at 10:00 AM tomorrow",
+          "intent": "run command at scheduled time",
+          "sim": 0.1013
+        }
+      ]
+    },
+    {
+      "query": "help me train for a marathon",
+      "lexical_top5": [
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        },
+        {
+          "command": "scp file.txt user@hostname:/path/to/destination",
+          "intent": "copy file to remote server via scp",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "at 10:00 AM tomorrow",
+          "intent": "run command at scheduled time",
+          "sim": 0.2089
+        },
+        {
+          "command": "while ($true) { command; Start-Sleep 2 }",
+          "intent": "repeat a command every 2 seconds",
+          "sim": 0.175
+        },
+        {
+          "command": "Get-Content 'filename.txt' -Tail 10",
+          "intent": "view last 10 lines of a file",
+          "sim": 0.1622
+        },
+        {
+          "command": "Get-Content 'filename.txt' -TotalCount 10",
+          "intent": "view first 10 lines of a file",
+          "sim": 0.1555
+        },
+        {
+          "command": "crontab -l",
+          "intent": "list cron jobs for current user",
+          "sim": 0.1455
+        }
+      ]
+    },
+    {
+      "query": "diagnose why my car won't start",
+      "lexical_top5": [
+        {
+          "command": "Start-Service -Name 'service-name'",
+          "intent": "start a systemd service",
+          "score": 5.55
+        },
+        {
+          "command": "docker compose up -d",
+          "intent": "start docker compose services",
+          "score": 4.98
+        },
+        {
+          "command": "Set-Service -Name 'service-name' -StartupType Automatic",
+          "intent": "enable a service to start on boot",
+          "score": 4.98
+        },
+        {
+          "command": "docker run -it image-name /bin/bash",
+          "intent": "run a docker container interactively",
+          "score": 3.77
+        },
+        {
+          "command": "tmux new -s session-name",
+          "intent": "start a new tmux session",
+          "score": 3.77
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Start-Service -Name 'service-name'",
+          "intent": "start a systemd service",
+          "sim": 0.2356
+        },
+        {
+          "command": "(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime",
+          "intent": "check system uptime",
+          "sim": 0.2001
+        },
+        {
+          "command": "Get-Service -Name 'service-name'",
+          "intent": "check status of a systemd service",
+          "sim": 0.1999
+        },
+        {
+          "command": "Set-Service -Name 'service-name' -StartupType Automatic",
+          "intent": "enable a service to start on boot",
+          "sim": 0.1782
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Directory | Where-Object { (Get-ChildItem $_.FullName).Count -eq 0 }",
+          "intent": "find empty directories",
+          "sim": 0.1687
+        }
+      ]
+    },
+    {
+      "query": "water my garden automatically",
+      "lexical_top5": [
+        {
+          "command": "curl -L https://example.com",
+          "intent": "follow redirects with curl",
+          "score": 4.94
+        },
+        {
+          "command": "npm audit fix",
+          "intent": "fix npm audit vulnerabilities",
+          "score": 4.56
+        },
+        {
+          "command": "Set-Service -Name 'service-name' -StartupType Automatic",
+          "intent": "enable a service to start on boot",
+          "score": 4.39
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "at 10:00 AM tomorrow",
+          "intent": "run command at scheduled time",
+          "sim": 0.2031
+        },
+        {
+          "command": "Set-Service -Name 'service-name' -StartupType Automatic",
+          "intent": "enable a service to start on boot",
+          "sim": 0.1834
+        },
+        {
+          "command": "docker run -it image-name /bin/bash",
+          "intent": "run a docker container interactively",
+          "sim": 0.1705
+        },
+        {
+          "command": "docker network create my-network",
+          "intent": "create a docker network",
+          "sim": 0.1699
+        },
+        {
+          "command": "docker run -d -p 8080:80 image-name",
+          "intent": "run a docker container in background",
+          "sim": 0.1533
+        }
+      ]
+    },
+    {
+      "query": "assemble my new bookshelf furniture",
+      "lexical_top5": [
+        {
+          "command": "npm init -y",
+          "intent": "create new npm project",
+          "score": 4.3
+        },
+        {
+          "command": "tmux new -s session-name",
+          "intent": "start a new tmux session",
+          "score": 4.18
+        },
+        {
+          "command": "docker run -it image-name /bin/bash",
+          "intent": "run a docker container interactively",
+          "score": 3.08
+        },
+        {
+          "command": "python -m venv venv",
+          "intent": "create a python virtual environment",
+          "score": 3.08
+        },
+        {
+          "command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+          "intent": "create a new directory",
+          "score": 3.08
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "ssh-keygen -t ed25519 -C 'your_email@example.com'",
+          "intent": "generate ssh key pair",
+          "sim": 0.0886
+        },
+        {
+          "command": "Get-Volume",
+          "intent": "list mounted filesystems",
+          "sim": 0.0873
+        },
+        {
+          "command": "screen -S session-name",
+          "intent": "start a new named screen session",
+          "sim": 0.0685
+        },
+        {
+          "command": "rsync -avz source/ destination/",
+          "intent": "synchronize files between directories",
+          "sim": 0.0647
+        },
+        {
+          "command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+          "intent": "create a new directory",
+          "sim": 0.0629
+        }
+      ]
+    },
+    {
+      "query": "bake a chocolate cake",
+      "lexical_top5": [
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        },
+        {
+          "command": "scp file.txt user@hostname:/path/to/destination",
+          "intent": "copy file to remote server via scp",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Test-Connection -ComputerName google.com -Count 4",
+          "intent": "ping a host to check connectivity",
+          "sim": 0.2397
+        },
+        {
+          "command": "tmux attach -t session-name",
+          "intent": "attach to a tmux session",
+          "sim": 0.1963
+        },
+        {
+          "command": "command | Out-File 'output.txt'",
+          "intent": "redirect stdout to a file",
+          "sim": 0.1877
+        },
+        {
+          "command": "tmux new -s session-name",
+          "intent": "start a new tmux session",
+          "sim": 0.1837
+        },
+        {
+          "command": "tmux kill-session -t session-name",
+          "intent": "kill a tmux session",
+          "sim": 0.1835
+        }
+      ]
+    },
+    {
+      "query": "brew a batch of homemade beer",
+      "lexical_top5": [
+        {
+          "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+          "intent": "batch convert all wav files to mp3 using ffmpeg",
+          "score": 4.04
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "kubectl logs -f pod-name -n namespace",
+          "intent": "stream logs from a kubernetes pod",
+          "sim": 0.1789
+        },
+        {
+          "command": "at 10:00 AM tomorrow",
+          "intent": "run command at scheduled time",
+          "sim": 0.1784
+        },
+        {
+          "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+          "intent": "batch convert all wav files to mp3 using ffmpeg",
+          "sim": 0.1746
+        },
+        {
+          "command": "python -m venv venv",
+          "intent": "create a python virtual environment",
+          "sim": 0.1573
+        },
+        {
+          "command": "pip install package-name",
+          "intent": "install pip package",
+          "sim": 0.1518
+        }
+      ]
+    },
+    {
+      "query": "mine cryptocurrency on my GPU",
+      "lexical_top5": [
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        },
+        {
+          "command": "scp file.txt user@hostname:/path/to/destination",
+          "intent": "copy file to remote server via scp",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "gpg -c filename.txt",
+          "intent": "encrypt a file with gpg",
+          "sim": 0.2757
+        },
+        {
+          "command": "gpg -d filename.txt.gpg",
+          "intent": "decrypt a gpg file",
+          "sim": 0.2696
+        },
+        {
+          "command": "Get-CimInstance Win32_Processor",
+          "intent": "show cpu info",
+          "sim": 0.156
+        },
+        {
+          "command": "openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes",
+          "intent": "generate a self signed ssl certificate",
+          "sim": 0.1405
+        },
+        {
+          "command": "at 10:00 AM tomorrow",
+          "intent": "run command at scheduled time",
+          "sim": 0.1389
+        }
+      ]
+    },
+    {
+      "query": "model a 3D character in Blender",
+      "lexical_top5": [
+        {
+          "command": "(Get-Content 'filename.txt' | Measure-Object -Line -Word -Character) | Select-Object Lines, Words, Characters",
+          "intent": "count lines words and characters in file",
+          "score": 5.05
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "(Get-Content 'filename.txt' | Measure-Object -Line -Word -Character) | Select-Object Lines, Words, Characters",
+          "intent": "count lines words and characters in file",
+          "sim": 0.1695
+        },
+        {
+          "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+          "intent": "generate a sha256 checksum",
+          "sim": 0.1336
+        },
+        {
+          "command": "Get-FileHash 'filename.txt' -Algorithm MD5",
+          "intent": "generate an md5 checksum",
+          "sim": 0.1192
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -vf \"fps=10,scale=640:-1\" -loop 0 output.gif",
+          "intent": "convert video to gif using ffmpeg",
+          "sim": 0.1105
+        },
+        {
+          "command": "[Convert]::ToBase64String([IO.File]::ReadAllBytes('filename.txt'))",
+          "intent": "encode a file to base64",
+          "sim": 0.1064
+        }
+      ]
+    },
+    {
+      "query": "mod my video game with custom skins",
+      "lexical_top5": [
+        {
+          "command": "curl -H 'Authorization: Bearer token' https://api.example.com",
+          "intent": "send custom headers with curl",
+          "score": 7.39
+        },
+        {
+          "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+          "intent": "convert a video to h264 mp4 using ffmpeg",
+          "score": 5.28
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -ss 00:01:00 -to 00:02:30 -c copy trimmed.mp4",
+          "intent": "trim a video to a specific time range using ffmpeg",
+          "score": 5.16
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+          "intent": "extract audio from a video file using ffmpeg",
+          "score": 4.82
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -vf \"fps=10,scale=640:-1\" -loop 0 output.gif",
+          "intent": "convert video to gif using ffmpeg",
+          "score": 3.6
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+          "intent": "generate a sha256 checksum",
+          "sim": 0.109
+        },
+        {
+          "command": "screen -S session-name",
+          "intent": "start a new named screen session",
+          "sim": 0.0888
+        },
+        {
+          "command": "openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes",
+          "intent": "generate a self signed ssl certificate",
+          "sim": 0.0857
+        },
+        {
+          "command": "kubectl apply -f manifest.yaml",
+          "intent": "apply a kubernetes manifest file",
+          "sim": 0.0694
+        },
+        {
+          "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+          "intent": "convert a video to h264 mp4 using ffmpeg",
+          "sim": 0.0667
+        }
+      ]
+    },
+    {
+      "query": "schedule a therapy appointment",
+      "lexical_top5": [
+        {
+          "command": "crontab -l",
+          "intent": "list cron jobs for current user",
+          "score": 4.72
+        },
+        {
+          "command": "at 10:00 AM tomorrow",
+          "intent": "run command at scheduled time",
+          "score": 4.4
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "at 10:00 AM tomorrow",
+          "intent": "run command at scheduled time",
+          "sim": 0.3136
+        },
+        {
+          "command": "while ($true) { command; Start-Sleep 2 }",
+          "intent": "repeat a command every 2 seconds",
+          "sim": 0.2025
+        },
+        {
+          "command": "crontab -l",
+          "intent": "list cron jobs for current user",
+          "sim": 0.18
+        },
+        {
+          "command": "crontab -e",
+          "intent": "edit cron jobs",
+          "sim": 0.1657
+        },
+        {
+          "command": "screen -S session-name",
+          "intent": "start a new named screen session",
+          "sim": 0.1506
+        }
+      ]
+    },
+    {
+      "query": "get my horoscope for today",
+      "lexical_top5": [
+        {
+          "command": "curl -s https://api.example.com/data",
+          "intent": "make a get request with curl",
+          "score": 5.7
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 4.71
+        },
+        {
+          "command": "Get-Process -Name 'process_name' | Select-Object Id",
+          "intent": "find process id by name",
+          "score": 3.94
+        },
+        {
+          "command": "curl -o /dev/null -s -w '%{http_code}' https://example.com",
+          "intent": "check http response code with curl",
+          "score": 3.79
+        },
+        {
+          "command": "kubectl get events --sort-by='.lastTimestamp' -n namespace",
+          "intent": "get kubernetes events sorted by timestamp",
+          "score": 3.54
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes",
+          "intent": "generate a self signed ssl certificate",
+          "sim": 0.1837
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-7) }",
+          "intent": "find files modified in the last 7 days",
+          "sim": 0.173
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "sim": 0.143
+        },
+        {
+          "command": "git tag -a v1.0.0 -m 'Version 1.0.0'",
+          "intent": "tag a git commit",
+          "sim": 0.1363
+        },
+        {
+          "command": "git status",
+          "intent": "show git status of current repository",
+          "sim": 0.1327
+        }
+      ]
+    },
+    {
+      "query": "write a cover letter for a job application",
+      "lexical_top5": [
+        {
+          "command": "Receive-Job -Id 1 -Wait",
+          "intent": "bring background process to foreground",
+          "score": 5.44
+        },
+        {
+          "command": "command 2>'error.txt'",
+          "intent": "redirect stderr to a file",
+          "score": 4.94
+        },
+        {
+          "command": "command | Out-File 'output.txt'",
+          "intent": "redirect stdout to a file",
+          "score": 4.56
+        },
+        {
+          "command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
+          "intent": "give read write permissions to owner only",
+          "score": 4.23
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "crontab -l",
+          "intent": "list cron jobs for current user",
+          "sim": 0.2742
+        },
+        {
+          "command": "Receive-Job -Id 1 -Wait",
+          "intent": "bring background process to foreground",
+          "sim": 0.2608
+        },
+        {
+          "command": "crontab -e",
+          "intent": "edit cron jobs",
+          "sim": 0.2278
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'pattern' -CaseSensitive:$false",
+          "intent": "search for a pattern case insensitively",
+          "sim": 0.2248
+        },
+        {
+          "command": "winget show package-name",
+          "intent": "show info about an apt package",
+          "sim": 0.2124
+        }
+      ]
+    },
+    {
+      "query": "plan my wedding seating chart",
+      "lexical_top5": [
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        },
+        {
+          "command": "scp file.txt user@hostname:/path/to/destination",
+          "intent": "copy file to remote server via scp",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Get-NetAdapter",
+          "intent": "show network interface statistics",
+          "sim": 0.1531
+        },
+        {
+          "command": "kubectl get events --sort-by='.lastTimestamp' -n namespace",
+          "intent": "get kubernetes events sorted by timestamp",
+          "sim": 0.1464
+        },
+        {
+          "command": "ssh-keygen -t ed25519 -C 'your_email@example.com'",
+          "intent": "generate ssh key pair",
+          "sim": 0.1239
+        },
+        {
+          "command": "Get-Content data.json | ConvertFrom-Json | ConvertTo-Json -Depth 10 | ConvertFrom-Json | Get-Member -MemberType NoteProperty | Sort-Object Name",
+          "intent": "pretty print and sort json keys using jq",
+          "sim": 0.1198
+        },
+        {
+          "command": "Get-ChildItem | ForEach-Object { [PSCustomObject]@{Name=$_.Name; Size=(Get-ChildItem $_.FullName -Recurse -File | Measure-Object -Property Length -Sum).Sum} } | Sort-Object Size -Descending",
+          "intent": "show disk usage of current directory sorted by size",
+          "sim": 0.1188
+        }
+      ]
+    },
+    {
+      "query": "choose a paint color for my bedroom",
+      "lexical_top5": [
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        },
+        {
+          "command": "scp file.txt user@hostname:/path/to/destination",
+          "intent": "copy file to remote server via scp",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Get-FileHash 'filename.txt' -Algorithm MD5",
+          "intent": "generate an md5 checksum",
+          "sim": 0.0459
+        },
+        {
+          "command": "New-NetFirewallRule -DisplayName 'Block IP' -Direction Inbound -RemoteAddress '192.168.1.100' -Action Block",
+          "intent": "block an ip address with firewall",
+          "sim": 0.0394
+        },
+        {
+          "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+          "intent": "generate a sha256 checksum",
+          "sim": 0.0349
+        },
+        {
+          "command": "winget search package-name",
+          "intent": "search for a package in apt",
+          "sim": 0.0297
+        },
+        {
+          "command": "icacls 'filename.txt' /setowner 'user'",
+          "intent": "change file owner",
+          "sim": 0.0289
+        }
+      ]
+    },
+    {
+      "query": "find a babysitter for Friday night",
+      "lexical_top5": [
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.log'",
+          "intent": "find files by extension recursively",
+          "score": 4.55
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
+          "intent": "find large files bigger than 100mb",
+          "score": 4.47
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-7) }",
+          "intent": "find files modified in the last 7 days",
+          "score": 4.38
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Directory | Where-Object { (Get-ChildItem $_.FullName).Count -eq 0 }",
+          "intent": "find empty directories",
+          "score": 4.32
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 4.3
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "crontab -l",
+          "intent": "list cron jobs for current user",
+          "sim": 0.164
+        },
+        {
+          "command": "at 10:00 AM tomorrow",
+          "intent": "run command at scheduled time",
+          "sim": 0.1536
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-7) }",
+          "intent": "find files modified in the last 7 days",
+          "sim": 0.1258
+        },
+        {
+          "command": "Receive-Job -Id 1 -Wait",
+          "intent": "bring background process to foreground",
+          "sim": 0.1206
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'pattern' -CaseSensitive:$false",
+          "intent": "search for a pattern case insensitively",
+          "sim": 0.1132
+        }
+      ]
+    }
+  ],
+  "ambiguous": [
+    {
+      "query": "grep",
+      "lexical_top5": [
+        {
+          "command": "Select-String -Path 'file.txt' -Pattern 'pattern1|pattern2'",
+          "intent": "grep using extended regular expressions",
+          "score": 19.66
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Where-Object { Select-String -Path $_.FullName -Pattern 'pattern' -Quiet }",
+          "intent": "grep and show only filenames with matches",
+          "score": 19.54
+        },
+        {
+          "command": "Get-Content 'file.txt' | Where-Object { $_ -notmatch 'pattern' }",
+          "intent": "grep for lines not matching a pattern",
+          "score": 19.54
+        },
+        {
+          "command": "Select-String -Path 'file.txt' -Pattern 'pattern' -Context 3,3",
+          "intent": "grep with context lines around match",
+          "score": 19.43
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'pattern' -CaseSensitive:$false",
+          "intent": "search for a pattern case insensitively",
+          "score": 3.81
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+          "intent": "search for a string in files recursively",
+          "sim": 0.5481
+        },
+        {
+          "command": "Get-Content 'file.txt' | Where-Object { $_ -notmatch 'pattern' }",
+          "intent": "grep for lines not matching a pattern",
+          "sim": 0.5404
+        },
+        {
+          "command": "(Select-String -Path 'file.txt' -Pattern 'pattern').Count",
+          "intent": "count number of matches in a file",
+          "sim": 0.529
+        },
+        {
+          "command": "Select-String -Path 'file.txt' -Pattern 'pattern1|pattern2'",
+          "intent": "grep using extended regular expressions",
+          "sim": 0.5178
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'pattern' -CaseSensitive:$false",
+          "intent": "search for a pattern case insensitively",
+          "sim": 0.4894
+        }
+      ]
+    },
+    {
+      "query": "tar",
+      "lexical_top5": [
+        {
+          "command": "docker compose up -d",
+          "intent": "start docker compose services",
+          "score": 15
+        },
+        {
+          "command": "screen -S session-name",
+          "intent": "start a new named screen session",
+          "score": 15
+        },
+        {
+          "command": "tmux new -s session-name",
+          "intent": "start a new tmux session",
+          "score": 15
+        },
+        {
+          "command": "Start-Service -Name 'service-name'",
+          "intent": "start a systemd service",
+          "score": 15
+        },
+        {
+          "command": "Restart-Service -Name 'service-name'",
+          "intent": "restart a systemd service",
+          "score": 15
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Expand-Archive -Path 'archive.zip' -DestinationPath '.'",
+          "intent": "extract a zip archive",
+          "sim": 0.2022
+        },
+        {
+          "command": "Expand-Archive -Path 'archive.zip' -WhatIf",
+          "intent": "list contents of a zip archive",
+          "sim": 0.1954
+        },
+        {
+          "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+          "intent": "generate a sha256 checksum",
+          "sim": 0.194
+        },
+        {
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "intent": "create a compressed zip archive",
+          "sim": 0.1907
+        },
+        {
+          "command": "clamscan -r /path/to/scan",
+          "intent": "scan a file for viruses with clamscan",
+          "sim": 0.1832
+        }
+      ]
+    },
+    {
+      "query": "sed",
+      "lexical_top5": [
+        {
+          "command": "(Get-Content 'filename.txt') -replace 'old','new' | Set-Content 'filename.txt'",
+          "intent": "substitute text in a file with sed",
+          "score": 20.69
+        },
+        {
+          "command": "(Get-Content 'filename.txt')[4]",
+          "intent": "print specific line number with sed",
+          "score": 20.69
+        },
+        {
+          "command": "Get-Content 'filename.txt' | Where-Object { $_ -notmatch 'pattern' } | Set-Content 'filename.txt'",
+          "intent": "delete lines matching a pattern with sed",
+          "score": 20.41
+        },
+        {
+          "command": "docker image prune -a",
+          "intent": "remove all unused docker images",
+          "score": 15
+        },
+        {
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "intent": "create a compressed zip archive",
+          "score": 15
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "(Get-Content 'filename.txt') -replace 'old','new' | Set-Content 'filename.txt'",
+          "intent": "substitute text in a file with sed",
+          "sim": 0.5133
+        },
+        {
+          "command": "(Get-Content 'filename.txt')[4]",
+          "intent": "print specific line number with sed",
+          "sim": 0.45
+        },
+        {
+          "command": "Get-Content 'filename.txt' | Where-Object { $_ -notmatch 'pattern' } | Set-Content 'filename.txt'",
+          "intent": "delete lines matching a pattern with sed",
+          "sim": 0.4351
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }",
+          "intent": "replace text in all files recursively",
+          "sim": 0.3989
+        },
+        {
+          "command": "Get-Content 'filename.txt' -TotalCount 10",
+          "intent": "view first 10 lines of a file",
+          "sim": 0.2383
+        }
+      ]
+    },
+    {
+      "query": "awk",
+      "lexical_top5": [
+        {
+          "command": "Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName",
+          "intent": "extract column from csv with awk",
+          "score": 20.69
+        },
+        {
+          "command": "(Import-Csv 'file.txt' -Header Val | Measure-Object -Property Val -Sum).Sum",
+          "intent": "sum a column of numbers with awk",
+          "score": 20.69
+        },
+        {
+          "command": "Get-Content 'file.txt' | ForEach-Object { ($_ -split '\\s+').Count }",
+          "intent": "print number of fields per line with awk",
+          "score": 20.55
+        },
+        {
+          "command": "Import-Csv 'file.csv' | Where-Object { [int]$_.Column3 -gt 100 }",
+          "intent": "filter rows by field value with awk",
+          "score": 20.16
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "(Import-Csv 'file.txt' -Header Val | Measure-Object -Property Val -Sum).Sum",
+          "intent": "sum a column of numbers with awk",
+          "sim": 0.3427
+        },
+        {
+          "command": "Import-Csv 'file.csv' | Where-Object { [int]$_.Column3 -gt 100 }",
+          "intent": "filter rows by field value with awk",
+          "sim": 0.3248
+        },
+        {
+          "command": "Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName",
+          "intent": "extract column from csv with awk",
+          "sim": 0.3007
+        },
+        {
+          "command": "Get-Content 'file.txt' | ForEach-Object { ($_ -split '\\s+').Count }",
+          "intent": "print number of fields per line with awk",
+          "sim": 0.2919
+        },
+        {
+          "command": "aws s3 ls",
+          "intent": "list all s3 buckets in the aws account",
+          "sim": 0.2505
+        }
+      ]
+    },
+    {
+      "query": "jq",
+      "lexical_top5": [
+        {
+          "command": "(Get-Content data.json | ConvertFrom-Json).users.Count",
+          "intent": "count items in a json array using jq",
+          "score": 20.55
+        },
+        {
+          "command": "Get-Content data.json | ConvertFrom-Json | ConvertTo-Json -Depth 10 | ConvertFrom-Json | Get-Member -MemberType NoteProperty | Sort-Object Name",
+          "intent": "pretty print and sort json keys using jq",
+          "score": 20.28
+        },
+        {
+          "command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
+          "intent": "extract a specific field from json output using jq",
+          "score": 19.93
+        },
+        {
+          "command": "(Get-Content data.json | ConvertFrom-Json).users | Where-Object { _.age -gt 30 }",
+          "intent": "filter json array by field value using jq",
+          "score": 19.72
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Get-Content data.json | ConvertFrom-Json | ConvertTo-Json -Depth 10 | ConvertFrom-Json | Get-Member -MemberType NoteProperty | Sort-Object Name",
+          "intent": "pretty print and sort json keys using jq",
+          "sim": 0.3545
+        },
+        {
+          "command": "(Get-Content data.json | ConvertFrom-Json).users.Count",
+          "intent": "count items in a json array using jq",
+          "sim": 0.3503
+        },
+        {
+          "command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
+          "intent": "extract a specific field from json output using jq",
+          "sim": 0.332
+        },
+        {
+          "command": "(Get-Content data.json | ConvertFrom-Json).users | Where-Object { _.age -gt 30 }",
+          "intent": "filter json array by field value using jq",
+          "sim": 0.3174
+        },
+        {
+          "command": "npm audit fix",
+          "intent": "fix npm audit vulnerabilities",
+          "sim": 0.1231
+        }
+      ]
+    },
+    {
+      "query": "ffmpeg",
+      "lexical_top5": [
+        {
+          "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+          "intent": "convert a video to h264 mp4 using ffmpeg",
+          "score": 20.03
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -ss 00:01:00 -to 00:02:30 -c copy trimmed.mp4",
+          "intent": "trim a video to a specific time range using ffmpeg",
+          "score": 19.91
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -vf \"fps=10,scale=640:-1\" -loop 0 output.gif",
+          "intent": "convert video to gif using ffmpeg",
+          "score": 19.91
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+          "intent": "extract audio from a video file using ffmpeg",
+          "score": 19.59
+        },
+        {
+          "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+          "intent": "batch convert all wav files to mp3 using ffmpeg",
+          "score": 19.49
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "ffmpeg -i input.mp4 -ss 00:01:00 -to 00:02:30 -c copy trimmed.mp4",
+          "intent": "trim a video to a specific time range using ffmpeg",
+          "sim": 0.546
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+          "intent": "extract audio from a video file using ffmpeg",
+          "sim": 0.5407
+        },
+        {
+          "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+          "intent": "convert a video to h264 mp4 using ffmpeg",
+          "sim": 0.5354
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -vf \"fps=10,scale=640:-1\" -loop 0 output.gif",
+          "intent": "convert video to gif using ffmpeg",
+          "sim": 0.5337
+        },
+        {
+          "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+          "intent": "batch convert all wav files to mp3 using ffmpeg",
+          "sim": 0.3792
+        }
+      ]
+    },
+    {
+      "query": "aws",
+      "lexical_top5": [
+        {
+          "command": "aws s3 ls",
+          "intent": "list all s3 buckets in the aws account",
+          "score": 21.03
+        },
+        {
+          "command": "aws ec2 describe-instances --instance-ids i-1234567890abcdef0 --query 'Reservations[0].Instances[0].PublicIpAddress' --output text",
+          "intent": "get the public ip of a running ec2 instance",
+          "score": 3.72
+        },
+        {
+          "command": "aws s3 sync ./local-dir s3://my-bucket/prefix/ --delete",
+          "intent": "sync a local directory to an s3 bucket",
+          "score": 3.49
+        },
+        {
+          "command": "aws s3 cp s3://my-bucket/prefix/ ./local-dir --recursive",
+          "intent": "download an entire s3 bucket prefix to a local directory",
+          "score": 3.38
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "aws s3 ls",
+          "intent": "list all s3 buckets in the aws account",
+          "sim": 0.3813
+        },
+        {
+          "command": "aws s3 sync ./local-dir s3://my-bucket/prefix/ --delete",
+          "intent": "sync a local directory to an s3 bucket",
+          "sim": 0.3291
+        },
+        {
+          "command": "aws s3 cp s3://my-bucket/prefix/ ./local-dir --recursive",
+          "intent": "download an entire s3 bucket prefix to a local directory",
+          "sim": 0.3286
+        },
+        {
+          "command": "aws ec2 describe-instances --instance-ids i-1234567890abcdef0 --query 'Reservations[0].Instances[0].PublicIpAddress' --output text",
+          "intent": "get the public ip of a running ec2 instance",
+          "sim": 0.3274
+        },
+        {
+          "command": "kubectl describe deployment deployment-name -n namespace",
+          "intent": "describe a kubernetes deployment for diagnostics",
+          "sim": 0.2346
+        }
+      ]
+    },
+    {
+      "query": "disk",
+      "lexical_top5": [
+        {
+          "command": "(Get-ChildItem '/path/to/dir' -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB",
+          "intent": "show disk usage of a specific directory",
+          "score": 20.7
+        },
+        {
+          "command": "Get-PSDrive -PSProvider FileSystem",
+          "intent": "show total disk space",
+          "score": 20.59
+        },
+        {
+          "command": "Get-ChildItem | ForEach-Object { [PSCustomObject]@{Name=$_.Name; Size=(Get-ChildItem $_.FullName -Recurse -File | Measure-Object -Property Length -Sum).Sum} } | Sort-Object Size -Descending",
+          "intent": "show disk usage of current directory sorted by size",
+          "score": 20.19
+        },
+        {
+          "command": "docker system df",
+          "intent": "show docker system disk usage",
+          "score": 19.98
+        },
+        {
+          "command": "Get-Volume",
+          "intent": "list mounted filesystems",
+          "score": 3.77
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "(Get-ChildItem '/path/to/dir' -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB",
+          "intent": "show disk usage of a specific directory",
+          "sim": 0.4125
+        },
+        {
+          "command": "Get-PSDrive -PSProvider FileSystem",
+          "intent": "show total disk space",
+          "sim": 0.3905
+        },
+        {
+          "command": "Get-ChildItem | ForEach-Object { [PSCustomObject]@{Name=$_.Name; Size=(Get-ChildItem $_.FullName -Recurse -File | Measure-Object -Property Length -Sum).Sum} } | Sort-Object Size -Descending",
+          "intent": "show disk usage of current directory sorted by size",
+          "sim": 0.3881
+        },
+        {
+          "command": "Get-Volume",
+          "intent": "list mounted filesystems",
+          "sim": 0.344
+        },
+        {
+          "command": "docker system df",
+          "intent": "show docker system disk usage",
+          "sim": 0.292
+        }
+      ]
+    },
+    {
+      "query": "system",
+      "lexical_top5": [
+        {
+          "command": "sudo reboot",
+          "intent": "reboot the system",
+          "score": 19.32
+        },
+        {
+          "command": "Get-EventLog -LogName System -Newest 50",
+          "intent": "view system logs",
+          "score": 19.06
+        },
+        {
+          "command": "Get-WinEvent -LogName System -MaxEvents 1 -Wait",
+          "intent": "follow system logs in real time",
+          "score": 18.83
+        },
+        {
+          "command": "sudo shutdown -h now",
+          "intent": "shut down the system",
+          "score": 18.7
+        },
+        {
+          "command": "Get-LocalUser | Select-Object Name",
+          "intent": "show all users on the system",
+          "score": 18.5
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "sudo shutdown -h now",
+          "intent": "shut down the system",
+          "sim": 0.4235
+        },
+        {
+          "command": "sudo reboot",
+          "intent": "reboot the system",
+          "sim": 0.328
+        },
+        {
+          "command": "Stop-Service -Name 'service-name'",
+          "intent": "stop a systemd service",
+          "sim": 0.3235
+        },
+        {
+          "command": "Get-WinEvent -LogName System -MaxEvents 1 -Wait",
+          "intent": "follow system logs in real time",
+          "sim": 0.3196
+        },
+        {
+          "command": "Get-Service -Name 'service-name'",
+          "intent": "check status of a systemd service",
+          "sim": 0.3122
+        }
+      ]
+    },
+    {
+      "query": "shell",
+      "lexical_top5": [
+        {
+          "command": "kubectl exec -it pod-name -n namespace -- /bin/sh",
+          "intent": "exec into a running kubernetes pod shell",
+          "score": 18.04
+        },
+        {
+          "command": "$env:VAR_NAME",
+          "intent": "print an environment variable",
+          "score": 2.75
+        },
+        {
+          "command": "Set-Alias -Name ll -Value Get-ChildItem",
+          "intent": "create an alias for a command",
+          "score": 2.75
+        },
+        {
+          "command": "command | Out-File 'output.txt' -Append",
+          "intent": "append stdout to a file",
+          "score": 2.75
+        },
+        {
+          "command": "command 2>'error.txt'",
+          "intent": "redirect stderr to a file",
+          "score": 2.75
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "docker exec -it container-name /bin/bash",
+          "intent": "exec into a running docker container",
+          "sim": 0.3616
+        },
+        {
+          "command": "docker run -it image-name /bin/bash",
+          "intent": "run a docker container interactively",
+          "sim": 0.3441
+        },
+        {
+          "command": "kubectl exec -it pod-name -n namespace -- /bin/sh",
+          "intent": "exec into a running kubernetes pod shell",
+          "sim": 0.3433
+        },
+        {
+          "command": "$env:VAR_NAME",
+          "intent": "print an environment variable",
+          "sim": 0.3088
+        },
+        {
+          "command": "$env:VAR_NAME = 'value'",
+          "intent": "set an environment variable",
+          "sim": 0.3053
+        }
+      ]
+    },
+    {
+      "query": "terminal",
+      "lexical_top5": [
+        {
+          "command": "Clear-Host",
+          "intent": "clear the terminal screen",
+          "score": 20.43
+        },
+        {
+          "command": "screen -r session-name",
+          "intent": "reattach to a screen session",
+          "score": 3.81
+        },
+        {
+          "command": "tmux attach -t session-name",
+          "intent": "attach to a tmux session",
+          "score": 3.81
+        },
+        {
+          "command": "tmux kill-session -t session-name",
+          "intent": "kill a tmux session",
+          "score": 3.81
+        },
+        {
+          "command": "tmux ls",
+          "intent": "list tmux sessions",
+          "score": 3.66
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Clear-Host",
+          "intent": "clear the terminal screen",
+          "sim": 0.4159
+        },
+        {
+          "command": "git log --oneline --graph --all",
+          "intent": "show graph of git branches",
+          "sim": 0.41
+        },
+        {
+          "command": "screen -ls",
+          "intent": "list all screen sessions",
+          "sim": 0.3768
+        },
+        {
+          "command": "screen -r session-name",
+          "intent": "reattach to a screen session",
+          "sim": 0.3685
+        },
+        {
+          "command": "screen -S session-name",
+          "intent": "start a new named screen session",
+          "sim": 0.3519
+        }
+      ]
+    },
+    {
+      "query": "package",
+      "lexical_top5": [
+        {
+          "command": "winget install package-name",
+          "intent": "install a package with apt",
+          "score": 20.1
+        },
+        {
+          "command": "winget uninstall package-name",
+          "intent": "remove a package with apt",
+          "score": 19.75
+        },
+        {
+          "command": "winget uninstall package-name --purge",
+          "intent": "purge a package and config with apt",
+          "score": 19.66
+        },
+        {
+          "command": "winget show package-name",
+          "intent": "show info about an apt package",
+          "score": 19.57
+        },
+        {
+          "command": "npm uninstall package-name",
+          "intent": "uninstall an npm package",
+          "score": 19.42
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "winget install package-name",
+          "intent": "install a package with apt",
+          "sim": 0.4053
+        },
+        {
+          "command": "winget show package-name",
+          "intent": "show info about an apt package",
+          "sim": 0.4043
+        },
+        {
+          "command": "npm audit",
+          "intent": "audit npm packages for vulnerabilities",
+          "sim": 0.3714
+        },
+        {
+          "command": "winget search package-name",
+          "intent": "search for a package in apt",
+          "sim": 0.3338
+        },
+        {
+          "command": "winget upgrade --all",
+          "intent": "upgrade all apt packages",
+          "sim": 0.32
+        }
+      ]
+    },
+    {
+      "query": "security",
+      "lexical_top5": [
+        {
+          "command": "gpg -d filename.txt.gpg",
+          "intent": "decrypt a gpg file",
+          "score": 4.43
+        },
+        {
+          "command": "gpg -c filename.txt",
+          "intent": "encrypt a file with gpg",
+          "score": 4.24
+        },
+        {
+          "command": "openssl rand -base64 32",
+          "intent": "generate a random password",
+          "score": 4.07
+        },
+        {
+          "command": "clamscan -r /path/to/scan",
+          "intent": "scan a file for viruses with clamscan",
+          "score": 4.07
+        },
+        {
+          "command": "openssl s_client -connect example.com:443 -showcerts",
+          "intent": "check ssl certificate of a domain",
+          "score": 3.91
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "openssl rand -base64 32",
+          "intent": "generate a random password",
+          "sim": 0.3434
+        },
+        {
+          "command": "npm audit fix",
+          "intent": "fix npm audit vulnerabilities",
+          "sim": 0.3321
+        },
+        {
+          "command": "openssl s_client -connect example.com:443 -showcerts",
+          "intent": "check ssl certificate of a domain",
+          "sim": 0.3108
+        },
+        {
+          "command": "npm audit",
+          "intent": "audit npm packages for vulnerabilities",
+          "sim": 0.3085
+        },
+        {
+          "command": "gpg -d filename.txt.gpg",
+          "intent": "decrypt a gpg file",
+          "sim": 0.2722
+        }
+      ]
+    },
+    {
+      "query": "encoding",
+      "lexical_top5": [
+        {
+          "command": "[IO.File]::WriteAllBytes('decoded.txt', [Convert]::FromBase64String((Get-Content 'encoded.txt')))",
+          "intent": "decode a base64 file",
+          "score": 4.86
+        },
+        {
+          "command": "[Convert]::ToBase64String([IO.File]::ReadAllBytes('filename.txt'))",
+          "intent": "encode a file to base64",
+          "score": 4.66
+        },
+        {
+          "command": "Get-FileHash 'filename.txt' -Algorithm MD5",
+          "intent": "generate an md5 checksum",
+          "score": 4.66
+        },
+        {
+          "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+          "intent": "generate a sha256 checksum",
+          "score": 4.66
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "[IO.File]::WriteAllBytes('decoded.txt', [Convert]::FromBase64String((Get-Content 'encoded.txt')))",
+          "intent": "decode a base64 file",
+          "sim": 0.5795
+        },
+        {
+          "command": "[Convert]::ToBase64String([IO.File]::ReadAllBytes('filename.txt'))",
+          "intent": "encode a file to base64",
+          "sim": 0.5333
+        },
+        {
+          "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+          "intent": "generate a sha256 checksum",
+          "sim": 0.3942
+        },
+        {
+          "command": "Get-FileHash 'filename.txt' -Algorithm MD5",
+          "intent": "generate an md5 checksum",
+          "sim": 0.3771
+        },
+        {
+          "command": "openssl rand -base64 32",
+          "intent": "generate a random password",
+          "sim": 0.3676
+        }
+      ]
+    },
+    {
+      "query": "archive",
+      "lexical_top5": [
+        {
+          "command": "Expand-Archive -Path 'archive.zip' -DestinationPath '.'",
+          "intent": "extract a zip archive",
+          "score": 21.53
+        },
+        {
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "intent": "create a compressed zip archive",
+          "score": 21.19
+        },
+        {
+          "command": "Expand-Archive -Path 'archive.zip' -WhatIf",
+          "intent": "list contents of a zip archive",
+          "score": 21.03
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Expand-Archive -Path 'archive.zip' -DestinationPath '.'",
+          "intent": "extract a zip archive",
+          "sim": 0.4771
+        },
+        {
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "intent": "create a compressed zip archive",
+          "sim": 0.4397
+        },
+        {
+          "command": "Expand-Archive -Path 'archive.zip' -WhatIf",
+          "intent": "list contents of a zip archive",
+          "sim": 0.4352
+        },
+        {
+          "command": "rsync -avz source/ destination/",
+          "intent": "synchronize files between directories",
+          "sim": 0.3427
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-7) }",
+          "intent": "find files modified in the last 7 days",
+          "sim": 0.3337
+        }
+      ]
+    },
+    {
+      "query": "pip",
+      "lexical_top5": [
+        {
+          "command": "pip install package-name",
+          "intent": "install pip package",
+          "score": 20.84
+        },
+        {
+          "command": "pip uninstall package-name",
+          "intent": "uninstall a pip package",
+          "score": 20.21
+        },
+        {
+          "command": "pip freeze > requirements.txt",
+          "intent": "save pip requirements to file",
+          "score": 20.07
+        },
+        {
+          "command": "pip install --upgrade package-name",
+          "intent": "upgrade a pip package",
+          "score": 20.07
+        },
+        {
+          "command": "pip install package-name==1.2.3",
+          "intent": "install specific version of pip package",
+          "score": 19.94
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "pip install package-name",
+          "intent": "install pip package",
+          "sim": 0.5937
+        },
+        {
+          "command": "pip install --upgrade package-name",
+          "intent": "upgrade a pip package",
+          "sim": 0.5452
+        },
+        {
+          "command": "pip uninstall package-name",
+          "intent": "uninstall a pip package",
+          "sim": 0.5438
+        },
+        {
+          "command": "python -m venv venv",
+          "intent": "create a python virtual environment",
+          "sim": 0.5212
+        },
+        {
+          "command": "pip install package-name==1.2.3",
+          "intent": "install specific version of pip package",
+          "sim": 0.4813
+        }
+      ]
+    },
+    {
+      "query": "find",
+      "lexical_top5": [
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.log'",
+          "intent": "find files by extension recursively",
+          "score": 19.55
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
+          "intent": "find large files bigger than 100mb",
+          "score": 19.47
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-7) }",
+          "intent": "find files modified in the last 7 days",
+          "score": 19.38
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Directory | Where-Object { (Get-ChildItem $_.FullName).Count -eq 0 }",
+          "intent": "find empty directories",
+          "score": 19.32
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 19.3
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-7) }",
+          "intent": "find files modified in the last 7 days",
+          "sim": 0.3834
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter 'filename.txt'",
+          "intent": "find files by name in current directory",
+          "sim": 0.3421
+        },
+        {
+          "command": "Get-ChildItem -Recurse | Where-Object { $_.GetAccessControl().Owner -like '*username*' }",
+          "intent": "find files owned by a specific user",
+          "sim": 0.3205
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '.DS_Store' | Remove-Item",
+          "intent": "find and delete all .DS_Store files",
+          "sim": 0.3175
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
+          "intent": "find large files bigger than 100mb",
+          "sim": 0.3107
+        }
+      ]
+    },
+    {
+      "query": "stop a process",
+      "lexical_top5": [
+        {
+          "command": "Stop-Service -Name 'service-name'",
+          "intent": "stop a systemd service",
+          "score": 6.53
+        },
+        {
+          "command": "docker compose down",
+          "intent": "stop docker compose services",
+          "score": 6.19
+        },
+        {
+          "command": "docker stop $(docker ps -q)",
+          "intent": "stop all running docker containers",
+          "score": 6.03
+        },
+        {
+          "command": "Stop-Process -Id PID -Force",
+          "intent": "kill a process by pid",
+          "score": 4.53
+        },
+        {
+          "command": "Get-Process -Name 'process_name' | Select-Object Id",
+          "intent": "find process id by name",
+          "score": 4.28
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Stop-Process -Name 'process_name' -Force",
+          "intent": "kill a process by name",
+          "sim": 0.6083
+        },
+        {
+          "command": "Stop-Process -Id PID -Force",
+          "intent": "kill a process by pid",
+          "sim": 0.6054
+        },
+        {
+          "command": "Stop-Service -Name 'service-name'",
+          "intent": "stop a systemd service",
+          "sim": 0.4488
+        },
+        {
+          "command": "Get-Process | Sort-Object CPU -Descending | Select-Object -First 20",
+          "intent": "monitor processes with htop",
+          "sim": 0.4062
+        },
+        {
+          "command": "Start-Job -ScriptBlock { command }",
+          "intent": "run a command in background",
+          "sim": 0.4061
+        }
+      ]
+    },
+    {
+      "query": "check disk usage",
+      "lexical_top5": [
+        {
+          "command": "(Get-ChildItem '/path/to/dir' -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB",
+          "intent": "show disk usage of a specific directory",
+          "score": 10.68
+        },
+        {
+          "command": "docker system df",
+          "intent": "show docker system disk usage",
+          "score": 9.97
+        },
+        {
+          "command": "Get-ChildItem | ForEach-Object { [PSCustomObject]@{Name=$_.Name; Size=(Get-ChildItem $_.FullName -Recurse -File | Measure-Object -Property Length -Sum).Sum} } | Sort-Object Size -Descending",
+          "intent": "show disk usage of current directory sorted by size",
+          "score": 9.61
+        },
+        {
+          "command": "Get-PSDrive -PSProvider FileSystem",
+          "intent": "show total disk space",
+          "score": 9.08
+        },
+        {
+          "command": "Get-Volume",
+          "intent": "list mounted filesystems",
+          "score": 3.77
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Get-ChildItem | ForEach-Object { [PSCustomObject]@{Name=$_.Name; Size=(Get-ChildItem $_.FullName -Recurse -File | Measure-Object -Property Length -Sum).Sum} } | Sort-Object Size -Descending",
+          "intent": "show disk usage of current directory sorted by size",
+          "sim": 0.621
+        },
+        {
+          "command": "(Get-ChildItem '/path/to/dir' -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB",
+          "intent": "show disk usage of a specific directory",
+          "sim": 0.6128
+        },
+        {
+          "command": "Get-PSDrive -PSProvider FileSystem",
+          "intent": "show total disk space",
+          "sim": 0.5832
+        },
+        {
+          "command": "docker system df",
+          "intent": "show docker system disk usage",
+          "sim": 0.5268
+        },
+        {
+          "command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory",
+          "intent": "show memory usage",
+          "sim": 0.4293
+        }
+      ]
+    },
+    {
+      "query": "compress a folder",
+      "lexical_top5": [
+        {
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "intent": "create a compressed zip archive",
+          "score": 5.44
+        },
+        {
+          "command": "git reset --soft HEAD~1",
+          "intent": "undo last git commit but keep changes",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "intent": "find all python files modified today",
+          "score": 0
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 0
+        },
+        {
+          "command": "ssh user@hostname",
+          "intent": "connect to a remote server via ssh",
+          "score": 0
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "intent": "create a compressed zip archive",
+          "sim": 0.63
+        },
+        {
+          "command": "rsync -avz source/ destination/",
+          "intent": "synchronize files between directories",
+          "sim": 0.361
+        },
+        {
+          "command": "Expand-Archive -Path 'archive.zip' -DestinationPath '.'",
+          "intent": "extract a zip archive",
+          "sim": 0.3522
+        },
+        {
+          "command": "Remove-Item -Recurse -Force 'directory/'",
+          "intent": "remove a directory and its contents",
+          "sim": 0.3172
+        },
+        {
+          "command": "Copy-Item -Recurse 'source/' 'destination/'",
+          "intent": "copy a directory recursively",
+          "sim": 0.2984
+        }
+      ]
+    },
+    {
+      "query": "search for a file",
+      "lexical_top5": [
+        {
+          "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'pattern' -CaseSensitive:$false",
+          "intent": "search for a pattern case insensitively",
+          "score": 4.9
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter 'filename.txt'",
+          "intent": "find files by name in current directory",
+          "score": 4.85
+        },
+        {
+          "command": "winget search package-name",
+          "intent": "search for a package in apt",
+          "score": 4.76
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+          "intent": "search for a string in files recursively",
+          "score": 4.64
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'",
+          "intent": "search for TODO comments in all javascript files",
+          "score": 4.3
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+          "intent": "search for a string in files recursively",
+          "sim": 0.6209
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter 'filename.txt'",
+          "intent": "find files by name in current directory",
+          "sim": 0.6012
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
+          "intent": "find large files bigger than 100mb",
+          "sim": 0.4747
+        },
+        {
+          "command": "Get-ChildItem -Recurse -File | Where-Object { Select-String -Path $_.FullName -Pattern 'pattern' -Quiet }",
+          "intent": "grep and show only filenames with matches",
+          "sim": 0.4671
+        },
+        {
+          "command": "Get-ChildItem -Recurse -Filter '*.log'",
+          "intent": "find files by extension recursively",
+          "sim": 0.4663
+        }
+      ]
+    },
+    {
+      "query": "list running processes",
+      "lexical_top5": [
+        {
+          "command": "Get-Process",
+          "intent": "show all running processes",
+          "score": 9.84
+        },
+        {
+          "command": "docker ps",
+          "intent": "list all running docker containers",
+          "score": 7.14
+        },
+        {
+          "command": "kubectl get pods --all-namespaces",
+          "intent": "show all kubernetes pods in all namespaces",
+          "score": 4.64
+        },
+        {
+          "command": "Get-Process -Id <PID> | Select-Object -ExpandProperty Modules",
+          "intent": "show open file handles for a running process",
+          "score": 4.49
+        },
+        {
+          "command": "Get-Process | Select-Object Id, ProcessName, @{N='Parent';E={(Get-Process -Id $_.Parent.Id -ErrorAction SilentlyContinue).ProcessName}}",
+          "intent": "show process tree",
+          "score": 4.43
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Get-Process",
+          "intent": "show all running processes",
+          "sim": 0.673
+        },
+        {
+          "command": "Get-Process -Id <PID> | Select-Object -ExpandProperty Modules",
+          "intent": "show open file handles for a running process",
+          "sim": 0.6208
+        },
+        {
+          "command": "Get-Process | Sort-Object CPU -Descending | Select-Object -First 20",
+          "intent": "monitor processes with htop",
+          "sim": 0.585
+        },
+        {
+          "command": "Get-Process | Sort-Object CPU -Descending",
+          "intent": "monitor system resources in real time",
+          "sim": 0.5757
+        },
+        {
+          "command": "Get-Process | Select-Object Id, ProcessName, @{N='Parent';E={(Get-Process -Id $_.Parent.Id -ErrorAction SilentlyContinue).ProcessName}}",
+          "intent": "show process tree",
+          "sim": 0.5388
+        }
+      ]
+    },
+    {
+      "query": "restart a service",
+      "lexical_top5": [
+        {
+          "command": "Restart-Service -Name 'service-name'",
+          "intent": "restart a systemd service",
+          "score": 13
+        },
+        {
+          "command": "sudo reboot",
+          "intent": "reboot the system",
+          "score": 5.8
+        },
+        {
+          "command": "Start-Service -Name 'service-name'",
+          "intent": "start a systemd service",
+          "score": 5.77
+        },
+        {
+          "command": "Stop-Service -Name 'service-name'",
+          "intent": "stop a systemd service",
+          "score": 5.61
+        },
+        {
+          "command": "Get-Service -Name 'service-name'",
+          "intent": "check status of a systemd service",
+          "score": 5.46
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Restart-Service -Name 'service-name'",
+          "intent": "restart a systemd service",
+          "sim": 0.6367
+        },
+        {
+          "command": "Stop-Service -Name 'service-name'",
+          "intent": "stop a systemd service",
+          "sim": 0.452
+        },
+        {
+          "command": "Set-Service -Name 'service-name' -StartupType Automatic",
+          "intent": "enable a service to start on boot",
+          "sim": 0.4197
+        },
+        {
+          "command": "sudo reboot",
+          "intent": "reboot the system",
+          "sim": 0.4159
+        },
+        {
+          "command": "Set-Service -Name 'service-name' -StartupType Disabled",
+          "intent": "disable a service from starting on boot",
+          "sim": 0.4142
+        }
+      ]
+    },
+    {
+      "query": "check network connection",
+      "lexical_top5": [
+        {
+          "command": "Get-NetIPAddress",
+          "intent": "check ip address of machine",
+          "score": 6.73
+        },
+        {
+          "command": "Test-Connection -ComputerName google.com -Count 4",
+          "intent": "ping a host to check connectivity",
+          "score": 6.73
+        },
+        {
+          "command": "Resolve-DnsName example.com",
+          "intent": "check dns resolution for a domain",
+          "score": 6.1
+        },
+        {
+          "command": "Test-NetConnection -ComputerName hostname -Port 80",
+          "intent": "test if a port is open on a host",
+          "score": 5.47
+        },
+        {
+          "command": "Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }",
+          "intent": "check which process is using a specific port",
+          "score": 5.28
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Get-NetIPAddress",
+          "intent": "check ip address of machine",
+          "sim": 0.59
+        },
+        {
+          "command": "Test-Connection -ComputerName google.com -Count 4",
+          "intent": "ping a host to check connectivity",
+          "sim": 0.5532
+        },
+        {
+          "command": "Get-NetTCPConnection",
+          "intent": "show active network connections",
+          "sim": 0.5357
+        },
+        {
+          "command": "Test-NetConnection -ComputerName hostname -Port 80",
+          "intent": "test if a port is open on a host",
+          "sim": 0.4871
+        },
+        {
+          "command": "Test-NetConnection -ComputerName google.com -TraceRoute",
+          "intent": "trace the network route to a host",
+          "sim": 0.4618
+        }
+      ]
+    },
+    {
+      "query": "install a package",
+      "lexical_top5": [
+        {
+          "command": "winget install package-name",
+          "intent": "install a package with apt",
+          "score": 25.04
+        },
+        {
+          "command": "pip install package-name",
+          "intent": "install pip package",
+          "score": 9.63
+        },
+        {
+          "command": "npm install package-name",
+          "intent": "install a specific npm package",
+          "score": 9.12
+        },
+        {
+          "command": "pip install package-name==1.2.3",
+          "intent": "install specific version of pip package",
+          "score": 9.12
+        },
+        {
+          "command": "npm install --save-dev package-name",
+          "intent": "install npm package as dev dependency",
+          "score": 8.67
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "winget install package-name",
+          "intent": "install a package with apt",
+          "sim": 0.5496
+        },
+        {
+          "command": "npm install package-name",
+          "intent": "install a specific npm package",
+          "sim": 0.4459
+        },
+        {
+          "command": "npm install --save-dev package-name",
+          "intent": "install npm package as dev dependency",
+          "sim": 0.4389
+        },
+        {
+          "command": "npm install",
+          "intent": "install npm packages from package.json",
+          "sim": 0.4237
+        },
+        {
+          "command": "pip install -r requirements.txt",
+          "intent": "install packages from requirements file",
+          "sim": 0.4229
+        }
+      ]
+    },
+    {
+      "query": "check git history",
+      "lexical_top5": [
+        {
+          "command": "git log -S 'search_string' --oneline",
+          "intent": "search git history for a string",
+          "score": 6.3
+        },
+        {
+          "command": "git bisect start && git bisect bad HEAD && git bisect good <good-commit>",
+          "intent": "find the commit that introduced a bug using bisect",
+          "score": 4.6
+        },
+        {
+          "command": "Get-History",
+          "intent": "show command history",
+          "score": 4.25
+        },
+        {
+          "command": "Get-History | Where-Object { $_.CommandLine -match 'keyword' }",
+          "intent": "search command history",
+          "score": 4.09
+        },
+        {
+          "command": "git checkout feature-branch -- path/to/file.txt",
+          "intent": "apply only the changes from a specific file from another branch",
+          "score": 3.67
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "git log -S 'search_string' --oneline",
+          "intent": "search git history for a string",
+          "sim": 0.6769
+        },
+        {
+          "command": "git status",
+          "intent": "show git status of current repository",
+          "sim": 0.615
+        },
+        {
+          "command": "git reflog",
+          "intent": "view all recent HEAD movements including deleted branches",
+          "sim": 0.5953
+        },
+        {
+          "command": "git bisect start && git bisect bad HEAD && git bisect good <good-commit>",
+          "intent": "find the commit that introduced a bug using bisect",
+          "sim": 0.5742
+        },
+        {
+          "command": "git diff",
+          "intent": "view diff of unstaged changes",
+          "sim": 0.5712
+        }
+      ]
+    },
+    {
+      "query": "copy a file",
+      "lexical_top5": [
+        {
+          "command": "docker cp container-name:/path/in/container ./local-path",
+          "intent": "copy file from container to host",
+          "score": 7.8
+        },
+        {
+          "command": "scp file.txt user@hostname:/path/to/destination",
+          "intent": "copy file to remote server via scp",
+          "score": 7.6
+        },
+        {
+          "command": "Copy-Item -Recurse 'source/' 'destination/'",
+          "intent": "copy a directory recursively",
+          "score": 5.7
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+          "intent": "extract audio from a video file using ffmpeg",
+          "score": 5.15
+        },
+        {
+          "command": "ssh-copy-id user@hostname",
+          "intent": "copy ssh public key to remote server",
+          "score": 3.54
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Copy-Item -Recurse 'source/' 'destination/'",
+          "intent": "copy a directory recursively",
+          "sim": 0.5019
+        },
+        {
+          "command": "scp file.txt user@hostname:/path/to/destination",
+          "intent": "copy file to remote server via scp",
+          "sim": 0.4277
+        },
+        {
+          "command": "docker cp container-name:/path/in/container ./local-path",
+          "intent": "copy file from container to host",
+          "sim": 0.383
+        },
+        {
+          "command": "Move-Item 'oldname.txt' 'newname.txt'",
+          "intent": "move or rename a file",
+          "sim": 0.3404
+        },
+        {
+          "command": "command 2>'error.txt'",
+          "intent": "redirect stderr to a file",
+          "sim": 0.3323
+        }
+      ]
+    },
+    {
+      "query": "extract an archive",
+      "lexical_top5": [
+        {
+          "command": "Expand-Archive -Path 'archive.zip' -DestinationPath '.'",
+          "intent": "extract a zip archive",
+          "score": 12.39
+        },
+        {
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "intent": "create a compressed zip archive",
+          "score": 6.19
+        },
+        {
+          "command": "Expand-Archive -Path 'archive.zip' -WhatIf",
+          "intent": "list contents of a zip archive",
+          "score": 6.03
+        },
+        {
+          "command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
+          "intent": "extract a specific field from json output using jq",
+          "score": 4.69
+        },
+        {
+          "command": "Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName",
+          "intent": "extract column from csv with awk",
+          "score": 3.94
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Expand-Archive -Path 'archive.zip' -DestinationPath '.'",
+          "intent": "extract a zip archive",
+          "sim": 0.613
+        },
+        {
+          "command": "Expand-Archive -Path 'archive.zip' -WhatIf",
+          "intent": "list contents of a zip archive",
+          "sim": 0.5433
+        },
+        {
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "intent": "create a compressed zip archive",
+          "sim": 0.4628
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+          "intent": "extract audio from a video file using ffmpeg",
+          "sim": 0.2704
+        },
+        {
+          "command": "curl -C - -O https://example.com/largefile.zip",
+          "intent": "resume an interrupted curl download",
+          "sim": 0.238
+        }
+      ]
+    },
+    {
+      "query": "convert a video file",
+      "lexical_top5": [
+        {
+          "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+          "intent": "convert a video to h264 mp4 using ffmpeg",
+          "score": 9.23
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -vf \"fps=10,scale=640:-1\" -loop 0 output.gif",
+          "intent": "convert video to gif using ffmpeg",
+          "score": 9.07
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+          "intent": "extract audio from a video file using ffmpeg",
+          "score": 6.85
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -ss 00:01:00 -to 00:02:30 -c copy trimmed.mp4",
+          "intent": "trim a video to a specific time range using ffmpeg",
+          "score": 5.16
+        },
+        {
+          "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+          "intent": "batch convert all wav files to mp3 using ffmpeg",
+          "score": 5.01
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+          "intent": "convert a video to h264 mp4 using ffmpeg",
+          "sim": 0.6061
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+          "intent": "extract audio from a video file using ffmpeg",
+          "sim": 0.5655
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -vf \"fps=10,scale=640:-1\" -loop 0 output.gif",
+          "intent": "convert video to gif using ffmpeg",
+          "sim": 0.5151
+        },
+        {
+          "command": "ffmpeg -i input.mp4 -ss 00:01:00 -to 00:02:30 -c copy trimmed.mp4",
+          "intent": "trim a video to a specific time range using ffmpeg",
+          "sim": 0.4925
+        },
+        {
+          "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+          "intent": "batch convert all wav files to mp3 using ffmpeg",
+          "sim": 0.4063
+        }
+      ]
+    },
+    {
+      "query": "kill a process",
+      "lexical_top5": [
+        {
+          "command": "Stop-Process -Id PID -Force",
+          "intent": "kill a process by pid",
+          "score": 25.42
+        },
+        {
+          "command": "Stop-Process -Name 'process_name' -Force",
+          "intent": "kill a process by name",
+          "score": 25.03
+        },
+        {
+          "command": "tmux kill-session -t session-name",
+          "intent": "kill a tmux session",
+          "score": 4.94
+        },
+        {
+          "command": "Get-Process -Name 'process_name' | Select-Object Id",
+          "intent": "find process id by name",
+          "score": 4.28
+        },
+        {
+          "command": "Get-Process | Select-Object Id, ProcessName, @{N='Parent';E={(Get-Process -Id $_.Parent.Id -ErrorAction SilentlyContinue).ProcessName}}",
+          "intent": "show process tree",
+          "score": 4.05
+        }
+      ],
+      "dense_top5": [
+        {
+          "command": "Stop-Process -Id PID -Force",
+          "intent": "kill a process by pid",
+          "sim": 0.7303
+        },
+        {
+          "command": "Stop-Process -Name 'process_name' -Force",
+          "intent": "kill a process by name",
+          "sim": 0.7281
+        },
+        {
+          "command": "Start-Job -ScriptBlock { command }",
+          "intent": "run a command in background",
+          "sim": 0.4199
+        },
+        {
+          "command": "Get-Process -Name 'process_name' | Select-Object Id",
+          "intent": "find process id by name",
+          "sim": 0.4058
+        },
+        {
+          "command": "Stop-Service -Name 'service-name'",
+          "intent": "stop a systemd service",
+          "sim": 0.3928
+        }
+      ]
+    }
+  ]
+}
