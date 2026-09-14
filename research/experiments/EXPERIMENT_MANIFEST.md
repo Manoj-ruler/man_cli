@@ -298,3 +298,21 @@ each phase completes — they are intentionally blank/pending until run.
   (`research/tables/`), all read their source JSON directly so they cannot drift from the
   experiments that produced them. Verified: no NaN/undefined in any SVG; fig1's rendered values
   (71.9/72.7/77.1) and every table's numbers cross-checked against Phases 4-13 exactly.
+
+## Phase 19 — Reproducibility & QC pass
+- **Objective:** re-run everything from a clean state, check for hardcoded paths/credentials/
+  non-determinism/orphaned files/broken links.
+- **Status:** COMPLETE. See `research/REPRODUCIBILITY_QC.md`.
+- **Reproducibility gap found and fixed:** Phase 8's ablation row A6 was patched in via a one-off
+  inline command never saved as a script -- silently lost on a clean re-run. Extracted to
+  `research/experiments/patch_ablation_A6.js` (reads ECE from calibration-results.json, not
+  hardcoded) and added to the new canonical pipeline runner `research/experiments/run_all.js`.
+- **Actual result:** every regenerated artifact verified programmatically identical to the
+  committed version, excluding only expected-to-vary fields (timestamps, latency, git_commit
+  provenance). Fold assignment (seed=42) is byte-identical. Zero hardcoded paths, zero
+  credentials, zero broken references in any deliverable document. Benchmark hash and baseline
+  reproduction re-verified exact.
+- **Conclusion:** this is the third implementation-adjacent issue found and fixed by this
+  program's own verification discipline (after Phase 8's isotonic bug and Phase 13's accuracy-
+  denominator bug) -- reported, not hidden. The pipeline is now genuinely one-command
+  reproducible from a clean checkout.

@@ -1,6 +1,6 @@
 {
   "experiment_id": "E1-baseline-reproduction",
-  "git_commit": "518adecf64d7f5e8cad0645cd084b5938d56dbcd",
+  "git_commit": "7bfb9df59694a2cab3692363733ebf375eb52b2f",
   "reference_frozen_baseline_commit": "4443ec016c87895ebbc1b9be831e5f80b9bd3b50",
   "benchmark_name": "TermAssist-Bench",
   "benchmark_version": "v0.1-validated",
@@ -10,7 +10,7 @@
   "platform": "win32",
   "os_release": "10.0.26200",
   "arch": "x64",
-  "timestamp": "2026-09-14T06:06:46.358Z",
+  "timestamp": "2026-09-14T11:23:23.508Z",
   "termassist_version": "0.1.0",
   "total_queries": 150
 }

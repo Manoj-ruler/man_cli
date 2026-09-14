@@ -7,8 +7,8 @@
   "ambiguity_success_rate_pct": 28.6,
   "high_confidence_wrong_count": 32,
   "mean_confidence_on_wrong_pct": "86.1",
-  "mean_latency_ms": 3.5421,
-  "p95_latency_ms": 5.898,
+  "mean_latency_ms": 3.2129,
+  "p95_latency_ms": 5.2421,
   "archived_reference": {
     "overall_accuracy_pct": 67.3,
     "supported_task_accuracy_pct": 71.9,

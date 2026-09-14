@@ -16,7 +16,7 @@
       "command": "git reset --soft HEAD~1",
       "score": 42.6735,
       "confidence": 100,
-      "latency_ms": 8.3709
+      "latency_ms": 10.4125
     },
     "evaluation": {
       "status": "CORRECT",
@@ -41,7 +41,7 @@
       "command": "git status",
       "score": 32.7568,
       "confidence": 100,
-      "latency_ms": 4.061
+      "latency_ms": 5.792
     },
     "evaluation": {
       "status": "CORRECT",
@@ -66,7 +66,7 @@
       "command": "docker ps",
       "score": 33.4215,
       "confidence": 100,
-      "latency_ms": 3.0372
+      "latency_ms": 3.1536
     },
     "evaluation": {
       "status": "CORRECT",
@@ -91,7 +91,7 @@
       "command": "npm install",
       "score": 36.3403,
       "confidence": 100,
-      "latency_ms": 2.8921
+      "latency_ms": 4.8601
     },
     "evaluation": {
       "status": "CORRECT",
@@ -116,7 +116,7 @@
       "command": "Get-ChildItem -Force",
       "score": 35.7364,
       "confidence": 100,
-      "latency_ms": 3.4993
+      "latency_ms": 2.9016
     },
     "evaluation": {
       "status": "CORRECT",
@@ -141,7 +141,7 @@
       "command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
       "score": 25.8392,
       "confidence": 100,
-      "latency_ms": 2.4079
+      "latency_ms": 3.7684
     },
     "evaluation": {
       "status": "CORRECT",
@@ -166,7 +166,7 @@
       "command": "Test-Connection -ComputerName google.com -Count 4",
       "score": 33.7898,
       "confidence": 100,
-      "latency_ms": 4.1102
+      "latency_ms": 2.9345
     },
     "evaluation": {
       "status": "CORRECT",
@@ -191,7 +191,7 @@
       "command": "Get-Process",
       "score": 28.6193,
       "confidence": 100,
-      "latency_ms": 3.8
+      "latency_ms": 2.5661
     },
     "evaluation": {
       "status": "CORRECT",
@@ -216,7 +216,7 @@
       "command": "Stop-Process -Name 'process_name' -Force",
       "score": 32.5554,
       "confidence": 100,
-      "latency_ms": 2.3618
+      "latency_ms": 3.7288
     },
     "evaluation": {
       "status": "CORRECT",
@@ -241,7 +241,7 @@
       "command": "$env:VAR_NAME = 'value'",
       "score": 33.0902,
       "confidence": 100,
-      "latency_ms": 2.8598
+      "latency_ms": 2.2597
     },
     "evaluation": {
       "status": "CORRECT",
@@ -266,7 +266,7 @@
       "command": "Get-History",
       "score": 24.0251,
       "confidence": 100,
-      "latency_ms": 3.3574
+      "latency_ms": 2.5626
     },
     "evaluation": {
       "status": "CORRECT",
@@ -291,7 +291,7 @@
       "command": "ssh user@hostname",
       "score": 37.5389,
       "confidence": 100,
-      "latency_ms": 3.9222
+      "latency_ms": 3.4163
     },
     "evaluation": {
       "status": "CORRECT",
@@ -316,7 +316,7 @@
       "command": "pip install package-name",
       "score": 30.4667,
       "confidence": 100,
-      "latency_ms": 3.8471
+      "latency_ms": 2.5314
     },
     "evaluation": {
       "status": "CORRECT",
@@ -341,7 +341,7 @@
       "command": "curl -O https://example.com/file.zip",
       "score": 33.2448,
       "confidence": 100,
-      "latency_ms": 3.1568
+      "latency_ms": 2.1112
     },
     "evaluation": {
       "status": "CORRECT",
@@ -366,7 +366,7 @@
       "command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
       "score": 46.3021,
       "confidence": 100,
-      "latency_ms": 3.8438
+      "latency_ms": 3.1665
     },
     "evaluation": {
       "status": "CORRECT",
@@ -391,7 +391,7 @@
       "command": "$env:USERNAME",
       "score": 28.4136,
       "confidence": 100,
-      "latency_ms": 2.8115
+      "latency_ms": 2.6391
     },
     "evaluation": {
       "status": "CORRECT",
@@ -416,7 +416,7 @@
       "command": "kubectl get pods --all-namespaces",
       "score": 33.4456,
       "confidence": 100,
-      "latency_ms": 3.3843
+      "latency_ms": 2.1646
     },
     "evaluation": {
       "status": "CORRECT",
@@ -441,7 +441,7 @@
       "command": "openssl rand -base64 32",
       "score": 35.8727,
       "confidence": 100,
-      "latency_ms": 2.8802
+      "latency_ms": 3.0704
     },
     "evaluation": {
       "status": "CORRECT",
@@ -466,7 +466,7 @@
       "command": "Get-PSDrive -PSProvider FileSystem",
       "score": 33.1759,
       "confidence": 100,
-      "latency_ms": 2.6016
+      "latency_ms": 2.5743
     },
     "evaluation": {
       "status": "CORRECT",
@@ -491,7 +491,7 @@
       "command": "[System.Environment]::OSVersion",
       "score": 34.4852,
       "confidence": 100,
-      "latency_ms": 3.959
+      "latency_ms": 2.1169
     },
     "evaluation": {
       "status": "CORRECT",
@@ -516,7 +516,7 @@
       "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
       "score": 32.0697,
       "confidence": 100,
-      "latency_ms": 3.7769
+      "latency_ms": 2.475
     },
     "evaluation": {
       "status": "CORRECT",
@@ -541,7 +541,7 @@
       "command": "Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName",
       "score": 38.2529,
       "confidence": 100,
-      "latency_ms": 3.3552
+      "latency_ms": 2.8508
     },
     "evaluation": {
       "status": "CORRECT",
@@ -566,7 +566,7 @@
       "command": "aws s3 ls",
       "score": 40.9761,
       "confidence": 100,
-      "latency_ms": 2.9724
+      "latency_ms": 2.4288
     },
     "evaluation": {
       "status": "CORRECT",
@@ -591,7 +591,7 @@
       "command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
       "score": 43.1845,
       "confidence": 100,
-      "latency_ms": 2.764
+      "latency_ms": 3.4282
     },
     "evaluation": {
       "status": "CORRECT",
@@ -616,7 +616,7 @@
       "command": "tmux new -s session-name",
       "score": 33.425,
       "confidence": 100,
-      "latency_ms": 5.1149
+      "latency_ms": 2.8169
     },
     "evaluation": {
       "status": "CORRECT",
@@ -641,7 +641,7 @@
       "command": "git reset --soft HEAD~1",
       "score": 7.5266,
       "confidence": 94,
-      "latency_ms": 2.9672
+      "latency_ms": 2.3004
     },
     "evaluation": {
       "status": "CORRECT",
@@ -666,7 +666,7 @@
       "command": "docker ps",
       "score": 15.5113,
       "confidence": 100,
-      "latency_ms": 4.2593
+      "latency_ms": 5.1919
     },
     "evaluation": {
       "status": "CORRECT",
@@ -691,7 +691,7 @@
       "command": "npm install",
       "score": 15.4051,
       "confidence": 100,
-      "latency_ms": 2.461
+      "latency_ms": 6.1965
     },
     "evaluation": {
       "status": "CORRECT",
@@ -716,7 +716,7 @@
       "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
       "score": 16.3985,
       "confidence": 100,
-      "latency_ms": 3.9161
+      "latency_ms": 3.9243
     },
     "evaluation": {
       "status": "CORRECT",
@@ -741,7 +741,7 @@
       "command": "git branch -a",
       "score": 8.4692,
       "confidence": 100,
-      "latency_ms": 4.3465
+      "latency_ms": 2.491
     },
     "evaluation": {
       "status": "CORRECT",
@@ -766,7 +766,7 @@
       "command": "npm init -y",
       "score": 7.2974,
       "confidence": 91,
-      "latency_ms": 3.2065
+      "latency_ms": 4.7306
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -791,7 +791,7 @@
       "command": "Get-NetTCPConnection -State Listen",
       "score": 14.3957,
       "confidence": 100,
-      "latency_ms": 3.6712
+      "latency_ms": 2.3247
     },
     "evaluation": {
       "status": "CORRECT",
@@ -816,7 +816,7 @@
       "command": "Get-ChildItem Env:",
       "score": 15.7115,
       "confidence": 100,
-      "latency_ms": 2.5029
+      "latency_ms": 3.1668
     },
     "evaluation": {
       "status": "CORRECT",
@@ -841,7 +841,7 @@
       "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
       "score": 9.1154,
       "confidence": 100,
-      "latency_ms": 2.954
+      "latency_ms": 2.89
     },
     "evaluation": {
       "status": "CORRECT",
@@ -866,7 +866,7 @@
       "command": "git stash",
       "score": 9.0711,
       "confidence": 100,
-      "latency_ms": 3.0602
+      "latency_ms": 2.497
     },
     "evaluation": {
       "status": "CORRECT",
@@ -891,7 +891,7 @@
       "command": "Copy-Item -Recurse 'source/' 'destination/'",
       "score": 9.6456,
       "confidence": 100,
-      "latency_ms": 2.2874
+      "latency_ms": 3.7136
     },
     "evaluation": {
       "status": "CORRECT",
@@ -916,7 +916,7 @@
       "command": "Resolve-DnsName example.com -Type ALL",
       "score": 10.8755,
       "confidence": 100,
-      "latency_ms": 2.8032
+      "latency_ms": 2.57
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -941,7 +941,7 @@
       "command": "git merge branch-name",
       "score": 16.3452,
       "confidence": 100,
-      "latency_ms": 2.8099
+      "latency_ms": 2.5091
     },
     "evaluation": {
       "status": "CORRECT",
@@ -966,7 +966,7 @@
       "command": "docker exec -it container-name /bin/bash",
       "score": 19.093,
       "confidence": 100,
-      "latency_ms": 2.5041
+      "latency_ms": 3.8702
     },
     "evaluation": {
       "status": "CORRECT",
@@ -991,7 +991,7 @@
       "command": "docker compose up -d",
       "score": 18.164,
       "confidence": 100,
-      "latency_ms": 3.741
+      "latency_ms": 2.7437
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1016,7 +1016,7 @@
       "command": "ssh-keygen -t ed25519 -C 'your_email@example.com'",
       "score": 17.4047,
       "confidence": 100,
-      "latency_ms": 2.8776
+      "latency_ms": 4.1217
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1041,7 +1041,7 @@
       "command": "curl -X POST -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/endpoint",
       "score": 20.1212,
       "confidence": 100,
-      "latency_ms": 2.4648
+      "latency_ms": 3.3025
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1066,7 +1066,7 @@
       "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
       "score": 20.3473,
       "confidence": 100,
-      "latency_ms": 3.0449
+      "latency_ms": 2.2413
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1091,7 +1091,7 @@
       "command": "Stop-Process -Id PID -Force",
       "score": 12.8838,
       "confidence": 100,
-      "latency_ms": 3.4813
+      "latency_ms": 4.3043
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1116,7 +1116,7 @@
       "command": "Compare-Object (Get-Content 'file1.txt') (Get-Content 'file2.txt')",
       "score": 5.4377,
       "confidence": 68,
-      "latency_ms": 3.1751
+      "latency_ms": 2.4706
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -1141,7 +1141,7 @@
       "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
       "score": 14.8327,
       "confidence": 100,
-      "latency_ms": 2.8222
+      "latency_ms": 2.2006
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1166,7 +1166,7 @@
       "command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory",
       "score": 5.2357,
       "confidence": 65,
-      "latency_ms": 2.4491
+      "latency_ms": 4.8415
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1191,7 +1191,7 @@
       "command": "Set-Alias -Name ll -Value Get-ChildItem",
       "score": 21.9589,
       "confidence": 100,
-      "latency_ms": 2.391
+      "latency_ms": 2.2664
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1216,7 +1216,7 @@
       "command": "npm outdated",
       "score": 27.1308,
       "confidence": 100,
-      "latency_ms": 3.7184
+      "latency_ms": 3.521
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1241,7 +1241,7 @@
       "command": "openssl s_client -connect example.com:443 -showcerts",
       "score": 16.4854,
       "confidence": 100,
-      "latency_ms": 2.7661
+      "latency_ms": 2.5134
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1266,7 +1266,7 @@
       "command": "git remote add origin https://github.com/user/repo.git",
       "score": 7.1978,
       "confidence": 90,
-      "latency_ms": 3.6204
+      "latency_ms": 2.4196
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -1291,7 +1291,7 @@
       "command": "docker rmi image-name",
       "score": 4.9069,
       "confidence": 61,
-      "latency_ms": 3.0459
+      "latency_ms": 5.2184
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -1316,7 +1316,7 @@
       "command": "Get-NetTCPConnection",
       "score": 6.4952,
       "confidence": 81,
-      "latency_ms": 2.5779
+      "latency_ms": 2.4036
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -1341,7 +1341,7 @@
       "command": "pip install package-name==1.2.3",
       "score": 5.5525,
       "confidence": 69,
-      "latency_ms": 3.5566
+      "latency_ms": 2.409
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -1366,7 +1366,7 @@
       "command": "git stash",
       "score": 12.9269,
       "confidence": 100,
-      "latency_ms": 2.8304
+      "latency_ms": 3.9586
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1391,7 +1391,7 @@
       "command": "npm install --save-dev package-name",
       "score": 4.692,
       "confidence": 59,
-      "latency_ms": 2.2008
+      "latency_ms": 3.116
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -1416,7 +1416,7 @@
       "command": "ssh user@hostname",
       "score": 4.9841,
       "confidence": 62,
-      "latency_ms": 2.4825
+      "latency_ms": 5.5476
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -1441,7 +1441,7 @@
       "command": "Get-History",
       "score": 4.7402,
       "confidence": 59,
-      "latency_ms": 2.607
+      "latency_ms": 4.2204
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1466,7 +1466,7 @@
       "command": "curl -s https://api.example.com/data",
       "score": 5.702,
       "confidence": 71,
-      "latency_ms": 2.007
+      "latency_ms": 3.841
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -1491,7 +1491,7 @@
       "command": "pip list",
       "score": 9.4665,
       "confidence": 100,
-      "latency_ms": 3.454
+      "latency_ms": 2.833
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -1516,7 +1516,7 @@
       "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
       "score": 8.1321,
       "confidence": 100,
-      "latency_ms": 2.8838
+      "latency_ms": 4.4903
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1541,7 +1541,7 @@
       "command": "winget upgrade --all",
       "score": 8.5326,
       "confidence": 100,
-      "latency_ms": 2.132
+      "latency_ms": 2.2533
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -1566,7 +1566,7 @@
       "command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
       "score": 14.8697,
       "confidence": 100,
-      "latency_ms": 2.7394
+      "latency_ms": 3.2229
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1591,7 +1591,7 @@
       "command": "(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime",
       "score": 18.9369,
       "confidence": 100,
-      "latency_ms": 3.0987
+      "latency_ms": 2.7478
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1616,7 +1616,7 @@
       "command": "Get-FileHash 'filename.txt' -Algorithm MD5",
       "score": 6.8938,
       "confidence": 86,
-      "latency_ms": 2.1859
+      "latency_ms": 2.1772
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -1644,7 +1644,7 @@
       "command": "git branch -d branch-name",
       "score": 8.6775,
       "confidence": 100,
-      "latency_ms": 3.1636
+      "latency_ms": 2.6988
     },
     "evaluation": {
       "status": "AMBIGUOUS_CORRECT",
@@ -1672,7 +1672,7 @@
       "command": "git log --oneline -20",
       "score": 9.1332,
       "confidence": 100,
-      "latency_ms": 3.0404
+      "latency_ms": 2.7208
     },
     "evaluation": {
       "status": "AMBIGUOUS_CORRECT",
@@ -1700,7 +1700,7 @@
       "command": "Resolve-DnsName example.com -Type ALL",
       "score": 17.066,
       "confidence": 100,
-      "latency_ms": 2.1325
+      "latency_ms": 2.0132
     },
     "evaluation": {
       "status": "AMBIGUOUS_CORRECT",
@@ -1727,7 +1727,7 @@
       "command": "Stop-Service -Name 'service-name'",
       "score": 12.1439,
       "confidence": 100,
-      "latency_ms": 3.1542
+      "latency_ms": 2.1648
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -1752,7 +1752,7 @@
       "command": "Move-Item 'oldname.txt' 'newname.txt'",
       "score": 24.5862,
       "confidence": 100,
-      "latency_ms": 3.2564
+      "latency_ms": 2.6194
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1779,7 +1779,7 @@
       "command": "Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }",
       "score": 11.4575,
       "confidence": 100,
-      "latency_ms": 2.6859
+      "latency_ms": 4.3717
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -1806,7 +1806,7 @@
       "command": "docker rm container-name",
       "score": 11.7332,
       "confidence": 100,
-      "latency_ms": 3.1666
+      "latency_ms": 3.5186
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1833,7 +1833,7 @@
       "command": "Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }",
       "score": 11.6093,
       "confidence": 100,
-      "latency_ms": 2.5473
+      "latency_ms": 4.0486
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -1860,7 +1860,7 @@
       "command": "git config --global user.name 'Your Name'",
       "score": 7.9165,
       "confidence": 99,
-      "latency_ms": 2.0641
+      "latency_ms": 2.086
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -1888,7 +1888,7 @@
       "command": "Get-Content 'filename.txt' | Out-Host -Paging",
       "score": 7.2234,
       "confidence": 90,
-      "latency_ms": 2.7316
+      "latency_ms": 5.4143
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1915,7 +1915,7 @@
       "command": "Resolve-DnsName example.com -Type ALL",
       "score": 5.4377,
       "confidence": 68,
-      "latency_ms": 2.4929
+      "latency_ms": 2.0796
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -1942,7 +1942,7 @@
       "command": "git config --list",
       "score": 7.8976,
       "confidence": 99,
-      "latency_ms": 2.0929
+      "latency_ms": 2.3062
     },
     "evaluation": {
       "status": "CORRECT",
@@ -1967,7 +1967,7 @@
       "command": "Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass",
       "score": 4.2414,
       "confidence": 53,
-      "latency_ms": 2.9226
+      "latency_ms": 3.8704
     },
     "evaluation": {
       "status": "OOD_FALSE_ACCEPT",
@@ -1992,7 +1992,7 @@
       "command": "git reset --soft HEAD~1",
       "score": 0,
       "confidence": 0,
-      "latency_ms": 3.4371
+      "latency_ms": 2.3165
     },
     "evaluation": {
       "status": "OOD_CORRECT_REJECTION",
@@ -2017,7 +2017,7 @@
       "command": "git reset --soft HEAD~1",
       "score": 0,
       "confidence": 0,
-      "latency_ms": 2.1302
+      "latency_ms": 3.7315
     },
     "evaluation": {
       "status": "OOD_CORRECT_REJECTION",
@@ -2042,7 +2042,7 @@
       "command": "git reset --soft HEAD~1",
       "score": 0,
       "confidence": 0,
-      "latency_ms": 4.9208
+      "latency_ms": 3.6604
     },
     "evaluation": {
       "status": "OOD_CORRECT_REJECTION",
@@ -2067,7 +2067,7 @@
       "command": "git reset --soft HEAD~1",
       "score": 0,
       "confidence": 0,
-      "latency_ms": 2.5412
+      "latency_ms": 4.9466
     },
     "evaluation": {
       "status": "OOD_CORRECT_REJECTION",
@@ -2092,7 +2092,7 @@
       "command": "npm init -y",
       "score": 5.1039,
       "confidence": 64,
-      "latency_ms": 7.3012
+      "latency_ms": 3.2931
     },
     "evaluation": {
       "status": "OOD_FALSE_ACCEPT",
@@ -2117,7 +2117,7 @@
       "command": "tmux attach -t session-name",
       "score": 4.9385,
       "confidence": 62,
-      "latency_ms": 8.5822
+      "latency_ms": 3.8941
     },
     "evaluation": {
       "status": "OOD_FALSE_ACCEPT",
@@ -2142,7 +2142,7 @@
       "command": "npm init -y",
       "score": 7.2974,
       "confidence": 91,
-      "latency_ms": 6.159
+      "latency_ms": 3.012
     },
     "evaluation": {
       "status": "OOD_FALSE_ACCEPT",
@@ -2167,7 +2167,7 @@
       "command": "crontab -e",
       "score": 5.3174,
       "confidence": 66,
-      "latency_ms": 4.2616
+      "latency_ms": 2.5952
     },
     "evaluation": {
       "status": "OOD_FALSE_ACCEPT",
@@ -2192,7 +2192,7 @@
       "command": "Resolve-DnsName example.com -Type ALL",
       "score": 5.4377,
       "confidence": 68,
-      "latency_ms": 9.4102
+      "latency_ms": 5.2775
     },
     "evaluation": {
       "status": "OOD_FALSE_ACCEPT",
@@ -2217,7 +2217,7 @@
       "command": "command 2>'error.txt'",
       "score": 4.9385,
       "confidence": 62,
-      "latency_ms": 5.898
+      "latency_ms": 2.9453
     },
     "evaluation": {
       "status": "OOD_FALSE_ACCEPT",
@@ -2242,7 +2242,7 @@
       "command": "!keyword",
       "score": 5.832,
       "confidence": 73,
-      "latency_ms": 5.149
+      "latency_ms": 4.3462
     },
     "evaluation": {
       "status": "OOD_FALSE_ACCEPT",
@@ -2267,7 +2267,7 @@
       "command": "clamscan -r /path/to/scan",
       "score": 6.8449,
       "confidence": 86,
-      "latency_ms": 5.4391
+      "latency_ms": 2.2902
     },
     "evaluation": {
       "status": "OOD_FALSE_ACCEPT",
@@ -2292,7 +2292,7 @@
       "command": "Set-Service -Name 'service-name' -StartupType Automatic",
       "score": 5.2357,
       "confidence": 65,
-      "latency_ms": 6.6809
+      "latency_ms": 2.0711
     },
     "evaluation": {
       "status": "OOD_FALSE_ACCEPT",
@@ -2317,7 +2317,7 @@
       "command": "Clear-Host",
       "score": 7.8833,
       "confidence": 99,
-      "latency_ms": 5.0255
+      "latency_ms": 4.0984
     },
     "evaluation": {
       "status": "OOD_FALSE_ACCEPT",
@@ -2342,7 +2342,7 @@
       "command": "Remove-Item -Recurse -Force 'directory/'",
       "score": 19.119,
       "confidence": 100,
-      "latency_ms": 5.54
+      "latency_ms": 2.837
     },
     "evaluation": {
       "status": "CORRECT",
@@ -2367,7 +2367,7 @@
       "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
       "score": 8.8038,
       "confidence": 100,
-      "latency_ms": 4.1602
+      "latency_ms": 2.4142
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -2392,7 +2392,7 @@
       "command": "Stop-Process -Name 'process_name' -Force",
       "score": 6.1905,
       "confidence": 77,
-      "latency_ms": 3.0927
+      "latency_ms": 2.9815
     },
     "evaluation": {
       "status": "CORRECT",
@@ -2417,7 +2417,7 @@
       "command": "Test-Connection -ComputerName google.com -Count 4",
       "score": 4.5553,
       "confidence": 57,
-      "latency_ms": 4.8753
+      "latency_ms": 2.0471
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -2442,7 +2442,7 @@
       "command": "winget uninstall package-name --purge",
       "score": 6.0324,
       "confidence": 75,
-      "latency_ms": 3.0066
+      "latency_ms": 1.9471
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -2467,7 +2467,7 @@
       "command": "icacls 'filename.txt' /setowner 'user'",
       "score": 12.821,
       "confidence": 100,
-      "latency_ms": 4.5225
+      "latency_ms": 3.0248
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -2492,7 +2492,7 @@
       "command": "docker images",
       "score": 8.7849,
       "confidence": 100,
-      "latency_ms": 3.9168
+      "latency_ms": 2.3099
     },
     "evaluation": {
       "status": "CORRECT",
@@ -2517,7 +2517,7 @@
       "command": "npm init -y",
       "score": 9.4007,
       "confidence": 100,
-      "latency_ms": 3.295
+      "latency_ms": 2.0484
     },
     "evaluation": {
       "status": "CORRECT",
@@ -2542,7 +2542,7 @@
       "command": "docker compose up -d",
       "score": 11.0165,
       "confidence": 100,
-      "latency_ms": 3.0899
+      "latency_ms": 2.2017
     },
     "evaluation": {
       "status": "CORRECT",
@@ -2567,7 +2567,7 @@
       "command": "docker stop $(docker ps -q)",
       "score": 10.208,
       "confidence": 100,
-      "latency_ms": 7.3292
+      "latency_ms": 3.1033
     },
     "evaluation": {
       "status": "CORRECT",
@@ -2592,7 +2592,7 @@
       "command": "Get-Service -Name 'service-name'",
       "score": 9.274,
       "confidence": 100,
-      "latency_ms": 2.7047
+      "latency_ms": 5.0806
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -2617,7 +2617,7 @@
       "command": "docker volume create my-volume",
       "score": 11.0165,
       "confidence": 100,
-      "latency_ms": 4.5294
+      "latency_ms": 3.8365
     },
     "evaluation": {
       "status": "CORRECT",
@@ -2644,7 +2644,7 @@
       "command": "git log --oneline -20",
       "score": 5.4242,
       "confidence": 68,
-      "latency_ms": 2.2767
+      "latency_ms": 2.6157
     },
     "evaluation": {
       "status": "AMBIGUOUS_CORRECT",
@@ -2669,7 +2669,7 @@
       "command": "git config --global user.name 'Your Name'",
       "score": 8.2728,
       "confidence": 100,
-      "latency_ms": 3.0081
+      "latency_ms": 3.2039
     },
     "evaluation": {
       "status": "CORRECT",
@@ -2694,7 +2694,7 @@
       "command": "winget install package-name",
       "score": 10.0356,
       "confidence": 100,
-      "latency_ms": 3.4587
+      "latency_ms": 2.6638
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -2719,7 +2719,7 @@
       "command": "Get-CimInstance Win32_Processor",
       "score": 7.4288,
       "confidence": 93,
-      "latency_ms": 2.7222
+      "latency_ms": 2.0315
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -2744,7 +2744,7 @@
       "command": "New-Item -ItemType SymbolicLink -Path '/path/to/link' -Target '/path/to/target'",
       "score": 11.1698,
       "confidence": 100,
-      "latency_ms": 3.8878
+      "latency_ms": 2.712
     },
     "evaluation": {
       "status": "CORRECT",
@@ -2769,7 +2769,7 @@
       "command": "winget uninstall package-name",
       "score": 7.8321,
       "confidence": 98,
-      "latency_ms": 3.3784
+      "latency_ms": 4.156
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -2794,7 +2794,7 @@
       "command": "git config --list",
       "score": 17.9907,
       "confidence": 100,
-      "latency_ms": 3.7508
+      "latency_ms": 2.1645
     },
     "evaluation": {
       "status": "AMBIGUOUS_INCORRECT",
@@ -2819,7 +2819,7 @@
       "command": "docker pull ubuntu:22.04",
       "score": 19.2181,
       "confidence": 100,
-      "latency_ms": 2.8592
+      "latency_ms": 2.458
     },
     "evaluation": {
       "status": "AMBIGUOUS_INCORRECT",
@@ -2844,7 +2844,7 @@
       "command": "ssh user@hostname",
       "score": 20.4988,
       "confidence": 100,
-      "latency_ms": 2.2105
+      "latency_ms": 2.4304
     },
     "evaluation": {
       "status": "AMBIGUOUS_INCORRECT",
@@ -2869,7 +2869,7 @@
       "command": "Get-NetAdapter",
       "score": 19.6367,
       "confidence": 100,
-      "latency_ms": 3.3746
+      "latency_ms": 2.0854
     },
     "evaluation": {
       "status": "AMBIGUOUS_INCORRECT",
@@ -2894,7 +2894,7 @@
       "command": "icacls 'directory/' /grant 'user:(OI)(CI)F' /T",
       "score": 20.3759,
       "confidence": 100,
-      "latency_ms": 2.9067
+      "latency_ms": 2.987
     },
     "evaluation": {
       "status": "AMBIGUOUS_INCORRECT",
@@ -2919,7 +2919,7 @@
       "command": "Stop-Process -Id PID -Force",
       "score": 19.5338,
       "confidence": 100,
-      "latency_ms": 2.1103
+      "latency_ms": 2.8095
     },
     "evaluation": {
       "status": "AMBIGUOUS_INCORRECT",
@@ -2944,7 +2944,7 @@
       "command": "npm list -g --depth=0",
       "score": 24.2144,
       "confidence": 100,
-      "latency_ms": 3.6081
+      "latency_ms": 2.089
     },
     "evaluation": {
       "status": "AMBIGUOUS_INCORRECT",
@@ -2969,7 +2969,7 @@
       "command": "kubectl describe deployment deployment-name -n namespace",
       "score": 20.2224,
       "confidence": 100,
-      "latency_ms": 2.5866
+      "latency_ms": 1.9141
     },
     "evaluation": {
       "status": "AMBIGUOUS_INCORRECT",
@@ -2994,7 +2994,7 @@
       "command": "Get-ChildItem -Force",
       "score": 18.82,
       "confidence": 100,
-      "latency_ms": 2.2393
+      "latency_ms": 2.6641
     },
     "evaluation": {
       "status": "AMBIGUOUS_INCORRECT",
@@ -3019,7 +3019,7 @@
       "command": "curl -H 'Authorization: Bearer token' https://api.example.com",
       "score": 20.2692,
       "confidence": 100,
-      "latency_ms": 4.0277
+      "latency_ms": 2.2181
     },
     "evaluation": {
       "status": "AMBIGUOUS_INCORRECT",
@@ -3044,7 +3044,7 @@
       "command": "Remove-Item -Recurse -Force 'directory/'",
       "score": 30.3157,
       "confidence": 100,
-      "latency_ms": 2.8739
+      "latency_ms": 2.4939
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3069,7 +3069,7 @@
       "command": "git reset --hard HEAD && git clean -fd",
       "score": 17.3311,
       "confidence": 100,
-      "latency_ms": 3.2375
+      "latency_ms": 3.4372
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3094,7 +3094,7 @@
       "command": "git checkout -- .",
       "score": 35.0601,
       "confidence": 100,
-      "latency_ms": 4.196
+      "latency_ms": 3.8644
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3119,7 +3119,7 @@
       "command": "git branch -D branch-name",
       "score": 35.1808,
       "confidence": 100,
-      "latency_ms": 2.7793
+      "latency_ms": 2.8372
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3144,7 +3144,7 @@
       "command": "docker stop $(docker ps -q)",
       "score": 36.7538,
       "confidence": 100,
-      "latency_ms": 3.9588
+      "latency_ms": 5.9996
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3169,7 +3169,7 @@
       "command": "docker image prune -a",
       "score": 37.9268,
       "confidence": 100,
-      "latency_ms": 2.6534
+      "latency_ms": 5.2421
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3194,7 +3194,7 @@
       "command": "Start-Process powershell -Verb RunAs",
       "score": 5.656,
       "confidence": 71,
-      "latency_ms": 2.6286
+      "latency_ms": 3.525
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3219,7 +3219,7 @@
       "command": "icacls 'filename.txt' /setowner 'user'",
       "score": 31.1539,
       "confidence": 100,
-      "latency_ms": 3.5519
+      "latency_ms": 2.4261
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3244,7 +3244,7 @@
       "command": "sudo reboot",
       "score": 25.7513,
       "confidence": 100,
-      "latency_ms": 2.2145
+      "latency_ms": 3.1361
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3269,7 +3269,7 @@
       "command": "sudo shutdown -h now",
       "score": 30.4816,
       "confidence": 100,
-      "latency_ms": 2.4838
+      "latency_ms": 2.4398
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3294,7 +3294,7 @@
       "command": "New-NetFirewallRule -DisplayName 'Block IP' -Direction Inbound -RemoteAddress '192.168.1.100' -Action Block",
       "score": 36.8424,
       "confidence": 100,
-      "latency_ms": 3.1271
+      "latency_ms": 2.6791
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3319,7 +3319,7 @@
       "command": "kubectl delete pods --field-selector=status.phase=Failed -n namespace",
       "score": 44.3501,
       "confidence": 100,
-      "latency_ms": 2.9228
+      "latency_ms": 3.318
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3344,7 +3344,7 @@
       "command": "winget uninstall package-name --purge",
       "score": 18.4536,
       "confidence": 100,
-      "latency_ms": 3.9572
+      "latency_ms": 2.5445
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3369,7 +3369,7 @@
       "command": "Rename-Computer -NewName 'new-hostname' -Force",
       "score": 16.053,
       "confidence": 100,
-      "latency_ms": 2.9621
+      "latency_ms": 2.5881
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3394,7 +3394,7 @@
       "command": "docker volume prune -f",
       "score": 32.949,
       "confidence": 100,
-      "latency_ms": 3.9548
+      "latency_ms": 3.9031
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3419,7 +3419,7 @@
       "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
       "score": 18.3764,
       "confidence": 100,
-      "latency_ms": 5.0809
+      "latency_ms": 2.7619
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3444,7 +3444,7 @@
       "command": "Select-String -Path 'file.txt' -Pattern 'pattern' -Context 3,3",
       "score": 10.5834,
       "confidence": 100,
-      "latency_ms": 5.2318
+      "latency_ms": 4.8222
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3469,7 +3469,7 @@
       "command": "kubectl get events --sort-by='.lastTimestamp' -n namespace",
       "score": 8.578,
       "confidence": 100,
-      "latency_ms": 3.5251
+      "latency_ms": 3.0931
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -3494,7 +3494,7 @@
       "command": "git blame filename.txt",
       "score": 14.9068,
       "confidence": 100,
-      "latency_ms": 4.4459
+      "latency_ms": 4.7503
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3519,7 +3519,7 @@
       "command": "ssh-copy-id user@hostname",
       "score": 19.3986,
       "confidence": 100,
-      "latency_ms": 3.3329
+      "latency_ms": 2.8634
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3544,7 +3544,7 @@
       "command": "git bisect start && git bisect bad HEAD && git bisect good <good-commit>",
       "score": 18.8717,
       "confidence": 100,
-      "latency_ms": 5.6107
+      "latency_ms": 4.1915
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3569,7 +3569,7 @@
       "command": "git rebase -i HEAD~5",
       "score": 19.7768,
       "confidence": 100,
-      "latency_ms": 3.818
+      "latency_ms": 3.185
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3594,7 +3594,7 @@
       "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
       "score": 15.2659,
       "confidence": 100,
-      "latency_ms": 5.6278
+      "latency_ms": 3.7969
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3619,7 +3619,7 @@
       "command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
       "score": 28.6582,
       "confidence": 100,
-      "latency_ms": 2.9748
+      "latency_ms": 4.4924
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3644,7 +3644,7 @@
       "command": "ssh -L 8080:localhost:80 user@hostname",
       "score": 16.8841,
       "confidence": 100,
-      "latency_ms": 4.1655
+      "latency_ms": 2.2694
     },
     "evaluation": {
       "status": "INCORRECT",
@@ -3669,7 +3669,7 @@
       "command": "Get-Process | Sort-Object CPU -Descending",
       "score": 12.5807,
       "confidence": 100,
-      "latency_ms": 3.6002
+      "latency_ms": 4.3349
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3694,7 +3694,7 @@
       "command": "gpg -c filename.txt",
       "score": 7.7952,
       "confidence": 97,
-      "latency_ms": 5.6806
+      "latency_ms": 2.4042
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3719,7 +3719,7 @@
       "command": "curl -C - -O https://example.com/largefile.zip",
       "score": 11.7845,
       "confidence": 100,
-      "latency_ms": 4.1239
+      "latency_ms": 2.4257
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3746,7 +3746,7 @@
       "command": "Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }",
       "score": 17.709,
       "confidence": 100,
-      "latency_ms": 5.2649
+      "latency_ms": 3.7701
     },
     "evaluation": {
       "status": "CORRECT",
@@ -3771,7 +3771,7 @@
       "command": "git checkout feature-branch -- path/to/file.txt",
       "score": 13.8067,
       "confidence": 100,
-      "latency_ms": 3.2275
+      "latency_ms": 2.4178
     },
     "evaluation": {
       "status": "CORRECT",

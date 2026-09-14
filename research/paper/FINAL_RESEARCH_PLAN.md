@@ -4,6 +4,16 @@ Status: PLAN ONLY — no production or research code has been modified by this d
 Purpose: single authoritative execution plan such that, once every item below is checked off,
 the project requires **no further implementation** before paper writing — only writing itself.
 
+**Phase 19 QC note:** four filenames mentioned prospectively below (`research/models/embeddings.json`,
+`research/analysis/reliability-analysis.md`, `research/analysis/safety-analysis.md`,
+`research/analysis/statistical-analysis.md`) evolved during implementation to
+`research/models/corpus_embeddings.json`, `research/results/reliability/SELECTIVE_PREDICTION_NOTES.md`
+/ `MARGIN_ENTROPY_NOTES.md`, `research/results/safety/SAFETY_EVAL_NOTES.md`, and
+`research/results/final/STATISTICAL_ANALYSIS_NOTES.md` respectively — the content this plan
+called for was delivered, under names chosen during implementation. This is a plan document, not
+a results index; the authoritative, verified-accurate deliverable list is
+`research/experiments/EXPERIMENT_MANIFEST.md` and `research/FINAL_RESEARCH_REPORT.md`.
+
 Frozen references (must never be altered):
 - Baseline commit: `4443ec016c87895ebbc1b9be831e5f80b9bd3b50` (tag `v1.0-research-baseline`)
 - Benchmark: `termassist_bench v0.1` (tag `v0.1-validated-benchmark`), 150 queries
