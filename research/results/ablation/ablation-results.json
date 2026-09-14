@@ -5316,6 +5316,16 @@
       "mean_selective_accuracy": 0.9006,
       "ood_caught_of_15": 10,
       "correct_answers_sacrificed": 11
+    },
+    "A6": {
+      "name": "A6",
+      "note": "Same accept/reject decision as A5 (margin+OOD thresholds); adds calibrated confidence (isotonic, hybrid_reliability variant) in place of raw fused score for the displayed confidence number.",
+      "mean_coverage": 0.6947,
+      "mean_selective_accuracy": 0.9006,
+      "ood_caught_of_15": 10,
+      "correct_answers_sacrificed": 11,
+      "confidence_ece_before_calibration": 0.2741,
+      "confidence_ece_after_calibration": 0.0537
     }
   },
   "table": [
@@ -5359,10 +5369,11 @@
     },
     {
       "condition": "A6",
-      "description": "Hybrid + margin + OOD + calibration",
-      "mean_non_ood_accuracy_pct": null,
-      "std_pp": null,
-      "status": "PENDING -- requires Phase 6/7/8 components, not yet implemented"
+      "description": "Hybrid + margin + OOD + calibrated confidence",
+      "mean_coverage_pct": 69.47,
+      "mean_selective_accuracy_pct": 90.06,
+      "ood_caught_of_15": 10,
+      "confidence_ece_after": 0.0537
     }
   ]
 }

@@ -17,7 +17,7 @@ the same condition. A4–A6 require components not yet built (margin/OOD/calibra
 | A3 | Hybrid BM25+dense (nested-CV α) | **77.1%** | 4.1pp |
 | A4 | + margin-based rejection | 88.5% selective acc. @ 70.8% coverage | see below |
 | A5 | + margin + OOD detection | 90.1% selective acc. @ 69.5% coverage | see below |
-| A6 | + margin + OOD + calibration | PENDING (Phase 8) | — |
+| A6 | + margin + OOD + calibration | 90.1% selective acc. @ 69.5% coverage (same as A5) | confidence ECE 0.054 vs. 0.274 raw |
 
 **A4/A5 use a different metric (selective accuracy + coverage, not unconditional-accept
 accuracy) because they can abstain — see `research/results/reliability/SELECTIVE_PREDICTION_NOTES.md`

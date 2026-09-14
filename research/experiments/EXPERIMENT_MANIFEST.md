@@ -162,7 +162,25 @@ each phase completes — they are intentionally blank/pending until run.
 ## E8 — Confidence calibration
 - **Objective:** Reduce the measured 86–88% mean confidence on wrong answers via post-hoc
   calibration (isotonic regression), evaluated via ECE/Brier score, fold-wise.
-- **Status:** PENDING (Phase 8).
+- **Status:** COMPLETE. Nested 5-fold CV isotonic (PAV), 4 variants. See
+  `research/calibration/CALIBRATION_NOTES.md`.
+- **Bug found and fixed before reporting:** tied x-values (110/150 production confidences are
+  exactly 100%) were not pre-aggregated before PAV, producing an invalid overlapping-block fit
+  that made calibration look like it *hurt* two of the four variants. Root-caused via direct
+  inspection (`predict(1.0)` returned 0.353 against a true ~80% dev accuracy), fixed by
+  aggregating ties before fitting (standard practice), and a permanent overlapping-range
+  assertion was added to `isotonic.js` to prevent recurrence.
+- **Actual result (after fix, pooled across 5 test folds):** ECE improves for all 4 variants --
+  baseline_confidence 0.269->0.117 (-56.7%), margin_confidence 0.342->0.112 (-67.2%),
+  semantic_confidence 0.115->0.061 (-47.0%), hybrid_reliability 0.274->0.054 (**-80.4%**, the
+  largest improvement, directly addressing the original 87.7%-mean-confidence-on-wrong-answers
+  problem that motivated this entire research program).
+- **Conclusion:** calibration measurably helps on this benchmark. Caveat stated explicitly: this
+  is a small-sample (150-query) result with heavy value-ties, which is exactly what caused the
+  bug above -- read as "calibration helps here," not "production-ready without more data."
+- **A6 ablation row filled in:** same accept/reject decision as A5 (69.5% coverage, 90.1%
+  selective accuracy, 10/15 OOD caught); adds calibrated confidence (ECE 0.054 vs. 0.274 raw)
+  as the displayed number. Ablation matrix A0-A6 is now complete.
 
 ## E9 — Functional evaluation
 - **Objective:** Distinguish retrieval-correctness from actual task-success for sandboxable
