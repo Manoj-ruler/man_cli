@@ -1,0 +1,3555 @@
+[
+  {
+    "id": "TA-B001",
+    "query": "undo last git commit but keep changes",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git reset --soft HEAD~1",
+      "score": 42.6735,
+      "confidence": 100,
+      "latency_ms": 12.359
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B002",
+    "query": "show git status of current repository",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git status",
+      "score": 32.7568,
+      "confidence": 100,
+      "latency_ms": 5.7489
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B003",
+    "query": "list all running docker containers",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker ps",
+      "score": 33.4215,
+      "confidence": 100,
+      "latency_ms": 5.4898
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B004",
+    "query": "install npm packages from package.json",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm install",
+      "score": 36.3403,
+      "confidence": 100,
+      "latency_ms": 4.6355
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B005",
+    "query": "list all files including hidden",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Force",
+      "score": 35.7364,
+      "confidence": 100,
+      "latency_ms": 4.6873
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B006",
+    "query": "create a new directory",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+      "score": 25.8392,
+      "confidence": 100,
+      "latency_ms": 4.7775
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B007",
+    "query": "ping a host to check connectivity",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Test-Connection -ComputerName google.com -Count 4",
+      "score": 33.7898,
+      "confidence": 100,
+      "latency_ms": 4.3591
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B008",
+    "query": "show all running processes",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-Process",
+      "score": 28.6193,
+      "confidence": 100,
+      "latency_ms": 3.7677
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B009",
+    "query": "kill a process by name",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Stop-Process -Name 'process_name' -Force",
+      "score": 32.5554,
+      "confidence": 100,
+      "latency_ms": 4.0772
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B010",
+    "query": "set an environment variable",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "$env:VAR_NAME = 'value'",
+      "score": 33.0902,
+      "confidence": 100,
+      "latency_ms": 4.3967
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B011",
+    "query": "show command history",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-History",
+      "score": 24.0251,
+      "confidence": 100,
+      "latency_ms": 4.1854
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B012",
+    "query": "connect to a remote server via ssh",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ssh user@hostname",
+      "score": 37.5389,
+      "confidence": 100,
+      "latency_ms": 4.212
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B013",
+    "query": "install pip package",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "pip install package-name",
+      "score": 30.4667,
+      "confidence": 100,
+      "latency_ms": 4.2025
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B014",
+    "query": "download a file from a url",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "curl -O https://example.com/file.zip",
+      "score": 33.2448,
+      "confidence": 100,
+      "latency_ms": 4.2091
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B015",
+    "query": "find large files bigger than 100mb",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
+      "score": 46.3021,
+      "confidence": 100,
+      "latency_ms": 5.0431
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B016",
+    "query": "check current user",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "$env:USERNAME",
+      "score": 28.4136,
+      "confidence": 100,
+      "latency_ms": 4.0222
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B017",
+    "query": "show all kubernetes pods in all namespaces",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "kubectl get pods --all-namespaces",
+      "score": 33.4456,
+      "confidence": 100,
+      "latency_ms": 4.167
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B018",
+    "query": "generate a random password",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "openssl rand -base64 32",
+      "score": 35.8727,
+      "confidence": 100,
+      "latency_ms": 4.5801
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B019",
+    "query": "show total disk space",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-PSDrive -PSProvider FileSystem",
+      "score": 33.1759,
+      "confidence": 100,
+      "latency_ms": 3.7646
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B020",
+    "query": "show os and kernel version",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "[System.Environment]::OSVersion",
+      "score": 34.4852,
+      "confidence": 100,
+      "latency_ms": 4.1538
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B021",
+    "query": "generate a sha256 checksum",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+      "score": 32.0697,
+      "confidence": 100,
+      "latency_ms": 4.7168
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B022",
+    "query": "extract column from csv with awk",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName",
+      "score": 38.2529,
+      "confidence": 100,
+      "latency_ms": 4.1683
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B023",
+    "query": "list all s3 buckets in the aws account",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "aws s3 ls",
+      "score": 40.9761,
+      "confidence": 100,
+      "latency_ms": 4.1542
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B024",
+    "query": "extract a specific field from json output using jq",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
+      "score": 43.1845,
+      "confidence": 100,
+      "latency_ms": 4.7667
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B025",
+    "query": "start a new tmux session",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "tmux new -s session-name",
+      "score": 33.425,
+      "confidence": 100,
+      "latency_ms": 4.2599
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B026",
+    "query": "revert my last commit without losing work",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git reset --soft HEAD~1",
+      "score": 7.5266,
+      "confidence": 94,
+      "latency_ms": 4.4359
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B027",
+    "query": "show me all docker containers that are currently active",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker ps",
+      "score": 15.5113,
+      "confidence": 100,
+      "latency_ms": 4.4239
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B028",
+    "query": "install all project dependencies with npm",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm install",
+      "score": 15.4051,
+      "confidence": 100,
+      "latency_ms": 3.871
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B029",
+    "query": "search for a text string in all files in the directory tree",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+      "score": 16.3985,
+      "confidence": 100,
+      "latency_ms": 4.5114
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B030",
+    "query": "see which git branches exist",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git branch -a",
+      "score": 8.4692,
+      "confidence": 100,
+      "latency_ms": 3.557
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B031",
+    "query": "create a new folder",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm init -y",
+      "score": 7.2974,
+      "confidence": 91,
+      "latency_ms": 3.3882
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B032",
+    "query": "check what ports my machine is listening on",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-NetTCPConnection -State Listen",
+      "score": 14.3957,
+      "confidence": 100,
+      "latency_ms": 4.0642
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B033",
+    "query": "display all environment variables",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem Env:",
+      "score": 15.7115,
+      "confidence": 100,
+      "latency_ms": 3.5627
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B034",
+    "query": "find python scripts that were edited recently",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+      "score": 9.1154,
+      "confidence": 100,
+      "latency_ms": 3.7916
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B035",
+    "query": "save the current changes for later without committing",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git stash",
+      "score": 9.0711,
+      "confidence": 100,
+      "latency_ms": 4.143
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B036",
+    "query": "copy a whole directory to another location",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Copy-Item -Recurse 'source/' 'destination/'",
+      "score": 9.6456,
+      "confidence": 100,
+      "latency_ms": 4.2947
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B037",
+    "query": "look up what python libraries I have",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Resolve-DnsName example.com -Type ALL",
+      "score": 10.8755,
+      "confidence": 100,
+      "latency_ms": 4.7898
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B038",
+    "query": "merge feature branch into main",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git merge branch-name",
+      "score": 16.3452,
+      "confidence": 100,
+      "latency_ms": 4.4582
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B039",
+    "query": "get inside a running docker container shell",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker exec -it container-name /bin/bash",
+      "score": 19.093,
+      "confidence": 100,
+      "latency_ms": 4.6156
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B040",
+    "query": "launch docker services defined in the compose file",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker compose up -d",
+      "score": 18.164,
+      "confidence": 100,
+      "latency_ms": 19.6518
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B041",
+    "query": "generate an ssh key",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ssh-keygen -t ed25519 -C 'your_email@example.com'",
+      "score": 17.4047,
+      "confidence": 100,
+      "latency_ms": 7.299
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B042",
+    "query": "send a POST request to an API endpoint",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "curl -X POST -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/endpoint",
+      "score": 20.1212,
+      "confidence": 100,
+      "latency_ms": 4.3242
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B043",
+    "query": "compress a directory into a zip file",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+      "score": 20.3473,
+      "confidence": 100,
+      "latency_ms": 4.7176
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B044",
+    "query": "terminate a process using its PID",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Stop-Process -Id PID -Force",
+      "score": 12.8838,
+      "confidence": 100,
+      "latency_ms": 4.1098
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B045",
+    "query": "see the differences before staging my changes",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Compare-Object (Get-Content 'file1.txt') (Get-Content 'file2.txt')",
+      "score": 5.4377,
+      "confidence": 68,
+      "latency_ms": 3.8619
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B046",
+    "query": "convert mkv video to mp4",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+      "score": 14.8327,
+      "confidence": 100,
+      "latency_ms": 4.0992
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B047",
+    "query": "check how much RAM is being used",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory",
+      "score": 5.2357,
+      "confidence": 65,
+      "latency_ms": 3.9312
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B048",
+    "query": "create a shortcut command alias",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Set-Alias -Name ll -Value Get-ChildItem",
+      "score": 21.9589,
+      "confidence": 100,
+      "latency_ms": 4.0944
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B049",
+    "query": "what npm packages have newer versions available",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm outdated",
+      "score": 27.1308,
+      "confidence": 100,
+      "latency_ms": 4.0763
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B050",
+    "query": "check the SSL certificate for a website",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "openssl s_client -connect example.com:443 -showcerts",
+      "score": 16.4854,
+      "confidence": 100,
+      "latency_ms": 3.5997
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B051",
+    "query": "I want to go back one version in my repo but not lose anything",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git remote add origin https://github.com/user/repo.git",
+      "score": 7.1978,
+      "confidence": 90,
+      "latency_ms": 4.412
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B052",
+    "query": "how much storage is left on my drives",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker rmi image-name",
+      "score": 4.9069,
+      "confidence": 61,
+      "latency_ms": 3.6013
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B053",
+    "query": "what services are accepting connections right now",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-NetTCPConnection",
+      "score": 6.4952,
+      "confidence": 81,
+      "latency_ms": 3.7644
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B054",
+    "query": "grab the newest version of a github project",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "pip install package-name==1.2.3",
+      "score": 5.5525,
+      "confidence": 69,
+      "latency_ms": 4.0062
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B055",
+    "query": "put my uncommitted work aside temporarily",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git stash",
+      "score": 12.9269,
+      "confidence": 100,
+      "latency_ms": 3.5804
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B056",
+    "query": "who am I logged in as",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm install --save-dev package-name",
+      "score": 4.692,
+      "confidence": 59,
+      "latency_ms": 3.4866
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B057",
+    "query": "is my server reachable from here",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ssh user@hostname",
+      "score": 4.9841,
+      "confidence": 62,
+      "latency_ms": 3.6632
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B058",
+    "query": "what commands did I type earlier",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-History",
+      "score": 4.7402,
+      "confidence": 59,
+      "latency_ms": 3.6406
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B059",
+    "query": "get a quick summary of processor specs",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "curl -s https://api.example.com/data",
+      "score": 5.702,
+      "confidence": 71,
+      "latency_ms": 3.447
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B060",
+    "query": "where is python installed on this machine",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "pip list",
+      "score": 9.4665,
+      "confidence": 100,
+      "latency_ms": 3.7022
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B061",
+    "query": "take the audio out of this movie file",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+      "score": 8.1321,
+      "confidence": 100,
+      "latency_ms": 3.651
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B062",
+    "query": "am I running the latest packages",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "winget upgrade --all",
+      "score": 8.5326,
+      "confidence": 100,
+      "latency_ms": 3.6901
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B063",
+    "query": "secure this file so only I can read and write it",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
+      "score": 14.8697,
+      "confidence": 100,
+      "latency_ms": 4.052
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B064",
+    "query": "how long has this machine been running without a reboot",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime",
+      "score": 18.9369,
+      "confidence": 100,
+      "latency_ms": 3.8908
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B065",
+    "query": "get the hash fingerprint of this file",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-FileHash 'filename.txt' -Algorithm MD5",
+      "score": 6.8938,
+      "confidence": 86,
+      "latency_ms": 3.7103
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B066",
+    "query": "delete a branch",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git branch -d branch-name",
+      "score": 8.6775,
+      "confidence": 100,
+      "latency_ms": 3.3055
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B067",
+    "query": "view the git log",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git log --oneline -20",
+      "score": 9.1332,
+      "confidence": 100,
+      "latency_ms": 3.3943
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B068",
+    "query": "look up DNS for example.com",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Resolve-DnsName example.com -Type ALL",
+      "score": 17.066,
+      "confidence": 100,
+      "latency_ms": 3.7666
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B069",
+    "query": "stop the docker service",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Stop-Service -Name 'service-name'",
+      "score": 12.1439,
+      "confidence": 100,
+      "latency_ms": 3.9548
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B070",
+    "query": "rename a file",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Move-Item 'oldname.txt' 'newname.txt'",
+      "score": 24.5862,
+      "confidence": 100,
+      "latency_ms": 3.2616
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B071",
+    "query": "find text in files",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }",
+      "score": 11.4575,
+      "confidence": 100,
+      "latency_ms": 3.5808
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B072",
+    "query": "remove a docker container",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker rm container-name",
+      "score": 11.7332,
+      "confidence": 100,
+      "latency_ms": 3.0798
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B073",
+    "query": "replace some text in a file",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }",
+      "score": 11.6093,
+      "confidence": 100,
+      "latency_ms": 3.0962
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B074",
+    "query": "set up git for this project",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git config --global user.name 'Your Name'",
+      "score": 7.9165,
+      "confidence": 99,
+      "latency_ms": 3.8194
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B075",
+    "query": "view the file",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-Content 'filename.txt' | Out-Host -Paging",
+      "score": 7.2234,
+      "confidence": 90,
+      "latency_ms": 3.1155
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B076",
+    "query": "clean up docker",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Resolve-DnsName example.com -Type ALL",
+      "score": 5.4377,
+      "confidence": 68,
+      "latency_ms": 3.0253
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B077",
+    "query": "check git configuration",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git config --list",
+      "score": 7.8976,
+      "confidence": 99,
+      "latency_ms": 3.2898
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B078",
+    "query": "make a cappuccino",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass",
+      "score": 4.2414,
+      "confidence": 53,
+      "latency_ms": 3.4611
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B079",
+    "query": "what is the meaning of life",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 3.4763
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B080",
+    "query": "book a flight to Tokyo",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 3.8953
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B081",
+    "query": "translate this sentence to French",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 3.3179
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B082",
+    "query": "design a logo for my company",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 3.2102
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B083",
+    "query": "compile a Rust project with cargo",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm init -y",
+      "score": 5.1039,
+      "confidence": 64,
+      "latency_ms": 3.7817
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B084",
+    "query": "connect to a PostgreSQL database",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "tmux attach -t session-name",
+      "score": 4.9385,
+      "confidence": 62,
+      "latency_ms": 4.3418
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B085",
+    "query": "create a new React app",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm init -y",
+      "score": 7.2974,
+      "confidence": 91,
+      "latency_ms": 5.1349
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B086",
+    "query": "edit my crontab using vim",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "crontab -e",
+      "score": 5.3174,
+      "confidence": 66,
+      "latency_ms": 5.5862
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B087",
+    "query": "set up a Python Flask web server",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Resolve-DnsName example.com -Type ALL",
+      "score": 5.4377,
+      "confidence": 68,
+      "latency_ms": 5.5174
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B088",
+    "query": "write a unit test in jest",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "command 2>'error.txt'",
+      "score": 4.9385,
+      "confidence": 62,
+      "latency_ms": 4.5476
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B089",
+    "query": "play music from the command line",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "!keyword",
+      "score": 5.832,
+      "confidence": 73,
+      "latency_ms": 4.8931
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B090",
+    "query": "scan my network for other devices",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "clamscan -r /path/to/scan",
+      "score": 6.8449,
+      "confidence": 86,
+      "latency_ms": 7.2173
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B091",
+    "query": "configure nginx reverse proxy",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Set-Service -Name 'service-name' -StartupType Automatic",
+      "score": 5.2357,
+      "confidence": 65,
+      "latency_ms": 5.4178
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B092",
+    "query": "send an email from the terminal",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Clear-Host",
+      "score": 7.8833,
+      "confidence": 99,
+      "latency_ms": 4.6814
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B093",
+    "query": "delete a directory and all its contents recursively",
+    "expected": {
+      "classification": "NEEDS_CORRECTION"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Remove-Item -Recurse -Force 'directory/'",
+      "score": 19.119,
+      "confidence": 100,
+      "latency_ms": 4.3816
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B094",
+    "query": "remove all files from the current directory",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+      "score": 8.8038,
+      "confidence": 100,
+      "latency_ms": 3.5004
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B095",
+    "query": "kill the application",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Stop-Process -Name 'process_name' -Force",
+      "score": 6.1905,
+      "confidence": 77,
+      "latency_ms": 3.1811
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B096",
+    "query": "run the test suite",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Test-Connection -ComputerName google.com -Count 4",
+      "score": 4.5553,
+      "confidence": 57,
+      "latency_ms": 3.3213
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B097",
+    "query": "open the config file",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "winget uninstall package-name --purge",
+      "score": 6.0324,
+      "confidence": 75,
+      "latency_ms": 3.1907
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B098",
+    "query": "change the file permissions",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "icacls 'filename.txt' /setowner 'user'",
+      "score": 12.821,
+      "confidence": 100,
+      "latency_ms": 3.4343
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B099",
+    "query": "list the images",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker images",
+      "score": 8.7849,
+      "confidence": 100,
+      "latency_ms": 3.095
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B100",
+    "query": "make a new project",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm init -y",
+      "score": 9.4007,
+      "confidence": 100,
+      "latency_ms": 3.1482
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B101",
+    "query": "start the services",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker compose up -d",
+      "score": 11.0165,
+      "confidence": 100,
+      "latency_ms": 3.1405
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B102",
+    "query": "stop everything running",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker stop $(docker ps -q)",
+      "score": 10.208,
+      "confidence": 100,
+      "latency_ms": 3.3325
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B103",
+    "query": "check the status",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-Service -Name 'service-name'",
+      "score": 9.274,
+      "confidence": 100,
+      "latency_ms": 3.0484
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B104",
+    "query": "create a new volume",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker volume create my-volume",
+      "score": 11.0165,
+      "confidence": 100,
+      "latency_ms": 6.6414
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B105",
+    "query": "show the log",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git log --oneline -20",
+      "score": 5.4242,
+      "confidence": 68,
+      "latency_ms": 3.7272
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B106",
+    "query": "set the name",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git config --global user.name 'Your Name'",
+      "score": 8.2728,
+      "confidence": 100,
+      "latency_ms": 4.7812
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B107",
+    "query": "install the package",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "winget install package-name",
+      "score": 10.0356,
+      "confidence": 100,
+      "latency_ms": 3.8574
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B108",
+    "query": "show network information",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-CimInstance Win32_Processor",
+      "score": 7.4288,
+      "confidence": 93,
+      "latency_ms": 3.9693
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B109",
+    "query": "create a link to the file",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "New-Item -ItemType SymbolicLink -Path '/path/to/link' -Target '/path/to/target'",
+      "score": 11.1698,
+      "confidence": 100,
+      "latency_ms": 4.9759
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B110",
+    "query": "remove the package",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "winget uninstall package-name",
+      "score": 7.8321,
+      "confidence": 98,
+      "latency_ms": 5.6492
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B111",
+    "query": "git",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git config --list",
+      "score": 17.9907,
+      "confidence": 100,
+      "latency_ms": 3.9582
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B112",
+    "query": "docker",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker pull ubuntu:22.04",
+      "score": 19.2181,
+      "confidence": 100,
+      "latency_ms": 4.3068
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B113",
+    "query": "ssh",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ssh user@hostname",
+      "score": 20.4988,
+      "confidence": 100,
+      "latency_ms": 3.804
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B114",
+    "query": "network",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-NetAdapter",
+      "score": 19.6367,
+      "confidence": 100,
+      "latency_ms": 5.4902
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B115",
+    "query": "permissions",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "icacls 'directory/' /grant 'user:(OI)(CI)F' /T",
+      "score": 20.3759,
+      "confidence": 100,
+      "latency_ms": 5.8072
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B116",
+    "query": "process",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Stop-Process -Id PID -Force",
+      "score": 19.5338,
+      "confidence": 100,
+      "latency_ms": 3.7387
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B117",
+    "query": "npm packages",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm list -g --depth=0",
+      "score": 24.2144,
+      "confidence": 100,
+      "latency_ms": 6.433
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B118",
+    "query": "kubernetes",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "kubectl describe deployment deployment-name -n namespace",
+      "score": 20.2224,
+      "confidence": 100,
+      "latency_ms": 5.5187
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B119",
+    "query": "files",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Force",
+      "score": 18.82,
+      "confidence": 100,
+      "latency_ms": 5.5031
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B120",
+    "query": "curl",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "curl -H 'Authorization: Bearer token' https://api.example.com",
+      "score": 20.2692,
+      "confidence": 100,
+      "latency_ms": 5.6794
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B121",
+    "query": "remove a directory and its contents",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Remove-Item -Recurse -Force 'directory/'",
+      "score": 30.3157,
+      "confidence": 100,
+      "latency_ms": 5.3696
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B122",
+    "query": "wipe all my uncommitted changes and reset to the last commit",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git reset --hard HEAD && git clean -fd",
+      "score": 17.3311,
+      "confidence": 100,
+      "latency_ms": 6.8597
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B123",
+    "query": "reset working directory to last commit",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git checkout -- .",
+      "score": 35.0601,
+      "confidence": 100,
+      "latency_ms": 7.4111
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B124",
+    "query": "force delete a local git branch",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git branch -D branch-name",
+      "score": 35.1808,
+      "confidence": 100,
+      "latency_ms": 7.3181
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B125",
+    "query": "stop all running docker containers",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker stop $(docker ps -q)",
+      "score": 36.7538,
+      "confidence": 100,
+      "latency_ms": 7.3433
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B126",
+    "query": "remove all unused docker images",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker image prune -a",
+      "score": 37.9268,
+      "confidence": 100,
+      "latency_ms": 5.3414
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B127",
+    "query": "elevate to administrator privileges",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Start-Process powershell -Verb RunAs",
+      "score": 5.656,
+      "confidence": 71,
+      "latency_ms": 6.235
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B128",
+    "query": "change file owner",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "icacls 'filename.txt' /setowner 'user'",
+      "score": 31.1539,
+      "confidence": 100,
+      "latency_ms": 5.3597
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B129",
+    "query": "reboot the system",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "sudo reboot",
+      "score": 25.7513,
+      "confidence": 100,
+      "latency_ms": 4.3372
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B130",
+    "query": "shut down the system",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "sudo shutdown -h now",
+      "score": 30.4816,
+      "confidence": 100,
+      "latency_ms": 3.2786
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B131",
+    "query": "block an ip address with firewall",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "New-NetFirewallRule -DisplayName 'Block IP' -Direction Inbound -RemoteAddress '192.168.1.100' -Action Block",
+      "score": 36.8424,
+      "confidence": 100,
+      "latency_ms": 3.2616
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B132",
+    "query": "delete all completed or failed pods in a namespace",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "kubectl delete pods --field-selector=status.phase=Failed -n namespace",
+      "score": 44.3501,
+      "confidence": 100,
+      "latency_ms": 3.8075
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B133",
+    "query": "purge a package completely including config files",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "winget uninstall package-name --purge",
+      "score": 18.4536,
+      "confidence": 100,
+      "latency_ms": 3.8461
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B134",
+    "query": "set the hostname of this machine",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Rename-Computer -NewName 'new-hostname' -Force",
+      "score": 16.053,
+      "confidence": 100,
+      "latency_ms": 3.9425
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B135",
+    "query": "remove all unused docker volumes",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker volume prune -f",
+      "score": 32.949,
+      "confidence": 100,
+      "latency_ms": 3.4956
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B136",
+    "query": "I need to find all the python files in my project that were changed today, can you help?",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+      "score": 18.3764,
+      "confidence": 100,
+      "latency_ms": 4.3144
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B137",
+    "query": "search for all lines containing ERROR in the log files and show me the surrounding context",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Select-String -Path 'file.txt' -Pattern 'pattern' -Context 3,3",
+      "score": 10.5834,
+      "confidence": 100,
+      "latency_ms": 3.858
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B138",
+    "query": "deploy my kubernetes cluster to production with rolling updates",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "kubectl get events --sort-by='.lastTimestamp' -n namespace",
+      "score": 8.578,
+      "confidence": 100,
+      "latency_ms": 3.5616
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B139",
+    "query": "show me who changed each line in the README and when they did it",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git blame filename.txt",
+      "score": 14.9068,
+      "confidence": 100,
+      "latency_ms": 3.7995
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B140",
+    "query": "copy my ssh key to the server so I don't have to enter a password",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ssh-copy-id user@hostname",
+      "score": 19.3986,
+      "confidence": 100,
+      "latency_ms": 4.1282
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B141",
+    "query": "find the commit that broke my tests using binary search",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git bisect start && git bisect bad HEAD && git bisect good <good-commit>",
+      "score": 18.8717,
+      "confidence": 100,
+      "latency_ms": 3.6061
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B142",
+    "query": "squash my last 5 commits into one before pushing",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git rebase -i HEAD~5",
+      "score": 19.7768,
+      "confidence": 100,
+      "latency_ms": 3.5591
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B143",
+    "query": "create a zip archive of this folder and name it backup.zip",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+      "score": 15.2659,
+      "confidence": 100,
+      "latency_ms": 3.6189
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B144",
+    "query": "forward port 8080 on my machine to port 80 on the kubernetes pod",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+      "score": 28.6582,
+      "confidence": 100,
+      "latency_ms": 3.9727
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B145",
+    "query": "set up an SSH tunnel to access a remote database on port 5432",
+    "expected": {
+      "classification": "NEEDS_CORRECTION"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ssh -L 8080:localhost:80 user@hostname",
+      "score": 16.8841,
+      "confidence": 100,
+      "latency_ms": 4.0374
+    },
+    "evaluation": {
+      "status": "INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B146",
+    "query": "monitor which processes are using the most CPU and sort them",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-Process | Sort-Object CPU -Descending",
+      "score": 12.5807,
+      "confidence": 100,
+      "latency_ms": 3.6007
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B147",
+    "query": "encrypt this sensitive document so nobody else can read it",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "gpg -c filename.txt",
+      "score": 7.7952,
+      "confidence": 97,
+      "latency_ms": 3.7387
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B148",
+    "query": "download a large file and resume if the connection drops",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "curl -C - -O https://example.com/largefile.zip",
+      "score": 11.7845,
+      "confidence": 100,
+      "latency_ms": 3.6252
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B149",
+    "query": "find which process is hogging port 3000 on my machine",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }",
+      "score": 17.709,
+      "confidence": 100,
+      "latency_ms": 3.5447
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B150",
+    "query": "take a specific file from the feature branch without merging everything",
+    "expected": {
+      "classification": "CORRECT"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git checkout feature-branch -- path/to/file.txt",
+      "score": 13.8067,
+      "confidence": 100,
+      "latency_ms": 3.5563
+    },
+    "evaluation": {
+      "status": "CORRECT"
+    }
+  },
+  {
+    "id": "TA-B151",
+    "query": "recommend me a good recipe for dinner",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git bisect good",
+      "score": 4.4153,
+      "confidence": 55,
+      "latency_ms": 3.6626
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B152",
+    "query": "tell me a joke",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 3.2624
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B153",
+    "query": "what's the weather like today",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+      "score": 4.7105,
+      "confidence": 59,
+      "latency_ms": 3.1511
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B154",
+    "query": "help me write a poem about the ocean",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "winget show package-name",
+      "score": 6.3334,
+      "confidence": 79,
+      "latency_ms": 3.3312
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B155",
+    "query": "calculate my monthly budget",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 3.2236
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B156",
+    "query": "find me a good doctor nearby",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -Filter '*.log'",
+      "score": 4.5545,
+      "confidence": 57,
+      "latency_ms": 3.2592
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B157",
+    "query": "book a hotel room in Paris",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 3.5235
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B158",
+    "query": "order a pizza for delivery",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "kubectl get events --sort-by='.lastTimestamp' -n namespace",
+      "score": 4.2507,
+      "confidence": 53,
+      "latency_ms": 3.2474
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B159",
+    "query": "teach me how to play guitar",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 3.2759
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B160",
+    "query": "give me legal advice about my lease",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "winget show package-name",
+      "score": 6.3334,
+      "confidence": 79,
+      "latency_ms": 3.4155
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B161",
+    "query": "help me meditate for stress relief",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 3.5998
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B162",
+    "query": "plan a birthday party for my friend",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 3.8333
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B163",
+    "query": "write my resume for a software job",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "curl -C - -O https://example.com/largefile.zip",
+      "score": 5.656,
+      "confidence": 71,
+      "latency_ms": 3.527
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B164",
+    "query": "give me stock market predictions",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "icacls 'filename.txt' /inheritance:r /grant:r 'Everyone:R'",
+      "score": 4.7246,
+      "confidence": 59,
+      "latency_ms": 3.3001
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B165",
+    "query": "help me learn Spanish",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 3.3007
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B166",
+    "query": "draw a picture of a cat",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 3.1806
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B167",
+    "query": "compose a song in the style of jazz",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker compose down",
+      "score": 4.5573,
+      "confidence": 57,
+      "latency_ms": 3.4557
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B168",
+    "query": "give me a tarot card reading",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "icacls 'filename.txt' /inheritance:r /grant:r 'Everyone:R'",
+      "score": 4.7246,
+      "confidence": 59,
+      "latency_ms": 4.063
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B169",
+    "query": "interpret my dream about flying",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "winget show package-name",
+      "score": 6.3334,
+      "confidence": 79,
+      "latency_ms": 5.6921
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B170",
+    "query": "recommend a good movie to watch tonight",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "git bisect good",
+      "score": 4.4153,
+      "confidence": 55,
+      "latency_ms": 4.7265
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B171",
+    "query": "help me train for a marathon",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 4.8448
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B172",
+    "query": "diagnose why my car won't start",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Start-Service -Name 'service-name'",
+      "score": 5.5513,
+      "confidence": 69,
+      "latency_ms": 4.188
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B173",
+    "query": "water my garden automatically",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "curl -L https://example.com",
+      "score": 4.9385,
+      "confidence": 62,
+      "latency_ms": 3.4141
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B174",
+    "query": "assemble my new bookshelf furniture",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "npm init -y",
+      "score": 4.2968,
+      "confidence": 54,
+      "latency_ms": 4.043
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B175",
+    "query": "bake a chocolate cake",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 5.0506
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B176",
+    "query": "brew a batch of homemade beer",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+      "score": 4.0358,
+      "confidence": 50,
+      "latency_ms": 6.3792
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B177",
+    "query": "mine cryptocurrency on my GPU",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 6.2583
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B178",
+    "query": "model a 3D character in Blender",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "(Get-Content 'filename.txt' | Measure-Object -Line -Word -Character) | Select-Object Lines, Words, Characters",
+      "score": 5.0481,
+      "confidence": 63,
+      "latency_ms": 5.3702
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B179",
+    "query": "mod my video game with custom skins",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "curl -H 'Authorization: Bearer token' https://api.example.com",
+      "score": 7.3865,
+      "confidence": 92,
+      "latency_ms": 4.0842
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B180",
+    "query": "schedule a therapy appointment",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "crontab -l",
+      "score": 4.7246,
+      "confidence": 59,
+      "latency_ms": 5.2816
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B181",
+    "query": "get my horoscope for today",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "curl -s https://api.example.com/data",
+      "score": 5.702,
+      "confidence": 71,
+      "latency_ms": 4.0948
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B182",
+    "query": "write a cover letter for a job application",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Receive-Job -Id 1 -Wait",
+      "score": 5.4377,
+      "confidence": 68,
+      "latency_ms": 4.1498
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B183",
+    "query": "plan my wedding seating chart",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 3.4535
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B184",
+    "query": "choose a paint color for my bedroom",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": false,
+      "command": "git reset --soft HEAD~1",
+      "score": 0,
+      "confidence": 0,
+      "latency_ms": 3.1909
+    },
+    "evaluation": {
+      "status": "OOD_CORRECT_REJECTION"
+    }
+  },
+  {
+    "id": "TA-B185",
+    "query": "find a babysitter for Friday night",
+    "expected": {
+      "classification": "OOD"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -Filter '*.log'",
+      "score": 4.5545,
+      "confidence": 57,
+      "latency_ms": 3.2053
+    },
+    "evaluation": {
+      "status": "OOD_FALSE_ACCEPT"
+    }
+  },
+  {
+    "id": "TA-B186",
+    "query": "grep",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Select-String -Path 'file.txt' -Pattern 'pattern1|pattern2'",
+      "score": 19.6589,
+      "confidence": 100,
+      "latency_ms": 2.8663
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B187",
+    "query": "tar",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker compose up -d",
+      "score": 15,
+      "confidence": 100,
+      "latency_ms": 3.2006
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_INCORRECT"
+    }
+  },
+  {
+    "id": "TA-B188",
+    "query": "sed",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "(Get-Content 'filename.txt') -replace 'old','new' | Set-Content 'filename.txt'",
+      "score": 20.6867,
+      "confidence": 100,
+      "latency_ms": 2.787
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B189",
+    "query": "awk",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName",
+      "score": 20.6867,
+      "confidence": 100,
+      "latency_ms": 2.7627
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B190",
+    "query": "jq",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "(Get-Content data.json | ConvertFrom-Json).users.Count",
+      "score": 20.5451,
+      "confidence": 100,
+      "latency_ms": 2.8262
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B191",
+    "query": "ffmpeg",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+      "score": 20.0256,
+      "confidence": 100,
+      "latency_ms": 2.805
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B192",
+    "query": "aws",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "aws s3 ls",
+      "score": 21.0292,
+      "confidence": 100,
+      "latency_ms": 2.7892
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B193",
+    "query": "disk",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "(Get-ChildItem '/path/to/dir' -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB",
+      "score": 20.6956,
+      "confidence": 100,
+      "latency_ms": 3.6697
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B194",
+    "query": "system",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "sudo reboot",
+      "score": 19.3208,
+      "confidence": 100,
+      "latency_ms": 2.9951
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B195",
+    "query": "shell",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "kubectl exec -it pod-name -n namespace -- /bin/sh",
+      "score": 18.0447,
+      "confidence": 100,
+      "latency_ms": 2.8753
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B196",
+    "query": "terminal",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Clear-Host",
+      "score": 20.4297,
+      "confidence": 100,
+      "latency_ms": 3.4744
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B197",
+    "query": "package",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "winget install package-name",
+      "score": 20.0976,
+      "confidence": 100,
+      "latency_ms": 3.4793
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B198",
+    "query": "security",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "gpg -d filename.txt.gpg",
+      "score": 4.4265,
+      "confidence": 55,
+      "latency_ms": 4.814
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B199",
+    "query": "encoding",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "[IO.File]::WriteAllBytes('decoded.txt', [Convert]::FromBase64String((Get-Content 'encoded.txt')))",
+      "score": 4.8587,
+      "confidence": 61,
+      "latency_ms": 6.3716
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B200",
+    "query": "archive",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Expand-Archive -Path 'archive.zip' -DestinationPath '.'",
+      "score": 21.533,
+      "confidence": 100,
+      "latency_ms": 5.0513
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B201",
+    "query": "pip",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "pip install package-name",
+      "score": 20.8398,
+      "confidence": 100,
+      "latency_ms": 5.4845
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B202",
+    "query": "find",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -Filter '*.log'",
+      "score": 19.5545,
+      "confidence": 100,
+      "latency_ms": 5.801
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B203",
+    "query": "stop a process",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Stop-Service -Name 'service-name'",
+      "score": 6.533,
+      "confidence": 82,
+      "latency_ms": 5.5725
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B204",
+    "query": "check disk usage",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "(Get-ChildItem '/path/to/dir' -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB",
+      "score": 10.6796,
+      "confidence": 100,
+      "latency_ms": 5.5524
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B205",
+    "query": "search for a file",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'pattern' -CaseSensitive:$false",
+      "score": 4.8965,
+      "confidence": 61,
+      "latency_ms": 4.8603
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B206",
+    "query": "list running processes",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-Process",
+      "score": 9.8375,
+      "confidence": 100,
+      "latency_ms": 3.5351
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B207",
+    "query": "check network connection",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "Get-NetIPAddress",
+      "score": 6.7309,
+      "confidence": 84,
+      "latency_ms": 3.0757
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B208",
+    "query": "install a package",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "winget install package-name",
+      "score": 25.0356,
+      "confidence": 100,
+      "latency_ms": 3.3328
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  },
+  {
+    "id": "TA-B209",
+    "query": "copy a file",
+    "expected": {
+      "classification": "AMBIGUOUS"
+    },
+    "actual": {
+      "retrieved": true,
+      "command": "docker cp container-name:/path/in/container ./local-path",
+      "score": 7.7991,
+      "confidence": 97,
+      "latency_ms": 2.9354
+    },
+    "evaluation": {
+      "status": "AMBIGUOUS_CORRECT"
+    }
+  }
+]

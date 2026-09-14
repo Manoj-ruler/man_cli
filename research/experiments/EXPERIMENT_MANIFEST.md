@@ -316,3 +316,21 @@ each phase completes — they are intentionally blank/pending until run.
   program's own verification discipline (after Phase 8's isotonic bug and Phase 13's accuracy-
   denominator bug) -- reported, not hidden. The pipeline is now genuinely one-command
   reproducible from a clean checkout.
+
+## v0.2 Benchmark Expansion — OOD Significance Resolved
+- **Objective:** answer whether growing the OOD subset (15->50) and ambiguous subset (14->38)
+  gives the Phase 13 OOD comparison enough statistical power (per PUBLICATION_ROADMAP.md's
+  Card-et-al.-grounded power analysis).
+- **Status:** COMPLETE. Full pipeline (baseline reproduction, hybrid fusion, candidates,
+  reliability features, selective prediction, statistical analysis) re-run against
+  `termassist_bench_v0.2` (209 queries), isolated in `research/results/v0.2/` -- v0.1's frozen
+  results untouched. See `research/results/v0.2/V0.2_RESULTS_NOTES.md` and
+  `research/datasets/v0.2_ADJUDICATION_REPORT.md`.
+- **Actual result:** OOD detection improvement is now statistically significant:
+  34.0%->68.0% rejection rate, p=0.000015 (vs. v0.1's p=0.25, n=15). All 17 discordant pairs
+  favor the tuned detector. AUROC improved 0.867->0.901; ambiguity F1 improved 0.310->0.496
+  (AUROC slightly decreased 0.784->0.723, reported honestly).
+- **Conclusion:** the single statistical caveat in the Phase 17 decision gate ("OOD improvement
+  not statistically confirmed at n=15") is now resolved on the expanded benchmark. Provenance of
+  the new 59 queries (AI-agent-authored under human direction, verified against actual retrieval
+  output) is disclosed explicitly, not hidden.

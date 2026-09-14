@@ -1,0 +1,46 @@
+{
+  "experiment_id": "E12-v0.2-statistical-analysis-OOD",
+  "benchmark_version": "v0.2",
+  "n_ood": 50,
+  "baseline_rejection_rate": 0.34,
+  "tuned_rejection_rate": 0.68,
+  "contingency": {
+    "both_correctly_rejected": 17,
+    "baseline_only_correct": 0,
+    "tuned_only_correct": 17,
+    "both_wrong": 16
+  },
+  "mcnemar_exact": {
+    "b": 0,
+    "c": 17,
+    "n_discordant": 17,
+    "p_value": 0.000015
+  },
+  "significant_at_0_05": true,
+  "confidence_intervals_95pct": {
+    "v0_1_baseline_rejection_rate_for_reference": {
+      "point": 0.2667,
+      "lower": 0.109,
+      "upper": 0.5195
+    },
+    "v0_2_baseline_rejection_rate": {
+      "point": 0.34,
+      "lower": 0.2244,
+      "upper": 0.4785
+    },
+    "v0_2_tuned_rejection_rate": {
+      "point": 0.68,
+      "lower": 0.5419,
+      "upper": 0.7924
+    }
+  },
+  "comparison_to_v0_1": {
+    "v0_1_n": 15,
+    "v0_1_p_value": 0.25,
+    "v0_1_significant": false,
+    "v0_2_n": 50,
+    "v0_2_p_value": 0.000015,
+    "v0_2_significant": true
+  },
+  "generated_at": "2026-09-14T13:30:55.370Z"
+}
