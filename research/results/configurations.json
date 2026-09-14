@@ -1,0 +1,291 @@
+{
+  "generated_at": "2026-09-14T10:53:21.135Z",
+  "row_count": 30,
+  "rows": [
+    {
+      "parameter": "BM25 k1",
+      "value": 1.2,
+      "type": "FIXED",
+      "source": "cli/search.js (frozen, unmodified)",
+      "experiment_id": "A0-A6 (all)",
+      "notes": "inherited from production; never tuned in this research program"
+    },
+    {
+      "parameter": "BM25 b",
+      "value": 0.75,
+      "type": "FIXED",
+      "source": "cli/search.js (frozen, unmodified)",
+      "experiment_id": "A0-A6 (all)",
+      "notes": "inherited from production; never tuned in this research program"
+    },
+    {
+      "parameter": "Exact-intent substring bonus",
+      "value": 15,
+      "type": "FIXED",
+      "source": "cli/search.js (frozen, unmodified)",
+      "experiment_id": "A0 vs A1",
+      "notes": "inherited; ablated (not retuned) in Phase 5 -- found to have zero effect on top-1 accuracy on this benchmark"
+    },
+    {
+      "parameter": "Production confidence divisor",
+      "value": 8,
+      "type": "FIXED",
+      "source": "cli/search.js (frozen, unmodified)",
+      "experiment_id": "E8 baseline_confidence variant",
+      "notes": "confidence = min(score/8*100, 100); superseded by calibrated confidence in A6, not modified in place"
+    },
+    {
+      "parameter": "Production rejection threshold",
+      "value": 2,
+      "type": "FIXED",
+      "source": "cli/search.js (frozen, unmodified)",
+      "experiment_id": "A0-A6 (all)",
+      "notes": "raw BM25 score floor below which production returns confidence=0"
+    },
+    {
+      "parameter": "Embedding model",
+      "value": "Xenova/all-MiniLM-L6-v2",
+      "type": "FIXED",
+      "source": "research/experiments/build_embeddings.js",
+      "experiment_id": "E3, E4, E5(A2/A3), E6/E7, E8",
+      "notes": "design choice (small, CPU-local, offline-capable ONNX model); not selected via a model-comparison sweep"
+    },
+    {
+      "parameter": "Embedding dimension",
+      "value": 384,
+      "type": "FIXED",
+      "source": "research/experiments/build_embeddings.js",
+      "experiment_id": "same as above",
+      "notes": "determined by the chosen model, not tuned"
+    },
+    {
+      "parameter": "Corpus representation for embedding",
+      "value": "Intent/Description/Category/Platform structured text",
+      "type": "FIXED",
+      "source": "research/experiments/build_embeddings.js",
+      "experiment_id": "same as above",
+      "notes": "design choice, not compared against alternative representations"
+    },
+    {
+      "parameter": "CV fold count (K)",
+      "value": 5,
+      "type": "FIXED",
+      "source": "research/experiments/build_folds.js",
+      "experiment_id": "E4-E8 (all nested-CV experiments)",
+      "notes": "5-fold chosen per FINAL_RESEARCH_PLAN.md Phase 4 given n=150"
+    },
+    {
+      "parameter": "CV fold seed",
+      "value": 42,
+      "type": "FIXED",
+      "source": "research/experiments/build_folds.js",
+      "experiment_id": "same as above",
+      "notes": "mulberry32(42), deterministic and documented for reproducibility"
+    },
+    {
+      "parameter": "Alpha grid resolution",
+      "value": "0.0 to 1.0, step 0.1 (11 values)",
+      "type": "FIXED",
+      "source": "research/experiments/run_hybrid.js",
+      "experiment_id": "E4",
+      "notes": "grid density is a design choice; the SELECTED alpha per fold (below) is the tuned value"
+    },
+    {
+      "parameter": "Top-k candidate window",
+      "value": 10,
+      "type": "FIXED",
+      "source": "research/experiments/build_candidates.js",
+      "experiment_id": "E6",
+      "notes": "used for margin/entropy computation; not accuracy-tuned"
+    },
+    {
+      "parameter": "ECE bin count",
+      "value": 10,
+      "type": "FIXED",
+      "source": "research/experiments/run_calibration.js",
+      "experiment_id": "E8",
+      "notes": "standard equal-width ECE binning; not tuned to favor a particular result"
+    },
+    {
+      "parameter": "Isotonic regression algorithm",
+      "value": "PAV (Pool-Adjacent-Violators), non-parametric",
+      "type": "FIXED",
+      "source": "research/experiments/isotonic.js",
+      "experiment_id": "E8",
+      "notes": "no hyperparameter to tune; had a tie-handling bug found and fixed in Phase 8 (see CALIBRATION_NOTES.md)"
+    },
+    {
+      "parameter": "Hybrid fusion alpha",
+      "value": 0.3,
+      "type": "TUNED",
+      "source": "research/results/hybrid/hybrid-nested-cv-results.json",
+      "experiment_id": "E4",
+      "dataset_split": "test_fold=0 (selected on the other 4 folds only)",
+      "metric": "dev non-OOD accuracy",
+      "metric_value": 0.7663551401869159,
+      "notes": "held-out test-fold accuracy at this alpha: 0.8214285714285714"
+    },
+    {
+      "parameter": "Hybrid fusion alpha",
+      "value": 0.3,
+      "type": "TUNED",
+      "source": "research/results/hybrid/hybrid-nested-cv-results.json",
+      "experiment_id": "E4",
+      "dataset_split": "test_fold=1 (selected on the other 4 folds only)",
+      "metric": "dev non-OOD accuracy",
+      "metric_value": 0.7850467289719626,
+      "notes": "held-out test-fold accuracy at this alpha: 0.75"
+    },
+    {
+      "parameter": "Hybrid fusion alpha",
+      "value": 0.3,
+      "type": "TUNED",
+      "source": "research/results/hybrid/hybrid-nested-cv-results.json",
+      "experiment_id": "E4",
+      "dataset_split": "test_fold=2 (selected on the other 4 folds only)",
+      "metric": "dev non-OOD accuracy",
+      "metric_value": 0.7777777777777778,
+      "notes": "held-out test-fold accuracy at this alpha: 0.7777777777777778"
+    },
+    {
+      "parameter": "Hybrid fusion alpha",
+      "value": 0.3,
+      "type": "TUNED",
+      "source": "research/results/hybrid/hybrid-nested-cv-results.json",
+      "experiment_id": "E4",
+      "dataset_split": "test_fold=3 (selected on the other 4 folds only)",
+      "metric": "dev non-OOD accuracy",
+      "metric_value": 0.7962962962962963,
+      "notes": "held-out test-fold accuracy at this alpha: 0.7037037037037037"
+    },
+    {
+      "parameter": "Hybrid fusion alpha",
+      "value": 0.5,
+      "type": "TUNED",
+      "source": "research/results/hybrid/hybrid-nested-cv-results.json",
+      "experiment_id": "E4",
+      "dataset_split": "test_fold=4 (selected on the other 4 folds only)",
+      "metric": "dev non-OOD accuracy",
+      "metric_value": 0.7636363636363637,
+      "notes": "held-out test-fold accuracy at this alpha: 0.8"
+    },
+    {
+      "parameter": "OOD detection threshold (top1_score)",
+      "value": 0.8327,
+      "type": "TUNED",
+      "source": "research/results/reliability/selective-prediction-results.json",
+      "experiment_id": "E6",
+      "dataset_split": "test_fold=0 (selected on the other 4 folds only)",
+      "metric": "dev F1 (is_ood positive class)",
+      "metric_value": 0.6,
+      "notes": "held-out test-fold F1 at this threshold: 0.5"
+    },
+    {
+      "parameter": "OOD detection threshold (top1_score)",
+      "value": 0.8327,
+      "type": "TUNED",
+      "source": "research/results/reliability/selective-prediction-results.json",
+      "experiment_id": "E6",
+      "dataset_split": "test_fold=1 (selected on the other 4 folds only)",
+      "metric": "dev F1 (is_ood positive class)",
+      "metric_value": 0.5263,
+      "notes": "held-out test-fold F1 at this threshold: 0.8"
+    },
+    {
+      "parameter": "OOD detection threshold (top1_score)",
+      "value": 0.8327,
+      "type": "TUNED",
+      "source": "research/results/reliability/selective-prediction-results.json",
+      "experiment_id": "E6",
+      "dataset_split": "test_fold=2 (selected on the other 4 folds only)",
+      "metric": "dev F1 (is_ood positive class)",
+      "metric_value": 0.7,
+      "notes": "held-out test-fold F1 at this threshold: 0"
+    },
+    {
+      "parameter": "OOD detection threshold (top1_score)",
+      "value": 0.8946,
+      "type": "TUNED",
+      "source": "research/results/reliability/selective-prediction-results.json",
+      "experiment_id": "E6",
+      "dataset_split": "test_fold=3 (selected on the other 4 folds only)",
+      "metric": "dev F1 (is_ood positive class)",
+      "metric_value": 0.6087,
+      "notes": "held-out test-fold F1 at this threshold: 0.5"
+    },
+    {
+      "parameter": "OOD detection threshold (top1_score)",
+      "value": 0.8946,
+      "type": "TUNED",
+      "source": "research/results/reliability/selective-prediction-results.json",
+      "experiment_id": "E6",
+      "dataset_split": "test_fold=4 (selected on the other 4 folds only)",
+      "metric": "dev F1 (is_ood positive class)",
+      "metric_value": 0.5833,
+      "notes": "held-out test-fold F1 at this threshold: 0.5714"
+    },
+    {
+      "parameter": "Ambiguity detection threshold (margin)",
+      "value": 0.0406,
+      "type": "TUNED",
+      "source": "research/results/reliability/selective-prediction-results.json",
+      "experiment_id": "E7",
+      "dataset_split": "test_fold=0 (selected on the other 4 folds only)",
+      "metric": "dev F1 (is_ambiguous positive class)",
+      "metric_value": 0.3704,
+      "notes": "held-out test-fold F1 at this threshold: 0.2222"
+    },
+    {
+      "parameter": "Ambiguity detection threshold (margin)",
+      "value": 0.0948,
+      "type": "TUNED",
+      "source": "research/results/reliability/selective-prediction-results.json",
+      "experiment_id": "E7",
+      "dataset_split": "test_fold=1 (selected on the other 4 folds only)",
+      "metric": "dev F1 (is_ambiguous positive class)",
+      "metric_value": 0.3913,
+      "notes": "held-out test-fold F1 at this threshold: 0.3333"
+    },
+    {
+      "parameter": "Ambiguity detection threshold (margin)",
+      "value": 0.0863,
+      "type": "TUNED",
+      "source": "research/results/reliability/selective-prediction-results.json",
+      "experiment_id": "E7",
+      "dataset_split": "test_fold=2 (selected on the other 4 folds only)",
+      "metric": "dev F1 (is_ambiguous positive class)",
+      "metric_value": 0.3704,
+      "notes": "held-out test-fold F1 at this threshold: 0.4444"
+    },
+    {
+      "parameter": "Ambiguity detection threshold (margin)",
+      "value": 0.0807,
+      "type": "TUNED",
+      "source": "research/results/reliability/selective-prediction-results.json",
+      "experiment_id": "E7",
+      "dataset_split": "test_fold=3 (selected on the other 4 folds only)",
+      "metric": "dev F1 (is_ambiguous positive class)",
+      "metric_value": 0.383,
+      "notes": "held-out test-fold F1 at this threshold: 0.3077"
+    },
+    {
+      "parameter": "Ambiguity detection threshold (margin)",
+      "value": 0.0863,
+      "type": "TUNED",
+      "source": "research/results/reliability/selective-prediction-results.json",
+      "experiment_id": "E7",
+      "dataset_split": "test_fold=4 (selected on the other 4 folds only)",
+      "metric": "dev F1 (is_ambiguous positive class)",
+      "metric_value": 0.4074,
+      "notes": "held-out test-fold F1 at this threshold: 0.2222"
+    },
+    {
+      "parameter": "Canonical definition of \"wrong\" for confidence-on-error metrics",
+      "value": "status in {INCORRECT, AMBIGUOUS_INCORRECT, OOD_FALSE_ACCEPT} (excludes REJECTED)",
+      "type": "METHODOLOGICAL_DEFINITION",
+      "source": "research/results/baseline/REPRODUCTION_NOTES.md, research/analysis/baseline-error-analysis.md (erratum)",
+      "experiment_id": "E1, E2, E8",
+      "notes": "Canonical mean-confidence-on-wrong value: 86.06% (86.1%), verified three times independently (archived baseline-v0.1, independent reproduction, and analysis_intermediate.json). A prior document (baseline-error-analysis.md) contained a transcription error (87.7%) that has been corrected with an erratum, traced to its own source data file."
+    }
+  ]
+}

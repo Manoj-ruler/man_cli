@@ -21,18 +21,20 @@ See `reproduction-vs-archive-diff.json` (`mismatches_count: 0`).
 | Mean latency | 3.29 ms | 3.54 ms | expected variance (timing, not determinism) |
 | P95 latency | 6.46 ms | 5.90 ms | expected variance |
 
-## One discrepancy noted, root-caused, not a reproduction failure
+## One discrepancy noted here, fully resolved in Phase 9
 
 `mean_confidence_on_wrong_pct` came out 86.1% in this script vs. 87.7% previously reported in
 `research/analysis/baseline-error-analysis.md`. Since every individual query's retrieved command,
-score, confidence, and evaluation status matches the archive exactly (0 mismatches), this is
-**not** evidence of non-determinism — it is a definitional difference between which result
-statuses count as "wrong" across two independently written analysis scripts (this script's
-ad-hoc sanity metric vs. whatever exact filter `compute_analysis_data.js` used originally). This
-is flagged here explicitly rather than silently reconciled, and should be resolved in Phase 9
-(hyperparameter/metric-definition log) by fixing one canonical definition of "wrong" used by every
-downstream script (`INCORRECT` + `AMBIGUOUS_INCORRECT` + `OOD_FALSE_ACCEPT`, excluding `REJECTED`)
-before any calibration numbers are computed against it.
+score, confidence, and evaluation status matches the archive exactly (0 mismatches), this was
+**not** evidence of non-determinism. **Resolved in Phase 9:** `research/analysis/analysis_intermediate.json`
+(the underlying data file that `baseline-error-analysis.md`'s prose was generated from) itself
+records `meanConfIncorrect: "86.06"` -- matching this script's 86.1% figure exactly. The 87.7%
+in the prose was a transcription error made when writing that document, not a data or
+definitional discrepancy; it has been corrected in `baseline-error-analysis.md` with an erratum.
+**86.06% (86.1%) is the canonical, three-times-independently-verified value** going forward. The
+canonical definition of "wrong" used consistently by every downstream script in this research
+program is `INCORRECT` + `AMBIGUOUS_INCORRECT` + `OOD_FALSE_ACCEPT` (excluding `REJECTED`, which
+already carries confidence=0 and is a separate outcome category, not a confident-but-wrong one).
 
 ## Conclusion
 

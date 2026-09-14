@@ -34,8 +34,9 @@ silently recur. After the fix, `predict(1.0) = 0.793`, matching the true dev acc
 fused top1 score) both starts closest to the classic miscalibration problem (0.274 ECE, similar
 to production's 0.269) and ends up the best-calibrated after correction (0.054 ECE, an 80%
 relative reduction) — a meaningful, directly-motivated result: this is the exact failure mode
-(87.7% mean confidence on wrong answers, 53.1% of failures at 100% confidence, documented in
-`research/analysis/baseline-error-analysis.md`) that started this entire research program.
+(86.06% mean confidence on wrong answers, 44.9% of failures at 100% confidence -- corrected
+figures per the Phase 9 erratum in `research/analysis/baseline-error-analysis.md`) that started
+this entire research program.
 
 ## Caveat, stated explicitly
 

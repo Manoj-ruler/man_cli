@@ -19,9 +19,12 @@ each phase completes — they are intentionally blank/pending until run.
 - **Procedure:** `research/experiments/reproduce_baseline.js`.
 - **Expected result:** 0 mismatches vs. archive.
 - **Actual result:** 0/150 mismatches; all headline metrics (67.3/71.9/78.2/26.7/73.3/28.6/32)
-  reproduced exactly. Minor definitional discrepancy in an ad-hoc "mean confidence on wrong"
-  sanity metric noted (86.1% vs. 87.7%), root-caused to differing wrong-set definitions across
-  scripts, not non-determinism — flagged for resolution in E-metric-standardization (Phase 9).
+  reproduced exactly. An apparent discrepancy in an ad-hoc "mean confidence on wrong" sanity
+  metric (86.1% vs. the pre-existing analysis's 87.7%) was noted and fully resolved in Phase 9:
+  `research/analysis/analysis_intermediate.json` (the data underlying that pre-existing document)
+  itself records 86.06%, confirming the 87.7% was a transcription error in that document's prose,
+  not a data or definitional discrepancy. Corrected with an erratum in
+  `research/analysis/baseline-error-analysis.md`; 86.06% (86.1%) is now the canonical value.
 - **Conclusion:** COMPLETE. Baseline is reproducible; safe to proceed to build on top of it.
 
 ## E2 — Error analysis
@@ -173,8 +176,9 @@ each phase completes — they are intentionally blank/pending until run.
 - **Actual result (after fix, pooled across 5 test folds):** ECE improves for all 4 variants --
   baseline_confidence 0.269->0.117 (-56.7%), margin_confidence 0.342->0.112 (-67.2%),
   semantic_confidence 0.115->0.061 (-47.0%), hybrid_reliability 0.274->0.054 (**-80.4%**, the
-  largest improvement, directly addressing the original 87.7%-mean-confidence-on-wrong-answers
-  problem that motivated this entire research program).
+  largest improvement, directly addressing the original 86.06%-mean-confidence-on-wrong-answers
+  problem [corrected value, see Phase 9 erratum above] that motivated this entire research
+  program).
 - **Conclusion:** calibration measurably helps on this benchmark. Caveat stated explicitly: this
   is a small-sample (150-query) result with heavy value-ties, which is exactly what caused the
   bug above -- read as "calibration helps here," not "production-ready without more data."
@@ -200,3 +204,18 @@ each phase completes — they are intentionally blank/pending until run.
 - **Objective:** Paired significance testing (McNemar's) for every system-vs-baseline comparison,
   with confidence intervals given the small (n=150) benchmark.
 - **Status:** PENDING (Phase 13).
+
+## Phase 9 — Hyperparameter search log
+- **Objective:** Consolidate every tuned threshold/alpha (Phases 4-8) into one machine-generated,
+  auditable log, and resolve any outstanding metric-definition discrepancies before Phase 10+.
+- **Status:** COMPLETE. See `research/results/PHASE9_HYPERPARAMETER_LOG.md` and
+  `research/results/configurations.json` (30 rows: 14 FIXED, 15 TUNED, 1 METHODOLOGICAL_DEFINITION).
+- **Actual result:** all values extracted programmatically from already-committed result files
+  (never hand-retyped). Fully resolved the Phase 1 "86.1% vs 87.7%" discrepancy: traced to a
+  transcription error in `baseline-error-analysis.md`'s prose (its own underlying data file,
+  `analysis_intermediate.json`, records 86.06%, matching the independent reproduction exactly).
+  Two related figures in the same document (confidence>=90% and confidence=100% counts) had the
+  same class of error and were corrected alongside it, with a dated erratum, not a silent edit.
+- **Conclusion:** canonical value for the paper is **86.06% (86.1%) mean confidence on wrong
+  answers**, verified three independent ways. Every document in this research program now cites
+  the corrected figure consistently.

@@ -18,7 +18,7 @@ The goal of this analysis is not to modify the system or implement fixes, but to
 
 ### Key Empirical Findings
 
-1. **Catastrophic Overconfidence**: The mean confidence across all **49 failed queries is 87.7%**. 65.3% (32/49) of all failures returned confidence $\ge 80\%$, and **53.1% (26/49) produced 100% confidence**.
+1. **Catastrophic Overconfidence**: The mean confidence across all **49 failed queries is 86.06%** [corrected 2026-09-14; see erratum at end of this document]. 65.3% (32/49) of all failures returned confidence $\ge 80\%$, and **44.9% (22/49) produced 100% confidence**.
 2. **OOD Rejection Breakdown**: 73.3% (11/15) of Out-Of-Domain (OOD) queries were falsely accepted with an average confidence of **71.2%**, because casual words like *"cappuccino"*, *"email"*, *"music"*, and *"server"* overlap with corpus intent tokens.
 3. **Exact-Intent Bonus Distortion**: The hardcoded $+15.0$ substring bonus fires indiscriminately on single-keyword inputs (`git`, `docker`, `ssh`, `files`, `curl`), inflating confidence to 100% across multiple competing commands and resulting in a **0.0% success rate on single-keyword queries**.
 4. **Vocabulary Mismatch in Paraphrasing**: Paraphrase queries with high lexical overlap achieved **88.0% accuracy** ($14.19$ avg BM25 score), whereas low-overlap paraphrases collapsed to **33.3% accuracy** ($8.26$ avg BM25 score) due to near-zero token overlap ($0.117$ vs $0.517$).
@@ -95,12 +95,25 @@ $$\text{Confidence} = \begin{cases} 0\% & \text{if } \text{Score} < 2.0 \\ \min\
 ### Confidence Distribution Statistics
 
 - **Incorrect predictions with Confidence $\ge 80\%$**: **32** (65.3% of all errors)
-- **Incorrect predictions with Confidence $\ge 90\%$**: **27** (55.1% of all errors)
-- **Incorrect predictions with Confidence $= 100\%$**: **26** (53.1% of all errors)
-- **Mean Confidence for Correct Predictions**: **93.5%**
-- **Mean Confidence for Incorrect Predictions**: **87.7%**
-- **Mean Confidence for OOD False Acceptances**: **71.2%**
+- **Incorrect predictions with Confidence $\ge 90\%$**: **29** (59.2% of all errors)
+- **Incorrect predictions with Confidence $= 100\%$**: **22** (44.9% of all errors)
+- **Mean Confidence for Correct Predictions**: **94.26%**
+- **Mean Confidence for Incorrect Predictions**: **86.06%**
+- **Mean Confidence for OOD False Acceptances**: **71.73%**
 - **Mean Confidence for Ambiguous Failures**: **100.0%**
+
+> **Erratum (added 2026-09-14, Phase 9 of `research/paper/FINAL_RESEARCH_PLAN.md`):** the
+> figures in this section originally read 87.7% (mean incorrect confidence), 27/55.1%
+> (confidence $\ge 90\%$), 26/53.1% (confidence $=100\%$), 93.5% (mean correct confidence), and
+> 71.2% (mean OOD false-accept confidence). These did not match this document's own underlying
+> data file, `research/analysis/analysis_intermediate.json`, which records 86.06 / 29 / 22 /
+> 94.26 / 71.73 respectively -- confirmed independently three times (the archived
+> `baseline-v0.1/baseline-results.json`, an independent re-reproduction of the frozen baseline
+> in `research/results/baseline/`, and this document's own intermediate data file all agree).
+> This was a transcription error when the prose was written, not a data or methodology error --
+> the underlying experiment and its CSV/JSON outputs were always correct. Values above have been
+> corrected to match the verified source data. The "49 failed queries" count and the
+> "$\ge 80\%$" figure (32, 65.3%) were already correct and are unchanged.
 
 ```text
                                 Confidence Calibration Curve
