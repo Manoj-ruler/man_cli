@@ -1,0 +1,50 @@
+{
+  "experiment_id": "E3-dense-only-exploratory",
+  "note": "UNCONDITIONAL top-1 accept, no OOD/rejection threshold tuned (see file header). Not the final system.",
+  "model_name": "Xenova/all-MiniLM-L6-v2",
+  "total_queries": 150,
+  "non_ood_accuracy_pct": 72.6,
+  "correct_in_domain_accuracy_pct": 79.8,
+  "ambiguity_success_rate_pct": 21.4,
+  "ood_false_acceptance_rate_pct": 100,
+  "mean_latency_ms": 5.8677,
+  "query_type_breakdown": {
+    "canonical": {
+      "total": 25,
+      "hits": 25
+    },
+    "paraphrase": {
+      "total": 25,
+      "hits": 22
+    },
+    "low_overlap_paraphrase": {
+      "total": 15,
+      "hits": 7
+    },
+    "ambiguous": {
+      "total": 12,
+      "hits": 10
+    },
+    "ood": {
+      "total": 15,
+      "hits": 0
+    },
+    "polysemy": {
+      "total": 18,
+      "hits": 9
+    },
+    "single_keyword": {
+      "total": 10,
+      "hits": 0
+    },
+    "safety_sensitive": {
+      "total": 15,
+      "hits": 13
+    },
+    "complex_multi_intent": {
+      "total": 15,
+      "hits": 12
+    }
+  },
+  "generated_at": "2026-09-14T06:11:38.954Z"
+}

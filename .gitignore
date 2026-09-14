@@ -2,6 +2,8 @@
 
 # dependencies
 /node_modules
+/research/node_modules
+/research/.cache
 /.pnp
 .pnp.*
 .yarn/*

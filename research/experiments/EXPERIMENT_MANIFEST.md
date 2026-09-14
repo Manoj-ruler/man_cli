@@ -38,7 +38,41 @@ each phase completes — they are intentionally blank/pending until run.
 - **Independent variable:** retrieval method (BM25 vs. dense-only).
 - **Dependent variables:** per-query-type accuracy, OOD false-acceptance rate, latency.
 - **Dataset:** same 150-query benchmark, 5-fold CV (Phase 4 protocol).
-- **Status:** PENDING (Phase 3).
+- **Model:** `Xenova/all-MiniLM-L6-v2` (local ONNX, 384-dim, mean-pooled, cosine similarity),
+  run fully offline after a one-time weight download; corpus embeddings cached in
+  `research/models/corpus_embeddings.json` (structured Intent/Description/Category/Platform
+  text representation, see `build_embeddings.js`).
+- **Status:** COMPLETE (exploratory, unconditional top-1 accept -- no OOD gating tuned yet;
+  see caveat in `run_dense.js` header). Results: `research/results/dense/dense-summary.json`.
+- **Actual result (vs. frozen BM25 baseline):**
+
+  | Query type | BM25 baseline | Dense-only (exploratory) | Delta |
+  |---|---:|---:|---:|
+  | canonical | 100.0% | 100.0% | 0 |
+  | paraphrase | 88.0% | 88.0% | 0 |
+  | low_overlap_paraphrase | 33.3% | **46.7%** | +13.4 |
+  | polysemy | 55.6% | 50.0% | -5.6 |
+  | ambiguous (success rate) | 28.6% | 21.4%\* | -7.2 |
+  | safety_sensitive | 100.0% | 86.7% | -13.3 |
+  | complex_multi_intent | 86.7% | 80.0% | -6.7 |
+  | single_keyword | 0.0% | 0.0% | 0 |
+  | OOD false-acceptance | 73.3% | 100.0%\*\* | n/a |
+
+  \* Ambiguous-success denominator/definition differs slightly from BM25's (dense run counts
+  any top-1 match in the valid-command set; not yet a controlled comparison -- to be redone
+  under the identical fold protocol in Phase 4/5).
+  \*\* Expected/uninformative: this exploratory run has no rejection mechanism at all
+  (unconditional top-1 accept), so 100% OOD false-acceptance is a property of the experiment
+  design, not a finding about semantic retrieval's OOD capability -- that requires Phase 7.
+
+- **Conclusion:** Dense retrieval does **not** uniformly dominate BM25. It measurably helps
+  the lexical-gap failure mode it was hypothesized to help (low-overlap-paraphrase, +13.4pp),
+  but measurably *hurts* three other slices (polysemy, safety-sensitive, complex-multi-intent)
+  and does not fix single-keyword queries at all. This is a genuine, non-cherry-picked
+  empirical result and directly motivates fusion (Phase 4) rather than replacement -- it also
+  means the paper cannot claim "semantic retrieval is strictly better," only that it is
+  complementary on specific failure modes, consistent with the general BM25-vs-dense
+  complementarity literature (CodeRAG-Bench, 2024) rather than being a novel finding on its own.
 
 ## E4 — Hybrid retrieval (BM25 + dense)
 - **Objective:** Determine whether fusing lexical and semantic scores improves over either alone.
