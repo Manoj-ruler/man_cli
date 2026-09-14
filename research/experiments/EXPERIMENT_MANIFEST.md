@@ -231,7 +231,24 @@ each phase completes — they are intentionally blank/pending until run.
 ## E12 — Final statistical analysis
 - **Objective:** Paired significance testing (McNemar's) for every system-vs-baseline comparison,
   with confidence intervals given the small (n=150) benchmark.
-- **Status:** PENDING (Phase 13).
+- **Status:** COMPLETE. Exact (binomial) McNemar's test + Wilson 95% CIs. See
+  `research/results/final/STATISTICAL_ANALYSIS_NOTES.md`.
+- **Bug found and fixed before reporting:** `A0.per_query` etc. include all 150 queries (OOD
+  included, hit always false), silently diluting the accuracy denominator to 150 instead of 135
+  and producing a wrong 64.7% figure contradicting every prior phase. Caught via an internal
+  cross-check (a same-script Wilson-CI computation correctly showed 71.9%), fixed by filtering
+  on the `classification` field, re-verified against all four known accuracy values before
+  trusting any p-value.
+- **Actual result:** A0 vs A3 (the headline hybrid-fusion result) IS statistically significant
+  (71.9% vs 77.0%, 7 discordant pairs all favoring A3, p=0.0156). A2 vs A3 is NOT significant
+  (72.6% vs 77.0%, p=0.146) despite a numerically similar-looking gap -- more discordant pairs
+  split less one-sidedly. OOD rejection improvement (26.7%->46.7%) is directionally consistent
+  but NOT statistically significant at n=15 (p=0.25) -- explicitly reported as underpowered, not
+  as a confirmed null result.
+- **Conclusion:** the paper can claim, with statistical backing, that hybrid fusion beats pure
+  BM25. It cannot claim, with the same confidence, that hybrid beats dense alone, or that the
+  OOD improvement is statistically confirmed -- both reported as real, measured, directionally
+  consistent findings with explicit significance caveats, not silently upgraded.
 
 ## Phase 9 — Hyperparameter search log
 - **Objective:** Consolidate every tuned threshold/alpha (Phases 4-8) into one machine-generated,

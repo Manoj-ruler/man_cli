@@ -1,0 +1,135 @@
+{
+  "experiment_id": "E12-statistical-analysis",
+  "method": "Exact (binomial) two-sided McNemar's test on discordant pairs; Wilson score 95% CIs for proportions. No chi-square approximation used given small sample sizes.",
+  "accuracy_comparisons": [
+    {
+      "comparison": "A0 vs A1",
+      "n": 135,
+      "accuracy_A": 0.7185,
+      "accuracy_B": 0.7185,
+      "absolute_diff": 0,
+      "contingency": {
+        "both_correct": 97,
+        "A0_only_correct": 0,
+        "A1_only_correct": 0,
+        "both_wrong": 38
+      },
+      "mcnemar_exact": {
+        "b": 0,
+        "c": 0,
+        "n_discordant": 0,
+        "p_value": 1,
+        "note": "no discordant pairs -- systems agree on every query, test undefined/trivially non-significant"
+      },
+      "significant_at_0_05": false
+    },
+    {
+      "comparison": "A0 vs A2",
+      "n": 135,
+      "accuracy_A": 0.7185,
+      "accuracy_B": 0.7259,
+      "absolute_diff": 0.0074,
+      "contingency": {
+        "both_correct": 88,
+        "A0_only_correct": 9,
+        "A2_only_correct": 10,
+        "both_wrong": 28
+      },
+      "mcnemar_exact": {
+        "b": 9,
+        "c": 10,
+        "n_discordant": 19,
+        "p_value": 1
+      },
+      "significant_at_0_05": false
+    },
+    {
+      "comparison": "A0 vs A3",
+      "n": 135,
+      "accuracy_A": 0.7185,
+      "accuracy_B": 0.7704,
+      "absolute_diff": 0.0519,
+      "contingency": {
+        "both_correct": 97,
+        "A0_only_correct": 0,
+        "A3_only_correct": 7,
+        "both_wrong": 31
+      },
+      "mcnemar_exact": {
+        "b": 0,
+        "c": 7,
+        "n_discordant": 7,
+        "p_value": 0.015625
+      },
+      "significant_at_0_05": true
+    },
+    {
+      "comparison": "A2 vs A3",
+      "n": 135,
+      "accuracy_A": 0.7259,
+      "accuracy_B": 0.7704,
+      "absolute_diff": 0.0444,
+      "contingency": {
+        "both_correct": 95,
+        "A2_only_correct": 3,
+        "A3_only_correct": 9,
+        "both_wrong": 28
+      },
+      "mcnemar_exact": {
+        "b": 3,
+        "c": 9,
+        "n_discordant": 12,
+        "p_value": 0.145996
+      },
+      "significant_at_0_05": false
+    }
+  ],
+  "ood_rejection_comparison": {
+    "comparison": "baseline OOD rejection vs Phase-7-tuned OOD detection",
+    "n": 15,
+    "baseline_rejection_rate": 0.2667,
+    "tuned_rejection_rate": 0.4667,
+    "contingency": {
+      "both_correctly_rejected": 4,
+      "baseline_only_correct": 0,
+      "tuned_only_correct": 3,
+      "both_wrong": 8
+    },
+    "mcnemar_exact": {
+      "b": 0,
+      "c": 3,
+      "n_discordant": 3,
+      "p_value": 0.25
+    },
+    "significant_at_0_05": false,
+    "caveat": "n=15 is very small; exact test is appropriate but power is low -- a non-significant result here would not prove no difference, only that this sample cannot detect one confidently"
+  },
+  "confidence_intervals_95pct": {
+    "A0_bm25_baseline_accuracy": {
+      "point": 0.7185,
+      "lower": 0.6374,
+      "upper": 0.7875
+    },
+    "A2_dense_accuracy": {
+      "point": 0.7259,
+      "lower": 0.6452,
+      "upper": 0.7941
+    },
+    "A3_hybrid_accuracy": {
+      "point": 0.7704,
+      "lower": 0.6925,
+      "upper": 0.8332
+    },
+    "ood_baseline_rejection_rate": {
+      "point": 0.2667,
+      "lower": 0.109,
+      "upper": 0.5195
+    },
+    "ood_tuned_rejection_rate": {
+      "point": 0.4667,
+      "lower": 0.2481,
+      "upper": 0.6988
+    }
+  },
+  "generated_at": "2026-09-14T11:07:08.252Z"
+}
