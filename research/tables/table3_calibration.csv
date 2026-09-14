@@ -1,0 +1,5 @@
+Confidence Variant,ECE Before,ECE After,ECE Relative Reduction (%),Brier Before,Brier After
+baseline_confidence,0.2691,0.1165,56.7,0.2543,0.1734
+margin_confidence,0.3424,0.1123,67.2,0.2552,0.1324
+semantic_confidence,0.1145,0.0608,46.9,0.1492,0.1395
+hybrid_reliability,0.2741,0.0537,80.4,0.2573,0.1224

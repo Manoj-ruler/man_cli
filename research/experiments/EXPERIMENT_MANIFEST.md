@@ -290,3 +290,11 @@ each phase completes — they are intentionally blank/pending until run.
 - **Key finding:** all 10 single-keyword failures are HIGH_CONFIDENCE_WRONG, and 39/46 (84.8%)
   of all wrong predictions overall are high-confidence -- concrete evidence that accuracy
   improvement (A0->A3) alone did not fix the calibration problem Phase 8 separately addressed.
+
+## Phase 15 — Figures and tables
+- **Objective:** generate publication-ready figures/tables programmatically from result files
+  (no hand-typed numbers, no external charting dependency).
+- **Status:** COMPLETE. 6 SVG figures (`research/figures/`) + 4 tables in md/csv
+  (`research/tables/`), all read their source JSON directly so they cannot drift from the
+  experiments that produced them. Verified: no NaN/undefined in any SVG; fig1's rendered values
+  (71.9/72.7/77.1) and every table's numbers cross-checked against Phases 4-13 exactly.

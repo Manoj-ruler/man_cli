@@ -1,0 +1,40 @@
+<svg viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+<rect width="1000" height="500" fill="white"/>
+<text x="500" y="25" text-anchor="middle" font-size="18" font-weight="bold" fill="#222222">Error Taxonomy Distribution (hybrid/A3, 150 queries, multi-label)</text>
+<line x1="70" y1="400" x2="970" y2="400" stroke="#DDDDDD" stroke-width="1"/>
+<text x="62" y="404" text-anchor="end" font-size="11" fill="#222222">0</text>
+<line x1="70" y1="330" x2="970" y2="330" stroke="#DDDDDD" stroke-width="1"/>
+<text x="62" y="334" text-anchor="end" font-size="11" fill="#222222">22</text>
+<line x1="70" y1="260" x2="970" y2="260" stroke="#DDDDDD" stroke-width="1"/>
+<text x="62" y="264" text-anchor="end" font-size="11" fill="#222222">44</text>
+<line x1="70" y1="190" x2="970" y2="190" stroke="#DDDDDD" stroke-width="1"/>
+<text x="62" y="194" text-anchor="end" font-size="11" fill="#222222">66</text>
+<line x1="70" y1="120" x2="970" y2="120" stroke="#DDDDDD" stroke-width="1"/>
+<text x="62" y="124" text-anchor="end" font-size="11" fill="#222222">88</text>
+<line x1="70" y1="50" x2="970" y2="50" stroke="#DDDDDD" stroke-width="1"/>
+<text x="62" y="54" text-anchor="end" font-size="11" fill="#222222">110</text>
+<rect x="86.9" y="69.1" width="66.9" height="330.9" fill="#55A868"/>
+<text x="119.9" y="65.1" text-anchor="middle" font-size="10" fill="#222222">104.0</text>
+<text x="126.3" y="420" text-anchor="middle" font-size="11" fill="#222222" transform="rotate(-20 126.3 420)">CORRECT</text>
+<rect x="199.4" y="275.9" width="66.9" height="124.1" fill="#C44E52"/>
+<text x="232.4" y="271.9" text-anchor="middle" font-size="10" fill="#222222">39.0</text>
+<text x="238.8" y="420" text-anchor="middle" font-size="11" fill="#222222" transform="rotate(-20 238.8 420)">HIGH_CONFIDENCE_WRONG</text>
+<rect x="311.9" y="352.3" width="66.9" height="47.7" fill="#C44E52"/>
+<text x="344.9" y="348.3" text-anchor="middle" font-size="10" fill="#222222">15.0</text>
+<text x="351.3" y="420" text-anchor="middle" font-size="11" fill="#222222" transform="rotate(-20 351.3 420)">OOD_FALSE_ACCEPTANCE</text>
+<rect x="424.4" y="368.2" width="66.9" height="31.8" fill="#C44E52"/>
+<text x="457.4" y="364.2" text-anchor="middle" font-size="10" fill="#222222">10.0</text>
+<text x="463.8" y="420" text-anchor="middle" font-size="11" fill="#222222" transform="rotate(-20 463.8 420)">AMBIGUITY_FAILURE</text>
+<rect x="536.9" y="374.5" width="66.9" height="25.5" fill="#C44E52"/>
+<text x="570.0" y="370.5" text-anchor="middle" font-size="10" fill="#222222">8.0</text>
+<text x="576.3" y="420" text-anchor="middle" font-size="11" fill="#222222" transform="rotate(-20 576.3 420)">LOW_OVERLAP_FAILURE</text>
+<rect x="649.4" y="380.9" width="66.9" height="19.1" fill="#C44E52"/>
+<text x="682.5" y="376.9" text-anchor="middle" font-size="10" fill="#222222">6.0</text>
+<text x="688.8" y="420" text-anchor="middle" font-size="11" fill="#222222" transform="rotate(-20 688.8 420)">LEXICAL_POLYSEMY</text>
+<rect x="761.9" y="384.1" width="66.9" height="15.9" fill="#C44E52"/>
+<text x="795.0" y="380.1" text-anchor="middle" font-size="10" fill="#222222">5.0</text>
+<text x="801.3" y="420" text-anchor="middle" font-size="11" fill="#222222" transform="rotate(-20 801.3 420)">SEMANTIC_MISMATCH</text>
+<rect x="874.4" y="393.6" width="66.9" height="6.4" fill="#C44E52"/>
+<text x="907.5" y="389.6" text-anchor="middle" font-size="10" fill="#222222">2.0</text>
+<text x="913.8" y="420" text-anchor="middle" font-size="11" fill="#222222" transform="rotate(-20 913.8 420)">WRONG_SCOPE</text>
+</svg>
