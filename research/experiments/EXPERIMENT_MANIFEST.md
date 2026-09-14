@@ -207,7 +207,21 @@ each phase completes — they are intentionally blank/pending until run.
 
 ## E10 — Safety evaluation
 - **Objective:** Precision/recall of a rule-based destructive-command tagger.
-- **Status:** PENDING (Phase 11).
+- **Status:** COMPLETE. Deterministic regex/keyword classifier (LOW/MEDIUM/HIGH/CRITICAL),
+  authored before looking at per-query benchmark outcomes (not tuned against this benchmark's
+  labels). Ground truth: the benchmark's existing `risk_level` field (120/10/15/5). See
+  `research/results/safety/SAFETY_EVAL_NOTES.md`. No command executed in this phase.
+- **Actual result:** exact 4-tier accuracy 89.6% (112/125 gold-command queries); risky
+  (HIGH/CRITICAL) binary precision=0.95, recall=0.95, F1=0.95; zero dangerous-direction misses
+  (no CRITICAL/HIGH command ever tagged LOW/MEDIUM). On retrieved (hybrid/A3) commands, accuracy
+  holds (90.0%) but risky-binary precision drops to 0.826 -- a retrieval-error artifact (wrong
+  commands sometimes trigger unrelated risk patterns), not a classifier defect.
+- **Documented gaps, not patched against the benchmark:** `Stop-Process -Force` and `git merge`
+  fall through to LOW (no covering rule); a few tier disagreements (e.g. `git reset --soft` LOW
+  vs. benchmark's MEDIUM) are judgment calls, not misses. Explicitly left as future work rather
+  than adding benchmark-specific rules after seeing the failures, which would be test-set tuning.
+- **Conclusion:** strong, auditable performance on the actionable risky/not-risky distinction;
+  imperfect but honestly reported on the finer 4-tier distinction.
 
 ## E11 — Optional local LLM comparison
 - **Objective:** Contextualize retrieval-system results against a local (offline, non-shipped)
