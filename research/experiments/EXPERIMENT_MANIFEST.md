@@ -189,7 +189,21 @@ each phase completes — they are intentionally blank/pending until run.
 ## E9 — Functional evaluation
 - **Objective:** Distinguish retrieval-correctness from actual task-success for sandboxable
   command categories (filesystem/git/npm).
-- **Status:** PENDING (Phase 10).
+- **Status:** COMPLETE, narrow and explicitly scoped. 15/150 queries (git + filesystem,
+  placeholder-free, non-interactive, host-safe). npm/docker/network/etc. explicitly excluded
+  (network-dependent or host/destructive by nature) -- see
+  `research/results/functional/FUNCTIONAL_EVAL_NOTES.md`.
+- **Fixture bug caught before reporting:** an unrelated pre-added git remote in the sandbox
+  fixture caused one retrieved command to fail for a reason unconnected to its real validity;
+  removed before any number was reported.
+- **Actual result:** gold functional success 100% (15/15, validates benchmark quality); retrieved
+  (hybrid/A3) functional success 93.3% (14/15); **zero** cases of textually-correct-but-
+  functionally-broken. The one real failure (TA-B103) is a textually wrong, cross-category
+  retrieval that also fails functionally -- consistent, not surprising. Two "textually wrong but
+  functionally succeeded" cases (git diff vs. --cached; remote add) illustrate the field's known
+  one-to-many command mapping problem (also noted by Lin et al. 2018), not a system defect.
+- **Conclusion:** positive but narrow signal -- only 10% of the benchmark could be safely
+  sandboxed without building a placeholder-substitution system, stated as a limitation.
 
 ## E10 — Safety evaluation
 - **Objective:** Precision/recall of a rule-based destructive-command tagger.
