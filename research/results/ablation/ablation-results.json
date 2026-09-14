@@ -1,0 +1,5230 @@
+{
+  "generated_at": "2026-09-14T10:22:24.728Z",
+  "conditions": {
+    "A0": {
+      "name": "A0",
+      "per_fold": [
+        {
+          "fold": 0,
+          "non_ood_accuracy": 0.8214285714285714,
+          "non_ood_total": 28,
+          "non_ood_hits": 23,
+          "by_query_type": {
+            "polysemy": {
+              "total": 6,
+              "hits": 4
+            },
+            "single_keyword": {
+              "total": 2,
+              "hits": 0
+            },
+            "paraphrase": {
+              "total": 2,
+              "hits": 2
+            },
+            "safety_sensitive": {
+              "total": 5,
+              "hits": 5
+            },
+            "canonical": {
+              "total": 4,
+              "hits": 4
+            },
+            "low_overlap_paraphrase": {
+              "total": 2,
+              "hits": 2
+            },
+            "complex_multi_intent": {
+              "total": 6,
+              "hits": 5
+            },
+            "ambiguous": {
+              "total": 1,
+              "hits": 1
+            }
+          }
+        },
+        {
+          "fold": 1,
+          "non_ood_accuracy": 0.6785714285714286,
+          "non_ood_total": 28,
+          "non_ood_hits": 19,
+          "by_query_type": {
+            "single_keyword": {
+              "total": 3,
+              "hits": 0
+            },
+            "canonical": {
+              "total": 7,
+              "hits": 7
+            },
+            "paraphrase": {
+              "total": 4,
+              "hits": 4
+            },
+            "complex_multi_intent": {
+              "total": 3,
+              "hits": 2
+            },
+            "polysemy": {
+              "total": 4,
+              "hits": 2
+            },
+            "ambiguous": {
+              "total": 1,
+              "hits": 0
+            },
+            "low_overlap_paraphrase": {
+              "total": 4,
+              "hits": 2
+            },
+            "safety_sensitive": {
+              "total": 2,
+              "hits": 2
+            }
+          }
+        },
+        {
+          "fold": 2,
+          "non_ood_accuracy": 0.6666666666666666,
+          "non_ood_total": 27,
+          "non_ood_hits": 18,
+          "by_query_type": {
+            "single_keyword": {
+              "total": 2,
+              "hits": 0
+            },
+            "ambiguous": {
+              "total": 3,
+              "hits": 2
+            },
+            "low_overlap_paraphrase": {
+              "total": 3,
+              "hits": 0
+            },
+            "safety_sensitive": {
+              "total": 2,
+              "hits": 2
+            },
+            "canonical": {
+              "total": 7,
+              "hits": 7
+            },
+            "polysemy": {
+              "total": 3,
+              "hits": 1
+            },
+            "complex_multi_intent": {
+              "total": 1,
+              "hits": 1
+            },
+            "paraphrase": {
+              "total": 6,
+              "hits": 5
+            }
+          }
+        },
+        {
+          "fold": 3,
+          "non_ood_accuracy": 0.6296296296296297,
+          "non_ood_total": 27,
+          "non_ood_hits": 17,
+          "by_query_type": {
+            "ambiguous": {
+              "total": 3,
+              "hits": 2
+            },
+            "single_keyword": {
+              "total": 2,
+              "hits": 0
+            },
+            "complex_multi_intent": {
+              "total": 4,
+              "hits": 4
+            },
+            "polysemy": {
+              "total": 4,
+              "hits": 2
+            },
+            "paraphrase": {
+              "total": 6,
+              "hits": 5
+            },
+            "safety_sensitive": {
+              "total": 2,
+              "hits": 2
+            },
+            "low_overlap_paraphrase": {
+              "total": 4,
+              "hits": 0
+            },
+            "canonical": {
+              "total": 2,
+              "hits": 2
+            }
+          }
+        },
+        {
+          "fold": 4,
+          "non_ood_accuracy": 0.8,
+          "non_ood_total": 25,
+          "non_ood_hits": 20,
+          "by_query_type": {
+            "single_keyword": {
+              "total": 1,
+              "hits": 0
+            },
+            "ambiguous": {
+              "total": 4,
+              "hits": 2
+            },
+            "safety_sensitive": {
+              "total": 4,
+              "hits": 4
+            },
+            "paraphrase": {
+              "total": 7,
+              "hits": 6
+            },
+            "complex_multi_intent": {
+              "total": 1,
+              "hits": 1
+            },
+            "canonical": {
+              "total": 5,
+              "hits": 5
+            },
+            "low_overlap_paraphrase": {
+              "total": 2,
+              "hits": 1
+            },
+            "polysemy": {
+              "total": 1,
+              "hits": 1
+            }
+          }
+        }
+      ],
+      "mean_non_ood_accuracy": 0.7193,
+      "std_non_ood_accuracy": 0.0767,
+      "by_query_type_aggregate": {
+        "polysemy": {
+          "total": 18,
+          "hits": 10
+        },
+        "single_keyword": {
+          "total": 10,
+          "hits": 0
+        },
+        "paraphrase": {
+          "total": 25,
+          "hits": 22
+        },
+        "safety_sensitive": {
+          "total": 15,
+          "hits": 15
+        },
+        "canonical": {
+          "total": 25,
+          "hits": 25
+        },
+        "low_overlap_paraphrase": {
+          "total": 15,
+          "hits": 5
+        },
+        "complex_multi_intent": {
+          "total": 15,
+          "hits": 13
+        },
+        "ambiguous": {
+          "total": 12,
+          "hits": 7
+        }
+      },
+      "per_query": [
+        {
+          "id": "TA-B105",
+          "condition": "A0",
+          "command": "git log --oneline -20",
+          "hit": true,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B119",
+          "condition": "A0",
+          "command": "Get-ChildItem -Force",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B114",
+          "condition": "A0",
+          "command": "Get-NetAdapter",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B035",
+          "condition": "A0",
+          "command": "git stash",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B129",
+          "condition": "A0",
+          "command": "sudo reboot",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B009",
+          "condition": "A0",
+          "command": "Stop-Process -Name 'process_name' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B058",
+          "condition": "A0",
+          "command": "Get-History",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B098",
+          "condition": "A0",
+          "command": "icacls 'filename.txt' /setowner 'user'",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B121",
+          "condition": "A0",
+          "command": "Remove-Item -Recurse -Force 'directory/'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B125",
+          "condition": "A0",
+          "command": "docker stop $(docker ps -q)",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B138",
+          "condition": "A0",
+          "command": "kubectl get events --sort-by='.lastTimestamp' -n namespace",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B122",
+          "condition": "A0",
+          "command": "git reset --hard HEAD && git clean -fd",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B039",
+          "condition": "A0",
+          "command": "docker exec -it container-name /bin/bash",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B142",
+          "condition": "A0",
+          "command": "git rebase -i HEAD~5",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B064",
+          "condition": "A0",
+          "command": "(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B097",
+          "condition": "A0",
+          "command": "winget uninstall package-name --purge",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B141",
+          "condition": "A0",
+          "command": "git bisect start && git bisect bad HEAD && git bisect good <good-commit>",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B002",
+          "condition": "A0",
+          "command": "git status",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B075",
+          "condition": "A0",
+          "command": "Get-Content 'filename.txt' | Out-Host -Paging",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B143",
+          "condition": "A0",
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B127",
+          "condition": "A0",
+          "command": "Start-Process powershell -Verb RunAs",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B148",
+          "condition": "A0",
+          "command": "curl -C - -O https://example.com/largefile.zip",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B139",
+          "condition": "A0",
+          "command": "git blame filename.txt",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B106",
+          "condition": "A0",
+          "command": "git config --global user.name 'Your Name'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B020",
+          "condition": "A0",
+          "command": "[System.Environment]::OSVersion",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B006",
+          "condition": "A0",
+          "command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B099",
+          "condition": "A0",
+          "command": "docker images",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B093",
+          "condition": "A0",
+          "command": "Remove-Item -Recurse -Force 'directory/'",
+          "hit": true,
+          "classification": "NEEDS_CORRECTION"
+        },
+        {
+          "id": "TA-B090",
+          "condition": "A0",
+          "command": "clamscan -r /path/to/scan",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B084",
+          "condition": "A0",
+          "command": "tmux attach -t session-name",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B080",
+          "condition": "A0",
+          "command": "git reset --soft HEAD~1",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B116",
+          "condition": "A0",
+          "command": "Stop-Process -Id PID -Force",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B120",
+          "condition": "A0",
+          "command": "curl -H 'Authorization: Bearer token' https://api.example.com",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B117",
+          "condition": "A0",
+          "command": "npm list -g --depth=0",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B010",
+          "condition": "A0",
+          "command": "$env:VAR_NAME = 'value'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B048",
+          "condition": "A0",
+          "command": "Set-Alias -Name ll -Value Get-ChildItem",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B144",
+          "condition": "A0",
+          "command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B014",
+          "condition": "A0",
+          "command": "curl -O https://example.com/file.zip",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B095",
+          "condition": "A0",
+          "command": "Stop-Process -Name 'process_name' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B071",
+          "condition": "A0",
+          "command": "Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B038",
+          "condition": "A0",
+          "command": "git merge branch-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B040",
+          "condition": "A0",
+          "command": "docker compose up -d",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B110",
+          "condition": "A0",
+          "command": "winget uninstall package-name",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B022",
+          "condition": "A0",
+          "command": "Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B063",
+          "condition": "A0",
+          "command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B057",
+          "condition": "A0",
+          "command": "ssh user@hostname",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B131",
+          "condition": "A0",
+          "command": "New-NetFirewallRule -DisplayName 'Block IP' -Direction Inbound -RemoteAddress '192.168.1.100' -Action Block",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B061",
+          "condition": "A0",
+          "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B008",
+          "condition": "A0",
+          "command": "Get-Process",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B101",
+          "condition": "A0",
+          "command": "docker compose up -d",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B137",
+          "condition": "A0",
+          "command": "Select-String -Path 'file.txt' -Pattern 'pattern' -Context 3,3",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B094",
+          "condition": "A0",
+          "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B023",
+          "condition": "A0",
+          "command": "aws s3 ls",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B044",
+          "condition": "A0",
+          "command": "Stop-Process -Id PID -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B018",
+          "condition": "A0",
+          "command": "openssl rand -base64 32",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B007",
+          "condition": "A0",
+          "command": "Test-Connection -ComputerName google.com -Count 4",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B124",
+          "condition": "A0",
+          "command": "git branch -D branch-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B059",
+          "condition": "A0",
+          "command": "curl -s https://api.example.com/data",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B145",
+          "condition": "A0",
+          "command": "ssh -L 8080:localhost:80 user@hostname",
+          "hit": false,
+          "classification": "NEEDS_CORRECTION"
+        },
+        {
+          "id": "TA-B089",
+          "condition": "A0",
+          "command": "!keyword",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B079",
+          "condition": "A0",
+          "command": "git reset --soft HEAD~1",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B078",
+          "condition": "A0",
+          "command": "Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B113",
+          "condition": "A0",
+          "command": "ssh user@hostname",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B068",
+          "condition": "A0",
+          "command": "Resolve-DnsName example.com -Type ALL",
+          "hit": true,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B112",
+          "condition": "A0",
+          "command": "docker pull ubuntu:22.04",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B052",
+          "condition": "A0",
+          "command": "docker rmi image-name",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B135",
+          "condition": "A0",
+          "command": "docker volume prune -f",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B021",
+          "condition": "A0",
+          "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B077",
+          "condition": "A0",
+          "command": "git config --list",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B107",
+          "condition": "A0",
+          "command": "winget install package-name",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B136",
+          "condition": "A0",
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B016",
+          "condition": "A0",
+          "command": "$env:USERNAME",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B027",
+          "condition": "A0",
+          "command": "docker ps",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B046",
+          "condition": "A0",
+          "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B015",
+          "condition": "A0",
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B031",
+          "condition": "A0",
+          "command": "npm init -y",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B096",
+          "condition": "A0",
+          "command": "Test-Connection -ComputerName google.com -Count 4",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B104",
+          "condition": "A0",
+          "command": "docker volume create my-volume",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B042",
+          "condition": "A0",
+          "command": "curl -X POST -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/endpoint",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B011",
+          "condition": "A0",
+          "command": "Get-History",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B076",
+          "condition": "A0",
+          "command": "Resolve-DnsName example.com -Type ALL",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B025",
+          "condition": "A0",
+          "command": "tmux new -s session-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B065",
+          "condition": "A0",
+          "command": "Get-FileHash 'filename.txt' -Algorithm MD5",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B134",
+          "condition": "A0",
+          "command": "Rename-Computer -NewName 'new-hostname' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B032",
+          "condition": "A0",
+          "command": "Get-NetTCPConnection -State Listen",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B003",
+          "condition": "A0",
+          "command": "docker ps",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B029",
+          "condition": "A0",
+          "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B054",
+          "condition": "A0",
+          "command": "pip install package-name==1.2.3",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B024",
+          "condition": "A0",
+          "command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B091",
+          "condition": "A0",
+          "command": "Set-Service -Name 'service-name' -StartupType Automatic",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B085",
+          "condition": "A0",
+          "command": "npm init -y",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B092",
+          "condition": "A0",
+          "command": "Clear-Host",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B066",
+          "condition": "A0",
+          "command": "git branch -d branch-name",
+          "hit": true,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B111",
+          "condition": "A0",
+          "command": "git config --list",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B115",
+          "condition": "A0",
+          "command": "icacls 'directory/' /grant 'user:(OI)(CI)F' /T",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B150",
+          "condition": "A0",
+          "command": "git checkout feature-branch -- path/to/file.txt",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B108",
+          "condition": "A0",
+          "command": "Get-CimInstance Win32_Processor",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B109",
+          "condition": "A0",
+          "command": "New-Item -ItemType SymbolicLink -Path '/path/to/link' -Target '/path/to/target'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B050",
+          "condition": "A0",
+          "command": "openssl s_client -connect example.com:443 -showcerts",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B072",
+          "condition": "A0",
+          "command": "docker rm container-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B140",
+          "condition": "A0",
+          "command": "ssh-copy-id user@hostname",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B043",
+          "condition": "A0",
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B126",
+          "condition": "A0",
+          "command": "docker image prune -a",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B062",
+          "condition": "A0",
+          "command": "winget upgrade --all",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B036",
+          "condition": "A0",
+          "command": "Copy-Item -Recurse 'source/' 'destination/'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B103",
+          "condition": "A0",
+          "command": "Get-Service -Name 'service-name'",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B130",
+          "condition": "A0",
+          "command": "sudo shutdown -h now",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B060",
+          "condition": "A0",
+          "command": "pip list",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B034",
+          "condition": "A0",
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B073",
+          "condition": "A0",
+          "command": "Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B147",
+          "condition": "A0",
+          "command": "gpg -c filename.txt",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B149",
+          "condition": "A0",
+          "command": "Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B028",
+          "condition": "A0",
+          "command": "npm install",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B053",
+          "condition": "A0",
+          "command": "Get-NetTCPConnection",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B100",
+          "condition": "A0",
+          "command": "npm init -y",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B056",
+          "condition": "A0",
+          "command": "npm install --save-dev package-name",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B004",
+          "condition": "A0",
+          "command": "npm install",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B001",
+          "condition": "A0",
+          "command": "git reset --soft HEAD~1",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B037",
+          "condition": "A0",
+          "command": "Resolve-DnsName example.com -Type ALL",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B086",
+          "condition": "A0",
+          "command": "crontab -e",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B083",
+          "condition": "A0",
+          "command": "npm init -y",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B081",
+          "condition": "A0",
+          "command": "git reset --soft HEAD~1",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B118",
+          "condition": "A0",
+          "command": "kubectl describe deployment deployment-name -n namespace",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B067",
+          "condition": "A0",
+          "command": "git log --oneline -20",
+          "hit": true,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B133",
+          "condition": "A0",
+          "command": "winget uninstall package-name --purge",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B041",
+          "condition": "A0",
+          "command": "ssh-keygen -t ed25519 -C 'your_email@example.com'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B146",
+          "condition": "A0",
+          "command": "Get-Process | Sort-Object CPU -Descending",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B013",
+          "condition": "A0",
+          "command": "pip install package-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B070",
+          "condition": "A0",
+          "command": "Move-Item 'oldname.txt' 'newname.txt'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B030",
+          "condition": "A0",
+          "command": "git branch -a",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B045",
+          "condition": "A0",
+          "command": "Compare-Object (Get-Content 'file1.txt') (Get-Content 'file2.txt')",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B012",
+          "condition": "A0",
+          "command": "ssh user@hostname",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B123",
+          "condition": "A0",
+          "command": "git checkout -- .",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B017",
+          "condition": "A0",
+          "command": "kubectl get pods --all-namespaces",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B051",
+          "condition": "A0",
+          "command": "git remote add origin https://github.com/user/repo.git",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B128",
+          "condition": "A0",
+          "command": "icacls 'filename.txt' /setowner 'user'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B047",
+          "condition": "A0",
+          "command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B026",
+          "condition": "A0",
+          "command": "git reset --soft HEAD~1",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B033",
+          "condition": "A0",
+          "command": "Get-ChildItem Env:",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B055",
+          "condition": "A0",
+          "command": "git stash",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B132",
+          "condition": "A0",
+          "command": "kubectl delete pods --field-selector=status.phase=Failed -n namespace",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B019",
+          "condition": "A0",
+          "command": "Get-PSDrive -PSProvider FileSystem",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B005",
+          "condition": "A0",
+          "command": "Get-ChildItem -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B049",
+          "condition": "A0",
+          "command": "npm outdated",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B102",
+          "condition": "A0",
+          "command": "docker stop $(docker ps -q)",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B069",
+          "condition": "A0",
+          "command": "Stop-Service -Name 'service-name'",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B074",
+          "condition": "A0",
+          "command": "git config --global user.name 'Your Name'",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B088",
+          "condition": "A0",
+          "command": "command 2>'error.txt'",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B087",
+          "condition": "A0",
+          "command": "Resolve-DnsName example.com -Type ALL",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B082",
+          "condition": "A0",
+          "command": "git reset --soft HEAD~1",
+          "hit": false,
+          "classification": "OOD"
+        }
+      ]
+    },
+    "A1": {
+      "name": "A1",
+      "per_fold": [
+        {
+          "fold": 0,
+          "non_ood_accuracy": 0.8214285714285714,
+          "non_ood_total": 28,
+          "non_ood_hits": 23,
+          "by_query_type": {
+            "polysemy": {
+              "total": 6,
+              "hits": 4
+            },
+            "single_keyword": {
+              "total": 2,
+              "hits": 0
+            },
+            "paraphrase": {
+              "total": 2,
+              "hits": 2
+            },
+            "safety_sensitive": {
+              "total": 5,
+              "hits": 5
+            },
+            "canonical": {
+              "total": 4,
+              "hits": 4
+            },
+            "low_overlap_paraphrase": {
+              "total": 2,
+              "hits": 2
+            },
+            "complex_multi_intent": {
+              "total": 6,
+              "hits": 5
+            },
+            "ambiguous": {
+              "total": 1,
+              "hits": 1
+            }
+          }
+        },
+        {
+          "fold": 1,
+          "non_ood_accuracy": 0.6785714285714286,
+          "non_ood_total": 28,
+          "non_ood_hits": 19,
+          "by_query_type": {
+            "single_keyword": {
+              "total": 3,
+              "hits": 0
+            },
+            "canonical": {
+              "total": 7,
+              "hits": 7
+            },
+            "paraphrase": {
+              "total": 4,
+              "hits": 4
+            },
+            "complex_multi_intent": {
+              "total": 3,
+              "hits": 2
+            },
+            "polysemy": {
+              "total": 4,
+              "hits": 2
+            },
+            "ambiguous": {
+              "total": 1,
+              "hits": 0
+            },
+            "low_overlap_paraphrase": {
+              "total": 4,
+              "hits": 2
+            },
+            "safety_sensitive": {
+              "total": 2,
+              "hits": 2
+            }
+          }
+        },
+        {
+          "fold": 2,
+          "non_ood_accuracy": 0.6666666666666666,
+          "non_ood_total": 27,
+          "non_ood_hits": 18,
+          "by_query_type": {
+            "single_keyword": {
+              "total": 2,
+              "hits": 0
+            },
+            "ambiguous": {
+              "total": 3,
+              "hits": 2
+            },
+            "low_overlap_paraphrase": {
+              "total": 3,
+              "hits": 0
+            },
+            "safety_sensitive": {
+              "total": 2,
+              "hits": 2
+            },
+            "canonical": {
+              "total": 7,
+              "hits": 7
+            },
+            "polysemy": {
+              "total": 3,
+              "hits": 1
+            },
+            "complex_multi_intent": {
+              "total": 1,
+              "hits": 1
+            },
+            "paraphrase": {
+              "total": 6,
+              "hits": 5
+            }
+          }
+        },
+        {
+          "fold": 3,
+          "non_ood_accuracy": 0.6296296296296297,
+          "non_ood_total": 27,
+          "non_ood_hits": 17,
+          "by_query_type": {
+            "ambiguous": {
+              "total": 3,
+              "hits": 2
+            },
+            "single_keyword": {
+              "total": 2,
+              "hits": 0
+            },
+            "complex_multi_intent": {
+              "total": 4,
+              "hits": 4
+            },
+            "polysemy": {
+              "total": 4,
+              "hits": 2
+            },
+            "paraphrase": {
+              "total": 6,
+              "hits": 5
+            },
+            "safety_sensitive": {
+              "total": 2,
+              "hits": 2
+            },
+            "low_overlap_paraphrase": {
+              "total": 4,
+              "hits": 0
+            },
+            "canonical": {
+              "total": 2,
+              "hits": 2
+            }
+          }
+        },
+        {
+          "fold": 4,
+          "non_ood_accuracy": 0.8,
+          "non_ood_total": 25,
+          "non_ood_hits": 20,
+          "by_query_type": {
+            "single_keyword": {
+              "total": 1,
+              "hits": 0
+            },
+            "ambiguous": {
+              "total": 4,
+              "hits": 2
+            },
+            "safety_sensitive": {
+              "total": 4,
+              "hits": 4
+            },
+            "paraphrase": {
+              "total": 7,
+              "hits": 6
+            },
+            "complex_multi_intent": {
+              "total": 1,
+              "hits": 1
+            },
+            "canonical": {
+              "total": 5,
+              "hits": 5
+            },
+            "low_overlap_paraphrase": {
+              "total": 2,
+              "hits": 1
+            },
+            "polysemy": {
+              "total": 1,
+              "hits": 1
+            }
+          }
+        }
+      ],
+      "mean_non_ood_accuracy": 0.7193,
+      "std_non_ood_accuracy": 0.0767,
+      "by_query_type_aggregate": {
+        "polysemy": {
+          "total": 18,
+          "hits": 10
+        },
+        "single_keyword": {
+          "total": 10,
+          "hits": 0
+        },
+        "paraphrase": {
+          "total": 25,
+          "hits": 22
+        },
+        "safety_sensitive": {
+          "total": 15,
+          "hits": 15
+        },
+        "canonical": {
+          "total": 25,
+          "hits": 25
+        },
+        "low_overlap_paraphrase": {
+          "total": 15,
+          "hits": 5
+        },
+        "complex_multi_intent": {
+          "total": 15,
+          "hits": 13
+        },
+        "ambiguous": {
+          "total": 12,
+          "hits": 7
+        }
+      },
+      "per_query": [
+        {
+          "id": "TA-B105",
+          "condition": "A1",
+          "command": "git log --oneline -20",
+          "hit": true,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B119",
+          "condition": "A1",
+          "command": "Get-ChildItem -Force",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B114",
+          "condition": "A1",
+          "command": "Get-NetAdapter",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B035",
+          "condition": "A1",
+          "command": "git stash",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B129",
+          "condition": "A1",
+          "command": "sudo reboot",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B009",
+          "condition": "A1",
+          "command": "Stop-Process -Name 'process_name' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B058",
+          "condition": "A1",
+          "command": "Get-History",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B098",
+          "condition": "A1",
+          "command": "icacls 'filename.txt' /setowner 'user'",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B121",
+          "condition": "A1",
+          "command": "Remove-Item -Recurse -Force 'directory/'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B125",
+          "condition": "A1",
+          "command": "docker stop $(docker ps -q)",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B138",
+          "condition": "A1",
+          "command": "kubectl get events --sort-by='.lastTimestamp' -n namespace",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B122",
+          "condition": "A1",
+          "command": "git reset --hard HEAD && git clean -fd",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B039",
+          "condition": "A1",
+          "command": "docker exec -it container-name /bin/bash",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B142",
+          "condition": "A1",
+          "command": "git rebase -i HEAD~5",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B064",
+          "condition": "A1",
+          "command": "(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B097",
+          "condition": "A1",
+          "command": "winget uninstall package-name --purge",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B141",
+          "condition": "A1",
+          "command": "git bisect start && git bisect bad HEAD && git bisect good <good-commit>",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B002",
+          "condition": "A1",
+          "command": "git status",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B075",
+          "condition": "A1",
+          "command": "Get-Content 'filename.txt' | Out-Host -Paging",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B143",
+          "condition": "A1",
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B127",
+          "condition": "A1",
+          "command": "Start-Process powershell -Verb RunAs",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B148",
+          "condition": "A1",
+          "command": "curl -C - -O https://example.com/largefile.zip",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B139",
+          "condition": "A1",
+          "command": "git blame filename.txt",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B106",
+          "condition": "A1",
+          "command": "git config --global user.name 'Your Name'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B020",
+          "condition": "A1",
+          "command": "[System.Environment]::OSVersion",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B006",
+          "condition": "A1",
+          "command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B099",
+          "condition": "A1",
+          "command": "docker images",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B093",
+          "condition": "A1",
+          "command": "Remove-Item -Recurse -Force 'directory/'",
+          "hit": true,
+          "classification": "NEEDS_CORRECTION"
+        },
+        {
+          "id": "TA-B090",
+          "condition": "A1",
+          "command": "clamscan -r /path/to/scan",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B084",
+          "condition": "A1",
+          "command": "tmux attach -t session-name",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B080",
+          "condition": "A1",
+          "command": "git reset --soft HEAD~1",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B116",
+          "condition": "A1",
+          "command": "Stop-Process -Id PID -Force",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B120",
+          "condition": "A1",
+          "command": "curl -H 'Authorization: Bearer token' https://api.example.com",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B117",
+          "condition": "A1",
+          "command": "npm list -g --depth=0",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B010",
+          "condition": "A1",
+          "command": "$env:VAR_NAME = 'value'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B048",
+          "condition": "A1",
+          "command": "Set-Alias -Name ll -Value Get-ChildItem",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B144",
+          "condition": "A1",
+          "command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B014",
+          "condition": "A1",
+          "command": "curl -O https://example.com/file.zip",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B095",
+          "condition": "A1",
+          "command": "Stop-Process -Name 'process_name' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B071",
+          "condition": "A1",
+          "command": "Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B038",
+          "condition": "A1",
+          "command": "git merge branch-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B040",
+          "condition": "A1",
+          "command": "docker compose up -d",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B110",
+          "condition": "A1",
+          "command": "winget uninstall package-name",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B022",
+          "condition": "A1",
+          "command": "Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B063",
+          "condition": "A1",
+          "command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B057",
+          "condition": "A1",
+          "command": "ssh user@hostname",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B131",
+          "condition": "A1",
+          "command": "New-NetFirewallRule -DisplayName 'Block IP' -Direction Inbound -RemoteAddress '192.168.1.100' -Action Block",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B061",
+          "condition": "A1",
+          "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B008",
+          "condition": "A1",
+          "command": "Get-Process",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B101",
+          "condition": "A1",
+          "command": "docker compose up -d",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B137",
+          "condition": "A1",
+          "command": "Select-String -Path 'file.txt' -Pattern 'pattern' -Context 3,3",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B094",
+          "condition": "A1",
+          "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B023",
+          "condition": "A1",
+          "command": "aws s3 ls",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B044",
+          "condition": "A1",
+          "command": "Stop-Process -Id PID -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B018",
+          "condition": "A1",
+          "command": "openssl rand -base64 32",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B007",
+          "condition": "A1",
+          "command": "Test-Connection -ComputerName google.com -Count 4",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B124",
+          "condition": "A1",
+          "command": "git branch -D branch-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B059",
+          "condition": "A1",
+          "command": "curl -s https://api.example.com/data",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B145",
+          "condition": "A1",
+          "command": "ssh -L 8080:localhost:80 user@hostname",
+          "hit": false,
+          "classification": "NEEDS_CORRECTION"
+        },
+        {
+          "id": "TA-B089",
+          "condition": "A1",
+          "command": "!keyword",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B079",
+          "condition": "A1",
+          "command": "git reset --soft HEAD~1",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B078",
+          "condition": "A1",
+          "command": "Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B113",
+          "condition": "A1",
+          "command": "ssh user@hostname",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B068",
+          "condition": "A1",
+          "command": "Resolve-DnsName example.com -Type ALL",
+          "hit": true,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B112",
+          "condition": "A1",
+          "command": "docker pull ubuntu:22.04",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B052",
+          "condition": "A1",
+          "command": "docker rmi image-name",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B135",
+          "condition": "A1",
+          "command": "docker volume prune -f",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B021",
+          "condition": "A1",
+          "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B077",
+          "condition": "A1",
+          "command": "git config --list",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B107",
+          "condition": "A1",
+          "command": "winget install package-name",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B136",
+          "condition": "A1",
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B016",
+          "condition": "A1",
+          "command": "$env:USERNAME",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B027",
+          "condition": "A1",
+          "command": "docker ps",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B046",
+          "condition": "A1",
+          "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B015",
+          "condition": "A1",
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B031",
+          "condition": "A1",
+          "command": "npm init -y",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B096",
+          "condition": "A1",
+          "command": "Test-Connection -ComputerName google.com -Count 4",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B104",
+          "condition": "A1",
+          "command": "docker volume create my-volume",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B042",
+          "condition": "A1",
+          "command": "curl -X POST -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/endpoint",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B011",
+          "condition": "A1",
+          "command": "Get-History",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B076",
+          "condition": "A1",
+          "command": "Resolve-DnsName example.com -Type ALL",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B025",
+          "condition": "A1",
+          "command": "tmux new -s session-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B065",
+          "condition": "A1",
+          "command": "Get-FileHash 'filename.txt' -Algorithm MD5",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B134",
+          "condition": "A1",
+          "command": "Rename-Computer -NewName 'new-hostname' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B032",
+          "condition": "A1",
+          "command": "Get-NetTCPConnection -State Listen",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B003",
+          "condition": "A1",
+          "command": "docker ps",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B029",
+          "condition": "A1",
+          "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B054",
+          "condition": "A1",
+          "command": "pip install package-name==1.2.3",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B024",
+          "condition": "A1",
+          "command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B091",
+          "condition": "A1",
+          "command": "Set-Service -Name 'service-name' -StartupType Automatic",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B085",
+          "condition": "A1",
+          "command": "npm init -y",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B092",
+          "condition": "A1",
+          "command": "Clear-Host",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B066",
+          "condition": "A1",
+          "command": "git branch -d branch-name",
+          "hit": true,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B111",
+          "condition": "A1",
+          "command": "git config --list",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B115",
+          "condition": "A1",
+          "command": "icacls 'directory/' /grant 'user:(OI)(CI)F' /T",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B150",
+          "condition": "A1",
+          "command": "git checkout feature-branch -- path/to/file.txt",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B108",
+          "condition": "A1",
+          "command": "Get-CimInstance Win32_Processor",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B109",
+          "condition": "A1",
+          "command": "New-Item -ItemType SymbolicLink -Path '/path/to/link' -Target '/path/to/target'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B050",
+          "condition": "A1",
+          "command": "openssl s_client -connect example.com:443 -showcerts",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B072",
+          "condition": "A1",
+          "command": "docker rm container-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B140",
+          "condition": "A1",
+          "command": "ssh-copy-id user@hostname",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B043",
+          "condition": "A1",
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B126",
+          "condition": "A1",
+          "command": "docker image prune -a",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B062",
+          "condition": "A1",
+          "command": "winget upgrade --all",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B036",
+          "condition": "A1",
+          "command": "Copy-Item -Recurse 'source/' 'destination/'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B103",
+          "condition": "A1",
+          "command": "Get-Service -Name 'service-name'",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B130",
+          "condition": "A1",
+          "command": "sudo shutdown -h now",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B060",
+          "condition": "A1",
+          "command": "pip list",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B034",
+          "condition": "A1",
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B073",
+          "condition": "A1",
+          "command": "Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B147",
+          "condition": "A1",
+          "command": "gpg -c filename.txt",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B149",
+          "condition": "A1",
+          "command": "Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B028",
+          "condition": "A1",
+          "command": "npm install",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B053",
+          "condition": "A1",
+          "command": "Get-NetTCPConnection",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B100",
+          "condition": "A1",
+          "command": "npm init -y",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B056",
+          "condition": "A1",
+          "command": "npm install --save-dev package-name",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B004",
+          "condition": "A1",
+          "command": "npm install",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B001",
+          "condition": "A1",
+          "command": "git reset --soft HEAD~1",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B037",
+          "condition": "A1",
+          "command": "Resolve-DnsName example.com -Type ALL",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B086",
+          "condition": "A1",
+          "command": "crontab -e",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B083",
+          "condition": "A1",
+          "command": "npm init -y",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B081",
+          "condition": "A1",
+          "command": "git reset --soft HEAD~1",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B118",
+          "condition": "A1",
+          "command": "kubectl describe deployment deployment-name -n namespace",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B067",
+          "condition": "A1",
+          "command": "git log --oneline -20",
+          "hit": true,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B133",
+          "condition": "A1",
+          "command": "winget uninstall package-name --purge",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B041",
+          "condition": "A1",
+          "command": "ssh-keygen -t ed25519 -C 'your_email@example.com'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B146",
+          "condition": "A1",
+          "command": "Get-Process | Sort-Object CPU -Descending",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B013",
+          "condition": "A1",
+          "command": "pip install package-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B070",
+          "condition": "A1",
+          "command": "Move-Item 'oldname.txt' 'newname.txt'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B030",
+          "condition": "A1",
+          "command": "git branch -a",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B045",
+          "condition": "A1",
+          "command": "Compare-Object (Get-Content 'file1.txt') (Get-Content 'file2.txt')",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B012",
+          "condition": "A1",
+          "command": "ssh user@hostname",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B123",
+          "condition": "A1",
+          "command": "git checkout -- .",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B017",
+          "condition": "A1",
+          "command": "kubectl get pods --all-namespaces",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B051",
+          "condition": "A1",
+          "command": "git remote add origin https://github.com/user/repo.git",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B128",
+          "condition": "A1",
+          "command": "icacls 'filename.txt' /setowner 'user'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B047",
+          "condition": "A1",
+          "command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B026",
+          "condition": "A1",
+          "command": "git reset --soft HEAD~1",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B033",
+          "condition": "A1",
+          "command": "Get-ChildItem Env:",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B055",
+          "condition": "A1",
+          "command": "git stash",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B132",
+          "condition": "A1",
+          "command": "kubectl delete pods --field-selector=status.phase=Failed -n namespace",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B019",
+          "condition": "A1",
+          "command": "Get-PSDrive -PSProvider FileSystem",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B005",
+          "condition": "A1",
+          "command": "Get-ChildItem -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B049",
+          "condition": "A1",
+          "command": "npm outdated",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B102",
+          "condition": "A1",
+          "command": "docker stop $(docker ps -q)",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B069",
+          "condition": "A1",
+          "command": "Stop-Service -Name 'service-name'",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B074",
+          "condition": "A1",
+          "command": "git config --global user.name 'Your Name'",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B088",
+          "condition": "A1",
+          "command": "command 2>'error.txt'",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B087",
+          "condition": "A1",
+          "command": "Resolve-DnsName example.com -Type ALL",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B082",
+          "condition": "A1",
+          "command": "git reset --soft HEAD~1",
+          "hit": false,
+          "classification": "OOD"
+        }
+      ]
+    },
+    "A2": {
+      "name": "A2",
+      "per_fold": [
+        {
+          "fold": 0,
+          "non_ood_accuracy": 0.6785714285714286,
+          "non_ood_total": 28,
+          "non_ood_hits": 19,
+          "by_query_type": {
+            "polysemy": {
+              "total": 6,
+              "hits": 2
+            },
+            "single_keyword": {
+              "total": 2,
+              "hits": 0
+            },
+            "paraphrase": {
+              "total": 2,
+              "hits": 2
+            },
+            "safety_sensitive": {
+              "total": 5,
+              "hits": 4
+            },
+            "canonical": {
+              "total": 4,
+              "hits": 4
+            },
+            "low_overlap_paraphrase": {
+              "total": 2,
+              "hits": 1
+            },
+            "complex_multi_intent": {
+              "total": 6,
+              "hits": 5
+            },
+            "ambiguous": {
+              "total": 1,
+              "hits": 1
+            }
+          }
+        },
+        {
+          "fold": 1,
+          "non_ood_accuracy": 0.6428571428571429,
+          "non_ood_total": 28,
+          "non_ood_hits": 18,
+          "by_query_type": {
+            "single_keyword": {
+              "total": 3,
+              "hits": 0
+            },
+            "canonical": {
+              "total": 7,
+              "hits": 7
+            },
+            "paraphrase": {
+              "total": 4,
+              "hits": 4
+            },
+            "complex_multi_intent": {
+              "total": 3,
+              "hits": 1
+            },
+            "polysemy": {
+              "total": 4,
+              "hits": 2
+            },
+            "ambiguous": {
+              "total": 1,
+              "hits": 1
+            },
+            "low_overlap_paraphrase": {
+              "total": 4,
+              "hits": 2
+            },
+            "safety_sensitive": {
+              "total": 2,
+              "hits": 1
+            }
+          }
+        },
+        {
+          "fold": 2,
+          "non_ood_accuracy": 0.8148148148148148,
+          "non_ood_total": 27,
+          "non_ood_hits": 22,
+          "by_query_type": {
+            "single_keyword": {
+              "total": 2,
+              "hits": 0
+            },
+            "ambiguous": {
+              "total": 3,
+              "hits": 3
+            },
+            "low_overlap_paraphrase": {
+              "total": 3,
+              "hits": 2
+            },
+            "safety_sensitive": {
+              "total": 2,
+              "hits": 2
+            },
+            "canonical": {
+              "total": 7,
+              "hits": 7
+            },
+            "polysemy": {
+              "total": 3,
+              "hits": 1
+            },
+            "complex_multi_intent": {
+              "total": 1,
+              "hits": 1
+            },
+            "paraphrase": {
+              "total": 6,
+              "hits": 6
+            }
+          }
+        },
+        {
+          "fold": 3,
+          "non_ood_accuracy": 0.7407407407407407,
+          "non_ood_total": 27,
+          "non_ood_hits": 20,
+          "by_query_type": {
+            "ambiguous": {
+              "total": 3,
+              "hits": 3
+            },
+            "single_keyword": {
+              "total": 2,
+              "hits": 0
+            },
+            "complex_multi_intent": {
+              "total": 4,
+              "hits": 4
+            },
+            "polysemy": {
+              "total": 4,
+              "hits": 3
+            },
+            "paraphrase": {
+              "total": 6,
+              "hits": 5
+            },
+            "safety_sensitive": {
+              "total": 2,
+              "hits": 2
+            },
+            "low_overlap_paraphrase": {
+              "total": 4,
+              "hits": 1
+            },
+            "canonical": {
+              "total": 2,
+              "hits": 2
+            }
+          }
+        },
+        {
+          "fold": 4,
+          "non_ood_accuracy": 0.76,
+          "non_ood_total": 25,
+          "non_ood_hits": 19,
+          "by_query_type": {
+            "single_keyword": {
+              "total": 1,
+              "hits": 0
+            },
+            "ambiguous": {
+              "total": 4,
+              "hits": 2
+            },
+            "safety_sensitive": {
+              "total": 4,
+              "hits": 4
+            },
+            "paraphrase": {
+              "total": 7,
+              "hits": 5
+            },
+            "complex_multi_intent": {
+              "total": 1,
+              "hits": 1
+            },
+            "canonical": {
+              "total": 5,
+              "hits": 5
+            },
+            "low_overlap_paraphrase": {
+              "total": 2,
+              "hits": 1
+            },
+            "polysemy": {
+              "total": 1,
+              "hits": 1
+            }
+          }
+        }
+      ],
+      "mean_non_ood_accuracy": 0.7274,
+      "std_non_ood_accuracy": 0.0607,
+      "by_query_type_aggregate": {
+        "polysemy": {
+          "total": 18,
+          "hits": 9
+        },
+        "single_keyword": {
+          "total": 10,
+          "hits": 0
+        },
+        "paraphrase": {
+          "total": 25,
+          "hits": 22
+        },
+        "safety_sensitive": {
+          "total": 15,
+          "hits": 13
+        },
+        "canonical": {
+          "total": 25,
+          "hits": 25
+        },
+        "low_overlap_paraphrase": {
+          "total": 15,
+          "hits": 7
+        },
+        "complex_multi_intent": {
+          "total": 15,
+          "hits": 12
+        },
+        "ambiguous": {
+          "total": 12,
+          "hits": 10
+        }
+      },
+      "per_query": [
+        {
+          "id": "TA-B105",
+          "condition": "A2",
+          "command": "Get-EventLog -LogName System -Newest 50",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B119",
+          "condition": "A2",
+          "command": "rsync -avz source/ destination/",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B114",
+          "condition": "A2",
+          "command": "Get-NetTCPConnection",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B035",
+          "condition": "A2",
+          "command": "git stash",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B129",
+          "condition": "A2",
+          "command": "sudo reboot",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B009",
+          "condition": "A2",
+          "command": "Stop-Process -Name 'process_name' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B058",
+          "condition": "A2",
+          "command": "Get-History | Where-Object { $_.CommandLine -match 'keyword' }",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B098",
+          "condition": "A2",
+          "command": "icacls 'filename.txt' /setowner 'user'",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B121",
+          "condition": "A2",
+          "command": "Remove-Item -Recurse -Force 'directory/'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B125",
+          "condition": "A2",
+          "command": "docker stop $(docker ps -q)",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B138",
+          "condition": "A2",
+          "command": "kubectl describe deployment deployment-name -n namespace",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B122",
+          "condition": "A2",
+          "command": "git reset --soft HEAD~1",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B039",
+          "condition": "A2",
+          "command": "docker exec -it container-name /bin/bash",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B142",
+          "condition": "A2",
+          "command": "git rebase -i HEAD~5",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B064",
+          "condition": "A2",
+          "command": "(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B097",
+          "condition": "A2",
+          "command": "git config --list",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B141",
+          "condition": "A2",
+          "command": "git bisect start && git bisect bad HEAD && git bisect good <good-commit>",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B002",
+          "condition": "A2",
+          "command": "git status",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B075",
+          "condition": "A2",
+          "command": "Get-Content 'filename.txt'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B143",
+          "condition": "A2",
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B127",
+          "condition": "A2",
+          "command": "Start-Process powershell -Verb RunAs",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B148",
+          "condition": "A2",
+          "command": "curl -C - -O https://example.com/largefile.zip",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B139",
+          "condition": "A2",
+          "command": "git blame filename.txt",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B106",
+          "condition": "A2",
+          "command": "Rename-Computer -NewName 'new-hostname' -Force",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B020",
+          "condition": "A2",
+          "command": "[System.Environment]::OSVersion",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B006",
+          "condition": "A2",
+          "command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B099",
+          "condition": "A2",
+          "command": "docker images",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B093",
+          "condition": "A2",
+          "command": "Remove-Item -Recurse -Force 'directory/'",
+          "hit": true,
+          "classification": "NEEDS_CORRECTION"
+        },
+        {
+          "id": "TA-B090",
+          "condition": "A2",
+          "command": "Get-NetIPAddress",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B084",
+          "condition": "A2",
+          "command": "ssh -R 9090:localhost:3000 user@hostname",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B080",
+          "condition": "A2",
+          "command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B116",
+          "condition": "A2",
+          "command": "Get-Process | Sort-Object CPU -Descending | Select-Object -First 20",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B120",
+          "condition": "A2",
+          "command": "curl -o /dev/null -s -w '%{http_code}' https://example.com",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B117",
+          "condition": "A2",
+          "command": "npm install --save-dev package-name",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B010",
+          "condition": "A2",
+          "command": "$env:VAR_NAME = 'value'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B048",
+          "condition": "A2",
+          "command": "Set-Alias -Name ll -Value Get-ChildItem",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B144",
+          "condition": "A2",
+          "command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B014",
+          "condition": "A2",
+          "command": "curl -O https://example.com/file.zip",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B095",
+          "condition": "A2",
+          "command": "Stop-Process -Name 'process_name' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B071",
+          "condition": "A2",
+          "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B038",
+          "condition": "A2",
+          "command": "git merge branch-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B040",
+          "condition": "A2",
+          "command": "docker compose up -d",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B110",
+          "condition": "A2",
+          "command": "winget uninstall package-name --purge",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B022",
+          "condition": "A2",
+          "command": "Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B063",
+          "condition": "A2",
+          "command": "icacls 'filename.txt' /inheritance:r /grant:r 'Everyone:R'",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B057",
+          "condition": "A2",
+          "command": "ssh -R 9090:localhost:3000 user@hostname",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B131",
+          "condition": "A2",
+          "command": "New-NetFirewallRule -DisplayName 'Block IP' -Direction Inbound -RemoteAddress '192.168.1.100' -Action Block",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B061",
+          "condition": "A2",
+          "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B008",
+          "condition": "A2",
+          "command": "Get-Process",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B101",
+          "condition": "A2",
+          "command": "Start-Service -Name 'service-name'",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B137",
+          "condition": "A2",
+          "command": "Get-EventLog -LogName System -Newest 50",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B094",
+          "condition": "A2",
+          "command": "Remove-Item -Recurse -Force 'directory/'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B023",
+          "condition": "A2",
+          "command": "aws s3 ls",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B044",
+          "condition": "A2",
+          "command": "Stop-Process -Id PID -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B018",
+          "condition": "A2",
+          "command": "openssl rand -base64 32",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B007",
+          "condition": "A2",
+          "command": "Test-Connection -ComputerName google.com -Count 4",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B124",
+          "condition": "A2",
+          "command": "git branch -d branch-name",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B059",
+          "condition": "A2",
+          "command": "Get-CimInstance Win32_Processor",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B145",
+          "condition": "A2",
+          "command": "ssh -R 9090:localhost:3000 user@hostname",
+          "hit": false,
+          "classification": "NEEDS_CORRECTION"
+        },
+        {
+          "id": "TA-B089",
+          "condition": "A2",
+          "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B079",
+          "condition": "A2",
+          "command": "winver",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B078",
+          "condition": "A2",
+          "command": "npm update",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B113",
+          "condition": "A2",
+          "command": "ssh user@hostname",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B068",
+          "condition": "A2",
+          "command": "Resolve-DnsName example.com -Type ALL",
+          "hit": true,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B112",
+          "condition": "A2",
+          "command": "docker inspect container-name",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B052",
+          "condition": "A2",
+          "command": "Get-PSDrive -PSProvider FileSystem",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B135",
+          "condition": "A2",
+          "command": "docker volume prune -f",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B021",
+          "condition": "A2",
+          "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B077",
+          "condition": "A2",
+          "command": "git config --list",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B107",
+          "condition": "A2",
+          "command": "winget install package-name",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B136",
+          "condition": "A2",
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B016",
+          "condition": "A2",
+          "command": "$env:USERNAME",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B027",
+          "condition": "A2",
+          "command": "docker ps",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B046",
+          "condition": "A2",
+          "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B015",
+          "condition": "A2",
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B031",
+          "condition": "A2",
+          "command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B096",
+          "condition": "A2",
+          "command": "npm audit",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B104",
+          "condition": "A2",
+          "command": "docker volume create my-volume",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B042",
+          "condition": "A2",
+          "command": "curl -X POST -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/endpoint",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B011",
+          "condition": "A2",
+          "command": "Get-History",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B076",
+          "condition": "A2",
+          "command": "docker image prune -a",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B025",
+          "condition": "A2",
+          "command": "tmux new -s session-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B065",
+          "condition": "A2",
+          "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B134",
+          "condition": "A2",
+          "command": "Rename-Computer -NewName 'new-hostname' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B032",
+          "condition": "A2",
+          "command": "Get-NetTCPConnection -State Listen",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B003",
+          "condition": "A2",
+          "command": "docker ps",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B029",
+          "condition": "A2",
+          "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B054",
+          "condition": "A2",
+          "command": "git tag --sort=-version:refname",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B024",
+          "condition": "A2",
+          "command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B091",
+          "condition": "A2",
+          "command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B085",
+          "condition": "A2",
+          "command": "npm init -y",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B092",
+          "condition": "A2",
+          "command": "git config --global user.email 'email@example.com'",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B066",
+          "condition": "A2",
+          "command": "git branch -d branch-name",
+          "hit": true,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B111",
+          "condition": "A2",
+          "command": "git add -A",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B115",
+          "condition": "A2",
+          "command": "icacls 'directory/' /grant 'user:(OI)(CI)F' /T",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B150",
+          "condition": "A2",
+          "command": "git checkout feature-branch -- path/to/file.txt",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B108",
+          "condition": "A2",
+          "command": "Get-NetAdapter",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B109",
+          "condition": "A2",
+          "command": "New-Item -ItemType SymbolicLink -Path '/path/to/link' -Target '/path/to/target'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B050",
+          "condition": "A2",
+          "command": "openssl s_client -connect example.com:443 -showcerts",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B072",
+          "condition": "A2",
+          "command": "docker rm container-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B140",
+          "condition": "A2",
+          "command": "ssh-copy-id user@hostname",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B043",
+          "condition": "A2",
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B126",
+          "condition": "A2",
+          "command": "docker image prune -a",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B062",
+          "condition": "A2",
+          "command": "npm outdated",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B036",
+          "condition": "A2",
+          "command": "Copy-Item -Recurse 'source/' 'destination/'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B103",
+          "condition": "A2",
+          "command": "curl -o /dev/null -s -w '%{http_code}' https://example.com",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B130",
+          "condition": "A2",
+          "command": "sudo shutdown -h now",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B060",
+          "condition": "A2",
+          "command": "python -m venv venv",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B034",
+          "condition": "A2",
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B073",
+          "condition": "A2",
+          "command": "(Get-Content 'filename.txt') -replace 'old','new' | Set-Content 'filename.txt'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B147",
+          "condition": "A2",
+          "command": "gpg -c filename.txt",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B149",
+          "condition": "A2",
+          "command": "Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B028",
+          "condition": "A2",
+          "command": "npm install",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B053",
+          "condition": "A2",
+          "command": "Get-NetTCPConnection",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B100",
+          "condition": "A2",
+          "command": "npm init -y",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B056",
+          "condition": "A2",
+          "command": "Get-LocalUser | Select-Object Name",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B004",
+          "condition": "A2",
+          "command": "npm install",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B001",
+          "condition": "A2",
+          "command": "git reset --soft HEAD~1",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B037",
+          "condition": "A2",
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B086",
+          "condition": "A2",
+          "command": "crontab -e",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B083",
+          "condition": "A2",
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B081",
+          "condition": "A2",
+          "command": "git commit --amend -m 'New commit message'",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B118",
+          "condition": "A2",
+          "command": "kubectl describe deployment deployment-name -n namespace",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B067",
+          "condition": "A2",
+          "command": "git log --oneline -20",
+          "hit": true,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B133",
+          "condition": "A2",
+          "command": "winget uninstall package-name --purge",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B041",
+          "condition": "A2",
+          "command": "ssh-keygen -t ed25519 -C 'your_email@example.com'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B146",
+          "condition": "A2",
+          "command": "Get-Process | Sort-Object CPU -Descending",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B013",
+          "condition": "A2",
+          "command": "pip install package-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B070",
+          "condition": "A2",
+          "command": "Move-Item 'oldname.txt' 'newname.txt'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B030",
+          "condition": "A2",
+          "command": "git branch -a",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B045",
+          "condition": "A2",
+          "command": "git diff --cached",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B012",
+          "condition": "A2",
+          "command": "ssh user@hostname",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B123",
+          "condition": "A2",
+          "command": "git checkout -- .",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B017",
+          "condition": "A2",
+          "command": "kubectl get pods --all-namespaces",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B051",
+          "condition": "A2",
+          "command": "git rebase -i HEAD~5",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B128",
+          "condition": "A2",
+          "command": "icacls 'filename.txt' /setowner 'user'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B047",
+          "condition": "A2",
+          "command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVirtualMemorySize,FreeVirtualMemory,TotalVisibleMemorySize,FreePhysicalMemory",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B026",
+          "condition": "A2",
+          "command": "git reset --soft HEAD~1",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B033",
+          "condition": "A2",
+          "command": "Get-ChildItem Env:",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B055",
+          "condition": "A2",
+          "command": "git stash",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B132",
+          "condition": "A2",
+          "command": "kubectl delete pods --field-selector=status.phase=Failed -n namespace",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B019",
+          "condition": "A2",
+          "command": "Get-PSDrive -PSProvider FileSystem",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B005",
+          "condition": "A2",
+          "command": "Get-ChildItem -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B049",
+          "condition": "A2",
+          "command": "npm outdated",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B102",
+          "condition": "A2",
+          "command": "docker stop $(docker ps -q)",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B069",
+          "condition": "A2",
+          "command": "docker stop $(docker ps -q)",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B074",
+          "condition": "A2",
+          "command": "git clone https://github.com/user/repo.git",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B088",
+          "condition": "A2",
+          "command": "npm audit",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B087",
+          "condition": "A2",
+          "command": "python -m venv venv",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B082",
+          "condition": "A2",
+          "command": "openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes",
+          "hit": false,
+          "classification": "OOD"
+        }
+      ]
+    },
+    "A3": {
+      "name": "A3",
+      "per_fold": [
+        {
+          "fold": 0,
+          "non_ood_accuracy": 0.8214285714285714,
+          "non_ood_total": 28,
+          "non_ood_hits": 23,
+          "selected_alpha": 0.3,
+          "by_query_type": {
+            "polysemy": {
+              "total": 6,
+              "hits": 4
+            },
+            "single_keyword": {
+              "total": 2,
+              "hits": 0
+            },
+            "paraphrase": {
+              "total": 2,
+              "hits": 2
+            },
+            "safety_sensitive": {
+              "total": 5,
+              "hits": 5
+            },
+            "canonical": {
+              "total": 4,
+              "hits": 4
+            },
+            "low_overlap_paraphrase": {
+              "total": 2,
+              "hits": 2
+            },
+            "complex_multi_intent": {
+              "total": 6,
+              "hits": 5
+            },
+            "ambiguous": {
+              "total": 1,
+              "hits": 1
+            }
+          }
+        },
+        {
+          "fold": 1,
+          "non_ood_accuracy": 0.75,
+          "non_ood_total": 28,
+          "non_ood_hits": 21,
+          "selected_alpha": 0.3,
+          "by_query_type": {
+            "single_keyword": {
+              "total": 3,
+              "hits": 0
+            },
+            "canonical": {
+              "total": 7,
+              "hits": 7
+            },
+            "paraphrase": {
+              "total": 4,
+              "hits": 4
+            },
+            "complex_multi_intent": {
+              "total": 3,
+              "hits": 2
+            },
+            "polysemy": {
+              "total": 4,
+              "hits": 3
+            },
+            "ambiguous": {
+              "total": 1,
+              "hits": 0
+            },
+            "low_overlap_paraphrase": {
+              "total": 4,
+              "hits": 3
+            },
+            "safety_sensitive": {
+              "total": 2,
+              "hits": 2
+            }
+          }
+        },
+        {
+          "fold": 2,
+          "non_ood_accuracy": 0.7777777777777778,
+          "non_ood_total": 27,
+          "non_ood_hits": 21,
+          "selected_alpha": 0.3,
+          "by_query_type": {
+            "single_keyword": {
+              "total": 2,
+              "hits": 0
+            },
+            "ambiguous": {
+              "total": 3,
+              "hits": 3
+            },
+            "low_overlap_paraphrase": {
+              "total": 3,
+              "hits": 1
+            },
+            "safety_sensitive": {
+              "total": 2,
+              "hits": 2
+            },
+            "canonical": {
+              "total": 7,
+              "hits": 7
+            },
+            "polysemy": {
+              "total": 3,
+              "hits": 1
+            },
+            "complex_multi_intent": {
+              "total": 1,
+              "hits": 1
+            },
+            "paraphrase": {
+              "total": 6,
+              "hits": 6
+            }
+          }
+        },
+        {
+          "fold": 3,
+          "non_ood_accuracy": 0.7037037037037037,
+          "non_ood_total": 27,
+          "non_ood_hits": 19,
+          "selected_alpha": 0.3,
+          "by_query_type": {
+            "ambiguous": {
+              "total": 3,
+              "hits": 3
+            },
+            "single_keyword": {
+              "total": 2,
+              "hits": 0
+            },
+            "complex_multi_intent": {
+              "total": 4,
+              "hits": 4
+            },
+            "polysemy": {
+              "total": 4,
+              "hits": 3
+            },
+            "paraphrase": {
+              "total": 6,
+              "hits": 5
+            },
+            "safety_sensitive": {
+              "total": 2,
+              "hits": 2
+            },
+            "low_overlap_paraphrase": {
+              "total": 4,
+              "hits": 0
+            },
+            "canonical": {
+              "total": 2,
+              "hits": 2
+            }
+          }
+        },
+        {
+          "fold": 4,
+          "non_ood_accuracy": 0.8,
+          "non_ood_total": 25,
+          "non_ood_hits": 20,
+          "selected_alpha": 0.5,
+          "by_query_type": {
+            "single_keyword": {
+              "total": 1,
+              "hits": 0
+            },
+            "ambiguous": {
+              "total": 4,
+              "hits": 2
+            },
+            "safety_sensitive": {
+              "total": 4,
+              "hits": 4
+            },
+            "paraphrase": {
+              "total": 7,
+              "hits": 6
+            },
+            "complex_multi_intent": {
+              "total": 1,
+              "hits": 1
+            },
+            "canonical": {
+              "total": 5,
+              "hits": 5
+            },
+            "low_overlap_paraphrase": {
+              "total": 2,
+              "hits": 1
+            },
+            "polysemy": {
+              "total": 1,
+              "hits": 1
+            }
+          }
+        }
+      ],
+      "mean_non_ood_accuracy": 0.7706,
+      "std_non_ood_accuracy": 0.041,
+      "by_query_type_aggregate": {
+        "polysemy": {
+          "total": 18,
+          "hits": 12
+        },
+        "single_keyword": {
+          "total": 10,
+          "hits": 0
+        },
+        "paraphrase": {
+          "total": 25,
+          "hits": 23
+        },
+        "safety_sensitive": {
+          "total": 15,
+          "hits": 15
+        },
+        "canonical": {
+          "total": 25,
+          "hits": 25
+        },
+        "low_overlap_paraphrase": {
+          "total": 15,
+          "hits": 7
+        },
+        "complex_multi_intent": {
+          "total": 15,
+          "hits": 13
+        },
+        "ambiguous": {
+          "total": 12,
+          "hits": 9
+        }
+      },
+      "per_query": [
+        {
+          "id": "TA-B105",
+          "condition": "A3",
+          "command": "git log --oneline -20",
+          "hit": true,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B119",
+          "condition": "A3",
+          "command": "rsync -avz source/ destination/",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B114",
+          "condition": "A3",
+          "command": "Get-NetTCPConnection",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B035",
+          "condition": "A3",
+          "command": "git stash",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B129",
+          "condition": "A3",
+          "command": "sudo reboot",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B009",
+          "condition": "A3",
+          "command": "Stop-Process -Name 'process_name' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B058",
+          "condition": "A3",
+          "command": "Get-History",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B098",
+          "condition": "A3",
+          "command": "icacls 'filename.txt' /setowner 'user'",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B121",
+          "condition": "A3",
+          "command": "Remove-Item -Recurse -Force 'directory/'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B125",
+          "condition": "A3",
+          "command": "docker stop $(docker ps -q)",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B138",
+          "condition": "A3",
+          "command": "kubectl describe deployment deployment-name -n namespace",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B122",
+          "condition": "A3",
+          "command": "git reset --hard HEAD && git clean -fd",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B039",
+          "condition": "A3",
+          "command": "docker exec -it container-name /bin/bash",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B142",
+          "condition": "A3",
+          "command": "git rebase -i HEAD~5",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B064",
+          "condition": "A3",
+          "command": "(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B097",
+          "condition": "A3",
+          "command": "winget uninstall package-name --purge",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B141",
+          "condition": "A3",
+          "command": "git bisect start && git bisect bad HEAD && git bisect good <good-commit>",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B002",
+          "condition": "A3",
+          "command": "git status",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B075",
+          "condition": "A3",
+          "command": "Get-Content 'filename.txt' | Out-Host -Paging",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B143",
+          "condition": "A3",
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B127",
+          "condition": "A3",
+          "command": "Start-Process powershell -Verb RunAs",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B148",
+          "condition": "A3",
+          "command": "curl -C - -O https://example.com/largefile.zip",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B139",
+          "condition": "A3",
+          "command": "git blame filename.txt",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B106",
+          "condition": "A3",
+          "command": "git config --global user.name 'Your Name'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B020",
+          "condition": "A3",
+          "command": "[System.Environment]::OSVersion",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B006",
+          "condition": "A3",
+          "command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B099",
+          "condition": "A3",
+          "command": "docker images",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B093",
+          "condition": "A3",
+          "command": "Remove-Item -Recurse -Force 'directory/'",
+          "hit": true,
+          "classification": "NEEDS_CORRECTION"
+        },
+        {
+          "id": "TA-B090",
+          "condition": "A3",
+          "command": "Test-NetConnection -ComputerName google.com -TraceRoute",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B084",
+          "condition": "A3",
+          "command": "ssh user@hostname",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B080",
+          "condition": "A3",
+          "command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B116",
+          "condition": "A3",
+          "command": "Get-Process | Sort-Object CPU -Descending | Select-Object -First 20",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B120",
+          "condition": "A3",
+          "command": "curl -s https://api.example.com/data",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B117",
+          "condition": "A3",
+          "command": "npm update",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B010",
+          "condition": "A3",
+          "command": "$env:VAR_NAME = 'value'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B048",
+          "condition": "A3",
+          "command": "Set-Alias -Name ll -Value Get-ChildItem",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B144",
+          "condition": "A3",
+          "command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B014",
+          "condition": "A3",
+          "command": "curl -O https://example.com/file.zip",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B095",
+          "condition": "A3",
+          "command": "Stop-Process -Name 'process_name' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B071",
+          "condition": "A3",
+          "command": "Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B038",
+          "condition": "A3",
+          "command": "git merge branch-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B040",
+          "condition": "A3",
+          "command": "docker compose up -d",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B110",
+          "condition": "A3",
+          "command": "winget uninstall package-name",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B022",
+          "condition": "A3",
+          "command": "Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B063",
+          "condition": "A3",
+          "command": "icacls 'filename.txt' /inheritance:r /grant:r \"${env:USERNAME}:RW\"",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B057",
+          "condition": "A3",
+          "command": "ssh user@hostname",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B131",
+          "condition": "A3",
+          "command": "New-NetFirewallRule -DisplayName 'Block IP' -Direction Inbound -RemoteAddress '192.168.1.100' -Action Block",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B061",
+          "condition": "A3",
+          "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B008",
+          "condition": "A3",
+          "command": "Get-Process",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B101",
+          "condition": "A3",
+          "command": "docker compose up -d",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B137",
+          "condition": "A3",
+          "command": "Select-String -Path 'file.txt' -Pattern 'pattern' -Context 3,3",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B094",
+          "condition": "A3",
+          "command": "Remove-Item -Recurse -Force 'directory/'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B023",
+          "condition": "A3",
+          "command": "aws s3 ls",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B044",
+          "condition": "A3",
+          "command": "Stop-Process -Id PID -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B018",
+          "condition": "A3",
+          "command": "openssl rand -base64 32",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B007",
+          "condition": "A3",
+          "command": "Test-Connection -ComputerName google.com -Count 4",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B124",
+          "condition": "A3",
+          "command": "git branch -D branch-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B059",
+          "condition": "A3",
+          "command": "Get-CimInstance Win32_Processor",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B145",
+          "condition": "A3",
+          "command": "ssh -R 9090:localhost:3000 user@hostname",
+          "hit": false,
+          "classification": "NEEDS_CORRECTION"
+        },
+        {
+          "id": "TA-B089",
+          "condition": "A3",
+          "command": "Set-Alias -Name ll -Value Get-ChildItem",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B079",
+          "condition": "A3",
+          "command": "winver",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B078",
+          "condition": "A3",
+          "command": "npm update",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B113",
+          "condition": "A3",
+          "command": "ssh user@hostname",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B068",
+          "condition": "A3",
+          "command": "Resolve-DnsName example.com -Type ALL",
+          "hit": true,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B112",
+          "condition": "A3",
+          "command": "docker inspect container-name",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B052",
+          "condition": "A3",
+          "command": "docker volume create my-volume",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B135",
+          "condition": "A3",
+          "command": "docker volume prune -f",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B021",
+          "condition": "A3",
+          "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B077",
+          "condition": "A3",
+          "command": "git config --list",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B107",
+          "condition": "A3",
+          "command": "winget install package-name",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B136",
+          "condition": "A3",
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B016",
+          "condition": "A3",
+          "command": "$env:USERNAME",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B027",
+          "condition": "A3",
+          "command": "docker ps",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B046",
+          "condition": "A3",
+          "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B015",
+          "condition": "A3",
+          "command": "Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B031",
+          "condition": "A3",
+          "command": "New-Item -ItemType Directory -Path 'path/to/directory' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B096",
+          "condition": "A3",
+          "command": "Test-Connection -ComputerName google.com -Count 4",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B104",
+          "condition": "A3",
+          "command": "docker volume create my-volume",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B042",
+          "condition": "A3",
+          "command": "curl -X POST -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/endpoint",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B011",
+          "condition": "A3",
+          "command": "Get-History",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B076",
+          "condition": "A3",
+          "command": "docker image prune -a",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B025",
+          "condition": "A3",
+          "command": "tmux new -s session-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B065",
+          "condition": "A3",
+          "command": "Get-FileHash 'filename.txt' -Algorithm SHA256",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B134",
+          "condition": "A3",
+          "command": "Rename-Computer -NewName 'new-hostname' -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B032",
+          "condition": "A3",
+          "command": "Get-NetTCPConnection -State Listen",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B003",
+          "condition": "A3",
+          "command": "docker ps",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B029",
+          "condition": "A3",
+          "command": "Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B054",
+          "condition": "A3",
+          "command": "git tag --sort=-version:refname",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B024",
+          "condition": "A3",
+          "command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B091",
+          "condition": "A3",
+          "command": "ssh -R 9090:localhost:3000 user@hostname",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B085",
+          "condition": "A3",
+          "command": "npm init -y",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B092",
+          "condition": "A3",
+          "command": "git config --global user.email 'email@example.com'",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B066",
+          "condition": "A3",
+          "command": "git branch -d branch-name",
+          "hit": true,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B111",
+          "condition": "A3",
+          "command": "git add -A",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B115",
+          "condition": "A3",
+          "command": "icacls 'directory/' /grant 'user:(OI)(CI)F' /T",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B150",
+          "condition": "A3",
+          "command": "git checkout feature-branch -- path/to/file.txt",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B108",
+          "condition": "A3",
+          "command": "Get-NetAdapter",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B109",
+          "condition": "A3",
+          "command": "New-Item -ItemType SymbolicLink -Path '/path/to/link' -Target '/path/to/target'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B050",
+          "condition": "A3",
+          "command": "openssl s_client -connect example.com:443 -showcerts",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B072",
+          "condition": "A3",
+          "command": "docker rm container-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B140",
+          "condition": "A3",
+          "command": "ssh-copy-id user@hostname",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B043",
+          "condition": "A3",
+          "command": "Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B126",
+          "condition": "A3",
+          "command": "docker image prune -a",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B062",
+          "condition": "A3",
+          "command": "winget upgrade --all",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B036",
+          "condition": "A3",
+          "command": "Copy-Item -Recurse 'source/' 'destination/'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B103",
+          "condition": "A3",
+          "command": "Get-Service -Name 'service-name'",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B130",
+          "condition": "A3",
+          "command": "sudo shutdown -h now",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B060",
+          "condition": "A3",
+          "command": "pip list",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B034",
+          "condition": "A3",
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B073",
+          "condition": "A3",
+          "command": "(Get-Content 'filename.txt') -replace 'old','new' | Set-Content 'filename.txt'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B147",
+          "condition": "A3",
+          "command": "gpg -c filename.txt",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B149",
+          "condition": "A3",
+          "command": "Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B028",
+          "condition": "A3",
+          "command": "npm install",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B053",
+          "condition": "A3",
+          "command": "Get-NetTCPConnection",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B100",
+          "condition": "A3",
+          "command": "npm init -y",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B056",
+          "condition": "A3",
+          "command": "Get-LocalUser | Select-Object Name",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B004",
+          "condition": "A3",
+          "command": "npm install",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B001",
+          "condition": "A3",
+          "command": "git reset --soft HEAD~1",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B037",
+          "condition": "A3",
+          "command": "Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B086",
+          "condition": "A3",
+          "command": "crontab -e",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B083",
+          "condition": "A3",
+          "command": "npm init -y",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B081",
+          "condition": "A3",
+          "command": "git commit --amend -m 'New commit message'",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B118",
+          "condition": "A3",
+          "command": "kubectl describe deployment deployment-name -n namespace",
+          "hit": false,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B067",
+          "condition": "A3",
+          "command": "git log --oneline -20",
+          "hit": true,
+          "classification": "AMBIGUOUS"
+        },
+        {
+          "id": "TA-B133",
+          "condition": "A3",
+          "command": "winget uninstall package-name --purge",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B041",
+          "condition": "A3",
+          "command": "ssh-keygen -t ed25519 -C 'your_email@example.com'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B146",
+          "condition": "A3",
+          "command": "Get-Process | Sort-Object CPU -Descending",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B013",
+          "condition": "A3",
+          "command": "pip install package-name",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B070",
+          "condition": "A3",
+          "command": "Move-Item 'oldname.txt' 'newname.txt'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B030",
+          "condition": "A3",
+          "command": "git branch -a",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B045",
+          "condition": "A3",
+          "command": "git diff --cached",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B012",
+          "condition": "A3",
+          "command": "ssh user@hostname",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B123",
+          "condition": "A3",
+          "command": "git checkout -- .",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B017",
+          "condition": "A3",
+          "command": "kubectl get pods --all-namespaces",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B051",
+          "condition": "A3",
+          "command": "git remote add origin https://github.com/user/repo.git",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B128",
+          "condition": "A3",
+          "command": "icacls 'filename.txt' /setowner 'user'",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B047",
+          "condition": "A3",
+          "command": "Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B026",
+          "condition": "A3",
+          "command": "git reset --soft HEAD~1",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B033",
+          "condition": "A3",
+          "command": "Get-ChildItem Env:",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B055",
+          "condition": "A3",
+          "command": "git stash",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B132",
+          "condition": "A3",
+          "command": "kubectl delete pods --field-selector=status.phase=Failed -n namespace",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B019",
+          "condition": "A3",
+          "command": "Get-PSDrive -PSProvider FileSystem",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B005",
+          "condition": "A3",
+          "command": "Get-ChildItem -Force",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B049",
+          "condition": "A3",
+          "command": "npm outdated",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B102",
+          "condition": "A3",
+          "command": "docker stop $(docker ps -q)",
+          "hit": true,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B069",
+          "condition": "A3",
+          "command": "docker stop $(docker ps -q)",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B074",
+          "condition": "A3",
+          "command": "git config --global user.name 'Your Name'",
+          "hit": false,
+          "classification": "CORRECT"
+        },
+        {
+          "id": "TA-B088",
+          "condition": "A3",
+          "command": "Test-Connection -ComputerName google.com -Count 4",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B087",
+          "condition": "A3",
+          "command": "python -m venv venv",
+          "hit": false,
+          "classification": "OOD"
+        },
+        {
+          "id": "TA-B082",
+          "condition": "A3",
+          "command": "openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes",
+          "hit": false,
+          "classification": "OOD"
+        }
+      ],
+      "note": "reused verbatim from Phase 4 (research/results/hybrid/hybrid-nested-cv-results.json); alpha selected per fold via nested CV, never tuned on the fold it is scored on"
+    }
+  },
+  "table": [
+    {
+      "condition": "A0",
+      "description": "BM25 only (production baseline)",
+      "mean_non_ood_accuracy_pct": 71.9,
+      "std_pp": 7.7
+    },
+    {
+      "condition": "A1",
+      "description": "BM25, no substring bonus",
+      "mean_non_ood_accuracy_pct": 71.9,
+      "std_pp": 7.7
+    },
+    {
+      "condition": "A2",
+      "description": "Dense only",
+      "mean_non_ood_accuracy_pct": 72.7,
+      "std_pp": 6.1
+    },
+    {
+      "condition": "A3",
+      "description": "Hybrid BM25+dense, nested-CV alpha",
+      "mean_non_ood_accuracy_pct": 77.1,
+      "std_pp": 4.1
+    },
+    {
+      "condition": "A4",
+      "description": "Hybrid + margin-based rejection",
+      "mean_non_ood_accuracy_pct": null,
+      "std_pp": null,
+      "status": "PENDING -- requires Phase 6/7/8 components, not yet implemented"
+    },
+    {
+      "condition": "A5",
+      "description": "Hybrid + margin + OOD detection",
+      "mean_non_ood_accuracy_pct": null,
+      "std_pp": null,
+      "status": "PENDING -- requires Phase 6/7/8 components, not yet implemented"
+    },
+    {
+      "condition": "A6",
+      "description": "Hybrid + margin + OOD + calibration",
+      "mean_non_ood_accuracy_pct": null,
+      "std_pp": null,
+      "status": "PENDING -- requires Phase 6/7/8 components, not yet implemented"
+    }
+  ]
+}

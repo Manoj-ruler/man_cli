@@ -1,0 +1,8 @@
+condition,description,mean_non_ood_accuracy_pct,std_pp,status
+A0,"BM25 only (production baseline)",71.9,7.7,complete
+A1,"BM25, no substring bonus",71.9,7.7,complete
+A2,"Dense only",72.7,6.1,complete
+A3,"Hybrid BM25+dense, nested-CV alpha",77.1,4.1,complete
+A4,"Hybrid + margin-based rejection",,,PENDING -- requires Phase 6/7/8 components, not yet implemented
+A5,"Hybrid + margin + OOD detection",,,PENDING -- requires Phase 6/7/8 components, not yet implemented
+A6,"Hybrid + margin + OOD + calibration",,,PENDING -- requires Phase 6/7/8 components, not yet implemented

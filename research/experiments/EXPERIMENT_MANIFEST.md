@@ -97,7 +97,20 @@ each phase completes — they are intentionally blank/pending until run.
 ## E5 — Ablation (A0–A6)
 - **Objective:** Isolate which component (substring bonus, dense retrieval, margin, OOD gate,
   calibration) is responsible for any observed improvement.
-- **Status:** PENDING (Phase 5).
+- **Status:** A0–A3 COMPLETE; A4–A6 PENDING (require Phase 6/7/8 components, explicitly marked
+  `PENDING` in `research/results/ablation/ablation-table.csv`, not fabricated). See
+  `research/results/ablation/ABLATION_NOTES.md`.
+- **Actual result:** A0 (BM25, bonus) = 71.9%, A1 (BM25, no bonus) = 71.9% (**identical on all
+  150 queries, 0 command differences** -- verified directly, not just at aggregate level), A2
+  (dense only) = 72.7%, A3 (hybrid, nested-CV) = **77.1%**. A0's fold-aggregated mean exactly
+  matches the frozen baseline's single-split 71.9%, confirming ablation methodology consistency.
+- **Conclusion:** The +15 substring bonus contributes zero measured accuracy on this specific
+  benchmark -- it fires for 47/150 queries but never flips the top-1 winner in any of them. This
+  refines (does not simply confirm) the earlier qualitative error analysis, which named the
+  bonus as a failure driver based on a plausible but not directly tested mechanism (near-tied
+  BM25 scores among same-category commands). Practically, this means Phase 4's +5.2pp gain
+  (A3 vs. A0/A1) is cleanly attributable to the dense/fusion mechanism, not confounded by an
+  unrelated bonus effect, since A0 and A1 are the same starting point either way.
 
 ## E6 — OOD / rejection
 - **Objective:** Evaluate whether margin/entropy/reliability-based rejection reduces the 73.3%
