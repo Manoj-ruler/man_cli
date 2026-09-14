@@ -1,0 +1,24 @@
+{
+  "overall_accuracy_pct": 67.3,
+  "supported_task_accuracy_pct": 71.9,
+  "non_ambiguous_in_domain_accuracy_pct": 78.2,
+  "ood_rejection_rate_pct": 26.7,
+  "ood_false_acceptance_rate_pct": 73.3,
+  "ambiguity_success_rate_pct": 28.6,
+  "high_confidence_wrong_count": 32,
+  "mean_confidence_on_wrong_pct": "86.1",
+  "mean_latency_ms": 3.5421,
+  "p95_latency_ms": 5.898,
+  "archived_reference": {
+    "overall_accuracy_pct": 67.3,
+    "supported_task_accuracy_pct": 71.9,
+    "non_ambiguous_in_domain_accuracy_pct": 78.2,
+    "ood_rejection_rate_pct": 26.7,
+    "ood_false_acceptance_rate_pct": 73.3,
+    "ambiguity_success_rate_pct": 28.6,
+    "high_confidence_wrong_count": 32,
+    "mean_confidence_on_wrong_pct": 87.7,
+    "mean_latency_ms": 3.29,
+    "p95_latency_ms": 6.46
+  }
+}

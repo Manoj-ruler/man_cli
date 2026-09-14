@@ -1,0 +1,16 @@
+{
+  "experiment_id": "E1-baseline-reproduction",
+  "git_commit": "518adecf64d7f5e8cad0645cd084b5938d56dbcd",
+  "reference_frozen_baseline_commit": "4443ec016c87895ebbc1b9be831e5f80b9bd3b50",
+  "benchmark_name": "TermAssist-Bench",
+  "benchmark_version": "v0.1-validated",
+  "benchmark_sha256_canonical_lf": "2a554d3c3c425192e0fa295f2dc2eae833f92a2ae77feaf0f3ef70996e8c02a0",
+  "benchmark_sha256_raw_as_checked_out": "3fd73347196bddd34fa34127c4dbf9cc5b75af1a097a06890949d923dff1d5e7",
+  "node_version": "v24.2.0",
+  "platform": "win32",
+  "os_release": "10.0.26200",
+  "arch": "x64",
+  "timestamp": "2026-09-14T06:06:46.358Z",
+  "termassist_version": "0.1.0",
+  "total_queries": 150
+}
