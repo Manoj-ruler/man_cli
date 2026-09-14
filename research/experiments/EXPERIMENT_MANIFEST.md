@@ -264,3 +264,13 @@ each phase completes — they are intentionally blank/pending until run.
 - **Conclusion:** canonical value for the paper is **86.06% (86.1%) mean confidence on wrong
   answers**, verified three independent ways. Every document in this research program now cites
   the corrected figure consistently.
+
+## Phase 14 — Literature / novelty re-verification
+- **Objective:** re-check literature for anything published since the original review that would
+  affect novelty claims; populate `research/paper/related-work-matrix.csv`.
+- **Status:** COMPLETE. See `research/paper/PHASE14_LITERATURE_RECHECK.md` (15-entry matrix).
+- **Actual result:** 4 new 2026 papers found (QuoteBench, BashCoder-R1/BashBench, "BM25 Wins at
+  Scale," whatisit-nl2sh) -- none invalidate the core novelty claim; QuoteBench and BashCoder-R1
+  strengthen the paper's evaluation-methodology framing and reliability-tradeoff context.
+- **Conclusion:** no paper found reports a BM25 retrieval baseline evaluated under nested-CV
+  calibration/OOD/selective-prediction on the NL2Bash/NLC2CMD task family -- novelty claim holds.
