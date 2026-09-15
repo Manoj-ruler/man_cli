@@ -1,0 +1,89 @@
+{
+  "experiment_id": "E-GEN-splitB-v0.2",
+  "split": "GroupKFold by intent_group_id (intent-held-out)",
+  "k": 5,
+  "group_count": 171,
+  "fold_sizes": [
+    42,
+    42,
+    42,
+    42,
+    41
+  ],
+  "groups_split_across_folds": 0,
+  "per_fold_alpha_and_acc": [
+    {
+      "test_fold": 0,
+      "selected_alpha": 0.5,
+      "non_ood_accuracy": 0.7188,
+      "non_ood_total": 32
+    },
+    {
+      "test_fold": 1,
+      "selected_alpha": 0.5,
+      "non_ood_accuracy": 0.8125,
+      "non_ood_total": 32
+    },
+    {
+      "test_fold": 2,
+      "selected_alpha": 0.5,
+      "non_ood_accuracy": 0.8125,
+      "non_ood_total": 32
+    },
+    {
+      "test_fold": 3,
+      "selected_alpha": 0.5,
+      "non_ood_accuracy": 0.8438,
+      "non_ood_total": 32
+    },
+    {
+      "test_fold": 4,
+      "selected_alpha": 0.5,
+      "non_ood_accuracy": 0.7742,
+      "non_ood_total": 31
+    }
+  ],
+  "splitB": {
+    "hybrid_non_ood_accuracy": 0.7924,
+    "ood_detection": {
+      "precision": 0.7143,
+      "recall": 0.7,
+      "f1": 0.7071,
+      "mean_auroc": 0.8979,
+      "confusion": {
+        "tp": 35,
+        "fp": 14,
+        "fn": 15,
+        "tn": 145
+      }
+    },
+    "ambiguity_detection": {
+      "precision": 0.3544,
+      "recall": 0.7368,
+      "f1": 0.4786,
+      "mean_auroc": 0.7229,
+      "confusion": {
+        "tp": 28,
+        "fp": 51,
+        "fn": 10,
+        "tn": 120
+      }
+    },
+    "calibration_ece_before": 0.3237,
+    "calibration_ece_after": 0.1013
+  },
+  "splitA_reference": {
+    "hybrid_non_ood_accuracy": 0.7925,
+    "ood_auroc": 0.9006,
+    "ood_f1": 0.7158,
+    "ambiguity_f1": 0.4956,
+    "calibration_ece_before": 0.3237,
+    "calibration_ece_after": 0.0738
+  },
+  "generalization_delta": {
+    "hybrid_accuracy": -0.0001,
+    "ood_auroc": -0.0027,
+    "calibration_ece_after": 0.0275
+  },
+  "generated_at": "2026-09-15T06:16:20.325Z"
+}
