@@ -4,7 +4,9 @@
  * TermAssist CLI — The Terminal That Understands English
  * Usage: ?? <natural language query>
  * 
- * Maps natural language to bash commands via local FAISS vector search.
+ * Maps natural language to shell commands via local BM25 lexical retrieval
+ * over a curated command corpus (see search.js). Fully offline; no vector
+ * database, embeddings, or network calls in the production path.
  */
 
 const { execSync }  = require('child_process');
