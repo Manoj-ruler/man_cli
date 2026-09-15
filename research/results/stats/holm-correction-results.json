@@ -1,0 +1,57 @@
+{
+  "experiment_id": "holm-correction",
+  "method": "Holm-Bonferroni step-down, family size m=4, per benchmark version; significant iff holm_p < 0.05",
+  "family_members": [
+    "A0-vs-A3 accuracy",
+    "A2-vs-A3 accuracy",
+    "baseline-vs-tuned OOD",
+    "calibration ECE reduction"
+  ],
+  "versions": {
+    "v0.1": [
+      {
+        "name": "A0-vs-A3 accuracy (McNemar)",
+        "p": 0.015625,
+        "holm_p": 0.046875
+      },
+      {
+        "name": "A2-vs-A3 accuracy (McNemar)",
+        "p": 0.145996,
+        "holm_p": 0.291992
+      },
+      {
+        "name": "baseline-vs-tuned OOD rejection (McNemar)",
+        "p": 0.25,
+        "holm_p": 0.291992
+      },
+      {
+        "name": "calibration ECE reduction (paired bootstrap)",
+        "p": 0.0001,
+        "holm_p": 0.0004
+      }
+    ],
+    "v0.2": [
+      {
+        "name": "A0-vs-A3 accuracy (McNemar)",
+        "p": 0.070313,
+        "holm_p": 0.070313
+      },
+      {
+        "name": "A2-vs-A3 accuracy (McNemar)",
+        "p": 0.012726,
+        "holm_p": 0.025452
+      },
+      {
+        "name": "baseline-vs-tuned OOD rejection (McNemar)",
+        "p": 0.000015,
+        "holm_p": 0.00006
+      },
+      {
+        "name": "calibration ECE reduction (paired bootstrap)",
+        "p": 0.0001,
+        "holm_p": 0.0003
+      }
+    ]
+  },
+  "generated_at": "2026-09-15T06:13:29.588Z"
+}
