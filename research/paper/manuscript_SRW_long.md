@@ -195,6 +195,14 @@ short-technical-keyword ambiguous queries (`grep`, `sed`, `awk`, `tar`, etc.), w
 exact-token-match strength is plausibly more competitive; we did not further test this and flag it
 as future work.
 
+![Figure 1: Supported-task accuracy for BM25, dense-only, and hybrid retrieval under nested 5-fold CV (v0.1 benchmark).](../figures/fig1_baseline_vs_improved_accuracy.svg)
+
+By query type (v0.1), hybrid retains BM25's 100% on canonical and safety-sensitive queries while
+improving most on low-overlap-paraphrase (Figure 2); single-keyword and OOD queries remain the
+hardest categories for both systems.
+
+![Figure 2: Accuracy by query type, BM25 (A0) vs. hybrid (A3), v0.1 benchmark.](../figures/fig2_accuracy_by_query_type.svg)
+
 **OOD and ambiguity detection.** On v0.1: AUROC 0.867 (OOD, feature = absolute top-1 score) and
 0.784 (ambiguity, feature = margin) — an evidence-driven feature choice (Section 4), not selected
 post-hoc. On v0.2 (OOD subset expanded 15→50 queries): OOD AUROC improves to 0.901, and the
@@ -206,8 +214,13 @@ significant even before correction (raw p=0.25). Ambiguity detection F1 improves
 **Calibration.** ECE is reduced 56.7–84.1% across four confidence variants tested, largest for the
 hybrid system's own fused-score signal. A paired bootstrap test of the reduction gives one-sided
 p≈0.0001 on both benchmarks, and this is the **only comparison in the primary family that survives
-Holm correction on both benchmark versions** (Table 1). Selective answering at 50% coverage
-achieves 10.7% error vs. 30.7% unconditional.
+Holm correction on both benchmark versions** (Table 1). On v0.1, isotonic calibration reduces the
+hybrid system's own reliability-diagram ECE from 0.2741 to 0.0537 (Figure 3). Selective answering
+at 50% coverage achieves 10.7% error vs. 30.7% unconditional (Figure 4).
+
+![Figure 3: Reliability diagram for the hybrid system's fused-score confidence, before vs. after isotonic calibration (v0.1 benchmark).](../figures/fig3_reliability_diagram.svg)
+
+![Figure 4: Risk-coverage curve for the hybrid system under confidence-ranked selective answering (v0.1 benchmark).](../figures/fig4_risk_coverage_curve.svg)
 
 **Table 1: Holm-corrected significance and bootstrap CIs.**
 
@@ -255,6 +268,8 @@ coverage on v0.1; A5 (+OOD detection) reaches 90.1% @ 69.5% coverage (10/15 OOD 
 A5 is *lower* at *lower* coverage (82.2% @ 58.9%, 38/50 OOD caught) — the harder v0.2 query mix
 making the accept/reject decision more difficult, not a regression in the method. A6
 (+calibration) makes the same decisions as A5 but with ECE 0.054 vs. 0.274 raw.
+
+![Figure 5: Ablation A0–A6 (v0.1). A0–A3 report unconditional accuracy; A4–A6 report selective accuracy at reduced coverage and are not directly comparable to A0–A3's bars.](../figures/fig5_ablation_A0_A6.svg)
 
 **Functional evaluation.** Sandboxed execution (disposable temp directories, never the host
 machine) on a deliberately narrow, explicitly-scoped 15/150-query subset (git + filesystem,
@@ -431,7 +446,7 @@ Power Comes Great Responsibility. *EMNLP*. arXiv:2010.06595.
 
 ## Note on remaining pre-submission work (not part of the paper text above)
 
-This condensing pass did three things: (1) cut internal file-path citations (`research/...`)
+This condensing pass did four things: (1) cut internal file-path citations (`research/...`)
 throughout and replaced them with either inline content (Tables 1–2 now contain the actual numbers,
 not a pointer to a generated file) or omission; (2) restructured the Limitations section from one
 run-on paragraph pointing to an external file into standalone bullet points, since ACL/EACL venues
@@ -440,18 +455,29 @@ added a short Ethics Statement, standard/expected at these venues and previously
 removed the non-citation "related-work matrix" entry from the reference list and filled in two
 references that were missing author names.
 
+A follow-up pass placed the five figures inline (Figures 1–5, Section 6/7 above) and fixed one
+found-in-passing defect: `fig5_ablation_A0_A6.svg`'s title had an internal file reference
+(`see ABLATION_NOTES.md`) baked directly into the image — same problem as the file-path citations
+in prose, just inside an SVG instead of markdown. Fixed in `research/experiments/generate_figures.js`
+and regenerated (`git diff` confirms only that one title string changed; no data values moved). All
+five placed figures are plotted from **v0.1 data only** — captions say so explicitly, since the
+paper's prose discusses v0.1 and v0.2 results together and a reader could otherwise assume a figure
+covers both. Figure 6 (error-taxonomy distribution) exists in `research/figures/` but is left
+unplaced: including it would require new supporting prose this condensed draft doesn't currently
+have room for or discuss; flagging the omission rather than silently dropping it.
+
 What this pass did **not** do, and what still remains:
 
 1. **Actual page-count verification.** This is markdown, not the ACL LaTeX template. Body text
-   (Abstract through References, excluding this note) is ~4,300 words plus two inline tables and
-   up to five figures not yet placed. ACL two-column pages run roughly 800–950 words/page of dense
-   prose, so text alone points to a bit over 4.5 pages — but the two tables and the figures below
-   will add real space once placed, and only building it in the actual template will confirm
-   whether this fits comfortably in 8 pages or needs a further trim.
-2. **Figures.** `research/figures/` has five SVGs (accuracy comparison, accuracy-by-type,
-   reliability diagram, risk-coverage curve, ablation) already generated from committed results;
-   none are placed in this draft yet. A sixth (error-taxonomy) exists but isn't currently cited by
-   any section — decide whether to include it or leave it out.
+   (Abstract through References, excluding this note) is now a bit over ~4,400 words plus two
+   inline tables and five embedded figures — figures in particular consume real vertical space in
+   a two-column layout (each is roughly a third to half a column at reasonable size), so only
+   building this in the actual ACL template will confirm whether it fits 8 pages or needs a trim.
+2. **v0.2 figure versions do not exist.** All five figures plotted above are v0.1-only; the paper's
+   central finding is precisely the v0.1-vs-v0.2 divergence (Section 6, Table 1), so a v0.2 version
+   of Figure 1 in particular (showing the non-replicating accuracy comparison) would strengthen the
+   visual argument. Not generated in this pass — would need extending `generate_figures.js` to read
+   the v0.2 result files.
 3. **Anonymization for double-blind review.** No author names appear in this draft, but the system
    under study, TermAssist, is a real, named, public npm package. If its repository or package
    metadata identifies its author, referencing it by name may itself be de-anonymizing regardless

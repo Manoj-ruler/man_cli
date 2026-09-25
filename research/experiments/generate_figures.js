@@ -141,7 +141,7 @@ function fig5() {
     label: r.condition,
     values: [{ name: 'val', value: r.mean_non_ood_accuracy_pct ?? r.mean_selective_accuracy_pct ?? 0, color: (r.condition <= 'A3') ? COLORS.bar1 : COLORS.bar3 }]
   }));
-  fs.writeFileSync(path.join(figDir, 'fig5_ablation_A0_A6.svg'), barChart('Ablation A0-A6 (A0-A3: unconditional accuracy; A4-A6: selective accuracy at reduced coverage -- NOT directly comparable, see ABLATION_NOTES.md)', series, { suffix: '%', maxVal: 100, width: 1000 }));
+  fs.writeFileSync(path.join(figDir, 'fig5_ablation_A0_A6.svg'), barChart('Ablation A0-A6 (A0-A3: unconditional accuracy; A4-A6: selective accuracy at reduced coverage -- not directly comparable)', series, { suffix: '%', maxVal: 100, width: 1000 }));
 }
 
 // --- Figure 6: error taxonomy distribution ---
