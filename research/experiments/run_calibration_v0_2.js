@@ -61,7 +61,12 @@ function ece(pairs, nBins = 10) {
   });
   let total = pairs.length, weightedGap = 0;
   bins.forEach(b => { if (b.count > 0) weightedGap += (b.count / total) * Math.abs((b.sumConf / b.count) - (b.sumHit / b.count)); });
-  return +weightedGap.toFixed(4);
+  const binDetail = bins.map((b, i) => {
+    if (b.count === 0) return { bin: i, count: 0 };
+    const avgConf = b.sumConf / b.count, avgAcc = b.sumHit / b.count;
+    return { bin: i, count: b.count, avg_confidence: +avgConf.toFixed(4), avg_accuracy: +avgAcc.toFixed(4), gap: +Math.abs(avgConf - avgAcc).toFixed(4) };
+  });
+  return { ece: +weightedGap.toFixed(4), bins: binDetail };
 }
 function brier(pairs) { return +(pairs.reduce((a, { conf, hit }) => a + (conf - hit) ** 2, 0) / pairs.length).toFixed(4); }
 
@@ -78,7 +83,8 @@ function runVariant(name, rawOf, hitOf) {
       pooledAfter.push({ conf: isotonic.predict(blocks, raw), hit });
     });
   }
-  return { name, before_calibration: { ece: ece(pooledBefore), brier: brier(pooledBefore) }, after_calibration: { ece: ece(pooledAfter), brier: brier(pooledAfter) } };
+  const before = ece(pooledBefore), after = ece(pooledAfter);
+  return { name, before_calibration: { ece: before.ece, brier: brier(pooledBefore) }, after_calibration: { ece: after.ece, brier: brier(pooledAfter) }, before_bins: before.bins, after_bins: after.bins };
 }
 
 function main() {

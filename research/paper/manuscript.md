@@ -26,7 +26,7 @@ reliability, evaluating on two versions of a benchmark we constructed: an origin
 version and an expanded 209-query version built specifically to test statistical power on the
 original's smaller subsets. Under a fully leakage-free nested 5-fold cross-validation protocol,
 hybrid fusion improves supported-task accuracy over pure BM25 on both benchmarks (71.9%→77.1% on
-the original, 75.5%→79.3% on the expanded version; bootstrap 95% CI on the delta [2.2, 8.9]pp and
+the original, 75.4%→79.3% on the expanded version; bootstrap 95% CI on the delta [2.2, 8.9]pp and
 [0.6, 7.5]pp respectively). Under a pre-registered Holm–Bonferroni correction across the primary
 four-comparison family (accuracy vs. BM25, accuracy vs. dense-alone, OOD rejection, calibration),
 this accuracy improvement **barely survives correction on the original benchmark (Holm-adjusted
@@ -212,7 +212,7 @@ OOD/ambiguity thresholds, and the isotonic calibrator are always selected on que
 **Retrieval accuracy** (Figure 1, Table 1): on v0.1, BM25 71.9%, dense-only 72.6–72.7%, hybrid
 77.1% (±4.1pp across folds) — a bootstrap 95% CI on the delta of [2.2, 8.9]pp, and an exact
 McNemar's p=0.0156 that **survives Holm correction, but only just** (Holm-adjusted p=0.047, within
-0.003 of the 0.05 cutoff for a family of 4). On v0.2, BM25 75.5%, dense-only 72.3–72.4%, hybrid
+0.003 of the 0.05 cutoff for a family of 4). On v0.2, BM25 75.4%, dense-only 72.3–72.4%, hybrid
 79.3% — numerically similar in magnitude (+3.8pp, bootstrap CI [0.6, 7.5]pp) but **this specific
 comparison does not clear p<0.05 even before correction (raw p=0.070)**. We verified this at the
 per-query level: of 8 discordant non-OOD pairs on v0.2 (vs. 7 on v0.1), 7 still favor hybrid but

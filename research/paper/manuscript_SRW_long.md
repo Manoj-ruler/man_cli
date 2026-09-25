@@ -22,7 +22,7 @@ reliability. We evaluate on two versions of a benchmark we constructed — an or
 version and an expanded 209-query version built specifically to probe statistical power on the
 original's smaller subsets — under a fully leakage-free nested 5-fold cross-validation protocol.
 Hybrid fusion improves supported-task accuracy over pure BM25 on both benchmarks (71.9%→77.1% and
-75.5%→79.3%), but under a pre-registered Holm–Bonferroni correction across a four-comparison
+75.4%→79.3%), but under a pre-registered Holm–Bonferroni correction across a four-comparison
 primary family, this improvement **barely survives correction on the original benchmark
 (Holm-adjusted p=0.047) and fails to survive on the expanded benchmark (raw p=0.070)** — a
 non-replication we verified is not a computation error and report as a central finding.
@@ -181,7 +181,7 @@ targeting *different* command intents than those they are scored on.
 
 **Retrieval accuracy.** On v0.1: BM25 71.9%, dense-only 72.6–72.7%, hybrid 77.1% (bootstrap 95% CI
 on the delta [2.2, 8.9]pp; exact McNemar's p=0.0156, **survives Holm correction, but only just**:
-Holm-adjusted p=0.047, family size 4). On v0.2: BM25 75.5%, dense-only 72.3–72.4%, hybrid 79.3%
+Holm-adjusted p=0.047, family size 4). On v0.2: BM25 75.4%, dense-only 72.3–72.4%, hybrid 79.3%
 (+3.8pp, bootstrap CI [0.6, 7.5]pp) — **this comparison does not clear p<0.05 even before
 correction** (raw p=0.070). At the per-query level, 7 of 8 discordant non-OOD pairs on v0.2 still
 favor hybrid, but one (`TA-B194`, "sudo reboot" vs. "sudo shutdown -h now") now favors BM25, and the
@@ -195,13 +195,18 @@ short-technical-keyword ambiguous queries (`grep`, `sed`, `awk`, `tar`, etc.), w
 exact-token-match strength is plausibly more competitive; we did not further test this and flag it
 as future work.
 
-![Figure 1: Supported-task accuracy for BM25, dense-only, and hybrid retrieval under nested 5-fold CV (v0.1 benchmark).](../figures/fig1_baseline_vs_improved_accuracy.svg)
+![Figure 1a: Supported-task accuracy for BM25, dense-only, and hybrid retrieval under nested 5-fold CV (v0.1 benchmark).](../figures/fig1_baseline_vs_improved_accuracy.svg)
+
+![Figure 1b: The same comparison on the v0.2 benchmark. Placed side by side with Figure 1a to make the accuracy non-replication visually explicit: the BM25→hybrid gain looks similar in the bars, but Table 1 shows only the v0.2 dense→hybrid comparison survives Holm correction.](../figures/fig1_baseline_vs_improved_accuracy_v0.2.svg)
 
 By query type (v0.1), hybrid retains BM25's 100% on canonical and safety-sensitive queries while
-improving most on low-overlap-paraphrase (Figure 2); single-keyword and OOD queries remain the
-hardest categories for both systems.
+improving most on low-overlap-paraphrase (Figure 2a); single-keyword and OOD queries remain the
+hardest categories for both systems. The same breakdown on v0.2 (Figure 2b) shows a similar overall
+shape with the new short-technical-keyword ambiguous queries added to that category.
 
-![Figure 2: Accuracy by query type, BM25 (A0) vs. hybrid (A3), v0.1 benchmark.](../figures/fig2_accuracy_by_query_type.svg)
+![Figure 2a: Accuracy by query type, BM25 (A0) vs. hybrid (A3), v0.1 benchmark.](../figures/fig2_accuracy_by_query_type.svg)
+
+![Figure 2b: Accuracy by query type, BM25 (A0) vs. hybrid (A3), v0.2 benchmark.](../figures/fig2_accuracy_by_query_type_v0.2.svg)
 
 **OOD and ambiguity detection.** On v0.1: AUROC 0.867 (OOD, feature = absolute top-1 score) and
 0.784 (ambiguity, feature = margin) — an evidence-driven feature choice (Section 4), not selected
@@ -215,12 +220,19 @@ significant even before correction (raw p=0.25). Ambiguity detection F1 improves
 hybrid system's own fused-score signal. A paired bootstrap test of the reduction gives one-sided
 p≈0.0001 on both benchmarks, and this is the **only comparison in the primary family that survives
 Holm correction on both benchmark versions** (Table 1). On v0.1, isotonic calibration reduces the
-hybrid system's own reliability-diagram ECE from 0.2741 to 0.0537 (Figure 3). Selective answering
-at 50% coverage achieves 10.7% error vs. 30.7% unconditional (Figure 4).
+hybrid system's own reliability-diagram ECE from 0.2741 to 0.0537 (Figure 3a); on v0.2 the same
+signal's ECE reduces from 0.3237 to 0.0738 (Figure 3b) — both large reductions, though the v0.2
+starting ECE is itself higher, consistent with the harder query mix discussed throughout this
+section. Selective answering at 50% coverage achieves 10.7% error vs. 30.7% unconditional on v0.1
+(Figure 4a); the same protocol on v0.2 is shown in Figure 4b.
 
-![Figure 3: Reliability diagram for the hybrid system's fused-score confidence, before vs. after isotonic calibration (v0.1 benchmark).](../figures/fig3_reliability_diagram.svg)
+![Figure 3a: Reliability diagram for the hybrid system's fused-score confidence, before vs. after isotonic calibration (v0.1 benchmark).](../figures/fig3_reliability_diagram.svg)
 
-![Figure 4: Risk-coverage curve for the hybrid system under confidence-ranked selective answering (v0.1 benchmark).](../figures/fig4_risk_coverage_curve.svg)
+![Figure 3b: The same reliability diagram on the v0.2 benchmark.](../figures/fig3_reliability_diagram_v0.2.svg)
+
+![Figure 4a: Risk-coverage curve for the hybrid system under confidence-ranked selective answering (v0.1 benchmark).](../figures/fig4_risk_coverage_curve.svg)
+
+![Figure 4b: The same risk-coverage curve on the v0.2 benchmark.](../figures/fig4_risk_coverage_curve_v0.2.svg)
 
 **Table 1: Holm-corrected significance and bootstrap CIs.**
 
@@ -269,7 +281,9 @@ A5 is *lower* at *lower* coverage (82.2% @ 58.9%, 38/50 OOD caught) — the hard
 making the accept/reject decision more difficult, not a regression in the method. A6
 (+calibration) makes the same decisions as A5 but with ECE 0.054 vs. 0.274 raw.
 
-![Figure 5: Ablation A0–A6 (v0.1). A0–A3 report unconditional accuracy; A4–A6 report selective accuracy at reduced coverage and are not directly comparable to A0–A3's bars.](../figures/fig5_ablation_A0_A6.svg)
+![Figure 5a: Ablation A0–A6 (v0.1). A0–A3 report unconditional accuracy; A4–A6 report selective accuracy at reduced coverage and are not directly comparable to A0–A3's bars.](../figures/fig5_ablation_A0_A6.svg)
+
+![Figure 5b: The same ablation on v0.2, visualizing A5's lower selective accuracy at lower coverage discussed above.](../figures/fig5_ablation_A0_A6_v0.2.svg)
 
 **Functional evaluation.** Sandboxed execution (disposable temp directories, never the host
 machine) on a deliberately narrow, explicitly-scoped 15/150-query subset (git + filesystem,
@@ -455,30 +469,51 @@ added a short Ethics Statement, standard/expected at these venues and previously
 removed the non-citation "related-work matrix" entry from the reference list and filled in two
 references that were missing author names.
 
-A follow-up pass placed the five figures inline (Figures 1–5, Section 6/7 above) and fixed one
+A follow-up pass placed the five figures inline (Figures 1a–5a, Section 6/7 above) and fixed one
 found-in-passing defect: `fig5_ablation_A0_A6.svg`'s title had an internal file reference
 (`see ABLATION_NOTES.md`) baked directly into the image — same problem as the file-path citations
 in prose, just inside an SVG instead of markdown. Fixed in `research/experiments/generate_figures.js`
-and regenerated (`git diff` confirms only that one title string changed; no data values moved). All
-five placed figures are plotted from **v0.1 data only** — captions say so explicitly, since the
-paper's prose discusses v0.1 and v0.2 results together and a reader could otherwise assume a figure
-covers both. Figure 6 (error-taxonomy distribution) exists in `research/figures/` but is left
-unplaced: including it would require new supporting prose this condensed draft doesn't currently
-have room for or discuss; flagging the omission rather than silently dropping it.
+and regenerated (`git diff` confirms only that one title string changed; no data values moved).
+
+A second follow-up pass generated and placed v0.2 counterparts (Figures 1b–5b) for all five figures,
+parameterizing `generate_figures.js` by benchmark version rather than duplicating it. v0.1's output
+files are confirmed byte-identical after this change (`git diff --stat` on each v0.1-named SVG is
+empty). One real gap surfaced doing this: `research/results/v0.2/calibration-results.json` had
+never stored per-bin reliability data, only summary ECE/Brier, so a v0.2 reliability diagram (Figure
+3b) could not be built from what was already committed. Fixed additively in
+`run_calibration_v0_2.js` (same bin-computation logic v0.1's script already used) and re-ran —
+verified programmatically that every ECE/Brier summary value for all four confidence variants is
+byte-identical before and after; only the new `before_bins`/`after_bins` fields were added, no
+existing result changed.
+
+Cross-checking the new v0.2 figures against the manuscript text surfaced one more real,
+pre-existing inconsistency, unrelated to figures per se: the manuscript stated v0.2's BM25 accuracy
+as both "75.5%" (Abstract, Results) and "75.4%" (Ablation section) in different places. The
+committed `ablation-results.json` field everything else in this study reads from says 75.4%
+(mean-of-fold accuracy, consistent with this study's nested-CV methodology throughout); 75.5% was
+apparently a pooled-accuracy figure (120/159 = 75.47%) that entered the text at some point and was
+never reconciled with the canonical per-fold-mean number. Fixed to 75.4% in both `manuscript.md` and
+this file (4 occurrences total). The nearby "+3.8pp" delta figure was **not** changed — it comes
+from an independent paired-bootstrap computation (`point_delta: 0.0377` in
+`bootstrap-ci-results.json`), not from subtracting these two point estimates, and was already
+correct.
+
+All ten placed figures (five v0.1, five v0.2) are captioned by benchmark version so a reader can't
+mistake one for covering both. Figure 6 (error-taxonomy distribution, generated for both versions
+though only referenced here) is left unplaced: including it would require new supporting prose this
+condensed draft doesn't currently have room for or discuss; flagging the omission rather than
+silently dropping it.
 
 What this pass did **not** do, and what still remains:
 
 1. **Actual page-count verification.** This is markdown, not the ACL LaTeX template. Body text
-   (Abstract through References, excluding this note) is now a bit over ~4,400 words plus two
-   inline tables and five embedded figures — figures in particular consume real vertical space in
-   a two-column layout (each is roughly a third to half a column at reasonable size), so only
-   building this in the actual ACL template will confirm whether it fits 8 pages or needs a trim.
-2. **v0.2 figure versions do not exist.** All five figures plotted above are v0.1-only; the paper's
-   central finding is precisely the v0.1-vs-v0.2 divergence (Section 6, Table 1), so a v0.2 version
-   of Figure 1 in particular (showing the non-replicating accuracy comparison) would strengthen the
-   visual argument. Not generated in this pass — would need extending `generate_figures.js` to read
-   the v0.2 result files.
-3. **Anonymization for double-blind review.** No author names appear in this draft, but the system
+   (Abstract through References, excluding this note) is now a bit over ~4,600 words plus two
+   inline tables and ten embedded figures — figures in particular consume real vertical space in a
+   two-column layout, so only building this in the actual ACL template will confirm whether it fits
+   8 pages or needs a trim (ten figures at any reasonable size likely argues for picking a smaller
+   subset for the main body and moving the rest to an appendix, which ACL page limits typically
+   exempt).
+2. **Anonymization for double-blind review.** No author names appear in this draft, but the system
    under study, TermAssist, is a real, named, public npm package. If its repository or package
    metadata identifies its author, referencing it by name may itself be de-anonymizing regardless
    of anything else in the text. This is a judgment call for you, not something I can silently
@@ -486,8 +521,8 @@ What this pass did **not** do, and what still remains:
    common and often explicitly permitted by venue policy, (b) checking the specific target venue's
    anonymity policy on referencing an author's own public prior work, or (c) anonymizing the system
    name for the review version and de-anonymizing at camera-ready.
-4. **Reproducibility/artifact statement.** I did not add one, since its correct content (a public
+3. **Reproducibility/artifact statement.** I did not add one, since its correct content (a public
    repository link, or "supplementary material") depends on the anonymization decision above.
-5. **A fresh literature-novelty check close to the actual submission date**, per the roadmap's own
+4. **A fresh literature-novelty check close to the actual submission date**, per the roadmap's own
    "should do" item — I verified the three 2026 citations are real papers with accurate claims as
    of today, but did not run a new novelty search.
