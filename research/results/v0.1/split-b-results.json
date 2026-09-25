@@ -1,0 +1,90 @@
+{
+  "experiment_id": "E-GEN-splitB-v0.1",
+  "split": "GroupKFold by intent_group_id (intent-held-out)",
+  "k": 5,
+  "group_count": 125,
+  "fold_sizes": [
+    30,
+    30,
+    30,
+    30,
+    30
+  ],
+  "groups_split_across_folds": 0,
+  "caveat": "v0.1 has only 15 OOD and 14 ambiguous queries; GroupKFold nested-CV dev pools for these classes are thin (~3/fold test, ~12/fold dev for OOD). OOD/ambiguity detection numbers here are expected to be noisier than the v0.2 Split B analysis for this reason -- the same underpowering already documented for Split A (n=15, p=0.25), not a new artifact.",
+  "per_fold_alpha_and_acc": [
+    {
+      "test_fold": 0,
+      "selected_alpha": 0.3,
+      "non_ood_accuracy": 0.8148,
+      "non_ood_total": 27
+    },
+    {
+      "test_fold": 1,
+      "selected_alpha": 0.5,
+      "non_ood_accuracy": 0.7407,
+      "non_ood_total": 27
+    },
+    {
+      "test_fold": 2,
+      "selected_alpha": 0.3,
+      "non_ood_accuracy": 0.6667,
+      "non_ood_total": 27
+    },
+    {
+      "test_fold": 3,
+      "selected_alpha": 0.3,
+      "non_ood_accuracy": 0.8148,
+      "non_ood_total": 27
+    },
+    {
+      "test_fold": 4,
+      "selected_alpha": 0.3,
+      "non_ood_accuracy": 0.8148,
+      "non_ood_total": 27
+    }
+  ],
+  "splitB": {
+    "hybrid_non_ood_accuracy": 0.7704,
+    "ood_detection": {
+      "precision": 0.5,
+      "recall": 0.4667,
+      "f1": 0.4828,
+      "mean_auroc": 0.8494,
+      "confusion": {
+        "tp": 7,
+        "fp": 7,
+        "fn": 8,
+        "tn": 128
+      }
+    },
+    "ambiguity_detection": {
+      "precision": 0.1957,
+      "recall": 0.6429,
+      "f1": 0.3,
+      "mean_auroc": 0.801,
+      "confusion": {
+        "tp": 9,
+        "fp": 37,
+        "fn": 5,
+        "tn": 99
+      }
+    },
+    "calibration_ece_before": 0.2735,
+    "calibration_ece_after": 0.0646
+  },
+  "splitA_reference": {
+    "hybrid_non_ood_accuracy": 0.7706,
+    "ood_auroc": 0.8673,
+    "ood_f1": 0.5,
+    "ambiguity_f1": 0.3103,
+    "calibration_ece_before": 0.2741,
+    "calibration_ece_after": 0.0537
+  },
+  "generalization_delta": {
+    "hybrid_accuracy": -0.0002,
+    "ood_auroc": -0.0179,
+    "calibration_ece_after": 0.0109
+  },
+  "generated_at": "2026-09-25T07:46:24.484Z"
+}

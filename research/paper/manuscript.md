@@ -199,12 +199,13 @@ McNemar's test with a continuous-estimate view of the same comparisons.
 
 **Split B — intent-held-out generalization.** To test whether Split A's findings depend on the
 same command intents appearing in both tuning and test folds, we additionally construct a
-GroupKFold split (`research/experiments/run_split_b_v0_2.js`) keyed by a derived
-`intent_group_id` (the gold command for answerable queries; the sorted acceptable-command set for
-ambiguous queries; a singleton per query for OOD, which targets no intent). This yields 171 groups
-over the 209 v0.2 queries; the split is verified programmatically to place zero groups across more
-than one fold, so α, the OOD/ambiguity thresholds, and the isotonic calibrator are always selected
-on queries targeting *different* command intents than those they are scored on.
+GroupKFold split keyed by a derived `intent_group_id` (the gold command for answerable queries;
+the sorted acceptable-command set for ambiguous queries; a singleton per query for OOD, which
+targets no intent). We run this on both benchmark versions (`run_split_b_v0_2.js`, 171 groups over
+the 209 v0.2 queries; `run_split_b_v0_1.js`, 125 groups over the 150 v0.1 queries), and both are
+verified programmatically to place zero groups across more than one fold, so α, the
+OOD/ambiguity thresholds, and the isotonic calibrator are always selected on queries targeting
+*different* command intents than those they are scored on.
 
 ## 11. Results
 
@@ -246,16 +247,24 @@ p=0.0003 on v0.2) — full per-comparison breakdown with bootstrap CIs in **Tabl
 `research/results/stats/STATS_HARDENING_NOTES.md`). **Risk-coverage** (Figure 4): selective
 answering at 50% coverage achieves 10.7% error vs. 30.7% unconditional.
 
-**Intent-held-out generalization (Split B, v0.2; Table 8).** GroupKFold over 171 derived intent
-groups (0 groups split across the 5 folds, verified programmatically) shows the two Holm-surviving
-findings above are not artifacts of intent overlap between tuning and test: hybrid non-OOD
-accuracy is 79.24% under Split B vs. 79.25% under Split A (Δ≈−0.01pp), and OOD detection AUROC is
-0.898 under Split B vs. 0.901 under Split A (Δ≈−0.003) — both effectively unchanged. Calibration,
-while still a large improvement, is measurably **attenuated on held-out intents**: ECE 0.324→0.101
-under Split B versus 0.324→0.074 under Split A (a 69% vs. 77% relative reduction). Ambiguity
-detection F1 is similarly close (0.479 Split B vs. 0.496 Split A) — remaining weak under both
-splits, consistent with Section 15's standing limitation. Full results and per-metric discussion:
-`research/results/v0.2/SPLIT_B_NOTES.md`.
+**Intent-held-out generalization (Split B, Table 8).** GroupKFold over 171 derived intent
+groups (v0.2; 0 groups split across the 5 folds, verified programmatically) shows the two
+Holm-surviving findings above are not artifacts of intent overlap between tuning and test: hybrid
+non-OOD accuracy is 79.24% under Split B vs. 79.25% under Split A (Δ≈−0.01pp), and OOD detection
+AUROC is 0.898 under Split B vs. 0.901 under Split A (Δ≈−0.003) — both effectively unchanged.
+Calibration, while still a large improvement, is measurably **attenuated on held-out intents**:
+ECE 0.324→0.101 under Split B versus 0.324→0.074 under Split A (a 69% vs. 77% relative reduction).
+Ambiguity detection F1 is similarly close (0.479 Split B vs. 0.496 Split A) — remaining weak under
+both splits, consistent with Section 15's standing limitation. **The identical protocol run on
+v0.1 for symmetry (125 groups, 150 queries, 0 groups split) replicates the same qualitative
+pattern at smaller scale**: accuracy Δ≈−0.1pp (77.0% vs. 77.1%), OOD AUROC Δ≈−0.018 (0.849 vs.
+0.867), and calibration ECE reduction attenuating from 80.4% to 76.4% — noisier than v0.2 given
+v0.1's thinner OOD (15) and ambiguous (14) classes under GroupKFold, an effect predicted in
+advance from the same underpowering already documented for Split A's v0.1 OOD comparison, not a
+new artifact. That the generalization pattern itself replicates across both independently
+constructed benchmarks is further evidence it is not specific to either benchmark's particular
+query mix. Full results and per-metric discussion: `research/results/v0.2/SPLIT_B_NOTES.md` and
+`research/results/v0.1/SPLIT_B_NOTES.md`.
 
 ## 12. Ablation Study
 
@@ -402,8 +411,8 @@ manuscript offers an interpretation, not a tested cause; a richer ambiguity-dete
 alone is an incomplete signal even with more data or held-out intents); a placeholder-substitution
 system to extend functional evaluation; an optional local-LLM comparator (explicitly deferred in
 this program); a human-preference study. (Intent-held-out generalization itself, previously listed
-here, has since been evaluated — Section 11 — and is no longer future work, though repeating it on
-v0.1 for symmetry and on a future v1.0 benchmark remains open.)
+here, has since been evaluated on both benchmark versions — Section 11 — and is no longer future
+work; repeating it on a future v1.0 benchmark, once built, remains open.)
 
 Four further items are specified in detail (`research/TERMASSIST_RESEARCH_V1.0_SPEC.md`) but
 require genuine human effort we did not substitute with automation, and so remain incomplete

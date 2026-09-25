@@ -37,21 +37,28 @@ function table7() {
 }
 
 function table8() {
-  const sb = read('research/results/v0.2/split-b-results.json');
-  const headers = ['Metric', 'Split A (class-stratified)', 'Split B (intent-held-out)', 'Delta'];
-  const rows = [
-    ['Hybrid non-OOD accuracy', (sb.splitA_reference.hybrid_non_ood_accuracy*100).toFixed(2)+'%', (sb.splitB.hybrid_non_ood_accuracy*100).toFixed(2)+'%', (sb.generalization_delta.hybrid_accuracy*100).toFixed(2)+'pp'],
-    ['OOD detection AUROC', sb.splitA_reference.ood_auroc, sb.splitB.ood_detection.mean_auroc, sb.generalization_delta.ood_auroc],
-    ['OOD detection F1', sb.splitA_reference.ood_f1, sb.splitB.ood_detection.f1, (sb.splitB.ood_detection.f1 - sb.splitA_reference.ood_f1).toFixed(4)],
-    ['Ambiguity detection F1', sb.splitA_reference.ambiguity_f1, sb.splitB.ambiguity_detection.f1, (sb.splitB.ambiguity_detection.f1 - sb.splitA_reference.ambiguity_f1).toFixed(4)],
-    ['Calibration ECE (before→after)', `${sb.splitA_reference.calibration_ece_before}→${sb.splitA_reference.calibration_ece_after}`, `${sb.splitB.calibration_ece_before}→${sb.splitB.calibration_ece_after}`, sb.generalization_delta.calibration_ece_after]
-  ];
-  let md = `# Table 8 -- Split A vs Split B (Intent-Held-Out Generalization), v0.2\n\n${sb.group_count} intent groups, 5 folds, ${sb.groups_split_across_folds} groups split across folds (must be 0).\n\n| ${headers.join(' | ')} |\n| ${headers.map(()=>'---').join(' | ')} |\n`;
+  const headers = ['Benchmark', 'Metric', 'Split A (class-stratified)', 'Split B (intent-held-out)', 'Delta'];
+  let md = `# Table 8 -- Split A vs Split B (Intent-Held-Out Generalization), v0.1 and v0.2\n\n`;
   const csvRows = [headers.join(',')];
-  rows.forEach(r => { md += `| ${r.join(' | ')} |\n`; csvRows.push(r.join(',')); });
+  let mdRows = '';
+
+  ['v0.1', 'v0.2'].forEach(ver => {
+    const sb = read(`research/results/${ver}/split-b-results.json`);
+    md += `**${ver}**: ${sb.group_count} intent groups, 5 folds, ${sb.groups_split_across_folds} groups split across folds (must be 0).${sb.caveat ? ' ' + sb.caveat : ''}\n\n`;
+    const rows = [
+      ['Hybrid non-OOD accuracy', (sb.splitA_reference.hybrid_non_ood_accuracy*100).toFixed(2)+'%', (sb.splitB.hybrid_non_ood_accuracy*100).toFixed(2)+'%', (sb.generalization_delta.hybrid_accuracy*100).toFixed(2)+'pp'],
+      ['OOD detection AUROC', sb.splitA_reference.ood_auroc, sb.splitB.ood_detection.mean_auroc, sb.generalization_delta.ood_auroc],
+      ['OOD detection F1', sb.splitA_reference.ood_f1, sb.splitB.ood_detection.f1, +(sb.splitB.ood_detection.f1 - sb.splitA_reference.ood_f1).toFixed(4)],
+      ['Ambiguity detection F1', sb.splitA_reference.ambiguity_f1, sb.splitB.ambiguity_detection.f1, +(sb.splitB.ambiguity_detection.f1 - sb.splitA_reference.ambiguity_f1).toFixed(4)],
+      ['Calibration ECE (before→after)', `${sb.splitA_reference.calibration_ece_before}→${sb.splitA_reference.calibration_ece_after}`, `${sb.splitB.calibration_ece_before}→${sb.splitB.calibration_ece_after}`, sb.generalization_delta.calibration_ece_after]
+    ];
+    rows.forEach(r => { mdRows += `| ${ver} | ${r.join(' | ')} |\n`; csvRows.push([ver, ...r].join(',')); });
+  });
+
+  md += `| ${headers.join(' | ')} |\n| ${headers.map(()=>'---').join(' | ')} |\n${mdRows}`;
   fs.writeFileSync(path.join(tblDir, 'table8_split_b_generalization.md'), md, 'utf-8');
   fs.writeFileSync(path.join(tblDir, 'table8_split_b_generalization.csv'), csvRows.join('\n') + '\n', 'utf-8');
-  console.log('Wrote table8 (Split B generalization)');
+  console.log('Wrote table8 (Split B generalization, v0.1 + v0.2)');
 }
 
 table7();
