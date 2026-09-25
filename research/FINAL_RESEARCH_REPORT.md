@@ -183,6 +183,38 @@ original text above is left unedited as the historical record of what was known 
   contribution. See `research/results/v0.1/SPLIT_B_NOTES.md`,
   `research/results/v0.2/SPLIT_B_NOTES.md`, `research/tables/table8_split_b_generalization.md`.
 
+### Phase 18 Addendum, 2026-09-25 — independent κ re-validation attempted, below target
+
+Q14 ("limitations") and Q18 ("future work") both listed "independent human re-validation of the
+v0.2 AI-authored queries" as not-yet-performed. It has now been **attempted**, and the result is
+disclosed here rather than folded silently into the existing text:
+
+A stratified, blind, seed-42 sample of 14 of the 59 v0.2 AI-authored queries (8 OOD, 6 AMBIGUOUS)
+was independently judged by a reviewer with **partial independence** — the project's human
+director, blind to which label each of these 14 specific queries had originally received, but not
+a fully uninvolved third party (this partiality is itself disclosed, not hidden). Result:
+**Cohen's κ = 0.6316, below the spec's pre-specified κ≥0.7 target**
+(`research/datasets/independent_review/KAPPA_RESULTS_NOTES.md`,
+`research/datasets/independent_review/kappa_results.json`). Reported as measured; no re-sampling
+was performed to try to raise it.
+
+The disagreement is not uniform, and this is the important part: agreement was **perfect on the
+8 OOD-labeled items (8/8)** and entirely concentrated in the **6 AMBIGUOUS-labeled items (3/6)**.
+All three disagreements were short, bare-keyword-style queries ("list running processes", "ffmpeg",
+"pip") that the original v0.2 labeling called AMBIGUOUS — following v0.1's own precedent of
+treating bare tool-name keywords like `git`/`docker` as ambiguous — while the independent reviewer
+judged each to have one sufficiently obvious default command. Consequences for the evidence chain:
+
+- **Corroborates, does not weaken, the Q16/Q17 OOD-significance claim.** The paper's strongest
+  v0.2-specific result (OOD rejection, Holm-adjusted p=0.00006) rests on the OOD label set, and
+  this independent check found perfect agreement on that label set.
+- **Sharpens, with a specific quantified cause, the pre-existing ambiguity-detection weakness**
+  already named in Q14/Q17 (F1 0.31–0.50). It does not introduce a new problem; it explains part
+  of an old one, localized to bare-keyword queries.
+- Gate B-1 (`research/V1.0_BUILD_STATUS.md`) is updated from BLOCKED-ON-HUMAN to
+  ATTEMPTED-BELOW-TARGET. Reaching κ≥0.7 with a fully-independent, non-project-affiliated
+  annotator remains open future work, not resolved by this check.
+
 ---
 
 ## Phase 17 — Decision Gate

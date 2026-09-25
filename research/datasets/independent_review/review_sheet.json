@@ -2,71 +2,71 @@
   {
     "review_id": "RV-01",
     "query": "copy a file",
-    "answer": null
+    "answer": "B"
   },
   {
     "review_id": "RV-02",
     "query": "security",
-    "answer": null
+    "answer": "B"
   },
   {
     "review_id": "RV-03",
     "query": "mine cryptocurrency on my GPU",
-    "answer": null
+    "answer": "C"
   },
   {
     "review_id": "RV-04",
     "query": "teach me how to play guitar",
-    "answer": null
+    "answer": "C"
   },
   {
     "review_id": "RV-05",
     "query": "list running processes",
-    "answer": null
+    "answer": "A"
   },
   {
     "review_id": "RV-06",
     "query": "give me legal advice about my lease",
-    "answer": null
+    "answer": "C"
   },
   {
     "review_id": "RV-07",
     "query": "get my horoscope for today",
-    "answer": null
+    "answer": "C"
   },
   {
     "review_id": "RV-08",
     "query": "system",
-    "answer": null
+    "answer": "B"
   },
   {
     "review_id": "RV-09",
     "query": "help me learn Spanish",
-    "answer": null
+    "answer": "C"
   },
   {
     "review_id": "RV-10",
     "query": "help me train for a marathon",
-    "answer": null
+    "answer": "C"
   },
   {
     "review_id": "RV-11",
     "query": "ffmpeg",
-    "answer": null
+    "answer": "A"
   },
   {
     "review_id": "RV-12",
     "query": "water my garden automatically",
-    "answer": null
+    "answer": "C"
   },
   {
     "review_id": "RV-13",
     "query": "pip",
-    "answer": null
+    "answer": "A"
   },
   {
     "review_id": "RV-14",
     "query": "help me write a poem about the ocean",
-    "answer": null
+    "answer": "C"
   }
 ]

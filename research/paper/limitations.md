@@ -54,11 +54,27 @@ particularly in how often genuinely out-of-scope or ambiguous requests occur in 
 queries added in `v0.2` (35 new OOD, 24 new ambiguous) were authored and adjudicated by an AI
 agent (Claude) under human direction, verified against actual system retrieval output rather than
 judged from intuition, and disclosed explicitly as such
-(`research/datasets/v0.2_ADJUDICATION_REPORT.md`) — but **independent human re-validation of these
-59 queries, with inter-annotator agreement (target Cohen's κ≥0.7), has not yet been performed**
-(`research/TERMASSIST_RESEARCH_V1.0_SPEC.md` §4.4, `research/V1.0_BUILD_STATUS.md`). Any
-capability claim resting specifically on the v0.2-only queries — as opposed to claims replicated
-across both v0.1 and v0.2 — carries this additional, currently unresolved caveat.
+(`research/datasets/v0.2_ADJUDICATION_REPORT.md`). **Independent re-validation was subsequently
+attempted** (`research/TERMASSIST_RESEARCH_V1.0_SPEC.md` §4.4): a stratified, blind, seed-42 sample
+of 14/59 of these queries (8 OOD, 6 AMBIGUOUS) was independently judged by a reviewer with partial
+independence — the project's human director, blind to which label each of these 14 specific
+queries had originally received, but not a fully uninvolved third party. Result: **Cohen's
+κ = 0.6316, below the pre-specified κ ≥ 0.7 target**
+(`research/datasets/independent_review/KAPPA_RESULTS_NOTES.md`,
+`research/datasets/independent_review/kappa_results.json`). This is reported as measured, not
+adjusted. The disagreement is not uniform: agreement was **perfect on the OOD-labeled items (8/8)**
+and concentrated entirely in the **AMBIGUOUS-labeled items (3/6)**, all three disagreements being
+short, bare-keyword-style queries ("list running processes", "ffmpeg", "pip") that the original
+labeling called AMBIGUOUS (following v0.1's own precedent for bare tool-name keywords like
+`git`/`docker`) but the independent reviewer judged to have one sufficiently obvious default
+command. Practically: the OOD-detection claim, the paper's strongest v0.2-specific result, is
+independently corroborated by this check; the ambiguity-detection claim, already the weakest result
+in this paper, now additionally carries a disclosed, quantified label-reliability concern specific
+to bare-keyword queries, on top of a small (n=14, 6 AMBIGUOUS items) sample size. Full
+fully-independent (non-project-affiliated) re-validation reaching κ≥0.7 remains open future work.
+Any capability claim resting specifically on the v0.2-only AMBIGUOUS-category queries — as opposed
+to claims replicated across both v0.1 and v0.2, or resting on the OOD category — carries this
+additional caveat.
 
 ## No large-scale human evaluation
 

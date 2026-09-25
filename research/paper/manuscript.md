@@ -351,8 +351,12 @@ intents, not the 431 raw record count — Section 5 — small relative to genera
 with an
 additive schema migration completed but the planned 500–800-intent expansion not yet performed,
 pending human authoring and validation), single-platform corpus, hand-authored queries (v0.2's new
-queries additionally disclose AI-agent authorship under human direction, with independent
-human re-validation of those queries likewise not yet performed — Section 6), no human-preference
+queries additionally disclose AI-agent authorship under human direction; independent re-validation
+of a stratified 14/59 blind sample subsequently yielded Cohen's κ=0.6316, below the κ≥0.7 target,
+with disagreement concentrated entirely in the AMBIGUOUS category (3/6) and perfect agreement on
+OOD items (8/8) — corroborating the OOD-significance claim while sharpening the already-disclosed
+ambiguity-detection weakness; reviewer independence itself partial, not a fully uninvolved
+third party — Section 6), no human-preference
 study, fixed embedding-model choice, narrow (10%) functional-evaluation coverage (confirmed
 unchanged between benchmark versions without re-executing identical sandboxed commands), an
 unresolved ambiguity-detection weakness (confirmed to persist under intent-held-out evaluation,
@@ -422,10 +426,14 @@ Four further items are specified in detail (`research/TERMASSIST_RESEARCH_V1.0_S
 require genuine human effort we did not substitute with automation, and so remain incomplete
 rather than fabricated (full status: `research/V1.0_BUILD_STATUS.md`): expanding the corpus from
 279 to 500–800 human-validated intents; independent second-annotator re-validation of the
-AI-authored v0.2 queries (target Cohen's κ≥0.7); an independent, human-labeled safety evaluation
-set (~50 items) not derived from or shared with the rule-based classifier's own logic; and
-expanding functional evaluation from 15 to roughly 40–60 sandboxed tasks. None of these can be
-responsibly completed by bulk automated generation or by the same process that produced the
+AI-authored v0.2 queries (target Cohen's κ≥0.7) — **attempted** on a stratified 14/59 blind sample
+with a partial-independence reviewer, yielding κ=0.6316 (below target), disagreement concentrated
+entirely in the AMBIGUOUS category (3/6) with perfect OOD agreement (8/8); reaching κ≥0.7 with a
+fully-independent, non-project-affiliated annotator remains open
+(`research/datasets/independent_review/KAPPA_RESULTS_NOTES.md`); an independent, human-labeled
+safety evaluation set (~50 items) not derived from or shared with the rule-based classifier's own
+logic; and expanding functional evaluation from 15 to roughly 40–60 sandboxed tasks. None of these
+can be responsibly completed by bulk automated generation or by the same process that produced the
 system under test, which is precisely why they are listed as future work rather than attempted here.
 
 ## 20. References
