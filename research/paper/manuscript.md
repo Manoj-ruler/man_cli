@@ -3,7 +3,12 @@
 *Manuscript draft. All numbers in this document are pulled from `research/results/`,
 `research/figures/`, and `research/tables/` — generated artifacts of this research program, not
 hand-typed. No number here may exceed what is stated in `research/FINAL_RESEARCH_REPORT.md`'s
-corrected final contribution statement (post-v0.2).*
+corrected final contribution statement (post-v0.2). This revision additionally incorporates
+Holm–Bonferroni-corrected significance and bootstrap 95% confidence intervals
+(`research/results/stats/`) and an intent-held-out generalization check
+(`research/results/v0.2/split-b-results.json`), per `research/TERMASSIST_RESEARCH_V1.0_SPEC.md`.
+See `research/V1.0_BUILD_STATUS.md` for what remains outstanding (corpus expansion and
+independent human validation, both gated on work beyond this revision's scope).*
 
 ---
 
@@ -21,24 +26,35 @@ reliability, evaluating on two versions of a benchmark we constructed: an origin
 version and an expanded 209-query version built specifically to test statistical power on the
 original's smaller subsets. Under a fully leakage-free nested 5-fold cross-validation protocol,
 hybrid fusion improves supported-task accuracy over pure BM25 on both benchmarks (71.9%→77.1% on
-the original, 75.5%→79.3% on the expanded version); this improvement is statistically significant
-on the original benchmark (exact McNemar's p=0.016) but **does not replicate at the conventional
-significance threshold on the expanded, harder benchmark** (p=0.070) — a non-replication we
-verified is not a computation error and report as a central, not incidental, finding.
-Conversely, hybrid significantly beats dense retrieval alone on the expanded benchmark (p=0.013),
-where it did not on the original (p=0.146). Isotonic-regression calibration reduces confidence
-miscalibration substantially and consistently on both benchmarks (56.7–84.1% relative ECE
-reduction across four confidence signals). Out-of-domain rejection improves substantially in
-magnitude on both benchmarks, and on the expanded benchmark's larger OOD subset (50 vs. 15
-queries) this improvement is confirmed statistically significant (34.0%→68.0% rejection rate,
-p=0.000015), resolving a power limitation identified on the original, smaller subset (p=0.25). A
-fully deterministic, rule-based safety classifier achieves 95%/95% precision/recall on
-distinguishing risky from safe commands with zero dangerous-direction misses. We report every
-weaker, null, and non-replicating result alongside the positive ones — including a substring-
-matching heuristic shown to have zero measurable effect on accuracy on both benchmark versions —
-and position this as the first reported study, to our knowledge, of a lexical/BM25 retrieval
-baseline for this task family evaluated with nested-CV calibration, OOD detection, selective
-prediction, and an explicit benchmark-expansion replication check.
+the original, 75.5%→79.3% on the expanded version; bootstrap 95% CI on the delta [2.2, 8.9]pp and
+[0.6, 7.5]pp respectively). Under a pre-registered Holm–Bonferroni correction across the primary
+four-comparison family (accuracy vs. BM25, accuracy vs. dense-alone, OOD rejection, calibration),
+this accuracy improvement **barely survives correction on the original benchmark (Holm-adjusted
+p=0.047) and fails to survive on the expanded, harder benchmark (raw p=0.070, a fortiori after
+correction)** — a non-replication we verified is not a computation error and report as a central,
+not incidental, finding. Conversely, hybrid significantly beats dense retrieval alone on the
+expanded benchmark after correction (Holm-adjusted p=0.025), where it did not on the original
+(p=0.292). Isotonic-regression calibration reduces confidence miscalibration substantially and
+consistently on both benchmarks (56.7–84.1% relative ECE reduction across four confidence
+signals), and this reduction is the one result that **survives Holm correction on both benchmarks**
+(paired-bootstrap Holm-adjusted p=0.0004 and p=0.0003) — the most statistically robust finding in
+this study. Out-of-domain rejection improves substantially in magnitude on both benchmarks, and on
+the expanded benchmark's larger OOD subset (50 vs. 15 queries) this improvement survives Holm
+correction (34.0%→68.0% rejection rate, Holm-adjusted p=0.00006), resolving a power limitation
+identified on the original, smaller subset (raw p=0.25, not significant even uncorrected). An
+intent-held-out generalization check (GroupKFold over 171 command-intent groups, zero groups split
+across tuning/test folds) shows the accuracy and OOD findings are **not artifacts of intent overlap
+between tuning and test** (accuracy 79.2% held-out vs. 79.3% within-distribution; OOD AUROC 0.898
+vs. 0.901), while calibration, though still substantial, is measurably **attenuated on unseen
+intents** (ECE 0.324→0.101 held-out vs. →0.074 within-distribution) — disclosed rather than
+smoothed over. A fully deterministic, rule-based safety classifier achieves 95%/95%
+precision/recall on distinguishing risky from safe commands with zero dangerous-direction misses.
+We report every weaker, null, and non-replicating result alongside the positive ones — including a
+substring-matching heuristic shown to have zero measurable effect on accuracy on both benchmark
+versions — and position this as the first reported study, to our knowledge, of a lexical/BM25
+retrieval baseline for this task family evaluated with nested-CV calibration, OOD detection,
+selective prediction, a multiple-comparison-corrected benchmark-expansion replication check, and
+an intent-held-out generalization check.
 
 ## 2. Introduction
 
@@ -50,8 +66,9 @@ execution-grounded and RL-trained approaches (BashCoder-R1, 2026). This trajecto
 persistent risk: open-vocabulary generation can hallucinate syntactically valid but semantically
 wrong or unsafe commands.
 
-TermAssist takes a different, narrower approach: retrieval from a fixed, pre-vetted 431-command
-corpus, using classical lexical (BM25) scoring, with no LLM anywhere in the system. This
+TermAssist takes a different, narrower approach: retrieval from a fixed, pre-vetted corpus of 431
+records spanning 279 unique command intents on the evaluated platform (Section 5), using classical
+lexical (BM25) scoring, with no LLM anywhere in the system. This
 constrains coverage but structurally eliminates hallucination of arbitrary commands. The system
 is real — a published, in-use npm package — and its baseline behavior was independently
 audited and reproduced (Section 5). That audit surfaced a specific, serious problem: the system
@@ -97,10 +114,19 @@ calibration, OOD detection, and selective prediction — the gap this paper fill
 `v1.0-research-baseline`): tokenize (lowercase, strip punctuation, 10-word stopword list), BM25
 scoring (`k1=1.2, b=0.75`, standard IDF smoothing) over `intent+category+description`, plus a
 flat `+15.0` bonus when the query is a near-substring of the command's intent. Confidence =
-`min(round(score/8×100), 100)`, rejected below `score<2.0`. 431 commands, 27 categories,
+`min(round(score/8×100), 100)`, rejected below `score<2.0`. 431 corpus records, 27 categories,
 platform-filtered (`win32`/`darwin`/`linux`/`all`). No embeddings, no LLM, mean latency 3.29ms.
 Independently re-verified byte-for-byte reproducible (Phase 1: 0/150 mismatches against the
-archived results).
+archived results). **Corpus size clarification** (a discrepancy the audit surfaced and we
+corrected rather than let stand): 134 of the 431 records are cross-platform duplicates — the same
+natural-language intent recorded once per platform — so the retrieval space actually exercised on
+the evaluated (win32) platform is **279 unique intents**, not 431; this is the number that should
+be compared against other corpora's scale, and the one we use throughout. The corpus schema was
+subsequently migrated (additively, non-breaking — re-verified 0/150 mismatch after migration) to
+add `command_id`, `risk_level`, `source`, and `validation_status` fields in preparation for a
+planned expansion to 500–800 human-validated intents; that expansion itself requires human
+authoring and validation and is not yet complete (`research/V1.0_BUILD_STATUS.md`), so all results
+in this manuscript are reported on the original 279-intent corpus.
 
 ## 6. TermAssist-Bench
 
@@ -151,24 +177,53 @@ command risk, orthogonal to retrieval correctness. No LLM is used anywhere.
 ## 10. Experimental Methodology
 
 All tuned parameters (fusion α, OOD/ambiguity thresholds) are selected via nested 5-fold
-cross-validation (seed 42, stratified by classification): for each test fold, the parameter is
-chosen using only the other 4 folds, then applied once to the held-out fold — never tuned on data
-it is later scored against. Full parameter log: `research/results/configurations.json` (30 rows,
-14 fixed / 15 tuned / 1 methodological definition). Statistical testing uses the exact
-(binomial) McNemar's test, not the chi-square approximation, given small sample sizes (n=135
-non-OOD, n=15 OOD).
+cross-validation (seed 42, stratified by classification) — **Split A** in our terminology: for each
+test fold, the parameter is chosen using only the other 4 folds, then applied once to the held-out
+fold — never tuned on data it is later scored against. Full parameter log:
+`research/results/configurations.json` (30 rows, 14 fixed / 15 tuned / 1 methodological
+definition). Statistical testing uses the exact (binomial) McNemar's test, not the chi-square
+approximation, given small sample sizes (n=135/159 non-OOD, n=15/50 OOD).
+
+**Multiple-comparison correction.** We pre-register a primary family of four comparisons per
+benchmark version — accuracy vs. BM25 (A0-vs-A3), accuracy vs. dense-alone (A2-vs-A3), OOD
+rejection (baseline-vs-tuned), and calibration ECE reduction — and apply Holm–Bonferroni
+correction within each family (`research/experiments/apply_holm_correction.js`); a result is
+called significant only at Holm-adjusted p<0.05. Preregistration text and the exact family
+definition predate the corrected results (`research/results/v1.0/PREREGISTRATION.md`).
+
+**Bootstrap confidence intervals.** Percentile bootstrap (10,000 resamples, seed 42,
+`research/experiments/run_bootstrap_ci.js`) provides 95% CIs for the A0→A3 and A2→A3 accuracy
+deltas (paired resampling over non-OOD query ids) and for calibration ECE before/after and their
+paired reduction (resampling over pooled held-out predictions), complementing the discrete exact
+McNemar's test with a continuous-estimate view of the same comparisons.
+
+**Split B — intent-held-out generalization.** To test whether Split A's findings depend on the
+same command intents appearing in both tuning and test folds, we additionally construct a
+GroupKFold split (`research/experiments/run_split_b_v0_2.js`) keyed by a derived
+`intent_group_id` (the gold command for answerable queries; the sorted acceptable-command set for
+ambiguous queries; a singleton per query for OOD, which targets no intent). This yields 171 groups
+over the 209 v0.2 queries; the split is verified programmatically to place zero groups across more
+than one fold, so α, the OOD/ambiguity thresholds, and the isotonic calibrator are always selected
+on queries targeting *different* command intents than those they are scored on.
 
 ## 11. Results
 
 **Retrieval accuracy** (Figure 1, Table 1): on v0.1, BM25 71.9%, dense-only 72.6–72.7%, hybrid
-77.1% (±4.1pp across folds), a significant improvement over BM25 (exact McNemar's p=0.0156). On
-v0.2, BM25 75.5%, dense-only 72.3–72.4%, hybrid 79.3% — numerically similar in magnitude
-(+3.8pp vs. +5.2pp) but **this specific comparison does not clear p<0.05 on v0.2 (p=0.070)**. We
-verified this at the per-query level: of 8 discordant non-OOD pairs on v0.2 (vs. 7 on v0.1), 7
-still favor hybrid but one (`TA-B194`, "sudo reboot" vs. "sudo shutdown -h now") now favors BM25,
-and the larger, harder query set is enough to push the p-value above the conventional threshold —
-not a computation error. Conversely, hybrid vs. dense-alone flips from not-significant on v0.1
-(p=0.146) to significant on v0.2 (p=0.0127). We attribute this shift, as an interpretation rather
+77.1% (±4.1pp across folds) — a bootstrap 95% CI on the delta of [2.2, 8.9]pp, and an exact
+McNemar's p=0.0156 that **survives Holm correction, but only just** (Holm-adjusted p=0.047, within
+0.003 of the 0.05 cutoff for a family of 4). On v0.2, BM25 75.5%, dense-only 72.3–72.4%, hybrid
+79.3% — numerically similar in magnitude (+3.8pp, bootstrap CI [0.6, 7.5]pp) but **this specific
+comparison does not clear p<0.05 even before correction (raw p=0.070)**. We verified this at the
+per-query level: of 8 discordant non-OOD pairs on v0.2 (vs. 7 on v0.1), 7 still favor hybrid but
+one (`TA-B194`, "sudo reboot" vs. "sudo shutdown -h now") now favors BM25, and the larger, harder
+query set is enough to push the p-value above the conventional threshold — not a computation
+error. We note the bootstrap CI on v0.2's delta ([0.6, 7.5]pp) technically excludes zero while the
+discrete exact McNemar's test (built from only 8 discordant pairs) does not reach significance —
+the two methods disagree at the boundary because McNemar's exact test on a small, discrete
+discordant-pair count is conservative; we treat this as **method-divergent, borderline evidence**,
+not a resolved significant result. Conversely, hybrid vs. dense-alone flips from not-significant on
+v0.1 (raw p=0.146, Holm-adjusted p=0.292) to significant on v0.2 even after Holm correction
+(raw p=0.0127, Holm-adjusted p=0.025). We attribute this shift, as an interpretation rather
 than a proven cause, to v0.2's 17 new short-technical-keyword ambiguous queries (`grep`, `sed`,
 `awk`, `tar`, etc.), where BM25's exact-token-match strength is plausibly more competitive than on
 v0.1's query mix — a hypothesis we did not further test and flag as future work (Section 19).
@@ -178,12 +233,29 @@ AUROC 0.867 (OOD, feature=absolute top-1 score) and 0.784 (ambiguity, feature=ma
 evidence-driven feature choice (Section 9), not selected post-hoc. On benchmark v0.2 (OOD subset
 expanded 15→50 queries via the identical adjudication methodology, Section 6), OOD detection
 AUROC improves to 0.901 and the baseline-vs-tuned rejection-rate improvement (34.0%→68.0%)
-reaches statistical significance (exact McNemar's p=0.000015) — resolving the power limitation
-of the v0.1-scale result. Ambiguity detection F1 improves on v0.2 (0.310→0.496) though AUROC
+**survives Holm correction** (raw p=0.000015, Holm-adjusted p=0.00006) — resolving the power
+limitation of the v0.1-scale result, which was not significant even before correction (raw p=0.25,
+Holm-adjusted p=0.292). Ambiguity detection F1 improves on v0.2 (0.310→0.496) though AUROC
 slightly decreases (0.784→0.723), reported as measured. **Calibration** (Figure 3,
-Table 3): ECE reduced 56.7–80.4% across four confidence variants tested, largest for the hybrid
-system's own fused-score signal. **Risk-coverage** (Figure 4): selective answering at 50%
-coverage achieves 10.7% error vs. 30.7% unconditional.
+Table 3): ECE reduced 56.7–84.1% across four confidence variants tested, largest for the hybrid
+system's own fused-score signal; a paired bootstrap test of the reduction (before−after ECE > 0)
+gives one-sided p≈0.0001 on both benchmarks, and this is the **only comparison in the primary
+family that survives Holm correction on both benchmark versions** (Holm-adjusted p=0.0004 on v0.1,
+p=0.0003 on v0.2) — full per-comparison breakdown with bootstrap CIs in **Table 7**
+(`research/tables/table7_holm_bootstrap.md`; notes in
+`research/results/stats/STATS_HARDENING_NOTES.md`). **Risk-coverage** (Figure 4): selective
+answering at 50% coverage achieves 10.7% error vs. 30.7% unconditional.
+
+**Intent-held-out generalization (Split B, v0.2; Table 8).** GroupKFold over 171 derived intent
+groups (0 groups split across the 5 folds, verified programmatically) shows the two Holm-surviving
+findings above are not artifacts of intent overlap between tuning and test: hybrid non-OOD
+accuracy is 79.24% under Split B vs. 79.25% under Split A (Δ≈−0.01pp), and OOD detection AUROC is
+0.898 under Split B vs. 0.901 under Split A (Δ≈−0.003) — both effectively unchanged. Calibration,
+while still a large improvement, is measurably **attenuated on held-out intents**: ECE 0.324→0.101
+under Split B versus 0.324→0.074 under Split A (a 69% vs. 77% relative reduction). Ambiguity
+detection F1 is similarly close (0.479 Split B vs. 0.496 Split A) — remaining weak under both
+splits, consistent with Section 15's standing limitation. Full results and per-metric discussion:
+`research/results/v0.2/SPLIT_B_NOTES.md`.
 
 ## 12. Ablation Study
 
@@ -232,31 +304,48 @@ uncertainty about what it gets wrong — two related but distinct problems, requ
 interventions (fusion for accuracy, calibration for confidence), neither of which alone was
 sufficient (Section 8's error taxonomy shows 84.8% of the hybrid system's remaining errors on v0.1
 are still high-confidence, improving only modestly to 67.5% on v0.2). But the accuracy
-improvement's statistical significance is benchmark-composition-sensitive: it holds on the
-original 150-query benchmark and does not replicate on the expanded, harder 209-query version,
-while a different comparison (hybrid vs. dense-alone) becomes significant only on the expanded
-version. We interpret this as evidence that a single benchmark, however carefully constructed,
-can support a significance claim that is real but fragile to the specific mix of query difficulty
-sampled — precisely the concern raised by Card et al. (2020) about NLP benchmark power, and
-precisely why this program is reporting both benchmark versions' results rather than only the more
-favorable one. The calibration and OOD results, by contrast, are robust across both versions —
-strengthening our confidence that reliability, not raw accuracy, is this study's most defensible
-individual contribution. This
-argues for treating calibration as a first-class research target in retrieval-based assistants,
-not an afterthought to accuracy.
+improvement's statistical significance is benchmark-composition-sensitive: even before any
+multiple-comparison correction, it barely holds on the original 150-query benchmark and does not
+replicate on the expanded, harder 209-query version, while a different comparison (hybrid vs.
+dense-alone) becomes significant — and survives Holm correction — only on the expanded version.
+Applying Holm–Bonferroni correction across the pre-registered four-comparison family sharpens this
+picture rather than changing it qualitatively: of the four comparisons, only **calibration ECE
+reduction survives correction on both benchmark versions**, OOD detection survives correction only
+on the powered v0.2 benchmark, and the BM25-vs-hybrid accuracy comparison survives correction only
+marginally on v0.1 and not at all on v0.2. We interpret this as evidence that a single benchmark,
+however carefully constructed, can support a significance claim that is real but fragile to the
+specific mix of query difficulty sampled — precisely the concern raised by Card et al. (2020) about
+NLP benchmark power, and precisely why this program is reporting both benchmark versions' results,
+under correction, rather than only the more favorable one. The intent-held-out generalization check
+(Split B) adds an independent line of evidence for the same conclusion: the two findings that
+survive multiple-comparison correction (accuracy-vs-BM25 marginally, OOD detection strongly) also
+generalize essentially unchanged to command intents withheld from tuning, while calibration — still
+a robust improvement — is measurably weaker on those same held-out intents. Together, this
+strengthens our confidence that reliability, not raw accuracy, is this study's most defensible
+individual contribution, and that this defensibility is not an artifact of a single benchmark's
+composition or of intent overlap between tuning and test. This argues for treating calibration as
+a first-class research target in retrieval-based assistants, not an afterthought to accuracy.
 
 ## 16. Limitations
 
 See `research/paper/limitations.md` for the full, unabridged list: benchmark composition
-sensitivity (the full ablation/calibration/safety suite was re-run on both v0.1 and v0.2; the OOD-
-significance gap on v0.1's 15-query subset was resolved on v0.2's 50-query expansion, but the
-core BM25-vs-hybrid accuracy significance did NOT replicate on v0.2 — Section 11/15 — meaning
-neither benchmark version alone should be treated as definitive), single-platform corpus, hand-
-authored queries (v0.2's new queries additionally disclose AI-agent authorship under human
-direction — Section 6), no human-preference study, fixed embedding-model choice, narrow (10%)
-functional-evaluation coverage (confirmed unchanged between benchmark versions without
-re-executing identical sandboxed commands), an unresolved ambiguity-detection weakness, and
-isotonic calibration's demonstrated small-sample sensitivity.
+sensitivity (the full ablation/calibration/safety suite was re-run on both v0.1 and v0.2, and all
+primary comparisons were subsequently re-evaluated under Holm correction; the OOD-significance gap
+on v0.1's 15-query subset was resolved and survives correction on v0.2's 50-query expansion, but
+the core BM25-vs-hybrid accuracy significance did NOT survive correction on either benchmark
+robustly — marginal on v0.1, absent on v0.2 — Section 11/15 — meaning neither benchmark version
+alone should be treated as definitive), corpus scale (279 win32-visible unique intents, not the
+431 raw record count — Section 5 — small relative to generation-oriented corpora, with an
+additive schema migration completed but the planned 500–800-intent expansion not yet performed,
+pending human authoring and validation), single-platform corpus, hand-authored queries (v0.2's new
+queries additionally disclose AI-agent authorship under human direction, with independent
+human re-validation of those queries likewise not yet performed — Section 6), no human-preference
+study, fixed embedding-model choice, narrow (10%) functional-evaluation coverage (confirmed
+unchanged between benchmark versions without re-executing identical sandboxed commands), an
+unresolved ambiguity-detection weakness (confirmed to persist under intent-held-out evaluation,
+F1 0.48–0.50 under both splits), and isotonic calibration's demonstrated sensitivity to both small
+samples and intent generalization — measured directly, not merely hypothesized: the ECE reduction
+attenuates from 77% within-distribution to 69% on intent-held-out evaluation (Section 11).
 
 ## 17. Threats to Validity
 
@@ -265,8 +354,10 @@ isotonic calibration's demonstrated small-sample sensitivity.
 was reported — both documented in full rather than silently corrected, as a transparency measure.
 A pre-existing document (`baseline-error-analysis.md`) was found to contain a transcription error
 (87.7% vs. the correct 86.06%), corrected with a dated erratum. **External validity:** results
-are specific to this 431-command, win32-only corpus and may not generalize to larger or
-differently-distributed command libraries. **Construct validity:** "functional success" (Section
+are specific to this 279-unique-intent, win32-only corpus (431 raw records, Section 5) and may not
+generalize to larger or differently-distributed command libraries; the intent-held-out check
+(Section 11) addresses generalization *within* this corpus's intent distribution, not beyond it.
+**Construct validity:** "functional success" (Section
 13) is defined as exit-code-0, not full semantic side-effect verification — a stated
 simplification.
 
@@ -275,20 +366,30 @@ simplification.
 A lightweight, fully offline, non-LLM hybrid retrieval architecture improves accuracy and
 substantially improves confidence calibration (56.7–84.1% relative ECE reduction, consistent
 across both benchmark versions) over a real, previously-shipped BM25 baseline, evaluated under a
-leakage-free nested cross-validation protocol throughout, and re-run in full on two independently
-constructed benchmark versions rather than one. The initially underpowered OOD-detection result
-was subsequently confirmed significant (p=0.000015) on a targeted benchmark expansion built
-specifically to test whether the gap was one of sample size rather than effect — it was. The
-headline BM25-vs-hybrid accuracy significance, by contrast, did **not** replicate on the expanded
-benchmark (p=0.016→0.070), while dense-vs-hybrid significance newly appeared there (p=0.146→
-0.0127) — reported as a central finding, not a footnote, because a study whose validated
-improvement disappears the moment the benchmark composition changes is exactly the failure mode
-the underlying literature on benchmark power (Card et al., 2020) warns about, and burying it would
-defeat the purpose of having built a second benchmark at all. The most defensible, replication-
-tested claims from this program are therefore the calibration improvement and the (now
-significance-confirmed) OOD detection improvement, not the raw accuracy gain in isolation. Weaker
-and non-replicating results (dense-vs-hybrid significance flipping across benchmark versions,
-ambiguity detection quality, the substring bonus's true effect, and the accuracy-significance
+leakage-free nested cross-validation protocol throughout, re-run in full on two independently
+constructed benchmark versions rather than one, and further validated under a pre-registered
+Holm–Bonferroni correction and an intent-held-out (GroupKFold) generalization check. The initially
+underpowered OOD-detection result was subsequently confirmed significant on a targeted benchmark
+expansion built specifically to test whether the gap was one of sample size rather than effect —
+it was, and the result **survives Holm correction** (Holm-adjusted p=0.00006) and generalizes to
+held-out command intents (AUROC 0.898 held-out vs. 0.901 within-distribution). The headline
+BM25-vs-hybrid accuracy significance, by contrast, did **not** replicate on the expanded benchmark
+(raw p=0.016→0.070) and, even where nominally significant, **only barely survives multiple-
+comparison correction** on the original benchmark (Holm-adjusted p=0.047) — while dense-vs-hybrid
+significance newly appeared, and survives correction, on the expanded benchmark (Holm-adjusted
+p=0.025) — reported as a central finding, not a footnote, because a study whose validated
+improvement disappears the moment the benchmark composition changes, or the moment a standard
+multiple-comparison correction is applied, is exactly the failure mode the underlying literature on
+benchmark power (Card et al., 2020) warns about, and burying it would defeat the purpose of having
+built a second benchmark and applied that correction at all. Calibration is the one finding in the
+primary family that **survives Holm correction on both benchmark versions** (Holm-adjusted
+p=0.0004 and p=0.0003) and remains a large, if somewhat attenuated, improvement under intent-held-
+out evaluation (69% vs. 77% relative ECE reduction). The most defensible, replication-tested,
+multiple-comparison-corrected, and generalization-checked claims from this program are therefore
+the calibration improvement and the OOD detection improvement, not the raw accuracy gain in
+isolation. Weaker and non-replicating results (dense-vs-hybrid significance flipping across
+benchmark versions, ambiguity detection quality — confirmed weak under both class-stratified and
+intent-held-out evaluation, the substring bonus's true effect, and the accuracy-significance
 non-replication itself) are reported alongside the positive findings, not folded into an
 overstated headline claim.
 
@@ -296,11 +397,23 @@ overstated headline claim.
 
 A direct follow-up investigation of why v0.2's new short-technical-keyword ambiguous queries
 shift the BM25-vs-hybrid and dense-vs-hybrid significance patterns (Section 11/15) — the current
-manuscript offers an interpretation, not a tested cause; a richer
-ambiguity-detection feature (v0.2's larger ambiguous subset improved F1 but not AUROC, suggesting
-margin alone is an incomplete signal even with more data); a placeholder-substitution system to
-extend functional evaluation; an optional local-LLM comparator (explicitly deferred in this
-program); a human-preference study.
+manuscript offers an interpretation, not a tested cause; a richer ambiguity-detection feature
+(v0.2's larger ambiguous subset improved F1 but not AUROC under either split, suggesting margin
+alone is an incomplete signal even with more data or held-out intents); a placeholder-substitution
+system to extend functional evaluation; an optional local-LLM comparator (explicitly deferred in
+this program); a human-preference study. (Intent-held-out generalization itself, previously listed
+here, has since been evaluated — Section 11 — and is no longer future work, though repeating it on
+v0.1 for symmetry and on a future v1.0 benchmark remains open.)
+
+Four further items are specified in detail (`research/TERMASSIST_RESEARCH_V1.0_SPEC.md`) but
+require genuine human effort we did not substitute with automation, and so remain incomplete
+rather than fabricated (full status: `research/V1.0_BUILD_STATUS.md`): expanding the corpus from
+279 to 500–800 human-validated intents; independent second-annotator re-validation of the
+AI-authored v0.2 queries (target Cohen's κ≥0.7); an independent, human-labeled safety evaluation
+set (~50 items) not derived from or shared with the rule-based classifier's own logic; and
+expanding functional evaluation from 15 to roughly 40–60 sandboxed tasks. None of these can be
+responsibly completed by bulk automated generation or by the same process that produced the
+system under test, which is precisely why they are listed as future work rather than attempted here.
 
 ## 20. References
 
