@@ -450,10 +450,11 @@ system under test, which is precisely why they are listed as future work rather 
    arXiv:2502.06858.
 6. Li, S., Zhang, Y., Tresp, V., Yang, Y. (2026). QuoteBench: How Matched Scores Can Hide
    Command-Path Failures. arXiv:2608.13547.
-7. (2026). BashCoder-R1: Towards Robust and Explainable Bash Script Generation with
+7. Yu, L., Wang, P., Xu, J., Zhang, J., Wang, X., Ma, J., Yang, L., Deng, C., Wang, Z., Zhang, F.
+   (2026). BashCoder-R1: Towards Robust and Explainable Bash Code Generation with
    Robustness-Aware Group Relative Policy Optimization. ISSTA 2026. arXiv:2606.27733.
-8. (2026). BM25 Wins at Scale: A Scaling Study of Retrieval-Augmented Generation Paradigms.
-   arXiv:2607.26497.
+8. Wang, P., Xu, B., Wang, S., Du, M., Zeng, X., Wu, H., Zhang, L., Zhang, L. (2026). BM25 Wins
+   at Scale: A Scaling Study of Retrieval-Augmented Generation Paradigms. arXiv:2607.26497.
 9. Husain, H. et al. (2019). CodeSearchNet. arXiv:1909.09436.
 10. Notaro, P., Haeri, S., Cardoso, J., Gerndt, M. (2024). Command-line Risk Classification using
     Transformer-based Neural Architectures. arXiv:2412.01655.
