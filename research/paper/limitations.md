@@ -3,14 +3,28 @@
 Stated explicitly and in full, not minimized. Every limitation below is grounded in something
 observed during this research program, not a generic disclaimer.
 
-## Benchmark size and composition
+## Benchmark size and composition — and a fragile headline result
 
-`termassist_bench v0.1` has 150 queries — adequate for the accuracy comparisons (A0 vs. A3
-reaches significance), but the OOD subset (15 queries) is too small to statistically confirm the
-otherwise large (+20pp) OOD rejection improvement (Phase 13: p=0.25, not significant). The
-ambiguous subset (14 queries) and ordinal risk categories (5 CRITICAL, 10 MEDIUM) are similarly
-thin. A larger benchmark, especially with more OOD and ambiguous examples, is the single highest-
-value piece of future work identified by this program.
+`termassist_bench v0.1` has 150 queries; its OOD subset (15) was too small to statistically
+confirm the otherwise large (+20pp) OOD rejection improvement (p=0.25, not significant). A
+follow-up benchmark, `v0.2` (209 queries, OOD grown to 50), was built specifically to test this,
+and did resolve it: the same OOD comparison is significant after correction (Holm-adjusted
+p=0.00006). But growing the benchmark also surfaced a less comfortable finding this program
+reports rather than hides: **the accuracy improvement that was the original headline result
+(hybrid vs. BM25, significant at p=0.016 on v0.1) does not survive on v0.2** (raw p=0.070, i.e.
+not significant even before correction), and even on v0.1 it only barely survives a
+Holm–Bonferroni correction for multiple comparisons (Holm-adjusted p=0.047). **Confidence
+calibration is the only comparison that survives correction on both benchmark versions**
+(Holm-adjusted p=0.0004 and p=0.0003) — see `research/results/stats/STATS_HARDENING_NOTES.md`.
+This means the paper's accuracy claim should be read as benchmark-composition-sensitive, not
+robustly established, while the calibration claim is this program's most defensible result. An
+intent-held-out (GroupKFold) generalization check, run on both benchmarks, further shows this
+pattern is not an artifact of a single benchmark or of intent overlap between tuning and test:
+accuracy and OOD detection generalize to unseen command intents essentially unchanged, while
+calibration, though still substantial, is measurably attenuated on those same held-out intents
+(76.4–69.0% vs. 80.4–77.2% relative ECE reduction) — see `research/tables/table8_split_b_generalization.md`.
+A larger benchmark, and independent human re-validation of the AI-authored portions of v0.2 (see
+below), remain the highest-value pieces of future work.
 
 ## Single-platform corpus
 
@@ -19,13 +33,32 @@ themselves are platform-agnostic, but no cross-platform (Linux/macOS) evaluation
 Category-level accuracy (e.g., strong git/filesystem performance) may not generalize to
 categories more platform-specific in phrasing.
 
-## Hand-authored benchmark queries
+## Canonical queries are a control, not evidence of capability
 
-All 150 queries, including the 15 "out-of-domain" and 14 "ambiguous" examples, were authored by
-the benchmark's creators to probe specific failure modes, not sampled from real user logs. This
-is a common and defensible benchmark-construction method (matching NL2Bash's own StackOverflow-
-sourced-then-filtered methodology), but real-world query distributions may differ, particularly
-in how often genuinely out-of-scope or ambiguous requests occur in practice.
+All 25 canonical-type queries in `termassist_bench v0.1` are verbatim-equal to a corpus `intent`
+string (verified directly: 25/25). This is by design — canonical queries are meant as a positive
+control, not a test of paraphrase or generalization ability — but it means the reported 100%
+canonical accuracy is near-tautological (the system is asked to retrieve the exact text it was
+indexed on) and must never be read as evidence of the system's language-understanding capability.
+The paraphrase, low-overlap-paraphrase, polysemy, and ambiguous query types are where the actual
+capability claims should be grounded; canonical accuracy is reported only as a sanity check that
+retrieval itself is not broken.
+
+## Hand-authored and AI-authored benchmark queries
+
+All 150 v0.1 queries, including the 15 original "out-of-domain" and 14 "ambiguous" examples, were
+authored by the benchmark's creators to probe specific failure modes, not sampled from real user
+logs. This is a common and defensible benchmark-construction method (matching NL2Bash's own
+StackOverflow-sourced-then-filtered methodology), but real-world query distributions may differ,
+particularly in how often genuinely out-of-scope or ambiguous requests occur in practice. The 59
+queries added in `v0.2` (35 new OOD, 24 new ambiguous) were authored and adjudicated by an AI
+agent (Claude) under human direction, verified against actual system retrieval output rather than
+judged from intuition, and disclosed explicitly as such
+(`research/datasets/v0.2_ADJUDICATION_REPORT.md`) — but **independent human re-validation of these
+59 queries, with inter-annotator agreement (target Cohen's κ≥0.7), has not yet been performed**
+(`research/TERMASSIST_RESEARCH_V1.0_SPEC.md` §4.4, `research/V1.0_BUILD_STATUS.md`). Any
+capability claim resting specifically on the v0.2-only queries — as opposed to claims replicated
+across both v0.1 and v0.2 — carries this additional, currently unresolved caveat.
 
 ## No large-scale human evaluation
 
@@ -52,20 +85,27 @@ retrieved commands should not be assumed to generalize to these excluded categor
 
 ## Ambiguity detection is a known, unresolved weakness
 
-Phase 7's margin-based ambiguity detector reaches only F1=0.310 (precision 0.205, recall 0.643) —
-a real signal (AUROC 0.784) but not a strong detector. This is reported as an open problem, not
-patched by adding rules tuned to this specific benchmark's 14 ambiguous examples (which would be
-equivalent to tuning on the test set).
+Phase 7's margin-based ambiguity detector reaches F1=0.310 on v0.1 (precision 0.205, recall
+0.643) — a real signal (AUROC 0.784) but not a strong detector. On v0.2's larger ambiguous subset
+(38 vs. 14), F1 improves to 0.496 but AUROC slightly *decreases* to 0.723, and under
+intent-held-out (Split B) evaluation F1 is similarly weak on both benchmarks (0.30 on v0.1, 0.479
+on v0.2). This is reported as an open problem under every evaluation protocol tried, not patched
+by adding rules tuned to specific benchmark examples (which would be equivalent to tuning on the
+test set).
 
-## Isotonic calibration's small-sample sensitivity
+## Isotonic calibration's sensitivity to small samples and to intent generalization
 
 Phase 8 uncovered and fixed a real implementation bug (tied x-values not pre-aggregated before
 PAV) that was specifically triggered by this benchmark's small size and heavy value-ties (110/150
 production confidences pinned at exactly 100%). While the fix is now verified correct and
 permanently guarded by an assertion, this episode is itself evidence that isotonic calibration on
-a dataset this small requires care, and the reported calibration numbers (pooled across 5 test
-folds) should be read as "calibration measurably helps here," not "this exact calibration mapping
-is production-ready without validation on more data."
+a dataset this small requires care. A second, independently measured sensitivity: under
+intent-held-out (GroupKFold) evaluation, calibration's ECE reduction attenuates from
+80.4%/77.2% (within-distribution) to 76.4%/69.0% (held-out intents) on v0.1/v0.2 respectively —
+still a large improvement, but a real, disclosed degradation, not a hypothetical one. The reported
+calibration numbers should be read as "calibration measurably and robustly helps here, with a
+measured generalization cost," not "this exact calibration mapping is production-ready without
+validation on more data or more diverse intents."
 
 ## Rule-based safety classifier gaps
 
@@ -75,9 +115,21 @@ were deliberately left unpatched to avoid tuning against this benchmark's specif
 classifier's strong result on the actionable risky/not-risky binary (95%/95%) should not be read
 as claiming perfect coverage of all possible destructive command patterns.
 
+## Corpus scale
+
+The corpus is 431 raw records but only 279 unique command intents on the evaluated (win32)
+platform — 134 records are cross-platform duplicates of the same intent. 279 is the number that
+should be compared against other corpora's scale (e.g. NL2Bash's ~9,000+ pairs); it is small, and
+results should not be assumed to hold on a larger or differently-distributed command library. The
+corpus schema has been migrated (additively, backward-compatible — re-verified 0/150 mismatch
+against the frozen baseline) to support a planned expansion to 500–800 human-validated intents,
+but that expansion itself requires human authoring and validation and has not yet been performed
+(`research/V1.0_BUILD_STATUS.md`); all results in this program are reported on the original
+279-intent corpus.
+
 ## Scope: retrieval, not generation
 
-TermAssist retrieves from a fixed, pre-vetted 431-command corpus; it cannot answer requests
+TermAssist retrieves from this fixed, pre-vetted corpus; it cannot answer requests
 outside that corpus's coverage (by design — this is also its safety argument). It is not
 comparable, in a head-to-head accuracy sense, to open-vocabulary generation systems (NL2Bash,
 NL2SH, LLM-based approaches), which solve a different, harder problem at the cost of the

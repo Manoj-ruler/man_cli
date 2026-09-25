@@ -343,8 +343,12 @@ primary comparisons were subsequently re-evaluated under Holm correction; the OO
 on v0.1's 15-query subset was resolved and survives correction on v0.2's 50-query expansion, but
 the core BM25-vs-hybrid accuracy significance did NOT survive correction on either benchmark
 robustly — marginal on v0.1, absent on v0.2 — Section 11/15 — meaning neither benchmark version
-alone should be treated as definitive), corpus scale (279 win32-visible unique intents, not the
-431 raw record count — Section 5 — small relative to generation-oriented corpora, with an
+alone should be treated as definitive), **canonical-query independence (all 25 canonical queries
+are verbatim-equal to a corpus intent, so 100% canonical accuracy is a positive-control sanity
+check, not evidence of language-understanding capability — the paraphrase/low-overlap/polysemy/
+ambiguous types carry the actual capability claims)**, corpus scale (279 win32-visible unique
+intents, not the 431 raw record count — Section 5 — small relative to generation-oriented corpora,
+with an
 additive schema migration completed but the planned 500–800-intent expansion not yet performed,
 pending human authoring and validation), single-platform corpus, hand-authored queries (v0.2's new
 queries additionally disclose AI-agent authorship under human direction, with independent
