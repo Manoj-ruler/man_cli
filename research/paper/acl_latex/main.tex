@@ -5,14 +5,12 @@
 % research/paper/manuscript.md (the canonical full research-report draft). Every number below was
 % cross-checked against the markdown source during this LaTeX pass; none were retyped from memory.
 %
-% Compiled with: [review] mode (double-blind anonymization + line numbers), per acl.sty's own
-% built-in anonymization -- the \author block below is never shown while this option is active.
-% Switch to \usepackage{acl} (no [review]) only at camera-ready time, and fill in real author
-% info first. See the note at the end of this file on the TermAssist-naming anonymization risk
-% that acl.sty's automatic author-hiding does NOT cover.
+% Compiled with: final/camera-ready mode (\usepackage{acl}, no [review]) -- author identity is
+% shown, no anonymization, no line numbers. Switch back to \usepackage[review]{acl} if this needs
+% to go back into double-blind review at any point.
 
 \documentclass[11pt]{article}
-\usepackage[review]{acl}
+\usepackage{acl}
 \usepackage{times}
 \usepackage{latexsym}
 \usepackage[T1]{fontenc}
@@ -26,8 +24,9 @@
 \title{Reliability-Aware Hybrid Retrieval for Natural-Language-to-Shell-Command Assistance: \\ A Non-LLM Study}
 
 \author{
-  Anonymous ACL submission \\
-  \small (author block hidden by acl.sty in review mode; see note at end of source)
+  Manoj Kumar Gaddam \\
+  SRKR Engineering College \\
+  \texttt{manojgaddam133@gmail.com}
 }
 
 \begin{document}
@@ -527,28 +526,29 @@ than attempted here.
 % items below require a human decision, not something to silently resolve)
 % ============================================================================
 %
-% 1. TITLE PAGE / AUTHOR BLOCK: acl.sty's [review] mode automatically replaces
-%    whatever \author{} contains with "Anonymous ACL submission" in the
-%    rendered PDF -- confirmed by reading acl.sty directly (search for
-%    "ifacl@anonymize"). No action needed for review-mode submission.
+% STATUS: switched to final/camera-ready mode (\usepackage{acl}, no [review]) at
+% the author's explicit request, with real author info filled in (Manoj Kumar
+% Gaddam, SRKR Engineering College, manojgaddam133@gmail.com). Author identity
+% is now visible in the compiled PDF -- there is no anonymization in this
+% version. If this ever needs to go back into double-blind review (e.g. a
+% desk-reject-and-resubmit, or a different venue that still requires it),
+% switch back to \usepackage[review]{acl} and restore a placeholder
+% \author{Anonymous ACL submission} block; acl.sty will then auto-hide it
+% regardless of what the block actually contains.
 %
-% 2. ANONYMIZATION RISK ACL.STY CANNOT COVER: this paper studies TermAssist, a
-%    real, named, public npm package. Global npm package metadata on the
-%    machine this file was built on ties that package to a specific public
-%    GitHub/npm account. If your target venue's double-blind policy is strict,
-%    referencing the system by its real name in the BODY TEXT (not just the
-%    author block) may itself be de-anonymizing regardless of anything acl.sty
-%    does. This is unresolved and is your call: (a) accept the risk -- many
-%    venues explicitly permit referencing one's own public prior artifact,
-%    (b) check your target venue's specific policy on this, or (c) use a
-%    pseudonym for the system name in the review version and reveal the real
-%    name at camera-ready.
+% Still worth checking before the actual submission:
 %
-% 3. CAMERA-READY SWITCH: change \usepackage[review]{acl} to \usepackage{acl}
-%    (drop [review]) and fill in the real \author block only once anonymity
-%    is no longer required.
+% 1. PAGE COUNT: recompiled and reverified after the final-mode switch (see
+%    the compile log / PDF from this pass) -- still 9 pages total, body text
+%    (Abstract through Conclusion/Future Work) fitting in 7, References on
+%    pages 8-9, under the ACL/EACL SRW 8-page body limit. Recheck if the text,
+%    tables, or figures change again -- page count isn't something to eyeball
+%    from source length, and final mode's layout (no line numbers) differs
+%    slightly from review mode's.
 %
-% 4. PAGE COUNT: this file was compiled and checked against the SRW 8-page
-%    body-text limit (see the compile log / PDF this pass produced). If you
-%    have since edited the text, tables, or figures, recompile and recheck --
-%    page count is not something to eyeball from source length.
+% 2. VENUE-SPECIFIC SUBMISSION FORMAT: most ACL/EACL-family venues still want
+%    an ANONYMIZED PDF for the actual review-stage submission, with author
+%    info revealed only at camera-ready time after acceptance. Confirm which
+%    stage this particular PDF is for before sending it anywhere -- this
+%    build is camera-ready-formatted, not blind-review-formatted, per the
+%    explicit instruction that produced it.
