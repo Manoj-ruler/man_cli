@@ -1,0 +1,72 @@
+[
+  {
+    "review_id": "RV-01",
+    "original_id": "TA-B209",
+    "original_label": "AMBIGUOUS"
+  },
+  {
+    "review_id": "RV-02",
+    "original_id": "TA-B198",
+    "original_label": "AMBIGUOUS"
+  },
+  {
+    "review_id": "RV-03",
+    "original_id": "TA-B177",
+    "original_label": "OOD"
+  },
+  {
+    "review_id": "RV-04",
+    "original_id": "TA-B159",
+    "original_label": "OOD"
+  },
+  {
+    "review_id": "RV-05",
+    "original_id": "TA-B206",
+    "original_label": "AMBIGUOUS"
+  },
+  {
+    "review_id": "RV-06",
+    "original_id": "TA-B160",
+    "original_label": "OOD"
+  },
+  {
+    "review_id": "RV-07",
+    "original_id": "TA-B181",
+    "original_label": "OOD"
+  },
+  {
+    "review_id": "RV-08",
+    "original_id": "TA-B194",
+    "original_label": "AMBIGUOUS"
+  },
+  {
+    "review_id": "RV-09",
+    "original_id": "TA-B165",
+    "original_label": "OOD"
+  },
+  {
+    "review_id": "RV-10",
+    "original_id": "TA-B171",
+    "original_label": "OOD"
+  },
+  {
+    "review_id": "RV-11",
+    "original_id": "TA-B191",
+    "original_label": "AMBIGUOUS"
+  },
+  {
+    "review_id": "RV-12",
+    "original_id": "TA-B173",
+    "original_label": "OOD"
+  },
+  {
+    "review_id": "RV-13",
+    "original_id": "TA-B201",
+    "original_label": "AMBIGUOUS"
+  },
+  {
+    "review_id": "RV-14",
+    "original_id": "TA-B154",
+    "original_label": "OOD"
+  }
+]
