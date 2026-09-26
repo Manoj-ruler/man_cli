@@ -1,0 +1,249 @@
+{
+  "_comment": "Illustrative worked examples for the annotation codebook. These are NOT benchmark queries and never enter the benchmark. build_annotation_materials.js verifies that every cited corpus id exists in the win32-visible corpus, that OOD examples' absent_terms appear in no corpus record, and that no example is identical or near-identical to any v0.1/v0.2 benchmark query.",
+  "examples": [
+    {
+      "id": "W1",
+      "query": "make a zip of this folder",
+      "label": "CLEAR",
+      "readings": [
+        {
+          "reading": "create a zip archive of a folder",
+          "ids": [
+            "tac-0258"
+          ]
+        }
+      ],
+      "why": "One reading, one record that performs it. Nothing else in the list zips a folder."
+    },
+    {
+      "id": "W2",
+      "query": "upgrade requests with pip",
+      "label": "CLEAR",
+      "readings": [
+        {
+          "reading": "upgrade one pip package",
+          "ids": [
+            "tac-0128"
+          ]
+        }
+      ],
+      "why": "The request names both the tool and the task. The other pip records (install, list, uninstall) do different things and essentially nobody who writes these words wants them."
+    },
+    {
+      "id": "W3",
+      "query": "which process is eating my CPU",
+      "label": "CLEAR",
+      "readings": [
+        {
+          "reading": "see which processes use the most CPU",
+          "ids": [
+            "tac-0032",
+            "tac-0221"
+          ]
+        }
+      ],
+      "why": "Two records, but both sort processes by CPU: same effect, different wording. Equivalent records are variants of one task, not ambiguity. (tac-0219 'show cpu info' answers a different question and is not a plausible reading of these words.)"
+    },
+    {
+      "id": "W4",
+      "query": "shut down my compose stack",
+      "label": "CLEAR",
+      "readings": [
+        {
+          "reading": "stop the docker compose services",
+          "ids": [
+            "tac-0099"
+          ]
+        },
+        {
+          "reading": "stop every running container",
+          "ids": [
+            "tac-0013"
+          ]
+        }
+      ],
+      "why": "Two supported readings exist, but the words name a compose stack. Almost nobody who writes this wants every running container stopped, so the second reading fails the plausibility test (Step 3). One dominant reading: CLEAR."
+    },
+    {
+      "id": "W5",
+      "query": "tmux",
+      "label": "AMBIGUOUS",
+      "readings": [
+        {
+          "reading": "start a session",
+          "ids": [
+            "tac-0315"
+          ]
+        },
+        {
+          "reading": "list sessions",
+          "ids": [
+            "tac-0316"
+          ]
+        },
+        {
+          "reading": "attach to a session",
+          "ids": [
+            "tac-0317"
+          ]
+        },
+        {
+          "reading": "kill a session",
+          "ids": [
+            "tac-0318"
+          ]
+        }
+      ],
+      "why": "A bare tool name: it names no task. Four records for it perform four different tasks, so no reading can be dominant. AMBIGUOUS by the bare-name rule (Section 6.1)."
+    },
+    {
+      "id": "W6",
+      "query": "uninstall a library",
+      "label": "AMBIGUOUS",
+      "readings": [
+        {
+          "reading": "uninstall an npm package",
+          "ids": [
+            "tac-0116"
+          ]
+        },
+        {
+          "reading": "uninstall a pip package",
+          "ids": [
+            "tac-0127"
+          ]
+        }
+      ],
+      "why": "Two package ecosystems, each a common reading among people who write this; a user of one is badly served by the record for the other. (A Windows system package, tac-0354, is a poor reading of the word library, so it is not counted.)"
+    },
+    {
+      "id": "W7",
+      "query": "free up docker space",
+      "label": "AMBIGUOUS",
+      "readings": [
+        {
+          "reading": "remove all unused images",
+          "ids": [
+            "tac-0014"
+          ]
+        },
+        {
+          "reading": "remove all stopped containers",
+          "ids": [
+            "tac-0103"
+          ]
+        },
+        {
+          "reading": "remove all unused volumes",
+          "ids": [
+            "tac-0419"
+          ]
+        }
+      ],
+      "why": "Three cleanups, each a common reading of \"free up space\", and each destroys something different (images can be re-pulled; volumes hold data). Readings that differ in effect on your data are distinct tasks (Section 6.3), and a user who meant one is badly served by another."
+    },
+    {
+      "id": "W8",
+      "query": "check whether a host is reachable",
+      "label": "CLEAR",
+      "readings": [
+        {
+          "reading": "ping a host",
+          "ids": [
+            "tac-0187"
+          ]
+        },
+        {
+          "reading": "test whether a specific port is open",
+          "ids": [
+            "tac-0199"
+          ]
+        }
+      ],
+      "why": "Ping is the dominant reading of 'reachable'. Testing one port is a narrower question that few users mean by these words, so it fails the plausibility test."
+    },
+    {
+      "id": "W9",
+      "query": "compile my rust project",
+      "label": "OOD",
+      "readings": [
+        {
+          "reading": "compile a Rust project",
+          "ids": []
+        }
+      ],
+      "absent_terms": [
+        "cargo",
+        "rustc",
+        "rust",
+        "compile"
+      ],
+      "why": "A real terminal task, but no record compiles a Rust project or any other program. OOD means \"the list cannot perform this\", not \"a shell cannot\"."
+    },
+    {
+      "id": "W10",
+      "query": "reserve a table at an Italian restaurant",
+      "label": "OOD",
+      "readings": [
+        {
+          "reading": "reserve a restaurant table",
+          "ids": []
+        }
+      ],
+      "absent_terms": [
+        "restaurant",
+        "reserve",
+        "italian"
+      ],
+      "why": "Not a computing task at all."
+    },
+    {
+      "id": "W11",
+      "query": "set up nginx as a reverse proxy",
+      "label": "OOD",
+      "readings": [
+        {
+          "reading": "configure nginx",
+          "ids": []
+        }
+      ],
+      "absent_terms": [
+        "nginx",
+        "proxy"
+      ],
+      "why": "The tool is absent from the list. Do not label it by what a shell could do."
+    },
+    {
+      "id": "W12",
+      "query": "rename every file in this folder to lowercase",
+      "label": "OOD",
+      "readings": [
+        {
+          "reading": "bulk rename",
+          "ids": []
+        }
+      ],
+      "absent_terms": [
+        "lowercase",
+        "ToLower",
+        "tolower",
+        "Rename-Item"
+      ],
+      "why": "Borderline. tac-0141 renames ONE file. Filling in placeholders is allowed, but turning it into a loop over every file changes the command's structure, so the record does not perform this task."
+    },
+    {
+      "id": "W13",
+      "query": "encrypt a file with a password",
+      "label": "CLEAR",
+      "readings": [
+        {
+          "reading": "encrypt a file symmetrically with gpg",
+          "ids": [
+            "tac-0364"
+          ]
+        }
+      ],
+      "why": "The list can do this (tac-0364 asks for a passphrase). A task that is done differently in real life is still CLEAR if a record performs it."
+    }
+  ]
+}

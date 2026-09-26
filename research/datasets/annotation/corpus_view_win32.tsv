@@ -1,0 +1,280 @@
+id	category	intent	command	description
+tac-0001	git	undo last git commit but keep changes	git reset --soft HEAD~1	Undo the last commit, keeping all changes staged
+tac-0003	find	find all python files modified today	Get-ChildItem -Recurse -Filter '*.py' | Where-Object { $_.LastWriteTime -gt (Get-Date).Date }	Find Python files modified in the last 24 hours
+tac-0005	grep	search for TODO comments in all javascript files	Get-ChildItem -Recurse -Filter '*.js' | Select-String -Pattern 'TODO'	Recursively search for TODO comments in JS files
+tac-0008	ssh	connect to a remote server via ssh	ssh user@hostname	Open an SSH connection to a remote server
+tac-0009	ssh	copy file to remote server via scp	scp file.txt user@hostname:/path/to/destination	Securely copy a file to a remote server
+tac-0010	curl	download a file from a url	curl -O https://example.com/file.zip	Download a file from a URL using curl
+tac-0011	curl	make an api post request with json data	curl -X POST -H 'Content-Type: application/json' -d '{"key":"value"}' https://api.example.com/endpoint	Send a POST request with JSON body
+tac-0012	docker	list all running docker containers	docker ps	List all currently running Docker containers
+tac-0013	docker	stop all running docker containers	docker stop $(docker ps -q)	Stop all running Docker containers
+tac-0014	docker	remove all unused docker images	docker image prune -a	Remove all unused Docker images
+tac-0015	npm	install npm packages from package.json	npm install	Install all dependencies from package.json
+tac-0016	npm	list all globally installed npm packages	npm list -g --depth=0	List globally installed npm packages
+tac-0018	find	find large files bigger than 100mb	Get-ChildItem -Recurse -File | Where-Object { $_.Length -gt 100MB }	Find files larger than 100MB
+tac-0020	disk	show disk usage of current directory sorted by size	Get-ChildItem | ForEach-Object { [PSCustomObject]@{Name=$_.Name; Size=(Get-ChildItem $_.FullName -Recurse -File | Measure-Object -Property Length -Sum).Sum} } | Sort-Object Size -Descending	Show disk usage sorted by size descending
+tac-0022	process	kill a process by name	Stop-Process -Name 'process_name' -Force	Kill all processes matching a name
+tac-0024	network	show all listening ports	Get-NetTCPConnection -State Listen	List all TCP ports currently listening
+tac-0025	git	create a git branch and switch to it	git checkout -b branch-name	Create a new branch and switch to it
+tac-0026	git	view git log with one line per commit	git log --oneline -20	Show last 20 commits in compact format
+tac-0028	sed	replace text in all files recursively	Get-ChildItem -Recurse -File | ForEach-Object { (Get-Content $_.FullName) -replace 'old_text','new_text' | Set-Content $_.FullName }	Find and replace text across all files
+tac-0030	find	count lines of code in a project	(Get-ChildItem -Recurse -Include '*.py','*.js' | Get-Content | Measure-Object -Line).Lines	Count total lines of code in Python and JS files
+tac-0032	process	monitor system resources in real time	Get-Process | Sort-Object CPU -Descending	Show processes sorted by CPU usage
+tac-0033	ssh	generate ssh key pair	ssh-keygen -t ed25519 -C 'your_email@example.com'	Generate a new ED25519 SSH key pair
+tac-0035	permissions	make a file executable	Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass	Add execute permission to a file
+tac-0036	git	show git status of current repository	git status	Show the working tree status
+tac-0037	git	stage all changes for git commit	git add -A	Stage all modified, deleted, and new files
+tac-0038	git	commit staged changes with a message	git commit -m 'Your commit message'	Create a commit with a message
+tac-0039	git	push changes to remote repository	git push origin branch-name	Push local branch to remote origin
+tac-0040	git	pull latest changes from remote	git pull origin main	Fetch and merge changes from remote main branch
+tac-0041	git	stash uncommitted changes	git stash	Temporarily save uncommitted changes
+tac-0042	git	apply stashed changes	git stash pop	Restore the most recently stashed changes
+tac-0043	git	view all git branches	git branch -a	List all local and remote branches
+tac-0044	git	delete a local git branch	git branch -d branch-name	Delete a local branch (safe, merged only)
+tac-0045	git	force delete a local git branch	git branch -D branch-name	Force delete a local branch regardless of merge status
+tac-0046	git	merge a branch into current branch	git merge branch-name	Merge the specified branch into the current branch
+tac-0047	git	rebase current branch onto another	git rebase main	Rebase current branch onto main
+tac-0048	git	view diff of unstaged changes	git diff	Show unstaged changes in the working directory
+tac-0049	git	view diff of staged changes	git diff --cached	Show changes staged for the next commit
+tac-0050	git	clone a git repository	git clone https://github.com/user/repo.git	Clone a remote repository locally
+tac-0051	git	tag a git commit	git tag -a v1.0.0 -m 'Version 1.0.0'	Create an annotated tag on the current commit
+tac-0052	git	show who last modified each line of a file	git blame filename.txt	Show commit and author info per line of a file
+tac-0053	git	search git history for a string	git log -S 'search_string' --oneline	Find commits that introduced or removed a string
+tac-0054	git	amend the last git commit message	git commit --amend -m 'New commit message'	Rewrite the most recent commit message
+tac-0055	git	reset working directory to last commit	git checkout -- .	Discard all unstaged changes in working directory
+tac-0056	git	show remote repository urls	git remote -v	List all remote connections with their URLs
+tac-0057	git	fetch all remote branches	git fetch --all	Download all branches from all remotes
+tac-0058	git	cherry pick a commit	git cherry-pick commit-hash	Apply a specific commit onto the current branch
+tac-0060	find	find files by name in current directory	Get-ChildItem -Recurse -Filter 'filename.txt'	Search for a file by exact name
+tac-0062	find	find files by extension recursively	Get-ChildItem -Recurse -Filter '*.log'	Find all files with a given extension
+tac-0064	find	find and delete all .DS_Store files	Get-ChildItem -Recurse -Filter '.DS_Store' | Remove-Item	Recursively delete all .DS_Store files
+tac-0066	find	find empty directories	Get-ChildItem -Recurse -Directory | Where-Object { (Get-ChildItem $_.FullName).Count -eq 0 }	List all empty directories
+tac-0068	find	find files modified in the last 7 days	Get-ChildItem -Recurse -File | Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-7) }	Find files modified within the past week
+tac-0070	find	find files owned by a specific user	Get-ChildItem -Recurse | Where-Object { $_.GetAccessControl().Owner -like '*username*' }	Find all files owned by a given user
+tac-0074	grep	search for a string in files recursively	Get-ChildItem -Recurse -File | Select-String -Pattern 'search_string'	Search recursively for a string in all files
+tac-0076	grep	search for a pattern case insensitively	Get-ChildItem -Recurse -File | Select-String -Pattern 'pattern' -CaseSensitive:$false	Case-insensitive recursive search
+tac-0078	grep	grep and show only filenames with matches	Get-ChildItem -Recurse -File | Where-Object { Select-String -Path $_.FullName -Pattern 'pattern' -Quiet }	List only filenames that contain the pattern
+tac-0080	grep	grep with context lines around match	Select-String -Path 'file.txt' -Pattern 'pattern' -Context 3,3	Show 3 lines before and after each match
+tac-0082	grep	grep for lines not matching a pattern	Get-Content 'file.txt' | Where-Object { $_ -notmatch 'pattern' }	Show lines that do NOT match the pattern
+tac-0084	grep	count number of matches in a file	(Select-String -Path 'file.txt' -Pattern 'pattern').Count	Count the number of matching lines
+tac-0086	grep	search for whole word matches only	Select-String -Path 'file.txt' -Pattern '\bword\b'	Match only complete words
+tac-0088	grep	grep using extended regular expressions	Select-String -Path 'file.txt' -Pattern 'pattern1|pattern2'	Search for multiple patterns with extended regex
+tac-0089	docker	build a docker image from dockerfile	docker build -t image-name:tag .	Build a Docker image from the current directory
+tac-0090	docker	run a docker container interactively	docker run -it image-name /bin/bash	Start an interactive shell in a new container
+tac-0091	docker	run a docker container in background	docker run -d -p 8080:80 image-name	Run a container detached with port mapping
+tac-0092	docker	view docker container logs	docker logs -f container-name	Follow live logs from a running container
+tac-0093	docker	exec into a running docker container	docker exec -it container-name /bin/bash	Open a shell inside a running container
+tac-0094	docker	remove a stopped docker container	docker rm container-name	Delete a stopped container
+tac-0095	docker	remove a docker image	docker rmi image-name	Delete a Docker image from local storage
+tac-0096	docker	list all docker images	docker images	Show all locally available Docker images
+tac-0097	docker	pull a docker image from docker hub	docker pull ubuntu:22.04	Download a Docker image from Docker Hub
+tac-0098	docker	start docker compose services	docker compose up -d	Start all services defined in docker-compose.yml detached
+tac-0099	docker	stop docker compose services	docker compose down	Stop and remove all docker-compose containers
+tac-0100	docker	view docker compose logs	docker compose logs -f	Follow logs from all docker-compose services
+tac-0101	docker	copy file from container to host	docker cp container-name:/path/in/container ./local-path	Copy a file out of a running container
+tac-0102	docker	inspect a docker container	docker inspect container-name	Show detailed info about a container
+tac-0103	docker	prune all stopped containers	docker container prune	Remove all stopped containers
+tac-0104	docker	show docker system disk usage	docker system df	Show Docker disk usage summary
+tac-0105	curl	make a get request with curl	curl -s https://api.example.com/data	Send a silent GET request
+tac-0106	curl	follow redirects with curl	curl -L https://example.com	Follow HTTP redirects automatically
+tac-0107	curl	save curl output to file	curl -o output.html https://example.com	Save the response body to a file
+tac-0108	curl	send custom headers with curl	curl -H 'Authorization: Bearer token' https://api.example.com	Add a custom header to a curl request
+tac-0109	curl	make a put request with curl	curl -X PUT -H 'Content-Type: application/json' -d '{"key":"value"}' https://api.example.com/resource/1	Send a PUT request with a JSON body
+tac-0110	curl	make a delete request with curl	curl -X DELETE https://api.example.com/resource/1	Send a DELETE request to an API endpoint
+tac-0111	curl	check http response code with curl	curl -o /dev/null -s -w '%{http_code}' https://example.com	Get only the HTTP status code of a request
+tac-0112	curl	resume an interrupted curl download	curl -C - -O https://example.com/largefile.zip	Continue a partially downloaded file
+tac-0113	npm	run npm script	npm run script-name	Execute a script defined in package.json
+tac-0114	npm	install a specific npm package	npm install package-name	Install and save a package as a dependency
+tac-0115	npm	install npm package as dev dependency	npm install --save-dev package-name	Install a package as a development dependency
+tac-0116	npm	uninstall an npm package	npm uninstall package-name	Remove a package and update package.json
+tac-0117	npm	update all npm packages	npm update	Update all packages to their latest allowed versions
+tac-0118	npm	check for outdated npm packages	npm outdated	List packages that have newer versions available
+tac-0119	npm	audit npm packages for vulnerabilities	npm audit	Scan dependencies for known vulnerabilities
+tac-0120	npm	fix npm audit vulnerabilities	npm audit fix	Automatically fix compatible audit vulnerabilities
+tac-0121	npm	create new npm project	npm init -y	Initialize a new package.json with defaults
+tac-0122	pip	install pip package	pip install package-name	Install a Python package with pip
+tac-0123	pip	install specific version of pip package	pip install package-name==1.2.3	Install a specific version of a package
+tac-0124	pip	list installed pip packages	pip list	Show all installed Python packages
+tac-0125	pip	save pip requirements to file	pip freeze > requirements.txt	Export installed packages to requirements.txt
+tac-0126	pip	install packages from requirements file	pip install -r requirements.txt	Install all packages listed in requirements.txt
+tac-0127	pip	uninstall a pip package	pip uninstall package-name	Remove an installed Python package
+tac-0128	pip	upgrade a pip package	pip install --upgrade package-name	Upgrade a package to its latest version
+tac-0129	pip	create a python virtual environment	python -m venv venv	Create a new Python virtual environment
+tac-0133	filesystem	list all files including hidden	Get-ChildItem -Force	List all files with details including hidden files
+tac-0135	filesystem	create a new directory	New-Item -ItemType Directory -Path 'path/to/directory' -Force	Create directory and any missing parent directories
+tac-0137	filesystem	remove a directory and its contents	Remove-Item -Recurse -Force 'directory/'	Recursively force delete a directory
+tac-0139	filesystem	copy a directory recursively	Copy-Item -Recurse 'source/' 'destination/'	Copy a directory and all its contents
+tac-0141	filesystem	move or rename a file	Move-Item 'oldname.txt' 'newname.txt'	Rename or move a file or directory
+tac-0143	filesystem	create an empty file	New-Item -ItemType File 'filename.txt'	Create a new empty file or update timestamps
+tac-0145	filesystem	view file contents	Get-Content 'filename.txt'	Print the contents of a file to stdout
+tac-0147	filesystem	view file with pagination	Get-Content 'filename.txt' | Out-Host -Paging	View a file with scrollable pagination
+tac-0149	filesystem	view first 10 lines of a file	Get-Content 'filename.txt' -TotalCount 10	Print the first 10 lines of a file
+tac-0151	filesystem	view last 10 lines of a file	Get-Content 'filename.txt' -Tail 10	Print the last 10 lines of a file
+tac-0153	filesystem	follow a file live as it updates	Get-Content 'C:\path\to\file.log' -Wait -Tail 10	Continuously display new lines appended to a file
+tac-0155	filesystem	show current directory path	Get-Location	Print the full path of the current directory
+tac-0157	filesystem	count lines words and characters in file	(Get-Content 'filename.txt' | Measure-Object -Line -Word -Character) | Select-Object Lines, Words, Characters	Show line, word, and character counts for a file
+tac-0159	filesystem	sort lines of a file alphabetically	Get-Content 'filename.txt' | Sort-Object	Sort lines of a text file alphabetically
+tac-0161	filesystem	remove duplicate lines from a file	Get-Content 'filename.txt' | Sort-Object -Unique	Sort and remove duplicate lines
+tac-0163	filesystem	compare two files	Compare-Object (Get-Content 'file1.txt') (Get-Content 'file2.txt')	Show line-by-line differences between two files
+tac-0165	filesystem	create a symbolic link	New-Item -ItemType SymbolicLink -Path '/path/to/link' -Target '/path/to/target'	Create a symbolic (soft) link
+tac-0167	filesystem	show file or directory permissions	Get-Item 'filename.txt' | Select-Object *	Display detailed file metadata including permissions
+tac-0169	permissions	change file owner	icacls 'filename.txt' /setowner 'user'	Change the owner and group of a file
+tac-0171	permissions	change permissions recursively	icacls 'directory/' /grant 'user:(OI)(CI)F' /T	Set permissions on a directory and all contents
+tac-0173	permissions	give read write permissions to owner only	icacls 'filename.txt' /inheritance:r /grant:r "${env:USERNAME}:RW"	Set file to owner read/write only
+tac-0175	permissions	give read only permissions to everyone	icacls 'filename.txt' /inheritance:r /grant:r 'Everyone:R'	Make a file read-only for all users
+tac-0177	permissions	check current user	$env:USERNAME	Print the name of the current user
+tac-0179	permissions	switch to another user	runas /user:username cmd	Switch to another user account
+tac-0181	permissions	run command as superuser	Start-Process powershell -Verb RunAs	Execute a command with root privileges
+tac-0183	permissions	show all users on the system	Get-LocalUser | Select-Object Name	List all user accounts on the system
+tac-0185	network	check ip address of machine	Get-NetIPAddress	Show all network interfaces and their IP addresses
+tac-0187	network	ping a host to check connectivity	Test-Connection -ComputerName google.com -Count 4	Send 4 ICMP packets to test network connectivity
+tac-0189	network	trace the network route to a host	Test-NetConnection -ComputerName google.com -TraceRoute	Show the network path packets take to a host
+tac-0191	network	check dns resolution for a domain	Resolve-DnsName example.com	Query DNS to resolve a domain name
+tac-0193	network	look up dns records for a domain	Resolve-DnsName example.com -Type ALL	Detailed DNS lookup for a domain
+tac-0195	network	show active network connections	Get-NetTCPConnection	Display all active network connections and sockets
+tac-0197	network	show network interface statistics	Get-NetAdapter	Display network interface configuration
+tac-0199	network	test if a port is open on a host	Test-NetConnection -ComputerName hostname -Port 80	Check if a specific port is open using netcat
+tac-0202	network	monitor network traffic in real time	Get-NetAdapterStatistics	Display real-time network bandwidth usage
+tac-0203	network	flush dns cache on linux	sudo systemd-resolve --flush-caches	Clear the system DNS resolver cache
+tac-0205	network	show routing table	Get-NetRoute	Display the IP routing table
+tac-0207	network	block an ip address with firewall	New-NetFirewallRule -DisplayName 'Block IP' -Direction Inbound -RemoteAddress '192.168.1.100' -Action Block	Add a firewall rule to drop packets from an IP
+tac-0209	process	show all running processes	Get-Process	Display all running processes with details
+tac-0211	process	show process tree	Get-Process | Select-Object Id, ProcessName, @{N='Parent';E={(Get-Process -Id $_.Parent.Id -ErrorAction SilentlyContinue).ProcessName}}	Display processes in a tree hierarchy
+tac-0213	process	kill a process by pid	Stop-Process -Id PID -Force	Force kill a process by its process ID
+tac-0215	process	find process id by name	Get-Process -Name 'process_name' | Select-Object Id	Get the PID of a process by name
+tac-0217	process	show memory usage	Get-CimInstance Win32_OperatingSystem | Select-Object TotalVisibleMemorySize, FreePhysicalMemory	Display total, used, and free memory in human-readable form
+tac-0219	process	show cpu info	Get-CimInstance Win32_Processor	Display CPU architecture and processor information
+tac-0221	process	monitor processes with htop	Get-Process | Sort-Object CPU -Descending | Select-Object -First 20	Interactive process viewer and manager
+tac-0223	process	run a command in background	Start-Job -ScriptBlock { command }	Execute a command as a background process
+tac-0225	process	bring background process to foreground	Receive-Job -Id 1 -Wait	Bring job 1 back to the foreground
+tac-0227	process	check system uptime	(Get-Date) - (gcim Win32_OperatingSystem).LastBootUpTime	Show how long the system has been running
+tac-0229	process	show system load averages	Get-CimInstance Win32_Processor | Select-Object LoadPercentage	Display the system load averages for 1, 5, 15 minutes
+tac-0230	process	run command at scheduled time	at 10:00 AM tomorrow	Schedule a one-time command to run at a specific time
+tac-0231	process	list cron jobs for current user	crontab -l	Display the current user's cron schedule
+tac-0232	process	edit cron jobs	crontab -e	Open the cron table for editing
+tac-0234	disk	show total disk space	Get-PSDrive -PSProvider FileSystem	Display disk space usage on all mounted filesystems
+tac-0236	disk	show disk usage of a specific directory	(Get-ChildItem '/path/to/dir' -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB	Show total disk usage of a directory
+tac-0238	disk	list mounted filesystems	Get-Volume	Show all mounted filesystems in a readable table
+tac-0240	disk	synchronize files between directories	rsync -avz source/ destination/	Sync files with verbose output and compression
+tac-0241	disk	rsync files to remote server	rsync -avz -e ssh source/ user@host:/destination/	Sync files to a remote server over SSH
+tac-0243	sed	substitute text in a file with sed	(Get-Content 'filename.txt') -replace 'old','new' | Set-Content 'filename.txt'	Replace all occurrences of old with new in a file
+tac-0245	sed	delete lines matching a pattern with sed	Get-Content 'filename.txt' | Where-Object { $_ -notmatch 'pattern' } | Set-Content 'filename.txt'	Remove all lines matching a pattern from a file
+tac-0247	sed	print specific line number with sed	(Get-Content 'filename.txt')[4]	Print only line 5 of a file
+tac-0250	awk	extract column from csv with awk	Import-Csv 'file.csv' | Select-Object -ExpandProperty ColumnName	Print the second column of a comma-separated file
+tac-0252	awk	sum a column of numbers with awk	(Import-Csv 'file.txt' -Header Val | Measure-Object -Property Val -Sum).Sum	Sum all values in the first column of a file
+tac-0254	awk	filter rows by field value with awk	Import-Csv 'file.csv' | Where-Object { [int]$_.Column3 -gt 100 }	Print rows where the third column is greater than 100
+tac-0256	awk	print number of fields per line with awk	Get-Content 'file.txt' | ForEach-Object { ($_ -split '\s+').Count }	Print the number of fields on each line
+tac-0258	archive	create a compressed zip archive	Compress-Archive -Path 'directory/*' -DestinationPath 'archive.zip'	Compress a directory into a zip file
+tac-0260	archive	extract a zip archive	Expand-Archive -Path 'archive.zip' -DestinationPath '.'	Extract the contents of a zip file
+tac-0262	archive	list contents of a zip archive	Expand-Archive -Path 'archive.zip' -WhatIf	Preview contents of a zip file without extracting
+tac-0267	encoding	encode a file to base64	[Convert]::ToBase64String([IO.File]::ReadAllBytes('filename.txt'))	Encode a file's contents to base64
+tac-0269	encoding	decode a base64 file	[IO.File]::WriteAllBytes('decoded.txt', [Convert]::FromBase64String((Get-Content 'encoded.txt')))	Decode a base64-encoded file
+tac-0271	encoding	generate an md5 checksum	Get-FileHash 'filename.txt' -Algorithm MD5	Generate the MD5 hash of a file
+tac-0273	encoding	generate a sha256 checksum	Get-FileHash 'filename.txt' -Algorithm SHA256	Generate the SHA-256 hash of a file
+tac-0275	shell	set an environment variable	$env:VAR_NAME = 'value'	Set an environment variable for the current session
+tac-0277	shell	print an environment variable	$env:VAR_NAME	Print the value of an environment variable
+tac-0279	shell	list all environment variables	Get-ChildItem Env:	Print all environment variables
+tac-0280	shell	run previous command with sudo	sudo !!	Re-run the last command with sudo prefix
+tac-0282	shell	create an alias for a command	Set-Alias -Name ll -Value Get-ChildItem	Create a shortcut alias for a command
+tac-0284	shell	show command history	Get-History	Display the list of previously run commands
+tac-0286	shell	search command history	Get-History | Where-Object { $_.CommandLine -match 'keyword' }	Find a previously run command by keyword
+tac-0287	shell	repeat last matching command from history	!keyword	Re-run the most recent command starting with keyword
+tac-0289	shell	redirect stdout to a file	command | Out-File 'output.txt'	Write command output to a file, overwriting it
+tac-0291	shell	append stdout to a file	command | Out-File 'output.txt' -Append	Append command output to a file
+tac-0293	shell	redirect stderr to a file	command 2>'error.txt'	Write error output to a file
+tac-0295	shell	redirect both stdout and stderr to a file	command *>'output.txt'	Capture all output including errors to a file
+tac-0296	shell	pipe output of one command to another	command1 | command2	Send output of command1 as input to command2
+tac-0297	shell	run multiple commands sequentially	command1 && command2	Run command2 only if command1 succeeds
+tac-0299	shell	run command and discard all output	command | Out-Null	Execute a command silently with no output
+tac-0301	shell	time how long a command takes	Measure-Command { command }	Measure the execution time of a command
+tac-0303	shell	repeat a command every 2 seconds	while ($true) { command; Start-Sleep 2 }	Execute a command repeatedly at an interval
+tac-0305	shell	open a manual page for a command	Get-Help command -Full	Open the manual page for a command
+tac-0307	shell	find where a binary is located	Get-Command python3 | Select-Object -ExpandProperty Source	Show the full path of a command's executable
+tac-0309	shell	show all instances of a binary in path	where.exe python3	Locate binary, source, and man pages for a command
+tac-0311	shell	add a line to a file without opening it	Add-Content 'filename.txt' 'new line'	Append a line of text to a file
+tac-0312	terminal	start a new named screen session	screen -S session-name	Create a named screen multiplexer session
+tac-0313	terminal	list all screen sessions	screen -ls	Show all active screen sessions
+tac-0314	terminal	reattach to a screen session	screen -r session-name	Reconnect to a detached screen session
+tac-0315	terminal	start a new tmux session	tmux new -s session-name	Create a new named tmux session
+tac-0316	terminal	list tmux sessions	tmux ls	Show all active tmux sessions
+tac-0317	terminal	attach to a tmux session	tmux attach -t session-name	Connect to an existing tmux session
+tac-0318	terminal	kill a tmux session	tmux kill-session -t session-name	Terminate a named tmux session
+tac-0320	terminal	clear the terminal screen	Clear-Host	Clear all text from the terminal window
+tac-0322	system	set hostname of the machine	Rename-Computer -NewName 'new-hostname' -Force	Change the system hostname permanently
+tac-0324	system	show current hostname	$env:COMPUTERNAME	Print the system's hostname
+tac-0326	system	view system logs	Get-EventLog -LogName System -Newest 50	View recent system logs with details
+tac-0328	system	follow system logs in real time	Get-WinEvent -LogName System -MaxEvents 1 -Wait	Continuously stream new system log entries
+tac-0330	system	check status of a systemd service	Get-Service -Name 'service-name'	Show the status of a systemd service
+tac-0332	system	start a systemd service	Start-Service -Name 'service-name'	Start a systemd service
+tac-0334	system	stop a systemd service	Stop-Service -Name 'service-name'	Stop a running systemd service
+tac-0336	system	restart a systemd service	Restart-Service -Name 'service-name'	Restart a systemd service
+tac-0338	system	enable a service to start on boot	Set-Service -Name 'service-name' -StartupType Automatic	Configure a service to start automatically at boot
+tac-0340	system	disable a service from starting on boot	Set-Service -Name 'service-name' -StartupType Disabled	Prevent a service from starting at boot
+tac-0342	system	show os and kernel version	[System.Environment]::OSVersion	Display kernel name, version, and system info
+tac-0344	system	show linux distribution info	winver	Display the Linux distribution name and version
+tac-0345	system	reboot the system	sudo reboot	Restart the operating system
+tac-0346	system	shut down the system	sudo shutdown -h now	Power off the machine immediately
+tac-0348	package	update apt package list	winget upgrade --all --include-unknown	Refresh the list of available packages
+tac-0350	package	upgrade all apt packages	winget upgrade --all	Upgrade all installed packages to latest versions
+tac-0352	package	install a package with apt	winget install package-name	Install a package via apt package manager
+tac-0354	package	remove a package with apt	winget uninstall package-name	Uninstall a package but keep config files
+tac-0356	package	purge a package and config with apt	winget uninstall package-name --purge	Uninstall a package and remove its config files
+tac-0358	package	search for a package in apt	winget search package-name	Search for packages by name in apt
+tac-0360	package	show info about an apt package	winget show package-name	Display detailed info about an apt package
+tac-0363	security	generate a random password	openssl rand -base64 32	Generate a 32-byte random base64 password
+tac-0364	security	encrypt a file with gpg	gpg -c filename.txt	Symmetrically encrypt a file with a passphrase
+tac-0365	security	decrypt a gpg file	gpg -d filename.txt.gpg	Decrypt a GPG-encrypted file
+tac-0366	security	check ssl certificate of a domain	openssl s_client -connect example.com:443 -showcerts	Inspect the SSL certificate of a remote server
+tac-0367	security	generate a self signed ssl certificate	openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes	Create a self-signed TLS certificate valid for 1 year
+tac-0368	security	scan a file for viruses with clamscan	clamscan -r /path/to/scan	Recursively scan a directory with ClamAV
+tac-0369	ssh	copy ssh public key to remote server	ssh-copy-id user@hostname	Install your SSH public key on a remote server
+tac-0370	ssh	use ssh tunnel to forward a port	ssh -L 8080:localhost:80 user@hostname	Forward local port 8080 to remote port 80 via SSH
+tac-0371	ssh	use ssh reverse tunnel	ssh -R 9090:localhost:3000 user@hostname	Expose a local port to a remote server via SSH
+tac-0372	ssh	run a command on remote server via ssh	ssh user@hostname 'command'	Execute a single command on a remote server
+tac-0373	git	add remote origin to git repo	git remote add origin https://github.com/user/repo.git	Link a local repo to a remote repository
+tac-0374	git	show git config settings	git config --list	List all git configuration values
+tac-0375	git	set git username globally	git config --global user.name 'Your Name'	Set the global git commit author name
+tac-0376	git	set git email globally	git config --global user.email 'email@example.com'	Set the global git commit author email
+tac-0377	git	show git stash list	git stash list	List all stashed changes
+tac-0378	git	drop a specific git stash	git stash drop stash@{0}	Delete a specific stash entry
+tac-0379	git	show graph of git branches	git log --oneline --graph --all	Display a visual branch graph in the terminal
+tac-0380	git	undo all uncommitted changes and clean	git reset --hard HEAD && git clean -fd	Wipe all uncommitted changes and untracked files
+tac-0381	git	find the commit that introduced a bug using bisect	git bisect start && git bisect bad HEAD && git bisect good <good-commit>	Start a binary search through commit history to find the first bad commit
+tac-0382	git	mark current bisect commit as good	git bisect good	Mark the current commit as working during a git bisect session
+tac-0383	git	mark current bisect commit as bad	git bisect bad	Mark the current commit as broken during a git bisect session
+tac-0384	git	end a git bisect session and return to original HEAD	git bisect reset	Terminate the bisect session and restore the original branch state
+tac-0385	git	view all recent HEAD movements including deleted branches	git reflog	Show a log of all HEAD reference changes, useful for recovering lost commits
+tac-0386	git	recover a dropped stash or lost commit by hash	git checkout -b recovery-branch <commit-hash>	Create a new branch from a dangling commit hash found in reflog
+tac-0387	git	rebase interactively to squash the last 5 commits	git rebase -i HEAD~5	Open an interactive rebase editor to squash, reorder, or edit the last 5 commits
+tac-0388	git	apply only the changes from a specific file from another branch	git checkout feature-branch -- path/to/file.txt	Check out a single file from another branch without switching to it
+tac-0389	git	list all git tags sorted by version	git tag --sort=-version:refname	Display all tags sorted in descending semantic version order
+tac-0390	kubernetes	show all kubernetes pods in all namespaces	kubectl get pods --all-namespaces	List every pod running across all namespaces in the cluster
+tac-0391	kubernetes	stream logs from a kubernetes pod	kubectl logs -f pod-name -n namespace	Continuously stream stdout logs from a specific pod in a namespace
+tac-0392	kubernetes	forward a local port to a kubernetes pod	kubectl port-forward pod/pod-name 8080:80 -n namespace	Tunnel local port 8080 to port 80 on a Kubernetes pod
+tac-0393	kubernetes	exec into a running kubernetes pod shell	kubectl exec -it pod-name -n namespace -- /bin/sh	Open an interactive shell session inside a running Kubernetes pod
+tac-0394	kubernetes	describe a kubernetes deployment for diagnostics	kubectl describe deployment deployment-name -n namespace	Show detailed state, events, and conditions for a Kubernetes deployment
+tac-0395	kubernetes	scale a kubernetes deployment to 3 replicas	kubectl scale deployment deployment-name --replicas=3 -n namespace	Set the desired replica count for a Kubernetes deployment
+tac-0396	kubernetes	get kubernetes events sorted by timestamp	kubectl get events --sort-by='.lastTimestamp' -n namespace	List cluster events in chronological order for a given namespace
+tac-0397	kubernetes	delete all completed or failed pods in a namespace	kubectl delete pods --field-selector=status.phase=Failed -n namespace	Remove all pods in a Failed phase from the specified namespace
+tac-0398	kubernetes	apply a kubernetes manifest file	kubectl apply -f manifest.yaml	Create or update Kubernetes resources defined in a YAML manifest
+tac-0400	jq	extract a specific field from json output using jq	Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name	Extract the name field from every object in the users array
+tac-0402	jq	filter json array by field value using jq	(Get-Content data.json | ConvertFrom-Json).users | Where-Object { _.age -gt 30 }	Return only objects from the users array where age exceeds 30
+tac-0404	jq	count items in a json array using jq	(Get-Content data.json | ConvertFrom-Json).users.Count	Return the count of elements in the users array
+tac-0406	jq	pretty print and sort json keys using jq	Get-Content data.json | ConvertFrom-Json | ConvertTo-Json -Depth 10 | ConvertFrom-Json | Get-Member -MemberType NoteProperty | Sort-Object Name	Output JSON with keys sorted alphabetically and formatted
+tac-0407	ffmpeg	convert a video to h264 mp4 using ffmpeg	ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4	Transcode a video to H.264/AAC MP4 with quality level 23
+tac-0408	ffmpeg	extract audio from a video file using ffmpeg	ffmpeg -i input.mp4 -vn -acodec copy output.aac	Strip video and copy the audio stream from an MP4 into an AAC file
+tac-0409	ffmpeg	trim a video to a specific time range using ffmpeg	ffmpeg -i input.mp4 -ss 00:01:00 -to 00:02:30 -c copy trimmed.mp4	Extract a 90-second clip from a video without re-encoding
+tac-0410	ffmpeg	convert video to gif using ffmpeg	ffmpeg -i input.mp4 -vf "fps=10,scale=640:-1" -loop 0 output.gif	Convert an MP4 to an animated GIF at 10fps scaled to 640px wide
+tac-0412	ffmpeg	batch convert all wav files to mp3 using ffmpeg	Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }	Loop over all WAV files in the current directory and convert each to MP3
+tac-0413	aws	sync a local directory to an s3 bucket	aws s3 sync ./local-dir s3://my-bucket/prefix/ --delete	Upload local directory to S3, deleting remote files not present locally
+tac-0414	aws	download an entire s3 bucket prefix to a local directory	aws s3 cp s3://my-bucket/prefix/ ./local-dir --recursive	Recursively download all objects under an S3 prefix to a local path
+tac-0415	aws	list all s3 buckets in the aws account	aws s3 ls	Display all S3 buckets accessible in the current AWS profile
+tac-0416	aws	get the public ip of a running ec2 instance	aws ec2 describe-instances --instance-ids i-1234567890abcdef0 --query 'Reservations[0].Instances[0].PublicIpAddress' --output text	Query the public IPv4 address of a specific EC2 instance
+tac-0417	docker	create a docker volume	docker volume create my-volume	Create a named Docker volume for persistent container storage
+tac-0418	docker	list all docker volumes	docker volume ls	Show all Docker volumes on the local host
+tac-0419	docker	remove all unused docker volumes	docker volume prune -f	Delete all volumes not referenced by any container
+tac-0420	docker	create a docker network	docker network create my-network	Create a user-defined bridge network for container communication
+tac-0421	docker	connect a running container to a docker network	docker network connect my-network container-name	Attach a running container to an existing Docker network
+tac-0423	system	show open file handles for a running process	Get-Process -Id <PID> | Select-Object -ExpandProperty Modules	List all modules and handles loaded by a specific process ID
+tac-0427	network	check which process is using a specific port	Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }	Identify the process currently bound to TCP port 3000
+tac-0429	system	display system memory map and check for overcommit	Get-CimInstance Win32_OperatingSystem | Select-Object TotalVirtualMemorySize,FreeVirtualMemory,TotalVisibleMemorySize,FreePhysicalMemory	Show detailed memory statistics including virtual and physical memory
