@@ -61,3 +61,23 @@ All reported on v0.1 (frozen) + v1.0, Split A + Split B, with bootstrap 95% CIs 
 If H1 (calibration) fails to reach Holm-adjusted significance on the v1.0 benchmark, the paper's
 primary contribution collapses and the framing must change — this is registered so that outcome
 cannot be quietly reinterpreted after the fact.
+
+---
+
+## Amendment 1 — 2026-09-26: the v0.1/v0.2 portion of this registration is retrospective
+
+Recorded per this document's own append-only rule. This document was committed on 2026-09-15
+(8d67147). The raw v0.1 and v0.2 McNemar results were committed earlier (v0.2 full re-run: 2026-09-14,
+b25a5aa; OOD significance: cddc41c). Only the Holm-adjusted values and bootstrap intervals
+(7676429, 2026-09-15) postdate the registration text. Two consequences that earlier text and the draft
+paper did not state plainly:
+
+1. **For v0.1/v0.2 this is not a pre-registration.** The comparison family and the four tests were
+   fixed after the raw p-values existed. "Registered expectation: SUPPORTED" for H1 was written knowing
+   calibration was the robust result ("registered as primary because it is the paper's intended headline").
+   All v0.1/v0.2 significance statements are therefore exploratory.
+2. **It is genuinely prospective only for v1.0**, which does not exist yet.
+
+The manuscript (research/paper/acl_latex/content.tex) was corrected on 2026-09-26 to say "fixed a family ...
+after the raw results were seen" instead of "pre-registered". No hypothesis, test, or number in this
+document was edited.

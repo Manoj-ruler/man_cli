@@ -1,0 +1,313 @@
+{
+  "experiment_id": "sensitivity-bare-keyword",
+  "status": "post-hoc, exploratory",
+  "rule": "bare-keyword = AMBIGUOUS-labeled query with exactly one whitespace-delimited token; applied uniformly to v0.1 and v0.2",
+  "not_rerun": "alpha and detector thresholds not re-tuned; OOD rejection not recomputed (unaffected by ambiguous relabeling)",
+  "versions": [
+    {
+      "benchmark": "v0.1",
+      "subsets": {
+        "ALL": {
+          "n_nonOOD_evaluated": 135,
+          "n_dropped": 0,
+          "accuracy_pct": {
+            "A0_bm25": 71.85,
+            "A2_dense": 72.59,
+            "A3_hybrid": 77.04
+          },
+          "A0_vs_A3": {
+            "a_only_correct": 0,
+            "b_only_correct": 7,
+            "exact_mcnemar_p": 0.015625,
+            "delta_pp": 5.19,
+            "ci95_pp": [
+              2.2,
+              8.9
+            ]
+          },
+          "A2_vs_A3": {
+            "a_only_correct": 3,
+            "b_only_correct": 9,
+            "exact_mcnemar_p": 0.145996,
+            "delta_pp": 4.44,
+            "ci95_pp": [
+              -0.7,
+              9.6
+            ]
+          },
+          "calibration": {
+            "n_pooled": 150,
+            "ece_before": 0.2741,
+            "ece_after": 0.0537,
+            "relative_reduction_pct": 80.4,
+            "ci95_reduction": [
+              0.1269,
+              0.2834
+            ],
+            "one_sided_p": 0.0001
+          },
+          "ambiguity_auroc_mean_over_folds": 0.784,
+          "ambiguity_positives_kept": 14
+        },
+        "DROP_ALL_BK": {
+          "n_nonOOD_evaluated": 126,
+          "n_dropped": 9,
+          "accuracy_pct": {
+            "A0_bm25": 76.98,
+            "A2_dense": 77.78,
+            "A3_hybrid": 82.54
+          },
+          "A0_vs_A3": {
+            "a_only_correct": 0,
+            "b_only_correct": 7,
+            "exact_mcnemar_p": 0.015625,
+            "delta_pp": 5.56,
+            "ci95_pp": [
+              1.6,
+              9.5
+            ]
+          },
+          "A2_vs_A3": {
+            "a_only_correct": 3,
+            "b_only_correct": 9,
+            "exact_mcnemar_p": 0.145996,
+            "delta_pp": 4.76,
+            "ci95_pp": [
+              -0.8,
+              10.3
+            ]
+          },
+          "calibration": {
+            "n_pooled": 141,
+            "ece_before": 0.2281,
+            "ece_after": 0.0464,
+            "relative_reduction_pct": 79.6,
+            "ci95_reduction": [
+              0.0851,
+              0.2337
+            ],
+            "one_sided_p": 0.0001
+          },
+          "ambiguity_auroc_mean_over_folds": 0.6445,
+          "ambiguity_positives_kept": 5
+        },
+        "ANSWERABLE": {
+          "n_nonOOD_evaluated": 121,
+          "n_dropped": 14,
+          "accuracy_pct": {
+            "A0_bm25": 76.86,
+            "A2_dense": 78.51,
+            "A3_hybrid": 82.64
+          },
+          "A0_vs_A3": {
+            "a_only_correct": 0,
+            "b_only_correct": 7,
+            "exact_mcnemar_p": 0.015625,
+            "delta_pp": 5.79,
+            "ci95_pp": [
+              1.7,
+              9.9
+            ]
+          },
+          "A2_vs_A3": {
+            "a_only_correct": 3,
+            "b_only_correct": 8,
+            "exact_mcnemar_p": 0.226563,
+            "delta_pp": 4.13,
+            "ci95_pp": [
+              -0.8,
+              9.9
+            ]
+          },
+          "calibration": {
+            "n_pooled": 136,
+            "ece_before": 0.2299,
+            "ece_after": 0.0503,
+            "relative_reduction_pct": 78.1,
+            "ci95_reduction": [
+              0.0803,
+              0.2294
+            ],
+            "one_sided_p": 0.0001
+          },
+          "ambiguity_auroc_mean_over_folds": null,
+          "ambiguity_positives_kept": 0
+        }
+      }
+    },
+    {
+      "benchmark": "v0.2",
+      "subsets": {
+        "ALL": {
+          "n_nonOOD_evaluated": 159,
+          "n_dropped": 0,
+          "accuracy_pct": {
+            "A0_bm25": 75.47,
+            "A2_dense": 72.33,
+            "A3_hybrid": 79.25
+          },
+          "A0_vs_A3": {
+            "a_only_correct": 1,
+            "b_only_correct": 7,
+            "exact_mcnemar_p": 0.070313,
+            "delta_pp": 3.77,
+            "ci95_pp": [
+              0.6,
+              7.5
+            ]
+          },
+          "A2_vs_A3": {
+            "a_only_correct": 3,
+            "b_only_correct": 14,
+            "exact_mcnemar_p": 0.012726,
+            "delta_pp": 6.92,
+            "ci95_pp": [
+              1.9,
+              11.9
+            ]
+          },
+          "calibration": {
+            "n_pooled": 209,
+            "ece_before": 0.3237,
+            "ece_after": 0.0738,
+            "relative_reduction_pct": 77.2,
+            "ci95_reduction": [
+              0.1703,
+              0.2923
+            ],
+            "one_sided_p": 0.0001
+          },
+          "ambiguity_auroc_mean_over_folds": 0.7226,
+          "ambiguity_positives_kept": 38
+        },
+        "DROP_NEW_BK": {
+          "n_nonOOD_evaluated": 142,
+          "n_dropped": 17,
+          "accuracy_pct": {
+            "A0_bm25": 73.24,
+            "A2_dense": 72.54,
+            "A3_hybrid": 78.17
+          },
+          "A0_vs_A3": {
+            "a_only_correct": 0,
+            "b_only_correct": 7,
+            "exact_mcnemar_p": 0.015625,
+            "delta_pp": 4.93,
+            "ci95_pp": [
+              1.4,
+              8.5
+            ]
+          },
+          "A2_vs_A3": {
+            "a_only_correct": 3,
+            "b_only_correct": 11,
+            "exact_mcnemar_p": 0.057373,
+            "delta_pp": 5.63,
+            "ci95_pp": [
+              0.7,
+              10.6
+            ]
+          },
+          "calibration": {
+            "n_pooled": 192,
+            "ece_before": 0.3438,
+            "ece_after": 0.0651,
+            "relative_reduction_pct": 81.1,
+            "ci95_reduction": [
+              0.1884,
+              0.3248
+            ],
+            "one_sided_p": 0.0001
+          },
+          "ambiguity_auroc_mean_over_folds": 0.7432,
+          "ambiguity_positives_kept": 21
+        },
+        "DROP_ALL_BK": {
+          "n_nonOOD_evaluated": 133,
+          "n_dropped": 26,
+          "accuracy_pct": {
+            "A0_bm25": 78.2,
+            "A2_dense": 77.44,
+            "A3_hybrid": 83.46
+          },
+          "A0_vs_A3": {
+            "a_only_correct": 0,
+            "b_only_correct": 7,
+            "exact_mcnemar_p": 0.015625,
+            "delta_pp": 5.26,
+            "ci95_pp": [
+              1.5,
+              9
+            ]
+          },
+          "A2_vs_A3": {
+            "a_only_correct": 3,
+            "b_only_correct": 11,
+            "exact_mcnemar_p": 0.057373,
+            "delta_pp": 6.02,
+            "ci95_pp": [
+              0.8,
+              11.3
+            ]
+          },
+          "calibration": {
+            "n_pooled": 183,
+            "ece_before": 0.3119,
+            "ece_after": 0.0486,
+            "relative_reduction_pct": 84.4,
+            "ci95_reduction": [
+              0.171,
+              0.3046
+            ],
+            "one_sided_p": 0.0001
+          },
+          "ambiguity_auroc_mean_over_folds": 0.6786,
+          "ambiguity_positives_kept": 12
+        },
+        "ANSWERABLE": {
+          "n_nonOOD_evaluated": 121,
+          "n_dropped": 38,
+          "accuracy_pct": {
+            "A0_bm25": 76.86,
+            "A2_dense": 78.51,
+            "A3_hybrid": 82.64
+          },
+          "A0_vs_A3": {
+            "a_only_correct": 0,
+            "b_only_correct": 7,
+            "exact_mcnemar_p": 0.015625,
+            "delta_pp": 5.79,
+            "ci95_pp": [
+              1.7,
+              9.9
+            ]
+          },
+          "A2_vs_A3": {
+            "a_only_correct": 3,
+            "b_only_correct": 8,
+            "exact_mcnemar_p": 0.226563,
+            "delta_pp": 4.13,
+            "ci95_pp": [
+              -0.8,
+              9.9
+            ]
+          },
+          "calibration": {
+            "n_pooled": 171,
+            "ece_before": 0.3296,
+            "ece_after": 0.0625,
+            "relative_reduction_pct": 81,
+            "ci95_reduction": [
+              0.1759,
+              0.3142
+            ],
+            "one_sided_p": 0.0001
+          },
+          "ambiguity_auroc_mean_over_folds": null,
+          "ambiguity_positives_kept": 0
+        }
+      }
+    }
+  ],
+  "generated_at": "2026-09-26T06:26:44.768Z"
+}

@@ -1,5 +1,8 @@
 # Reliability-Aware Hybrid Retrieval for Natural-Language-to-Shell-Command Assistance: A Non-LLM Study
 
+> **SUPERSEDED (2026-09-26).** The submission source is now `research/paper/acl_latex/content.tex`; this markdown draft is kept as an archival record and is **not** maintained. It contains claims that were corrected there after review: (1) "first reported study / the gap this paper fills" was removed (no priority claim; literature search was limited); (2) "independently constructed benchmarks" and "replication check" were wrong: v0.2 *extends* v0.1 (the 121 answerable queries are identical), so the versions are not independent and the accuracy "non-replication" is sensitivity to one query; (3) "pre-registered" was wrong for v0.1/v0.2: the Holm family was fixed after the raw results existed (see PREREGISTRATION.md, Amendment 1); (4) the "independent" re-validation was a blind but only partially independent single-reviewer check. See `research/results/stats/SENSITIVITY_NOTES.md`.
+
+
 *Manuscript draft. All numbers in this document are pulled from `research/results/`,
 `research/figures/`, and `research/tables/` — generated artifacts of this research program, not
 hand-typed. No number here may exceed what is stated in `research/FINAL_RESEARCH_REPORT.md`'s

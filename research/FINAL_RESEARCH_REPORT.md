@@ -215,6 +215,26 @@ judged each to have one sufficiently obvious default command. Consequences for t
   ATTEMPTED-BELOW-TARGET. Reaching κ≥0.7 with a fully-independent, non-project-affiliated
   annotator remains open future work, not resolved by this check.
 
+### Phase 18 Addendum, 2026-09-26 — corrections after external critique + bare-keyword sensitivity analysis
+
+An outside review flagged six issues; checking them against the files produced these corrections, which
+supersede the framing in the Phase 17/18 text above (kept as history, not deleted):
+
+- **"First reported study" removed** from the paper (spec line 464 forbids "first" without narrow, literature-backed scoping).
+- **v0.2 is not an independent benchmark.** It extends v0.1 (150 + 35 OOD + 24 ambiguous); the 121 answerable queries
+  are identical in both. "Independently constructed" and "replication check" were my wording and were wrong. The v0.2
+  accuracy result is therefore *composition sensitivity*, not a failed replication.
+- **"Pre-registered" was an overclaim** for v0.1/v0.2: raw results (2026-09-14) predate the preregistration
+  (2026-09-15). See PREREGISTRATION.md Amendment 1. All v0.1/v0.2 significance statements are exploratory.
+- **Post-hoc sensitivity analysis** (`results/stats/SENSITIVITY_NOTES.md`): the v0.2 BM25→hybrid non-significance
+  (raw p=0.070) is decided by a single query, TA-B194 "system" (without it 7–0, p=0.0156, as on v0.1); hybrid-over-dense
+  on v0.2 depends on three new bare-keyword queries (p 0.013 → 0.057); calibration is unchanged (77–84% ECE reduction in
+  every subset). The "Outcome A" and "significant accuracy improvement" language earlier in this report should be read
+  through this lens: the accuracy gain is consistent in size and fragile in significance.
+- **A measurement error of mine, also corrected:** earlier build notes claimed the LaTeX body "fits in 7 pages".
+  That was inferred from a log marker; measured with `\label{endofbody}` the body actually ran onto page 9. Three
+  secondary figures were moved to an appendix and `build.sh` now fails the build if the body passes page 8.
+
 ---
 
 ## Phase 17 — Decision Gate

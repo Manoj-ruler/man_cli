@@ -55,5 +55,6 @@
 % review version and reveal the real name only in main.tex (would require content.tex to no longer
 % be perfectly shared between the two -- a bigger structural change, not done here).
 %
-% Page count: 9 pages total as of the last build (7 pages body text, under the ACL/EACL SRW 8-page
-% limit; References on pages 8-9). Recheck after any edit to content.tex, figures, or tables.
+% Page count: the body text (through the Conclusion) ends on page 8, exactly at the ACL/EACL SRW
+% 8-page limit; references and the appendix figures follow and are not counted. build.sh measures
+% this via \label{endofbody} and fails the build if the body passes page 8 -- rerun it after edits.

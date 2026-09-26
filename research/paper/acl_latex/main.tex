@@ -44,7 +44,8 @@
 % after acceptance -- confirm which stage you're at before sending this PDF
 % anywhere. Use main_review.tex for the review-stage submission instead.
 %
-% Page count: 9 pages total as of the last build (7 pages body text, under
-% the ACL/EACL SRW 8-page limit; References on pages 8-9, which don't count
-% against that limit). Recheck after any edit to content.tex, figures, or
-% tables -- don't assume it still fits.
+% Page count: the body text (through the Conclusion) ends on page 8, exactly at the ACL/EACL SRW
+% 8-page limit; references and the appendix figures follow and are not counted. An earlier version
+% of this note claimed the body fit in 7 pages -- that was wrong (inferred from a log marker rather
+% than measured). build.sh now measures it via \label{endofbody} and fails the build if the body
+% passes page 8, so rerun build.sh after any edit rather than trusting this comment.

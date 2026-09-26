@@ -1,5 +1,11 @@
 # Limitations
 
+> **Partly superseded (2026-09-26).** The current, corrected list is the Limitations section of
+> `research/paper/acl_latex/content.tex`. This file predates three corrections: v0.2 *extends* v0.1 (not an
+> independent benchmark; the 121 answerable queries are identical), the Holm family was fixed after the raw
+> results were seen (not pre-registered), and the v0.2 accuracy "non-replication" is decided by one query
+> (`research/results/stats/SENSITIVITY_NOTES.md`).
+
 Stated explicitly and in full, not minimized. Every limitation below is grounded in something
 observed during this research program, not a generic disclaimer.
 
