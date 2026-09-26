@@ -357,8 +357,8 @@ Cohen's $\kappa=0.6316$, below our pre-specified 0.7 target. Agreement was perfe
 items (8/8), and all three disagreements were among the 6 ambiguous-labeled ones: ``ffmpeg'' and ``pip''
 (single-token tool names) and ``list running processes'' (a short category phrase), each of which we had
 labeled ambiguous but the reviewer judged to have one obvious default command. The other three ambiguous
-items (``copy a file'', ``security'', ``system'') were confirmed. With $n=14$ the estimate is coarse:
-one flipped item would move it materially. The OOD labels, on which the OOD-rejection result rests, were
+items (``copy a file'', ``security'', ``system'') were confirmed. With $n=14$ the estimate is coarse: a
+post hoc bootstrap 95\% interval for $\kappa$ is [0.39, 1.00], and one flipped item would move it materially. The OOD labels, on which the OOD-rejection result rests, were
 fully confirmed; the ambiguous labels are the uncertain ones, and this is why \S\ref{sec:results} reports
 how the conclusions change when ambiguous queries are excluded. Note that the disputed items are not all
 single-token, so the ``answerable only'' rows of Table~\ref{tab:sens}, which drop every ambiguous query,

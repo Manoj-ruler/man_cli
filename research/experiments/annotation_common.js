@@ -49,4 +49,42 @@ function verifyItems(items, { extraQueries = [], jaccardMax = 0.5 } = {}) {
   return [...new Set(errors)];
 }
 
-module.exports = { root, dir, rd, view, byId, bench, tokens, jaccard, nearest, verifyItems };
+// ---- CSV, agreement statistics (used by the adjudication and analysis scripts) ----
+function parseCsv(text) {
+  text = text.replace(/^﻿/, ''); const rows = []; let row = [], cell = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) { if (c === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; } else cell += c; }
+    else if (c === '"') q = true;
+    else if (c === ',') { row.push(cell); cell = ''; }
+    else if (c === '\n') { row.push(cell.replace(/\r$/, '')); rows.push(row); row = []; cell = ''; }
+    else cell += c;
+  }
+  if (cell.length || row.length) { row.push(cell.replace(/\r$/, '')); rows.push(row); }
+  return rows.filter(r => r.some(x => x !== ''));
+}
+const csvCell = s => '"' + String(s).replace(/"/g, '""') + '"';
+
+function mulberry32(seed) { return function () { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+function shuffled(arr, rng) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+// Unweighted Cohen's kappa. If chance agreement pe == 1 (both raters constant and identical) kappa is
+// undefined; we return 1 when observed agreement is 1 and 0 otherwise, and flag it.
+function cohenKappa(a, b, cats) {
+  const n = a.length; if (!n) return { n: 0, po: NaN, pe: NaN, kappa: NaN, degenerate: true };
+  let agree = 0; for (let i = 0; i < n; i++) if (a[i] === b[i]) agree++;
+  const po = agree / n; let pe = 0;
+  cats.forEach(c => { pe += (a.filter(x => x === c).length / n) * (b.filter(x => x === c).length / n); });
+  if (pe >= 1 - 1e-12) return { n, po, pe, kappa: po === 1 ? 1 : 0, degenerate: true };
+  return { n, po, pe, kappa: (po - pe) / (1 - pe), degenerate: false };
+}
+function bootstrapKappa(a, b, cats, { n = 10000, seed = 42 } = {}) {
+  const rng = mulberry32(seed), m = a.length, ks = [];
+  for (let k = 0; k < n; k++) { const ra = new Array(m), rb = new Array(m); for (let i = 0; i < m; i++) { const j = Math.floor(rng() * m); ra[i] = a[j]; rb[i] = b[j]; } ks.push(cohenKappa(ra, rb, cats).kappa); }
+  ks.sort((x, y) => x - y);
+  const pct = p => { const idx = (ks.length - 1) * p, lo = Math.floor(idx), hi = Math.ceil(idx); return lo === hi ? ks[lo] : ks[lo] + (ks[hi] - ks[lo]) * (idx - lo); };
+  return { lo: pct(0.025), hi: pct(0.975), n_boot: n, seed };
+}
+function confusion(a, b, cats) { const m = {}; cats.forEach(r => { m[r] = {}; cats.forEach(c => { m[r][c] = 0; }); }); a.forEach((x, i) => { m[x][b[i]]++; }); return m; }
+
+module.exports = { root, dir, rd, view, byId, bench, tokens, jaccard, nearest, verifyItems, parseCsv, csvCell, mulberry32, shuffled, cohenKappa, bootstrapKappa, confusion };

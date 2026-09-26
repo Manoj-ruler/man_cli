@@ -169,11 +169,49 @@ Workflow, in order:
    and `sheets/practice/PRACTICE_SHEET.csv`. **Do not send the real sheet yet.**
 3. Get the practice sheets back; run `node build_practice_set.js --score <file>` for each; resolve any
    flags through the clarification log; send `coordinator/PRACTICE_FEEDBACK.md` to both.
-4. Send `sheets/annotator_N_sheet.csv`. Put returned files in `returned/` and run
-   `node validate_returned_sheet.js returned/<file>.csv N`.
+4. Send `sheets/annotator_N_sheet.csv`. Put returned files in `returned/` as `annotator_1.csv` and
+   `annotator_2.csv` and run `node validate_returned_sheet.js returned/<file>.csv N`.
+5. `node build_adjudication_sheet.js` → send `sheets/adjudication/adjudication_sheet.csv` and
+   `ADJUDICATION_INSTRUCTIONS.md` (plus the codebook and list) to the third reader; put the return in
+   `returned/adjudication.csv`; check it with `node build_adjudication_sheet.js --validate returned/adjudication.csv`.
+6. `node analyze_annotation.js --adjudication returned/adjudication.csv` (omit the flag to analyze
+   before adjudication). Outputs go to `research/results/annotation/`.
 
-**Still to build before analysis:** the adjudication template, and extending `compute_kappa.js` to the
-plan in §4 (bootstrap CI, per-item CONFIRMED / REVERSED / CONTESTED outcomes, TA-B187 exclusion).
+**Built and tested (analysis stage).**
+
+| File | Purpose |
+|---|---|
+| `build_adjudication_sheet.js` | builds the adjudication sheet (REVERSED + CONTESTED targets + decoys), anonymous A/B, seeded; `--validate` checks the return |
+| `analyze_annotation.js` | implements §4 exactly: primary κ + bootstrap CI, targets-only κ, confusion matrix, pre-declared criteria, CONFIRMED/REVERSED/CONTESTED, secondary descriptives, controls, comparison with the first review, adjudication integration, and a relabel *proposal* |
+| `annotation_common.js` | shared: verification, CSV, κ, bootstrap CI |
+
+Testing: both scripts were run on **synthetic** fixtures (two simulated annotators with noise plus a
+shared systematic disagreement, and TA-B187 mimicking the platform defect). κ was recomputed
+independently from the written per-item CSV with separate code and matched (0.781 on the fixture); the
+helper was also checked against a hand-computed value (0.75) and reproduces the first review's committed
+κ = 0.6316. **Safety:** a real run accepts only inputs inside `returned/` and writes only to
+`research/results/annotation/`; a synthetic run must write outside `research/` and stamps every output
+SYNTHETIC, so test data cannot reach the results folder. `compute_kappa.js` (the first review's script)
+is left untouched.
+
+## 8. Amendments (dated, made before any annotator label exists)
+
+**Amendment 1 (2026-09-26): decoys in the adjudication sheet.** §4 says REVERSED and CONTESTED items go to
+the adjudicator. Sent alone, unanimity would reveal which items are REVERSED (both annotators agree with
+each other) and which are CONTESTED (they split), inviting the adjudicator to defer to the annotators.
+The sheet therefore also includes an equal number of **decoy** items (CONFIRMED targets, chosen with a
+seeded shuffle), so unanimity carries no information. Decoy adjudications are descriptive only and never
+change a label; the count of decoys where the adjudicator disagreed with unanimous annotators is reported.
+
+**Amendment 2 (2026-09-26): control disputes.** §4 defines outcomes for targets only. Control items
+where the annotators disagree, or where both say not-CLEAR, are **reported** (ids listed in the results)
+but **not adjudicated**, since they concern v0.1 labels outside the 59 AI-authored items; look at them
+by hand.
+
+**Amendment 3 (2026-09-26): final status rules.** REVERSED + adjudicator confirms the annotators →
+RELABELED; adjudicator sides with the original → ORIGINAL_UPHELD; adjudicator picks a third label →
+UNRESOLVED (excluded). CONTESTED → the adjudicator's label (UPHELD if equal to the original, else
+CHANGED); with no adjudicator → EXCLUDED_CONTESTED. Nothing is relabeled without adjudication.
 
 Timeline: EACL SRW mentorship deadline Nov 6, 2026; direct submission Dec 15, 2026 (from
 PUBLICATION_ROADMAP.md).
