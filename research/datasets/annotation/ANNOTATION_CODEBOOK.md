@@ -2,6 +2,8 @@
 
 **Version 1.0 — frozen before annotation begins (2026-09-26).** If a rule ever has to change, both
 annotators are told at the same time and the change is dated and logged; nothing is changed silently.
+*(Pre-distribution edits so far, all before any annotator saw this file: a conduct rule about not looking
+up the source, and this practice-set note. No labeling rule was changed.)*
 
 ---
 
@@ -11,8 +13,9 @@ Imagine a command-line assistant. A user types a short request such as *"make a 
 folder"*. The assistant looks in a **fixed list of 279 Windows/PowerShell commands** (the file
 `corpus_view_win32.tsv`, called **the list** below) and returns exactly one command from it.
 
-For each request, you decide how the list relates to it, using three labels (Section 2). You will
-label about 80 requests. Plan for 1 to 1.5 hours; you can split it over several sittings.
+For each request, you decide how the list relates to it, using three labels (Section 2). **First** you
+will label a short practice set (11 requests) and get feedback on it. **Then** you will label about 80
+requests. Plan for 1 to 1.5 hours for the main set; you can split it over several sittings.
 
 **Ground rules**
 

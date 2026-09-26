@@ -1,0 +1,58 @@
+{
+  "_comment": "Practice set for the annotation study. Labeled by annotators BEFORE the real sheet; they get feedback afterwards. NOT benchmark queries and never enter the benchmark. Topics were chosen to be semantically far from the 59 real target queries, so that no practice answer settles a disputed real item by proxy. Verified by build_practice_set.js with the shared checks in annotation_common.js (plus no collision with the worked examples). difficulty: core = the codebook's rules give one defensible answer; borderline = reasonable annotators may differ, discussed but not scored.",
+  "items": [
+    { "id": "P1", "query": "what's my computer called", "label": "CLEAR", "difficulty": "core",
+      "readings": [ { "reading": "show this machine's name", "ids": ["tac-0324"] } ],
+      "why": "One reading. tac-0322 SETS the hostname, which is a different task; 'called' asks for the current name." },
+
+    { "id": "P2", "query": "show me the last 20 lines of a file", "label": "CLEAR", "difficulty": "core",
+      "readings": [ { "reading": "print the last N lines of a file", "ids": ["tac-0151"] } ],
+      "why": "tac-0151 prints the last 10 lines, but the count is a placeholder you may change (Section 3, 'performs'). Not OOD." },
+
+    { "id": "P3", "query": "how many lines does this file have", "label": "CLEAR", "difficulty": "core",
+      "readings": [ { "reading": "count the lines in one file", "ids": ["tac-0157"] },
+                    { "reading": "count lines of code across a whole project", "ids": ["tac-0030"] } ],
+      "why": "Two supported readings, but the words say 'this file'. Counting a whole project fails the plausibility test (Step 3c). One dominant reading: CLEAR." },
+
+    { "id": "P4", "query": "clamscan", "label": "CLEAR", "difficulty": "core",
+      "readings": [ { "reading": "scan for viruses with clamscan", "ids": ["tac-0368"] } ],
+      "why": "A bare name (Section 6.1) with exactly ONE record that mentions it, so the only reading is that record: CLEAR." },
+
+    { "id": "P5", "query": "kubectl", "label": "AMBIGUOUS", "difficulty": "core",
+      "readings": [ { "reading": "list pods", "ids": ["tac-0390"] },
+                    { "reading": "stream pod logs", "ids": ["tac-0391"] },
+                    { "reading": "forward a port to a pod", "ids": ["tac-0392"] },
+                    { "reading": "open a shell in a pod", "ids": ["tac-0393"] } ],
+      "why": "A bare name with three or more records that do distinct tasks (Section 6.1): AMBIGUOUS. Nothing was asked, so no reading can be dominant." },
+
+    { "id": "P6", "query": "rsync", "label": "AMBIGUOUS", "difficulty": "borderline",
+      "readings": [ { "reading": "sync two local directories", "ids": ["tac-0240"] },
+                    { "reading": "sync to a remote server", "ids": ["tac-0241"] } ],
+      "why": "A bare name with exactly TWO records, so apply the plausibility test (Section 6.1). Local and remote syncing differ in scope and both are common, so the key says AMBIGUOUS, but a careful annotator could argue local is the default. Borderline: not scored." },
+
+    { "id": "P7", "query": "forward a port", "label": "AMBIGUOUS", "difficulty": "borderline",
+      "readings": [ { "reading": "forward a local port over ssh", "ids": ["tac-0370"] },
+                    { "reading": "forward a local port to a Kubernetes pod", "ids": ["tac-0392"] } ],
+      "why": "The task is named but the scope is not (Section 6.2). Both readings are common among developers and differ in scope; a user of one is badly served by the other. Borderline: not scored." },
+
+    { "id": "P8", "query": "deploy this to heroku", "label": "OOD", "difficulty": "core",
+      "readings": [ { "reading": "deploy to Heroku", "ids": [] } ],
+      "absent_terms": ["heroku"],
+      "why": "The tool is absent from the list. A shell could do it; the list cannot." },
+
+    { "id": "P9", "query": "translate this paragraph into German", "label": "OOD", "difficulty": "core",
+      "readings": [ { "reading": "translate text", "ids": [] } ],
+      "absent_terms": ["translate", "german"],
+      "why": "Not something any record does." },
+
+    { "id": "P10", "query": "convert this word document to pdf", "label": "OOD", "difficulty": "core",
+      "readings": [ { "reading": "convert a document to PDF", "ids": [] } ],
+      "absent_terms": ["pdf", "docx"],
+      "why": "The only conversion records are for video/audio (ffmpeg) and archives. Nothing handles documents." },
+
+    { "id": "P11", "query": "delete files older than 30 days", "label": "OOD", "difficulty": "borderline",
+      "readings": [ { "reading": "delete files by age", "ids": [] } ],
+      "absent_terms": ["older"],
+      "why": "tac-0068 finds files modified in the last 7 days but does not delete them; tac-0064 deletes only one named file pattern. Combining them, or turning the age test into a delete, changes the commands' structure (Section 6.5). Borderline: not scored." }
+  ]
+}

@@ -1,21 +1,15 @@
 // Builds and verifies the materials for the two-annotator re-annotation (Phase C):
 //   1. corpus_view_win32.tsv  -- the exact win32-visible corpus the retrieval system searches
 //      (os includes "all" or "win32", same filter as cli/search.js), generated from cli/data/commands.json.
-//   2. Verifies codebook_examples.json: every cited corpus id exists in that view; OOD examples'
-//      absent_terms occur in NO record; no example is identical / near-identical to a benchmark query.
+//   2. Verifies codebook_examples.json with the shared checks in annotation_common.js.
 //   3. Injects the worked-examples block into ANNOTATION_CODEBOOK.md between the EXAMPLES markers,
 //      so the examples shown to annotators are exactly the ones that were verified.
 // Aborts (non-zero exit) on any verification failure, before touching the codebook.
+// The practice set is built separately by build_practice_set.js.
 
 const fs = require('fs');
 const path = require('path');
-const root = path.join(__dirname, '..', '..');
-const dir = path.join(root, 'research/datasets/annotation');
-const rd = p => JSON.parse(fs.readFileSync(path.join(root, p), 'utf-8'));
-
-const corpus = rd('cli/data/commands.json');
-const view = corpus.filter(r => r.os.includes('all') || r.os.includes('win32'));
-const byId = new Map(view.map(r => [r.command_id, r]));
+const { dir, rd, view, byId, verifyItems } = require('./annotation_common');
 
 const clean = s => String(s).replace(/[\t\r\n]+/g, ' ').trim();
 const tsv = ['id\tcategory\tintent\tcommand\tdescription']
@@ -24,39 +18,11 @@ fs.writeFileSync(path.join(dir, 'corpus_view_win32.tsv'), tsv, 'utf-8');
 console.log(`corpus_view_win32.tsv: ${view.length} records (expected 279)`);
 if (view.length !== 279) { console.error('ABORT: win32-visible corpus is not 279 records'); process.exit(1); }
 
-// ---- verify examples ----
 const ex = rd('research/datasets/annotation/codebook_examples.json').examples;
-const bench = [...rd('research/datasets/termassist_bench_v0.1_validated.json').queries, ...rd('research/datasets/termassist_bench_v0.2_validated.json').queries];
-const tokens = s => new Set(String(s).toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').split(/\s+/).filter(Boolean));
-const jaccard = (a, b) => { const i = [...a].filter(x => b.has(x)).length; return i / (a.size + b.size - i); };
-const corpusText = view.map(r => (r.intent + ' ' + r.command + ' ' + (r.description || '') + ' ' + r.category).toLowerCase());
-
-let errors = 0;
-const fail = m => { errors++; console.error('FAIL  ' + m); };
-ex.forEach(e => {
-  // 1. cited ids exist
-  e.readings.forEach(rd_ => rd_.ids.forEach(id => { if (!byId.has(id)) fail(`${e.id}: cited ${id} is not in the win32-visible corpus`); }));
-  // 2. label/readings consistency
-  const supported = e.readings.filter(r => r.ids.length > 0);
-  if (e.label === 'OOD' && supported.length !== 0) fail(`${e.id}: OOD example cites supporting records`);
-  if (e.label === 'AMBIGUOUS' && supported.length < 2) fail(`${e.id}: AMBIGUOUS example needs >=2 supported readings`);
-  if (e.label === 'CLEAR' && supported.length < 1) fail(`${e.id}: CLEAR example needs a supporting record`);
-  // 3. OOD absent terms occur nowhere
-  (e.absent_terms || []).forEach(t => {
-    const hits = corpusText.filter(x => x.includes(t.toLowerCase())).length;
-    if (hits) fail(`${e.id}: absent term "${t}" appears in ${hits} corpus record(s)`);
-  });
-  // 4. no collision with any benchmark query
-  const et = tokens(e.query);
-  bench.forEach(q => {
-    const j = jaccard(et, tokens(q.query));
-    if (j >= 0.5) fail(`${e.id} "${e.query}" too close to benchmark ${q.id} "${q.query}" (Jaccard ${j.toFixed(2)})`);
-  });
-});
-if (errors) { console.error(`\nABORT: ${errors} verification failure(s); codebook not modified.`); process.exit(1); }
+const errors = verifyItems(ex);
+if (errors.length) { errors.forEach(e => console.error('FAIL  ' + e)); console.error(`\nABORT: ${errors.length} verification failure(s); codebook not modified.`); process.exit(1); }
 console.log(`examples verified: ${ex.length} (ids exist, label/reading consistency, OOD absent-terms, no benchmark collision)`);
 
-// ---- render examples block ----
 const cmd = id => '`' + byId.get(id).command.slice(0, 70) + (byId.get(id).command.length > 70 ? '…' : '') + '`';
 const blocks = ex.map(e => {
   const rows = e.readings.map(r => `  - *${r.reading}*: ${r.ids.length ? r.ids.map(i => `${i} (${cmd(i)})`).join('; ') : '**no record**'}`).join('\n');

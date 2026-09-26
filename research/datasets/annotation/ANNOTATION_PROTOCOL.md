@@ -36,8 +36,11 @@ Controls exist so annotators cannot infer "everything here is OOD or ambiguous",
 prevalence in the reliability estimate is not degenerate. Exclude from control sampling any query
 whose gold or acceptable command is absent from the win32 corpus view (**TA-B145, TA-B149**; see §6).
 
-**Tier 2 (optional, same sitting if annotators can):** the 14 v0.1 ambiguous + 15 v0.1 OOD queries.
-The paper's v0.1 ambiguity results depend on these, and 9 of the 14 are bare names.
+**Tier 2 (not run):** the 14 v0.1 ambiguous + 15 v0.1 OOD queries. **Decision (2026-09-26): Tier 1
+only, 79 items.** The paper's v0.1 ambiguity results depend on the Tier-2 items (9 of the 14 are bare
+names), so that gap stays open and is stated as a limitation. If Tier 2 is added later, note that the
+practice items overlap its topics (`kubectl` ~ v0.1 "kubernetes"; `translate…German` ~ v0.1 "translate this
+sentence to French"), and the two annotators must again get the identical item set.
 
 **Blinding and order.** Each annotator gets an independently shuffled order (seeds 1001 and 1002),
 anonymous item numbers, and query text only: no ids, no original labels, no query-type field.
@@ -66,9 +69,19 @@ replaced afterwards.
 ## 3. Procedure
 
 1. Annotators read the codebook and study worked examples W1–W13.
-2. **Recommended, not yet built:** a practice set of ≥8 fresh requests, verified with the same script
-   (`build_annotation_materials.js`) for corpus ids and benchmark collisions, labeled before the real
-   sheet. The codebook is frozen after practice.
+2. **Practice set (11 items: 8 core + 3 borderline; 4 CLEAR / 3 AMBIGUOUS / 4 OOD).** Each annotator
+   labels `sheets/practice/PRACTICE_SHEET.csv` alone and returns it. The coordinator runs
+   `build_practice_set.js --score <file>`; it flags an annotator who misses **2 or more of the 8 core
+   items**, in which case the *rules* (never the items) are discussed through the clarification log
+   before the real sheet is sent. Then `coordinator/PRACTICE_FEEDBACK.md` (answers and reasoning) goes to
+   **both** annotators at once. Nobody is excluded on the basis of practice. Practice labels never enter
+   the κ; report practice agreement descriptively only. The codebook is frozen once feedback is sent; if
+   practice exposes a flaw in the codebook, that is a dated amendment sent to both **before** the real
+   sheet. The practice items were verified with the same checks as the worked examples and were chosen
+   to be semantically far from the 59 real targets (avoiding the process, disk, package, network and
+   security families, where real items are disputed), so no practice answer settles a real item by proxy.
+   Borderline items (`rsync`, `forward a port`, `delete files older than 30 days`) are deliberately
+   contestable and are never scored.
 3. Each annotator labels independently and returns a sheet with `label`, `confidence`, `record_ids`,
    `comment`.
 4. **Clarification log.** Rule questions only, never about a specific request. Answers go to both
@@ -144,18 +157,23 @@ be corrected or dropped in v0.2.1 and disclosed in the paper.
 | File | Purpose |
 |---|---|
 | `ANNOTATION_CODEBOOK.md`, `codebook_examples.json`, `corpus_view_win32.tsv` | annotator materials |
-| `research/experiments/build_annotation_materials.js` | generates the list; verifies the examples (ids exist, absent terms, no benchmark collision); injects them into the codebook |
-| `research/experiments/build_annotation_sheets.js` | blind sheets for both annotators + private key + `SHEETS_MANIFEST.json`; `--with-tier2` adds the 29 v0.1 items (108 total) |
+| `research/experiments/annotation_common.js` | shared context and verification (cited ids exist, label/reading consistency, OOD absent-terms, no benchmark or worked-example collision, no duplicates) |
+| `research/experiments/build_annotation_materials.js` | generates the list; verifies the worked examples; injects them into the codebook |
+| `practice_items.json`, `research/experiments/build_practice_set.js` | the 11 practice items; verifies them (including that each bare-name item obeys the codebook's own bare-name rule); writes the practice sheet, a private key, and the feedback file; `--score <file>` grades a returned practice sheet |
+| `research/experiments/build_annotation_sheets.js` | blind sheets for both annotators + private key + `SHEETS_MANIFEST.json` (Tier 1 = 79 items; `--with-tier2` exists but is not used) |
 | `research/experiments/validate_returned_sheet.js` | checks a returned sheet: labels, confidence, record ids exist, query text unaltered, no missing rows; flags AMBIGUOUS with <2 ids, OOD with ids, CLEAR with none |
 
-Workflow: `node build_annotation_sheets.js` → send `sheets/annotator_N_sheet.csv` + codebook +
-`corpus_view_win32.tsv` + `sheets/HOW_TO_RETURN.md` to each annotator privately → put returned files in
-`returned/` → `node validate_returned_sheet.js returned/<file>.csv N`.
+Workflow, in order:
+1. `node build_practice_set.js` and `node build_annotation_sheets.js`.
+2. Send each annotator, privately: the codebook, `corpus_view_win32.tsv`, `sheets/HOW_TO_RETURN.md`,
+   and `sheets/practice/PRACTICE_SHEET.csv`. **Do not send the real sheet yet.**
+3. Get the practice sheets back; run `node build_practice_set.js --score <file>` for each; resolve any
+   flags through the clarification log; send `coordinator/PRACTICE_FEEDBACK.md` to both.
+4. Send `sheets/annotator_N_sheet.csv`. Put returned files in `returned/` and run
+   `node validate_returned_sheet.js returned/<file>.csv N`.
 
-**Still to build before starting:** the practice set (≥8 fresh, verified requests); the adjudication
-template; and extending `compute_kappa.js` to the plan in §4 (bootstrap CI, per-item
-CONFIRMED / REVERSED / CONTESTED outcomes, TA-B187 exclusion). **Decide first:** Tier 1 only (79 items)
-or Tier 1 + Tier 2 (108), because both annotators must get the identical set.
+**Still to build before analysis:** the adjudication template, and extending `compute_kappa.js` to the
+plan in §4 (bootstrap CI, per-item CONFIRMED / REVERSED / CONTESTED outcomes, TA-B187 exclusion).
 
 Timeline: EACL SRW mentorship deadline Nov 6, 2026; direct submission Dec 15, 2026 (from
 PUBLICATION_ROADMAP.md).
