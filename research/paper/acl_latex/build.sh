@@ -4,9 +4,10 @@
 # Requires a LaTeX distribution (MiKTeX/TeX Live) with pdflatex and bibtex on PATH.
 # Run from this directory.
 #
-# Also enforces the ACL/EACL SRW long-paper body limit: the page holding the \label{endofbody}
-# marker at the end of content.tex (just before the bibliography) must be <= BODY_LIMIT. The
-# bibliography and appendices come after it and are not counted.
+# Also enforces the ACL/EACL SRW long-paper page limit: the page holding the \label{endofbody}
+# marker (end of the Conclusion in content.tex) must be <= BODY_LIMIT. Per the ACL formatting
+# guidelines, the Limitations and Ethical Considerations sections (placed after the conclusion),
+# the references, and the appendices do not count toward the limit.
 set -e
 BODY_LIMIT=8
 for base in main main_review; do

@@ -241,6 +241,33 @@ supersede the framing in the Phase 17/18 text above (kept as history, not delete
   TA-B149, so no system comparison changes; absolute accuracy is understated by about 1 point on v0.2 (0.6 on v0.1).
   Disclosed in the paper's Limitations; correction deferred to v0.2.1 (`research/datasets/annotation/ANNOTATION_PROTOCOL.md` §6).
 
+### Addendum, 2026-09-26 (later) — full read-through of the typeset paper
+
+A page-by-page read of the rendered PDF, with every suspect number re-derived from the result files, found and fixed:
+
+- **Wrong calibration range.** "56.7–84.1% across four confidence variants" was false: the dense-similarity signal
+  improves only 46.9% on v0.1. The true range is 46.9–84.1%; the hybrid's own signal is 80.4% / 77.2%.
+  "Largest for the hybrid's signal" was true on v0.1 only (on v0.2 the baseline signal gains most, 84.1%).
+- **Transposed held-out range.** "69–77% vs. 76–80%" should be 69–76% (Split B) vs. 77–80% (Split A).
+- **Mixed accuracy definitions, including my own earlier "fix".** The paper mixed per-fold means with pooled accuracy.
+  My earlier change of v0.2 BM25 from 75.5% to 75.4% picked the per-fold mean, which is the wrong unit: the McNemar
+  tests, bootstrap intervals and the +3.8 delta are all pooled. The paper now reports pooled accuracy with counts
+  everywhere (v0.1: 97/98/104 of 135; v0.2: 120/115/126 of 159), and the figures were regenerated to match.
+  The "Split A vs. B accuracy Δ −0.01/−0.02 pp" was an artifact of the same mix: pooled accuracy is identical under
+  both splits (104/135, 126/159).
+- **Bibliography errors from my earlier work.** Invented co-authors on the NL2SH entry (correct list verified on arXiv),
+  a wrong NLC2CMD title, a wrong ISSTA venue expansion, and a direct quote ("remains low") that is not in the NL2SH
+  abstract. All entries now checked against arXiv; uncited, unverified entries removed.
+- **Corpus arithmetic.** "134 duplicates, so 279" did not add up; correct: 152 Linux/macOS-only records are filtered
+  out of 431, leaving 279 Windows-visible records (145 cross-platform + 134 Windows-specific), each a distinct intent.
+- **Overclaims.** The ethics section said commands were "human-vetted"; the corpus is script-checked only
+  (`validation_status: machine_verified`) and includes Linux commands visible on Windows. "OOD labels fully confirmed"
+  now says "all 8 sampled". The first reviewer's lack of access to the command list is now disclosed.
+- **Structure.** ACL guidelines place Limitations and Ethical Considerations after the conclusion, outside the page
+  limit; the paper had them before it, and `build.sh` counted them. Fixed; the body now ends on page 7.
+- **Figures.** Text was ~3 pt at print size, one title was clipped, one showed an internal variable name, the
+  reliability diagrams had no tick labels. All regenerated for print.
+
 ---
 
 ## Phase 17 — Decision Gate

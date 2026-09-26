@@ -5,9 +5,11 @@
   Talamadupula, Teng, and White}]{agarwal2021nlc2cmd}
 Mayank Agarwal, Tathagata Chakraborti, Quchen Fu, David Gros, Xi~Victoria Lin,
   Jaron Maene, Kartik Talamadupula, Zhongwei Teng, and Jules White. 2021.
-\newblock \href {https://arxiv.org/abs/2103.02523} {Nlc2cmd competition
-  report}.
-\newblock \emph{Preprint}, arXiv:2103.02523.
+\newblock \href {https://arxiv.org/abs/2103.02523} {{NeurIPS} 2020 {NLC2CMD}
+  competition: Translating natural language to {B}ash commands}.
+\newblock In \emph{Proceedings of the {NeurIPS} 2020 Competition and
+  Demonstration Track}, volume 133 of \emph{Proceedings of Machine Learning
+  Research}.
 
 \bibitem[{Card et~al.(2020)Card, Henderson, Khandelwal, Jia, Mahowald, and
   Jurafsky}]{card2020littlepower}
@@ -16,22 +18,22 @@ Dallas Card, Peter Henderson, Urvashi Khandelwal, Robin Jia, Kyle Mahowald, and
 \newblock \href {https://arxiv.org/abs/2010.06595} {With little power comes
   great responsibility}.
 \newblock In \emph{Proceedings of the 2020 Conference on Empirical Methods in
-  Natural Language Processing (EMNLP)}.
+  Natural Language Processing ({EMNLP})}.
 
 \bibitem[{Li et~al.(2026)Li, Zhang, Tresp, and Yang}]{li2026quotebench}
 Shangao Li, Yao Zhang, Volker Tresp, and Yuanyuan Yang. 2026.
-\newblock \href {https://arxiv.org/abs/2608.13547} {Quotebench: How matched
+\newblock \href {https://arxiv.org/abs/2608.13547} {{QuoteBench}: How matched
   scores can hide command-path failures}.
 \newblock \emph{Preprint}, arXiv:2608.13547.
 
 \bibitem[{Lin et~al.(2018)Lin, Wang, Zettlemoyer, and
   Ernst}]{lin-etal-2018-nl2bash}
 Xi~Victoria Lin, Chenglong Wang, Luke Zettlemoyer, and Michael~D. Ernst. 2018.
-\newblock \href {https://arxiv.org/abs/1802.08979} {{NL2B}ash: A corpus and
+\newblock \href {https://arxiv.org/abs/1802.08979} {{NL2Bash}: A corpus and
   semantic parser for natural language interface to the {L}inux operating
   system}.
 \newblock In \emph{Proceedings of the Eleventh International Conference on
-  Language Resources and Evaluation (LREC 2018)}.
+  Language Resources and Evaluation ({LREC} 2018)}.
 
 \bibitem[{Notaro et~al.(2024)Notaro, Haeri, Cardoso, and
   Gerndt}]{notaro2024commandrisk}
@@ -48,23 +50,22 @@ Pengyu Wang, Benfeng Xu, Shaohan Wang, Mingxuan Du, Xin Zeng, Huarui Wu, Lei
   scaling study of retrieval-augmented generation paradigms}.
 \newblock \emph{Preprint}, arXiv:2607.26497.
 
-\bibitem[{Westenfelder et~al.(2025)Westenfelder, Buchheit, Tayeb, Hemberg, and
-  O'Reilly}]{westenfelder2025nl2sh}
-Finnian~R. Westenfelder, Erik Buchheit, Tara Tayeb, Erik Hemberg, and Una-May
-  O'Reilly. 2025.
+\bibitem[{Westenfelder et~al.(2025)Westenfelder, Hemberg, Tulla, Moskal,
+  O'Reilly, and Chiricescu}]{westenfelder2025nl2sh}
+Finnian Westenfelder, Erik Hemberg, Miguel Tulla, Stephen Moskal, Una-May
+  O'Reilly, and Silviu Chiricescu. 2025.
 \newblock \href {https://arxiv.org/abs/2502.06858} {{LLM}-supported natural
   language to {B}ash translation}.
-\newblock In \emph{Proceedings of the 2025 Conference of the North American
-  Chapter of the Association for Computational Linguistics (NAACL)}.
+\newblock In \emph{{NAACL} 2025}.
 
 \bibitem[{Yu et~al.(2026)Yu, Wang, Xu, Zhang, Wang, Ma, Yang, Deng, Wang, and
   Zhang}]{yu2026bashcoderr1}
 Lei Yu, Peng Wang, Jia Xu, Jingyuan Zhang, Xin Wang, Jiajia Ma, Li~Yang,
   Changzhi Deng, Zenghua Wang, and Fengjun Zhang. 2026.
-\newblock \href {https://arxiv.org/abs/2606.27733} {Bashcoder-{R}1: Towards
+\newblock \href {https://arxiv.org/abs/2606.27733} {{BashCoder-R1}: Towards
   robust and explainable {B}ash code generation with robustness-aware group
   relative policy optimization}.
-\newblock In \emph{Proceedings of the ACM/IEEE International Conference on
-  Software Engineering (ISSTA 2026)}.
+\newblock In \emph{Proceedings of the {ACM} {SIGSOFT} International Symposium
+  on Software Testing and Analysis ({ISSTA} 2026)}.
 
 \end{thebibliography}

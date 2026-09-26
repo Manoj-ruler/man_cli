@@ -1,54 +1,45 @@
-% References for "Reliability-Aware Hybrid Retrieval for Natural-Language-to-Shell-Command
-% Assistance: A Non-LLM Study". Every entry corresponds to a citation actually used in main.tex;
-% no entry here is decorative. arXiv IDs and claims were verified against live arXiv pages for the
-% three 2026 entries (Li et al., Yu et al., Wang et al.), since they postdate the writer's training
-% cutoff and could not be verified from memory.
+% References for "Reliability-Aware Hybrid Retrieval for Natural-Language-to-Shell-Command Assistance:
+% A Non-LLM Study". Only entries cited in content.tex are kept.
+%
+% Every title and author list below was checked against the paper's arXiv page on 2026-09-26.
+% That check found errors in an earlier version of this file, which had been partly typed from memory:
+% invented co-authors on westenfelder2025nl2sh, a wrong title on agarwal2021nlc2cmd, and a wrong venue
+% expansion on yu2026bashcoderr1. Uncited entries that had not been checked were removed.
+% Braces protect capitalization of acronyms and system names.
 
 @inproceedings{lin-etal-2018-nl2bash,
-    title     = {{NL2B}ash: A Corpus and Semantic Parser for Natural Language Interface to the {L}inux Operating System},
+    title     = {{NL2Bash}: A Corpus and Semantic Parser for Natural Language Interface to the {L}inux Operating System},
     author    = {Lin, Xi Victoria and Wang, Chenglong and Zettlemoyer, Luke and Ernst, Michael D.},
-    booktitle = {Proceedings of the Eleventh International Conference on Language Resources and Evaluation (LREC 2018)},
+    booktitle = {Proceedings of the Eleventh International Conference on Language Resources and Evaluation ({LREC} 2018)},
     year      = {2018},
     eprint    = {1802.08979},
     archiveprefix = {arXiv}
 }
 
-@misc{agarwal2021nlc2cmd,
-    title  = {NLC2CMD Competition Report},
-    author = {Agarwal, Mayank and Chakraborti, Tathagata and Fu, Quchen and Gros, David and Lin, Xi Victoria and Maene, Jaron and Talamadupula, Kartik and Teng, Zhongwei and White, Jules},
-    year   = {2021},
-    eprint = {2103.02523},
+@inproceedings{agarwal2021nlc2cmd,
+    title     = {{NeurIPS} 2020 {NLC2CMD} Competition: Translating Natural Language to {B}ash Commands},
+    author    = {Agarwal, Mayank and Chakraborti, Tathagata and Fu, Quchen and Gros, David and Lin, Xi Victoria and Maene, Jaron and Talamadupula, Kartik and Teng, Zhongwei and White, Jules},
+    booktitle = {Proceedings of the {NeurIPS} 2020 Competition and Demonstration Track},
+    series    = {Proceedings of Machine Learning Research},
+    volume    = {133},
+    year      = {2021},
+    eprint    = {2103.02523},
     archiveprefix = {arXiv}
 }
 
-@misc{agarwal2020claiproject,
-    title  = {Project {CLAI}: Instrumenting the Command Line as a New Environment for {AI} Agents},
-    author = {Agarwal, Mayank and Barroso, Ibrahim and Chakraborti, Tathagata and Talamadupula, Kartik and Wang, Jaimie and Weisz, Justin D. and Sinha, Kshitij P.},
-    year   = {2020},
-    eprint = {2002.00762},
-    archiveprefix = {arXiv}
-}
-
-@inproceedings{yang2023intercode,
-    title     = {InterCode: Standardizing and Benchmarking Interactive Coding with Execution Feedback},
-    author    = {Yang, John and Prabhakar, Akshara and Narasimhan, Karthik and Yao, Shunyu},
-    booktitle = {Advances in Neural Information Processing Systems (NeurIPS) Datasets and Benchmarks Track},
-    year      = {2023},
-    eprint    = {2306.14898},
-    archiveprefix = {arXiv}
-}
-
+% TODO before camera-ready: arXiv says only "NAACL 2025". Check the ACL Anthology for main track vs.
+% Findings and replace this entry with the Anthology's official BibTeX.
 @inproceedings{westenfelder2025nl2sh,
     title     = {{LLM}-Supported Natural Language to {B}ash Translation},
-    author    = {Westenfelder, Finnian R. and Buchheit, Erik and Tayeb, Tara and Hemberg, Erik and O'Reilly, Una-May},
-    booktitle = {Proceedings of the 2025 Conference of the North American Chapter of the Association for Computational Linguistics (NAACL)},
+    author    = {Westenfelder, Finnian and Hemberg, Erik and Tulla, Miguel and Moskal, Stephen and O'Reilly, Una-May and Chiricescu, Silviu},
+    booktitle = {{NAACL} 2025},
     year      = {2025},
     eprint    = {2502.06858},
     archiveprefix = {arXiv}
 }
 
 @misc{li2026quotebench,
-    title  = {QuoteBench: How Matched Scores Can Hide Command-Path Failures},
+    title  = {{QuoteBench}: How Matched Scores Can Hide Command-Path Failures},
     author = {Li, Shangao and Zhang, Yao and Tresp, Volker and Yang, Yuanyuan},
     year   = {2026},
     eprint = {2608.13547},
@@ -56,9 +47,9 @@
 }
 
 @inproceedings{yu2026bashcoderr1,
-    title     = {BashCoder-{R}1: Towards Robust and Explainable {B}ash Code Generation with Robustness-Aware Group Relative Policy Optimization},
+    title     = {{BashCoder-R1}: Towards Robust and Explainable {B}ash Code Generation with Robustness-Aware Group Relative Policy Optimization},
     author    = {Yu, Lei and Wang, Peng and Xu, Jia and Zhang, Jingyuan and Wang, Xin and Ma, Jiajia and Yang, Li and Deng, Changzhi and Wang, Zenghua and Zhang, Fengjun},
-    booktitle = {Proceedings of the ACM/IEEE International Conference on Software Engineering (ISSTA 2026)},
+    booktitle = {Proceedings of the {ACM} {SIGSOFT} International Symposium on Software Testing and Analysis ({ISSTA} 2026)},
     year      = {2026},
     eprint    = {2606.27733},
     archiveprefix = {arXiv}
@@ -69,14 +60,6 @@
     author = {Wang, Pengyu and Xu, Benfeng and Wang, Shaohan and Du, Mingxuan and Zeng, Xin and Wu, Huarui and Zhang, Lei and Zhang, Licheng},
     year   = {2026},
     eprint = {2607.26497},
-    archiveprefix = {arXiv}
-}
-
-@misc{husain2019codesearchnet,
-    title  = {CodeSearchNet Challenge: Evaluating the State of Semantic Code Search},
-    author = {Husain, Hamel and Wu, Ho-Hsiang and Gazit, Tiferet and Allamanis, Miltiadis and Brockschmidt, Marc},
-    year   = {2019},
-    eprint = {1909.09436},
     archiveprefix = {arXiv}
 }
 
@@ -91,7 +74,7 @@
 @inproceedings{card2020littlepower,
     title     = {With Little Power Comes Great Responsibility},
     author    = {Card, Dallas and Henderson, Peter and Khandelwal, Urvashi and Jia, Robin and Mahowald, Kyle and Jurafsky, Dan},
-    booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+    booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing ({EMNLP})},
     year      = {2020},
     eprint    = {2010.06595},
     archiveprefix = {arXiv}
