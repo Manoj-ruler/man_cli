@@ -20,6 +20,8 @@ label about 80 requests. Plan for 1 to 1.5 hours; you can split it over several 
 - **Judge against the list, not against what a shell can do in general.** Use Ctrl+F on the list.
 - **Do not use search engines or AI assistants to decide a label.** Your own knowledge of how
   people use command lines is exactly what we want.
+- **Do not look for where these requests came from.** Do not search for them, and do not open any
+  project repository, paper, or benchmark file.
 - The requests are in random order and you are **not told where they came from**. There is no
   answer key you are graded against. We want your honest reading of the rules.
 - If you are unsure, pick the label you could defend and mark low confidence. That is useful data,

@@ -234,6 +234,12 @@ supersede the framing in the Phase 17/18 text above (kept as history, not delete
 - **A measurement error of mine, also corrected:** earlier build notes claimed the LaTeX body "fits in 7 pages".
   That was inferred from a log marker; measured with `\label{endofbody}` the body actually ran onto page 9. Three
   secondary figures were moved to an appendix and `build.sh` now fails the build if the body passes page 8.
+- **Benchmark ground-truth defects found 2026-09-26** (while checking the win32-visible corpus for the annotation
+  codebook): TA-B187 "tar" (v0.2) has its gold and all 3 acceptable commands only in the Linux/macOS records, so no
+  system can answer it on the win32 corpus; TA-B145 (v0.1, already NEEDS_CORRECTION) has a gold command that is not a
+  corpus record; TA-B149 has one acceptable command outside the corpus. Every system misses TA-B145 and TA-B187 and hits
+  TA-B149, so no system comparison changes; absolute accuracy is understated by about 1 point on v0.2 (0.6 on v0.1).
+  Disclosed in the paper's Limitations; correction deferred to v0.2.1 (`research/datasets/annotation/ANNOTATION_PROTOCOL.md` §6).
 
 ---
 

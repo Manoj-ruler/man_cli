@@ -1,0 +1,69 @@
+{
+  "generated_by": "research/experiments/build_annotation_sheets.js",
+  "tier2_included": false,
+  "n_items": 79,
+  "counts": {
+    "targets": 59,
+    "controls": 20,
+    "tier2": 0
+  },
+  "seeds": {
+    "sampling": 42,
+    "annotator_order": {
+      "1": 1001,
+      "2": 1002
+    }
+  },
+  "control_pool": {
+    "size": 118,
+    "by_type": {
+      "canonical": 25,
+      "paraphrase": 25,
+      "low_overlap_paraphrase": 15,
+      "ambiguous": 9,
+      "polysemy": 16,
+      "safety_sensitive": 15,
+      "complex_multi_intent": 13
+    },
+    "allocation": {
+      "canonical": 4,
+      "complex_multi_intent": 4,
+      "low_overlap_paraphrase": 3,
+      "paraphrase": 3,
+      "polysemy": 3,
+      "safety_sensitive": 3
+    },
+    "extra_type": "complex_multi_intent"
+  },
+  "control_ids": [
+    "TA-B004",
+    "TA-B006",
+    "TA-B015",
+    "TA-B023",
+    "TA-B031",
+    "TA-B040",
+    "TA-B041",
+    "TA-B056",
+    "TA-B062",
+    "TA-B064",
+    "TA-B094",
+    "TA-B103",
+    "TA-B106",
+    "TA-B124",
+    "TA-B129",
+    "TA-B135",
+    "TA-B139",
+    "TA-B141",
+    "TA-B146",
+    "TA-B147"
+  ],
+  "excluded_from_control_pool": [
+    "TA-B145 (NEEDS_CORRECTION, gold not in corpus)",
+    "TA-B149 (acceptable command not in corpus)"
+  ],
+  "sheet_sha256": {
+    "annotator_1": "70a2daba7668a06025c67b90c2df06e0842ee54020fb0b198f4c918a867d253b",
+    "annotator_2": "4413f57dc8fc64da130792f83cb71c3bff406656d6a4f5ef5543a45c289aa266"
+  },
+  "note": "Sheets and key are gitignored and regenerated deterministically from this script; this manifest lets a reader verify a regenerated copy matches."
+}

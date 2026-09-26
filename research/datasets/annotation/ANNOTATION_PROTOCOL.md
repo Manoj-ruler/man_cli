@@ -30,7 +30,7 @@ only if this protocol is run as written.
 | Group | n | Source | Original label |
 |---|---:|---|---|
 | Targets | 59 | the 59 AI-authored v0.2 queries (TA-B151–TA-B209): 35 OOD + 24 ambiguous | OOD / AMBIGUOUS |
-| Controls | 20 | seeded (seed 42) sample of v0.1 queries whose ground-truth classification is CORRECT (pool of 119 after removing TA-B145 and TA-B149): 4 canonical (attention checks) + 16 stratified across paraphrase / low-overlap / polysemy / complex / safety | CLEAR |
+| Controls | 20 | seeded (seed 42) sample of v0.1 queries whose ground-truth classification is CORRECT and whose gold and acceptable commands are all in the win32 corpus view (pool of **118**; TA-B145 is NEEDS_CORRECTION and TA-B149 has an acceptable command outside the corpus): 4 canonical (attention checks) + 16 across the five other types (3 each, plus 1 extra to a seeded-random type; in the current build, complex_multi_intent) | CLEAR |
 
 Controls exist so annotators cannot infer "everything here is OOD or ambiguous", and so the
 prevalence in the reliability estimate is not degenerate. Exclude from control sampling any query
@@ -41,6 +41,19 @@ The paper's v0.1 ambiguity results depend on these, and 9 of the 14 are bare nam
 
 **Blinding and order.** Each annotator gets an independently shuffled order (seeds 1001 and 1002),
 anonymous item numbers, and query text only: no ids, no original labels, no query-type field.
+`build_annotation_sheets.js` enforces this (it aborts if any id appears in a sheet, if the two orders
+match, or if the annotators do not share the same item set) and is deterministic, so a regenerated
+sheet can be checked against the hashes in `SHEETS_MANIFEST.json`. TA-B187 is on the sheets like any
+other target; it is only excluded at analysis time (§6).
+
+**Residual blinding risks (cannot be removed, so disclose them).**
+- **The repository is public.** The original labels are in the benchmark files and adjudication
+  reports, so anyone who looks can find them. Deliver the sheets privately, tell annotators not to look
+  up the source (the codebook says so), and state in the paper that blinding rests on their compliance.
+- **Style cues.** Controls come from v0.1 (hand-written) and targets from v0.2 (AI-authored); an
+  attentive annotator might notice a difference in style. Not fixable without rewriting queries.
+- The generated `sheets/`, `coordinator/` and `returned/` folders are gitignored; do not commit them
+  before annotation is finished.
 
 ## 2. Annotators
 
@@ -126,11 +139,23 @@ be corrected or dropped in v0.2.1 and disclosed in the paper.
 
 ## 7. Files and next steps
 
-Built: `ANNOTATION_CODEBOOK.md`, `codebook_examples.json`, `corpus_view_win32.tsv`,
-`research/experiments/build_annotation_materials.js` (generates the list, verifies the examples,
-injects them into the codebook).
+**Built and tested**
 
-To build before starting: the blank-sheet generator (seeded, blinded, with the controls);
-the practice set; the adjudication template; extend `compute_kappa.js` to the plan in §4
-(bootstrap CI, per-item outcomes). Timeline: EACL SRW mentorship deadline Nov 6, 2026; direct
-submission Dec 15, 2026 (from PUBLICATION_ROADMAP.md).
+| File | Purpose |
+|---|---|
+| `ANNOTATION_CODEBOOK.md`, `codebook_examples.json`, `corpus_view_win32.tsv` | annotator materials |
+| `research/experiments/build_annotation_materials.js` | generates the list; verifies the examples (ids exist, absent terms, no benchmark collision); injects them into the codebook |
+| `research/experiments/build_annotation_sheets.js` | blind sheets for both annotators + private key + `SHEETS_MANIFEST.json`; `--with-tier2` adds the 29 v0.1 items (108 total) |
+| `research/experiments/validate_returned_sheet.js` | checks a returned sheet: labels, confidence, record ids exist, query text unaltered, no missing rows; flags AMBIGUOUS with <2 ids, OOD with ids, CLEAR with none |
+
+Workflow: `node build_annotation_sheets.js` → send `sheets/annotator_N_sheet.csv` + codebook +
+`corpus_view_win32.tsv` + `sheets/HOW_TO_RETURN.md` to each annotator privately → put returned files in
+`returned/` → `node validate_returned_sheet.js returned/<file>.csv N`.
+
+**Still to build before starting:** the practice set (≥8 fresh, verified requests); the adjudication
+template; and extending `compute_kappa.js` to the plan in §4 (bootstrap CI, per-item
+CONFIRMED / REVERSED / CONTESTED outcomes, TA-B187 exclusion). **Decide first:** Tier 1 only (79 items)
+or Tier 1 + Tier 2 (108), because both annotators must get the identical set.
+
+Timeline: EACL SRW mentorship deadline Nov 6, 2026; direct submission Dec 15, 2026 (from
+PUBLICATION_ROADMAP.md).

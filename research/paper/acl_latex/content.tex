@@ -405,6 +405,13 @@ ambiguous label itself is unsettled for short queries.
   \item \textbf{Canonical-query independence.} All 25 canonical queries are verbatim-equal to a corpus
   intent, so 100\% canonical accuracy is a positive-control sanity check, not evidence of language
   understanding; the paraphrase, low-overlap, polysemy, and ambiguous types carry the capability claims.
+  \item \textbf{Ground-truth defects.} Three items have a gold or acceptable command that is not a
+  record of the win32 corpus the system searches: TA-B187 (``tar''; gold and all three acceptable
+  commands exist only in the Linux/macOS records), TA-B145 (gold absent; already classed as needing
+  correction), and TA-B149 (one acceptable command absent). None affects a comparison between
+  systems (every system misses TA-B145 and TA-B187 and hits TA-B149), but the first two lower every
+  system's absolute accuracy by about 1 point on v0.2 (0.6 on v0.1). We report both versions
+  unchanged; the items should be corrected or dropped in a later version.
   \item \textbf{Corpus scale and platform.} 279 win32-visible unique intents (431 raw records), small
   relative to generation-oriented corpora and single-platform; the planned 500--800-intent expansion
   is not done.
