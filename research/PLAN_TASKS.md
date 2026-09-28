@@ -37,6 +37,10 @@ Every new script must first reproduce the current reported values and refuse to 
   - *Work:* count dangerous-direction misses by the spec's definition (high or critical predicted as low **or medium**), for gold and retrieved commands on both versions. Add Wilson intervals and raw counts.
   - *Done when:* counts match the audit (v0.1 gold 1 miss; v0.2 gold 3 misses, 2 of them HIGH→LOW).
 
+- [ ] **T3b 🟢 AUGRC next to AURC** (from D5)
+  - *Work:* compute AUGRC from the same tie-aware risk-coverage curves as T3, with 95% bootstrap CIs (10,000 resamples, seed 42), for both versions, with and without controls.
+  - *Done when:* the T3 AURC numbers are reproduced first, and the AUGRC results file exists.
+
 ## Phase 2 — Literature and document hygiene (no humans; parallel with Phase 1) — T6, T7 DONE 2026-09-28
 
 - [x] **T6 ✅ Targeted literature search** — record: `research/paper/T6_LITERATURE_VERIFICATION.md`
@@ -108,11 +112,22 @@ Every new script must first reproduce the current reported values and refuse to 
 
 ## Decisions only you can make
 
-- [ ] **D1:** keep a descriptive safety result (with its misses reported), or remove safety from the paper?
+- [x] **D1 (decided 2026-09-28):** keep safety as a **short, descriptive, secondary** result.
+  - Remove it from the abstract and the contributions list.
+  - In the body, report the dangerous-direction misses under the spec definition (v0.1 1/20, v0.2 3/22) with Wilson CIs.
+  - Name the one genuine miss (`git checkout -- .`) and the two label inconsistencies.
+  - State that the labels are the benchmark's own, not an independent set.
+  - No "safe" claim anywhere.
 - [ ] **D2:** build the near-OOD set (T13)?
-- [ ] **D3:** anonymity — the review version names TermAssist, a public npm package under an identifiable scope.
-- [ ] **D4:** confirm the target venue and deadlines (EACL 2026 SRW: Nov 6 mentorship, Dec 15 submission — re-verify).
-- [ ] **D5:** found in T6: Traub et al. (NeurIPS 2024) argue AURC is flawed and propose AUGRC. Should I also report AUGRC next to AURC (computed from the same tie-aware curve), or cite them and justify AURC?
+- [x] **D3 (decided 2026-09-28):** keep the name TermAssist in the review version. It is referred to in the third person, with no npm URL, package scope, repository link or author-identifying detail; those go in the camera-ready only. (Checked: `content.tex` currently has none.)
+- [x] **D4 (decided 2026-09-28): EACL 2027 Student Research Workshop** (Athens, March 9–14, 2027). It was verified on the official call as the earliest open SRW. The previous label "EACL 2026" was wrong; these dates belong to EACL 2027.
+  - Pre-submission mentorship deadline: **Nov 6, 2026**. Mentorship feedback: Dec 5, 2026.
+  - Direct submission deadline: **Dec 15, 2026**.
+  - Notification: Jan 5, 2027. Camera-ready: Jan 19, 2027.
+  - Long paper: 8 pages of content (9 on acceptance) plus unlimited references. Anonymous review; non-anonymous preprints are allowed. Archival and non-archival options exist. The first author must be a student.
+  - Fallback: NAACL 2027 SRW (mentorship Nov 16, 2026; submission Jan 11, 2027; double-blind).
+  - Plan: send a mentorship draft by Nov 6 (T14 with annotation placeholders), then the final version by Dec 15 with T11/T12 results. That needs the annotation study finished by about the end of November.
+- [x] **D5 (decided 2026-09-28):** report **AUGRC** (Traub et al., NeurIPS 2024) next to AURC, computed from the same tie-aware curves with bootstrap CIs, and cite both. This is added as T3b, before T14.
 
 ## Suggested order
 
