@@ -26,8 +26,9 @@ C5. Ids for a CLEAR item whose second reading failed the plausibility test. Code
     readings. Provisionally: record only the ids of the reading kept (the dominant one, with its
     variants).
 C6. Intent/command mismatch. A few records describe the task with Linux wording (e.g. "apt", "linux
-    distribution") while the command is a Windows one (e.g. winget, winver). Codebook 6.6 covers
-    Linux-looking commands, and the W6 note treats one such record as a Windows system package.
+    distribution") while the command is a Windows one (e.g. winget, winver). Codebook 6.6 covers only
+    Linux-looking commands. (The former W6 note that treated one such record as a Windows system
+    package was removed when W6 was replaced on 2026-09-28, so the codebook no longer addresses this.)
     Provisionally: judge a record by the task it performs described in general terms, not by the
     operating-system or tool name in its wording; mark lower confidence and add a comment when unsure.
 C7. Multi-step requests. Codebook 6.5 says a record that "handles only part of the task" does not
@@ -206,7 +207,7 @@ All three conditions must hold:
 
 | Example | Reasoning | What to look at in the list | Caution |
 |---|---|---|---|
-| *"uninstall a library"* (codebook W6) | npm and pip packages are both common readings; a user of one is badly served by the other. | See the codebook. | Don't count far-fetched readings (see the codebook's note). |
+| *"stream the container logs"* (codebook W6) | Docker, docker compose and Kubernetes each have a record, and a user of one is badly served by another. | See the codebook. | The word "container" rules out other kinds of logs, so they are not counted. |
 | *"free up docker space"* (codebook W7) | Three cleanups, each destroying something different. | See the codebook. | Different effects on data make distinct tasks. |
 | *"tmux"* (codebook W5) | A bare tool name asks for no task; four records do four different things. | See the codebook. | Bare names have their own rule (Section 9.6). |
 | *"call the api endpoint"* (H3) | Fetching data (`tac-0105`) and sending data (`tac-0011`) differ in effect, both are common readings of "call", and someone who meant one is badly served by the other. Record both ids. | Search "request", "api". | Other records (e.g. for replacing or deleting data) may exist. Whether *those* are plausible readings of these words is your plausibility judgment. Do not add readings just because a record exists. |

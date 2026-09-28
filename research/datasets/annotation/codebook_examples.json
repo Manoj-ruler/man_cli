@@ -98,23 +98,29 @@
     },
     {
       "id": "W6",
-      "query": "uninstall a library",
+      "query": "stream the container logs",
       "label": "AMBIGUOUS",
       "readings": [
         {
-          "reading": "uninstall an npm package",
+          "reading": "follow one docker container's logs",
           "ids": [
-            "tac-0116"
+            "tac-0092"
           ]
         },
         {
-          "reading": "uninstall a pip package",
+          "reading": "follow the logs of all docker compose services",
           "ids": [
-            "tac-0127"
+            "tac-0100"
+          ]
+        },
+        {
+          "reading": "follow a Kubernetes pod's logs",
+          "ids": [
+            "tac-0391"
           ]
         }
       ],
-      "why": "Two package ecosystems, each a common reading among people who write this; a user of one is badly served by the record for the other. (A Windows system package, tac-0354, is a poor reading of the word library, so it is not counted.)"
+      "why": "Containers run under different tools (docker, docker compose, Kubernetes), each with its own record, and a user of one is badly served by another: a different scope or ecosystem makes a distinct task. The word container rules out readings such as a log file on this machine, so those are not counted."
     },
     {
       "id": "W7",
@@ -144,23 +150,24 @@
     },
     {
       "id": "W8",
-      "query": "check whether a host is reachable",
+      "query": "download this installer from the website",
       "label": "CLEAR",
       "readings": [
         {
-          "reading": "ping a host",
+          "reading": "download a file from a web address",
           "ids": [
-            "tac-0187"
+            "tac-0010",
+            "tac-0107"
           ]
         },
         {
-          "reading": "test whether a specific port is open",
+          "reading": "resume a download that was interrupted",
           "ids": [
-            "tac-0199"
+            "tac-0112"
           ]
         }
       ],
-      "why": "Ping is the dominant reading of 'reachable'. Testing one port is a narrower question that few users mean by these words, so it fails the plausibility test."
+      "why": "A plain download is the dominant reading; tac-0010 and tac-0107 both save a web address to a file, so they are variants. Resuming an interrupted download is a narrower task that few users mean by these words, so it fails the plausibility test."
     },
     {
       "id": "W9",

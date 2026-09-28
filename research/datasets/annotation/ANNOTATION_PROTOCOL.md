@@ -242,6 +242,29 @@ differ, the codebook wins, and the handbook says so.
       the bare-name rule, not W2, decides that item.
   - **Handling (analysis unchanged):** report agreement for these five items, and whether they were
     CONFIRMED or REVERSED, as a sensitivity note next to the primary κ.
+    *(Superseded in part by Amendment 5: W6 and W8 were replaced before distribution.)*
+
+**Amendment 5 (2026-09-28): W6 and W8 replaced before distribution.** No annotator has seen the codebook,
+and no label exists. The two worked examples near targets were replaced by examples on topics absent from
+both sheets and the practice set. Each teaches the same rule as the example it replaces.
+- **W6** "uninstall a library" (AMBIGUOUS, npm vs. pip) → "stream the container logs" (AMBIGUOUS:
+  `tac-0092` docker, `tac-0100` docker compose, `tac-0391` Kubernetes). Same lesson: distinct scope or
+  ecosystem. It also shows a scope word ruling readings out.
+- **W8** "check whether a host is reachable" (CLEAR, ping dominant) → "download this installer from the
+  website" (CLEAR: `tac-0010` and `tac-0107` as variants; the resume-download reading, `tac-0112`, fails
+  the plausibility test). Same lesson: a dominant reading beats a narrower supported one.
+- **Checks.** `build_annotation_materials.js` re-verified all 13 examples and regenerated the examples
+  block; `corpus_view_win32.tsv` is byte-identical. An extra `verifyItems` run passed all 13 W and 6 H
+  examples against the practice set, the Tier 1 sheet and each other (token Jaccard < 0.5).
+  - Nearest sheet or practice request: 0.17 for W6, 0.18 for W8.
+  - The new W8 means nearly the same as TA-B014 "download a file from a url", a v0.1 canonical query that
+    is **not** on the Tier 1 sheet, so it cannot bias this study.
+- **Side effect.** The old W6 note (that `tac-0354`, a winget record worded as apt, is a "Windows system
+  package") is gone. The handbook's coordinator question C6 covers such intent/command mismatches.
+- **Remaining sensitivity note** (replacing the five-item list in Amendment 4): W3 ~ TA-B146, W7 ~ TA-B135
+  and W13 ~ TA-B147 (all controls), and W2 "upgrade requests with pip", which shares a tool with the
+  bare-name target TA-B201 "pip". Report agreement on these four items descriptively; the primary
+  analysis is unchanged.
 
 Timeline: EACL SRW mentorship deadline Nov 6, 2026; direct submission Dec 15, 2026 (from
 PUBLICATION_ROADMAP.md).

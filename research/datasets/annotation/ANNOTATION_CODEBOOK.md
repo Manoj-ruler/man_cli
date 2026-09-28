@@ -3,7 +3,8 @@
 **Version 1.0 — frozen before annotation begins (2026-09-26).** If a rule ever has to change, both
 annotators are told at the same time and the change is dated and logged; nothing is changed silently.
 *(Pre-distribution edits so far, all before any annotator saw this file: a conduct rule about not looking
-up the source, and this practice-set note. No labeling rule was changed.)*
+up the source, and this practice-set note; and on 2026-09-28, worked examples W6 and W8 were replaced
+by examples on different topics that teach the same rules. No labeling rule was changed.)*
 
 ---
 
@@ -173,10 +174,11 @@ will be asked to label.** Record ids refer to the list.
   - *kill a session*: tac-0318 (`tmux kill-session -t session-name`)
   - A bare tool name: it names no task. Four records for it perform four different tasks, so no reading can be dominant. AMBIGUOUS by the bare-name rule (Section 6.1).
 
-**W6. "uninstall a library" → AMBIGUOUS**
-  - *uninstall an npm package*: tac-0116 (`npm uninstall package-name`)
-  - *uninstall a pip package*: tac-0127 (`pip uninstall package-name`)
-  - Two package ecosystems, each a common reading among people who write this; a user of one is badly served by the record for the other. (A Windows system package, tac-0354, is a poor reading of the word library, so it is not counted.)
+**W6. "stream the container logs" → AMBIGUOUS**
+  - *follow one docker container's logs*: tac-0092 (`docker logs -f container-name`)
+  - *follow the logs of all docker compose services*: tac-0100 (`docker compose logs -f`)
+  - *follow a Kubernetes pod's logs*: tac-0391 (`kubectl logs -f pod-name -n namespace`)
+  - Containers run under different tools (docker, docker compose, Kubernetes), each with its own record, and a user of one is badly served by another: a different scope or ecosystem makes a distinct task. The word container rules out readings such as a log file on this machine, so those are not counted.
 
 **W7. "free up docker space" → AMBIGUOUS**
   - *remove all unused images*: tac-0014 (`docker image prune -a`)
@@ -184,10 +186,10 @@ will be asked to label.** Record ids refer to the list.
   - *remove all unused volumes*: tac-0419 (`docker volume prune -f`)
   - Three cleanups, each a common reading of "free up space", and each destroys something different (images can be re-pulled; volumes hold data). Readings that differ in effect on your data are distinct tasks (Section 6.3), and a user who meant one is badly served by another.
 
-**W8. "check whether a host is reachable" → CLEAR**
-  - *ping a host*: tac-0187 (`Test-Connection -ComputerName google.com -Count 4`)
-  - *test whether a specific port is open*: tac-0199 (`Test-NetConnection -ComputerName hostname -Port 80`)
-  - Ping is the dominant reading of 'reachable'. Testing one port is a narrower question that few users mean by these words, so it fails the plausibility test.
+**W8. "download this installer from the website" → CLEAR**
+  - *download a file from a web address*: tac-0010 (`curl -O https://example.com/file.zip`); tac-0107 (`curl -o output.html https://example.com`)
+  - *resume a download that was interrupted*: tac-0112 (`curl -C - -O https://example.com/largefile.zip`)
+  - A plain download is the dominant reading; tac-0010 and tac-0107 both save a web address to a file, so they are variants. Resuming an interrupted download is a narrower task that few users mean by these words, so it fails the plausibility test.
 
 **W9. "compile my rust project" → OOD**
   - *compile a Rust project*: **no record**
