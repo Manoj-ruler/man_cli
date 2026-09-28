@@ -145,7 +145,11 @@ Every new script must first reproduce the current reported values and refuse to 
     - Fix our own errors: the "smaller gain" sentence; the 6 OOD queries missing from the breakdown; explain the two p-values for the 15 original OOD queries.
     - Triage the 37 suggested items.
   - *Done when:* body ≤ 8 pages, all checks are clean, and a response-to-reviewers table is written.
-- [ ] **T22 🔵 Re-review** (ARS `academic-paper-reviewer` re-review mode, against the round-1 roadmap)
+- [x] **T22 ✅ Re-review (2026-09-28): Major Revision (rule B3), not checker-verified.** Report: `research/paper/review_round2/phase2b_verification_report.md`.
+  - must_fix: 5 fully, 10 partly, REV-11 not addressed (author decline), REV-03 made worse.
+  - should_fix addressed rate: 76% (below the 80% bar).
+  - 7 new issues: 6 minor regressions, 1 previously-missed major.
+  - The three-gate run was manual, because the contract's machine artifacts do not exist for a LaTeX source. (ARS `academic-paper-reviewer` re-review mode, against the round-1 roadmap)
 - [ ] **T23 🔵 Mentorship draft, due Nov 6, 2026**
   - *Work:* T15 trace table, T17 read-through, then submit to the EACL 2027 SRW mentorship program. Annotation results appear as clearly marked pending text.
 
@@ -171,7 +175,7 @@ Every new script must first reproduce the current reported values and refuse to 
 - [x] **D5 (decided 2026-09-28):** report **AUGRC** (Traub et al., NeurIPS 2024) next to AURC, computed from the same tie-aware curves with bootstrap CIs, and cite both. This is added as T3b, before T14.
 
 - [x] **D6 (decided 2026-09-28): contribution framing = audit and recalibration of the shipped confidence; the hybrid is one arm.** Lead with "auditing and recalibrating a shipped command retriever's confidence", with the hybrid as one arm of the study (REV-01)? The skill leaves the contribution claim to the author.
-- [ ] **D7: anonymity.** The EIC asks to anonymize the package name in the review version (REV-11); this would reverse D3.
+- [x] **D7 (decided 2026-09-28): keep the TermAssist name** (D3 stands; REV-11 declined). **Anonymity.** The EIC asks to anonymize the package name in the review version (REV-11); this would reverse D3.
 - [ ] **D8: page budget.** Move Split B, the sensitivity table and per-subset results to the appendix, as REV-02 proposes?
 - [ ] **D9: triage mode.** Work through the 54 items with the ARS guided Socratic triage, or let Claude triage and bring back only the contested items?
 - [ ] **D10: pending approvals.**
