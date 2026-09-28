@@ -1,5 +1,13 @@
-\begin{thebibliography}{29}
+\begin{thebibliography}{30}
 \providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Agarwal et~al.(2020)Agarwal, Barroso, Chakraborti, Dow, Fadnis,
+  Godoy, Pallan, and Talamadupula}]{agarwal2020clai}
+Mayank Agarwal, Jorge~J. Barroso, Tathagata Chakraborti, Eli~M. Dow, Kshitij
+  Fadnis, Borja Godoy, Madhavan Pallan, and Kartik Talamadupula. 2020.
+\newblock \href {https://arxiv.org/abs/2002.00762} {Project {CLAI}:
+  Instrumenting the command line as a new environment for {AI} agents}.
+\newblock \emph{Preprint}, arXiv:2002.00762.
 
 \bibitem[{Agarwal et~al.(2021)Agarwal, Chakraborti, Fu, Gros, Lin, Maene,
   Talamadupula, Teng, and White}]{agarwal2021nlc2cmd}
@@ -118,13 +126,6 @@ Quinn McNemar. 1947.
   error of the difference between correlated proportions or percentages}.
 \newblock \emph{Psychometrika}, 12(2):153--157.
 
-\bibitem[{Notaro et~al.(2024)Notaro, Haeri, Cardoso, and
-  Gerndt}]{notaro2024commandrisk}
-Paolo Notaro, Soroush Haeri, Jorge Cardoso, and Michael Gerndt. 2024.
-\newblock \href {https://arxiv.org/abs/2412.01655} {Command-line risk
-  classification using transformer-based neural architectures}.
-\newblock \emph{Preprint}, arXiv:2412.01655.
-
 \bibitem[{Pakdaman~Naeini et~al.(2015)Pakdaman~Naeini, Cooper, and
   Hauskrecht}]{naeini2015ece}
 Mahdi Pakdaman~Naeini, Gregory Cooper, and Milos Hauskrecht. 2015.
@@ -172,14 +173,6 @@ Jeremias Traub, Till~J. Bungert, Carsten~T. L{\"u}th, Michael Baumgartner,
   systems.
 \newblock In \emph{Advances in Neural Information Processing Systems},
   volume~37, pages 2323--2347.
-
-\bibitem[{Wang et~al.(2026)Wang, Xu, Wang, Du, Zeng, Wu, Zhang, and
-  Zhang}]{wang2026bm25wins}
-Pengyu Wang, Benfeng Xu, Shaohan Wang, Mingxuan Du, Xin Zeng, Huarui Wu, Lei
-  Zhang, and Licheng Zhang. 2026.
-\newblock \href {https://arxiv.org/abs/2607.26497} {{BM25} wins at scale: A
-  scaling study of retrieval-augmented generation paradigms}.
-\newblock \emph{Preprint}, arXiv:2607.26497.
 
 \bibitem[{Wang et~al.(2020)Wang, Wei, Dong, Bao, Yang, and
   Zhou}]{wang2020minilm}
@@ -230,5 +223,22 @@ Bianca Zadrozny and Charles Elkan. 2002.
   classifier scores into accurate multiclass probability estimates}.
 \newblock In \emph{Proceedings of the Eighth {ACM} {SIGKDD} International
   Conference on Knowledge Discovery and Data Mining}, pages 694--699. ACM.
+
+\bibitem[{Zhang et~al.(2022)Zhang, Liu, Xia, Treude, Zou, Lo, and
+  Zheng}]{zhang2022shellfusion}
+Neng Zhang, Chao Liu, Xin Xia, Christoph Treude, Ying Zou, David Lo, and Zibin
+  Zheng. 2022.
+\newblock \href {https://doi.org/10.1145/3510003.3510131} {{ShellFusion}:
+  Answer generation for shell programming tasks via knowledge fusion}.
+\newblock In \emph{Proceedings of the 44th International Conference on Software
+  Engineering ({ICSE})}, pages 1970--1981. ACM.
+
+\bibitem[{Zhou et~al.(2023)Zhou, Alon, Xu, Wang, Jiang, and
+  Neubig}]{zhou2023docprompting}
+Shuyan Zhou, Uri Alon, Frank~F. Xu, Zhiruo Wang, Zhengbao Jiang, and Graham
+  Neubig. 2023.
+\newblock {DocPrompting}: Generating code by retrieving the docs.
+\newblock In \emph{International Conference on Learning Representations
+  ({ICLR})}.
 
 \end{thebibliography}

@@ -139,7 +139,7 @@ Every new script must first reproduce the current reported values and refuse to 
     - Correct the BashCoder-R1 description.
     - Fix our own `related-work-matrix.csv` NLC2CMD row, which wrongly says no team submitted a lexical-IR baseline.
   - *Done when:* entries are verified, the matrix is corrected, and the novelty sentence is rescoped.
-- [ ] **T21 🔵 T14 round 2** (ARS `academic-paper` revision mode; after T18–T20 and decisions D6–D9)
+- [x] **T21 ✅ T14 round 2 (2026-09-28)**. Log: `research/paper/T21_REVISION_LOG.md`. 16/17 required addressed (REV-11 declined per D3, contested); 23 suggested addressed, 13 contested (need approval), 1 declined. Body ends on page 5; abstract 172 words; all checks clean. (ARS `academic-paper` revision mode; after T18–T20 and decisions D6–D9)
   - *Work:*
     - All 17 required items: reframing, a single reporting population, a claims-status table, OOD scoping, abstract ≤ 200 words, the interaction model, related work, terminology, the specification, and scoped calibration claims.
     - Fix our own errors: the "smaller gain" sentence; the 6 OOD queries missing from the breakdown; explain the two p-values for the 15 original OOD queries.
@@ -170,7 +170,7 @@ Every new script must first reproduce the current reported values and refuse to 
   - Plan: send a mentorship draft by Nov 6 (T14 with annotation placeholders), then the final version by Dec 15 with T11/T12 results. That needs the annotation study finished by about the end of November.
 - [x] **D5 (decided 2026-09-28):** report **AUGRC** (Traub et al., NeurIPS 2024) next to AURC, computed from the same tie-aware curves with bootstrap CIs, and cite both. This is added as T3b, before T14.
 
-- [ ] **D6 (review round 1): contribution framing.** Lead with "auditing and recalibrating a shipped command retriever's confidence", with the hybrid as one arm of the study (REV-01)? The skill leaves the contribution claim to the author.
+- [x] **D6 (decided 2026-09-28): contribution framing = audit and recalibration of the shipped confidence; the hybrid is one arm.** Lead with "auditing and recalibrating a shipped command retriever's confidence", with the hybrid as one arm of the study (REV-01)? The skill leaves the contribution claim to the author.
 - [ ] **D7: anonymity.** The EIC asks to anonymize the package name in the review version (REV-11); this would reverse D3.
 - [ ] **D8: page budget.** Move Split B, the sensitivity table and per-subset results to the appendix, as REV-02 proposes?
 - [ ] **D9: triage mode.** Work through the 54 items with the ARS guided Socratic triage, or let Claude triage and bring back only the contested items?
