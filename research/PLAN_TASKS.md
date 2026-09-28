@@ -112,7 +112,7 @@ Every new script must first reproduce the current reported values and refuse to 
 
 **Source:** `research/paper/review_round1/phase2_editorial_decision.md`. Decision: Major Revision; 3 blocking issues, 17 required items, 37 suggested. Facts were checked in `review_round1/author_verification.md`. No item needs new data.
 
-- [ ] **T18 🟢 New analyses of existing data** (Phase 1 style: scripts that first reproduce the committed numbers)
+- [x] **T18 ✅ New analyses of existing data (2026-09-28)** — `research/results/review_r1/` (notes: `REVIEW_R1_NOTES.md`; runner `run_review_r1.js`; 53 reproduction checks; deterministic). **Key finding:** the OOD gain is a threshold choice. A nested tuned threshold on the baseline's raw BM25 rejects 46/50 vs the detector's 34/50 on v0.2 (p=0.004), and raw BM25 is the better OOD ranker (AUROC 0.96 vs 0.90). (Phase 1 style: scripts that first reproduce the committed numbers)
   - *Work:*
     - **REV-14.** Quantify the OOD selection effect:
       - candidates drafted, discarded and edited during screening (`v0.2_candidates.json`, adjudication records);
@@ -127,12 +127,12 @@ Every new script must first reproduce the current reported values and refuse to 
     - **REV-42.** A table of correctness × the risk level of the returned command × confidence band, for both systems.
     - **REV-49.** OOD at matched operating points: baseline-score OOD AUROC, the baseline's false rejections, and a threshold sweep or matched-false-rejection comparison.
   - *Done when:* results are in `research/results/review_r1/` with notes, and two runs are deterministic.
-- [ ] **T19 🟢 Facts the paper needs from the code**
+- [x] **T19 ✅ Facts the paper needs from the code (2026-09-28)** — `research/paper/T19_IMPLEMENTATION_FACTS.md`
   - *Work:*
     - **REV-06.** What the published CLI shows the user: confidence, rejection message, whether commands are printed or run. Read from `cli/`.
     - **REV-16.** The exact fusion formula, score normalization, hybrid confidence, margin/entropy, α grid, threshold objective, and how detector features were chosen. Read from `research/experiments/`.
   - *Done when:* a short spec note cites the file and line for each fact.
-- [ ] **T20 🟢 Literature additions** (T6 rules: verified against the primary source)
+- [x] **T20 ✅ Literature additions (2026-09-28)** — entries verified, matrix corrected; the novelty sentence itself is rewritten in T21 (T6 rules: verified against the primary source)
   - *Work:*
     - NLC2CMD: the TF-IDF retrieval entry with its learned confidence adjuster, and the confidence-weighted metric.
     - ShellFusion (ICSE 2022), DocPrompting (ICLR 2023), Project CLAI.

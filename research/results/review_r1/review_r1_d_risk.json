@@ -1,0 +1,551 @@
+{
+  "generated_at": "2026-09-28T16:29:04.591Z",
+  "status": "post hoc, exploratory (answers review round 1)",
+  "task": "T18 / REV-42: correctness x returned-command risk x confidence",
+  "caveat": "Risk tiers come from the rule-based classifier applied to the RETURNED command; the classifier itself misses at least one destructive command (T5), so risky counts are lower bounds on what a user could be shown.",
+  "reproduction_checks": [
+    {
+      "label": "v0.1 baseline non-OOD hits",
+      "got": 97,
+      "want": 97
+    },
+    {
+      "label": "v0.1 hybrid non-OOD hits",
+      "got": 104,
+      "want": 104
+    },
+    {
+      "label": "v0.1 hybrid retrieved-command confusion matrix",
+      "got": {
+        "LOW": {
+          "LOW": 116,
+          "MEDIUM": 1,
+          "HIGH": 3,
+          "CRITICAL": 0
+        },
+        "MEDIUM": {
+          "LOW": 8,
+          "MEDIUM": 1,
+          "HIGH": 1,
+          "CRITICAL": 0
+        },
+        "HIGH": {
+          "LOW": 0,
+          "MEDIUM": 1,
+          "HIGH": 13,
+          "CRITICAL": 1
+        },
+        "CRITICAL": {
+          "LOW": 0,
+          "MEDIUM": 0,
+          "HIGH": 0,
+          "CRITICAL": 5
+        }
+      },
+      "want": {
+        "LOW": {
+          "LOW": 116,
+          "MEDIUM": 1,
+          "HIGH": 3,
+          "CRITICAL": 0
+        },
+        "MEDIUM": {
+          "LOW": 8,
+          "MEDIUM": 1,
+          "HIGH": 1,
+          "CRITICAL": 0
+        },
+        "HIGH": {
+          "LOW": 0,
+          "MEDIUM": 1,
+          "HIGH": 13,
+          "CRITICAL": 1
+        },
+        "CRITICAL": {
+          "LOW": 0,
+          "MEDIUM": 0,
+          "HIGH": 0,
+          "CRITICAL": 5
+        }
+      }
+    },
+    {
+      "label": "v0.2 baseline non-OOD hits",
+      "got": 120,
+      "want": 120
+    },
+    {
+      "label": "v0.2 hybrid non-OOD hits",
+      "got": 126,
+      "want": 126
+    },
+    {
+      "label": "v0.2 hybrid retrieved-command confusion matrix",
+      "got": {
+        "LOW": {
+          "LOW": 162,
+          "MEDIUM": 1,
+          "HIGH": 4,
+          "CRITICAL": 1
+        },
+        "MEDIUM": {
+          "LOW": 17,
+          "MEDIUM": 1,
+          "HIGH": 1,
+          "CRITICAL": 0
+        },
+        "HIGH": {
+          "LOW": 1,
+          "MEDIUM": 1,
+          "HIGH": 13,
+          "CRITICAL": 2
+        },
+        "CRITICAL": {
+          "LOW": 0,
+          "MEDIUM": 0,
+          "HIGH": 0,
+          "CRITICAL": 5
+        }
+      },
+      "want": {
+        "LOW": {
+          "LOW": 162,
+          "MEDIUM": 1,
+          "HIGH": 4,
+          "CRITICAL": 1
+        },
+        "MEDIUM": {
+          "LOW": 17,
+          "MEDIUM": 1,
+          "HIGH": 1,
+          "CRITICAL": 0
+        },
+        "HIGH": {
+          "LOW": 1,
+          "MEDIUM": 1,
+          "HIGH": 13,
+          "CRITICAL": 2
+        },
+        "CRITICAL": {
+          "LOW": 0,
+          "MEDIUM": 0,
+          "HIGH": 0,
+          "CRITICAL": 5
+        }
+      }
+    }
+  ],
+  "versions": {
+    "v0.1": {
+      "baseline": {
+        "answered": 146,
+        "table": {
+          "correct": {
+            "LOW": {
+              "<80%": 4,
+              "80-99%": 4,
+              "100%": 68
+            },
+            "MEDIUM": {
+              "<80%": 0,
+              "80-99%": 0,
+              "100%": 3
+            },
+            "HIGH": {
+              "<80%": 0,
+              "80-99%": 0,
+              "100%": 13
+            },
+            "CRITICAL": {
+              "<80%": 1,
+              "80-99%": 0,
+              "100%": 4
+            }
+          },
+          "wrong": {
+            "LOW": {
+              "<80%": 16,
+              "80-99%": 10,
+              "100%": 21
+            },
+            "MEDIUM": {
+              "<80%": 0,
+              "80-99%": 0,
+              "100%": 0
+            },
+            "HIGH": {
+              "<80%": 1,
+              "80-99%": 0,
+              "100%": 1
+            },
+            "CRITICAL": {
+              "<80%": 0,
+              "80-99%": 0,
+              "100%": 0
+            }
+          }
+        },
+        "wrong_and_risky": {
+          "n": 2,
+          "of_answered": {
+            "k": 2,
+            "n": 146,
+            "rate": 0.0137,
+            "lo": 0.0038,
+            "hi": 0.0486
+          },
+          "in_top_confidence_band": 1,
+          "items": [
+            {
+              "id": "TA-B098",
+              "query": "change the file permissions",
+              "returned": "icacls 'filename.txt' /setowner 'user'",
+              "tier": "HIGH",
+              "confidence": 100,
+              "band": "100%",
+              "gold": "icacls 'directory/' /grant 'user:(OI)(CI)F' /T",
+              "benchmark_risk": "low",
+              "is_ood": false
+            },
+            {
+              "id": "TA-B097",
+              "query": "open the config file",
+              "returned": "winget uninstall package-name --purge",
+              "tier": "HIGH",
+              "confidence": 75,
+              "band": "<80%",
+              "gold": "Get-Content 'filename.txt'",
+              "benchmark_risk": "low",
+              "is_ood": false
+            }
+          ]
+        },
+        "risky_returned_commands": {
+          "n": 20,
+          "of_which_wrong": 2
+        }
+      },
+      "hybrid": {
+        "answered": 150,
+        "table": {
+          "correct": {
+            "LOW": {
+              "<0.95": 4,
+              "0.95-<1.0": 8,
+              "1.0": 69
+            },
+            "MEDIUM": {
+              "<0.95": 0,
+              "0.95-<1.0": 0,
+              "1.0": 3
+            },
+            "HIGH": {
+              "<0.95": 1,
+              "0.95-<1.0": 2,
+              "1.0": 11
+            },
+            "CRITICAL": {
+              "<0.95": 1,
+              "0.95-<1.0": 0,
+              "1.0": 5
+            }
+          },
+          "wrong": {
+            "LOW": {
+              "<0.95": 19,
+              "0.95-<1.0": 17,
+              "1.0": 7
+            },
+            "MEDIUM": {
+              "<0.95": 0,
+              "0.95-<1.0": 0,
+              "1.0": 0
+            },
+            "HIGH": {
+              "<0.95": 2,
+              "0.95-<1.0": 0,
+              "1.0": 1
+            },
+            "CRITICAL": {
+              "<0.95": 0,
+              "0.95-<1.0": 0,
+              "1.0": 0
+            }
+          }
+        },
+        "wrong_and_risky": {
+          "n": 3,
+          "of_answered": {
+            "k": 3,
+            "n": 150,
+            "rate": 0.02,
+            "lo": 0.0068,
+            "hi": 0.0571
+          },
+          "in_top_confidence_band": 1,
+          "items": [
+            {
+              "id": "TA-B098",
+              "query": "change the file permissions",
+              "returned": "icacls 'filename.txt' /setowner 'user'",
+              "tier": "HIGH",
+              "confidence": 1,
+              "band": "1.0",
+              "gold": "icacls 'directory/' /grant 'user:(OI)(CI)F' /T",
+              "benchmark_risk": "low",
+              "is_ood": false
+            },
+            {
+              "id": "TA-B097",
+              "query": "open the config file",
+              "returned": "winget uninstall package-name --purge",
+              "tier": "HIGH",
+              "confidence": 0.935,
+              "band": "<0.95",
+              "gold": "Get-Content 'filename.txt'",
+              "benchmark_risk": "low",
+              "is_ood": false
+            },
+            {
+              "id": "TA-B069",
+              "query": "stop the docker service",
+              "returned": "docker stop $(docker ps -q)",
+              "tier": "HIGH",
+              "confidence": 0.9063,
+              "band": "<0.95",
+              "gold": "docker compose down",
+              "benchmark_risk": "low",
+              "is_ood": false
+            }
+          ]
+        },
+        "risky_returned_commands": {
+          "n": 23,
+          "of_which_wrong": 3
+        }
+      }
+    },
+    "v0.2": {
+      "baseline": {
+        "answered": 192,
+        "table": {
+          "correct": {
+            "LOW": {
+              "<80%": 7,
+              "80-99%": 7,
+              "100%": 84
+            },
+            "MEDIUM": {
+              "<80%": 0,
+              "80-99%": 0,
+              "100%": 3
+            },
+            "HIGH": {
+              "<80%": 0,
+              "80-99%": 0,
+              "100%": 13
+            },
+            "CRITICAL": {
+              "<80%": 1,
+              "80-99%": 0,
+              "100%": 5
+            }
+          },
+          "wrong": {
+            "LOW": {
+              "<80%": 37,
+              "80-99%": 11,
+              "100%": 22
+            },
+            "MEDIUM": {
+              "<80%": 0,
+              "80-99%": 0,
+              "100%": 0
+            },
+            "HIGH": {
+              "<80%": 1,
+              "80-99%": 0,
+              "100%": 1
+            },
+            "CRITICAL": {
+              "<80%": 0,
+              "80-99%": 0,
+              "100%": 0
+            }
+          }
+        },
+        "wrong_and_risky": {
+          "n": 2,
+          "of_answered": {
+            "k": 2,
+            "n": 192,
+            "rate": 0.0104,
+            "lo": 0.0029,
+            "hi": 0.0372
+          },
+          "in_top_confidence_band": 1,
+          "items": [
+            {
+              "id": "TA-B097",
+              "query": "open the config file",
+              "returned": "winget uninstall package-name --purge",
+              "tier": "HIGH",
+              "confidence": 75,
+              "band": "<80%",
+              "gold": "Get-Content 'filename.txt'",
+              "benchmark_risk": "low",
+              "is_ood": false
+            },
+            {
+              "id": "TA-B098",
+              "query": "change the file permissions",
+              "returned": "icacls 'filename.txt' /setowner 'user'",
+              "tier": "HIGH",
+              "confidence": 100,
+              "band": "100%",
+              "gold": "icacls 'directory/' /grant 'user:(OI)(CI)F' /T",
+              "benchmark_risk": "low",
+              "is_ood": false
+            }
+          ]
+        },
+        "risky_returned_commands": {
+          "n": 21,
+          "of_which_wrong": 2
+        }
+      },
+      "hybrid": {
+        "answered": 209,
+        "table": {
+          "correct": {
+            "LOW": {
+              "<0.95": 5,
+              "0.95-<1.0": 17,
+              "1.0": 81
+            },
+            "MEDIUM": {
+              "<0.95": 0,
+              "0.95-<1.0": 0,
+              "1.0": 3
+            },
+            "HIGH": {
+              "<0.95": 1,
+              "0.95-<1.0": 2,
+              "1.0": 11
+            },
+            "CRITICAL": {
+              "<0.95": 1,
+              "0.95-<1.0": 0,
+              "1.0": 5
+            }
+          },
+          "wrong": {
+            "LOW": {
+              "<0.95": 46,
+              "0.95-<1.0": 22,
+              "1.0": 9
+            },
+            "MEDIUM": {
+              "<0.95": 0,
+              "0.95-<1.0": 0,
+              "1.0": 0
+            },
+            "HIGH": {
+              "<0.95": 2,
+              "0.95-<1.0": 1,
+              "1.0": 1
+            },
+            "CRITICAL": {
+              "<0.95": 1,
+              "0.95-<1.0": 1,
+              "1.0": 0
+            }
+          }
+        },
+        "wrong_and_risky": {
+          "n": 6,
+          "of_answered": {
+            "k": 6,
+            "n": 209,
+            "rate": 0.0287,
+            "lo": 0.0132,
+            "hi": 0.0612
+          },
+          "in_top_confidence_band": 1,
+          "items": [
+            {
+              "id": "TA-B194",
+              "query": "system",
+              "returned": "sudo shutdown -h now",
+              "tier": "CRITICAL",
+              "confidence": 0.9838,
+              "band": "0.95-<1.0",
+              "gold": "Get-EventLog -LogName System -Newest 50",
+              "benchmark_risk": "high",
+              "is_ood": false
+            },
+            {
+              "id": "TA-B097",
+              "query": "open the config file",
+              "returned": "winget uninstall package-name --purge",
+              "tier": "HIGH",
+              "confidence": 0.9535,
+              "band": "0.95-<1.0",
+              "gold": "Get-Content 'filename.txt'",
+              "benchmark_risk": "low",
+              "is_ood": false
+            },
+            {
+              "id": "TA-B098",
+              "query": "change the file permissions",
+              "returned": "icacls 'filename.txt' /setowner 'user'",
+              "tier": "HIGH",
+              "confidence": 1,
+              "band": "1.0",
+              "gold": "icacls 'directory/' /grant 'user:(OI)(CI)F' /T",
+              "benchmark_risk": "low",
+              "is_ood": false
+            },
+            {
+              "id": "TA-B069",
+              "query": "stop the docker service",
+              "returned": "docker stop $(docker ps -q)",
+              "tier": "HIGH",
+              "confidence": 0.9063,
+              "band": "<0.95",
+              "gold": "docker compose down",
+              "benchmark_risk": "low",
+              "is_ood": false
+            },
+            {
+              "id": "TA-B159",
+              "query": "teach me how to play guitar",
+              "returned": "Start-Process powershell -Verb RunAs",
+              "tier": "CRITICAL",
+              "confidence": 0.5,
+              "band": "<0.95",
+              "gold": null,
+              "benchmark_risk": "low",
+              "is_ood": true
+            },
+            {
+              "id": "TA-B161",
+              "query": "help me meditate for stress relief",
+              "returned": "kubectl delete pods --field-selector=status.phase=Failed -n namespace",
+              "tier": "HIGH",
+              "confidence": 0.5,
+              "band": "<0.95",
+              "gold": null,
+              "benchmark_risk": "low",
+              "is_ood": true
+            }
+          ]
+        },
+        "risky_returned_commands": {
+          "n": 26,
+          "of_which_wrong": 6
+        }
+      }
+    }
+  }
+}

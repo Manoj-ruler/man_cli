@@ -1,0 +1,270 @@
+{
+  "generated_at": "2026-09-28T16:28:52.857Z",
+  "status": "post hoc, exploratory (answers review round 1)",
+  "task": "T18 / REV-14: OOD selection effect (v0.2)",
+  "facts": {
+    "drafted_ood_candidates": 35,
+    "accepted_unchanged": 35,
+    "discarded": 0,
+    "edited": 0,
+    "note": "The 7.39 / 0.31 values are the maxima observed over the 35 added OOD queries after drafting (v0.2_ADJUDICATION_REPORT.md: \"never exceeds\"), used to confirm OOD status; no candidate was discarded or edited, so the screen selected nothing out. Any selection effect would have to come from how candidates were drafted, not from filtering."
+  },
+  "detector_feature_note": "The OOD detector thresholds the hybrid fused top-1 score (per-query min-max normalized; 1.0 when BM25 and dense top-1 agree), not raw BM25 or cosine (see research/paper/T19_IMPLEMENTATION_FACTS.md). The baseline rejects on raw BM25 < 2.0.",
+  "profiles": {
+    "original_ood_15": {
+      "n": 15,
+      "bm25_median": 5.104,
+      "bm25_max": 7.883,
+      "cos_median": 0.274,
+      "cos_max": 0.506,
+      "pass_screen": {
+        "k": 10,
+        "n": 15,
+        "rate": 0.6667,
+        "lo": 0.4171,
+        "hi": 0.8482
+      }
+    },
+    "added_ood_35": {
+      "n": 35,
+      "bm25_median": 4.415,
+      "bm25_max": 7.387,
+      "cos_median": 0.17,
+      "cos_max": 0.314,
+      "pass_screen": {
+        "k": 34,
+        "n": 35,
+        "rate": 0.9714,
+        "lo": 0.8547,
+        "hi": 0.9949
+      }
+    },
+    "non_ood_159": {
+      "n": 159,
+      "bm25_median": 17.066,
+      "bm25_max": 46.302,
+      "cos_median": 0.608,
+      "cos_max": 0.898,
+      "pass_screen": {
+        "k": 2,
+        "n": 159,
+        "rate": 0.0126,
+        "lo": 0.0035,
+        "hi": 0.0447
+      }
+    },
+    "non_ood_controls_excluded_134": {
+      "n": 134,
+      "bm25_median": 14.833,
+      "bm25_max": 44.35,
+      "cos_median": 0.577,
+      "cos_max": 0.898,
+      "pass_screen": {
+        "k": 2,
+        "n": 134,
+        "rate": 0.0149,
+        "lo": 0.0041,
+        "hi": 0.0528
+      }
+    }
+  },
+  "rates": {
+    "original_ood_15": {
+      "detector": {
+        "k": 9,
+        "n": 15,
+        "rate": 0.6,
+        "lo": 0.3575,
+        "hi": 0.8018
+      },
+      "baseline": {
+        "k": 4,
+        "n": 15,
+        "rate": 0.2667,
+        "lo": 0.109,
+        "hi": 0.5195
+      },
+      "gain_pp": 33.3333
+    },
+    "added_ood_35": {
+      "detector": {
+        "k": 25,
+        "n": 35,
+        "rate": 0.7143,
+        "lo": 0.5494,
+        "hi": 0.8367
+      },
+      "baseline": {
+        "k": 13,
+        "n": 35,
+        "rate": 0.3714,
+        "lo": 0.2317,
+        "hi": 0.5366
+      },
+      "gain_pp": 34.2857
+    },
+    "all_ood_50": {
+      "detector": {
+        "k": 34,
+        "n": 50,
+        "rate": 0.68,
+        "lo": 0.5419,
+        "hi": 0.7924
+      },
+      "baseline": {
+        "k": 17,
+        "n": 50,
+        "rate": 0.34,
+        "lo": 0.2244,
+        "hi": 0.4785
+      },
+      "gain_pp": 34
+    }
+  },
+  "gain_difference": {
+    "added_minus_original_pp": 0.9524,
+    "ci95": [
+      -28.5714,
+      29.5238
+    ]
+  },
+  "relation_raw_screen_vs_detector_feature": {
+    "spearman_all_209": {
+      "bm25_vs_fused": 0.7159,
+      "cos_vs_fused": 0.7039
+    },
+    "spearman_non_ood_159": {
+      "bm25_vs_fused": 0.4949,
+      "cos_vs_fused": 0.4696
+    },
+    "non_ood_inside_screen": {
+      "n": 2,
+      "detector_rejects": {
+        "k": 0,
+        "n": 2,
+        "rate": 0,
+        "lo": 0,
+        "hi": 0.6576
+      },
+      "fused_median": 0.952
+    },
+    "non_ood_outside_screen": {
+      "n": 157,
+      "detector_rejects": {
+        "k": 11,
+        "n": 157,
+        "rate": 0.0701,
+        "lo": 0.0396,
+        "hi": 0.1211
+      },
+      "fused_median": 1
+    },
+    "share_top1_score_exactly_1": {
+      "ood_original": {
+        "k": 2,
+        "n": 15,
+        "rate": 0.1333,
+        "lo": 0.0374,
+        "hi": 0.3788
+      },
+      "ood_added": {
+        "k": 2,
+        "n": 35,
+        "rate": 0.0571,
+        "lo": 0.0158,
+        "hi": 0.1861
+      },
+      "non_ood": {
+        "k": 106,
+        "n": 159,
+        "rate": 0.6667,
+        "lo": 0.5902,
+        "hi": 0.7352
+      }
+    }
+  },
+  "per_fold_thresholds": [
+    {
+      "fold": 0,
+      "threshold": 0.9179,
+      "original_ood_in_fold": 1,
+      "added_ood_in_fold": 9
+    },
+    {
+      "fold": 1,
+      "threshold": 0.9219,
+      "original_ood_in_fold": 2,
+      "added_ood_in_fold": 8
+    },
+    {
+      "fold": 2,
+      "threshold": 0.8841,
+      "original_ood_in_fold": 3,
+      "added_ood_in_fold": 7
+    },
+    {
+      "fold": 3,
+      "threshold": 0.9247,
+      "original_ood_in_fold": 5,
+      "added_ood_in_fold": 5
+    },
+    {
+      "fold": 4,
+      "threshold": 0.9219,
+      "original_ood_in_fold": 4,
+      "added_ood_in_fold": 6
+    }
+  ],
+  "bootstrap": {
+    "B": 10000,
+    "seed": 42,
+    "method": "stratified within group"
+  },
+  "reproduction_checks": [
+    {
+      "label": "drafted OOD candidates",
+      "got": 35,
+      "want": 35
+    },
+    {
+      "label": "added OOD queries identical to drafts",
+      "got": 35,
+      "want": 35
+    },
+    {
+      "label": "max top-1 BM25 over added OOD (report: 7.39)",
+      "got": 7.39,
+      "want": 7.39
+    },
+    {
+      "label": "max top-1 cosine over added OOD (report: 0.31)",
+      "got": 0.31,
+      "want": 0.31
+    },
+    {
+      "label": "detector rejects, original 15",
+      "got": 9,
+      "want": 9
+    },
+    {
+      "label": "detector rejects, added 35",
+      "got": 25,
+      "want": 25
+    },
+    {
+      "label": "baseline rejects, original 15",
+      "got": 4,
+      "want": 4
+    },
+    {
+      "label": "baseline rejects, added 35",
+      "got": 13,
+      "want": 13
+    },
+    {
+      "label": "detector false rejections (11/159)",
+      "got": 11,
+      "want": 11
+    }
+  ]
+}
