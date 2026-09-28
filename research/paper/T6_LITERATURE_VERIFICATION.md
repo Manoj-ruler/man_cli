@@ -108,3 +108,26 @@ It is still a search result, not proof of absence. Phrase any novelty claim as "
 3. OOD discussion: note the parallel with `somov2025texttosql`.
 4. Decide on AUGRC (`traub2024overcoming`).
 5. **Watch the page budget:** about 20 new references will lengthen the reference list, which is outside the page limit. The in-text citations add a few lines to the body, which currently ends on page 7 of 8.
+
+## 7. T20 addendum (2026-09-28): literature from review round 1
+
+Checked against the primary records (details in `review_round1/author_verification.md`).
+
+| Item | Verified against | Outcome |
+|---|---|---|
+| NLC2CMD metric and retrieval entry (REV-07, REV-32) | Full report text, arXiv 2103.02523 | The metric is confidence-weighted: each prediction carries δ, "factored into the competition evaluation". Team AINixCLAISimple used TF-IDF retrieval with a logistic-regression confidence adjuster: score 0.472, within 12% of the best, ≤10 ms. **Our matrix row was wrong** ("no team submitted a pure lexical-IR baseline") and is now corrected with a dated note. |
+| BashCoder-R1 (REV-12) | arXiv 2606.27733 abstract | The reward is syntax correctness + shellcheck robustness + format adherence, i.e. static analysis. **The paper's "training against execution feedback" is wrong**; the text is fixed in T21. The matrix row is corrected, including its title ("Code", not "Script"). |
+| `zhang2022shellfusion` | Crossref 10.1145/3510003.3510131 (ICSE 2022, pp. 1970–1981); title from ACM DL / IEEE Xplore | Added to references.bib and the matrix. Its "≥179.6%" figure comes from a search listing (secondary). |
+| `zhou2023docprompting` | arXiv 2207.05987 (comment "ICLR 2023") | Added. |
+| `agarwal2020clai` | arXiv 2002.00762 | Added; the matrix row was re-verified. |
+
+**Novelty consequence (for T21).** Lexical retrieval for NL-to-command with learned confidence adjustment
+already exists (NLC2CMD, 2020), and so does published lexical-plus-semantic shell retrieval (ShellFusion,
+2022). The paper must:
+- stop framing retrieval as the unexplored alternative;
+- credit both works;
+- scope any novelty claim to what they did not do: calibration evaluation of a shipped tool's confidence,
+  tie-aware selective prediction, and OOD rejection with its false-rejection cost, on a closed
+  platform-specific corpus.
+
+The R2 report lists 18 further references; they are triaged with the suggested items in T21.
