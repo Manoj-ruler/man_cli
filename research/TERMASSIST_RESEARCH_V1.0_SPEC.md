@@ -5,7 +5,9 @@ Derived from: `research/FINAL_RESEARCH_REPORT.md` (audit) and the full-repositor
 2026-09-15. Supersedes ad-hoc planning for the v1.0 research cycle.
 
 Governing constraint (from the audit): the paper's contribution is **reliability**
-(calibration + OOD abstention), reported across **two independently-scaled benchmarks**, with the
+(calibration + OOD abstention), reported across ~~**two independently-scaled benchmarks**~~
+**two benchmark versions, where v0.2 extends v0.1 (the 150 v0.1 queries plus 59 new ones), so they are
+not independent** *(amended 2026-09-28, see Amendment 1 at the end)*, with the
 hybrid-accuracy result presented as a **replication case study (including its non-replication on
 the larger benchmark)** — not as the headline. Every design choice below serves that framing.
 
@@ -22,6 +24,8 @@ DB; no bulk LLM-generated corpus or benchmark data; no expansion "for size." The
 | Production baseline `cli/search.js` | UNCHANGED | Immutable except the one comment fix in §10 |
 | `TermAssist-Bench v0.1-validated` (150) | FROZEN | Never modified; remains a reported benchmark |
 | `TermAssist-Bench v0.2` (209) | Superseded by v1.0 after human re-validation | Kept as historical |
+| *Amended 2026-09-28:* `TermAssist-Bench v0.2` (209) | FROZEN as committed in `0110768` (2026-09-14); tag `v0.2-validated-benchmark` pending (PLAN_TASKS T8) | Never modified; historical results stay reproducible |
+| *Amended 2026-09-28:* `TermAssist-Bench v0.2.1` | NEW, after the two-annotator study (PLAN_TASKS T12) | v0.2 plus adjudicated relabels and fixes; new hash, manifest and changelog; reported next to v0.2, never replacing it |
 | `TermAssist-Corpus` | Expanded → v1.0 | Additive schema change only (§1) |
 | `TermAssist-Bench v1.0` | NEW (§3) | Built per this spec |
 
@@ -195,9 +199,17 @@ carry the actual claims.
   variants of one command), each independently plausible. Reject "one dominant answer" candidates
   (this rule already rejected 6/30 v0.2 candidates — keep it).
 - **OOD**: MUST satisfy BOTH (a) human judgment: no corpus command performs the task, AND (b)
-  empirical gate: `top-1 raw BM25 score < 8.0` AND `top-1 dense cosine < 0.35` against the corpus.
+  ~~empirical gate: `top-1 raw BM25 score < 8.0` AND `top-1 dense cosine < 0.35` against the corpus.~~
   (Thresholds derived from the v0.2 OOD adjudication distribution; record the measured values in
   the adjudication report per query.)
+  - **Amended 2026-09-28 (Amendment 1): (b) is no longer an inclusion criterion.** OOD status is
+    decided by human judgment (a) alone. The top-1 BM25 score and top-1 dense cosine are still
+    **measured and reported per query as covariates**, but never used to accept or reject a query.
+    *Reason:* the OOD detector rejects on the same top-1 retrieval scores. Admitting only queries
+    that already score low guarantees that the detector finds them, which inflates OOD results (a
+    selection effect; audit R2). The 35 OOD queries added in v0.2 were "verified genuinely
+    out-of-domain" using these same scores (all had top-1 BM25 ≤ 7.39 and cosine ≤ 0.31;
+    `research/datasets/v0.2_ADJUDICATION_REPORT.md`), and the paper must disclose that.
 - **Paraphrase / low-overlap**: expresses the same task as exactly one corpus intent, adding/
   removing no constraint; low-overlap requires token-Jaccard < 0.4 with the source intent.
 - **Safety-sensitive**: `risk_level ∈ {high, critical}` verified against actual command behavior.
@@ -300,7 +312,8 @@ the 45 ambiguous queries.
 | platform_ood | valid only on an uncovered platform | 8 | (task requiring a shell not in corpus) |
 | unsupported_tool_ood | names a specific tool absent from corpus | 10 | "compile with cargo" |
 
-Each must pass the §4.3 empirical gate. Report OOD detection **per subtype** (near_ood is the hard,
+Each must pass the §4.3 empirical gate *(amended 2026-09-28: the empirical gate is withdrawn; each
+must pass §4.3 human judgment, with scores reported as covariates — see Amendment 1)*. Report OOD detection **per subtype** (near_ood is the hard,
 interesting case; nonsensical is the trivial control).
 
 ### 7.2 Safety protocol (fixes the "not independent" finding)
@@ -434,6 +447,8 @@ The v1.0 research artifact is frozen only when ALL of the following pass. Each i
 - B-2 Every canonical/verbatim query has `is_control=true`; controls excluded from headline metrics.
 - B-3 Every OOD query passes the empirical gate (BM25 < 8.0 AND dense cosine < 0.35) and carries an
   `ood_subtype`; every ambiguous query has ≥2 distinct valid commands and an `ambiguity_subtype`.
+  *(Amended 2026-09-28: read "passes the empirical gate" as "is judged OOD by a human, with its top-1
+  BM25 score and dense cosine recorded"; see Amendment 1.)*
 - B-4 v1.0 frozen, LF-hashed, manifested; `v1.0-validated-benchmark` tag cut; v0.1 untouched.
 
 **Splits & leakage**
@@ -479,3 +494,25 @@ The v1.0 research artifact is frozen only when ALL of the following pass. Each i
 ---
 
 *End of specification. Implementation of any item above requires separate authorization.*
+
+---
+
+## Amendment 1 — 2026-09-28
+
+Source: `research/CURRENT_PUBLICATION_STATUS_AND_ROADMAP.md` (audit, 2026-09-28), task T7 in
+`research/PLAN_TASKS.md`. No original text was deleted; superseded text is struck through or annotated
+where it appears.
+
+1. **Header (governing constraint).** "Two independently-scaled benchmarks" was wrong. v0.2 contains
+   all 150 v0.1 queries plus 35 OOD and 24 ambiguous additions (209 total), so results on the two
+   versions share most of their data. They must be described as two versions of one benchmark,
+   never as independent replications.
+2. **§0 versions.** v0.2 is frozen as committed in `0110768`. The next benchmark is v0.2.1 (adjudicated
+   corrections from the two-annotator study), reported next to v0.2. v1.0 remains the longer-term
+   target and still depends on corpus expansion (A-3) and the κ gate (B-1).
+3. **§4.3 OOD gate, and its uses in §7.1 and gate B-3.** The retrieval-score gate is withdrawn as an
+   inclusion criterion and kept as a reported covariate. Reason: selection effect (the detector
+   thresholds the same scores). Future OOD sets, including the optional near-OOD set (PLAN_TASKS T13),
+   are admitted by human judgment only.
+4. **Not changed by this amendment:** the other §4.3 gates, the §4.2 control rule (now applied in the
+   Phase 1 analyses, `research/results/phase1/`), and every hard prohibition.

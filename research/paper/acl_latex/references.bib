@@ -1,43 +1,60 @@
 % References for "Reliability-Aware Hybrid Retrieval for Natural-Language-to-Shell-Command Assistance:
-% A Non-LLM Study". Only entries cited in content.tex are kept.
+% A Non-LLM Study".
 %
-% Every title and author list below was checked against the paper's arXiv page on 2026-09-26.
-% That check found errors in an earlier version of this file, which had been partly typed from memory:
-% invented co-authors on westenfelder2025nl2sh, a wrong title on agarwal2021nlc2cmd, and a wrong venue
-% expansion on yu2026bashcoderr1. Uncited entries that had not been checked were removed.
+% Part 1 is cited in content.tex. Part 2 was verified on 2026-09-28 (T6 in research/PLAN_TASKS.md) for the
+% T14 revision; BibTeX prints only what \cite uses, so Part 2 does not appear in the PDF until cited.
+%
+% Verification record (details in research/paper/T6_LITERATURE_VERIFICATION.md):
+% - 2026-09-26: every Part 1 title and author list checked against arXiv. That check found errors in an
+%   earlier version of this file, which had been partly typed from memory: invented co-authors on
+%   westenfelder2025nl2sh, a wrong title on agarwal2021nlc2cmd, and a wrong venue expansion on
+%   yu2026bashcoderr1.
+% - 2026-09-28: Part 1 re-checked, and venue/pages added from the ACL Anthology BibTeX, PMLR and arXiv
+%   comments. Part 2 checked against the ACL Anthology, PMLR, NeurIPS proceedings, arXiv, Crossref or the
+%   author's own PDF, as noted per entry. Fields with no primary source are marked.
 % Braces protect capitalization of acronyms and system names.
 
+% ======================================================================================================
+% Part 1 — cited in content.tex
+% ======================================================================================================
+
+% Source: ACL Anthology L18-1491 (no DOI or pages in the Anthology record); arXiv 1802.08979.
 @inproceedings{lin-etal-2018-nl2bash,
     title     = {{NL2Bash}: A Corpus and Semantic Parser for Natural Language Interface to the {L}inux Operating System},
     author    = {Lin, Xi Victoria and Wang, Chenglong and Zettlemoyer, Luke and Ernst, Michael D.},
     booktitle = {Proceedings of the Eleventh International Conference on Language Resources and Evaluation ({LREC} 2018)},
+    address   = {Miyazaki, Japan},
+    publisher = {European Language Resources Association (ELRA)},
     year      = {2018},
-    eprint    = {1802.08979},
-    archiveprefix = {arXiv}
+    url       = {https://aclanthology.org/L18-1491/}
 }
 
+% Source: PMLR v133 (agarwal21b) for authors and pages; arXiv 2103.02523.
 @inproceedings{agarwal2021nlc2cmd,
     title     = {{NeurIPS} 2020 {NLC2CMD} Competition: Translating Natural Language to {B}ash Commands},
     author    = {Agarwal, Mayank and Chakraborti, Tathagata and Fu, Quchen and Gros, David and Lin, Xi Victoria and Maene, Jaron and Talamadupula, Kartik and Teng, Zhongwei and White, Jules},
     booktitle = {Proceedings of the {NeurIPS} 2020 Competition and Demonstration Track},
     series    = {Proceedings of Machine Learning Research},
     volume    = {133},
-    year      = {2021},
-    eprint    = {2103.02523},
-    archiveprefix = {arXiv}
+    pages     = {302--324},
+    year      = {2021}
 }
 
-% TODO before camera-ready: arXiv says only "NAACL 2025". Check the ACL Anthology for main track vs.
-% Findings and replace this entry with the Anthology's official BibTeX.
+% Source: ACL Anthology 2025.naacl-long.555 (venue, pages, DOI) and the published PDF (authors).
+% The Anthology's metadata lists five authors and omits Miguel Tulla, but the published PDF and arXiv
+% both list six. We follow the paper itself.
 @inproceedings{westenfelder2025nl2sh,
     title     = {{LLM}-Supported Natural Language to {B}ash Translation},
     author    = {Westenfelder, Finnian and Hemberg, Erik and Tulla, Miguel and Moskal, Stephen and O'Reilly, Una-May and Chiricescu, Silviu},
-    booktitle = {{NAACL} 2025},
+    booktitle = {Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers)},
+    address   = {Albuquerque, New Mexico},
+    publisher = {Association for Computational Linguistics},
+    pages     = {11135--11147},
     year      = {2025},
-    eprint    = {2502.06858},
-    archiveprefix = {arXiv}
+    doi       = {10.18653/v1/2025.naacl-long.555}
 }
 
+% Source: arXiv 2608.13547 (preprint; not peer-reviewed as of 2026-09-28).
 @misc{li2026quotebench,
     title  = {{QuoteBench}: How Matched Scores Can Hide Command-Path Failures},
     author = {Li, Shangao and Zhang, Yao and Tresp, Volker and Yang, Yuanyuan},
@@ -46,6 +63,7 @@
     archiveprefix = {arXiv}
 }
 
+% Source: arXiv 2606.27733 ("Accepted to ISSTA 2026"; proceedings pages not yet available).
 @inproceedings{yu2026bashcoderr1,
     title     = {{BashCoder-R1}: Towards Robust and Explainable {B}ash Code Generation with Robustness-Aware Group Relative Policy Optimization},
     author    = {Yu, Lei and Wang, Peng and Xu, Jia and Zhang, Jingyuan and Wang, Xin and Ma, Jiajia and Yang, Li and Deng, Changzhi and Wang, Zenghua and Zhang, Fengjun},
@@ -55,6 +73,7 @@
     archiveprefix = {arXiv}
 }
 
+% Source: arXiv 2607.26497 (preprint).
 @misc{wang2026bm25wins,
     title  = {{BM25} Wins at Scale: A Scaling Study of Retrieval-Augmented Generation Paradigms},
     author = {Wang, Pengyu and Xu, Benfeng and Wang, Shaohan and Du, Mingxuan and Zeng, Xin and Wu, Huarui and Zhang, Lei and Zhang, Licheng},
@@ -63,6 +82,7 @@
     archiveprefix = {arXiv}
 }
 
+% Source: arXiv 2412.01655 (preprint).
 @misc{notaro2024commandrisk,
     title  = {Command-line Risk Classification using Transformer-based Neural Architectures},
     author = {Notaro, Paolo and Haeri, Soroush and Cardoso, Jorge and Gerndt, Michael},
@@ -71,11 +91,278 @@
     archiveprefix = {arXiv}
 }
 
+% Source: ACL Anthology 2020.emnlp-main.745.
 @inproceedings{card2020littlepower,
     title     = {With Little Power Comes Great Responsibility},
     author    = {Card, Dallas and Henderson, Peter and Khandelwal, Urvashi and Jia, Robin and Mahowald, Kyle and Jurafsky, Dan},
     booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing ({EMNLP})},
+    publisher = {Association for Computational Linguistics},
+    pages     = {9263--9274},
     year      = {2020},
-    eprint    = {2010.06595},
-    archiveprefix = {arXiv}
+    doi       = {10.18653/v1/2020.emnlp-main.745}
+}
+
+% ======================================================================================================
+% Part 2 — verified 2026-09-28, not yet cited (for T14)
+% ======================================================================================================
+
+% --- Methods the paper uses but does not currently cite ---------------------------------------------
+
+% Source: ACM DL record for DOI 10.1561/1500000019 (vol. 3, no. 4, pp. 333-389). Crossref's current
+% record for the same DOI (re-deposited by Emerald) says vol. 4, no. 1-2, pp. 1-174. We use the
+% original volume, which matches how the monograph is normally cited.
+@article{robertson2009bm25,
+    title   = {The Probabilistic Relevance Framework: {BM25} and Beyond},
+    author  = {Robertson, Stephen and Zaragoza, Hugo},
+    journal = {Foundations and Trends in Information Retrieval},
+    volume  = {3},
+    number  = {4},
+    pages   = {333--389},
+    year    = {2009},
+    doi     = {10.1561/1500000019}
+}
+
+% Source: ACL Anthology D19-1410.
+@inproceedings{reimers-gurevych-2019-sentence,
+    title     = {{S}entence-{BERT}: Sentence Embeddings using {S}iamese {BERT}-Networks},
+    author    = {Reimers, Nils and Gurevych, Iryna},
+    booktitle = {Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing ({EMNLP-IJCNLP})},
+    address   = {Hong Kong, China},
+    publisher = {Association for Computational Linguistics},
+    pages     = {3982--3992},
+    year      = {2019},
+    doi       = {10.18653/v1/D19-1410}
+}
+
+% Source: NeurIPS proceedings page (vol. 33, pp. 5776-5788); arXiv 2002.10957.
+@inproceedings{wang2020minilm,
+    title     = {{MiniLM}: Deep Self-Attention Distillation for Task-Agnostic Compression of Pre-Trained Transformers},
+    author    = {Wang, Wenhui and Wei, Furu and Dong, Li and Bao, Hangbo and Yang, Nan and Zhou, Ming},
+    booktitle = {Advances in Neural Information Processing Systems},
+    volume    = {33},
+    pages     = {5776--5788},
+    year      = {2020}
+}
+
+% --- Calibration ------------------------------------------------------------------------------------
+
+% Source: PMLR v70 (guo17a), pp. 1321-1330; arXiv 1706.04599 ("ICML 2017").
+@inproceedings{guo2017calibration,
+    title     = {On Calibration of Modern Neural Networks},
+    author    = {Guo, Chuan and Pleiss, Geoff and Sun, Yu and Weinberger, Kilian Q.},
+    booktitle = {Proceedings of the 34th International Conference on Machine Learning},
+    series    = {Proceedings of Machine Learning Research},
+    volume    = {70},
+    pages     = {1321--1330},
+    year      = {2017}
+}
+
+% Source: Crossref, DOI 10.1609/aaai.v29i1.9602 (no page range in the record, so none given).
+% Origin of the equal-width-bin ECE the paper reports.
+@inproceedings{naeini2015ece,
+    title     = {Obtaining Well Calibrated Probabilities Using {B}ayesian Binning},
+    author    = {Pakdaman Naeini, Mahdi and Cooper, Gregory and Hauskrecht, Milos},
+    booktitle = {Proceedings of the {AAAI} Conference on Artificial Intelligence},
+    volume    = {29},
+    number    = {1},
+    year      = {2015},
+    doi       = {10.1609/aaai.v29i1.9602}
+}
+
+% Source: Crossref, DOI 10.1145/775047.775151. Isotonic-regression calibration.
+@inproceedings{zadrozny2002isotonic,
+    title     = {Transforming Classifier Scores into Accurate Multiclass Probability Estimates},
+    author    = {Zadrozny, Bianca and Elkan, Charles},
+    booktitle = {Proceedings of the Eighth {ACM} {SIGKDD} International Conference on Knowledge Discovery and Data Mining},
+    publisher = {ACM},
+    pages     = {694--699},
+    year      = {2002},
+    doi       = {10.1145/775047.775151}
+}
+
+% Source: title and authors from the authors' PDF (cseweb.ucsd.edu/~elkan/calibrated.pdf). Pages 609-616
+% are from the ACM DL / Google Scholar listing; the ACM page itself returned 403, so pages are
+% secondary-sourced. Histogram-binning calibration (T4 comparator).
+@inproceedings{zadrozny2001binning,
+    title     = {Obtaining Calibrated Probability Estimates from Decision Trees and Naive {B}ayesian Classifiers},
+    author    = {Zadrozny, Bianca and Elkan, Charles},
+    booktitle = {Proceedings of the Eighteenth International Conference on Machine Learning ({ICML})},
+    pages     = {609--616},
+    year      = {2001}
+}
+
+% Source: editors, publisher and year from the reference list of Lin, Lin & Weng (2007), "A note on
+% Platt's probabilistic outputs for support vector machines", Machine Learning 68 (author copy at
+% csie.ntu.edu.tw/~cjlin/papers/plattprob.pdf). Pages 61-74 are secondary-sourced (Google Scholar);
+% the book has no DOI. Often cited as 1999; the book appeared in 2000. Platt scaling (T4 comparator).
+@incollection{platt2000probabilistic,
+    title     = {Probabilistic Outputs for Support Vector Machines and Comparisons to Regularized Likelihood Methods},
+    author    = {Platt, John C.},
+    booktitle = {Advances in Large Margin Classifiers},
+    editor    = {Smola, Alexander J. and Bartlett, Peter and Sch{\"o}lkopf, Bernhard and Schuurmans, Dale},
+    publisher = {MIT Press},
+    address   = {Cambridge, MA},
+    pages     = {61--74},
+    year      = {2000}
+}
+
+% Source: Crossref, DOI 10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2.
+@article{brier1950verification,
+    title   = {Verification of Forecasts Expressed in Terms of Probability},
+    author  = {Brier, Glenn W.},
+    journal = {Monthly Weather Review},
+    volume  = {78},
+    number  = {1},
+    pages   = {1--3},
+    year    = {1950},
+    doi     = {10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2}
+}
+
+% --- Selective prediction and OOD ------------------------------------------------------------------
+
+% Source: NeurIPS proceedings page (vol. 30; page range not in the record); arXiv 1705.08500.
+@inproceedings{geifman2017selective,
+    title     = {Selective Classification for Deep Neural Networks},
+    author    = {Geifman, Yonatan and El-Yaniv, Ran},
+    booktitle = {Advances in Neural Information Processing Systems},
+    volume    = {30},
+    year      = {2017}
+}
+
+% Source: arXiv 1805.08206 ("Accepted to ICLR 2019"); OpenReview forum SJfb5jCqKm. Defines AURC and E-AURC.
+@inproceedings{geifman2019aurc,
+    title     = {Bias-Reduced Uncertainty Estimation for Deep Neural Classifiers},
+    author    = {Geifman, Yonatan and Uziel, Guy and El-Yaniv, Ran},
+    booktitle = {International Conference on Learning Representations ({ICLR})},
+    year      = {2019},
+    url       = {https://openreview.net/forum?id=SJfb5jCqKm}
+}
+
+% Source: NeurIPS proceedings page (vol. 37, pp. 2323-2347); arXiv 2407.01032. Argues AURC has flaws
+% and proposes AUGRC; relevant to how T3's AURC result is framed.
+@inproceedings{traub2024overcoming,
+    title     = {Overcoming Common Flaws in the Evaluation of Selective Classification Systems},
+    author    = {Traub, Jeremias and Bungert, Till J. and L{\"u}th, Carsten T. and Baumgartner, Michael and Maier-Hein, Klaus H. and Maier-Hein, Lena and J{\"a}ger, Paul F.},
+    booktitle = {Advances in Neural Information Processing Systems},
+    volume    = {37},
+    pages     = {2323--2347},
+    year      = {2024}
+}
+
+% Source: arXiv 1610.02136 (journal-ref "International Conference on Learning Representations 2017").
+@inproceedings{hendrycks2017baseline,
+    title     = {A Baseline for Detecting Misclassified and Out-of-Distribution Examples in Neural Networks},
+    author    = {Hendrycks, Dan and Gimpel, Kevin},
+    booktitle = {International Conference on Learning Representations ({ICLR})},
+    year      = {2017}
+}
+
+% Source: ACL Anthology 2020.acl-main.503.
+@inproceedings{kamath-etal-2020-selective,
+    title     = {Selective Question Answering under Domain Shift},
+    author    = {Kamath, Amita and Jia, Robin and Liang, Percy},
+    booktitle = {Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics},
+    publisher = {Association for Computational Linguistics},
+    pages     = {5684--5696},
+    year      = {2020},
+    doi       = {10.18653/v1/2020.acl-main.503}
+}
+
+% Source: ACL Anthology D19-1131. CLINC150: closed-set intent classification with out-of-scope queries,
+% the closest task framing to TermAssist's closed-vocabulary retrieval with OOD rejection.
+@inproceedings{larson-etal-2019-evaluation,
+    title     = {An Evaluation Dataset for Intent Classification and Out-of-Scope Prediction},
+    author    = {Larson, Stefan and Mahendran, Anish and Peper, Joseph J. and Clarke, Christopher and Lee, Andrew and Hill, Parker and Kummerfeld, Jonathan K. and Leach, Kevin and Laurenzano, Michael A. and Tang, Lingjia and Mars, Jason},
+    booktitle = {Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing ({EMNLP-IJCNLP})},
+    address   = {Hong Kong, China},
+    publisher = {Association for Computational Linguistics},
+    pages     = {1311--1316},
+    year      = {2019},
+    doi       = {10.18653/v1/D19-1131}
+}
+
+% --- Confidence for NL-to-program mapping (fresh search) --------------------------------------------
+
+% Source: ACL Anthology P18-1069.
+@inproceedings{dong-etal-2018-confidence,
+    title     = {Confidence Modeling for Neural Semantic Parsing},
+    author    = {Dong, Li and Quirk, Chris and Lapata, Mirella},
+    booktitle = {Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+    address   = {Melbourne, Australia},
+    publisher = {Association for Computational Linguistics},
+    pages     = {743--753},
+    year      = {2018},
+    doi       = {10.18653/v1/P18-1069}
+}
+
+% Source: Crossref, DOI 10.1162/tacl_a_00598.
+@article{stengel-eskin2023calibrated,
+    title   = {Calibrated Interpretation: Confidence Estimation in Semantic Parsing},
+    author  = {Stengel-Eskin, Elias and Van Durme, Benjamin},
+    journal = {Transactions of the Association for Computational Linguistics},
+    volume  = {11},
+    pages   = {1213--1231},
+    year    = {2023},
+    doi     = {10.1162/tacl_a_00598}
+}
+
+% Source: Crossref, DOI 10.1609/aaai.v39i23.34699; arXiv 2501.09527.
+@inproceedings{somov2025texttosql,
+    title     = {Confidence Estimation for Error Detection in Text-to-{SQL} Systems},
+    author    = {Somov, Oleg and Tutubalina, Elena},
+    booktitle = {Proceedings of the {AAAI} Conference on Artificial Intelligence},
+    volume    = {39},
+    number    = {23},
+    pages     = {25137--25145},
+    year      = {2025},
+    doi       = {10.1609/aaai.v39i23.34699}
+}
+
+% --- Statistics ------------------------------------------------------------------------------------
+
+% Source: Crossref, DOI 10.1007/BF02295996.
+@article{mcnemar1947note,
+    title   = {Note on the Sampling Error of the Difference Between Correlated Proportions or Percentages},
+    author  = {McNemar, Quinn},
+    journal = {Psychometrika},
+    volume  = {12},
+    number  = {2},
+    pages   = {153--157},
+    year    = {1947},
+    doi     = {10.1007/BF02295996}
+}
+
+% Source: JSTOR stable 4615733 (no DOI); volume/issue/pages confirmed by multiple listings.
+@article{holm1979simple,
+    title   = {A Simple Sequentially Rejective Multiple Test Procedure},
+    author  = {Holm, Sture},
+    journal = {Scandinavian Journal of Statistics},
+    volume  = {6},
+    number  = {2},
+    pages   = {65--70},
+    year    = {1979}
+}
+
+% Source: Crossref, DOI 10.1080/01621459.1927.10502953.
+@article{wilson1927probable,
+    title   = {Probable Inference, the Law of Succession, and Statistical Inference},
+    author  = {Wilson, Edwin B.},
+    journal = {Journal of the American Statistical Association},
+    volume  = {22},
+    number  = {158},
+    pages   = {209--212},
+    year    = {1927},
+    doi     = {10.1080/01621459.1927.10502953}
+}
+
+% Source: Crossref, DOI 10.1177/001316446002000104.
+@article{cohen1960coefficient,
+    title   = {A Coefficient of Agreement for Nominal Scales},
+    author  = {Cohen, Jacob},
+    journal = {Educational and Psychological Measurement},
+    volume  = {20},
+    number  = {1},
+    pages   = {37--46},
+    year    = {1960},
+    doi     = {10.1177/001316446002000104}
 }

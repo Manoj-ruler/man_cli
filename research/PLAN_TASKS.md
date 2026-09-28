@@ -37,9 +37,9 @@ Every new script must first reproduce the current reported values and refuse to 
   - *Work:* count dangerous-direction misses by the spec's definition (high or critical predicted as low **or medium**), for gold and retrieved commands on both versions. Add Wilson intervals and raw counts.
   - *Done when:* counts match the audit (v0.1 gold 1 miss; v0.2 gold 3 misses, 2 of them HIGH→LOW).
 
-## Phase 2 — Literature and document hygiene (no humans; parallel with Phase 1)
+## Phase 2 — Literature and document hygiene (no humans; parallel with Phase 1) — T6, T7 DONE 2026-09-28
 
-- [ ] **T6 🟢 Targeted literature search**
+- [x] **T6 ✅ Targeted literature search** — record: `research/paper/T6_LITERATURE_VERIFICATION.md`
   - *Work:* find and verify, against the primary source, citations for:
     - calibration (Guo et al. 2017; isotonic regression, Zadrozny & Elkan 2002);
     - selective classification (Geifman & El-Yaniv 2017);
@@ -47,7 +47,7 @@ Every new script must first reproduce the current reported values and refuse to 
     - selective QA under domain shift (Kamath et al. 2020);
     - calibration or abstention in command and tool retrieval (fresh search).
   - *Done when:* every BibTeX entry is checked against its source and the related-work matrix is updated.
-- [ ] **T7 🟢 Dated amendments**
+- [x] **T7 ✅ Dated amendments** — `V1.0_BUILD_STATUS.md` Amendment A (11 gate rows corrected); spec Amendment 1 (line 8, §0, §4.3, §7.1, B-3)
   - *Work:*
     - `V1.0_BUILD_STATUS.md`: correct the C-2, D-3, D-4 and E-3 gates that are wrongly marked PASS, and replace F-1 "N/A".
     - Spec line 8: replace "independently-scaled benchmarks".
@@ -95,6 +95,7 @@ Every new script must first reproduce the current reported values and refuse to 
     - Corrected safety wording; tie-aware selective-prediction figures; calibration comparators.
     - Reword Split B as a "tuning-leakage check across intent groups".
     - Replace "in-use" with "published", and state that the hybrid is research-only. Add the new citations.
+    - Citation placement: §6 of `research/paper/T6_LITERATURE_VERIFICATION.md`.
 - [ ] **T15 🔵 Claim-to-result trace table**
   - *Work:* map every number in the paper to a result file and field (appendix or `research/paper/CLAIMS_TRACE.md`).
 - [ ] **T16 🔵 Reproducibility**
@@ -111,6 +112,7 @@ Every new script must first reproduce the current reported values and refuse to 
 - [ ] **D2:** build the near-OOD set (T13)?
 - [ ] **D3:** anonymity — the review version names TermAssist, a public npm package under an identifiable scope.
 - [ ] **D4:** confirm the target venue and deadlines (EACL 2026 SRW: Nov 6 mentorship, Dec 15 submission — re-verify).
+- [ ] **D5:** found in T6: Traub et al. (NeurIPS 2024) argue AURC is flawed and propose AUGRC. Should I also report AUGRC next to AURC (computed from the same tie-aware curve), or cite them and justify AURC?
 
 ## Suggested order
 
