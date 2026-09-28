@@ -19,7 +19,7 @@ for (const v of ['v0.1', 'v0.2']) {
   const D = C.load(v);
   const corpusIntents = new Set(C.rd('cli/data/commands.json').map(r => r.intent.toLowerCase().trim()));
   const canon = D.queries.filter(q => q.query_type === 'canonical');
-  C.guard(`${v} canonical count`, canon.length, 25, 0);
+  if (C.frozen(v)) C.guard(`${v} canonical count`, canon.length, 25, 0); // hard-coded published count: frozen benchmark only
   C.guard(`${v} canonical queries verbatim corpus intents`, canon.filter(q => corpusIntents.has(q.query.toLowerCase().trim())).length, 25, 0);
 
   // ---- accuracy ----
@@ -28,8 +28,8 @@ for (const v of ['v0.1', 'v0.2']) {
   const allIds = [...H.A0.keys()], exIds = allIds.filter(id => !D.isCanonical(id));
   const acc = (m, ids) => ({ hits: ids.reduce((s, id) => s + m.get(id), 0), n: ids.length });
   const want = { 'v0.1': { A0: 97, A2: 98, A3: 104, n: 135 }, 'v0.2': { A0: 120, A2: 115, A3: 126, n: 159 } }[v];
-  ['A0', 'A2', 'A3'].forEach(k => C.guard(`${v} ${k} hits (all non-OOD)`, acc(H[k], allIds).hits, want[k], 0));
-  C.guard(`${v} non-OOD n`, allIds.length, want.n, 0);
+  if (C.frozen(v)) { ['A0', 'A2', 'A3'].forEach(k => C.guard(`${v} ${k} hits (all non-OOD)`, acc(H[k], allIds).hits, want[k], 0)); C.guard(`${v} non-OOD n`, allIds.length, want.n, 0); }
+  else console.log(`${v}: benchmark is not the frozen file; hard-coded count guards skipped`);
 
   const accuracy = {};
   for (const k of ['A0', 'A1', 'A2', 'A3']) {

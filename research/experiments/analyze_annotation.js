@@ -115,11 +115,13 @@ if (fAdj) {
   const akey = JSON.parse(fs.readFileSync(akeyPath, 'utf-8'));
   const rows = parseCsv(fs.readFileSync(fAdj, 'utf-8')); const H = rows[0]; const col = n => H.indexOf(n);
   const adjByNo = new Map(rows.slice(1).map(r => [r[0], r[col('adj_label')].trim().toUpperCase()]));
+  // record ids are carried into relabel_proposal.json only (Amendment 6); they do not enter any statistic
+  const adjIdsByNo = new Map(rows.slice(1).map(r => { const raw = (r[col('adj_record_ids')] || '').trim(); return [r[0], raw.toLowerCase() === 'none' || !raw ? [] : raw.split(/[;,s]+/).filter(Boolean).map(x => x.toLowerCase())]; }));
   let decoyDisagree = 0, decoyN = 0;
   akey.items.forEach(k => {
     const it = items.find(i => i.id === k.id); const lab = adjByNo.get(String(k.adj_no));
     if (!lab || !CATS.includes(lab)) { console.error(`ABORT: adjudication item ${k.adj_no} has no valid label`); process.exit(1); }
-    it.adjudicated_label = lab; it.adj_role = k.role;
+    it.adjudicated_label = lab; it.adj_role = k.role; it.adjudicated_ids = adjIdsByNo.get(String(k.adj_no)) || [];
     if (k.role === 'DECOY') { decoyN++; if (lab !== it.original) decoyDisagree++; }
   });
   adjudication = { n_items: akey.items.length, n_reversed: akey.n_reversed, n_contested: akey.n_contested, n_decoys: akey.n_decoys, decoys_where_adjudicator_disagreed_with_unanimous_annotators: `${decoyDisagree}/${decoyN}` };
@@ -176,7 +178,7 @@ fs.writeFileSync(path.join(outDir, 'per_item.csv'), csv.join('\n') + '\n', 'utf-
 
 // relabel proposal (a PROPOSAL only: building v0.2.1 is a separate, deliberate step)
 fs.writeFileSync(path.join(outDir, 'relabel_proposal.json'), JSON.stringify({ stamp: STAMP, status: 'PROPOSAL ONLY -- v0.2 stays frozen; any accepted change becomes benchmark v0.2.1 with a new hash and changelog', adjudication_supplied: !!fAdj,
-  relabel: changed.map(t => ({ id: t.id, query: t.query, from: t.original, to: t.final_label, basis: t.final_status })),
+  relabel: changed.map(t => ({ id: t.id, query: t.query, from: t.original, to: t.final_label, basis: t.final_status, record_ids: { annotator_1: t.a1.ids, annotator_2: t.a2.ids, adjudicator: t.adjudicated_ids || null } })),
   excluded_pending: excluded.map(t => ({ id: t.id, query: t.query, original: t.original, basis: t.final_status })),
   benchmark_defects_to_correct_or_drop: ['TA-B187 (gold and all acceptable commands are Linux/macOS-only records)', 'TA-B145 (gold not a corpus record)', 'TA-B149 (one acceptable command not a corpus record)'] }, null, 2), 'utf-8');
 

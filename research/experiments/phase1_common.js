@@ -133,4 +133,15 @@ function writeOut(name, obj) {
   console.log(`wrote research/results/phase1/${name}.json`);
 }
 
-module.exports = { root, rd, PATHS, load, mulberry32, eceOf, brierOf, r4, p4, percentile, wilson, exactMcNemar, auroc, bootstrap, nestedCalibrate, guard, assertGuards, writeOut };
+// True when the benchmark file for version v is the frozen, manifested one. False when another
+// benchmark (e.g. v0.2.1, placed at the v0.2 path by run_v0_2_1.js) is being analysed. The few guards
+// that compare with hard-coded published counts only apply to the frozen files; guards against
+// result files always apply.
+function frozen(v) {
+  const crypto = require('crypto');
+  const man = { 'v0.1': ['research/datasets/VALIDATED_BENCHMARK_MANIFEST.json', 'validated_json_sha256'], 'v0.2': ['research/datasets/VALIDATED_BENCHMARK_MANIFEST_v0.2.json', 'validated_json_sha256_lf_normalized'] }[v];
+  const text = fs.readFileSync(path.join(root, PATHS[v].bench), 'utf-8').replace(/\r\n/g, '\n');
+  return crypto.createHash('sha256').update(Buffer.from(text, 'utf-8')).digest('hex') === rd(man[0])[man[1]];
+}
+
+module.exports = { root, rd, PATHS, load, mulberry32, eceOf, brierOf, r4, p4, percentile, wilson, exactMcNemar, auroc, bootstrap, nestedCalibrate, guard, assertGuards, writeOut, frozen };

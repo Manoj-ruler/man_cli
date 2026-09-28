@@ -30,7 +30,7 @@ function analyse(v) {
   const pc = D.selective.ood_detection.pooled_confusion;
   C.guard(`${v} detector TP`, tp, pc.tp, 0); C.guard(`${v} detector FP`, fp, pc.fp, 0);
   C.guard(`${v} detector FN`, ood.length - tp, pc.fn, 0); C.guard(`${v} detector TN`, non.length - fp, pc.tn, 0);
-  C.guard(`${v} baseline OOD rejections`, ood.filter(baseRejects).length, v === 'v0.1' ? 4 : 17, 0);
+  if (C.frozen(v)) C.guard(`${v} baseline OOD rejections`, ood.filter(baseRejects).length, v === 'v0.1' ? 4 : 17, 0); // hard-coded: frozen benchmark only
   C.guard(`${v} subtype labels cover all OOD`, ood.filter(id => subtypeOf.has(id)).length, ood.length, 0);
   ood.forEach(id => C.guard(`${v} ${id} label text`, labels.labels.find(l => l.id === id).query, D.qById.get(id).query, 0));
   if (v === 'v0.2') {

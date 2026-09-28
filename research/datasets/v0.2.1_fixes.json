@@ -1,0 +1,24 @@
+{
+  "status": "PROPOSED 2026-09-28 -- needs the author's approval before the real v0.2.1 build (build_v0_2_1.js refuses --confirm while status starts with PROPOSED)",
+  "purpose": "Corrections to TermAssist-Bench v0.2 items that violate spec 4.1 (gold and acceptable commands must be records of the win32 corpus view). Declared before annotation in ANNOTATION_PROTOCOL.md section 6. Applied in addition to the adjudicated relabels; v0.2 itself stays frozen.",
+  "fixes": [
+    {
+      "id": "TA-B145",
+      "action": "set_gold",
+      "record_id": "tac-0370",
+      "decision": "CORRECT",
+      "reason": "The gold command 'ssh -L 5432:localhost:5432 user@hostname' is not a corpus record, so no system could ever match it. It was edited from the corpus record tac-0370 ('ssh -L 8080:localhost:80 user@hostname') to match the port named in the query; the ports are placeholders, which the codebook allows a user to fill in. Restores the gold to the record and clears NEEDS_CORRECTION."
+    },
+    {
+      "id": "TA-B149",
+      "action": "remove_acceptable",
+      "commands": ["netstat -ano | findstr :3000"],
+      "reason": "This acceptable command is not a corpus record, so it can never be returned. The gold command (record tac-0427) is unchanged."
+    },
+    {
+      "id": "TA-B187",
+      "action": "drop",
+      "reason": "Query 'tar'. Every tar record in the corpus is Linux/macOS-only (tac-0006, tac-0007, tac-0263, tac-0264, tac-0265), so on the win32 view the benchmark evaluates, no record exists and no system can answer it. Dropped rather than relabeled OOD, because its 'OOD' status would be a platform artifact, not an out-of-scope request."
+    }
+  ]
+}
