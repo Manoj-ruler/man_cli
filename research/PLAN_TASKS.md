@@ -108,6 +108,47 @@ Every new script must first reproduce the current reported values and refuse to 
   - *Work:* rebuild both PDFs with the page guard and re-read every rendered page.
   - **Decision G3 (submit):** every MUST item in §10 of the roadmap is closed.
 
+## Phase 7 — Respond to review round 1 (added 2026-09-28)
+
+**Source:** `research/paper/review_round1/phase2_editorial_decision.md`. Decision: Major Revision; 3 blocking issues, 17 required items, 37 suggested. Facts were checked in `review_round1/author_verification.md`. No item needs new data.
+
+- [ ] **T18 🟢 New analyses of existing data** (Phase 1 style: scripts that first reproduce the committed numbers)
+  - *Work:*
+    - **REV-14.** Quantify the OOD selection effect:
+      - candidates drafted, discarded and edited during screening (`v0.2_candidates.json`, adjudication records);
+      - per-fold detector thresholds vs. the 7.39 / 0.31 screening bounds;
+      - detection reported separately for the 15 keyword-verified and 35 score-screened queries, in rates.
+    - **REV-15.** Make the calibration numbers interpretable:
+      - equal-mass ECE plus a debiased or sweep ECE;
+      - a noise floor for a perfectly calibrated forecaster at this n;
+      - Brier skill against a no-skill reference, computed out of fold;
+      - intervals on the relative reductions.
+    - **REV-26.** A paired bootstrap interval for the correctness-AUROC difference.
+    - **REV-42.** A table of correctness × the risk level of the returned command × confidence band, for both systems.
+    - **REV-49.** OOD at matched operating points: baseline-score OOD AUROC, the baseline's false rejections, and a threshold sweep or matched-false-rejection comparison.
+  - *Done when:* results are in `research/results/review_r1/` with notes, and two runs are deterministic.
+- [ ] **T19 🟢 Facts the paper needs from the code**
+  - *Work:*
+    - **REV-06.** What the published CLI shows the user: confidence, rejection message, whether commands are printed or run. Read from `cli/`.
+    - **REV-16.** The exact fusion formula, score normalization, hybrid confidence, margin/entropy, α grid, threshold objective, and how detector features were chosen. Read from `research/experiments/`.
+  - *Done when:* a short spec note cites the file and line for each fact.
+- [ ] **T20 🟢 Literature additions** (T6 rules: verified against the primary source)
+  - *Work:*
+    - NLC2CMD: the TF-IDF retrieval entry with its learned confidence adjuster, and the confidence-weighted metric.
+    - ShellFusion (ICSE 2022), DocPrompting (ICLR 2023), Project CLAI.
+    - Correct the BashCoder-R1 description.
+    - Fix our own `related-work-matrix.csv` NLC2CMD row, which wrongly says no team submitted a lexical-IR baseline.
+  - *Done when:* entries are verified, the matrix is corrected, and the novelty sentence is rescoped.
+- [ ] **T21 🔵 T14 round 2** (ARS `academic-paper` revision mode; after T18–T20 and decisions D6–D9)
+  - *Work:*
+    - All 17 required items: reframing, a single reporting population, a claims-status table, OOD scoping, abstract ≤ 200 words, the interaction model, related work, terminology, the specification, and scoped calibration claims.
+    - Fix our own errors: the "smaller gain" sentence; the 6 OOD queries missing from the breakdown; explain the two p-values for the 15 original OOD queries.
+    - Triage the 37 suggested items.
+  - *Done when:* body ≤ 8 pages, all checks are clean, and a response-to-reviewers table is written.
+- [ ] **T22 🔵 Re-review** (ARS `academic-paper-reviewer` re-review mode, against the round-1 roadmap)
+- [ ] **T23 🔵 Mentorship draft, due Nov 6, 2026**
+  - *Work:* T15 trace table, T17 read-through, then submit to the EACL 2027 SRW mentorship program. Annotation results appear as clearly marked pending text.
+
 ---
 
 ## Decisions only you can make
@@ -129,6 +170,24 @@ Every new script must first reproduce the current reported values and refuse to 
   - Plan: send a mentorship draft by Nov 6 (T14 with annotation placeholders), then the final version by Dec 15 with T11/T12 results. That needs the annotation study finished by about the end of November.
 - [x] **D5 (decided 2026-09-28):** report **AUGRC** (Traub et al., NeurIPS 2024) next to AURC, computed from the same tie-aware curves with bootstrap CIs, and cite both. This is added as T3b, before T14.
 
+- [ ] **D6 (review round 1): contribution framing.** Lead with "auditing and recalibrating a shipped command retriever's confidence", with the hybrid as one arm of the study (REV-01)? The skill leaves the contribution claim to the author.
+- [ ] **D7: anonymity.** The EIC asks to anonymize the package name in the review version (REV-11); this would reverse D3.
+- [ ] **D8: page budget.** Move Split B, the sensitivity table and per-subset results to the appendix, as REV-02 proposes?
+- [ ] **D9: triage mode.** Work through the 54 items with the ARS guided Socratic triage, or let Claude triage and bring back only the contested items?
+- [ ] **D10: pending approvals.**
+  - the v0.2.1 defect fixes (`research/datasets/v0.2.1_fixes.json`);
+  - the T8 tag;
+  - the handbook's coordinator questions C1–C10, before annotators receive it.
+
 ## Suggested order
 
-T1–T5 and T6–T7 in parallel, now. T9 as soon as annotators agree. Then T10 → T11 → T12. T14–T17 once Phase 1–2 is done, folding in T12 if it's ready in time.
+Updated 2026-09-28.
+
+| When | Work |
+|---|---|
+| Week of Sep 28 | Decisions D6–D10. T18, T19, T20 in parallel (no humans). |
+| Oct 5–16 | T21 (T14 round 2), then T22 (re-review) and a possible short round 3. |
+| Oct 19–Nov 4 | T15 trace table, T17 read-through, then T23 mentorship submission, due Nov 6. |
+| In parallel, from now | Annotation T9 → T10 → T11; aim to finish by about Nov 25. |
+| After T11 | T12 (v0.2.1 build and re-run), fold in κ and v0.2.1, a final re-review, T17, then submit by Dec 15. |
+| Optional | T13 (near-OOD set) only if D2 = yes and Phase 3 ends by early November; otherwise skip and say so in Limitations. |
