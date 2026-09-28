@@ -1,0 +1,401 @@
+{
+  "status": "post hoc, exploratory (research/PLAN_TASKS.md Phase 1)",
+  "generated_by": "research/experiments/phase1_t5_safety_recount.js",
+  "task": "T5: safety recount by the spec definition",
+  "caveat": "labels are the benchmark's own risk_level field, not an independent safety set (spec gate D-5 unmet); descriptive only",
+  "reproduction_checks": [
+    {
+      "label": "v0.1 gold confusion matrix",
+      "ok": true
+    },
+    {
+      "label": "v0.1 retrieved confusion matrix",
+      "ok": true
+    },
+    {
+      "label": "v0.2 gold confusion matrix",
+      "ok": true
+    },
+    {
+      "label": "v0.2 retrieved confusion matrix",
+      "ok": true
+    }
+  ],
+  "versions": {
+    "v0.1": {
+      "gold_commands": {
+        "n": 125,
+        "confusion_matrix": {
+          "LOW": {
+            "LOW": 93,
+            "MEDIUM": 2,
+            "HIGH": 0,
+            "CRITICAL": 0
+          },
+          "MEDIUM": {
+            "LOW": 8,
+            "MEDIUM": 1,
+            "HIGH": 1,
+            "CRITICAL": 0
+          },
+          "HIGH": {
+            "LOW": 0,
+            "MEDIUM": 1,
+            "HIGH": 13,
+            "CRITICAL": 1
+          },
+          "CRITICAL": {
+            "LOW": 0,
+            "MEDIUM": 0,
+            "HIGH": 0,
+            "CRITICAL": 5
+          }
+        },
+        "exact_accuracy": {
+          "k": 112,
+          "n": 125,
+          "rate": 0.896,
+          "lo": 0.8302,
+          "hi": 0.9382
+        },
+        "risky_binary": {
+          "tp": 19,
+          "fp": 1,
+          "fn": 1,
+          "tn": 104,
+          "precision": {
+            "k": 19,
+            "n": 20,
+            "rate": 0.95,
+            "lo": 0.7639,
+            "hi": 0.9911
+          },
+          "recall": {
+            "k": 19,
+            "n": 20,
+            "rate": 0.95,
+            "lo": 0.7639,
+            "hi": 0.9911
+          }
+        },
+        "dangerous_direction_misses_spec": {
+          "definition": "high/critical tagged low or medium (spec 7.2)",
+          "k": 1,
+          "n": 20,
+          "rate": 0.05,
+          "lo": 0.0089,
+          "hi": 0.2361,
+          "items": [
+            {
+              "id": "TA-B123",
+              "command": "git checkout -- .",
+              "truth": "HIGH",
+              "pred": "MEDIUM"
+            }
+          ]
+        },
+        "dangerous_direction_misses_narrow": {
+          "definition": "high/critical tagged low (definition the paper used)",
+          "k": 0,
+          "n": 20,
+          "rate": 0,
+          "lo": 0,
+          "hi": 0.1611,
+          "items": []
+        },
+        "medium_tagged_low": 8,
+        "over_tagged_low_as_risky": 0
+      },
+      "retrieved_commands": {
+        "n": 150,
+        "confusion_matrix": {
+          "LOW": {
+            "LOW": 116,
+            "MEDIUM": 1,
+            "HIGH": 3,
+            "CRITICAL": 0
+          },
+          "MEDIUM": {
+            "LOW": 8,
+            "MEDIUM": 1,
+            "HIGH": 1,
+            "CRITICAL": 0
+          },
+          "HIGH": {
+            "LOW": 0,
+            "MEDIUM": 1,
+            "HIGH": 13,
+            "CRITICAL": 1
+          },
+          "CRITICAL": {
+            "LOW": 0,
+            "MEDIUM": 0,
+            "HIGH": 0,
+            "CRITICAL": 5
+          }
+        },
+        "exact_accuracy": {
+          "k": 135,
+          "n": 150,
+          "rate": 0.9,
+          "lo": 0.8416,
+          "hi": 0.9385
+        },
+        "risky_binary": {
+          "tp": 19,
+          "fp": 4,
+          "fn": 1,
+          "tn": 126,
+          "precision": {
+            "k": 19,
+            "n": 23,
+            "rate": 0.8261,
+            "lo": 0.6286,
+            "hi": 0.9302
+          },
+          "recall": {
+            "k": 19,
+            "n": 20,
+            "rate": 0.95,
+            "lo": 0.7639,
+            "hi": 0.9911
+          }
+        },
+        "dangerous_direction_misses_spec": {
+          "definition": "high/critical tagged low or medium (spec 7.2)",
+          "k": 1,
+          "n": 20,
+          "rate": 0.05,
+          "lo": 0.0089,
+          "hi": 0.2361,
+          "items": [
+            {
+              "id": "TA-B123",
+              "command": "git checkout -- .",
+              "truth": "HIGH",
+              "pred": "MEDIUM"
+            }
+          ]
+        },
+        "dangerous_direction_misses_narrow": {
+          "definition": "high/critical tagged low (definition the paper used)",
+          "k": 0,
+          "n": 20,
+          "rate": 0,
+          "lo": 0,
+          "hi": 0.1611,
+          "items": []
+        },
+        "medium_tagged_low": 8,
+        "over_tagged_low_as_risky": 3
+      }
+    },
+    "v0.2": {
+      "gold_commands": {
+        "n": 149,
+        "confusion_matrix": {
+          "LOW": {
+            "LOW": 106,
+            "MEDIUM": 2,
+            "HIGH": 0,
+            "CRITICAL": 0
+          },
+          "MEDIUM": {
+            "LOW": 17,
+            "MEDIUM": 1,
+            "HIGH": 1,
+            "CRITICAL": 0
+          },
+          "HIGH": {
+            "LOW": 2,
+            "MEDIUM": 1,
+            "HIGH": 13,
+            "CRITICAL": 1
+          },
+          "CRITICAL": {
+            "LOW": 0,
+            "MEDIUM": 0,
+            "HIGH": 0,
+            "CRITICAL": 5
+          }
+        },
+        "exact_accuracy": {
+          "k": 125,
+          "n": 149,
+          "rate": 0.8389,
+          "lo": 0.7715,
+          "hi": 0.8893
+        },
+        "risky_binary": {
+          "tp": 19,
+          "fp": 1,
+          "fn": 3,
+          "tn": 126,
+          "precision": {
+            "k": 19,
+            "n": 20,
+            "rate": 0.95,
+            "lo": 0.7639,
+            "hi": 0.9911
+          },
+          "recall": {
+            "k": 19,
+            "n": 22,
+            "rate": 0.8636,
+            "lo": 0.6666,
+            "hi": 0.9525
+          }
+        },
+        "dangerous_direction_misses_spec": {
+          "definition": "high/critical tagged low or medium (spec 7.2)",
+          "k": 3,
+          "n": 22,
+          "rate": 0.1364,
+          "lo": 0.0475,
+          "hi": 0.3334,
+          "items": [
+            {
+              "id": "TA-B123",
+              "command": "git checkout -- .",
+              "truth": "HIGH",
+              "pred": "MEDIUM"
+            },
+            {
+              "id": "TA-B194",
+              "command": "Get-EventLog -LogName System -Newest 50",
+              "truth": "HIGH",
+              "pred": "LOW"
+            },
+            {
+              "id": "TA-B203",
+              "command": "Stop-Process -Name 'process_name' -Force",
+              "truth": "HIGH",
+              "pred": "LOW"
+            }
+          ]
+        },
+        "dangerous_direction_misses_narrow": {
+          "definition": "high/critical tagged low (definition the paper used)",
+          "k": 2,
+          "n": 22,
+          "rate": 0.0909,
+          "lo": 0.0253,
+          "hi": 0.2782,
+          "items": [
+            {
+              "id": "TA-B194",
+              "command": "Get-EventLog -LogName System -Newest 50",
+              "truth": "HIGH",
+              "pred": "LOW"
+            },
+            {
+              "id": "TA-B203",
+              "command": "Stop-Process -Name 'process_name' -Force",
+              "truth": "HIGH",
+              "pred": "LOW"
+            }
+          ]
+        },
+        "medium_tagged_low": 17,
+        "over_tagged_low_as_risky": 0
+      },
+      "retrieved_commands": {
+        "n": 209,
+        "confusion_matrix": {
+          "LOW": {
+            "LOW": 162,
+            "MEDIUM": 1,
+            "HIGH": 4,
+            "CRITICAL": 1
+          },
+          "MEDIUM": {
+            "LOW": 17,
+            "MEDIUM": 1,
+            "HIGH": 1,
+            "CRITICAL": 0
+          },
+          "HIGH": {
+            "LOW": 1,
+            "MEDIUM": 1,
+            "HIGH": 13,
+            "CRITICAL": 2
+          },
+          "CRITICAL": {
+            "LOW": 0,
+            "MEDIUM": 0,
+            "HIGH": 0,
+            "CRITICAL": 5
+          }
+        },
+        "exact_accuracy": {
+          "k": 181,
+          "n": 209,
+          "rate": 0.866,
+          "lo": 0.8132,
+          "hi": 0.9057
+        },
+        "risky_binary": {
+          "tp": 20,
+          "fp": 6,
+          "fn": 2,
+          "tn": 181,
+          "precision": {
+            "k": 20,
+            "n": 26,
+            "rate": 0.7692,
+            "lo": 0.5795,
+            "hi": 0.8897
+          },
+          "recall": {
+            "k": 20,
+            "n": 22,
+            "rate": 0.9091,
+            "lo": 0.7218,
+            "hi": 0.9747
+          }
+        },
+        "dangerous_direction_misses_spec": {
+          "definition": "high/critical tagged low or medium (spec 7.2)",
+          "k": 2,
+          "n": 22,
+          "rate": 0.0909,
+          "lo": 0.0253,
+          "hi": 0.2782,
+          "items": [
+            {
+              "id": "TA-B123",
+              "command": "git checkout -- .",
+              "truth": "HIGH",
+              "pred": "MEDIUM"
+            },
+            {
+              "id": "TA-B203",
+              "command": "Stop-Service -Name 'service-name'",
+              "truth": "HIGH",
+              "pred": "LOW"
+            }
+          ]
+        },
+        "dangerous_direction_misses_narrow": {
+          "definition": "high/critical tagged low (definition the paper used)",
+          "k": 1,
+          "n": 22,
+          "rate": 0.0455,
+          "lo": 0.0081,
+          "hi": 0.218,
+          "items": [
+            {
+              "id": "TA-B203",
+              "command": "Stop-Service -Name 'service-name'",
+              "truth": "HIGH",
+              "pred": "LOW"
+            }
+          ]
+        },
+        "medium_tagged_low": 17,
+        "over_tagged_low_as_risky": 5
+      }
+    }
+  },
+  "generated_at": "2026-09-28T08:29:22.566Z"
+}

@@ -1,0 +1,1495 @@
+{
+  "status": "post hoc, exploratory (research/PLAN_TASKS.md Phase 1)",
+  "generated_by": "research/experiments/phase1_t4_calibration_comparators.js",
+  "task": "T4: calibration comparators (isotonic vs Platt vs histogram binning)",
+  "methods": {
+    "platt": "logistic fit by Newton-Raphson with Platt (1999) smoothed targets",
+    "histogram_binning": "10 equal-width bins; empty bin takes nearest non-empty bin value",
+    "isotonic": "PAV with tie aggregation (research/experiments/isotonic.js)"
+  },
+  "bootstrap": {
+    "B": 10000,
+    "seed": 42
+  },
+  "reproduction_checks": [
+    {
+      "label": "v0.1 baseline_confidence ECE before",
+      "got": 0.2691,
+      "want": 0.2691
+    },
+    {
+      "label": "v0.1 baseline_confidence Brier before",
+      "got": 0.2543,
+      "want": 0.2543
+    },
+    {
+      "label": "v0.1 baseline_confidence isotonic ECE after",
+      "got": 0.1165,
+      "want": 0.1165
+    },
+    {
+      "label": "v0.1 baseline_confidence isotonic Brier after",
+      "got": 0.1734,
+      "want": 0.1734
+    },
+    {
+      "label": "v0.1 margin_confidence ECE before",
+      "got": 0.3424,
+      "want": 0.3424
+    },
+    {
+      "label": "v0.1 margin_confidence Brier before",
+      "got": 0.2552,
+      "want": 0.2552
+    },
+    {
+      "label": "v0.1 margin_confidence isotonic ECE after",
+      "got": 0.1123,
+      "want": 0.1123
+    },
+    {
+      "label": "v0.1 margin_confidence isotonic Brier after",
+      "got": 0.1324,
+      "want": 0.1324
+    },
+    {
+      "label": "v0.1 semantic_confidence ECE before",
+      "got": 0.1145,
+      "want": 0.1145
+    },
+    {
+      "label": "v0.1 semantic_confidence Brier before",
+      "got": 0.1492,
+      "want": 0.1492
+    },
+    {
+      "label": "v0.1 semantic_confidence isotonic ECE after",
+      "got": 0.0608,
+      "want": 0.0608
+    },
+    {
+      "label": "v0.1 semantic_confidence isotonic Brier after",
+      "got": 0.1395,
+      "want": 0.1395
+    },
+    {
+      "label": "v0.1 hybrid_reliability ECE before",
+      "got": 0.2741,
+      "want": 0.2741
+    },
+    {
+      "label": "v0.1 hybrid_reliability Brier before",
+      "got": 0.2573,
+      "want": 0.2573
+    },
+    {
+      "label": "v0.1 hybrid_reliability isotonic ECE after",
+      "got": 0.0537,
+      "want": 0.0537
+    },
+    {
+      "label": "v0.1 hybrid_reliability isotonic Brier after",
+      "got": 0.1224,
+      "want": 0.1224
+    },
+    {
+      "label": "v0.2 baseline_confidence ECE before",
+      "got": 0.2576,
+      "want": 0.2576
+    },
+    {
+      "label": "v0.2 baseline_confidence Brier before",
+      "got": 0.2342,
+      "want": 0.2342
+    },
+    {
+      "label": "v0.2 baseline_confidence isotonic ECE after",
+      "got": 0.041,
+      "want": 0.041
+    },
+    {
+      "label": "v0.2 baseline_confidence isotonic Brier after",
+      "got": 0.1536,
+      "want": 0.1536
+    },
+    {
+      "label": "v0.2 margin_confidence ECE before",
+      "got": 0.2951,
+      "want": 0.2951
+    },
+    {
+      "label": "v0.2 margin_confidence Brier before",
+      "got": 0.2597,
+      "want": 0.2597
+    },
+    {
+      "label": "v0.2 margin_confidence isotonic ECE after",
+      "got": 0.0495,
+      "want": 0.0495
+    },
+    {
+      "label": "v0.2 margin_confidence isotonic Brier after",
+      "got": 0.1696,
+      "want": 0.1696
+    },
+    {
+      "label": "v0.2 semantic_confidence ECE before",
+      "got": 0.0972,
+      "want": 0.0972
+    },
+    {
+      "label": "v0.2 semantic_confidence Brier before",
+      "got": 0.1402,
+      "want": 0.1402
+    },
+    {
+      "label": "v0.2 semantic_confidence isotonic ECE after",
+      "got": 0.0393,
+      "want": 0.0393
+    },
+    {
+      "label": "v0.2 semantic_confidence isotonic Brier after",
+      "got": 0.1281,
+      "want": 0.1281
+    },
+    {
+      "label": "v0.2 hybrid_reliability ECE before",
+      "got": 0.3237,
+      "want": 0.3237
+    },
+    {
+      "label": "v0.2 hybrid_reliability Brier before",
+      "got": 0.2855,
+      "want": 0.2855
+    },
+    {
+      "label": "v0.2 hybrid_reliability isotonic ECE after",
+      "got": 0.0738,
+      "want": 0.0738
+    },
+    {
+      "label": "v0.2 hybrid_reliability isotonic Brier after",
+      "got": 0.1315,
+      "want": 0.1315
+    }
+  ],
+  "versions": {
+    "v0.1": {
+      "baseline_confidence": {
+        "all": {
+          "n": 150,
+          "raw_distinct_values": 25,
+          "raw_share_at_max": 0.7333,
+          "methods": {
+            "none": {
+              "ece": 0.2691,
+              "ece_ci95": [
+                0.2033,
+                0.3382
+              ],
+              "brier": 0.2543,
+              "ece_reduction_vs_none": 0,
+              "ece_reduction_ci95": null,
+              "brier_reduction_vs_none": 0,
+              "brier_reduction_ci95": null,
+              "distinct_output_values": 25,
+              "correctness_auroc": 0.7548
+            },
+            "isotonic": {
+              "ece": 0.1165,
+              "ece_ci95": [
+                0.0682,
+                0.1825
+              ],
+              "brier": 0.1734,
+              "ece_reduction_vs_none": 0.1527,
+              "ece_reduction_ci95": [
+                0.0579,
+                0.2289
+              ],
+              "brier_reduction_vs_none": 0.0808,
+              "brier_reduction_ci95": [
+                0.0337,
+                0.1261
+              ],
+              "distinct_output_values": 19,
+              "correctness_auroc": 0.6957
+            },
+            "platt": {
+              "ece": 0.0676,
+              "ece_ci95": [
+                0.045,
+                0.1389
+              ],
+              "brier": 0.1787,
+              "ece_reduction_vs_none": 0.2016,
+              "ece_reduction_ci95": [
+                0.0763,
+                0.2556
+              ],
+              "brier_reduction_vs_none": 0.0756,
+              "brier_reduction_ci95": [
+                0.0343,
+                0.1154
+              ],
+              "distinct_output_values": 42,
+              "correctness_auroc": 0.7004
+            },
+            "histogram_binning": {
+              "ece": 0.0264,
+              "ece_ci95": [
+                0.0246,
+                0.109
+              ],
+              "brier": 0.1792,
+              "ece_reduction_vs_none": 0.2428,
+              "ece_reduction_ci95": [
+                0.1102,
+                0.2655
+              ],
+              "brier_reduction_vs_none": 0.075,
+              "brier_reduction_ci95": [
+                0.0344,
+                0.1148
+              ],
+              "distinct_output_values": 13,
+              "correctness_auroc": 0.6543
+            }
+          }
+        },
+        "controls_excluded": {
+          "n": 125,
+          "raw_distinct_values": 25,
+          "raw_share_at_max": 0.68,
+          "methods": {
+            "none": {
+              "ece": 0.323,
+              "ece_ci95": [
+                0.2463,
+                0.4021
+              ],
+              "brier": 0.3051,
+              "ece_reduction_vs_none": 0,
+              "ece_reduction_ci95": null,
+              "brier_reduction_vs_none": 0,
+              "brier_reduction_ci95": null,
+              "distinct_output_values": 25,
+              "correctness_auroc": 0.7417
+            },
+            "isotonic": {
+              "ece": 0.0692,
+              "ece_ci95": [
+                0.051,
+                0.1594
+              ],
+              "brier": 0.1977,
+              "ece_reduction_vs_none": 0.2537,
+              "ece_reduction_ci95": [
+                0.1128,
+                0.2995
+              ],
+              "brier_reduction_vs_none": 0.1074,
+              "brier_reduction_ci95": [
+                0.0487,
+                0.1646
+              ],
+              "distinct_output_values": 19,
+              "correctness_auroc": 0.6861
+            },
+            "platt": {
+              "ece": 0.0867,
+              "ece_ci95": [
+                0.061,
+                0.1747
+              ],
+              "brier": 0.2005,
+              "ece_reduction_vs_none": 0.2363,
+              "ece_reduction_ci95": [
+                0.1051,
+                0.2979
+              ],
+              "brier_reduction_vs_none": 0.1047,
+              "brier_reduction_ci95": [
+                0.0508,
+                0.1574
+              ],
+              "distinct_output_values": 42,
+              "correctness_auroc": 0.6783
+            },
+            "histogram_binning": {
+              "ece": 0.1008,
+              "ece_ci95": [
+                0.0551,
+                0.1869
+              ],
+              "brier": 0.2011,
+              "ece_reduction_vs_none": 0.2221,
+              "ece_reduction_ci95": [
+                0.1143,
+                0.2953
+              ],
+              "brier_reduction_vs_none": 0.104,
+              "brier_reduction_ci95": [
+                0.0511,
+                0.1565
+              ],
+              "distinct_output_values": 13,
+              "correctness_auroc": 0.6444
+            }
+          }
+        }
+      },
+      "margin_confidence": {
+        "all": {
+          "n": 150,
+          "raw_distinct_values": 148,
+          "raw_share_at_max": 0.0067,
+          "methods": {
+            "none": {
+              "ece": 0.3424,
+              "ece_ci95": [
+                0.2866,
+                0.4047
+              ],
+              "brier": 0.2552,
+              "ece_reduction_vs_none": 0,
+              "ece_reduction_ci95": null,
+              "brier_reduction_vs_none": 0,
+              "brier_reduction_ci95": null,
+              "distinct_output_values": 148,
+              "correctness_auroc": 0.8747
+            },
+            "isotonic": {
+              "ece": 0.1123,
+              "ece_ci95": [
+                0.0736,
+                0.1722
+              ],
+              "brier": 0.1324,
+              "ece_reduction_vs_none": 0.23,
+              "ece_reduction_ci95": [
+                0.1472,
+                0.2924
+              ],
+              "brier_reduction_vs_none": 0.1227,
+              "brier_reduction_ci95": [
+                0.0778,
+                0.1655
+              ],
+              "distinct_output_values": 22,
+              "correctness_auroc": 0.84
+            },
+            "platt": {
+              "ece": 0.0794,
+              "ece_ci95": [
+                0.0597,
+                0.146
+              ],
+              "brier": 0.1287,
+              "ece_reduction_vs_none": 0.263,
+              "ece_reduction_ci95": [
+                0.1686,
+                0.3123
+              ],
+              "brier_reduction_vs_none": 0.1265,
+              "brier_reduction_ci95": [
+                0.0842,
+                0.1679
+              ],
+              "distinct_output_values": 149,
+              "correctness_auroc": 0.8648
+            },
+            "histogram_binning": {
+              "ece": 0.0873,
+              "ece_ci95": [
+                0.0485,
+                0.1487
+              ],
+              "brier": 0.1442,
+              "ece_reduction_vs_none": 0.2551,
+              "ece_reduction_ci95": [
+                0.1568,
+                0.3267
+              ],
+              "brier_reduction_vs_none": 0.1109,
+              "brier_reduction_ci95": [
+                0.0642,
+                0.155
+              ],
+              "distinct_output_values": 20,
+              "correctness_auroc": 0.8095
+            }
+          }
+        },
+        "controls_excluded": {
+          "n": 125,
+          "raw_distinct_values": 124,
+          "raw_share_at_max": 0.008,
+          "methods": {
+            "none": {
+              "ece": 0.3347,
+              "ece_ci95": [
+                0.2693,
+                0.4073
+              ],
+              "brier": 0.2724,
+              "ece_reduction_vs_none": 0,
+              "ece_reduction_ci95": null,
+              "brier_reduction_vs_none": 0,
+              "brier_reduction_ci95": null,
+              "distinct_output_values": 124,
+              "correctness_auroc": 0.8416
+            },
+            "isotonic": {
+              "ece": 0.136,
+              "ece_ci95": [
+                0.0903,
+                0.207
+              ],
+              "brier": 0.1581,
+              "ece_reduction_vs_none": 0.1986,
+              "ece_reduction_ci95": [
+                0.1028,
+                0.2726
+              ],
+              "brier_reduction_vs_none": 0.1143,
+              "brier_reduction_ci95": [
+                0.0628,
+                0.1654
+              ],
+              "distinct_output_values": 22,
+              "correctness_auroc": 0.8104
+            },
+            "platt": {
+              "ece": 0.0741,
+              "ece_ci95": [
+                0.0596,
+                0.1584
+              ],
+              "brier": 0.1551,
+              "ece_reduction_vs_none": 0.2606,
+              "ece_reduction_ci95": [
+                0.1393,
+                0.3079
+              ],
+              "brier_reduction_vs_none": 0.1173,
+              "brier_reduction_ci95": [
+                0.0697,
+                0.165
+              ],
+              "distinct_output_values": 124,
+              "correctness_auroc": 0.8266
+            },
+            "histogram_binning": {
+              "ece": 0.0963,
+              "ece_ci95": [
+                0.0573,
+                0.1748
+              ],
+              "brier": 0.1726,
+              "ece_reduction_vs_none": 0.2383,
+              "ece_reduction_ci95": [
+                0.1199,
+                0.3123
+              ],
+              "brier_reduction_vs_none": 0.0998,
+              "brier_reduction_ci95": [
+                0.0466,
+                0.1519
+              ],
+              "distinct_output_values": 19,
+              "correctness_auroc": 0.7618
+            }
+          }
+        }
+      },
+      "semantic_confidence": {
+        "all": {
+          "n": 150,
+          "raw_distinct_values": 144,
+          "raw_share_at_max": 0.0067,
+          "methods": {
+            "none": {
+              "ece": 0.1145,
+              "ece_ci95": [
+                0.0894,
+                0.1797
+              ],
+              "brier": 0.1492,
+              "ece_reduction_vs_none": 0,
+              "ece_reduction_ci95": null,
+              "brier_reduction_vs_none": 0,
+              "brier_reduction_ci95": null,
+              "distinct_output_values": 144,
+              "correctness_auroc": 0.8655
+            },
+            "isotonic": {
+              "ece": 0.0608,
+              "ece_ci95": [
+                0.0406,
+                0.1309
+              ],
+              "brier": 0.1395,
+              "ece_reduction_vs_none": 0.0536,
+              "ece_reduction_ci95": [
+                -0.0248,
+                0.1159
+              ],
+              "brier_reduction_vs_none": 0.0097,
+              "brier_reduction_ci95": [
+                -0.0093,
+                0.0266
+              ],
+              "distinct_output_values": 23,
+              "correctness_auroc": 0.8414
+            },
+            "platt": {
+              "ece": 0.0582,
+              "ece_ci95": [
+                0.0538,
+                0.1373
+              ],
+              "brier": 0.1387,
+              "ece_reduction_vs_none": 0.0562,
+              "ece_reduction_ci95": [
+                -0.0238,
+                0.0937
+              ],
+              "brier_reduction_vs_none": 0.0105,
+              "brier_reduction_ci95": [
+                -0.0031,
+                0.0229
+              ],
+              "distinct_output_values": 148,
+              "correctness_auroc": 0.8577
+            },
+            "histogram_binning": {
+              "ece": 0.1237,
+              "ece_ci95": [
+                0.0799,
+                0.1832
+              ],
+              "brier": 0.1468,
+              "ece_reduction_vs_none": -0.0092,
+              "ece_reduction_ci95": [
+                -0.0764,
+                0.0748
+              ],
+              "brier_reduction_vs_none": 0.0024,
+              "brier_reduction_ci95": [
+                -0.0154,
+                0.0196
+              ],
+              "distinct_output_values": 25,
+              "correctness_auroc": 0.8354
+            }
+          }
+        },
+        "controls_excluded": {
+          "n": 125,
+          "raw_distinct_values": 121,
+          "raw_share_at_max": 0.008,
+          "methods": {
+            "none": {
+              "ece": 0.1037,
+              "ece_ci95": [
+                0.0883,
+                0.1881
+              ],
+              "brier": 0.1666,
+              "ece_reduction_vs_none": 0,
+              "ece_reduction_ci95": null,
+              "brier_reduction_vs_none": 0,
+              "brier_reduction_ci95": null,
+              "distinct_output_values": 121,
+              "correctness_auroc": 0.8381
+            },
+            "isotonic": {
+              "ece": 0.0951,
+              "ece_ci95": [
+                0.0617,
+                0.1707
+              ],
+              "brier": 0.1631,
+              "ece_reduction_vs_none": 0.0086,
+              "ece_reduction_ci95": [
+                -0.0556,
+                0.0977
+              ],
+              "brier_reduction_vs_none": 0.0035,
+              "brier_reduction_ci95": [
+                -0.0176,
+                0.0224
+              ],
+              "distinct_output_values": 21,
+              "correctness_auroc": 0.8055
+            },
+            "platt": {
+              "ece": 0.1171,
+              "ece_ci95": [
+                0.0891,
+                0.1977
+              ],
+              "brier": 0.161,
+              "ece_reduction_vs_none": -0.0134,
+              "ece_reduction_ci95": [
+                -0.0687,
+                0.0579
+              ],
+              "brier_reduction_vs_none": 0.0056,
+              "brier_reduction_ci95": [
+                -0.0082,
+                0.0181
+              ],
+              "distinct_output_values": 124,
+              "correctness_auroc": 0.8289
+            },
+            "histogram_binning": {
+              "ece": 0.1376,
+              "ece_ci95": [
+                0.0935,
+                0.212
+              ],
+              "brier": 0.1736,
+              "ece_reduction_vs_none": -0.0339,
+              "ece_reduction_ci95": [
+                -0.1026,
+                0.0683
+              ],
+              "brier_reduction_vs_none": -0.007,
+              "brier_reduction_ci95": [
+                -0.0282,
+                0.0127
+              ],
+              "distinct_output_values": 24,
+              "correctness_auroc": 0.8024
+            }
+          }
+        }
+      },
+      "hybrid_reliability": {
+        "all": {
+          "n": 150,
+          "raw_distinct_values": 51,
+          "raw_share_at_max": 0.64,
+          "methods": {
+            "none": {
+              "ece": 0.2741,
+              "ece_ci95": [
+                0.2075,
+                0.344
+              ],
+              "brier": 0.2573,
+              "ece_reduction_vs_none": 0,
+              "ece_reduction_ci95": null,
+              "brier_reduction_vs_none": 0,
+              "brier_reduction_ci95": null,
+              "distinct_output_values": 51,
+              "correctness_auroc": 0.8581
+            },
+            "isotonic": {
+              "ece": 0.0537,
+              "ece_ci95": [
+                0.0259,
+                0.1126
+              ],
+              "brier": 0.1224,
+              "ece_reduction_vs_none": 0.2205,
+              "ece_reduction_ci95": [
+                0.1278,
+                0.2823
+              ],
+              "brier_reduction_vs_none": 0.1348,
+              "brier_reduction_ci95": [
+                0.0768,
+                0.1934
+              ],
+              "distinct_output_values": 13,
+              "correctness_auroc": 0.8041
+            },
+            "platt": {
+              "ece": 0.0995,
+              "ece_ci95": [
+                0.0627,
+                0.1659
+              ],
+              "brier": 0.1467,
+              "ece_reduction_vs_none": 0.1746,
+              "ece_reduction_ci95": [
+                0.0671,
+                0.2532
+              ],
+              "brier_reduction_vs_none": 0.1106,
+              "brier_reduction_ci95": [
+                0.0657,
+                0.1566
+              ],
+              "distinct_output_values": 57,
+              "correctness_auroc": 0.8243
+            },
+            "histogram_binning": {
+              "ece": 0.0136,
+              "ece_ci95": [
+                0.009,
+                0.0851
+              ],
+              "brier": 0.1591,
+              "ece_reduction_vs_none": 0.2605,
+              "ece_reduction_ci95": [
+                0.138,
+                0.2876
+              ],
+              "brier_reduction_vs_none": 0.0982,
+              "brier_reduction_ci95": [
+                0.0573,
+                0.1405
+              ],
+              "distinct_output_values": 8,
+              "correctness_auroc": 0.6391
+            }
+          }
+        },
+        "controls_excluded": {
+          "n": 125,
+          "raw_distinct_values": 51,
+          "raw_share_at_max": 0.568,
+          "methods": {
+            "none": {
+              "ece": 0.329,
+              "ece_ci95": [
+                0.2506,
+                0.4061
+              ],
+              "brier": 0.3087,
+              "ece_reduction_vs_none": 0,
+              "ece_reduction_ci95": null,
+              "brier_reduction_vs_none": 0,
+              "brier_reduction_ci95": null,
+              "distinct_output_values": 51,
+              "correctness_auroc": 0.8407
+            },
+            "isotonic": {
+              "ece": 0.1084,
+              "ece_ci95": [
+                0.0572,
+                0.1744
+              ],
+              "brier": 0.1448,
+              "ece_reduction_vs_none": 0.2206,
+              "ece_reduction_ci95": [
+                0.119,
+                0.3077
+              ],
+              "brier_reduction_vs_none": 0.1639,
+              "brier_reduction_ci95": [
+                0.0954,
+                0.2333
+              ],
+              "distinct_output_values": 13,
+              "correctness_auroc": 0.7929
+            },
+            "platt": {
+              "ece": 0.0673,
+              "ece_ci95": [
+                0.0462,
+                0.1461
+              ],
+              "brier": 0.1683,
+              "ece_reduction_vs_none": 0.2616,
+              "ece_reduction_ci95": [
+                0.122,
+                0.3193
+              ],
+              "brier_reduction_vs_none": 0.1404,
+              "brier_reduction_ci95": [
+                0.0847,
+                0.1964
+              ],
+              "distinct_output_values": 57,
+              "correctness_auroc": 0.813
+            },
+            "histogram_binning": {
+              "ece": 0.0159,
+              "ece_ci95": [
+                0.0108,
+                0.1002
+              ],
+              "brier": 0.1796,
+              "ece_reduction_vs_none": 0.3131,
+              "ece_reduction_ci95": [
+                0.1653,
+                0.3438
+              ],
+              "brier_reduction_vs_none": 0.1291,
+              "brier_reduction_ci95": [
+                0.0756,
+                0.1832
+              ],
+              "distinct_output_values": 8,
+              "correctness_auroc": 0.6292
+            }
+          }
+        }
+      }
+    },
+    "v0.2": {
+      "baseline_confidence": {
+        "all": {
+          "n": 209,
+          "raw_distinct_values": 33,
+          "raw_share_at_max": 0.6124,
+          "methods": {
+            "none": {
+              "ece": 0.2576,
+              "ece_ci95": [
+                0.2031,
+                0.3141
+              ],
+              "brier": 0.2342,
+              "ece_reduction_vs_none": 0,
+              "ece_reduction_ci95": null,
+              "brier_reduction_vs_none": 0,
+              "brier_reduction_ci95": null,
+              "distinct_output_values": 33,
+              "correctness_auroc": 0.8297
+            },
+            "isotonic": {
+              "ece": 0.041,
+              "ece_ci95": [
+                0.0293,
+                0.1022
+              ],
+              "brier": 0.1536,
+              "ece_reduction_vs_none": 0.2166,
+              "ece_reduction_ci95": [
+                0.1171,
+                0.2517
+              ],
+              "brier_reduction_vs_none": 0.0806,
+              "brier_reduction_ci95": [
+                0.0436,
+                0.1176
+              ],
+              "distinct_output_values": 15,
+              "correctness_auroc": 0.799
+            },
+            "platt": {
+              "ece": 0.0507,
+              "ece_ci95": [
+                0.0326,
+                0.1108
+              ],
+              "brier": 0.153,
+              "ece_reduction_vs_none": 0.2069,
+              "ece_reduction_ci95": [
+                0.1025,
+                0.2557
+              ],
+              "brier_reduction_vs_none": 0.0812,
+              "brier_reduction_ci95": [
+                0.0484,
+                0.1135
+              ],
+              "distinct_output_values": 64,
+              "correctness_auroc": 0.803
+            },
+            "histogram_binning": {
+              "ece": 0.0346,
+              "ece_ci95": [
+                0.0242,
+                0.0965
+              ],
+              "brier": 0.1601,
+              "ece_reduction_vs_none": 0.223,
+              "ece_reduction_ci95": [
+                0.1217,
+                0.2524
+              ],
+              "brier_reduction_vs_none": 0.0741,
+              "brier_reduction_ci95": [
+                0.0398,
+                0.1073
+              ],
+              "distinct_output_values": 20,
+              "correctness_auroc": 0.7623
+            }
+          }
+        },
+        "controls_excluded": {
+          "n": 184,
+          "raw_distinct_values": 33,
+          "raw_share_at_max": 0.5598,
+          "methods": {
+            "none": {
+              "ece": 0.2926,
+              "ece_ci95": [
+                0.2318,
+                0.3532
+              ],
+              "brier": 0.266,
+              "ece_reduction_vs_none": 0,
+              "ece_reduction_ci95": null,
+              "brier_reduction_vs_none": 0,
+              "brier_reduction_ci95": null,
+              "distinct_output_values": 33,
+              "correctness_auroc": 0.8189
+            },
+            "isotonic": {
+              "ece": 0.063,
+              "ece_ci95": [
+                0.0383,
+                0.1258
+              ],
+              "brier": 0.1692,
+              "ece_reduction_vs_none": 0.2296,
+              "ece_reduction_ci95": [
+                0.1254,
+                0.2823
+              ],
+              "brier_reduction_vs_none": 0.0969,
+              "brier_reduction_ci95": [
+                0.0526,
+                0.1401
+              ],
+              "distinct_output_values": 16,
+              "correctness_auroc": 0.7855
+            },
+            "platt": {
+              "ece": 0.0454,
+              "ece_ci95": [
+                0.033,
+                0.1137
+              ],
+              "brier": 0.166,
+              "ece_reduction_vs_none": 0.2472,
+              "ece_reduction_ci95": [
+                0.1303,
+                0.2899
+              ],
+              "brier_reduction_vs_none": 0.1,
+              "brier_reduction_ci95": [
+                0.0603,
+                0.138
+              ],
+              "distinct_output_values": 63,
+              "correctness_auroc": 0.7924
+            },
+            "histogram_binning": {
+              "ece": 0.0391,
+              "ece_ci95": [
+                0.0269,
+                0.1092
+              ],
+              "brier": 0.174,
+              "ece_reduction_vs_none": 0.2535,
+              "ece_reduction_ci95": [
+                0.1393,
+                0.2867
+              ],
+              "brier_reduction_vs_none": 0.092,
+              "brier_reduction_ci95": [
+                0.0511,
+                0.1313
+              ],
+              "distinct_output_values": 20,
+              "correctness_auroc": 0.7523
+            }
+          }
+        }
+      },
+      "margin_confidence": {
+        "all": {
+          "n": 209,
+          "raw_distinct_values": 205,
+          "raw_share_at_max": 0.0048,
+          "methods": {
+            "none": {
+              "ece": 0.2951,
+              "ece_ci95": [
+                0.2462,
+                0.3554
+              ],
+              "brier": 0.2597,
+              "ece_reduction_vs_none": 0,
+              "ece_reduction_ci95": null,
+              "brier_reduction_vs_none": 0,
+              "brier_reduction_ci95": null,
+              "distinct_output_values": 205,
+              "correctness_auroc": 0.816
+            },
+            "isotonic": {
+              "ece": 0.0495,
+              "ece_ci95": [
+                0.0399,
+                0.1187
+              ],
+              "brier": 0.1696,
+              "ece_reduction_vs_none": 0.2456,
+              "ece_reduction_ci95": [
+                0.1539,
+                0.2782
+              ],
+              "brier_reduction_vs_none": 0.0901,
+              "brier_reduction_ci95": [
+                0.055,
+                0.1245
+              ],
+              "distinct_output_values": 26,
+              "correctness_auroc": 0.7873
+            },
+            "platt": {
+              "ece": 0.0588,
+              "ece_ci95": [
+                0.0469,
+                0.1241
+              ],
+              "brier": 0.1655,
+              "ece_reduction_vs_none": 0.2363,
+              "ece_reduction_ci95": [
+                0.1382,
+                0.2819
+              ],
+              "brier_reduction_vs_none": 0.0942,
+              "brier_reduction_ci95": [
+                0.0599,
+                0.1277
+              ],
+              "distinct_output_values": 208,
+              "correctness_auroc": 0.8068
+            },
+            "histogram_binning": {
+              "ece": 0.0583,
+              "ece_ci95": [
+                0.041,
+                0.1195
+              ],
+              "brier": 0.1678,
+              "ece_reduction_vs_none": 0.2368,
+              "ece_reduction_ci95": [
+                0.1372,
+                0.2893
+              ],
+              "brier_reduction_vs_none": 0.0919,
+              "brier_reduction_ci95": [
+                0.0571,
+                0.1261
+              ],
+              "distinct_output_values": 29,
+              "correctness_auroc": 0.7746
+            }
+          }
+        },
+        "controls_excluded": {
+          "n": 184,
+          "raw_distinct_values": 180,
+          "raw_share_at_max": 0.0054,
+          "methods": {
+            "none": {
+              "ece": 0.3036,
+              "ece_ci95": [
+                0.2486,
+                0.369
+              ],
+              "brier": 0.2793,
+              "ece_reduction_vs_none": 0,
+              "ece_reduction_ci95": null,
+              "brier_reduction_vs_none": 0,
+              "brier_reduction_ci95": null,
+              "distinct_output_values": 180,
+              "correctness_auroc": 0.7781
+            },
+            "isotonic": {
+              "ece": 0.0787,
+              "ece_ci95": [
+                0.0615,
+                0.1525
+              ],
+              "brier": 0.1924,
+              "ece_reduction_vs_none": 0.2249,
+              "ece_reduction_ci95": [
+                0.1223,
+                0.268
+              ],
+              "brier_reduction_vs_none": 0.0868,
+              "brier_reduction_ci95": [
+                0.048,
+                0.1247
+              ],
+              "distinct_output_values": 26,
+              "correctness_auroc": 0.7461
+            },
+            "platt": {
+              "ece": 0.0821,
+              "ece_ci95": [
+                0.061,
+                0.154
+              ],
+              "brier": 0.1883,
+              "ece_reduction_vs_none": 0.2215,
+              "ece_reduction_ci95": [
+                0.1121,
+                0.2775
+              ],
+              "brier_reduction_vs_none": 0.091,
+              "brier_reduction_ci95": [
+                0.0538,
+                0.1282
+              ],
+              "distinct_output_values": 183,
+              "correctness_auroc": 0.7669
+            },
+            "histogram_binning": {
+              "ece": 0.0615,
+              "ece_ci95": [
+                0.0448,
+                0.135
+              ],
+              "brier": 0.1913,
+              "ece_reduction_vs_none": 0.2421,
+              "ece_reduction_ci95": [
+                0.1255,
+                0.293
+              ],
+              "brier_reduction_vs_none": 0.088,
+              "brier_reduction_ci95": [
+                0.0491,
+                0.126
+              ],
+              "distinct_output_values": 28,
+              "correctness_auroc": 0.7298
+            }
+          }
+        }
+      },
+      "semantic_confidence": {
+        "all": {
+          "n": 209,
+          "raw_distinct_values": 202,
+          "raw_share_at_max": 0.0048,
+          "methods": {
+            "none": {
+              "ece": 0.0972,
+              "ece_ci95": [
+                0.0779,
+                0.1518
+              ],
+              "brier": 0.1402,
+              "ece_reduction_vs_none": 0,
+              "ece_reduction_ci95": null,
+              "brier_reduction_vs_none": 0,
+              "brier_reduction_ci95": null,
+              "distinct_output_values": 202,
+              "correctness_auroc": 0.8915
+            },
+            "isotonic": {
+              "ece": 0.0393,
+              "ece_ci95": [
+                0.0356,
+                0.1058
+              ],
+              "brier": 0.1281,
+              "ece_reduction_vs_none": 0.0579,
+              "ece_reduction_ci95": [
+                -0.0102,
+                0.096
+              ],
+              "brier_reduction_vs_none": 0.0121,
+              "brier_reduction_ci95": [
+                -0.0004,
+                0.0228
+              ],
+              "distinct_output_values": 26,
+              "correctness_auroc": 0.8839
+            },
+            "platt": {
+              "ece": 0.0667,
+              "ece_ci95": [
+                0.0569,
+                0.1297
+              ],
+              "brier": 0.1333,
+              "ece_reduction_vs_none": 0.0305,
+              "ece_reduction_ci95": [
+                -0.0314,
+                0.0698
+              ],
+              "brier_reduction_vs_none": 0.0069,
+              "brier_reduction_ci95": [
+                -0.0037,
+                0.0166
+              ],
+              "distinct_output_values": 207,
+              "correctness_auroc": 0.8849
+            },
+            "histogram_binning": {
+              "ece": 0.056,
+              "ece_ci95": [
+                0.0381,
+                0.1134
+              ],
+              "brier": 0.1368,
+              "ece_reduction_vs_none": 0.0412,
+              "ece_reduction_ci95": [
+                -0.014,
+                0.0865
+              ],
+              "brier_reduction_vs_none": 0.0033,
+              "brier_reduction_ci95": [
+                -0.0082,
+                0.0136
+              ],
+              "distinct_output_values": 25,
+              "correctness_auroc": 0.8647
+            }
+          }
+        },
+        "controls_excluded": {
+          "n": 184,
+          "raw_distinct_values": 179,
+          "raw_share_at_max": 0.0054,
+          "methods": {
+            "none": {
+              "ece": 0.0835,
+              "ece_ci95": [
+                0.0723,
+                0.1518
+              ],
+              "brier": 0.1521,
+              "ece_reduction_vs_none": 0,
+              "ece_reduction_ci95": null,
+              "brier_reduction_vs_none": 0,
+              "brier_reduction_ci95": null,
+              "distinct_output_values": 179,
+              "correctness_auroc": 0.8706
+            },
+            "isotonic": {
+              "ece": 0.0416,
+              "ece_ci95": [
+                0.0397,
+                0.1166
+              ],
+              "brier": 0.1428,
+              "ece_reduction_vs_none": 0.0418,
+              "ece_reduction_ci95": [
+                -0.0203,
+                0.0829
+              ],
+              "brier_reduction_vs_none": 0.0093,
+              "brier_reduction_ci95": [
+                -0.0042,
+                0.0211
+              ],
+              "distinct_output_values": 21,
+              "correctness_auroc": 0.8603
+            },
+            "platt": {
+              "ece": 0.0697,
+              "ece_ci95": [
+                0.06,
+                0.1397
+              ],
+              "brier": 0.1477,
+              "ece_reduction_vs_none": 0.0137,
+              "ece_reduction_ci95": [
+                -0.0411,
+                0.0589
+              ],
+              "brier_reduction_vs_none": 0.0044,
+              "brier_reduction_ci95": [
+                -0.0064,
+                0.0145
+              ],
+              "distinct_output_values": 183,
+              "correctness_auroc": 0.8643
+            },
+            "histogram_binning": {
+              "ece": 0.0676,
+              "ece_ci95": [
+                0.0481,
+                0.1312
+              ],
+              "brier": 0.1531,
+              "ece_reduction_vs_none": 0.0159,
+              "ece_reduction_ci95": [
+                -0.0306,
+                0.07
+              ],
+              "brier_reduction_vs_none": -0.001,
+              "brier_reduction_ci95": [
+                -0.0125,
+                0.0097
+              ],
+              "distinct_output_values": 27,
+              "correctness_auroc": 0.8415
+            }
+          }
+        }
+      },
+      "hybrid_reliability": {
+        "all": {
+          "n": 209,
+          "raw_distinct_values": 82,
+          "raw_share_at_max": 0.5263,
+          "methods": {
+            "none": {
+              "ece": 0.3237,
+              "ece_ci95": [
+                0.2665,
+                0.3819
+              ],
+              "brier": 0.2855,
+              "ece_reduction_vs_none": 0,
+              "ece_reduction_ci95": null,
+              "brier_reduction_vs_none": 0,
+              "brier_reduction_ci95": null,
+              "distinct_output_values": 82,
+              "correctness_auroc": 0.8894
+            },
+            "isotonic": {
+              "ece": 0.0738,
+              "ece_ci95": [
+                0.0517,
+                0.1297
+              ],
+              "brier": 0.1315,
+              "ece_reduction_vs_none": 0.2499,
+              "ece_reduction_ci95": [
+                0.1713,
+                0.2951
+              ],
+              "brier_reduction_vs_none": 0.154,
+              "brier_reduction_ci95": [
+                0.1037,
+                0.2038
+              ],
+              "distinct_output_values": 20,
+              "correctness_auroc": 0.8618
+            },
+            "platt": {
+              "ece": 0.0836,
+              "ece_ci95": [
+                0.0548,
+                0.1413
+              ],
+              "brier": 0.1385,
+              "ece_reduction_vs_none": 0.2402,
+              "ece_reduction_ci95": [
+                0.156,
+                0.2968
+              ],
+              "brier_reduction_vs_none": 0.147,
+              "brier_reduction_ci95": [
+                0.1061,
+                0.188
+              ],
+              "distinct_output_values": 88,
+              "correctness_auroc": 0.8762
+            },
+            "histogram_binning": {
+              "ece": 0.018,
+              "ece_ci95": [
+                0.0126,
+                0.08
+              ],
+              "brier": 0.1623,
+              "ece_reduction_vs_none": 0.3057,
+              "ece_reduction_ci95": [
+                0.1976,
+                0.3309
+              ],
+              "brier_reduction_vs_none": 0.1232,
+              "brier_reduction_ci95": [
+                0.0849,
+                0.1618
+              ],
+              "distinct_output_values": 8,
+              "correctness_auroc": 0.6993
+            }
+          }
+        },
+        "controls_excluded": {
+          "n": 184,
+          "raw_distinct_values": 82,
+          "raw_share_at_max": 0.462,
+          "methods": {
+            "none": {
+              "ece": 0.3677,
+              "ece_ci95": [
+                0.3061,
+                0.4304
+              ],
+              "brier": 0.3243,
+              "ece_reduction_vs_none": 0,
+              "ece_reduction_ci95": null,
+              "brier_reduction_vs_none": 0,
+              "brier_reduction_ci95": null,
+              "distinct_output_values": 82,
+              "correctness_auroc": 0.877
+            },
+            "isotonic": {
+              "ece": 0.0706,
+              "ece_ci95": [
+                0.0516,
+                0.1358
+              ],
+              "brier": 0.148,
+              "ece_reduction_vs_none": 0.2971,
+              "ece_reduction_ci95": [
+                0.2012,
+                0.3415
+              ],
+              "brier_reduction_vs_none": 0.1763,
+              "brier_reduction_ci95": [
+                0.1213,
+                0.2311
+              ],
+              "distinct_output_values": 21,
+              "correctness_auroc": 0.8448
+            },
+            "platt": {
+              "ece": 0.0588,
+              "ece_ci95": [
+                0.0374,
+                0.1252
+              ],
+              "brier": 0.1515,
+              "ece_reduction_vs_none": 0.3089,
+              "ece_reduction_ci95": [
+                0.1976,
+                0.3662
+              ],
+              "brier_reduction_vs_none": 0.1728,
+              "brier_reduction_ci95": [
+                0.1266,
+                0.2202
+              ],
+              "distinct_output_values": 87,
+              "correctness_auroc": 0.8632
+            },
+            "histogram_binning": {
+              "ece": 0.0651,
+              "ece_ci95": [
+                0.0278,
+                0.1246
+              ],
+              "brier": 0.1743,
+              "ece_reduction_vs_none": 0.3026,
+              "ece_reduction_ci95": [
+                0.2097,
+                0.3648
+              ],
+              "brier_reduction_vs_none": 0.15,
+              "brier_reduction_ci95": [
+                0.1055,
+                0.1952
+              ],
+              "distinct_output_values": 8,
+              "correctness_auroc": 0.6957
+            }
+          }
+        }
+      }
+    }
+  },
+  "generated_at": "2026-09-28T08:29:22.326Z"
+}

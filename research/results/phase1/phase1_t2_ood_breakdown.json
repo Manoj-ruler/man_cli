@@ -1,0 +1,1126 @@
+{
+  "status": "post hoc, exploratory (research/PLAN_TASKS.md Phase 1)",
+  "generated_by": "research/experiments/phase1_t2_ood_breakdown.js",
+  "task": "T2: OOD by source and subtype; false-rejection cost",
+  "subtype_label_provenance": "OOD subtype labels for the 50 OOD queries of TermAssist-Bench v0.2 (15 original v0.1 + 35 added in v0.2). ASSIGNED BY THE AI ASSISTANT on 2026-09-28, NOT human-validated. For a descriptive breakdown only (research/PLAN_TASKS.md T2); do not treat as ground truth or merge into the frozen benchmark. Vocabulary from spec section 7.1. Where the spec's own examples conflict with its definitions, the example wins (e.g. 'configure nginx reverse proxy' is near_ood per the spec example even though it names a tool).",
+  "bootstrap": {
+    "B": 10000,
+    "seed": 42,
+    "method": "stratified (OOD and non-OOD resampled separately)"
+  },
+  "reproduction_checks": [
+    {
+      "label": "v0.1 detector TP",
+      "got": 7,
+      "want": 7
+    },
+    {
+      "label": "v0.1 detector FP",
+      "got": 6,
+      "want": 6
+    },
+    {
+      "label": "v0.1 detector FN",
+      "got": 8,
+      "want": 8
+    },
+    {
+      "label": "v0.1 detector TN",
+      "got": 129,
+      "want": 129
+    },
+    {
+      "label": "v0.1 baseline OOD rejections",
+      "got": 4,
+      "want": 4
+    },
+    {
+      "label": "v0.1 subtype labels cover all OOD",
+      "got": 15,
+      "want": 15
+    },
+    {
+      "label": "v0.1 TA-B090 label text",
+      "got": "scan my network for other devices",
+      "want": "scan my network for other devices"
+    },
+    {
+      "label": "v0.1 TA-B089 label text",
+      "got": "play music from the command line",
+      "want": "play music from the command line"
+    },
+    {
+      "label": "v0.1 TA-B091 label text",
+      "got": "configure nginx reverse proxy",
+      "want": "configure nginx reverse proxy"
+    },
+    {
+      "label": "v0.1 TA-B086 label text",
+      "got": "edit my crontab using vim",
+      "want": "edit my crontab using vim"
+    },
+    {
+      "label": "v0.1 TA-B088 label text",
+      "got": "write a unit test in jest",
+      "want": "write a unit test in jest"
+    },
+    {
+      "label": "v0.1 TA-B084 label text",
+      "got": "connect to a PostgreSQL database",
+      "want": "connect to a PostgreSQL database"
+    },
+    {
+      "label": "v0.1 TA-B079 label text",
+      "got": "what is the meaning of life",
+      "want": "what is the meaning of life"
+    },
+    {
+      "label": "v0.1 TA-B085 label text",
+      "got": "create a new React app",
+      "want": "create a new React app"
+    },
+    {
+      "label": "v0.1 TA-B083 label text",
+      "got": "compile a Rust project with cargo",
+      "want": "compile a Rust project with cargo"
+    },
+    {
+      "label": "v0.1 TA-B087 label text",
+      "got": "set up a Python Flask web server",
+      "want": "set up a Python Flask web server"
+    },
+    {
+      "label": "v0.1 TA-B080 label text",
+      "got": "book a flight to Tokyo",
+      "want": "book a flight to Tokyo"
+    },
+    {
+      "label": "v0.1 TA-B078 label text",
+      "got": "make a cappuccino",
+      "want": "make a cappuccino"
+    },
+    {
+      "label": "v0.1 TA-B092 label text",
+      "got": "send an email from the terminal",
+      "want": "send an email from the terminal"
+    },
+    {
+      "label": "v0.1 TA-B081 label text",
+      "got": "translate this sentence to French",
+      "want": "translate this sentence to French"
+    },
+    {
+      "label": "v0.1 TA-B082 label text",
+      "got": "design a logo for my company",
+      "want": "design a logo for my company"
+    },
+    {
+      "label": "v0.2 detector TP",
+      "got": 34,
+      "want": 34
+    },
+    {
+      "label": "v0.2 detector FP",
+      "got": 11,
+      "want": 11
+    },
+    {
+      "label": "v0.2 detector FN",
+      "got": 16,
+      "want": 16
+    },
+    {
+      "label": "v0.2 detector TN",
+      "got": 148,
+      "want": 148
+    },
+    {
+      "label": "v0.2 baseline OOD rejections",
+      "got": 17,
+      "want": 17
+    },
+    {
+      "label": "v0.2 subtype labels cover all OOD",
+      "got": 50,
+      "want": 50
+    },
+    {
+      "label": "v0.2 TA-B169 label text",
+      "got": "interpret my dream about flying",
+      "want": "interpret my dream about flying"
+    },
+    {
+      "label": "v0.2 TA-B182 label text",
+      "got": "write a cover letter for a job application",
+      "want": "write a cover letter for a job application"
+    },
+    {
+      "label": "v0.2 TA-B080 label text",
+      "got": "book a flight to Tokyo",
+      "want": "book a flight to Tokyo"
+    },
+    {
+      "label": "v0.2 TA-B180 label text",
+      "got": "schedule a therapy appointment",
+      "want": "schedule a therapy appointment"
+    },
+    {
+      "label": "v0.2 TA-B164 label text",
+      "got": "give me stock market predictions",
+      "want": "give me stock market predictions"
+    },
+    {
+      "label": "v0.2 TA-B156 label text",
+      "got": "find me a good doctor nearby",
+      "want": "find me a good doctor nearby"
+    },
+    {
+      "label": "v0.2 TA-B155 label text",
+      "got": "calculate my monthly budget",
+      "want": "calculate my monthly budget"
+    },
+    {
+      "label": "v0.2 TA-B152 label text",
+      "got": "tell me a joke",
+      "want": "tell me a joke"
+    },
+    {
+      "label": "v0.2 TA-B084 label text",
+      "got": "connect to a PostgreSQL database",
+      "want": "connect to a PostgreSQL database"
+    },
+    {
+      "label": "v0.2 TA-B176 label text",
+      "got": "brew a batch of homemade beer",
+      "want": "brew a batch of homemade beer"
+    },
+    {
+      "label": "v0.2 TA-B174 label text",
+      "got": "assemble my new bookshelf furniture",
+      "want": "assemble my new bookshelf furniture"
+    },
+    {
+      "label": "v0.2 TA-B162 label text",
+      "got": "plan a birthday party for my friend",
+      "want": "plan a birthday party for my friend"
+    },
+    {
+      "label": "v0.2 TA-B078 label text",
+      "got": "make a cappuccino",
+      "want": "make a cappuccino"
+    },
+    {
+      "label": "v0.2 TA-B154 label text",
+      "got": "help me write a poem about the ocean",
+      "want": "help me write a poem about the ocean"
+    },
+    {
+      "label": "v0.2 TA-B175 label text",
+      "got": "bake a chocolate cake",
+      "want": "bake a chocolate cake"
+    },
+    {
+      "label": "v0.2 TA-B168 label text",
+      "got": "give me a tarot card reading",
+      "want": "give me a tarot card reading"
+    },
+    {
+      "label": "v0.2 TA-B086 label text",
+      "got": "edit my crontab using vim",
+      "want": "edit my crontab using vim"
+    },
+    {
+      "label": "v0.2 TA-B173 label text",
+      "got": "water my garden automatically",
+      "want": "water my garden automatically"
+    },
+    {
+      "label": "v0.2 TA-B088 label text",
+      "got": "write a unit test in jest",
+      "want": "write a unit test in jest"
+    },
+    {
+      "label": "v0.2 TA-B172 label text",
+      "got": "diagnose why my car won't start",
+      "want": "diagnose why my car won't start"
+    },
+    {
+      "label": "v0.2 TA-B178 label text",
+      "got": "model a 3D character in Blender",
+      "want": "model a 3D character in Blender"
+    },
+    {
+      "label": "v0.2 TA-B171 label text",
+      "got": "help me train for a marathon",
+      "want": "help me train for a marathon"
+    },
+    {
+      "label": "v0.2 TA-B163 label text",
+      "got": "write my resume for a software job",
+      "want": "write my resume for a software job"
+    },
+    {
+      "label": "v0.2 TA-B081 label text",
+      "got": "translate this sentence to French",
+      "want": "translate this sentence to French"
+    },
+    {
+      "label": "v0.2 TA-B185 label text",
+      "got": "find a babysitter for Friday night",
+      "want": "find a babysitter for Friday night"
+    },
+    {
+      "label": "v0.2 TA-B159 label text",
+      "got": "teach me how to play guitar",
+      "want": "teach me how to play guitar"
+    },
+    {
+      "label": "v0.2 TA-B158 label text",
+      "got": "order a pizza for delivery",
+      "want": "order a pizza for delivery"
+    },
+    {
+      "label": "v0.2 TA-B183 label text",
+      "got": "plan my wedding seating chart",
+      "want": "plan my wedding seating chart"
+    },
+    {
+      "label": "v0.2 TA-B167 label text",
+      "got": "compose a song in the style of jazz",
+      "want": "compose a song in the style of jazz"
+    },
+    {
+      "label": "v0.2 TA-B082 label text",
+      "got": "design a logo for my company",
+      "want": "design a logo for my company"
+    },
+    {
+      "label": "v0.2 TA-B170 label text",
+      "got": "recommend a good movie to watch tonight",
+      "want": "recommend a good movie to watch tonight"
+    },
+    {
+      "label": "v0.2 TA-B161 label text",
+      "got": "help me meditate for stress relief",
+      "want": "help me meditate for stress relief"
+    },
+    {
+      "label": "v0.2 TA-B181 label text",
+      "got": "get my horoscope for today",
+      "want": "get my horoscope for today"
+    },
+    {
+      "label": "v0.2 TA-B160 label text",
+      "got": "give me legal advice about my lease",
+      "want": "give me legal advice about my lease"
+    },
+    {
+      "label": "v0.2 TA-B177 label text",
+      "got": "mine cryptocurrency on my GPU",
+      "want": "mine cryptocurrency on my GPU"
+    },
+    {
+      "label": "v0.2 TA-B153 label text",
+      "got": "what's the weather like today",
+      "want": "what's the weather like today"
+    },
+    {
+      "label": "v0.2 TA-B179 label text",
+      "got": "mod my video game with custom skins",
+      "want": "mod my video game with custom skins"
+    },
+    {
+      "label": "v0.2 TA-B157 label text",
+      "got": "book a hotel room in Paris",
+      "want": "book a hotel room in Paris"
+    },
+    {
+      "label": "v0.2 TA-B079 label text",
+      "got": "what is the meaning of life",
+      "want": "what is the meaning of life"
+    },
+    {
+      "label": "v0.2 TA-B090 label text",
+      "got": "scan my network for other devices",
+      "want": "scan my network for other devices"
+    },
+    {
+      "label": "v0.2 TA-B083 label text",
+      "got": "compile a Rust project with cargo",
+      "want": "compile a Rust project with cargo"
+    },
+    {
+      "label": "v0.2 TA-B091 label text",
+      "got": "configure nginx reverse proxy",
+      "want": "configure nginx reverse proxy"
+    },
+    {
+      "label": "v0.2 TA-B165 label text",
+      "got": "help me learn Spanish",
+      "want": "help me learn Spanish"
+    },
+    {
+      "label": "v0.2 TA-B085 label text",
+      "got": "create a new React app",
+      "want": "create a new React app"
+    },
+    {
+      "label": "v0.2 TA-B087 label text",
+      "got": "set up a Python Flask web server",
+      "want": "set up a Python Flask web server"
+    },
+    {
+      "label": "v0.2 TA-B166 label text",
+      "got": "draw a picture of a cat",
+      "want": "draw a picture of a cat"
+    },
+    {
+      "label": "v0.2 TA-B184 label text",
+      "got": "choose a paint color for my bedroom",
+      "want": "choose a paint color for my bedroom"
+    },
+    {
+      "label": "v0.2 TA-B092 label text",
+      "got": "send an email from the terminal",
+      "want": "send an email from the terminal"
+    },
+    {
+      "label": "v0.2 TA-B151 label text",
+      "got": "recommend me a good recipe for dinner",
+      "want": "recommend me a good recipe for dinner"
+    },
+    {
+      "label": "v0.2 TA-B089 label text",
+      "got": "play music from the command line",
+      "want": "play music from the command line"
+    },
+    {
+      "label": "v0.2 McNemar contingency",
+      "got": {
+        "both": 17,
+        "bOnly": 0,
+        "tOnly": 17,
+        "none": 16
+      },
+      "want": {
+        "both": 17,
+        "bOnly": 0,
+        "tOnly": 17,
+        "none": 16
+      }
+    }
+  ],
+  "versions": {
+    "v0.1": {
+      "groups": [
+        {
+          "group": "all OOD",
+          "n": 15,
+          "tuned_rejects": {
+            "k": 7,
+            "n": 15,
+            "rate": 0.4667,
+            "lo": 0.2481,
+            "hi": 0.6988
+          },
+          "baseline_rejects": {
+            "k": 4,
+            "n": 15,
+            "rate": 0.2667,
+            "lo": 0.109,
+            "hi": 0.5195
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 3,
+          "exact_mcnemar_p": 0.25,
+          "auroc_vs_all_non_ood": 0.8548,
+          "auroc_ci95": [
+            0.7331,
+            0.9536
+          ],
+          "queries_with_top_confidence_1": [
+            "TA-B086 edit my crontab using vim",
+            "TA-B085 create a new React app"
+          ]
+        },
+        {
+          "group": "terminal-task OOD (near_ood + unsupported_tool_ood)",
+          "n": 10,
+          "tuned_rejects": {
+            "k": 2,
+            "n": 10,
+            "rate": 0.2,
+            "lo": 0.0567,
+            "hi": 0.5098
+          },
+          "baseline_rejects": {
+            "k": 0,
+            "n": 10,
+            "rate": 0,
+            "lo": 0,
+            "hi": 0.2775
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 2,
+          "exact_mcnemar_p": 0.5,
+          "auroc_vs_all_non_ood": 0.7837,
+          "auroc_ci95": [
+            0.6237,
+            0.9185
+          ],
+          "queries_with_top_confidence_1": [
+            "TA-B086 edit my crontab using vim",
+            "TA-B085 create a new React app"
+          ]
+        },
+        {
+          "group": "other OOD (far_ood + non_terminal + nonsensical)",
+          "n": 5,
+          "tuned_rejects": {
+            "k": 5,
+            "n": 5,
+            "rate": 1,
+            "lo": 0.5655,
+            "hi": 1
+          },
+          "baseline_rejects": {
+            "k": 4,
+            "n": 5,
+            "rate": 0.8,
+            "lo": 0.3755,
+            "hi": 0.9638
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 1,
+          "exact_mcnemar_p": 1,
+          "auroc_vs_all_non_ood": 0.997,
+          "auroc_ci95": [
+            0.9889,
+            1
+          ],
+          "queries_with_top_confidence_1": []
+        },
+        {
+          "group": "subtype: near_ood",
+          "n": 5,
+          "tuned_rejects": {
+            "k": 0,
+            "n": 5,
+            "rate": 0,
+            "lo": 0,
+            "hi": 0.4345
+          },
+          "baseline_rejects": {
+            "k": 0,
+            "n": 5,
+            "rate": 0,
+            "lo": 0,
+            "hi": 0.4345
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 0,
+          "exact_mcnemar_p": 1,
+          "auroc_vs_all_non_ood": 0.7807,
+          "auroc_ci95": [
+            0.5556,
+            0.9378
+          ],
+          "queries_with_top_confidence_1": [
+            "TA-B086 edit my crontab using vim"
+          ]
+        },
+        {
+          "group": "subtype: unsupported_tool_ood",
+          "n": 5,
+          "tuned_rejects": {
+            "k": 2,
+            "n": 5,
+            "rate": 0.4,
+            "lo": 0.1176,
+            "hi": 0.7693
+          },
+          "baseline_rejects": {
+            "k": 0,
+            "n": 5,
+            "rate": 0,
+            "lo": 0,
+            "hi": 0.4345
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 2,
+          "exact_mcnemar_p": 0.5,
+          "auroc_vs_all_non_ood": 0.7867,
+          "auroc_ci95": [
+            0.5556,
+            0.957
+          ],
+          "queries_with_top_confidence_1": [
+            "TA-B085 create a new React app"
+          ]
+        },
+        {
+          "group": "subtype: far_ood",
+          "n": 2,
+          "tuned_rejects": {
+            "k": 2,
+            "n": 2,
+            "rate": 1,
+            "lo": 0.3424,
+            "hi": 1
+          },
+          "baseline_rejects": {
+            "k": 2,
+            "n": 2,
+            "rate": 1,
+            "lo": 0.3424,
+            "hi": 1
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 0,
+          "exact_mcnemar_p": 1,
+          "auroc_vs_all_non_ood": 0.9981,
+          "auroc_ci95": [
+            0.9926,
+            1
+          ],
+          "queries_with_top_confidence_1": []
+        },
+        {
+          "group": "subtype: non_terminal",
+          "n": 2,
+          "tuned_rejects": {
+            "k": 2,
+            "n": 2,
+            "rate": 1,
+            "lo": 0.3424,
+            "hi": 1
+          },
+          "baseline_rejects": {
+            "k": 2,
+            "n": 2,
+            "rate": 1,
+            "lo": 0.3424,
+            "hi": 1
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 0,
+          "exact_mcnemar_p": 1,
+          "auroc_vs_all_non_ood": 0.9963,
+          "auroc_ci95": [
+            0.9889,
+            1
+          ],
+          "queries_with_top_confidence_1": []
+        },
+        {
+          "group": "subtype: nonsensical",
+          "n": 1,
+          "tuned_rejects": {
+            "k": 1,
+            "n": 1,
+            "rate": 1,
+            "lo": 0.2065,
+            "hi": 1
+          },
+          "baseline_rejects": {
+            "k": 0,
+            "n": 1,
+            "rate": 0,
+            "lo": 0,
+            "hi": 0.7935
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 1,
+          "exact_mcnemar_p": 1,
+          "auroc_vs_all_non_ood": 0.9963,
+          "auroc_ci95": [
+            0.9889,
+            1
+          ],
+          "queries_with_top_confidence_1": []
+        }
+      ],
+      "false_rejections": {
+        "detector": {
+          "k": 6,
+          "n": 135,
+          "rate": 0.0444,
+          "lo": 0.0205,
+          "hi": 0.0936
+        },
+        "baseline": {
+          "k": 0,
+          "n": 135,
+          "rate": 0,
+          "lo": 0,
+          "hi": 0.0277
+        },
+        "by_label": {
+          "CORRECT": 6,
+          "AMBIGUOUS": 0,
+          "NEEDS_CORRECTION": 0
+        },
+        "of_which_hybrid_was_correct": 0,
+        "of_which_canonical_controls": 0,
+        "items": [
+          {
+            "id": "TA-B052",
+            "query": "how much storage is left on my drives",
+            "label": "CORRECT",
+            "hybrid_correct": false,
+            "top1_score": 0.7006
+          },
+          {
+            "id": "TA-B045",
+            "query": "see the differences before staging my changes",
+            "label": "CORRECT",
+            "hybrid_correct": false,
+            "top1_score": 0.8847
+          },
+          {
+            "id": "TA-B051",
+            "query": "I want to go back one version in my repo but not lose anything",
+            "label": "CORRECT",
+            "hybrid_correct": false,
+            "top1_score": 0.8591
+          },
+          {
+            "id": "TA-B060",
+            "query": "where is python installed on this machine",
+            "label": "CORRECT",
+            "hybrid_correct": false,
+            "top1_score": 0.8851
+          },
+          {
+            "id": "TA-B056",
+            "query": "who am I logged in as",
+            "label": "CORRECT",
+            "hybrid_correct": false,
+            "top1_score": 0.7
+          },
+          {
+            "id": "TA-B037",
+            "query": "look up what python libraries I have",
+            "label": "CORRECT",
+            "hybrid_correct": false,
+            "top1_score": 0.8327
+          }
+        ]
+      },
+      "tradeoff": {
+        "ood_newly_rejected": 3,
+        "correct_answers_withheld": 0,
+        "non_ood_n": 135,
+        "ood_n": 15
+      }
+    },
+    "v0.2": {
+      "groups": [
+        {
+          "group": "all OOD",
+          "n": 50,
+          "tuned_rejects": {
+            "k": 34,
+            "n": 50,
+            "rate": 0.68,
+            "lo": 0.5419,
+            "hi": 0.7924
+          },
+          "baseline_rejects": {
+            "k": 17,
+            "n": 50,
+            "rate": 0.34,
+            "lo": 0.2244,
+            "hi": 0.4785
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 17,
+          "exact_mcnemar_p": 0.00001526,
+          "auroc_vs_all_non_ood": 0.8999,
+          "auroc_ci95": [
+            0.8423,
+            0.949
+          ],
+          "queries_with_top_confidence_1": [
+            "TA-B086 edit my crontab using vim",
+            "TA-B172 diagnose why my car won't start",
+            "TA-B178 model a 3D character in Blender",
+            "TA-B085 create a new React app"
+          ]
+        },
+        {
+          "group": "source: original v0.1 OOD (TA-B078-092)",
+          "n": 15,
+          "tuned_rejects": {
+            "k": 9,
+            "n": 15,
+            "rate": 0.6,
+            "lo": 0.3575,
+            "hi": 0.8018
+          },
+          "baseline_rejects": {
+            "k": 4,
+            "n": 15,
+            "rate": 0.2667,
+            "lo": 0.109,
+            "hi": 0.5195
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 5,
+          "exact_mcnemar_p": 0.0625,
+          "auroc_vs_all_non_ood": 0.8583,
+          "auroc_ci95": [
+            0.7342,
+            0.9572
+          ],
+          "queries_with_top_confidence_1": [
+            "TA-B086 edit my crontab using vim",
+            "TA-B085 create a new React app"
+          ]
+        },
+        {
+          "group": "source: added in v0.2 (TA-B151-185)",
+          "n": 35,
+          "tuned_rejects": {
+            "k": 25,
+            "n": 35,
+            "rate": 0.7143,
+            "lo": 0.5494,
+            "hi": 0.8367
+          },
+          "baseline_rejects": {
+            "k": 13,
+            "n": 35,
+            "rate": 0.3714,
+            "lo": 0.2317,
+            "hi": 0.5366
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 12,
+          "exact_mcnemar_p": 0.0004883,
+          "auroc_vs_all_non_ood": 0.9177,
+          "auroc_ci95": [
+            0.8534,
+            0.9675
+          ],
+          "queries_with_top_confidence_1": [
+            "TA-B172 diagnose why my car won't start",
+            "TA-B178 model a 3D character in Blender"
+          ]
+        },
+        {
+          "group": "terminal-task OOD (near_ood + unsupported_tool_ood)",
+          "n": 10,
+          "tuned_rejects": {
+            "k": 4,
+            "n": 10,
+            "rate": 0.4,
+            "lo": 0.1682,
+            "hi": 0.6873
+          },
+          "baseline_rejects": {
+            "k": 0,
+            "n": 10,
+            "rate": 0,
+            "lo": 0,
+            "hi": 0.2775
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 4,
+          "exact_mcnemar_p": 0.125,
+          "auroc_vs_all_non_ood": 0.7874,
+          "auroc_ci95": [
+            0.6252,
+            0.9252
+          ],
+          "queries_with_top_confidence_1": [
+            "TA-B086 edit my crontab using vim",
+            "TA-B085 create a new React app"
+          ]
+        },
+        {
+          "group": "other OOD (far_ood + non_terminal + nonsensical)",
+          "n": 40,
+          "tuned_rejects": {
+            "k": 30,
+            "n": 40,
+            "rate": 0.75,
+            "lo": 0.5981,
+            "hi": 0.8581
+          },
+          "baseline_rejects": {
+            "k": 17,
+            "n": 40,
+            "rate": 0.425,
+            "lo": 0.2851,
+            "hi": 0.5781
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 13,
+          "exact_mcnemar_p": 0.0002441,
+          "auroc_vs_all_non_ood": 0.928,
+          "auroc_ci95": [
+            0.8714,
+            0.9722
+          ],
+          "queries_with_top_confidence_1": [
+            "TA-B172 diagnose why my car won't start",
+            "TA-B178 model a 3D character in Blender"
+          ]
+        },
+        {
+          "group": "subtype: near_ood",
+          "n": 5,
+          "tuned_rejects": {
+            "k": 2,
+            "n": 5,
+            "rate": 0.4,
+            "lo": 0.1176,
+            "hi": 0.7693
+          },
+          "baseline_rejects": {
+            "k": 0,
+            "n": 5,
+            "rate": 0,
+            "lo": 0,
+            "hi": 0.4345
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 2,
+          "exact_mcnemar_p": 0.5,
+          "auroc_vs_all_non_ood": 0.7962,
+          "auroc_ci95": [
+            0.5591,
+            0.956
+          ],
+          "queries_with_top_confidence_1": [
+            "TA-B086 edit my crontab using vim"
+          ]
+        },
+        {
+          "group": "subtype: unsupported_tool_ood",
+          "n": 5,
+          "tuned_rejects": {
+            "k": 2,
+            "n": 5,
+            "rate": 0.4,
+            "lo": 0.1176,
+            "hi": 0.7693
+          },
+          "baseline_rejects": {
+            "k": 0,
+            "n": 5,
+            "rate": 0,
+            "lo": 0,
+            "hi": 0.4345
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 2,
+          "exact_mcnemar_p": 0.5,
+          "auroc_vs_all_non_ood": 0.7786,
+          "auroc_ci95": [
+            0.544,
+            0.9497
+          ],
+          "queries_with_top_confidence_1": [
+            "TA-B085 create a new React app"
+          ]
+        },
+        {
+          "group": "subtype: far_ood",
+          "n": 5,
+          "tuned_rejects": {
+            "k": 4,
+            "n": 5,
+            "rate": 0.8,
+            "lo": 0.3755,
+            "hi": 0.9638
+          },
+          "baseline_rejects": {
+            "k": 3,
+            "n": 5,
+            "rate": 0.6,
+            "lo": 0.2307,
+            "hi": 0.8824
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 1,
+          "exact_mcnemar_p": 1,
+          "auroc_vs_all_non_ood": 0.8616,
+          "auroc_ci95": [
+            0.5943,
+            1
+          ],
+          "queries_with_top_confidence_1": [
+            "TA-B178 model a 3D character in Blender"
+          ]
+        },
+        {
+          "group": "subtype: non_terminal",
+          "n": 34,
+          "tuned_rejects": {
+            "k": 25,
+            "n": 34,
+            "rate": 0.7353,
+            "lo": 0.5688,
+            "hi": 0.854
+          },
+          "baseline_rejects": {
+            "k": 14,
+            "n": 34,
+            "rate": 0.4118,
+            "lo": 0.2637,
+            "hi": 0.5778
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 11,
+          "exact_mcnemar_p": 0.0009766,
+          "auroc_vs_all_non_ood": 0.9356,
+          "auroc_ci95": [
+            0.8836,
+            0.9752
+          ],
+          "queries_with_top_confidence_1": [
+            "TA-B172 diagnose why my car won't start"
+          ]
+        },
+        {
+          "group": "subtype: nonsensical",
+          "n": 1,
+          "tuned_rejects": {
+            "k": 1,
+            "n": 1,
+            "rate": 1,
+            "lo": 0.2065,
+            "hi": 1
+          },
+          "baseline_rejects": {
+            "k": 0,
+            "n": 1,
+            "rate": 0,
+            "lo": 0,
+            "hi": 0.7935
+          },
+          "discordant_baseline_only": 0,
+          "discordant_tuned_only": 1,
+          "exact_mcnemar_p": 1,
+          "auroc_vs_all_non_ood": 1,
+          "auroc_ci95": [
+            1,
+            1
+          ],
+          "queries_with_top_confidence_1": []
+        }
+      ],
+      "false_rejections": {
+        "detector": {
+          "k": 11,
+          "n": 159,
+          "rate": 0.0692,
+          "lo": 0.0391,
+          "hi": 0.1196
+        },
+        "baseline": {
+          "k": 0,
+          "n": 159,
+          "rate": 0,
+          "lo": 0,
+          "hi": 0.0236
+        },
+        "by_label": {
+          "CORRECT": 9,
+          "AMBIGUOUS": 2,
+          "NEEDS_CORRECTION": 0
+        },
+        "of_which_hybrid_was_correct": 3,
+        "of_which_canonical_controls": 0,
+        "items": [
+          {
+            "id": "TA-B203",
+            "query": "stop a process",
+            "label": "AMBIGUOUS",
+            "hybrid_correct": true,
+            "top1_score": 0.8841
+          },
+          {
+            "id": "TA-B187",
+            "query": "tar",
+            "label": "AMBIGUOUS",
+            "hybrid_correct": false,
+            "top1_score": 0.7483
+          },
+          {
+            "id": "TA-B052",
+            "query": "how much storage is left on my drives",
+            "label": "CORRECT",
+            "hybrid_correct": false,
+            "top1_score": 0.7756
+          },
+          {
+            "id": "TA-B051",
+            "query": "I want to go back one version in my repo but not lose anything",
+            "label": "CORRECT",
+            "hybrid_correct": false,
+            "top1_score": 0.8591
+          },
+          {
+            "id": "TA-B138",
+            "query": "deploy my kubernetes cluster to production with rolling updates",
+            "label": "CORRECT",
+            "hybrid_correct": false,
+            "top1_score": 0.891
+          },
+          {
+            "id": "TA-B037",
+            "query": "look up what python libraries I have",
+            "label": "CORRECT",
+            "hybrid_correct": false,
+            "top1_score": 0.7708
+          },
+          {
+            "id": "TA-B060",
+            "query": "where is python installed on this machine",
+            "label": "CORRECT",
+            "hybrid_correct": false,
+            "top1_score": 0.9179
+          },
+          {
+            "id": "TA-B076",
+            "query": "clean up docker",
+            "label": "CORRECT",
+            "hybrid_correct": true,
+            "top1_score": 0.8526
+          },
+          {
+            "id": "TA-B074",
+            "query": "set up git for this project",
+            "label": "CORRECT",
+            "hybrid_correct": false,
+            "top1_score": 0.9219
+          },
+          {
+            "id": "TA-B056",
+            "query": "who am I logged in as",
+            "label": "CORRECT",
+            "hybrid_correct": false,
+            "top1_score": 0.7396
+          },
+          {
+            "id": "TA-B094",
+            "query": "remove all files from the current directory",
+            "label": "CORRECT",
+            "hybrid_correct": true,
+            "top1_score": 0.9059
+          }
+        ]
+      },
+      "tradeoff": {
+        "ood_newly_rejected": 17,
+        "correct_answers_withheld": 3,
+        "non_ood_n": 159,
+        "ood_n": 50
+      }
+    }
+  },
+  "generated_at": "2026-09-28T08:28:28.737Z"
+}
