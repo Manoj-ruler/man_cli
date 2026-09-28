@@ -1,0 +1,98 @@
+{
+  "_note": "Teaching examples added in ANNOTATOR_GUIDELINES.md (2026-09-28), in addition to the codebook's W1-W13. Checked with annotation_common.verifyItems against every v0.1/v0.2 benchmark query, the codebook worked examples, the practice set and the Tier 1 annotation sheet (token Jaccard < 0.5), and chosen to avoid the topics and bare names on the annotation sheets. See ANNOTATION_PROTOCOL.md Amendment 4. Written by the AI assistant, like the codebook examples.",
+  "examples": [
+    {
+      "id": "H1",
+      "query": "is this page returning a 404 or a 200",
+      "label": "CLEAR",
+      "readings": [
+        {
+          "reading": "check the HTTP response code of a web page",
+          "ids": [
+            "tac-0111"
+          ]
+        }
+      ],
+      "note": "The words differ from the record (404 and 200 are HTTP response codes), but the task is the same. Matching is by meaning, not wording."
+    },
+    {
+      "id": "H2",
+      "query": "clone a repo",
+      "label": "CLEAR",
+      "readings": [
+        {
+          "reading": "clone a git repository",
+          "ids": [
+            "tac-0050"
+          ]
+        }
+      ],
+      "note": "The repository address is missing, but it is a placeholder, not a second task."
+    },
+    {
+      "id": "H3",
+      "query": "call the api endpoint",
+      "label": "AMBIGUOUS",
+      "readings": [
+        {
+          "reading": "fetch data from it (GET)",
+          "ids": [
+            "tac-0105"
+          ]
+        },
+        {
+          "reading": "send data to it (POST)",
+          "ids": [
+            "tac-0011"
+          ]
+        }
+      ],
+      "note": "Reading data and sending data differ in effect (codebook 6.3), both are common readings of call, and a user who meant one is badly served by the other. PUT and DELETE records also exist; whether they are plausible readings of these words is a judgment for the plausibility test."
+    },
+    {
+      "id": "H4",
+      "query": "put a v2.0 label on this release",
+      "label": "CLEAR",
+      "readings": [
+        {
+          "reading": "tag the current git commit",
+          "ids": [
+            "tac-0051"
+          ]
+        },
+        {
+          "reading": "re-tag an existing docker image",
+          "ids": []
+        }
+      ],
+      "note": "The docker reading has no performing record (tac-0089 builds an image, it does not re-tag one), so it does not count. One supported reading remains."
+    },
+    {
+      "id": "H5",
+      "query": "print this report on the office printer",
+      "label": "OOD",
+      "readings": [
+        {
+          "reading": "send a document to a printer",
+          "ids": []
+        }
+      ],
+      "absent_terms": [
+        "printer"
+      ],
+      "note": "Several records contain the word print, but they display text on screen; none sends anything to a printer."
+    },
+    {
+      "id": "H6",
+      "query": "stage everything and commit it with a message",
+      "label": "OOD",
+      "readings": [
+        {
+          "reading": "stage all changes and commit them in one go",
+          "ids": []
+        }
+      ],
+      "note": "tac-0037 stages and tac-0038 commits; no single record does both. Codebook 6.5: a record that handles only part of the task does not perform it."
+    }
+  ]
+}

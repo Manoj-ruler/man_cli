@@ -213,5 +213,35 @@ RELABELED; adjudicator sides with the original → ORIGINAL_UPHELD; adjudicator 
 UNRESOLVED (excluded). CONTESTED → the adjudicator's label (UPHELD if equal to the original, else
 CHANGED); with no adjudicator → EXCLUDED_CONTESTED. Nothing is relabeled without adjudication.
 
+**Amendment 4 (2026-09-28): annotator handbook.** `ANNOTATOR_GUIDELINES.md` is added to the annotator
+materials. It restates the codebook in beginner-friendly form and adds no labeling rule; where the two
+differ, the codebook wins, and the handbook says so.
+- **New teaching examples.** Six examples (H1–H6, `handbook_examples.json`) were written by the AI
+  assistant, like W1–W13. They passed `annotation_common.verifyItems` (ids exist; label/reading
+  consistency; OOD absent terms; token Jaccard < 0.5 against all v0.1/v0.2 queries, the worked examples,
+  the practice set and the Tier 1 sheet), and they avoid every topic and bare name on the sheets. Two
+  earlier candidates were replaced because they were semantically near v0.1 queries TA-B026 and TA-B105, and one because it
+  failed the Jaccard check.
+- **Before sending.** The file opens with a coordinator-only comment block listing 10 open questions
+  (C1–C10). Several are marked *provisional* in the text: the return channel, the file name, practice
+  return, more than 4 ids, ids for a CLEAR item after the plausibility test, intent/command mismatch
+  records, multi-step requests under 6.5, and looking up commands. Resolve them, then **delete the
+  block**. Send any resolution that changes how labels are assigned to both annotators at the same time,
+  as a codebook amendment.
+- **Known limitation, found while checking the handbook examples.** Several codebook worked examples,
+  frozen before this amendment, are close in topic to Tier 1 items. The handbook does not add to this,
+  but it must be reported.
+  - **Near controls:** W3 (CPU sorting) ~ TA-B146; W7 (includes `tac-0419`, docker volumes) ~ TA-B135;
+    W13 (encryption) ~ TA-B147.
+  - **Near targets (more serious):**
+    - W8 "check whether a host is reachable" (taught as CLEAR, ping dominant) ~ TA-B207 "check network
+      connection" (original AMBIGUOUS). This could push annotators toward REVERSED.
+    - W6 "uninstall a library" (taught as AMBIGUOUS, npm vs. pip) ~ TA-B208 "install a package"
+      (original AMBIGUOUS). This could push annotators toward CONFIRMED.
+    - W2 "upgrade requests with pip" is on the same tool as the bare-name target TA-B201 "pip", although
+      the bare-name rule, not W2, decides that item.
+  - **Handling (analysis unchanged):** report agreement for these five items, and whether they were
+    CONFIRMED or REVERSED, as a sensitivity note next to the primary κ.
+
 Timeline: EACL SRW mentorship deadline Nov 6, 2026; direct submission Dec 15, 2026 (from
 PUBLICATION_ROADMAP.md).
