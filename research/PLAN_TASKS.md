@@ -93,7 +93,7 @@ Every new script must first reproduce the current reported values and refuse to 
 
 ## Phase 6 — Paper and reproducibility (🔵 after T1–T6; include T12 if done)
 
-- [ ] **T14 🔵 Revise `content.tex`**
+- [ ] **T14 🟡 Revise `content.tex`**. **Round 1 applied 2026-09-28** with the ARS `academic-paper` revision workflow (roadmap and checks: `research/paper/T14_REVISION_ROADMAP.md`). Body ends on page 8. Still open: an external re-review (`academic-paper-reviewer`), then the κ and v0.2.1 results once T11/T12 are done.
   - *Work:*
     - Headline numbers without controls; OOD by type with the false-rejection cost.
     - Corrected safety wording; tie-aware selective-prediction figures; calibration comparators.

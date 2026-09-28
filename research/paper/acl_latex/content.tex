@@ -4,25 +4,26 @@
 
 \begin{abstract}
 Natural-language interfaces to the shell are usually framed as generation (NL2Bash, NL2SH). We study a
-constrained alternative --- closed-vocabulary \emph{retrieval} from a curated command library, with no large
-language model anywhere in the system --- and focus on \emph{reliability} rather than accuracy alone. A real,
-previously shipped BM25 baseline reaches 67.3\% accuracy on a 150-query benchmark but has 86.06\% mean
-confidence on its wrong answers. We test whether a lightweight hybrid lexical+local-semantic retriever with
-post-hoc isotonic calibration and margin-based rejection improves accuracy and reliability, under leakage-free
-nested 5-fold cross-validation, on two benchmark versions: v0.1 (150 queries) and v0.2, which adds 35
-out-of-domain (OOD) and 24 ambiguous queries to v0.1, so the two are not independent samples. Calibration is the
-most robust result: it reduces the expected calibration error (ECE) of the hybrid's confidence by 80\% (v0.1) and
-77\% (v0.2), is the only one of four compared effects significant after Holm--Bonferroni correction on both
-versions (adjusted $p=0.0004$ and $0.0003$), and persists on intents held out from tuning (76\% and 69\%) and when
-ambiguous queries are removed. OOD rejection, underpowered at 15 queries (raw $p=0.25$), is significant on v0.2's
-50 OOD queries (34\%$\to$68\%; adjusted $p=0.00006$). The hybrid's accuracy gain over BM25 is consistent in size
-(+5.2 and +3.8 points) but statistically fragile (adjusted $p=0.047$ on v0.1; raw $p=0.070$ on v0.2, where BM25
-wins on exactly one query), and its advantage over dense retrieval on v0.2 (adjusted $p=0.025$) is no longer
-significant without bare-keyword ambiguous queries (raw $p=0.057$). Ambiguity detection is weak (F1 0.31--0.50).
-A rule-based safety classifier reaches 95\%/95\% precision/recall in flagging risky commands. A blind
-re-annotation of 14 of v0.2's 59 AI-authored queries by one partially independent reviewer gave Cohen's
-$\kappa=0.63$, below our 0.7 target; all 8 sampled OOD labels were confirmed, and every disagreement concerned an
-ambiguous label. All significance analyses were specified after the raw results were seen and are exploratory.
+constrained alternative, closed-vocabulary \emph{retrieval} from a curated command library with no large
+language model in the system, and focus on \emph{reliability} rather than accuracy alone. A previously
+published BM25 baseline reaches 67.3\% accuracy on a 150-query benchmark but has 86.06\% mean confidence on its
+wrong answers. We evaluate a lightweight hybrid lexical+local-semantic retriever with post-hoc calibration and
+out-of-domain (OOD) rejection under nested 5-fold cross-validation on two benchmark versions: v0.1 (150
+queries) and v0.2, which adds 35 OOD and 24 ambiguous queries to v0.1, so the two are not independent samples.
+Headline figures exclude 25 canonical queries that copy corpus intents verbatim. Calibration is the most
+consistent result: isotonic calibration cuts the expected calibration error (ECE) of the shipped baseline's
+confidence by 79\% on both versions (0.32$\to$0.07 and 0.29$\to$0.06) and of the hybrid's by 67\% and 81\%
+(bootstrap $p\leq0.0001$ each), Platt scaling and histogram binning do about as well, and calibration changes
+reported confidence, not decisions. The hybrid's confidence also ranks its own errors better than the shipped
+one: lower areas under its risk-coverage curves (AURC and AUGRC) on both versions, with 95\% intervals
+excluding zero. OOD rejection doubles on v0.2
+(17/50$\to$34/50; Holm-adjusted $p=0.00006$), but mostly on requests that are not computing tasks: of 10 terminal
+tasks the corpus does not cover, the detector rejects 4, and it wrongly rejects 11 of 159 answerable queries.
+The accuracy gain over BM25 ($+6.4$ and $+4.5$ points) is consistent in size but statistically fragile
+(adjusted $p=0.047$ on v0.1; raw $p=0.070$ on v0.2), and ambiguity detection is weak. A blind re-annotation of
+14 of v0.2's 59 AI-authored queries by one partially independent reviewer gave Cohen's $\kappa=0.63$, below our
+0.7 target; a two-annotator study is under way. All significance analyses were specified after the raw results
+were seen and are exploratory.
 \end{abstract}
 
 \section{Introduction}
@@ -30,15 +31,17 @@ ambiguous label. All significance analyses were specified after the raw results 
 Natural-language shell assistance can lower the barrier to command-line tools, but incorrect
 commands --- especially destructive ones --- carry real cost. The dominant research trajectory
 since NL2Bash \citep{lin-etal-2018-nl2bash} has been generative: seq2seq and Transformer models (the
-NLC2CMD competition, \citealp{agarwal2021nlc2cmd}), then LLM-based systems (NL2SH;
-\citealp{westenfelder2025nl2sh}), most recently with execution-grounded, RL-trained approaches
+NLC2CMD competition, \citealp{agarwal2021nlc2cmd}), then large language model (LLM) systems (NL2SH;
+\citealp{westenfelder2025nl2sh}), most recently with execution-grounded approaches trained by reinforcement learning
 (BashCoder-R1; \citealp{yu2026bashcoderr1}). This trajectory inherits a persistent risk:
 open-vocabulary generation can hallucinate syntactically valid but semantically wrong or unsafe
 commands.
 
-We study a different, narrower approach implemented in a real, previously-shipped, in-use npm
+We study a different, narrower approach implemented in a real, previously published npm
 package: retrieval from a fixed, curated command corpus (279 commands on the evaluated Windows
-platform) using classical lexical (BM25) scoring, with no LLM anywhere in the system. This constrains
+platform) using classical lexical (BM25) scoring \citep{robertson2009bm25}, with no LLM anywhere in the
+system. The hybrid retriever we evaluate is a research prototype and is not part of the published package.
+This constrains
 coverage but structurally eliminates hallucination of arbitrary commands. We audited and reproduced the
 system's baseline behavior (\S\ref{sec:system}) and found a specific, serious problem: the system is
 frequently \emph{confidently} wrong, not merely wrong. This paper asks whether that problem, and the
@@ -56,14 +59,16 @@ architecture, combined with explicit uncertainty estimation and post-hoc calibra
 improve accuracy and reliability over a pure-BM25 baseline, without the cost or hallucination risk
 of a generative system?
 
-\paragraph{Contributions.} (1) A reproduced audit of a real shipped BM25 baseline's accuracy and ---
-more consequentially --- its confidence miscalibration. (2) A five-component reliability-aware
-retrieval architecture evaluated under leakage-free nested cross-validation. (3) Results on two
-benchmark versions (v0.2 extends v0.1, so they are not independent), with Holm--Bonferroni-corrected
-significance and a sensitivity analysis showing which conclusions depend on bare-keyword ambiguous
-queries. (4) An intent-held-out (GroupKFold) generalization check. (5) Disclosure of the null, weak,
-and fragile results we found, including a below-target blind re-annotation of a sample of our own
-benchmark's AI-authored queries.
+\paragraph{Contributions.} (1) A reproduced audit of a real shipped BM25 baseline's accuracy and, more
+consequentially, its confidence miscalibration. (2) A five-component reliability-aware retrieval
+architecture evaluated under nested cross-validation, with headline figures that exclude verbatim-copy
+control queries. (3) A decision-level reliability analysis: calibration against standard post-hoc
+comparators, selective prediction that does not depend on how tied confidences are ordered, and out-of-domain (OOD) rejection
+broken down by kind of request together with its false-rejection cost. (4) Results on two benchmark versions
+(v0.2 extends v0.1, so they are not independent), with Holm--Bonferroni-corrected significance, a
+sensitivity analysis for bare-keyword ambiguous queries, and a check for tuning leakage across intent groups.
+(5) Disclosure of the null, weak, and fragile results we found, including a below-target blind
+re-annotation of a sample of our own benchmark's AI-authored queries.
 
 \section{Related Work}
 
@@ -75,15 +80,24 @@ generation-based successor, reporting that parsing, in-context learning, in-weig
 constrained decoding improve LLM translation accuracy by up to 32\%. Recent work reinforces our framing
 that exact-match accuracy alone is an incomplete signal: QuoteBench \citep{li2026quotebench} shows that
 matched execution scores can mask command-path failures, and BashCoder-R1 \citep{yu2026bashcoderr1},
-despite RL training against execution feedback, reaches 90\% (single-line) and 73\% (multi-line) full
+despite reinforcement-learning training against execution feedback, reaches 90\% (single-line) and 73\% (multi-line) full
 functional success. A 2026 scaling study \citep{wang2026bm25wins} finds BM25 overtakes dense and agentic
 retrieval past roughly 10M corpus tokens, supporting lexical retrieval's competitiveness at scale, though
 at a corpus scale far larger than ours. \citet{notaro2024commandrisk} train a transformer-based
-command-risk classifier; we deliberately compare against a simpler, fully deterministic rule-based
-alternative (\S\ref{sec:ablation}). Our study complements this generation-focused work with a
-reliability-oriented evaluation of closed-vocabulary retrieval: calibration, OOD rejection, and
-intent-held-out evaluation of a lexical/hybrid retriever. We do not claim priority; our literature search
-was limited (see Limitations).
+command-risk classifier; we use a simpler, fully deterministic rule-based one instead (\S\ref{sec:ablation}).
+
+Our reliability analysis draws on work on calibration \citep{guo2017calibration,naeini2015ece}, post-hoc
+recalibration \citep{zadrozny2002isotonic,platt2000probabilistic,zadrozny2001binning}, selective
+classification and its risk-coverage metrics \citep{geifman2017selective,geifman2019aurc,traub2024overcoming},
+and OOD detection from confidence scores \citep{hendrycks2017baseline}. The closest task framing is intent
+classification with out-of-scope queries \citep{larson-etal-2019-evaluation}, where classifiers do well in scope
+but struggle to flag out-of-scope requests; the closest methods are trained calibrators that decide when to
+abstain under domain shift \citep{kamath-etal-2020-selective} and confidence estimation for mapping language to
+programs \citep{dong-etal-2018-confidence}. In text-to-SQL, selective classifiers mostly catch irrelevant
+questions rather than wrong queries \citep{somov2025texttosql}, which parallels our OOD breakdown
+(\S\ref{sec:results}). A targeted search (Limitations) found no prior evaluation of calibration, OOD rejection,
+and selective prediction for closed-vocabulary natural-language-to-shell retrieval; to our knowledge this
+combination, not any single component, is new.
 
 \section{TermAssist: Baseline System and Benchmark}
 \label{sec:system}
@@ -92,8 +106,9 @@ was limited (see Limitations).
 10-word stopword list), BM25 scoring ($k_1=1.2$, $b=0.75$, standard IDF smoothing) over
 \texttt{intent+category+description}, plus a flat $+15.0$ bonus when the query is a near-substring
 of the command's intent. Confidence $= \min(\mathrm{round}(\mathrm{score}/8\times100), 100)$,
-rejected below $\mathrm{score}<2.0$. No embeddings, no LLM, mean latency 3.29ms. We reproduced this
-baseline's outputs exactly (0/150 mismatches against the archived results).
+rejected below $\mathrm{score}<2.0$. No embeddings, no LLM; mean latency was 3.29\,ms in one run on one
+machine, an indicative figure only. We reproduced this baseline's outputs exactly (0/150 mismatches against
+the archived results).
 
 \paragraph{Corpus.} 431 records in 27 categories, covering 297 distinct intents across platforms; each
 record is tagged for Windows, Linux/macOS, or all platforms. On the evaluated Windows platform the 152
@@ -107,7 +122,8 @@ complete, so all results here are on this 279-intent corpus.
 low-overlap-paraphrase, ambiguous, OOD, polysemy, single-keyword, safety-sensitive,
 complex-multi-intent), with ground-truth classification (119 CORRECT, 14 AMBIGUOUS, 15 OOD, 2
 NEEDS\_CORRECTION) and a risk-level field (120 LOW, 10 MEDIUM, 15 HIGH, 5 CRITICAL) reused in the
-safety evaluation (\S\ref{sec:ablation}).
+safety evaluation (\S\ref{sec:ablation}). All 25 canonical queries repeat a corpus intent verbatim and every
+system answers them correctly, so we treat them as a positive control and exclude them from headline figures.
 
 \paragraph{Benchmark, v0.2.} A second version (209 queries) \emph{extends} v0.1: it contains all 150
 v0.1 queries plus 35 new OOD and 24 new ambiguous queries, added because v0.1's OOD (15) and ambiguous
@@ -116,7 +132,9 @@ independent sample: the 121 answerable queries are identical in both versions, a
 between the versions comes from the added OOD and ambiguous queries. The new queries were authored and
 adjudicated by an AI agent under human direction, following v0.1's design methodology (each query
 checked against actual system retrieval output; 6 of 30 drafted ambiguous candidates were rejected for
-failing the ambiguity or novelty criteria). Seventeen of the 24 new ambiguous queries are single-token
+failing the ambiguity or novelty criteria). The new OOD queries were confirmed as OOD partly with the system's
+own retrieval scores (every one has top-1 BM25 score $\leq7.39$ and dense similarity $\leq0.31$), the scores the
+OOD detector thresholds, which may make them easier for it to reject. Seventeen of the 24 new ambiguous queries are single-token
 tool or category names (``grep'', ``pip'', ``system''); we call these \emph{bare-keyword} queries, and
 nine of v0.1's 14 ambiguous queries are of the same kind (``git'', ``docker'').
 
@@ -141,13 +159,14 @@ the central problem motivating this paper.
 \label{sec:architecture}
 
 Five components, each targeting a specific measured failure: (1) local dense retrieval
-(\texttt{Xenova/all-MiniLM-L6-v2}, 384-dim, offline after one-time download) for the lexical gap;
-(2) hybrid score fusion with $\alpha$ tuned via nested 5-fold CV; (3) margin/entropy uncertainty
+(\texttt{Xenova/all-MiniLM-L6-v2}, a 384-dimensional MiniLM sentence encoder
+\citep{wang2020minilm,reimers-gurevych-2019-sentence}, offline after a one-time download) for the lexical gap;
+(2) hybrid score fusion with $\alpha$ tuned via nested 5-fold cross-validation (CV); (3) margin/entropy uncertainty
 signals over top-10 ranked candidates; (4) OOD and ambiguity detectors (dev-tuned thresholds); (5)
-isotonic confidence calibration. A sixth, independent component --- a rule-based safety classifier
---- targets command risk, orthogonal to retrieval correctness. No LLM is used anywhere in the
-system. Dense-only retrieval took 5.9\,ms per query on average on v0.1 (BM25: 3.3\,ms) once the model
-was loaded; we did not time the full hybrid pipeline end to end.
+isotonic confidence calibration \citep{zadrozny2002isotonic}. A sixth, independent component, a rule-based
+safety classifier, targets command risk, which is orthogonal to retrieval correctness. No LLM is used anywhere
+in the system. In one timing run on one machine (indicative only), dense-only retrieval took 5.9\,ms per query
+on v0.1 (BM25: 3.3\,ms) once the model was loaded; we did not time the full hybrid pipeline end to end.
 
 \section{Experimental Methodology}
 \label{sec:methods}
@@ -157,12 +176,12 @@ cross-validation (seed 42, stratified by classification) --- \textbf{Split A}: f
 the parameter is chosen using only the other four folds, then applied once to the held-out fold,
 never tuned on data it is later scored against. Accuracy is pooled over all non-OOD queries (hits
 divided by queries), the unit of our significance tests; per-fold means differ from it by at most
-0.2 points. Statistical testing uses the exact (binomial) McNemar's test, given small discordant-pair
-counts.
+0.2 points. Statistical testing uses the exact (binomial) McNemar's test \citep{mcnemar1947note}, given
+small discordant-pair counts; proportions carry Wilson intervals \citep{wilson1927probable}.
 
 \paragraph{Multiple-comparison correction.} We fix a family of four comparisons per benchmark
-version --- accuracy vs. BM25, accuracy vs. dense-alone, OOD rejection, and calibration ECE
-reduction --- and apply Holm--Bonferroni correction within each family; a result is called significant
+version --- accuracy vs. BM25, accuracy vs. dense-alone, OOD rejection, and reduction in expected
+calibration error (ECE) --- and apply Holm--Bonferroni correction \citep{holm1979simple} within each family; a result is called significant
 only at Holm-adjusted $p<0.05$. \emph{This family was written down after the raw v0.1 and v0.2 test
 results had been computed} (only the Holm-adjusted values and bootstrap intervals came later), and
 calibration was named the primary hypothesis knowing it was the robust result. All significance
@@ -175,8 +194,19 @@ provides 95\% CIs for the accuracy deltas (paired resampling over non-OOD query 
 calibration ECE reduction (resampling over pooled held-out predictions), complementing the discrete
 exact McNemar's test with a continuous-estimate view of the same comparisons.
 
-\paragraph{Split B --- intent-held-out generalization.} To test whether Split A's findings depend on
-the same command intents appearing in both tuning and test folds, we additionally construct a
+\paragraph{Calibration and selective prediction.} ECE uses 10 equal-width bins
+\citep{naeini2015ece,guo2017calibration}, reported with the Brier score \citep{brier1950verification};
+every calibrator (isotonic, Platt scaling, histogram binning) is fit on development folds only. Confidence
+often ties at its maximum (64\% of the hybrid's and 73\% of the baseline's values on v0.1), so a
+risk-coverage curve that answers queries in order of confidence depends on how ties are broken. We therefore
+use the expected risk under a random order within ties and summarize the curve by the area under it (AURC; \citealp{geifman2019aurc}) and the area under
+the generalized risk-coverage curve (AUGRC; \citealp{traub2024overcoming}), over all queries, where answering an OOD query
+counts as an error. The area under the receiver operating characteristic curve (AUROC) for separating
+right from wrong answers by confidence, which we call correctness AUROC, measures ranking alone.
+
+\paragraph{Split B: tuning-leakage check across intent groups.} The corpus always contains the gold intent,
+so no split can test unseen commands. Split B instead checks whether Split A's results depend on the
+same command intents appearing in both tuning and test folds. We construct a
 GroupKFold split keyed by a derived intent-group id (the gold command for answerable queries; the
 sorted acceptable-command set for ambiguous queries; a singleton per query for OOD queries, which
 target no intent). We run this on both benchmark versions (171 groups over v0.2's 209 queries; 125
@@ -187,61 +217,88 @@ on queries targeting \emph{different} command intents than those they are scored
 \section{Results}
 \label{sec:results}
 
-\paragraph{Retrieval accuracy.} On v0.1's 135 non-OOD queries, BM25 reaches 71.9\% (97/135), dense-only
-72.6\% (98/135), and hybrid 77.0\% (104/135): a gain over BM25 of $+5.2$ points (bootstrap 95\% CI [2.2,
-8.9]; exact McNemar $p=0.0156$, Holm-adjusted $p=0.047$: significant, but by 0.003). On v0.2's 159 non-OOD
-queries, BM25 reaches 75.5\% (120/159), dense-only 72.3\% (115/159), and hybrid 79.2\% (126/159): a gain of
-similar size ($+3.8$ points, CI [0.6, 7.5]) that does not clear $p<0.05$ even before correction (raw
-$p=0.070$). The exact test rests on very few discordant queries: 7 on v0.1 (all favoring hybrid) and 8 on
+\paragraph{Retrieval accuracy.} Table~\ref{tab:acc} gives accuracy with and without the 25 canonical
+controls. Without them, the hybrid gains $+6.4$ points over BM25 on v0.1 (72/110 to 79/110; bootstrap
+95\% CI [1.8, 10.9]; exact McNemar $p=0.0156$, Holm-adjusted $p=0.047$: significant, but by 0.003) and
+$+4.5$ points on v0.2 (95/134 to 101/134; CI [0.7, 9.0]), which does not clear $p<0.05$ even before
+correction (raw $p=0.070$). The controls are answered correctly by every system, so they never enter the
+discordant pairs and the $p$-values are the same with or without them; only levels and effect sizes move.
+The exact test rests on very few discordant queries: 7 on v0.1 (all favoring hybrid) and 8 on
 v0.2 (7 favoring hybrid). The single query on which BM25 succeeds and hybrid fails is the bare keyword
 ``system'' (\texttt{TA-B194}); without it the v0.2 comparison is 7--0, exactly as on v0.1. The accuracy gain
 is therefore consistent in size across versions, but its significance depends on one query, and we read it
-as suggestive rather than established. Hybrid vs.\ dense-alone is not significant on v0.1 (Holm-adjusted
-$p=0.292$) but is on v0.2 (Holm-adjusted $p=0.025$); three of the 14 queries on which hybrid beats dense are
+as suggestive rather than established. Hybrid vs.\ dense-alone ($+5.5$ and $+8.2$ points without controls) is
+not significant on v0.1 (Holm-adjusted $p=0.292$) but is on v0.2 (Holm-adjusted $p=0.025$); three of the 14
+queries on which hybrid beats dense are
 new bare-keyword queries (\texttt{jq}, \texttt{grep}, \texttt{shell}), and without them the comparison is
 3--11 (raw $p=0.057$). We suspect exact-token matching helps on such queries, but we did not test this.
 
-\begin{figure*}[t]
+\begin{table}[t]
   \centering
-  \includegraphics[width=0.48\linewidth]{figures/fig1_baseline_vs_improved_accuracy.png} \hfill
-  \includegraphics[width=0.48\linewidth]{figures/fig1_baseline_vs_improved_accuracy_v0.2.png}
-  \caption{Accuracy on non-OOD queries (pooled; $n=135$ and $159$) for BM25, dense-only, and hybrid
-  retrieval under nested 5-fold CV. Left: v0.1. Right: v0.2. The BM25$\to$hybrid gain is similar in size
-  on both versions; its exact-test significance differs (Table~\ref{tab:holm}) and rests on a few queries
-  (Table~\ref{tab:sens}).}
-  \label{fig:accuracy}
-\end{figure*}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}llrr@{}}
+    \toprule
+    \textbf{Ver.} & \textbf{System} & \textbf{Excl.\ controls} & \textbf{All non-OOD} \\
+    \midrule
+    v0.1 & BM25   & 72/110 (65.5) & 97/135 (71.9) \\
+         & Dense  & 73/110 (66.4) & 98/135 (72.6) \\
+         & Hybrid & 79/110 (71.8) & 104/135 (77.0) \\
+    v0.2 & BM25   & 95/134 (70.9) & 120/159 (75.5) \\
+         & Dense  & 90/134 (67.2) & 115/159 (72.3) \\
+         & Hybrid & 101/134 (75.4) & 126/159 (79.2) \\
+    \bottomrule
+  \end{tabular}
+  \caption{Non-OOD accuracy (hits/queries, \%) with the 25 canonical controls excluded (headline) and
+  included. Every system answers all 25 controls correctly.}
+  \label{tab:acc}
+\end{table}
 
 By query type (v0.1), hybrid retains BM25's 100\% on canonical and safety-sensitive queries while
 improving most on low-overlap-paraphrase; single-keyword and OOD queries remain the hardest
 categories for both systems, and v0.2 has a similar shape (Figure~\ref{fig:bytype}, Appendix~\ref{app:figs}).
 
 \paragraph{OOD and ambiguity detection.} On v0.1, AUROC is 0.867 for OOD detection (feature: absolute
-top-1 score) and 0.784 for ambiguity detection (feature: margin). On v0.2, with 50 instead of 15 OOD
-queries, OOD AUROC is 0.901, and the tuned OOD detector raises the rejection rate on OOD queries from the
-baseline's 34.0\% to 68.0\% (17/50 to 34/50), which \textbf{survives Holm correction} (Holm-adjusted
-$p=0.00006$). On v0.1 the same comparison was not significant even before correction (raw $p=0.25$).
-Combined with margin rejection (A5, \S\ref{sec:ablation}), 38 of the 50 OOD queries are rejected.
-Ambiguity-detection F1 is 0.310 on v0.1 and 0.496 on v0.2, while AUROC is 0.784 and 0.723.
+top-1 score) and 0.784 for ambiguity detection (feature: margin), as means over folds. On v0.2, with 50
+instead of 15 OOD queries, OOD AUROC is 0.901 (pooled: 0.900, 95\% CI [0.84, 0.95]), and the tuned OOD
+detector raises the rejection rate on OOD queries from the baseline's 34.0\% to 68.0\% (17/50 to 34/50),
+which \textbf{survives Holm correction} (Holm-adjusted $p=0.00006$). On v0.1 the same comparison was not
+significant even before correction (raw $p=0.25$). Combined with margin rejection (A5,
+\S\ref{sec:ablation}), 38 of the 50 OOD queries are rejected.
 
-\paragraph{Calibration.} Isotonic calibration reduces ECE for all four confidence signals we tested, by
-46.9--84.1\% (the dense-similarity signal gains least). For the hybrid's own fused-score signal, which
-the rest of the paper uses, ECE falls from 0.2741 to 0.0537 on v0.1 (80.4\%; Figure~\ref{fig:reliability},
-left) and from 0.3237 to 0.0738 on v0.2 (77.2\%; right). A paired bootstrap test of the reduction gives
-one-sided $p\leq0.0001$ on both benchmarks (the resolution of 10,000 resamples), and this is the
-\textbf{only comparison in the family that survives Holm correction on both benchmark versions}
-(Table~\ref{tab:holm}). Selective answering at 50\% coverage achieves 10.7\% error vs.\ 30.7\% unconditional
-on v0.1; risk-coverage curves for both versions are in Figure~\ref{fig:riskcoverage} (Appendix~\ref{app:figs}).
+The gain comes mostly from requests that are not computing tasks. Grouping v0.2's OOD queries by kind (labels
+assigned by an AI assistant and not yet checked by a person), the detector rejects 25 of 34 everyday
+non-computing requests (baseline 14; AUROC 0.94) but only 4 of the 10 terminal tasks the corpus does not
+cover, such as unsupported tools (baseline 0; AUROC 0.79, CI [0.63, 0.93]), too few to test ($p=0.125$).
+The 15 original v0.1 OOD queries show a smaller gain (9/15 vs.\ 4/15, $p=0.0625$) than the 35 added ones
+(25/35 vs.\ 13/35), consistent with the selection effect noted in \S\ref{sec:system}, though too small to test
+it. Rejection also has a cost: the detector
+rejects 11 of 159 answerable v0.2 queries (6.9\%, Wilson 95\% CI [3.9, 12.0]; 6/135 on v0.1), 3 of which the
+hybrid had answered correctly, against 17 OOD queries newly rejected. Ambiguity-detection F1 is 0.310 on
+v0.1 and 0.496 on v0.2, while AUROC is 0.784 and 0.723.
 
-\begin{figure*}[t]
-  \centering
-  \includegraphics[width=0.40\linewidth]{figures/fig3_reliability_diagram.png} \hspace{0.08\linewidth}
-  \includegraphics[width=0.40\linewidth]{figures/fig3_reliability_diagram_v0.2.png}
-  \caption{Reliability diagram for the hybrid system's fused-score confidence, before vs.\ after isotonic
-  calibration (10 equal-width bins; dot area grows with the number of predictions in the bin; dashed line:
-  perfect calibration). Left: v0.1. Right: v0.2.}
-  \label{fig:reliability}
-\end{figure*}
+\paragraph{Calibration.} We lead with the shipped baseline's confidence, the number users see. With the
+controls excluded, isotonic calibration lowers its ECE from 0.323 to 0.069 on v0.1 and from 0.293 to 0.063 on
+v0.2 (79\% each; Brier 0.305$\to$0.198 and 0.266$\to$0.169). For the hybrid's fused-score confidence, ECE
+falls from 0.329 to 0.108 (67\%) and from 0.368 to 0.071 (81\%). Each reduction has one-sided paired-bootstrap
+$p\leq0.0001$, the resolution of 10,000 resamples. With the controls included, the hybrid's reductions are
+80\% and 77\% (Figure~\ref{fig:reliability}, Appendix~\ref{app:figs}); this is the family's pre-named calibration comparison and
+\textbf{the only one that survives Holm correction on both benchmark versions} (Table~\ref{tab:holm}). The
+dense-similarity signal is already nearly calibrated, and its reduction is not significant ($p=0.27$ and
+$0.10$). Platt scaling and histogram binning, fit on the same folds, reduce ECE by similar amounts, with
+overlapping bootstrap intervals; histogram binning's lowest ECE partly reflects being scored on the bins it
+fits, and it has the worst Brier score. Calibration changes reported confidence, not decisions: A6 makes the
+same choices as A5 (\S\ref{sec:ablation}), and because each fold gets its own map, pooled correctness AUROC
+even falls slightly (hybrid, v0.1: 0.858 to 0.804).
+
+\paragraph{Selective prediction.} The hybrid's confidence ranks its own errors better than the shipped
+confidence: tie-aware AURC is 0.125 vs.\ 0.221 on v0.1 (difference $-0.096$, 95\% CI [$-0.148$, $-0.045$]) and
+0.163 vs.\ 0.229 on v0.2 ($-0.067$ [$-0.111$, $-0.023$]); AUGRC agrees ($-0.041$ [$-0.062$, $-0.021$] and
+$-0.027$ [$-0.045$, $-0.010$]), and both differences keep their sign and exclude zero without the controls.
+Because the two systems also differ in accuracy, AURC and AUGRC mix ranking with accuracy; correctness
+AUROC, which isolates ranking, is 0.858 vs.\ 0.755 on v0.1 and 0.889 vs.\ 0.830 on v0.2. At 50\% coverage the
+hybrid's expected error on v0.1 is 8.3\% (0--10.7\% depending on how ties are ordered) against 30.7\% when
+answering every query. Figure~\ref{fig:riskcoverage} (Appendix~\ref{app:figs}) shows the curves.
 
 \begin{table}[t]
   \centering
@@ -262,7 +319,8 @@ on v0.1; risk-coverage curves for both versions are in Figure~\ref{fig:riskcover
     \bottomrule
   \end{tabular}
   \caption{Holm-corrected significance ($\alpha=0.05$; exploratory, see \S\ref{sec:methods}); Ver.\ is
-  the benchmark version. The calibration $p$ of 0.0001 is the resolution limit of the bootstrap.
+  the benchmark version. All rows include the canonical controls, which do not change the accuracy
+  $p$-values. The calibration $p$ of 0.0001 is the resolution limit of the bootstrap.
   Bootstrap 95\% CIs: accuracy vs.\ BM25 [2.2, 8.9]pp (v0.1) and [0.6, 7.5]pp (v0.2); accuracy vs.\
   dense [$-$0.7, 9.6]pp and [1.9, 11.9]pp; ECE reduction [0.128, 0.283] and [0.172, 0.295].}
   \label{tab:holm}
@@ -294,37 +352,15 @@ answerable evidence.
   \label{tab:sens}
 \end{table*}
 
-\paragraph{Intent-held-out generalization (Split B).} GroupKFold over 171 derived intent groups
-(v0.2; 0 groups split across folds, verified programmatically) shows that hybrid accuracy and OOD
-detection do not depend on intent overlap between tuning and test: the hybrid answers exactly the same
-number of non-OOD queries correctly under both splits (126/159 on v0.2 and 104/135 on v0.1), and OOD AUROC
-is 0.898 vs.\ 0.901 on v0.2. Calibration, while still a large improvement, is measurably
-\textbf{attenuated on held-out intents}: a 69.0\% vs.\ 77.2\% relative ECE reduction on v0.2 and 76.4\%
-vs.\ 80.4\% on v0.1 (Table~\ref{tab:splitb}). The v0.1 detection numbers are noisier, consistent with its
-small OOD subset.
-
-\begin{table}[t]
-  \centering
-  \small
-  \setlength{\tabcolsep}{3pt}
-  \begin{tabular}{@{}llrrr@{}}
-    \toprule
-    \textbf{Ver.} & \textbf{Metric} & \textbf{Split A} & \textbf{Split B} & \textbf{$\Delta$} \\
-    \midrule
-    v0.1 & Non-OOD acc. & 104/135 & 104/135 & 0 \\
-    v0.1 & OOD AUROC & 0.867 & 0.849 & $-$0.018 \\
-    v0.1 & Ambig. F1 & 0.310 & 0.300 & $-$0.010 \\
-    v0.1 & Calib. ECE & .274$\to$.054 & .274$\to$.065 & $+$0.011 \\
-    v0.2 & Non-OOD acc. & 126/159 & 126/159 & 0 \\
-    v0.2 & OOD AUROC & 0.901 & 0.898 & $-$0.003 \\
-    v0.2 & Ambig. F1 & 0.496 & 0.479 & $-$0.017 \\
-    v0.2 & Calib. ECE & .324$\to$.074 & .324$\to$.101 & $+$0.027 \\
-    \bottomrule
-  \end{tabular}
-  \caption{Split A (class-stratified) vs.\ Split B (intent-held-out). For ECE, $\Delta$ is the change in
-  post-calibration ECE (higher is worse).}
-  \label{tab:splitb}
-\end{table}
+\paragraph{Tuning-leakage check (Split B).} GroupKFold over 171 derived intent groups (v0.2; 0 groups split
+across folds, verified programmatically) shows that hybrid accuracy and OOD detection do not depend on the
+same intents appearing in tuning and test: the hybrid answers exactly the same number of non-OOD queries
+correctly under both splits (126/159 on v0.2 and 104/135 on v0.1), and OOD AUROC is 0.898 vs.\ 0.901 on v0.2.
+This is expected, since only 3--4 parameters are tuned, and it is not evidence about commands missing from
+the corpus. Calibration, while still a large improvement, is measurably \textbf{attenuated when the
+calibrator never sees the test queries' intents}: a 69.0\% vs.\ 77.2\% relative ECE reduction on v0.2 and
+76.4\% vs.\ 80.4\% on v0.1 (Table~\ref{tab:splitb}, Appendix~\ref{app:figs}; controls included). The v0.1 detection numbers are
+noisier, consistent with its small OOD subset.
 
 \section{Ablation, Functional, and Safety Evaluation}
 \label{sec:ablation}
@@ -347,15 +383,17 @@ success (validates benchmark quality). Retrieved (hybrid) commands: 93.3\% funct
 cases of textually-correct-but-functionally-broken --- a positive result that covers only 10\% of
 the benchmark by design.
 
-\paragraph{Safety evaluation.} A deterministic, rule-based classifier with four risk levels (low,
-medium, high, critical), written from general domain knowledge before inspecting per-query outcomes,
-was evaluated against the benchmark's pre-existing risk labels: 89.6\% exact four-level accuracy (112/125
-gold commands), 95\%/95\% precision/recall on the actionable risky-vs.-not-risky decision, and no
-dangerous-direction misses (no critical- or high-risk command was ever tagged safe). On retrieved commands,
-accuracy holds (90.0\%) but risky-binary precision drops to 0.826 --- a retrieval-error artifact, not a
-classifier defect. On v0.2, exact accuracy and recall shift modestly downward (83.9\%/0.864) because the
-classifier --- deliberately not re-tuned against new examples --- was authored before v0.2's new gold
-commands existed, surfacing the same documented gaps, not new ones.
+\paragraph{Safety evaluation (descriptive).} A deterministic, rule-based classifier with four risk levels
+(low, medium, high, critical), written from general domain knowledge before inspecting per-query outcomes,
+was scored against the benchmark's own risk labels, which are not an independent safety set. On v0.1 gold
+commands it reaches 89.6\% exact four-level accuracy (112/125) and flags 19 of the 20 high- or critical-risk
+commands. It misses one: \texttt{git checkout -- .}, which discards uncommitted work, is tagged medium, a
+dangerous-direction miss under our specification's definition (high or critical tagged low or medium; 1/20,
+Wilson 95\% CI [0.9, 23.6]\%). On v0.2 there are 3 such misses of 22 ([4.8, 33.3]\%): the same one, plus two
+that trace to the labels rather than the classifier. The bare query ``system'' is labeled high from its
+riskiest reading although its gold command only reads logs, and ``stop a process'' is labeled high although
+v0.1 labels the same forced \texttt{Stop-Process} command medium. We therefore make no safety claim; an
+independent, human-labeled safety set is future work.
 
 \section{Blind Re-Annotation of a Sample of AI-Authored Queries}
 \label{sec:kappa}
@@ -368,7 +406,7 @@ authoring at a summary level but had not seen these 14 labels; the check is ther
 partially independent. The reviewer was also shown only the query text, not the command list, whereas our
 labels are defined relative to that list (a query is ambiguous if the list holds several distinct commands
 that match it), so part of any disagreement may reflect different definitions rather than labeling error.
-Cohen's $\kappa=0.6316$, below our pre-specified 0.7 target. Agreement was perfect on the 8 OOD-labeled
+Cohen's $\kappa=0.6316$ \citep{cohen1960coefficient}, below our pre-specified 0.7 target. Agreement was perfect on the 8 OOD-labeled
 items (8/8), and all three disagreements were among the 6 ambiguous-labeled ones: ``ffmpeg'' and ``pip''
 (single-token tool names) and ``list running processes'' (a short category phrase), each of which we had
 labeled ambiguous but the reviewer judged to have one obvious default command. The other three ambiguous
@@ -378,20 +416,24 @@ materially. All sampled OOD labels, on which the OOD-rejection result rests, wer
 labels are the uncertain ones, which is why \S\ref{sec:results} reports how the conclusions change when
 ambiguous queries are excluded. The disputed items are not all single-token, so the ``answerable only''
 rows of Table~\ref{tab:sens}, which drop every ambiguous query, are the ones free of this label
-uncertainty.
+uncertainty. A two-annotator re-annotation of all 59 AI-authored queries, with a written codebook that
+defines the labels relative to the command list and an analysis fixed in advance, is under way; its
+results are not reported here.
 
 \section{Discussion}
 
-The clearest result concerns reliability, not accuracy. Post-hoc isotonic calibration removes most of the
-baseline's overconfidence (80\% and 77\% relative ECE reduction for the hybrid's confidence on v0.1 and
-v0.2). It is the only compared effect that is significant after correction on both benchmark versions, it
-survives intent-held-out evaluation with some attenuation (69--76\% vs.\ 77--80\%), and it is unchanged when
-bare-keyword or all ambiguous queries are removed (Table~\ref{tab:sens}). OOD rejection is the second solid
-result, but only once the OOD subset grew from 15 to 50 queries, and all 8 of its labels that we
-re-annotated were confirmed. The accuracy gain over BM25 is real in size but not established in
-significance: it is similar on both versions ($+5.2$ and $+3.8$ points), and every discordant query but one
-favors the hybrid, yet the exact test has only 7--8 discordant queries to work with, so a single query
-(``system'') moves it across the threshold. The hybrid-over-dense result on v0.2 depends on three new
+The clearest results concern reliability, not accuracy. Post-hoc calibration removes most of the shipped
+baseline's overconfidence (79\% relative ECE reduction on both versions, controls excluded), and the gain does
+not depend on isotonic regression: Platt scaling and histogram binning do about as well. It improves the
+confidence users see, not the answers or their ranking. The decision-level result is that the hybrid's
+confidence orders its own errors better than the shipped one, on AURC, AUGRC, and correctness AUROC, on both
+versions and without the controls. OOD rejection is the third result, significant once the OOD subset grew
+from 15 to 50 queries, but its scope is narrower than the headline rate suggests: it comes mostly from
+everyday non-computing requests, the detector rejects only 4 of 10 terminal tasks the corpus lacks, and it
+costs 11 false rejections on 159 answerable queries. The accuracy gain over BM25 is real in size but not
+established in significance: it is similar on both versions ($+6.4$ and $+4.5$ points without controls), and
+every discordant query but one favors the hybrid, yet the exact test has only 7--8 discordant queries to work
+with, so a single query (``system'') moves it across the threshold. The hybrid-over-dense result on v0.2 depends on three new
 bare-keyword queries. We draw two lessons. First, at this benchmark size, significance statements about
 accuracy differences are fragile to individual queries, the power concern raised by
 \citet{card2020littlepower}; effect sizes with intervals are more informative than $p$-values here. Second,
@@ -403,19 +445,21 @@ ambiguous label itself is unsettled for short queries.
 \section{Conclusion and Future Work}
 \label{sec:conclusion}
 
-A lightweight, fully offline, non-LLM hybrid retriever with post-hoc isotonic calibration substantially
-improves the reliability of a shipped BM25 command-retrieval baseline. The most defensible results are the
-calibration improvement, which holds on both benchmark versions, on held-out intents, and when ambiguous
-queries are removed, and the OOD-rejection improvement, which is significant on the larger OOD subset.
+A lightweight, fully offline, non-LLM hybrid retriever with post-hoc calibration improves the reliability
+of a shipped BM25 command-retrieval baseline. The most defensible results are that standard recalibration
+removes most of the shipped confidence's overconfidence on both benchmark versions with the controls
+excluded (the hybrid's calibration gain also holds when ambiguous queries are removed); that the hybrid's
+confidence ranks its own errors better; and that OOD
+rejection improves significantly on the larger OOD subset, mainly for requests that are not computing tasks.
 The hybrid's accuracy gain over BM25 is consistent in size but statistically fragile, the hybrid-over-dense
-advantage on v0.2 depends on a few bare-keyword queries, and ambiguity detection is weak. All significance
-analyses are exploratory. Future work, in priority order: (1) a two-annotator re-annotation of all 59
-AI-authored queries, for which a written codebook (defining labels relative to the command list) and a
-pre-declared analysis protocol are ready, followed by adjudication and a corrected, frozen benchmark
-version; (2) a confirmatory analysis specified before running on that benchmark; (3) more answerable
-queries, since v0.2 adds none; (4) an independent human-labeled safety set not derived from the
-classifier's own logic; (5) expanding the corpus toward the planned 500--800 human-validated intents, and
-functional evaluation beyond 15 tasks; and (6) a human-preference study. Items (1)--(5) need human effort
+advantage on v0.2 depends on a few bare-keyword queries, ambiguity detection is weak, and the rule-based
+safety classifier misses at least one destructive command. All significance analyses are exploratory. Future
+work, in priority order: (1) completing the two-annotator re-annotation now under way, followed by
+adjudication and a corrected, frozen benchmark version; (2) a confirmatory analysis specified before running
+on that benchmark; (3) more answerable queries, since v0.2 adds none, and more terminal-task OOD queries,
+judged by people without retrieval-score screening; (4) an independent human-labeled safety set not derived
+from the classifier's own logic; (5) expanding the corpus toward the planned 500--800 human-validated intents,
+and functional evaluation beyond 15 tasks; and (6) a human-preference study. Items (1)--(5) need human effort
 and cannot responsibly be replaced by bulk automated generation.
 
 % Invisible marker: build.sh reads its page number to check the 8-page limit. Per the ACL formatting
@@ -439,28 +483,36 @@ and cannot responsibly be replaced by bulk automated generation.
   \item \textbf{Label uncertainty in AI-authored queries.} v0.2's 59 new queries were authored and
   adjudicated by an AI agent under human direction. A blind re-annotation of 14 by one partially
   independent reviewer, who did not see the command list, gave $\kappa=0.63$ (\S\ref{sec:kappa}): OOD
-  labels were confirmed, ambiguous labels were not (3/6 disagreed). The two-annotator protocol has not
-  been run, and v0.1's own ambiguous labels have not been re-annotated at all.
+  labels were confirmed, ambiguous labels were not (3/6 disagreed). The two-annotator study is under way
+  but has no results yet, and v0.1's own ambiguous labels have not been re-annotated at all.
+  \item \textbf{OOD scope and selection.} The OOD gain comes mostly from non-computing requests; only 10 OOD
+  queries are terminal tasks outside the corpus. The added OOD queries were confirmed partly with the same
+  retrieval scores the detector thresholds, and the subtype labels used in the breakdown were assigned by an
+  AI assistant and not checked by a person.
   \item \textbf{Ambiguity detection is weak} (F1 0.31--0.50 under both class-stratified and
-  intent-held-out evaluation), and the ambiguous label itself is unsettled for short queries.
+  intent-grouped splits), and the ambiguous label itself is unsettled for short queries.
   \item \textbf{Canonical-query independence.} All 25 canonical queries are verbatim-equal to a corpus
   intent, so 100\% canonical accuracy is a positive-control sanity check, not evidence of language
-  understanding; the paraphrase, low-overlap, polysemy, and ambiguous types carry the capability claims.
+  understanding. Headline figures exclude them, but the Holm table, sensitivity table, Split B table, and
+  figures include them.
   \item \textbf{Ground-truth defects.} Three benchmark items have gold or acceptable commands outside the
   searched corpus (\S\ref{sec:system}). They do not change comparisons between systems, but they should be
   corrected in a later version.
   \item \textbf{Corpus scale, platform, and vetting.} 279 Windows-visible intents (431 raw records), small
   relative to generation-oriented corpora and single-platform; records were checked by script, not
   validated one by one; the planned 500--800-intent expansion is not done.
-  \item \textbf{Calibration under intent shift.} The ECE reduction attenuates on intent-held-out
-  evaluation (80\% to 76\% on v0.1, 77\% to 69\% on v0.2), and isotonic calibration is sensitive to small
-  samples.
-  \item \textbf{Evaluation scope.} No human-preference study; a fixed embedding model; no end-to-end
-  latency measurement of the hybrid; functional evaluation covers only 15 of 150 queries and treats success
-  as exit code 0, not verified side effects; the safety classifier is evaluated against the benchmark's own
-  risk labels.
-  \item \textbf{Literature coverage.} Our literature search was limited, so we make no claim of priority
-  or novelty beyond the comparisons cited.
+  \item \textbf{Calibration scope.} The ECE reduction attenuates when grouped by intent (80\% to 76\% on
+  v0.1, 77\% to 69\% on v0.2), calibrators fit on small samples, and calibration does not change decisions or
+  improve ranking.
+  \item \textbf{Safety.} The rule-based classifier misses at least one destructive command and is scored
+  only against the benchmark's own risk labels, two of which are inconsistent; we make no safety claim.
+  \item \textbf{Evaluation scope.} No human-preference study; a fixed embedding model; latencies are
+  single-run, single-machine figures, and the hybrid was not timed end to end; functional evaluation covers
+  only 15 of 150 queries and treats success as exit code 0, not verified side effects. Exact reproduction
+  requires the Windows platform the corpus view is filtered for.
+  \item \textbf{Literature coverage.} Our search was targeted (natural-language-to-shell generation and retrieval,
+  calibration, selective prediction, OOD and out-of-scope detection), so our novelty claim is limited to
+  the combination evaluated here.
 \end{itemize}
 
 \section*{Ethical Considerations}
@@ -470,20 +522,65 @@ which bounds its possible outputs to commands in that library. The library was c
 reviewed command by command (\S\ref{sec:system}), so this bound is weaker than full human vetting, and a
 retrieved command can still be inappropriate for a given user's intent; our own baseline audit found the
 deployed system is frequently \emph{confidently} wrong. We evaluate command risk with a separate,
-deterministic safety classifier (\S\ref{sec:ablation}) specifically because retrieval correctness and command
-risk are orthogonal concerns: a correctly retrieved command can still be destructive if misapplied, and no
-component in this study executes a retrieved command against a user's real system. All functional-evaluation
-command execution in this study ran in disposable, sandboxed temporary directories, never against a host
-machine. We disclose the AI-assisted authorship of part of our benchmark (\S\ref{sec:system}) and the
-below-target result of our own partially independent re-annotation of it (\S\ref{sec:kappa}) rather than omit
-or minimize either.
+deterministic safety classifier (\S\ref{sec:ablation}) because retrieval correctness and command risk are
+orthogonal concerns, and we report that it misses at least one destructive command rather than presenting it
+as a safeguard. No component in this study executes a retrieved command against a user's real system: all
+functional-evaluation command execution ran in disposable, sandboxed temporary directories. We disclose the
+AI-assisted authorship of part of our benchmark (\S\ref{sec:system}) and the below-target result of our own
+partially independent re-annotation of it (\S\ref{sec:kappa}) rather than omit or minimize either. The code,
+benchmark files, result files, and a reproduction guide will be released with the camera-ready version; they
+are withheld from the review version for anonymity.
 
 \bibliography{references}
 
 \appendix
 
-\section{Additional Figures}
+\section{Additional Figures and Tables}
 \label{app:figs}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.48\linewidth]{figures/fig1_baseline_vs_improved_accuracy.png} \hfill
+  \includegraphics[width=0.48\linewidth]{figures/fig1_baseline_vs_improved_accuracy_v0.2.png}
+  \caption{Accuracy on non-OOD queries (pooled; $n=135$ and $159$, including the 25 canonical controls;
+  Table~\ref{tab:acc} gives both views) for BM25, dense-only, and hybrid retrieval under nested 5-fold CV.
+  Left: v0.1. Right: v0.2. The BM25$\to$hybrid gain is similar in size on both versions; its exact-test
+  significance differs (Table~\ref{tab:holm}) and rests on a few queries (Table~\ref{tab:sens}).}
+  \label{fig:accuracy}
+\end{figure*}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.40\linewidth]{figures/fig3_reliability_diagram.png} \hspace{0.08\linewidth}
+  \includegraphics[width=0.40\linewidth]{figures/fig3_reliability_diagram_v0.2.png}
+  \caption{Reliability diagram for the hybrid system's fused-score confidence, before vs.\ after isotonic
+  calibration (10 equal-width bins; dot area grows with the number of predictions in the bin; dashed line:
+  perfect calibration). Left: v0.1. Right: v0.2.}
+  \label{fig:reliability}
+\end{figure*}
+
+\begin{table}[t]
+  \centering
+  \small
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}llrrr@{}}
+    \toprule
+    \textbf{Ver.} & \textbf{Metric} & \textbf{Split A} & \textbf{Split B} & \textbf{$\Delta$} \\
+    \midrule
+    v0.1 & Non-OOD acc. & 104/135 & 104/135 & 0 \\
+    v0.1 & OOD AUROC & 0.867 & 0.849 & $-$0.018 \\
+    v0.1 & Ambig. F1 & 0.310 & 0.300 & $-$0.010 \\
+    v0.1 & Calib. ECE & .274$\to$.054 & .274$\to$.065 & $+$0.011 \\
+    v0.2 & Non-OOD acc. & 126/159 & 126/159 & 0 \\
+    v0.2 & OOD AUROC & 0.901 & 0.898 & $-$0.003 \\
+    v0.2 & Ambig. F1 & 0.496 & 0.479 & $-$0.017 \\
+    v0.2 & Calib. ECE & .324$\to$.074 & .324$\to$.101 & $+$0.027 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Split A (class-stratified) vs.\ Split B (grouped by intent), controls included. For ECE,
+  $\Delta$ is the change in post-calibration ECE (higher is worse).}
+  \label{tab:splitb}
+\end{table}
 
 \begin{figure*}[t]
   \centering
@@ -499,7 +596,9 @@ or minimize either.
   \includegraphics[width=0.48\linewidth]{figures/fig4_risk_coverage_curve.png} \hfill
   \includegraphics[width=0.48\linewidth]{figures/fig4_risk_coverage_curve_v0.2.png}
   \caption{Risk-coverage curve for the hybrid system: queries are answered in order of decreasing
-  confidence, and the error rate is computed over the answered share. Left: v0.1. Right: v0.2.}
+  confidence, and the error rate is computed over the answered share. Tied confidences are answered in
+  benchmark order, so points inside a tie block depend on that order; tie-aware values are in the text.
+  Left: v0.1. Right: v0.2.}
   \label{fig:riskcoverage}
 \end{figure*}
 
