@@ -1,0 +1,221 @@
+{
+  "status": "post hoc, exploratory (research/PLAN_TASKS.md Phase 1)",
+  "generated_by": "research/experiments/phase1_t3b_augrc.js",
+  "task": "T3b: AUGRC (Traub et al., NeurIPS 2024) next to AURC",
+  "definition": "AUGRC = integral over coverage 0..1 of (expected errors among answered queries)/n; tie-aware as in T3; trapezoid rule on the piecewise-linear expected curve",
+  "identity_checked": "AUGRC = acc*(1-acc)*(1-AUROC_correctness) + (1-acc)^2/2, to 1e-12",
+  "reference_points": "augrc_oracle = (1-acc)^2/2 (every error ranked last); augrc_random_ranking = (1-acc)/2 (AUROC 0.5)",
+  "bootstrap": {
+    "B": 10000,
+    "seed": 42
+  },
+  "reproduction_checks": [
+    {
+      "label": "v0.1 all hybrid AURC reproduces T3",
+      "ok": true
+    },
+    {
+      "label": "v0.1 all hybrid AUGRC closed-form identity",
+      "ok": true
+    },
+    {
+      "label": "v0.1 all baseline AURC reproduces T3",
+      "ok": true
+    },
+    {
+      "label": "v0.1 all baseline AUGRC closed-form identity",
+      "ok": true
+    },
+    {
+      "label": "v0.1 controls_excluded hybrid AURC reproduces T3",
+      "ok": true
+    },
+    {
+      "label": "v0.1 controls_excluded hybrid AUGRC closed-form identity",
+      "ok": true
+    },
+    {
+      "label": "v0.1 controls_excluded baseline AURC reproduces T3",
+      "ok": true
+    },
+    {
+      "label": "v0.1 controls_excluded baseline AUGRC closed-form identity",
+      "ok": true
+    },
+    {
+      "label": "v0.2 all hybrid AURC reproduces T3",
+      "ok": true
+    },
+    {
+      "label": "v0.2 all hybrid AUGRC closed-form identity",
+      "ok": true
+    },
+    {
+      "label": "v0.2 all baseline AURC reproduces T3",
+      "ok": true
+    },
+    {
+      "label": "v0.2 all baseline AUGRC closed-form identity",
+      "ok": true
+    },
+    {
+      "label": "v0.2 controls_excluded hybrid AURC reproduces T3",
+      "ok": true
+    },
+    {
+      "label": "v0.2 controls_excluded hybrid AUGRC closed-form identity",
+      "ok": true
+    },
+    {
+      "label": "v0.2 controls_excluded baseline AURC reproduces T3",
+      "ok": true
+    },
+    {
+      "label": "v0.2 controls_excluded baseline AUGRC closed-form identity",
+      "ok": true
+    }
+  ],
+  "versions": {
+    "v0.1": {
+      "all": {
+        "hybrid": {
+          "n": 150,
+          "accuracy": 0.6933,
+          "augrc": 0.0772,
+          "augrc_ci95": [
+            0.0494,
+            0.1094
+          ],
+          "aurc_from_t3": 0.1247,
+          "augrc_random_ranking": 0.1533,
+          "augrc_oracle": 0.047
+        },
+        "baseline": {
+          "n": 150,
+          "accuracy": 0.6467,
+          "augrc": 0.1184,
+          "augrc_ci95": [
+            0.0846,
+            0.1567
+          ],
+          "aurc_from_t3": 0.2208,
+          "augrc_random_ranking": 0.1767,
+          "augrc_oracle": 0.0624
+        },
+        "augrc_difference_hybrid_minus_baseline": {
+          "point": -0.0412,
+          "ci95": [
+            -0.0624,
+            -0.0205
+          ]
+        },
+        "note": "hybrid and baseline are scored on their own answers (different top-1 commands), so accuracy differs; AUGRC mixes ranking quality and accuracy by design"
+      },
+      "controls_excluded": {
+        "hybrid": {
+          "n": 125,
+          "accuracy": 0.632,
+          "augrc": 0.1048,
+          "augrc_ci95": [
+            0.0692,
+            0.1449
+          ],
+          "aurc_from_t3": 0.1709,
+          "augrc_random_ranking": 0.184,
+          "augrc_oracle": 0.0677
+        },
+        "baseline": {
+          "n": 125,
+          "accuracy": 0.576,
+          "augrc": 0.153,
+          "augrc_ci95": [
+            0.1102,
+            0.1995
+          ],
+          "aurc_from_t3": 0.2859,
+          "augrc_random_ranking": 0.212,
+          "augrc_oracle": 0.0899
+        },
+        "augrc_difference_hybrid_minus_baseline": {
+          "point": -0.0482,
+          "ci95": [
+            -0.0731,
+            -0.0238
+          ]
+        },
+        "note": "hybrid and baseline are scored on their own answers (different top-1 commands), so accuracy differs; AUGRC mixes ranking quality and accuracy by design"
+      }
+    },
+    "v0.2": {
+      "all": {
+        "hybrid": {
+          "n": 209,
+          "accuracy": 0.6029,
+          "augrc": 0.1053,
+          "augrc_ci95": [
+            0.0775,
+            0.1369
+          ],
+          "aurc_from_t3": 0.1626,
+          "augrc_random_ranking": 0.1986,
+          "augrc_oracle": 0.0789
+        },
+        "baseline": {
+          "n": 209,
+          "accuracy": 0.5742,
+          "augrc": 0.1323,
+          "augrc_ci95": [
+            0.1008,
+            0.167
+          ],
+          "aurc_from_t3": 0.2291,
+          "augrc_random_ranking": 0.2129,
+          "augrc_oracle": 0.0907
+        },
+        "augrc_difference_hybrid_minus_baseline": {
+          "point": -0.027,
+          "ci95": [
+            -0.0445,
+            -0.0103
+          ]
+        },
+        "note": "hybrid and baseline are scored on their own answers (different top-1 commands), so accuracy differs; AUGRC mixes ranking quality and accuracy by design"
+      },
+      "controls_excluded": {
+        "hybrid": {
+          "n": 184,
+          "accuracy": 0.5489,
+          "augrc": 0.1322,
+          "augrc_ci95": [
+            0.0981,
+            0.1696
+          ],
+          "aurc_from_t3": 0.2081,
+          "augrc_random_ranking": 0.2255,
+          "augrc_oracle": 0.1017
+        },
+        "baseline": {
+          "n": 184,
+          "accuracy": 0.5163,
+          "augrc": 0.1622,
+          "augrc_ci95": [
+            0.1252,
+            0.202
+          ],
+          "aurc_from_t3": 0.2834,
+          "augrc_random_ranking": 0.2418,
+          "augrc_oracle": 0.117
+        },
+        "augrc_difference_hybrid_minus_baseline": {
+          "point": -0.03,
+          "ci95": [
+            -0.0499,
+            -0.0107
+          ]
+        },
+        "note": "hybrid and baseline are scored on their own answers (different top-1 commands), so accuracy differs; AUGRC mixes ranking quality and accuracy by design"
+      }
+    }
+  },
+  "generated_at": "2026-09-28T10:15:48.682Z"
+}

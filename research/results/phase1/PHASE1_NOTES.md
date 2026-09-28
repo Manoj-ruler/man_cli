@@ -77,6 +77,31 @@ The hybrid's confidence is exactly 1.0 for 64% (v0.1) and 53% (v0.2) of queries;
 - **Detection AUROC, pooled:** OOD 0.855 [0.732, 0.953] (v0.1) and 0.900 [0.843, 0.949] (v0.2); ambiguity 0.790 [0.671, 0.887] and 0.725 [0.633, 0.809]. The committed values are means over folds (0.867/0.901 and 0.784/0.723).
 - **Paper impact:** this is a decision-level reliability result, stronger than ECE: the hybrid's confidence ranks correct above wrong answers better than the shipped confidence, and the difference survives excluding the controls. Replace the 10.7% figure with tie-aware numbers or AURC.
 
+## T3b — AUGRC next to AURC (`phase1_t3b_augrc.json`, added 2026-09-28, decision D5)
+
+**Why.** Traub et al. (NeurIPS 2024) argue AURC over-weights errors made at low coverage. They propose
+AUGRC: the area under the curve of (errors among answered queries) / n, i.e. the average rate of
+undetected failures. Lower is better.
+
+**How.** Computed on the same tie-aware curve as T3. The script first reproduces the T3 AURC values
+and checks the exact identity AUGRC = acc·(1−acc)·(1−AUROC) + (1−acc)²/2 (16 checks, all passed).
+
+| | v0.1 hybrid | v0.1 baseline | v0.2 hybrid | v0.2 baseline |
+|---|---|---|---|---|
+| AUGRC, all queries | 0.077 [0.049, 0.109] | 0.118 [0.085, 0.157] | 0.105 [0.078, 0.137] | 0.132 [0.101, 0.167] |
+| Hybrid − baseline | −0.041 [−0.062, −0.021] | | −0.027 [−0.045, −0.010] | |
+| AUGRC, controls excluded | 0.105 [0.069, 0.145] | 0.153 [0.110, 0.200] | 0.132 [0.098, 0.170] | 0.162 [0.125, 0.202] |
+| Hybrid − baseline, controls excluded | −0.048 [−0.073, −0.024] | | −0.030 [−0.050, −0.011] | |
+
+**Reference points.** AUGRC is (1−acc)²/2 when every error is ranked last and (1−acc)/2 for a random
+ranking. Example: v0.1 hybrid, all queries — oracle 0.047, observed 0.077, random 0.153.
+
+**Paper impact.**
+- The selective-prediction result does not depend on the choice of metric: the hybrid's confidence
+  beats the shipped confidence on AURC and on AUGRC, on both versions, with and without controls.
+- Caveat: AUGRC, like AURC, mixes ranking quality with accuracy. The hybrid is also more accurate, so
+  report correctness AUROC (T3) as the pure ranking measure.
+
 ## T4 — Calibration comparators (`phase1_t4_calibration_comparators.json`)
 
 ECE and Brier score, all queries, nested Split A:
