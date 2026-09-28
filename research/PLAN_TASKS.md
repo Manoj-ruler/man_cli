@@ -37,7 +37,7 @@ Every new script must first reproduce the current reported values and refuse to 
   - *Work:* count dangerous-direction misses by the spec's definition (high or critical predicted as low **or medium**), for gold and retrieved commands on both versions. Add Wilson intervals and raw counts.
   - *Done when:* counts match the audit (v0.1 gold 1 miss; v0.2 gold 3 misses, 2 of them HIGH→LOW).
 
-- [ ] **T3b 🟢 AUGRC next to AURC** (from D5)
+- [x] **T3b ✅ AUGRC next to AURC** (from D5) — `phase1_t3b_augrc.json`. Hybrid is better on AUGRC too: v0.1 −0.041 [−0.062, −0.021], v0.2 −0.027 [−0.045, −0.010].
   - *Work:* compute AUGRC from the same tie-aware risk-coverage curves as T3, with 95% bootstrap CIs (10,000 resamples, seed 42), for both versions, with and without controls.
   - *Done when:* the T3 AURC numbers are reproduced first, and the AUGRC results file exists.
 
@@ -102,7 +102,7 @@ Every new script must first reproduce the current reported values and refuse to 
     - Citation placement: §6 of `research/paper/T6_LITERATURE_VERIFICATION.md`.
 - [ ] **T15 🔵 Claim-to-result trace table**
   - *Work:* map every number in the paper to a result file and field (appendix or `research/paper/CLAIMS_TRACE.md`).
-- [ ] **T16 🔵 Reproducibility**
+- [x] **T16 ✅ Reproducibility (2026-09-28).** Guide: `research/REPRODUCE.md`. A fresh clone, fresh `npm ci` and fresh model download regenerate everything; 0 files DIFFERENT (38 identical, 40 timestamp/timing-only). Scripts: `run_all_v0_2.js`, `check_model_cache.js` (model SHA-256 pin), `compare_reproduction.js`. `.nvmrc` and engines pin Node 24. Exact reproduction needs Windows. Latency is single-machine and indicative only (the paper must say so; T14).
   - *Work:* write a `run_all_v0_2.js` runner (or a documented script order), add an `engines` pin, and write down how to cache the embedding model offline. Then reproduce once from a clean clone and diff the outputs.
 - [ ] **T17 🔵 Final build and read-through**
   - *Work:* rebuild both PDFs with the page guard and re-read every rendered page.
