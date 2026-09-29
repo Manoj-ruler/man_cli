@@ -150,6 +150,10 @@ Every new script must first reproduce the current reported values and refuse to 
   - should_fix addressed rate: 76% (below the 80% bar).
   - 7 new issues: 6 minor regressions, 1 previously-missed major.
   - The three-gate run was manual, because the contract's machine artifacts do not exist for a LaTeX source. (ARS `academic-paper-reviewer` re-review mode, against the round-1 roadmap)
+- [x] **T21b ✅ Revision round 3 (2026-09-29)**, an **author-approved exception to the ARS 2-round cap**. Log: `research/paper/T21b_REVISION_LOG.md`.
+  - Scope: the T22 residuals (REV-03, REV-14, REV-49 must_fix; REV-11 after the D7 reversal; should_fix residuals; NEW-2 to NEW-7).
+  - New traced numbers: `review_r1_e` split by source and kind plus a controls-excluded block; `review_r1_f` κ intervals. Both are deterministic and guarded.
+  - Next: a scoped re-review of the round-3 items (not yet run).
 - [ ] **T23 🔵 Mentorship draft, due Nov 6, 2026**
   - *Work:* T15 trace table, T17 read-through, then submit to the EACL 2027 SRW mentorship program. Annotation results appear as clearly marked pending text.
 
@@ -175,7 +179,7 @@ Every new script must first reproduce the current reported values and refuse to 
 - [x] **D5 (decided 2026-09-28):** report **AUGRC** (Traub et al., NeurIPS 2024) next to AURC, computed from the same tie-aware curves with bootstrap CIs, and cite both. This is added as T3b, before T14.
 
 - [x] **D6 (decided 2026-09-28): contribution framing = audit and recalibration of the shipped confidence; the hybrid is one arm.** Lead with "auditing and recalibrating a shipped command retriever's confidence", with the hybrid as one arm of the study (REV-01)? The skill leaves the contribution claim to the author.
-- [x] **D7 (decided 2026-09-28): keep the TermAssist name** (D3 stands; REV-11 declined). **Anonymity.** The EIC asks to anonymize the package name in the review version (REV-11); this would reverse D3.
+- [x] ~~**D7 (decided 2026-09-28): keep the TermAssist name** (D3 stands; REV-11 declined).~~ **Reversed 2026-09-29 by the author: anonymize the tool in the review version** ("anonymize the name and start round 3"). This supersedes D3 for the review version; the camera-ready keeps the real name. Implemented in T21b via wrapper macros (`\toolname`, `\toolhost`, `\toolnote`, `\authorrel`, `\qid`), plus a neutral authorship sentence (REV-11).
 - [ ] **D8: page budget.** Move Split B, the sensitivity table and per-subset results to the appendix, as REV-02 proposes?
 - [ ] **D9: triage mode.** Work through the 54 items with the ARS guided Socratic triage, or let Claude triage and bring back only the contested items?
 - [ ] **D10: pending approvals.**

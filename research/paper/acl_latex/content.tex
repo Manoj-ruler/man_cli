@@ -3,20 +3,24 @@
 % body in one wrapper and not the other would silently desync the two submission versions.
 % Revision round 2 (T21, 2026-09-28): restructured per research/paper/review_round1 and
 % research/paper/T21_REVISION_LOG.md; every number traces to research/results (see the log).
+% Revision round 3 (T21b, 2026-09-29): residuals of research/paper/review_round2, see
+% research/paper/T21b_REVISION_LOG.md. The audited tool is named only through the macros \toolname,
+% \toolhost, \toolnote, \authorrel and \qid, defined differently in the two wrappers.
 
 \begin{abstract}
 Natural-language shell assistants are usually built by generation. We audit a published closed-set
 alternative: a BM25 retriever over 279 Windows commands that shows its user a confidence and runs the
 chosen command on Enter. Its confidence is no better than a constant forecaster, and wrong answers
-average 86\% confidence. With nested cross-validation on two benchmark versions (the second adds 59
-out-of-scope and ambiguous queries) and 25 verbatim-copy controls excluded, three results hold.
-Isotonic recalibration cuts the shipped confidence's expected calibration error by 79\% on both
-versions, to about the noise floor of a perfectly calibrated forecaster; Platt scaling and histogram
-binning do about as well. A tuned rejection threshold on the shipped score rejects 46 of 50
-out-of-scope requests, where the fixed rule rejects 17 and a hybrid lexical--dense detector 34. The
-hybrid's confidence ranks its own errors better than the shipped one, but its accuracy gain is
-statistically fragile, and both systems sometimes return destructive commands for benign requests. All
-analyses are exploratory; a two-annotator label study is under way.
+average 86\% confidence. Under cross-validation on two benchmark versions (the second adds 59
+out-of-scope and ambiguous queries), excluding 25 verbatim-copy controls, isotonic recalibration cuts
+the shipped confidence's expected calibration error by 79\% on both versions, to about the noise floor
+of a calibrated forecaster (outside our corrected test family). A rejection threshold on the shipped
+score, tuned on held-out folds, rejects 46 of 50 out-of-scope requests but also 20 of 134 in-scope
+ones; the fixed rule rejects 17 and none, a hybrid lexical--dense detector 34 and 11. Most are
+everyday, not computing, requests; the 35 added ones were screened for low scores, and on the 15
+original ones the threshold rejects 12 and the detector 9. The hybrid's confidence ranks its own
+errors better, but its accuracy gain is fragile; both systems sometimes return destructive commands
+for benign requests. All analyses are exploratory; a two-annotator label study is under way.
 \end{abstract}
 
 \section{Introduction}
@@ -28,12 +32,14 @@ systems (NL2SH; \citealp{westenfelder2025nl2sh}), most recently trained with rei
 static-analysis rewards (BashCoder-R1; \citealp{yu2026bashcoderr1}). Retrieval over a fixed command list is an
 older alternative that NLC2CMD also tested \citep{agarwal2021nlc2cmd} and ShellFusion developed
 \citep{zhang2022shellfusion}. It cannot invent a command, and a small lexical retriever runs offline and
-deterministically, so no query leaves the user's machine and every answer can be traced to a vetted record;
-the price is coverage.
+deterministically, so queries need not leave the user's machine and every answer is a record from a fixed
+list that can be inspected; the price is coverage.
 
-We audit one such system as it is published: TermAssist, an npm package that maps a query to one of 279
+We audit one such system as it is published: \toolname{}\toolnote{}, \toolhost{} that maps a query to one of 279
 Windows commands with BM25 \citep{robertson2009bm25}, prints the command with a confidence percentage,
 refuses below 30\%, and runs the pre-filled, editable command when the user presses Enter (\S\ref{sec:system}).
+It was written and released by \authorrel{} before this study, which changed none of its executable code
+and none of the corpus fields it reads.
 The printed confidence is the only reliability signal a user gets, and our reproduction of the published
 baseline found it frequently confidently wrong. We therefore ask: \emph{how reliable is the confidence of a
 shipped closed-set command retriever, and what do post-hoc recalibration, a tuned rejection threshold, and a
@@ -41,12 +47,12 @@ hybrid lexical--dense retriever each contribute?}
 
 \paragraph{Contributions.} (1) An audit of a published tool's confidence: it is no better than a constant
 forecaster, wrong answers average 86\% confidence, and some wrong answers are destructive commands. (2) An
-attribution of what fixes what, under nested cross-validation on two benchmark versions with verbatim-copy
-controls excluded: standard recalibration fixes the confidence level, a tuned threshold on the shipped score
-handles out-of-scope requests, and a hybrid retriever (a research prototype, not part of the package) mainly
-improves how confidence ranks the system's own errors; its accuracy gain is fragile. (3) Evaluation practice for
+attribution of what fixes what, under cross-validation on two benchmark versions with verbatim-copy controls
+excluded: standard recalibration fixes the confidence level, a tuned threshold on the shipped score handles
+out-of-scope requests at a cost in refused in-scope queries, and a hybrid retriever (a research prototype, not
+part of the package) mainly improves how confidence ranks the system's own errors. (3) Evaluation practice for
 small closed-set benchmarks: tie-aware selective-prediction metrics, a noise floor and no-skill reference for
-calibration, detection compared at matched operating points, and disclosure of every null and fragile result.
+calibration, and out-of-scope rules compared under the same tuning protocol and at equal false-rejection counts.
 
 \section{Related Work}
 
@@ -54,7 +60,9 @@ calibration, detection compared at matched operating points, and disclosure of e
 Bash commands. The NLC2CMD competition \citep{agarwal2021nlc2cmd} scored each prediction by utility and flag
 overlap, weighted by the confidence the system submitted, so confident wrong answers were penalized; one
 entry used TF-IDF retrieval with a logistic-regression model that lowered confidence on likely-wrong
-predictions, and came within 12\% of the best system. ShellFusion \citep{zhang2022shellfusion} retrieves
+predictions, and came within 12\% of the best system. That metric folds confidence into one accuracy-like score;
+it does not separate calibration, the ranking of errors and out-of-scope rejection, which we measure
+separately. ShellFusion \citep{zhang2022shellfusion} retrieves
 commands from question-answer posts and re-ranks them against manual pages; DocPrompting
 \citep{zhou2023docprompting} retrieves documentation, including tldr pages, before generating code; Project
 CLAI \citep{agarwal2020clai} treats the command line as an environment for AI agents. NL2SH
@@ -96,17 +104,21 @@ few Windows-visible records are Linux commands (e.g., \texttt{sudo reboot}).
 gold command. All 25 \emph{canonical} queries repeat a corpus intent verbatim and every system answers them, so
 we treat them as positive controls and exclude them from headline figures. v0.2 contains all of v0.1 plus 35
 out-of-scope and 24 ambiguous queries, so the versions share their 121 answerable queries and are not
-independent. The new queries were drafted and adjudicated by an AI agent under human direction; all 35
-out-of-scope drafts were kept unchanged, and their top-1 BM25 score and dense similarity were then checked to be
-low (maximum 7.39 and 0.31). Seventeen of the 24 new ambiguous queries are single tool or category names
-(``grep'', ``pip''); nine of v0.1's 14 are too. Public natural-language-to-Bash benchmarks target Linux commands and do not
-map onto this Windows corpus, so we did not use them. Three items have gold commands outside the Windows corpus
-(TA-B145, TA-B149, TA-B187); they lower every system's non-OOD accuracy by at most 2 of 159 queries and change no
-comparison. One partially independent reviewer, shown only the query text, re-labeled a stratified sample of 14
-AI-authored queries: Cohen's $\kappa=0.63$ \citep{cohen1960coefficient}, below our 0.7 target. The reviewer
-agreed with all 8 out-of-scope labels (7 everyday requests and one far-from-corpus computing task, none a terminal
-task) and disagreed on 3 of 6 ambiguous ones. A
-two-annotator study with a written codebook is under way.
+independent. The new queries were drafted and adjudicated by an AI agent under human direction, and every
+draft was run through both BM25 and dense retrieval: 24 of 30 ambiguous drafts were kept (6 failed the ambiguity
+or novelty criteria), and all 35 out-of-scope drafts were kept unchanged, their top-1 BM25 score and dense
+similarity having been checked to be low (maximum 7.39 and 0.31). The 15 v0.1 out-of-scope queries were instead
+checked by searching all corpus intents and descriptions for relevant keywords, not against retrieval scores.
+Seventeen of the 24 new ambiguous queries are single tool or category names (``grep'', ``pip''); nine of v0.1's
+14 are too. Public natural-language-to-Bash benchmarks target Linux commands and do not map onto this Windows
+corpus, so we did not use them. Two items have gold commands outside the Windows corpus (\qid{145}, and
+\qid{187} in v0.2 only), and one (\qid{149}) has an acceptable command outside it; every system misses the first
+two and answers \qid{149} correctly, so they lower every system's non-OOD accuracy by one query on v0.1 and two on
+v0.2 and change no comparison. One partially independent reviewer, shown only the query text, re-labeled a
+stratified sample of 14 AI-authored queries: Cohen's $\kappa=0.63$ \citep{cohen1960coefficient} (post hoc bootstrap
+95\% interval [0.39, 1.00]), below our 0.7 target. The reviewer agreed with all 8 out-of-scope labels (exact 95\%
+interval for the agreement rate [63, 100]\%; 7 everyday requests and one far-from-corpus computing task, none a
+terminal task) and disagreed on 3 of 6 ambiguous ones. A two-annotator study with a written codebook is under way.
 
 \section{Methods}
 \label{sec:methods}
@@ -122,9 +134,12 @@ when that score falls below a threshold. Appendix~\ref{app:spec} gives the full 
 
 \paragraph{Protocol.} Five folds (seed 42, stratified by label; Split A). For each test fold, $\alpha$ (grid
 0.0--1.0, maximizing non-OOD accuracy), the detector thresholds (maximizing F1) and the calibrators are chosen
-on the other four folds and applied once. There is no inner split; each query's hybrid score uses the $\alpha$
-chosen for its own fold ($\alpha\in\{0.3,0.5\}$ throughout). The features for the two detectors were chosen by
-inspecting class means on the full data, a disclosed leak. A second split groups queries by intent (Split B),
+on the other four folds and applied once. Each threshold is chosen from the scores observed on the development
+folds, with out-of-scope predicted below it; ties in F1 go to the lowest such score. There is no inner split;
+each query's hybrid score uses the $\alpha$ chosen for its own fold ($\alpha\in\{0.3,0.5\}$ throughout). The
+features for the hybrid's out-of-scope and ambiguity detectors were chosen by inspecting class means on the full
+data, a leak that may flatter the detector's figures; the tuned shipped threshold uses the tool's own score
+and needed no such choice. A second split groups queries by intent (Split B),
 which checks for tuning leakage across intents but cannot test unseen commands, since the corpus always holds the
 gold intent (Appendix~\ref{app:secondary}).
 
@@ -132,20 +147,22 @@ gold intent (Appendix~\ref{app:secondary}).
 \citep{naeini2015ece,guo2017calibration}; we also report equal-mass and sweep estimates, a noise floor (the ECE of a
 perfectly calibrated forecaster with the same confidences and $n$, simulated), and Brier skill
 \citep{brier1950verification} against an out-of-fold no-skill forecaster that predicts the development base rate.
-Confidence often ties at its maximum (64\% of the hybrid's and 73\% of the shipped values on v0.1), so
+Confidence often ties at its maximum (64\% of the hybrid's and 73\% of the shipped values on all 150 v0.1
+queries), so
 risk-coverage curves use expected risk under a random order within ties and are summarized by the area under them (AURC; \citealp{geifman2019aurc}) and the area under the
 generalized risk-coverage curve (AUGRC; \citealp{traub2024overcoming}); the area under the receiver
 operating characteristic curve (AUROC) for separating right from wrong answers by confidence, which we call
 correctness AUROC, measures ranking alone. Accuracy differences use the exact McNemar test \citep{mcnemar1947note}, proportions
 Wilson intervals \citep{wilson1927probable}, and effects paired percentile bootstraps (10,000 resamples, seed 42),
 which are not dual to the exact test. A family of four comparisons per version (accuracy vs.\ BM25 and vs.\ dense,
-out-of-scope rejection, hybrid ECE reduction) is Holm-corrected \citep{holm1979simple}; it was fixed after the raw
-results were seen, so \emph{all significance statements are exploratory}.
+out-of-scope rejection by the hybrid detector, hybrid ECE reduction) is Holm-corrected \citep{holm1979simple}; it
+was fixed after the raw results were seen, so \emph{all significance statements are exploratory}. The shipped
+confidence's recalibration and the tuned shipped threshold are outside this family.
 
 \section{Results}
 \label{sec:results}
 
-Table~\ref{tab:claims} summarizes every claim; the population throughout is non-control queries unless stated.
+Table~\ref{tab:claims} summarizes every claim; the population throughout is non-control queries.
 
 \begin{table*}[t]
   \centering
@@ -156,25 +173,30 @@ Table~\ref{tab:claims} summarizes every claim; the population throughout is non-
     \textbf{Claim} & \textbf{v0.1} & \textbf{v0.2} & \textbf{Status} \\
     \midrule
     Shipped confidence: ECE before $\to$ after isotonic & .323$\to$.069; $-$79\% [44, 84] & .293$\to$.063; $-$79\% [52, 87] & robust \\
-    Shipped confidence: Brier skill vs.\ no-skill, raw / recalibrated & $-$.23 [$-$.45, .01] / .20 [.04, .36] & $-$.06 [$-$.26, .15] / .33 [.19, .46] & robust \\
-    Hybrid confidence: ECE reduction (Holm-adjusted $p$, controls incl.) & $-$67\% [43, 83] ($p$=.0004) & $-$81\% [62, 86] ($p$=.0003) & robust \\
+    Shipped confidence: Brier skill vs.\ no-skill, raw / recalibrated & $-$.23 [$-$.45, .01] / .20 [.04, .36] & $-$.06 [$-$.26, .15] / .33 [.19, .46] & raw: no skill; recal.: robust \\
+    Hybrid confidence: ECE before $\to$ after isotonic (pre-named test) & .329$\to$.108; $-$67\% [43, 83] & .368$\to$.071; $-$81\% [62, 86] & robust \\
     Out-of-scope rejected: fixed rule / tuned threshold / hybrid detector & 4 / 10 / 7 of 15 & 17 / 46 / 34 of 50 & threshold, not hybrid \\
-    False rejections of non-OOD: fixed / tuned / hybrid & 0 / 9 / 6 of 135 & 0 / 20 / 11 of 159 & cost of tuning \\
-    Out-of-scope AUROC: shipped score minus hybrid feature & +.095 [.005, .208] & +.063 [.015, .119] & robust \\
+    False rejections of in-scope: fixed / tuned / hybrid & 0 / 9 / 6 of 110 & 0 / 20 / 11 of 134 & cost of tuning \\
+    Out-of-scope rejected at equal false rejections, shipped score / hybrid feature (in-sample) & 10 / 7 at 6 & 37 / 36 at 10--11 & descriptive \\
+    Out-of-scope AUROC (pooled): shipped score minus hybrid feature & +.102 [.006, .222] & +.067 [.015, .127] & robust \\
     Hybrid minus shipped AURC (tie-aware) & $-$.115 [$-$.177, $-$.054] & $-$.075 [$-$.126, $-$.024] & robust \\
+    Hybrid minus shipped AUGRC (tie-aware) & $-$.048 [$-$.073, $-$.024] & $-$.030 [$-$.050, $-$.011] & robust \\
     Hybrid minus shipped correctness AUROC & +.099 [.008, .190] & +.058 [$-$.001, .118] & weak on v0.2 \\
-    Accuracy, hybrid minus BM25 (pp; Holm-adj.\ $p$) & +6.4 [1.8, 10.9] (.047) & +4.5 [0.7, 9.0] (raw .070) & fragile \\
+    Accuracy, hybrid minus BM25 (pp; Holm-adj.\ $p$) & +6.4 [1.8, 10.9] (.047) & +4.5 [0.7, 9.0] (.070) & fragile \\
     Accuracy, hybrid minus dense (pp; Holm-adj.\ $p$) & +5.5 [0.0, 11.8] (.292) & +8.2 [2.2, 14.2] (.025) & fragile \\
     \bottomrule
   \end{tabular}
-  \caption{Claims with 95\% bootstrap intervals, non-control queries unless stated (``controls incl.''). Status
+  \caption{Claims with 95\% bootstrap intervals, all on non-control queries: 110 and 134 in-scope queries plus the
+  15 and 50 out-of-scope ones. No rule ever rejects a control, and controls are never discordant, so the accuracy
+  $p$-values equal the Holm table's (Appendix~\ref{app:secondary}), which also holds the pre-named ECE test. Status
   ``robust'' means the interval excludes zero on both versions; ``fragile'' means the result depends on a few
-  queries (Appendix~\ref{app:secondary}). Out-of-scope rows use all queries of each version.}
+  queries. The equal-false-rejection row picks each score's threshold on the same data (\S\ref{sec:ood}).}
   \label{tab:claims}
 \end{table*}
 
-\paragraph{The shipped confidence.} The published baseline answers 67.3\% of v0.1's 150 queries correctly, yet its
-49 wrong answers carry a mean confidence of 86\%, and 44.9\% of them are shown at 100\%. Its ECE (0.323 on v0.1,
+\paragraph{The shipped confidence.} The published baseline answers 67.3\% of all 150 v0.1 queries correctly (65.5\%
+of the non-control in-scope ones, Table~\ref{tab:acc}), yet its 49 wrong answers, none of them controls, carry a mean confidence of 86\%, and
+44.9\% of them are shown at 100\%. Its ECE (0.323 on v0.1,
 0.293 on v0.2, controls excluded) is five to six times the noise floor of a perfectly calibrated forecaster at this size
 (0.064 and 0.050), and its Brier score is no better than predicting the base rate for every query (skill $-0.23$
 and $-0.06$, intervals including zero). A heuristic score such as $s/8$ capped at 100\% is not expected to be
@@ -182,30 +204,45 @@ calibrated; what the audit adds is how far off it is, and that the tool shows it
 
 \paragraph{Recalibration.} Isotonic regression fit on development folds lowers the shipped confidence's ECE to
 0.069 on v0.1 and 0.063 on v0.2, a 79\% reduction on both versions and within the noise floor's 95th percentile
-(0.105 and 0.080); equal-mass and sweep estimates agree. Brier skill becomes positive (0.20 and 0.33, intervals
-excluding zero), so the recalibrated number carries information about correctness. Platt scaling and histogram
-binning reduce ECE by similar amounts with overlapping intervals, so the gain does not depend on the method. The
-hybrid's own confidence behaves the same way: raw, it is significantly worse than the no-skill forecaster; after
-recalibration its ECE falls 67\% and 81\%, with residual miscalibration above the noise floor on v0.1. The
-pre-named comparison in the Holm family is this hybrid reduction, with controls included, and it survives
+(0.105 and 0.080). Equal-mass bins give 0.110 and 0.070 (noise-floor 95th percentiles 0.122 and 0.092) and the
+bin-count sweep 0.060 and 0.047. Brier skill becomes positive (0.20 and 0.33, intervals excluding zero), so the
+recalibrated number carries information about correctness. These reductions were not in the corrected family.
+Platt scaling and histogram binning, fit on the same folds, give ECEs with overlapping bootstrap intervals (v0.1:
+0.087 and 0.101; v0.2: 0.045 and 0.039), but we did not test the differences between calibrators; histogram binning's ECE is partly measured on the bins it fits, and
+it has the worst Brier score of the three in every case. The hybrid's own confidence behaves similarly: raw, its
+Brier skill is $-0.32$ and $-0.30$, both intervals excluding zero; after recalibration its ECE falls from 0.329 to
+0.108 and from 0.368 to 0.071, above the noise floor's 95th percentile on v0.1 (0.089) and within it on v0.2
+(0.079). This hybrid reduction is the pre-named comparison, tested with controls included, and it survives Holm
 correction on both versions (Table~\ref{tab:holm}). Recalibration changes the number shown, not the answer or its
-ranking: correctness AUROC even drops slightly (hybrid, v0.1: 0.858 to 0.804), because each fold gets its own map.
+ranking: correctness AUROC even drops slightly (shipped, v0.1: 0.742 to 0.686), because each fold gets its own map.
+The maps are fit on benchmark queries written by the authors and an AI agent, so they hold for queries like these;
+a deployed calibrator would be fit on all labeled queries, and whether its map transfers to real user queries is
+untested.
 
 \paragraph{Out-of-scope requests.}
 \label{sec:ood}
-The shipped fixed rule rejects 17 of v0.2's 50 out-of-scope requests. The hybrid detector rejects 34, which
-survives Holm correction (adjusted $p=0.00006$), at a cost of 11 false rejections among 159 in-scope queries,
-three of which the hybrid had answered correctly. But the gain comes from the threshold, not the hybrid: the
-shipped score itself separates out-of-scope requests better than the hybrid's fused score (AUROC 0.963 vs.\ 0.900
-on v0.2, 0.950 vs.\ 0.855 on v0.1), and a threshold on the shipped score tuned exactly like the detector rejects
-46 of 50 (McNemar $p=0.004$ against the detector) at 20 false rejections ($p=0.093$). On v0.1 the tuned threshold
-rejects 10 of 15 and the detector 7 ($p=0.25$). By kind of request (labels assigned by an AI assistant, unchecked),
-the detector rejects 25 of 34 everyday non-computing requests, 4 of 5 far-from-corpus computing tasks, the one
-nonsensical request, and 4 of the 10 terminal tasks the corpus does not cover. One caveat favors the shipped score:
-the added out-of-scope queries were checked to have low raw BM25 scores, and the tuned thresholds (6.5--7.2) sit just
-below their 7.39 maximum. The detector's gain is nevertheless the same on the 15 keyword-verified v0.1 queries as on
-the 35 added ones (+33.3 vs.\ +34.3 points). (The same 15 queries give $p=0.25$ in the v0.1 run and $p=0.0625$ in
-the v0.2 run because each run tunes its own thresholds.)
+The shipped fixed rule rejects 17 of v0.2's 50 out-of-scope requests. The hybrid detector rejects 34 (two-sided
+exact McNemar, Holm-adjusted $p=0.00006$), at a cost of 11 false rejections among 134 in-scope queries, three of
+which the hybrid had answered correctly. But the gain comes from the threshold, not the hybrid. The shipped score
+itself separates out-of-scope requests better than the hybrid's fused score (pooled AUROC 0.956 vs.\ 0.889 on v0.2,
+0.939 vs.\ 0.837 on v0.1), and a threshold on the shipped score tuned exactly like the detector rejects 46 of 50
+(McNemar $p=0.004$ against the detector) at 20 false rejections ($p=0.093$); on v0.1 it rejects 10 of 15 and the
+detector 7 ($p=0.25$), at 9 and 6 false rejections. The two tuned rules thus sit at different operating points.
+Compared at equal false-rejection counts, with each score's threshold picked on the same data (an in-sample,
+descriptive comparison), the shipped score rejects 37 of 50 at 10 false rejections and the hybrid's feature 36 at
+11; with no false rejections, 23 and 21 (v0.1: 10 and 7 at 6; 5 and 1 at none). The shipped score is never worse at
+the points we checked, and the tuned threshold's larger count comes mostly from accepting more false rejections.
+
+By kind of request (labels assigned by an AI assistant, unchecked), the fixed rule, tuned threshold and detector
+reject 14, 34 and 25 of 34 everyday non-computing requests; 3, 4 and 4 of 5 far-from-corpus computing tasks; 0, 1
+and 1 of the one nonsensical request; and 0, 7 and 4 of the 10 terminal tasks the corpus does not cover. One caveat
+favors the shipped score: the 35 added queries were checked to have low raw BM25 scores (at most 7.39), and the
+tuned shipped thresholds (6.50--7.20) sit just below that maximum. The hybrid's thresholds (0.884--0.925) are on the
+fused, per-query-normalized scale and cannot be compared with the 7.39 and 0.31 bounds. On the 15 original queries,
+which were not checked against scores, the three rules reject 4, 12 and 9; on the 35 added ones, 13, 34 and 25. The
+threshold's lead over the detector therefore also appears on the unscreened queries, though 15 queries are few. (The
+detector's gain over the fixed rule on the same 15 queries has $p=0.25$ in the v0.1 run and $p=0.0625$ in the v0.2
+run, because each run tunes its own thresholds; neither is significant, and the second is not a replication.)
 
 \paragraph{What the hybrid adds.} The hybrid's confidence ranks its own errors better than the shipped confidence:
 tie-aware AURC and AUGRC are lower on both versions with intervals excluding zero (Table~\ref{tab:claims}), and
@@ -213,9 +250,11 @@ correctness AUROC is higher, though on v0.2 without controls its interval just i
 lies inside the maximum-confidence tie block, the hybrid's expected error on all 150 v0.1 queries is 8.3\% (0--10.7\%
 depending on how ties are ordered). Its accuracy gain is consistent in size but not established (Table~\ref{tab:acc}): over BM25 it
 gains 6.4 points on v0.1 (exact $p=0.0156$, Holm-adjusted 0.047) and 4.5 on v0.2 ($p=0.070$), resting on 7 and 8
-discordant queries, and one bare keyword (``system'') decides the v0.2 test. Its advantage over dense retrieval on
-v0.2 depends on three bare-keyword queries (Appendix~\ref{app:secondary}). Grouping folds by intent leaves accuracy
-unchanged and weakens calibration somewhat (Appendix~\ref{app:secondary}).
+discordant queries, and one bare keyword (``system'') decides the v0.2 test; a benchmark this size has little power
+for gains of this size \citep{card2020littlepower}. Its advantage over dense retrieval on v0.2 depends on three
+bare-keyword queries (Appendix~\ref{app:secondary}). Grouping folds by intent leaves accuracy unchanged and weakens
+calibration somewhat (Appendix~\ref{app:secondary}). All hybrid results are for one small encoder (MiniLM) and one
+fusion rule.
 
 \begin{table}[t]
   \centering
@@ -264,29 +303,35 @@ successfully.
     \bottomrule
   \end{tabular}
   \caption{Returned commands the rule-based classifier rates high or critical risk, how many are wrong answers, and how
-  many of those are shown at the system's maximum confidence band (shipped: 100\%; hybrid: fused score 1.0). The
-  classifier misses at least one destructive command, so counts are lower bounds.}
+  many of those are shown at the system's maximum confidence band (shipped: 100\%; hybrid: fused score 1.0). Unlike
+  Table~\ref{tab:claims}, the population is every query of each version (150 and 209, controls and out-of-scope
+  requests included), because a risky command can be returned for any of them. The classifier misses at least one
+  destructive command, so counts are lower bounds.}
   \label{tab:risk}
 \end{table}
 
 \section{Discussion}
 
 For a shipped closed-set assistant the three problems separate cleanly. The displayed confidence was the weakest
-part, and standard recalibration on held-out labels repairs most of it; the number a user sees can become
-informative without changing the system. Out-of-scope rejection needed a better threshold, not a new retriever: the
-shipped score, thresholded well, did better than the hybrid detector, at the cost of more refused in-scope queries,
-a trade-off that should be set by the relative cost of a wrong command and a refusal. The hybrid's value lies in
-ranking its own errors, which matters for abstention, while its accuracy gain is too small for this benchmark to
-establish \citep{card2020littlepower}. For users of a tool that runs a command on Enter, the risky wrong answers
-suggest a further safeguard independent of calibration: showing the risk level and asking for confirmation, or using
-PowerShell's \texttt{-WhatIf}, before destructive commands.
+part, and standard recalibration on held-out labels repairs most of it on our benchmark (a result outside the
+corrected family); on queries like these, the number a user sees can become informative without changing the
+retriever. Whether a better-calibrated number changes what users run is untested. Out-of-scope rejection needed a
+better threshold, not a new retriever: the shipped score, thresholded well, did at least as well as the hybrid
+detector at equal false-rejection counts, and the tuned threshold rejected more out-of-scope requests by refusing
+more in-scope queries, a trade-off that should be set by the relative cost of a wrong command and a refusal. The
+hybrid's value lies in ranking its own errors, which matters for abstention. For users of a tool that runs a
+command on Enter, the risky wrong answers suggest safeguards independent of calibration: showing the risk level and
+asking for confirmation (PowerShell's \texttt{-Confirm}) or offering a dry run (\texttt{-WhatIf}) before destructive
+commands, or requiring higher confidence before returning a high-risk command. We did not evaluate any of these.
 
 \section{Conclusion}
 
-A published natural-language command retriever shows its users a confidence that is no better than a constant
-forecaster. Post-hoc recalibration fixes most of that on both benchmark versions, a tuned threshold on the shipped
-score handles out-of-scope requests better than a hybrid detector, and the hybrid mainly improves how confidence
-ranks its own errors; its accuracy gain and its advantage over dense retrieval are fragile. Next steps, in order:
+A published natural-language command retriever shows its users a confidence that, on our benchmark, is no better
+than a constant forecaster. On the same benchmark, post-hoc recalibration fixes most of that. A threshold on the
+shipped score, tuned on held-out folds, rejects more out-of-scope requests than a hybrid detector (46 vs.\ 34 of 50;
+12 vs.\ 9 on the 15 not screened by retrieval score) but refuses more in-scope queries (20 vs.\ 11 of 134), and
+most of these requests are everyday rather than terminal tasks. The hybrid mainly improves how confidence ranks its
+own errors. Next steps, in order:
 finish the two-annotator label study and release a corrected benchmark; confirm the findings with an analysis
 specified in advance; add answerable and terminal-task out-of-scope queries judged by people; build an independent
 safety set; and study whether calibrated confidence and risk prompts change what users run.
@@ -301,15 +346,16 @@ safety set; and study whether calibrated confidence and risk prompts change what
 \begin{itemize}
   \item \textbf{Small, dependent, partly AI-authored benchmark.} 150 and 209 queries, the second containing the first;
   59 queries drafted by an AI agent, whose labels were checked only by one partially independent reviewer
-  ($\kappa=0.63$, $n=14$); the two-annotator study has no results yet. Three items have gold commands outside the
-  corpus. Queries were written by the authors and an AI agent, not collected from users, so calibration and
-  out-of-scope rates depend on this mix.
+  ($\kappa=0.63$, interval [0.39, 1.00], $n=14$); the two-annotator study has no results yet. Two items have gold
+  commands outside the corpus and one an acceptable command. Queries were written by the authors and an AI agent,
+  not collected from users, so calibration and out-of-scope rates depend on this mix.
   \item \textbf{Exploratory statistics.} Every analysis was specified after results were seen, including the Holm
-  family, the controls exclusion, the matched operating points and the sensitivity subsets. Accuracy tests rest on
-  7--8 discordant queries. Results come from one fold partition (seed 42).
+  family, the controls exclusion, the equal-false-rejection comparison (whose thresholds are chosen in-sample) and
+  the sensitivity subsets. Accuracy tests rest on 7--8 discordant queries. Results come from one fold partition
+  (seed 42).
   \item \textbf{Out-of-scope evidence.} Only 10 out-of-scope queries are terminal tasks outside the corpus; the kind
-  labels are AI-assigned; the added queries were checked with raw retrieval scores; and detector features were chosen
-  on the full data.
+  labels are AI-assigned; the added queries were checked with raw retrieval scores, which favors the shipped score;
+  and the hybrid detector's features were chosen on the full data, which may flatter it.
   \item \textbf{Scope.} One tool, one platform (Windows; results depend on the platform-filtered corpus), 279 commands,
   one small sentence encoder and one fusion rule, exact-match scoring against gold commands, and single-machine
   latencies. No generative system, user study, or public benchmark is evaluated.
@@ -387,7 +433,9 @@ calibration $p$ is a bootstrap bound (one-sided, resolution $10^{-4}$), so its H
     \bottomrule
   \end{tabular}
   \caption{Holm-corrected family ($\alpha=0.05$; exploratory). ``OOD rej., tuned vs.\ base'' is the hybrid detector
-  against the shipped fixed rule. Accuracy $p$ are two-sided exact McNemar; the calibration $p$ is one-sided.}
+  against the shipped fixed rule. Accuracy and out-of-scope $p$ are two-sided exact McNemar; the calibration $p$ is a
+  one-sided bootstrap bound. The shipped-confidence recalibration and the tuned shipped threshold are not in this
+  family.}
   \label{tab:holm}
 \end{table}
 
@@ -409,6 +457,8 @@ bare-keyword queries and $p=0.227$ on answerable queries only; the calibration g
 
 \paragraph{Split B.} Grouping folds by derived intent group (171 groups on v0.2, 125 on v0.1; none split across folds)
 leaves hybrid accuracy unchanged and OOD AUROC nearly so, while the ECE reduction attenuates (Table~\ref{tab:splitb}).
+This table includes the controls and reports OOD AUROC as a mean over folds, so its values (0.867, 0.901) differ
+from the pooled, non-control values in \S\ref{sec:ood}.
 Because only 3--4 parameters are tuned and the corpus always holds the gold intent, this is a check for tuning leakage,
 not evidence about unseen commands.
 

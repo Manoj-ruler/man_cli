@@ -204,8 +204,8 @@ Edwin~B. Wilson. 1927.
   Zhang}]{yu2026bashcoderr1}
 Lei Yu, Peng Wang, Jia Xu, Jingyuan Zhang, Xin Wang, Jiajia Ma, Li~Yang,
   Changzhi Deng, Zenghua Wang, and Fengjun Zhang. 2026.
-\newblock \href {https://arxiv.org/abs/2606.27733} {{BashCoder-R1}: Towards
-  robust and explainable {B}ash code generation with robustness-aware group
+\newblock \href {https://doi.org/10.1145/3832094} {{BashCoder-R1}: Towards
+  robust and explainable {B}ash script generation with robustness-aware group
   relative policy optimization}.
 \newblock In \emph{Proceedings of the {ACM} {SIGSOFT} International Symposium
   on Software Testing and Analysis ({ISSTA} 2026)}.

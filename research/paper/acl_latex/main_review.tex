@@ -9,10 +9,10 @@
 % rendered PDF (confirmed by reading acl.sty's own anonymize logic) and adds line numbers, so the
 % placeholder \author block below is never actually shown.
 %
-% NOT COVERED by acl.sty's anonymization: this paper studies TermAssist, a real, named, public npm
-% package. If the target venue's double-blind policy is strict, referencing the system by its real
-% name in the BODY TEXT (content.tex) may itself be de-anonymizing regardless of anything this
-% wrapper does. Unresolved, and the author's call -- see the note at the end of this file.
+% The audited tool is a real, public package. acl.sty cannot hide it, so content.tex refers to it only
+% through the macros defined below (\toolname, \toolhost, \toolnote, \authorrel, \qid), which this
+% wrapper sets to neutral values and main.tex to the real ones (round 3, REV-11; author decision
+% 2026-09-29).
 
 \documentclass[11pt]{article}
 \usepackage[review]{acl}
@@ -25,6 +25,14 @@
 \usepackage{booktabs}
 \usepackage{amsmath}
 \usepackage{amssymb}
+
+% Tool-identity macros (round 3, REV-11): the audited tool is anonymized in this review version
+% (author decision 2026-09-29, reversing D3/D7). main.tex defines the real values.
+\newcommand{\toolname}{\textsc{Tool}}
+\newcommand{\toolhost}{a publicly released package}
+\newcommand{\toolnote}{\footnote{The tool's name and package are withheld for anonymous review.}}
+\newcommand{\authorrel}{one of the authors}
+\newcommand{\qid}[1]{Q#1}
 
 \title{Confidently Wrong: Auditing and Recalibrating the Confidence of a \\ Shipped Natural-Language-to-Shell Command Retriever}
 
@@ -46,15 +54,9 @@
 % This is the ANONYMIZED REVIEW build: author identity hidden, line numbers on. Use main.tex
 % instead for a camera-ready/non-blind copy.
 %
-% ANONYMIZATION RISK ACL.STY CANNOT COVER: TermAssist is a real, named, public npm package. Global
-% npm metadata ties that package to a specific, identifiable public account. If the target venue's
-% double-blind policy is strict, referencing the system by its real name in content.tex may itself
-% be de-anonymizing regardless of anything acl.sty does. Unresolved -- the author's call: (a)
-% accept the risk (many venues explicitly permit referencing one's own public prior artifact), (b)
-% check the specific target venue's policy, or (c) use a pseudonym for the system name in this
-% review version and reveal the real name only in main.tex (would require content.tex to no longer
-% be perfectly shared between the two -- a bigger structural change, not done here).
+% Tool anonymity: resolved in round 3 by the identity macros above (review: neutral name, "Q" item
+% IDs, a withheld-name footnote, "one of the authors"). Before submitting, grep the built PDF text
+% for the real tool name, the package scope and the "TA-B" prefix; all three must be absent.
 %
-% Page count: the body text (through the Conclusion) ends on page 8, exactly at the ACL/EACL SRW
-% 8-page limit; references and the appendix figures follow and are not counted. build.sh measures
-% this via \label{endofbody} and fails the build if the body passes page 8 -- rerun it after edits.
+% Page count: build.sh reads the page of \label{endofbody} and fails the build if the body passes
+% page 8 (the ACL/EACL SRW limit); rerun it after edits.

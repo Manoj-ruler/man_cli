@@ -87,8 +87,46 @@ for (const v of ['v0.1', 'v0.2']) {
     versus_tuned_detector: { on_ood_detector_vs_tuned_baseline: mcn(detRejects, tb, ood), on_non_ood_false_rejections_detector_vs_tuned_baseline: mcn(detRejects, tb, non) }
   };
 
+  // 5. (added for T21b / round 3, REV-14 and REV-22) the three rules' OOD rejections split by source
+  //    (15 original v0.1 items vs 35 added in v0.2) and by kind of request (AI-assigned subtype labels,
+  //    research/datasets/ood_subtypes_v0.2_ai_assigned.json, unchecked by a person).
+  const num = id => +id.slice(4);
+  const rules = { fixed_rule: baseRejects, tuned_shipped_threshold: tb, hybrid_detector: detRejects };
+  const splitBy = groups => Object.fromEntries(Object.entries(groups).map(([g, ids]) => [g, { n: ids.length, ...Object.fromEntries(Object.entries(rules).map(([r, f]) => [r, ids.filter(f).length])) }]));
+  const bySource = splitBy({ original_v0_1_items: ood.filter(id => num(id) <= 150), added_v0_2_items: ood.filter(id => num(id) > 150) });
+  let byKind = null;
+  if (v === 'v0.2') {
+    const st = C.rd('research/datasets/ood_subtypes_v0.2_ai_assigned.json');
+    const kind = new Map((st.labels || st).map(l => [l.id, l.subtype || l.ood_subtype]));
+    const kinds = {}; ood.forEach(id => { const k = kind.get(id) || 'unlabelled'; (kinds[k] = kinds[k] || []).push(id); });
+    byKind = splitBy(kinds);
+    // guard: fixed-rule and detector counts per kind reproduce T2
+    const t2 = C.rd('research/results/phase1/phase1_t2_ood_breakdown.json').versions['v0.2'].groups;
+    for (const [k, x] of Object.entries(byKind)) { const g = t2.find(y => y.group === 'subtype: ' + k); if (g) { C.guard(`${v} ${k} fixed-rule rejects (T2)`, x.fixed_rule, g.baseline_rejects.k, 0); C.guard(`${v} ${k} detector rejects (T2)`, x.hybrid_detector, g.tuned_rejects.k, 0); } }
+  }
+
+  // 6. (round 3, REV-02) the same comparisons with the 25 canonical controls excluded, so the claims
+  //    table uses one population. Controls are in-scope, so only false rejections and AUROC change.
+  const nonX = non.filter(id => !D.isCanonical(id)), ctrl = non.filter(id => D.isCanonical(id));
+  const itemsX = s => [...ood, ...nonX].map(id => ({ score: s(id), pos: D.isOOD(id) }));
+  const rngX = C.mulberry32(42), dX = [], bX = [], tX = [];
+  for (let b = 0; b < B; b++) {
+    const rp = ood.map(() => ood[Math.floor(rngX() * ood.length)]), rn = nonX.map(() => nonX[Math.floor(rngX() * nonX.length)]);
+    const ids = [...rp, ...rn], mk = s => ids.map(id => ({ score: s(id), pos: D.isOOD(id) }));
+    const x = C.auroc(mk(sBase)), y = C.auroc(mk(sDet)); bX.push(x); tX.push(y); dX.push(y - x);
+  }
+  [dX, bX, tX].forEach(a => a.sort((p, q) => p - q));
+  const aBX = C.auroc(itemsX(sBase)), aDX = C.auroc(itemsX(sDet));
+  const controlsExcluded = {
+    n_non_ood: nonX.length, n_controls: ctrl.length,
+    controls_rejected: Object.fromEntries(Object.entries(rules).map(([r, f]) => [r, ctrl.filter(f).length])),
+    false_rejected: Object.fromEntries(Object.entries(rules).map(([r, f]) => [r, nonX.filter(f).length])),
+    auroc: { baseline_raw_bm25: C.r4(aBX), baseline_ci95: ci(bX), detector_fused_top1: C.r4(aDX), detector_ci95: ci(tX), difference_detector_minus_baseline: C.r4(aDX - aBX), difference_ci95: ci(dX) }
+  };
+
   result.versions[v] = {
     n_ood: ood.length, n_non_ood: non.length, nested_tuned_baseline_threshold: nestedBaseline,
+    rejections_by_source: bySource, rejections_by_kind: byKind, controls_excluded: controlsExcluded,
     auroc: { baseline_raw_bm25: C.r4(aBase), baseline_ci95: ci(bv), detector_fused_top1: C.r4(aDet), detector_ci95: ci(tv), difference_detector_minus_baseline: C.r4(aDet - aBase), difference_ci95: ci(dv) },
     committed_operating_points: { baseline_rule_bm25_lt_2: { ood_rejected: C.wilson(ood.filter(baseRejects).length, ood.length), false_rejected: C.wilson(non.filter(baseRejects).length, non.length) },
       tuned_detector_nested: { ood_rejected: C.wilson(ood.filter(detRejects).length, ood.length), false_rejected: C.wilson(non.filter(detRejects).length, non.length) } },

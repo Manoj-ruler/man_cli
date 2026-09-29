@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T16:29:09.693Z",
+  "generated_at": "2026-09-29T04:23:52.518Z",
   "status": "post hoc, exploratory (answers review round 1)",
   "task": "T18 / REV-49: OOD detection as a ranking and at matched false-rejection rates",
   "note": "Sweep thresholds are chosen in-sample for both scores (descriptive upper bound on equal footing); the committed detector is nested.",
@@ -58,6 +58,56 @@
       "label": "v0.2 pooled detector AUROC (T3)",
       "got": 0.8999,
       "want": 0.8999
+    },
+    {
+      "label": "v0.2 non_terminal fixed-rule rejects (T2)",
+      "got": 14,
+      "want": 14
+    },
+    {
+      "label": "v0.2 non_terminal detector rejects (T2)",
+      "got": 25,
+      "want": 25
+    },
+    {
+      "label": "v0.2 unsupported_tool_ood fixed-rule rejects (T2)",
+      "got": 0,
+      "want": 0
+    },
+    {
+      "label": "v0.2 unsupported_tool_ood detector rejects (T2)",
+      "got": 2,
+      "want": 2
+    },
+    {
+      "label": "v0.2 nonsensical fixed-rule rejects (T2)",
+      "got": 0,
+      "want": 0
+    },
+    {
+      "label": "v0.2 nonsensical detector rejects (T2)",
+      "got": 1,
+      "want": 1
+    },
+    {
+      "label": "v0.2 near_ood fixed-rule rejects (T2)",
+      "got": 0,
+      "want": 0
+    },
+    {
+      "label": "v0.2 near_ood detector rejects (T2)",
+      "got": 2,
+      "want": 2
+    },
+    {
+      "label": "v0.2 far_ood fixed-rule rejects (T2)",
+      "got": 3,
+      "want": 3
+    },
+    {
+      "label": "v0.2 far_ood detector rejects (T2)",
+      "got": 4,
+      "want": 4
     }
   ],
   "versions": {
@@ -97,6 +147,52 @@
             "b_only": 7,
             "exact_mcnemar_p": 0.5488
           }
+        }
+      },
+      "rejections_by_source": {
+        "original_v0_1_items": {
+          "n": 15,
+          "fixed_rule": 4,
+          "tuned_shipped_threshold": 10,
+          "hybrid_detector": 7
+        },
+        "added_v0_2_items": {
+          "n": 0,
+          "fixed_rule": 0,
+          "tuned_shipped_threshold": 0,
+          "hybrid_detector": 0
+        }
+      },
+      "rejections_by_kind": null,
+      "controls_excluded": {
+        "n_non_ood": 110,
+        "n_controls": 25,
+        "controls_rejected": {
+          "fixed_rule": 0,
+          "tuned_shipped_threshold": 0,
+          "hybrid_detector": 0
+        },
+        "false_rejected": {
+          "fixed_rule": 0,
+          "tuned_shipped_threshold": 9,
+          "hybrid_detector": 6
+        },
+        "auroc": {
+          "baseline_raw_bm25": 0.9388,
+          "baseline_ci95": [
+            0.8885,
+            0.9767
+          ],
+          "detector_fused_top1": 0.837,
+          "detector_ci95": [
+            0.7067,
+            0.9421
+          ],
+          "difference_detector_minus_baseline": -0.1018,
+          "difference_ci95": [
+            -0.2215,
+            -0.0058
+          ]
         }
       },
       "auroc": {
@@ -245,6 +341,83 @@
             "b_only": 16,
             "exact_mcnemar_p": 0.09314
           }
+        }
+      },
+      "rejections_by_source": {
+        "original_v0_1_items": {
+          "n": 15,
+          "fixed_rule": 4,
+          "tuned_shipped_threshold": 12,
+          "hybrid_detector": 9
+        },
+        "added_v0_2_items": {
+          "n": 35,
+          "fixed_rule": 13,
+          "tuned_shipped_threshold": 34,
+          "hybrid_detector": 25
+        }
+      },
+      "rejections_by_kind": {
+        "non_terminal": {
+          "n": 34,
+          "fixed_rule": 14,
+          "tuned_shipped_threshold": 34,
+          "hybrid_detector": 25
+        },
+        "unsupported_tool_ood": {
+          "n": 5,
+          "fixed_rule": 0,
+          "tuned_shipped_threshold": 4,
+          "hybrid_detector": 2
+        },
+        "nonsensical": {
+          "n": 1,
+          "fixed_rule": 0,
+          "tuned_shipped_threshold": 1,
+          "hybrid_detector": 1
+        },
+        "near_ood": {
+          "n": 5,
+          "fixed_rule": 0,
+          "tuned_shipped_threshold": 3,
+          "hybrid_detector": 2
+        },
+        "far_ood": {
+          "n": 5,
+          "fixed_rule": 3,
+          "tuned_shipped_threshold": 4,
+          "hybrid_detector": 4
+        }
+      },
+      "controls_excluded": {
+        "n_non_ood": 134,
+        "n_controls": 25,
+        "controls_rejected": {
+          "fixed_rule": 0,
+          "tuned_shipped_threshold": 0,
+          "hybrid_detector": 0
+        },
+        "false_rejected": {
+          "fixed_rule": 0,
+          "tuned_shipped_threshold": 20,
+          "hybrid_detector": 11
+        },
+        "auroc": {
+          "baseline_raw_bm25": 0.956,
+          "baseline_ci95": [
+            0.9283,
+            0.9779
+          ],
+          "detector_fused_top1": 0.8887,
+          "detector_ci95": [
+            0.8258,
+            0.9409
+          ],
+          "difference_detector_minus_baseline": -0.0673,
+          "difference_ci95": [
+            -0.1273,
+            -0.0154
+          ]
         }
       },
       "auroc": {

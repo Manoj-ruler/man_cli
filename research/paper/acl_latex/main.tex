@@ -20,6 +20,14 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 
+% Tool-identity macros (round 3, REV-11). content.tex never names the audited tool directly; the
+% review wrapper defines neutral values, this final wrapper the real ones.
+\newcommand{\toolname}{TermAssist}
+\newcommand{\toolhost}{an npm package}
+\newcommand{\toolnote}{}
+\newcommand{\authorrel}{the author}
+\newcommand{\qid}[1]{TA-B#1}
+
 \title{Confidently Wrong: Auditing and Recalibrating the Confidence of a \\ Shipped Natural-Language-to-Shell Command Retriever}
 
 \author{

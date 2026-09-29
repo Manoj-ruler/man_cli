@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-09-29T04:23:52.826Z",
+  "status": "post hoc, exploratory (answers review round 1)",
+  "task": "T21b / NEW-7, REV-21: interval for the 14-item kappa and exact interval for the 8/8 OOD agreement",
+  "kappa": {
+    "n": 14,
+    "point": 0.6316,
+    "bootstrap_ci95": [
+      0.3913,
+      1
+    ],
+    "bootstrap": {
+      "B": 10000,
+      "seed": 42,
+      "method": "percentile, rows resampled",
+      "valid_resamples": 9993,
+      "dropped_undefined": 7
+    }
+  },
+  "ood_agreement": {
+    "k": 8,
+    "n": 8,
+    "clopper_pearson_ci95": [
+      0.6306,
+      1
+    ]
+  },
+  "reproduction_checks": [
+    {
+      "label": "n rows",
+      "got": 14,
+      "want": 14
+    },
+    {
+      "label": "kappa (kappa_results.json)",
+      "got": 0.6316,
+      "want": 0.6316
+    },
+    {
+      "label": "OOD rows",
+      "got": 8,
+      "want": 8
+    },
+    {
+      "label": "OOD agreements",
+      "got": 8,
+      "want": 8
+    }
+  ]
+}

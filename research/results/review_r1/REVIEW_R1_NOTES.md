@@ -148,3 +148,42 @@ paragraph and the Ethics section.
    a returned command.
 5. **Selection effect.** Screening filtered nothing out. The added queries lie lower on raw scores, yet the
    detector's gain matches the original set. The effect does favour the raw-BM25 baseline on v0.2.
+
+## Round 3 additions (T21b, 2026-09-29)
+
+Both additions are deterministic: a full rerun of `run_review_r1.js` reproduces every JSON byte for byte,
+apart from `generated_at`. The pre-existing fields of `review_r1_e` are unchanged.
+
+**E, extended (`review_r1_e_ood_operating_points.json`).**
+
+- **`rejections_by_source`** (REV-14). v0.2 OOD rejections, fixed rule / tuned shipped threshold / hybrid detector:
+
+  | Items | Fixed rule | Tuned threshold | Detector |
+  |---|---|---|---|
+  | 15 original (keyword-checked, not score-screened) | 4 | 12 | 9 |
+  | 35 added (score-screened) | 13 | 34 | 25 |
+
+  The tuned threshold's lead over the detector therefore also appears on the unscreened items.
+- **`rejections_by_kind`** (REV-22). Subtypes are AI-assigned and unchecked. Fixed / tuned / detector:
+
+  | Kind | n | Fixed rule | Tuned threshold | Detector |
+  |---|---|---|---|---|
+  | non_terminal | 34 | 14 | 34 | 25 |
+  | far_ood | 5 | 3 | 4 | 4 |
+  | nonsensical | 1 | 0 | 1 | 1 |
+  | unsupported_tool_ood | 5 | 0 | 4 | 2 |
+  | near_ood | 5 | 0 | 3 | 2 |
+
+  The last two rows together are the 10 terminal tasks: 0 / 7 / 4. Guard: the fixed-rule and detector counts
+  reproduce T2 (10 checks).
+- **`controls_excluded`** (REV-02).
+  - No rule rejects any of the 25 controls, so the false rejections are unchanged: 0 / 9 / 6 of 110 and
+    0 / 20 / 11 of 134.
+  - Pooled OOD AUROC, shipped vs hybrid feature: v0.1 0.939 vs 0.837, difference −0.102 [−0.222, −0.006];
+    v0.2 0.956 vs 0.889, difference −0.067 [−0.127, −0.015].
+
+**F, new (`review_r1_f_kappa_intervals.json`)** (NEW-7, REV-21).
+
+- κ = 0.6316 on 14 rows, percentile bootstrap 95% [0.391, 1.000]; 9,993 of 10,000 resamples valid. This
+  reproduces the round-1 manuscript's untraced "[0.39, 1.00]".
+- The 8/8 OOD agreement has a Clopper–Pearson 95% interval of [0.631, 1].
