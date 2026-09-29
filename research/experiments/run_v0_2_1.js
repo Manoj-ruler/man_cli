@@ -48,6 +48,7 @@ git(['worktree', 'add', '--detach', wt, commit]);
 const t0 = Date.now();
 let ok = false;
 try {
+  if (!fs.existsSync(path.join(ROOT, 'research/node_modules/@xenova/transformers/package.json'))) throw new Error('research/node_modules is not installed (npm ci in research/)');
   fs.symlinkSync(path.join(ROOT, 'research/node_modules'), path.join(wt, 'research/node_modules'), 'junction');
   // v0.2.1 files at the v0.2 paths, inside the worktree only
   fs.copyFileSync(IN.json, path.join(wt, 'research/datasets/termassist_bench_v0.2_validated.json'));
@@ -87,6 +88,22 @@ try {
   ok = true;
   console.log(`\nwrote ${Object.keys(outFiles).length} result files + RUN_MANIFEST.json to ${outRoot}${DRY ? ' [SYNTHETIC]' : ''}`);
 } finally {
-  try { git(['worktree', 'remove', '--force', wt]); } catch (e) { console.error('warning: could not remove worktree ' + wt + ': ' + e.message); }
+  // The node_modules link MUST go before the worktree: on Windows `git worktree remove --force`
+  // follows a junction and deletes the target's contents (it emptied research/node_modules, and with
+  // it the pinned model cache, on 2026-09-29). Unlink it, confirm it is gone, and only then remove the
+  // worktree; if the link cannot be removed, leave the worktree in place rather than risk the target.
+  const link = path.join(wt, 'research/node_modules');
+  let linkGone = false;
+  try { if (fs.lstatSync(link, { throwIfNoEntry: false })) fs.unlinkSync(link); linkGone = !fs.lstatSync(link, { throwIfNoEntry: false }); }
+  catch (e) { console.error('warning: could not unlink ' + link + ': ' + e.message); }
+  if (linkGone) {
+    try { git(['worktree', 'remove', '--force', wt]); } catch (e) { console.error('warning: could not remove worktree ' + wt + ': ' + e.message); }
+  } else {
+    console.error(`warning: left the worktree at ${wt} because its node_modules link is still present; remove the link by hand (rmdir, not rm -r), then run: git worktree remove --force ${wt}`);
+  }
+  if (!fs.existsSync(path.join(ROOT, 'research/node_modules/@xenova/transformers/package.json'))) {
+    console.error('ERROR: research/node_modules/@xenova/transformers is missing after cleanup; run npm ci in research/ and node research/experiments/check_model_cache.js --fetch');
+    process.exitCode = 1;
+  }
   if (!ok) process.exitCode = 1;
 }
