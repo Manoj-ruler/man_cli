@@ -53,7 +53,16 @@ try {
   fs.copyFileSync(IN.json, path.join(wt, 'research/datasets/termassist_bench_v0.2_validated.json'));
   fs.copyFileSync(IN.csv, path.join(wt, 'research/datasets/termassist_bench_v0.2_validated.csv'));
   fs.copyFileSync(IN.review, path.join(wt, 'research/datasets/review/human_review_results_v0.2.json'));
-  for (const s of ['check_model_cache.js', 'run_all_v0_2.js', 'run_review_r1.js']) {
+  // The step list is read from run_all_v0_2.js itself (so the two cannot drift), minus the generate_*
+  // steps: those render the paper's v0.2 tables and figures, not results, and one of them
+  // (generate_sensitivity_table.js) requires the answerable subsets of v0.1 and v0.2 to coincide,
+  // which the v0.2.1 defect fixes break by design.
+  const runAll = fs.readFileSync(path.join(wt, 'research/experiments/run_all_v0_2.js'), 'utf8');
+  const listed = [...runAll.match(/const steps = \[([\s\S]*?)\];/)[1].matchAll(/'([^']+\.js)'/g)].map(m => m[1]);
+  if (listed.length < 20) throw new Error('could not read the step list from run_all_v0_2.js');
+  const steps = ['check_model_cache.js', ...listed.filter(s => !s.startsWith('generate_')), 'run_review_r1.js'];
+  console.log(`steps (${steps.length}): ${steps.join(', ')}`);
+  for (const s of steps) {
     console.log(`\n=== ${s} (worktree) ===`);
     execFileSync('node', [path.join(wt, 'research/experiments', s)], { cwd: wt, stdio: 'inherit' });
   }
@@ -69,7 +78,7 @@ try {
   }
   fs.writeFileSync(path.join(outRoot, 'RUN_MANIFEST.json'), JSON.stringify({
     stamp: DRY ? 'SYNTHETIC TEST RUN -- NOT REAL RESULTS' : null,
-    what: 'Full v0.2 analysis chain re-run on benchmark v0.2.1 (run_all_v0_2.js + run_review_r1.js) in a disposable worktree; v0.2.1 placed at the v0.2 paths inside that worktree only. Folders keep their research/results/ layout; files named v0.2 inside them hold v0.2.1 results. v0.1 sections are unchanged re-runs.',
+    what: 'Full v0.2 analysis chain re-run on benchmark v0.2.1 (the run_all_v0_2.js steps except the generate_* table/figure renderers, then run_review_r1.js) in a disposable worktree; v0.2.1 placed at the v0.2 paths inside that worktree only. Folders keep their research/results/ layout; files named v0.2 inside them hold v0.2.1 results. v0.1 sections are unchanged re-runs.',
     commit, node: process.version, platform: `${os.platform()} ${os.release()}`, seconds: Math.round((Date.now() - t0) / 1000),
     benchmark_manifest: { file: path.basename(IN.manifest), synthetic: !!manifest.synthetic },
     input_sha256: Object.fromEntries(Object.entries(IN).map(([k, f]) => [k, sha(f)])),

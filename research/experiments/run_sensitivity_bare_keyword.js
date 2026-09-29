@@ -130,8 +130,12 @@ const expect = [
   ['v0.1 ECE before', v01.subsets.ALL.calibration.ece_before, 0.2741, 1e-4],
   ['v0.1 ECE after', v01.subsets.ALL.calibration.ece_after, 0.0537, 1e-4]
 ];
+// Published v0.2 values apply only to the frozen v0.2 benchmark; on a re-labelled benchmark (v0.2.1,
+// run through run_v0_2_1.js) the v0.2 rows are skipped and reported as such. v0.1 rows always apply.
+const frozenV02 = require('./phase1_common').frozen('v0.2');
+if (!frozenV02) console.log('note: benchmark at the v0.2 path is not the frozen v0.2; its published-value checks are skipped');
 let bad = 0;
-expect.forEach(([n, got, want, tol]) => { const ok = Math.abs(got - want) <= tol; if (!ok) bad++; console.log(`${ok ? 'OK  ' : 'FAIL'} reproduce ${n}: got ${got}, reported ${want}`); });
+expect.filter(([n]) => frozenV02 || !n.startsWith('v0.2')).forEach(([n, got, want, tol]) => { const ok = Math.abs(got - want) <= tol; if (!ok) bad++; console.log(`${ok ? 'OK  ' : 'FAIL'} reproduce ${n}: got ${got}, reported ${want}`); });
 if (bad) { console.error(`\nABORT: ${bad} reproduction check(s) failed -- subset numbers below would not be trustworthy.`); process.exit(1); }
 
 const outDir = path.join(projectRoot, 'research/results/stats');
