@@ -63,6 +63,12 @@ for (const v of ['v0.1', 'v0.2']) {
   const rawBM25 = id => repro.get(id).actual.score;
   const shippedConf = id => D.variants.baseline_confidence.rawOf.get(id), shippedHit = id => D.variants.baseline_confidence.hitOf.get(id);
   const denseHit = new Map(D.cands.filter(c => c.system === 'dense').map(c => [c.id, isMatch(cache.get(c.id), c.top1_command) ? 1 : 0]));
+  // BM25 accuracy uses the ablation's A0 top-1 hit, the definition of Table 1 and T1 (ranking
+  // accuracy, no refusal), as the hybrid and dense hits do. The shipped, refusal-aware hit stays in
+  // the calibration analysis, where it belongs. On the frozen benchmarks the two agree on every row.
+  // They can differ on a relabelled benchmark: a refused query returns the first corpus record,
+  // which may be the new gold. Found in the 2026-09-29 v0.2.1 pipeline rehearsal.
+  const bm25TopHit = new Map(D.ablation.conditions.A0.per_query.map(r => [r.id, r.hit ? 1 : 0]));
   // fused result per (query, alpha), computed once; the score is rounded to 4 decimals because the
   // committed pipeline stores features that way (build_reliability_features*.js) and thresholds and
   // calibrates on the stored values
@@ -102,9 +108,10 @@ for (const v of ['v0.1', 'v0.2']) {
     oods.p_detector_vs_fixed = mcn(id => rej.detector.has(id), fixedRej, oodIds);
     oods.p_tuned_vs_detector = mcn(id => rej.tuned.has(id), id => rej.detector.has(id), oodIds);
     // 4. accuracy and ranking, non-control
-    const hitsH = cnt(hybHit, inScope), hitsB = cnt(shippedHit, inScope), hitsD = cnt(id => denseHit.get(id), inScope);
+    const bm25Hit = id => bm25TopHit.get(id);
+    const hitsH = cnt(hybHit, inScope), hitsB = cnt(bm25Hit, inScope), hitsD = cnt(id => denseHit.get(id), inScope);
     const acc = { n: inScope.length, hybrid: hitsH, bm25: hitsB, dense: hitsD,
-      gain_vs_bm25_pp: 100 * (hitsH - hitsB) / inScope.length, p_vs_bm25: mcn(hybHit, shippedHit, inScope),
+      gain_vs_bm25_pp: 100 * (hitsH - hitsB) / inScope.length, p_vs_bm25: mcn(hybHit, bm25Hit, inScope),
       gain_vs_dense_pp: 100 * (hitsH - hitsD) / inScope.length, p_vs_dense: mcn(hybHit, id => denseHit.get(id), inScope) };
     const items = (conf, hit) => nonCtl.map(id => ({ conf: conf(id), err: hit(id) ? 0 : 1 }));
     const iH = items(hybScore, hybHit), iB = items(shippedConf, shippedHit);
