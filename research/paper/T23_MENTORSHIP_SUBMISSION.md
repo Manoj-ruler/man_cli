@@ -36,7 +36,7 @@ These were verified on the official call on 2026-09-28 and are recorded in `rese
 
 Run in `research/paper/acl_latex/`:
 
-1. `bash build.sh` must report "body text ends on page N (limit 8)" with N ≤ 8, currently 6.
+1. `bash build.sh` must report "body text ends on page N (limit 8)" with N ≤ 8, currently 7 (the main-text figure added in T24).
 2. `main_review.log` must show 0 overfull boxes and no undefined references; `main_review.blg` must show 0 warnings.
 3. The review PDF text must contain none of the identifying strings:
 
