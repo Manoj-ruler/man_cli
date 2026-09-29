@@ -169,6 +169,14 @@ Every new script must first reproduce the current reported values and refuse to 
   - Scope: the T22 residuals (REV-03, REV-14, REV-49 must_fix; REV-11 after the D7 reversal; should_fix residuals; NEW-2 to NEW-7).
   - New traced numbers: `review_r1_e` split by source and kind plus a controls-excluded block; `review_r1_f` κ intervals. Both are deterministic and guarded.
   - Next: a scoped re-review of the round-3 items (not yet run).
+- [x] **T24 ✅ Approved contested items S11, S6, REV-10 (author approval 2026-09-29).** Notes: `results/review_r1/REVIEW_R1_NOTES.md`, section "Approved analyses".
+  - **S11:** 20 fold partitions, `seed_repeat_cv.js`.
+    - Ranking and out-of-scope results hold on all or nearly all partitions.
+    - The recalibrated shipped ECE is within the noise floor on only 18/20 (v0.1) and 13/20 (v0.2) partitions. The paper now says so.
+  - **S6:** mid-p and asymptotic tests, `review_r1_g`. Only v0.2 hybrid vs BM25 flips (exact 0.070, mid-p 0.039).
+  - **REV-10:** a main-text reliability diagram of the shipped confidence, `review_r1_h`, as Figure 1. The body now ends on page 7 of 8.
+  - All new numbers are in the claim trace: 459 numbers, 0 problems.
+  - Still contested, open for the author and mentors: REV-23 is now done; REV-18 is done; REV-33 (tool-retrieval literature) and REV-39 (cost-of-harm operating points) remain.
 - [ ] **T23 🟡 Mentorship draft, due Nov 6, 2026. The package is prepared; submission is the author's.**
   - Guide: `research/paper/T23_MENTORSHIP_SUBMISSION.md` (what to upload, the pre-upload checklist, author checks).
   - Before submitting, the author verifies on the official call: the submission system, the mentorship format, and whether the checklist is required.

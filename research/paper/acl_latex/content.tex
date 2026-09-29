@@ -201,10 +201,23 @@ of the non-control in-scope ones, Table~\ref{tab:acc}), yet its 49 wrong answers
 (0.064 and 0.050), and its Brier score is no better than predicting the base rate for every query (skill $-0.23$
 and $-0.06$, intervals including zero). A heuristic score such as $s/8$ capped at 100\% is not expected to be
 calibrated; what the audit adds is how far off it is, and that the tool shows it to users as a percentage.
+Figure~\ref{fig:shipped} shows the gap: 77\% and 63\% of non-control queries fall in the top bin, shown at a mean
+99\% confidence, and 70\% and 73\% of them are answered correctly.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.36\linewidth]{figures/fig7_shipped_reliability.png} \hspace{0.08\linewidth}
+  \includegraphics[width=0.36\linewidth]{figures/fig7_shipped_reliability_v0.2.png}
+  \caption{Reliability of the shipped confidence (red) and after isotonic recalibration fit on development folds
+  (green), non-control queries (125 and 184), 10 equal-width bins; dot area grows with the number of queries, and the
+  dashed line is perfect calibration. Left: v0.1. Right: v0.2.}
+  \label{fig:shipped}
+\end{figure*}
 
 \paragraph{Recalibration.} Isotonic regression fit on development folds lowers the shipped confidence's ECE to
 0.069 on v0.1 and 0.063 on v0.2, reductions of 79\% and 78\%, within the noise floor's 95th percentile
-(0.105 and 0.080). Equal-mass bins give 0.110 and 0.070 (noise-floor 95th percentiles 0.122 and 0.092) and the
+(0.105 and 0.080) on this fold partition; across 20 partitions the reduction is at least 45\% and 63\%, but the
+recalibrated ECE is within that percentile on only 18 and 13 of them (Appendix~\ref{app:secondary}). Equal-mass bins give 0.110 and 0.070 (noise-floor 95th percentiles 0.122 and 0.092) and the
 bin-count sweep 0.060 and 0.047; before recalibration all three estimators give the same 0.323 and 0.293. Brier skill becomes positive (0.20 and 0.33, intervals excluding zero), so the
 recalibrated number carries information about correctness.
 Platt scaling and histogram binning, fit on the same folds, give ECEs with overlapping bootstrap intervals (v0.1:
@@ -253,7 +266,8 @@ correctness AUROC is higher, though on v0.2 without controls its interval just i
 lies inside the maximum-confidence tie block, the hybrid's expected error on all 150 v0.1 queries is 8.3\% (0--10.7\%
 depending on how ties are ordered). Its accuracy gain is consistent in size but not established (Table~\ref{tab:acc}): over BM25 it
 gains 6.4 points on v0.1 (exact $p=0.0156$, Holm-adjusted 0.047) and 4.5 on v0.2 ($p=0.070$), resting on 7 and 8
-discordant queries, and one bare keyword (``system'') decides the v0.2 test; a benchmark this size has little power
+discordant queries, and one bare keyword (``system'') decides the v0.2 test, whose verdict also depends on the test used (mid-p 0.039; Appendix~\ref{app:secondary});
+a benchmark this size has little power
 for gains of this size \citep{card2020littlepower}. Its advantage over dense retrieval on v0.2 depends on three
 bare-keyword queries (Appendix~\ref{app:secondary}). Grouping folds by intent leaves accuracy unchanged and weakens
 calibration somewhat (Appendix~\ref{app:secondary}). All hybrid results are for one small encoder (MiniLM) and one
@@ -356,8 +370,8 @@ safety set; and study whether calibrated confidence and risk prompts change what
   not collected from users, so calibration and out-of-scope rates depend on this mix.
   \item \textbf{Exploratory statistics.} Every analysis was specified after results were seen, including the Holm
   family, the controls exclusion, the equal-false-rejection comparison (whose thresholds are chosen in-sample) and
-  the sensitivity subsets. Accuracy tests rest on 7--8 discordant queries. Results come from one fold partition
-  (seed 42).
+  the sensitivity subsets. Accuracy tests rest on 7--8 discordant queries. Headline results use one fold partition
+  (seed 42); Appendix~\ref{app:secondary} repeats every fold-dependent step on 20 partitions, as point estimates.
   \item \textbf{Out-of-scope evidence.} Only 10 out-of-scope queries are terminal tasks outside the corpus; the kind
   labels are AI-assigned; the added queries were checked with raw retrieval scores, which favors the shipped score;
   and the hybrid detector's features were chosen on the full data, which may flatter its out-of-scope counts and
@@ -462,6 +476,24 @@ bare-keyword queries and $p=0.227$ on answerable queries only; the calibration g
   Fusion weight and thresholds were not re-tuned.}
   \label{tab:sens}
 \end{table*}
+
+\paragraph{Fold partitions.} Every fold-dependent step ($\alpha$, both thresholds and the calibrators) was repeated on
+20 stratified partitions (seed 42 and seeds 1--19; non-control queries; point estimates). The ranking result holds
+on all 20 partitions of both versions: the hybrid's AURC and AUGRC are lower and its correctness AUROC higher. The
+tuned shipped threshold rejects more out-of-scope requests than the detector on 19 (v0.1) and 20 (v0.2) of 20
+partitions (v0.2: 41--46 vs.\ 33--35 of 50, at 17--23 vs.\ 11--14 false rejections; McNemar $p<0.05$ on 16), and the
+detector beats the fixed rule with $p<0.05$ on all 20 v0.2 partitions and on none of v0.1. Isotonic recalibration cuts
+the shipped ECE on every partition (v0.1: 45--91\%, median 82\%; v0.2: 63--88\%, median 78\%), but the recalibrated
+ECE lies within the noise floor's 95th percentile on only 18 (v0.1) and 13 (v0.2) of 20 partitions, and the hybrid's
+on 9 and 11. The accuracy tests change only on the one partition per version where a fold selects $\alpha=0.1$:
+hybrid over BM25 has $p=0.016$ on 19 of 20 v0.1 partitions and $p\geq0.07$ on all v0.2 partitions; hybrid over dense
+has $p=0.013$ on 19 of 20 v0.2 partitions.
+
+\paragraph{Test choice.} With mid-p instead of exact McNemar tests (asymptotic tests agree), the only conclusion that
+changes is the v0.2 accuracy gain over BM25 (1 vs.\ 7 discordant queries): exact $p=0.070$, mid-p 0.039, asymptotic
+0.034, and it would survive Holm correction under mid-p (0.039). Every other comparison stays on the same side of
+0.05, for example the v0.1 gain over dense (mid-p 0.092) and the v0.2 tuned threshold against the detector (mid-p
+0.0024).
 
 \paragraph{Split B.} Grouping folds by derived intent group (171 groups on v0.2, 125 on v0.1; none split across folds)
 leaves hybrid accuracy unchanged and OOD AUROC nearly so, while the ECE reduction attenuates (Table~\ref{tab:splitb}).

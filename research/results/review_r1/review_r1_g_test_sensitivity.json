@@ -1,0 +1,258 @@
+{
+  "generated_at": "2026-09-29T09:53:31.573Z",
+  "status": "post hoc, exploratory (answers review round 1)",
+  "task": "S6 / REV-18: mid-p and asymptotic McNemar sensitivity; Holm family under mid-p",
+  "note": "Counts are the committed discordant pairs (controls excluded; controls are never discordant). The calibration member of the Holm family is a one-sided bootstrap bound and is carried unchanged.",
+  "reproduction_checks": [
+    {
+      "label": "v0.1 accuracy_hybrid_vs_bm25 exact p",
+      "got": 0.01563,
+      "want": 0.01563
+    },
+    {
+      "label": "v0.1 accuracy_hybrid_vs_dense exact p",
+      "got": 0.146,
+      "want": 0.146
+    },
+    {
+      "label": "v0.1 ood_detector_vs_fixed_rule exact p",
+      "got": 0.25,
+      "want": 0.25
+    },
+    {
+      "label": "v0.1 ood_tuned_threshold_vs_detector exact p",
+      "got": 0.25,
+      "want": 0.25
+    },
+    {
+      "label": "v0.1 false_rejections_tuned_vs_detector exact p",
+      "got": 0.5488,
+      "want": 0.5488
+    },
+    {
+      "label": "v0.1 Holm (exact) member 0",
+      "got": 0.04689,
+      "want": 0.04688
+    },
+    {
+      "label": "v0.1 Holm (exact) member 1",
+      "got": 0.292,
+      "want": 0.292
+    },
+    {
+      "label": "v0.1 Holm (exact) member 2",
+      "got": 0.292,
+      "want": 0.292
+    },
+    {
+      "label": "v0.1 Holm (exact) member 3",
+      "got": 0.0004,
+      "want": 0.0004
+    },
+    {
+      "label": "v0.2 accuracy_hybrid_vs_bm25 exact p",
+      "got": 0.07031,
+      "want": 0.07031
+    },
+    {
+      "label": "v0.2 accuracy_hybrid_vs_dense exact p",
+      "got": 0.01273,
+      "want": 0.01273
+    },
+    {
+      "label": "v0.2 ood_detector_vs_fixed_rule exact p",
+      "got": 0.00001526,
+      "want": 0.000015
+    },
+    {
+      "label": "v0.2 ood_tuned_threshold_vs_detector exact p",
+      "got": 0.004181,
+      "want": 0.004181
+    },
+    {
+      "label": "v0.2 false_rejections_tuned_vs_detector exact p",
+      "got": 0.09314,
+      "want": 0.09314
+    },
+    {
+      "label": "v0.2 Holm (exact) member 0",
+      "got": 0.07031,
+      "want": 0.07031
+    },
+    {
+      "label": "v0.2 Holm (exact) member 1",
+      "got": 0.02546,
+      "want": 0.02545
+    },
+    {
+      "label": "v0.2 Holm (exact) member 2",
+      "got": 0.00006104,
+      "want": 0.00006
+    },
+    {
+      "label": "v0.2 Holm (exact) member 3",
+      "got": 0.0003,
+      "want": 0.0003
+    }
+  ],
+  "versions": {
+    "v0.1": {
+      "tests": {
+        "accuracy_hybrid_vs_bm25": {
+          "b": 0,
+          "c": 7,
+          "exact": 0.01563,
+          "mid_p": 0.007813,
+          "asymptotic_chi2": 7,
+          "asymptotic": 0.008151,
+          "committed": 0.01563
+        },
+        "accuracy_hybrid_vs_dense": {
+          "b": 3,
+          "c": 9,
+          "exact": 0.146,
+          "mid_p": 0.09229,
+          "asymptotic_chi2": 3,
+          "asymptotic": 0.08326,
+          "committed": 0.146
+        },
+        "ood_detector_vs_fixed_rule": {
+          "b": 0,
+          "c": 3,
+          "exact": 0.25,
+          "mid_p": 0.125,
+          "asymptotic_chi2": 3,
+          "asymptotic": 0.08326,
+          "committed": 0.25
+        },
+        "ood_tuned_threshold_vs_detector": {
+          "b": 0,
+          "c": 3,
+          "exact": 0.25,
+          "mid_p": 0.125,
+          "asymptotic_chi2": 3,
+          "asymptotic": 0.08326,
+          "committed": 0.25
+        },
+        "false_rejections_tuned_vs_detector": {
+          "b": 4,
+          "c": 7,
+          "exact": 0.5488,
+          "mid_p": 0.3877,
+          "asymptotic_chi2": 0.8182,
+          "asymptotic": 0.3657,
+          "committed": 0.5488
+        }
+      },
+      "holm_family": [
+        {
+          "member": "accuracy_hybrid_vs_bm25",
+          "holm_exact": 0.04689,
+          "holm_mid_p": 0.02344,
+          "significant_exact": true,
+          "significant_mid_p": true
+        },
+        {
+          "member": "accuracy_hybrid_vs_dense",
+          "holm_exact": 0.292,
+          "holm_mid_p": 0.1846,
+          "significant_exact": false,
+          "significant_mid_p": false
+        },
+        {
+          "member": "ood_detector_vs_fixed_rule",
+          "holm_exact": 0.292,
+          "holm_mid_p": 0.1846,
+          "significant_exact": false,
+          "significant_mid_p": false
+        },
+        {
+          "member": "calibration_ece_reduction_bootstrap_bound",
+          "holm_exact": 0.0004,
+          "holm_mid_p": 0.0004,
+          "significant_exact": true,
+          "significant_mid_p": true
+        }
+      ]
+    },
+    "v0.2": {
+      "tests": {
+        "accuracy_hybrid_vs_bm25": {
+          "b": 1,
+          "c": 7,
+          "exact": 0.07031,
+          "mid_p": 0.03906,
+          "asymptotic_chi2": 4.5,
+          "asymptotic": 0.03389,
+          "committed": 0.07031
+        },
+        "accuracy_hybrid_vs_dense": {
+          "b": 3,
+          "c": 14,
+          "exact": 0.01273,
+          "mid_p": 0.007538,
+          "asymptotic_chi2": 7.1176,
+          "asymptotic": 0.007633,
+          "committed": 0.01273
+        },
+        "ood_detector_vs_fixed_rule": {
+          "b": 0,
+          "c": 17,
+          "exact": 0.00001526,
+          "mid_p": 0.000007629,
+          "asymptotic_chi2": 17,
+          "asymptotic": 0.00003738,
+          "committed": 0.000015
+        },
+        "ood_tuned_threshold_vs_detector": {
+          "b": 2,
+          "c": 14,
+          "exact": 0.004181,
+          "mid_p": 0.00235,
+          "asymptotic_chi2": 9,
+          "asymptotic": 0.0027,
+          "committed": 0.004181
+        },
+        "false_rejections_tuned_vs_detector": {
+          "b": 7,
+          "c": 16,
+          "exact": 0.09314,
+          "mid_p": 0.06391,
+          "asymptotic_chi2": 3.5217,
+          "asymptotic": 0.06057,
+          "committed": 0.09314
+        }
+      },
+      "holm_family": [
+        {
+          "member": "accuracy_hybrid_vs_bm25",
+          "holm_exact": 0.07031,
+          "holm_mid_p": 0.03906,
+          "significant_exact": false,
+          "significant_mid_p": true
+        },
+        {
+          "member": "accuracy_hybrid_vs_dense",
+          "holm_exact": 0.02546,
+          "holm_mid_p": 0.01508,
+          "significant_exact": true,
+          "significant_mid_p": true
+        },
+        {
+          "member": "ood_detector_vs_fixed_rule",
+          "holm_exact": 0.00006104,
+          "holm_mid_p": 0.00003052,
+          "significant_exact": true,
+          "significant_mid_p": true
+        },
+        {
+          "member": "calibration_ece_reduction_bootstrap_bound",
+          "holm_exact": 0.0003,
+          "holm_mid_p": 0.0003,
+          "significant_exact": true,
+          "significant_mid_p": true
+        }
+      ]
+    }
+  }
+}

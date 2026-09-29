@@ -187,3 +187,37 @@ apart from `generated_at`. The pre-existing fields of `review_r1_e` are unchange
 - κ = 0.6316 on 14 rows, percentile bootstrap 95% [0.391, 1.000]; 9,993 of 10,000 resamples valid. This
   reproduces the round-1 manuscript's untraced "[0.39, 1.00]".
 - The 8/8 OOD agreement has a Clopper–Pearson 95% interval of [0.631, 1].
+
+## Approved analyses S11, S6 and REV-10 (T24, 2026-09-29)
+
+The author approved these three on 2026-09-29. All scripts are deterministic and guarded, and `run_review_r1.js` runs them.
+
+**S11: fold-partition sensitivity** (`research/results/seed_repeat/seed_repeat_cv.json`, script `seed_repeat_cv.js`).
+
+- **Method.** 20 stratified partitions (seed 42 and seeds 1–19). Every fold-dependent step is re-run: α, the two out-of-scope thresholds, and the isotonic calibrators. The population is non-control queries. Results are point estimates.
+- **Reproduction.** Seed 42 reproduces 36 committed values, including the fold assignment, α per fold, fused scores to 4 decimals, the ECEs, the out-of-scope counts, the hits and the ranking differences.
+- **Ranking.** AURC and AUGRC are lower, and correctness AUROC higher, on 20 of 20 partitions of both versions.
+- **Out-of-scope.**
+  - The tuned threshold rejects more than the detector on 19/20 (v0.1) and 20/20 (v0.2) partitions.
+  - On v0.2 it rejects 41–46 against 33–35, at 17–23 against 11–14 false rejections, with p < 0.05 on 16/20.
+  - Detector vs fixed rule: p < 0.05 on 20/20 partitions on v0.2 and 0/20 on v0.1.
+- **Recalibration.**
+  - The shipped ECE reduction is 45–91% (median 82%) on v0.1 and 63–88% (median 78%) on v0.2.
+  - The recalibrated ECE is within the seed-42 noise-floor p95 on 18/20 (v0.1) and 13/20 (v0.2) partitions. For the hybrid it is 9/20 and 11/20.
+  - "About the noise floor" is therefore partition-dependent on v0.2.
+- **Accuracy.** Results change only on the one partition per version where a fold picks α = 0.1 (seed 12 for v0.1, seed 18 for v0.2).
+  - Hybrid vs BM25: p = 0.016 on 19/20 v0.1 partitions; p ≥ 0.07 on all v0.2 partitions.
+  - Hybrid vs dense on v0.2: p = 0.013 on 19/20.
+
+**S6: test choice** (`review_r1_g_test_sensitivity.json`). The exact McNemar test is compared with mid-p and the asymptotic test. The exact p values and the Holm values reproduce (18 guards).
+
+- **One conclusion changes:** v0.2 hybrid vs BM25 (1 vs 7 discordant queries).
+  - The p value is exact 0.070, mid-p 0.039, asymptotic 0.034.
+  - It is Holm-significant under mid-p (0.039).
+- **Nothing else crosses 0.05.**
+
+**REV-10: main-text figure** (`review_r1_h_shipped_reliability_bins.json`; `research/figures/fig7_shipped_reliability*.svg`, converted to PNG with the cached sharp-cli as in REPRODUCE.md).
+
+- It shows the shipped-confidence reliability diagram, before and after isotonic recalibration, on non-control queries.
+- Its ECEs reproduce 0.323→0.069 and 0.293→0.063.
+- The top bin holds 77% and 63% of queries, at a mean confidence of 0.994, with accuracy 70% and 73%.
