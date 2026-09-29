@@ -93,7 +93,7 @@ Every new script must first reproduce the current reported values and refuse to 
 
 ## Phase 6 — Paper and reproducibility (🔵 after T1–T6; include T12 if done)
 
-- [ ] **T14 🟡 Revise `content.tex`**. **Round 1 applied 2026-09-28** with the ARS `academic-paper` revision workflow (roadmap and checks: `research/paper/T14_REVISION_ROADMAP.md`). Body ends on page 8. Still open: an external re-review (`academic-paper-reviewer`), then the κ and v0.2.1 results once T11/T12 are done.
+- [x] **T14 ✅ Revise `content.tex` (superseded by T21, T21b, T24; current status in `research/PUBLICATION_STATUS.md`)**. **Round 1 applied 2026-09-28** with the ARS `academic-paper` revision workflow (roadmap and checks: `research/paper/T14_REVISION_ROADMAP.md`). Body ends on page 8. Still open: an external re-review (`academic-paper-reviewer`), then the κ and v0.2.1 results once T11/T12 are done.
   - *Work:*
     - Headline numbers without controls; OOD by type with the false-rejection cost.
     - Corrected safety wording; tie-aware selective-prediction figures; calibration comparators.
@@ -193,7 +193,7 @@ Every new script must first reproduce the current reported values and refuse to 
   - State that the labels are the benchmark's own, not an independent set.
   - No "safe" claim anywhere.
 - [ ] **D2:** build the near-OOD set (T13)?
-- [x] **D3 (decided 2026-09-28):** keep the name TermAssist in the review version. It is referred to in the third person, with no npm URL, package scope, repository link or author-identifying detail; those go in the camera-ready only. (Checked: `content.tex` currently has none.)
+- [x] **D3 (decided 2026-09-28; superseded 2026-09-29 by the D7 reversal: the review version is anonymized):** keep the name TermAssist in the review version. It is referred to in the third person, with no npm URL, package scope, repository link or author-identifying detail; those go in the camera-ready only. (Checked: `content.tex` currently has none.)
 - [x] **D4 (decided 2026-09-28): EACL 2027 Student Research Workshop** (Athens, March 9–14, 2027). It was verified on the official call as the earliest open SRW. The previous label "EACL 2026" was wrong; these dates belong to EACL 2027.
   - Pre-submission mentorship deadline: **Nov 6, 2026**. Mentorship feedback: Dec 5, 2026.
   - Direct submission deadline: **Dec 15, 2026**.
@@ -205,8 +205,8 @@ Every new script must first reproduce the current reported values and refuse to 
 
 - [x] **D6 (decided 2026-09-28): contribution framing = audit and recalibration of the shipped confidence; the hybrid is one arm.** Lead with "auditing and recalibrating a shipped command retriever's confidence", with the hybrid as one arm of the study (REV-01)? The skill leaves the contribution claim to the author.
 - [x] ~~**D7 (decided 2026-09-28): keep the TermAssist name** (D3 stands; REV-11 declined).~~ **Reversed 2026-09-29 by the author: anonymize the tool in the review version** ("anonymize the name and start round 3"). This supersedes D3 for the review version; the camera-ready keeps the real name. Implemented in T21b via wrapper macros (`\toolname`, `\toolhost`, `\toolnote`, `\authorrel`, `\qid`), plus a neutral authorship sentence (REV-11).
-- [ ] **D8: page budget.** Move Split B, the sensitivity table and per-subset results to the appendix, as REV-02 proposes?
-- [ ] **D9: triage mode.** Work through the 54 items with the ARS guided Socratic triage, or let Claude triage and bring back only the contested items?
+- [x] **D8 (settled in T21, round 2): page budget.** Split B, the sensitivity table and the Holm table moved to Appendix B. Move Split B, the sensitivity table and per-subset results to the appendix, as REV-02 proposes?
+- [x] **D9 (settled in T21): triage mode.** Claude triaged and returned the contested items to the author (T24 resolved three of them). Work through the 54 items with the ARS guided Socratic triage, or let Claude triage and bring back only the contested items?
 - [ ] **D10: pending approvals.**
   - the v0.2.1 defect fixes (`research/datasets/v0.2.1_fixes.json`);
   - the T8 tag;

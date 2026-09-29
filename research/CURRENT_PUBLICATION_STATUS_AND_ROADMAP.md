@@ -1,5 +1,8 @@
 # TermAssist Current Research Status and Publication Roadmap
 
+> **Superseded (2026-09-29):** the current status is `research/PUBLICATION_STATUS.md`. This file is kept as the
+> 2026-09-28 audit record.
+
 Audit date: 2026-09-28. Branch `research/improvement`, HEAD `e909fb3`, working tree clean. Analysis only:
 no code, data, results, manuscript, or configuration was changed; this file is the only file written.
 
