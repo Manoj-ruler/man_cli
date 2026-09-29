@@ -1,0 +1,1018 @@
+     Confidently Wrong: Auditing and Recalibrating the Confidence of a
+            Shipped Natural-Language-to-Shell Command Retriever
+
+                                      Anonymous ACL submission
+
+001                  Abstract                              et al., 2022). It cannot invent a command, and a         043
+
+                                                           small lexical retriever runs offline and deterministi-   044
+
+002  Natural-language shell assistants are usually         cally, so queries need not leave the user’s machine      045
+
+003  built by generation. We audit a published             and every answer is a record from a fixed list that      046
+
+004  closed-set alternative: a BM25 retriever over         can be inspected; the price is coverage.                 047
+
+005  279 Windows commands that shows its user a
+
+006  confidence and runs the chosen command on             We audit one such system as it is published:             048
+
+007  Enter. Its confidence is no better than a con-        TOOL1, a publicly released package that maps a           049
+
+008  stant forecaster, and wrong answers average           query to one of 279 Windows commands with                050
+
+009  86% confidence. Under cross-validation on two         BM25 (Robertson and Zaragoza, 2009), prints the          051
+
+010  benchmark versions (the second adds 59 out-           command with a confidence percentage, refuses            052
+
+011  of-scope and ambiguous queries), excluding 25         below 30%, and runs the pre-filled, editable com-        053
+
+012  verbatim-copy controls, isotonic recalibration        mand when the user presses Enter (§3). It was            054
+013  cuts the shipped confidence’s expected calibra-
+                                                           written and released by one of the authors before
+014  tion error by 79% on both versions, to about the                                                               055
+
+015  noise floor of a calibrated forecaster (outside       this study, which changed none of its executable         056
+
+016  our corrected test family). A rejection threshold     code and none of the corpus fields it reads. The         057
+
+017  on the shipped score, tuned on held-out folds,        printed confidence is the only reliability signal a      058
+
+018  rejects 46 of 50 out-of-scope requests but also       user gets, and our reproduction of the published         059
+
+019  20 of 134 in-scope ones; the fixed rule rejects       baseline found it frequently confidently wrong. We       060
+
+020  17 and none, a hybrid lexical–dense detector          therefore ask: how reliable is the confidence of a       061
+021  34 and 11. Most are everyday, not comput-
+                                                           shipped closed-set command retriever, and what
+022  ing, requests; the 35 added ones were screened                                                                 062
+
+023  for low scores, and on the 15 original ones the       do post-hoc recalibration, a tuned rejection thresh-     063
+
+024  threshold rejects 12 and the detector 9. The          old, and a hybrid lexical–dense retriever each con-      064
+
+025  hybrid’s confidence ranks its own errors better,      tribute?                                                 065
+
+026  but its accuracy gain is fragile; both systems
+
+027  sometimes return destructive commands for be-         Contributions. (1) An audit of a published tool’s        066
+
+028  nign requests. All analyses are exploratory; a        confidence: it is no better than a constant fore-        067
+
+029  two-annotator label study is under way.               caster, wrong answers average 86% confidence,            068
+
+     1 Introduction                                        and some wrong answers are destructive com-              069
+
+030                                                        mands. (2) An attribution of what fixes what, under      070
+
+031  Natural-language shell assistance can lower the bar- cross-validation on two benchmark versions with           071
+
+032  rier to command-line tools, but a wrong command verbatim-copy controls excluded: standard recali-              072
+
+033  can destroy data. Research since NL2Bash (Lin bration fixes the confidence level, a tuned threshold            073
+
+034  et al., 2018) has mostly generated commands: neu- on the shipped score handles out-of-scope requests           074
+
+035  ral translation (the NLC2CMD competition, Agar- at a cost in refused in-scope queries, and a hybrid            075
+
+036  wal et al., 2021), then large language model (LLM) retriever (a research prototype, not part of the pack-      076
+
+037  systems (NL2SH; Westenfelder et al., 2025), most age) mainly improves how confidence ranks the                 077
+
+038  recently trained with reinforcement learning on system’s own errors. (3) Evaluation practice for               078
+
+039  static-analysis rewards (BashCoder-R1; Yu et al., small closed-set benchmarks: tie-aware selective-            079
+
+040  2026). Retrieval over a fixed command list is an prediction metrics, a noise floor and no-skill refer-         080
+
+041  older alternative that NLC2CMD also tested (Agar-     1The tool’s name and package are withheld for anonymous
+
+042  wal et al., 2021) and ShellFusion developed (Zhang review.
+
+                                                        1
+081  ence for calibration, and out-of-scope rules com- confidence, tie-aware selective prediction, or out-        131
+
+082  pared under the same tuning protocol and at equal of-scope rejection with its false-rejection cost; to       132
+
+083  false-rejection counts.                                 our knowledge, that combination is what is new       133
+
+                                                             here, not any single method.                         134
+
+084  2 Related Work
+
+085  Natural language to shell. NL2Bash (Lin et al., 3 System and Benchmark                                       135
+
+086  2018) paired English descriptions with Bash com- The published tool. Queries are tokenized (low-             136
+
+087  mands. The NLC2CMD competition (Agarwal ercase, punctuation stripped, 10-word stopword                       137
+
+088  et al., 2021) scored each prediction by utility and list) and scored with BM25 (k1 = 1.2, b =                138
+
+089  flag overlap, weighted by the confidence the sys- 0.75) over each record’s intent, category and              139
+
+090  tem submitted, so confident wrong answers were description, plus a flat +15 bonus when the                   140
+
+091  penalized; one entry used TF-IDF retrieval with a query nearly matches an intent. Confidence is              141
+
+092  logistic-regression model that lowered confidence min(round(s/8 × 100), 100) for top score s, and            142
+
+093  on likely-wrong predictions, and came within 12% is 0 when s < 2.0. The command-line tool prints             143
+
+094  of the best system. That metric folds confidence the top command with “confidence: N %”, refuses             144
+
+095  into one accuracy-like score; it does not separate when N < 30, and otherwise opens an editable              145
+
+096  calibration, the ranking of errors and out-of-scope prompt pre-filled with the command, which runs           146
+
+097  rejection, which we measure separately. ShellFu- (in PowerShell on Windows) when the user presses            147
+
+098  sion (Zhang et al., 2022) retrieves commands from Enter; no risk level is shown. Retrieval is local;         148
+
+099  question-answer posts and re-ranks them against an optional query-sync feature is off by default.            149
+
+100  manual pages; DocPrompting (Zhou et al., 2023) Our evaluation counts a query as answered when                150
+
+101  retrieves documentation, including tldr pages, be- s ≥ 2.0; no benchmark query scores between 2.0            151
+
+102  fore generating code; Project CLAI (Agarwal et al., and 2.4, so this makes the same decisions as the         152
+
+103  2020) treats the command line as an environment 30% rule. We reproduced the published outputs                153
+
+104  for AI agents. NL2SH (Westenfelder et al., 2025) exactly (0/150 mismatches). Mean latency was                154
+
+105  improves LLM translation with parsing and con- 3.3 ms in one run on one machine, an indicative               155
+
+106  strained decoding, and QuoteBench (Li et al., 2026) figure.                                                  156
+
+107  shows that matched execution scores can hide
+
+108  command-path failures. We run no generative sys- Corpus. 431 records, of which 279 are visible               157
+
+109  tem, so our comparison with generation is concep- on Windows (145 cross-platform, 134 Windows-               158
+
+110  tual.                                                   specific), each a distinct intent. The records were  159
+
+                                                             checked by script rather than one by one, and a      160
+
+111  Reliability. We draw on calibration (Guo et al., few Windows-visible records are Linux commands              161
+
+112  2017; Pakdaman Naeini et al., 2015), post-hoc re- (e.g., sudo reboot).                                       162
+
+113  calibration (Zadrozny and Elkan, 2002; Platt, 2000;
+
+114  Zadrozny and Elkan, 2001), selective classifica- Benchmark. v0.1 has 150 hand-adjudicated                    163
+
+115  tion and its risk-coverage metrics (Geifman and queries of 9 types, labeled CORRECT (119),                   164
+
+116  El-Yaniv, 2017; Geifman et al., 2019; Traub et al., AMBIGUOUS (14), OOD (15; here, out-                      165
+
+117  2024), and out-of-distribution (OOD) detection of-scope requests that no record serves) or                   166
+
+118  from confidence scores (Hendrycks and Gimpel, NEEDS_CORRECTION (2), with a risk level for                    167
+
+119  2017). The closest task framing is intent classifica- the gold command. All 25 canonical queries repeat      168
+
+120  tion with out-of-scope queries (Larson et al., 2019); a corpus intent verbatim and every system answers      169
+
+121  the closest methods are learned calibrators for ab- them, so we treat them as positive controls and ex-      170
+
+122  stention under domain shift (Kamath et al., 2020) clude them from headline figures. v0.2 contains            171
+
+123  and confidence estimation for mapping language all of v0.1 plus 35 out-of-scope and 24 ambiguous             172
+
+124  to programs (Dong et al., 2018). In text-to-SQL, queries, so the versions share their 121 answerable         173
+
+125  selective classifiers mostly catch irrelevant ques- queries and are not independent. The new queries         174
+
+126  tions rather than wrong queries (Somov and Tu- were drafted and adjudicated by an AI agent under             175
+
+127  tubalina, 2025), which our out-of-scope breakdown human direction, and every draft was run through           176
+
+128  echoes (§5). Within our targeted search (Limita- both BM25 and dense retrieval: 24 of 30 ambigu-             177
+
+129  tions), natural-language-to-shell retrieval work has ous drafts were kept (6 failed the ambiguity or         178
+
+130  not evaluated the calibration of a deployed tool’s novelty criteria), and all 35 out-of-scope drafts         179
+
+                                                          2
+180  were kept unchanged, their top-1 BM25 score and sen on the other four folds and applied once. Each             230
+
+181  dense similarity having been checked to be low threshold is chosen from the scores observed on the             231
+
+182  (maximum 7.39 and 0.31). The 15 v0.1 out-of- development folds, with out-of-scope predicted be-                232
+
+183  scope queries were instead checked by searching low it; ties in F1 go to the lowest such score. There          233
+
+184  all corpus intents and descriptions for relevant key- is no inner split; each query’s hybrid score uses the    234
+
+185  words, not against retrieval scores. Seventeen of α chosen for its own fold (α ∈ {0.3, 0.5} through-           235
+
+186  the 24 new ambiguous queries are single tool or out). The features for the hybrid’s out-of-scope               236
+
+187  category names (“grep”, “pip”); nine of v0.1’s 14 and ambiguity detectors were chosen by inspecting            237
+
+188  are too. Public natural-language-to-Bash bench- class means on the full data, a leak that may flatter          238
+
+189  marks target Linux commands and do not map the detector’s figures; the tuned shipped thresh-                   239
+
+190  onto this Windows corpus, so we did not use them. old uses the tool’s own score and needed no such             240
+
+191  Two items have gold commands outside the Win- choice. A second split groups queries by intent                  241
+
+192  dows corpus (Q145, and Q187 in v0.2 only), and (Split B), which checks for tuning leakage across               242
+
+193  one (Q149) has an acceptable command outside intents but cannot test unseen commands, since the                243
+
+194  it; every system misses the first two and answers corpus always holds the gold intent (Appendix B).            244
+
+195  Q149 correctly, so they lower every system’s non-
+
+196  OOD accuracy by one query on v0.1 and two on Metrics and statistics. Expected calibration                      245
+
+197  v0.2 and change no comparison. One partially in- error (ECE) uses 10 equal-width bins (Pak-                    246
+
+198  dependent reviewer, shown only the query text, daman Naeini et al., 2015; Guo et al., 2017); we                247
+
+199  re-labeled a stratified sample of 14 AI-authored also report equal-mass and sweep estimates, a noise           248
+
+200  queries: Cohen’s κ = 0.63 (Cohen, 1960) (post floor (the ECE of a perfectly calibrated forecaster              249
+
+201  hoc bootstrap 95% interval [0.39, 1.00]), below our with the same confidences and n, simulated), and           250
+
+202  0.7 target. The reviewer agreed with all 8 out-of- Brier skill (Brier, 1950) against an out-of-fold no-        251
+
+203  scope labels (exact 95% interval for the agreement skill forecaster that predicts the development base         252
+
+204  rate [63, 100]%; 7 everyday requests and one far- rate. Confidence often ties at its maximum (64% of           253
+
+205  from-corpus computing task, none a terminal task) the hybrid’s and 73% of the shipped values on all            254
+
+206  and disagreed on 3 of 6 ambiguous ones. A two- 150 v0.1 queries), so risk-coverage curves use ex-              255
+
+207  annotator study with a written codebook is under pected risk under a random order within ties and are          256
+
+208  way.                                                    summarized by the area under them (AURC; Geif-         257
+
+                                                             man et al., 2019) and the area under the generalized   258
+
+209  4 Methods                                               risk-coverage curve (AUGRC; Traub et al., 2024);       259
+
+210  What is compared. (i) The shipped confidence, the area under the receiver operating characteristic             260
+
+211  before and after post-hoc recalibration. (ii) Three curve (AUROC) for separating right from wrong              261
+
+212  out-of-scope rules: the shipped fixed rule (s < answers by confidence, which we call correctness               262
+
+213  2.0), a threshold on the shipped score s tuned AUROC, measures ranking alone. Accuracy dif-                    263
+
+214  on development folds, and the hybrid detector. ferences use the exact McNemar test (McNemar,                   264
+
+215  (iii) Three retrievers: BM25, dense retrieval 1947), proportions Wilson intervals (Wilson, 1927),              265
+
+216  with a 384-dimensional MiniLM sentence en- and effects paired percentile bootstraps (10,000 re-                266
+
+217  coder (all-MiniLM-L6-v2; Wang et al., 2020; samples, seed 42), which are not dual to the exact                 267
+
+218  Reimers and Gurevych, 2019), and a hybrid that test. A family of four comparisons per version                  268
+
+219  min-max normalizes both score lists over each (accuracy vs. BM25 and vs. dense, out-of-scope                   269
+
+220  query’s candidates and ranks by α BM25norm +            rejection by the hybrid detector, hybrid ECE re-       270
+221  (1 − α) densenorm. The hybrid’s confidence is its       duction) is Holm-corrected (Holm, 1979); it was        271
+222  fused top-1 score, which equals 1 whenever the          fixed after the raw results were seen, so all signif-  272
+
+223  two retrievers agree on the top command; its detec- icance statements are exploratory. The shipped             273
+
+224  tor rejects when that score falls below a threshold. confidence’s recalibration and the tuned shipped          274
+
+225  Appendix A gives the full specification.                threshold are outside this family.                     275
+
+226  Protocol. Five folds (seed 42, stratified by label; 5 Results                                                  276
+
+227  Split A). For each test fold, α (grid 0.0–1.0, max-
+
+228  imizing non-OOD accuracy), the detector thresh- Table 1 summarizes every claim; the population                 277
+
+229  olds (maximizing F1) and the calibrators are cho- throughout is non-control queries.                           278
+
+                                                          3
+     Claim                                     v0.1                   v0.2                     Status
+
+     Shipped confidence: ECE before → after .323→.069; −79% [44, 84] .293→.063; −79% [52, 87] robust
+
+     isotonic
+
+     Shipped confidence: Brier skill vs. no- −.23 [−.45, .01] / .20 [.04, −.06 [−.26, .15] / .33 [.19, raw: no skill; re-
+
+     skill, raw / recalibrated                 .36]                   .46]                     cal.: robust
+
+     Hybrid confidence: ECE before → after .329→.108; −67% [43, 83] .368→.071; −81% [62, 86] robust
+
+     isotonic (pre-named test)
+
+     Out-of-scope rejected: fixed rule / tuned 4 / 10 / 7 of 15       17 / 46 / 34 of 50       threshold, not hy-
+
+     threshold / hybrid detector                                                               brid
+
+     False rejections of in-scope: fixed / tuned 0 / 9 / 6 of 110     0 / 20 / 11 of 134       cost of tuning
+
+     / hybrid
+
+     Out-of-scope rejected at equal false re- 10 / 7 at 6             37 / 36 at 10–11         descriptive
+
+     jections, shipped score / hybrid feature
+
+     (in-sample)
+
+     Out-of-scope AUROC (pooled): shipped +.102 [.006, .222]          +.067 [.015, .127]       robust
+
+     score minus hybrid feature
+
+     Hybrid minus shipped AURC (tie-aware) −.115 [−.177, −.054]       −.075 [−.126, −.024]     robust
+
+     Hybrid minus shipped AUGRC (tie- −.048 [−.073, −.024]            −.030 [−.050, −.011]     robust
+
+     aware)
+
+     Hybrid minus shipped correctness AU- +.099 [.008, .190]          +.058 [−.001, .118]      weak on v0.2
+
+     ROC
+
+     Accuracy, hybrid minus BM25 (pp; +6.4 [1.8, 10.9] (.047)         +4.5 [0.7, 9.0] (.070)   fragile
+
+     Holm-adj. p)
+
+     Accuracy, hybrid minus dense (pp; Holm- +5.5 [0.0, 11.8] (.292)  +8.2 [2.2, 14.2] (.025)  fragile
+
+     adj. p)
+
+     Table 1: Claims with 95% bootstrap intervals, all on non-control queries: 110 and 134 in-scope queries plus the 15
+     and 50 out-of-scope ones. No rule ever rejects a control, and controls are never discordant, so the accuracy p-values
+     equal the Holm table’s (Appendix B), which also holds the pre-named ECE test. Status “robust” means the interval
+     excludes zero on both versions; “fragile” means the result depends on a few queries. The equal-false-rejection row
+     picks each score’s threshold on the same data (§5).
+
+279  The shipped confidence. The published baseline ness. These reductions were not in the corrected                        304
+
+280  answers 67.3% of all 150 v0.1 queries correctly family. Platt scaling and histogram binning, fit                       305
+
+281  (65.5% of the non-control in-scope ones, Table 2), on the same folds, give ECEs with overlapping                       306
+
+282  yet its 49 wrong answers, none of them controls, bootstrap intervals (v0.1: 0.087 and 0.101; v0.2:                     307
+
+283  carry a mean confidence of 86%, and 44.9% of 0.045 and 0.039), but we did not test the differences                     308
+
+284  them are shown at 100%. Its ECE (0.323 on v0.1, between calibrators; histogram binning’s ECE is                        309
+
+285  0.293 on v0.2, controls excluded) is five to six times partly measured on the bins it fits, and it has the             310
+
+286  the noise floor of a perfectly calibrated forecaster at worst Brier score of the three in every case. The              311
+
+287  this size (0.064 and 0.050), and its Brier score is no hybrid’s own confidence behaves similarly: raw, its             312
+
+288  better than predicting the base rate for every query Brier skill is −0.32 and −0.30, both intervals ex-                313
+
+289  (skill −0.23 and −0.06, intervals including zero). cluding zero; after recalibration its ECE falls from                314
+
+290  A heuristic score such as s/8 capped at 100% is 0.329 to 0.108 and from 0.368 to 0.071, above the                      315
+
+291  not expected to be calibrated; what the audit adds is noise floor’s 95th percentile on v0.1 (0.089) and                316
+
+292  how far off it is, and that the tool shows it to users within it on v0.2 (0.079). This hybrid reduction is             317
+
+293  as a percentage.                                                 the pre-named comparison, tested with controls in-    318
+
+                                                                      cluded, and it survives Holm correction on both ver-  319
+
+294  Recalibration. Isotonic regression fit on devel- sions (Table 5). Recalibration changes the number                     320
+
+295  opment folds lowers the shipped confidence’s ECE shown, not the answer or its ranking: correctness                     321
+
+296  to 0.069 on v0.1 and 0.063 on v0.2, a 79% reduc- AUROC even drops slightly (shipped, v0.1: 0.742                       322
+
+297  tion on both versions and within the noise floor’s to 0.686), because each fold gets its own map. The                  323
+
+298  95th percentile (0.105 and 0.080). Equal-mass maps are fit on benchmark queries written by the                         324
+
+299  bins give 0.110 and 0.070 (noise-floor 95th per- authors and an AI agent, so they hold for queries                     325
+
+300  centiles 0.122 and 0.092) and the bin-count sweep like these; a deployed calibrator would be fit on all                326
+
+301  0.060 and 0.047. Brier skill becomes positive (0.20 labeled queries, and whether its map transfers to                  327
+
+302  and 0.33, intervals excluding zero), so the recali- real user queries is untested.                                     328
+
+303  brated number carries information about correct-
+
+                                                                   4
+329  Out-of-scope requests. The shipped fixed rule           System          v0.1         v0.2
+
+330  rejects 17 of v0.2’s 50 out-of-scope requests. The      BM25 (shipped) 72/110 (65.5) 95/134 (70.9)
+
+331  hybrid detector rejects 34 (two-sided exact McNe-       Dense           73/110 (66.4) 90/134 (67.2)
+
+332  mar, Holm-adjusted p = 0.00006), at a cost of 11        Hybrid          79/110 (71.8) 101/134 (75.4)
+
+333  false rejections among 134 in-scope queries, three Table 2: Non-OOD accuracy (hits/queries, %), canoni-
+
+334  of which the hybrid had answered correctly. But cal controls excluded. Every system also answers all 25
+
+335  the gain comes from the threshold, not the hybrid. controls correctly (Appendix B).
+
+336  The shipped score itself separates out-of-scope re-
+
+337  quests better than the hybrid’s fused score (pooled
+
+338  AUROC 0.956 vs. 0.889 on v0.2, 0.939 vs. 0.837 What the hybrid adds. The hybrid’s confidence                 379
+
+339  on v0.1), and a threshold on the shipped score tuned ranks its own errors better than the shipped con-       380
+
+340  exactly like the detector rejects 46 of 50 (McNe- fidence: tie-aware AURC and AUGRC are lower                381
+
+341  mar p = 0.004 against the detector) at 20 false on both versions with intervals excluding zero (Ta-          382
+
+342  rejections (p = 0.093); on v0.1 it rejects 10 of 15 ble 1), and correctness AUROC is higher, though          383
+
+343  and the detector 7 (p = 0.25), at 9 and 6 false re- on v0.2 without controls its interval just includes      384
+
+344  jections. The two tuned rules thus sit at different zero. At 50% coverage, which lies inside the             385
+
+345  operating points. Compared at equal false-rejection maximum-confidence tie block, the hybrid’s ex-           386
+
+346  counts, with each score’s threshold picked on the pected error on all 150 v0.1 queries is 8.3% (0–           387
+
+347  same data (an in-sample, descriptive comparison), 10.7% depending on how ties are ordered). Its ac-          388
+
+348  the shipped score rejects 37 of 50 at 10 false re- curacy gain is consistent in size but not established     389
+
+349  jections and the hybrid’s feature 36 at 11; with no (Table 2): over BM25 it gains 6.4 points on v0.1         390
+
+350  false rejections, 23 and 21 (v0.1: 10 and 7 at 6; 5 (exact p = 0.0156, Holm-adjusted 0.047) and 4.5          391
+
+351  and 1 at none). The shipped score is never worse on v0.2 (p = 0.070), resting on 7 and 8 discordant          392
+
+352  at the points we checked, and the tuned threshold’s queries, and one bare keyword (“system”) decides         393
+
+353  larger count comes mostly from accepting more the v0.2 test; a benchmark this size has little power          394
+
+354  false rejections.                                       for gains of this size (Card et al., 2020). Its ad-  395
+
+                                                             vantage over dense retrieval on v0.2 depends on      396
+
+                                                             three bare-keyword queries (Appendix B). Group-      397
+
+355  By kind of request (labels assigned by an AI as- ing folds by intent leaves accuracy unchanged and           398
+
+356  sistant, unchecked), the fixed rule, tuned threshold weakens calibration somewhat (Appendix B). All          399
+
+357  and detector reject 14, 34 and 25 of 34 everyday hybrid results are for one small encoder (MiniLM)           400
+
+358  non-computing requests; 3, 4 and 4 of 5 far-from- and one fusion rule.                                       401
+
+359  corpus computing tasks; 0, 1 and 1 of the one non-
+
+360  sensical request; and 0, 7 and 4 of the 10 terminal Risky wrong answers. The case that moti-                 402
+
+361  tasks the corpus does not cover. One caveat fa- vates the audit does occur (Table 3). Classi-                403
+
+362  vors the shipped score: the 35 added queries were fying each returned command with a determin-               404
+
+363  checked to have low raw BM25 scores (at most istic rule-based risk classifier, both systems re-              405
+
+364  7.39), and the tuned shipped thresholds (6.50–7.20) turn a few wrong answers whose command is                406
+
+365  sit just below that maximum. The hybrid’s thresh- high or critical risk: “open the config file” re-          407
+
+366  olds (0.884–0.925) are on the fused, per-query- turns winget uninstall package-name                          408
+
+367  normalized scale and cannot be compared with the -purge from both systems, and “change the file              409
+
+368  7.39 and 0.31 bounds. On the 15 original queries, permissions” returns an ownership change at maxi-          410
+
+369  which were not checked against scores, the three mum confidence. On v0.2 the hybrid also maps the            411
+
+370  rules reject 4, 12 and 9; on the 35 added ones, bare query “system” to sudo shutdown -h                      412
+
+371  13, 34 and 25. The threshold’s lead over the de- now and the everyday request “teach me how to               413
+
+372  tector therefore also appears on the unscreened play guitar” to an elevated PowerShell. The full hy-         414
+
+373  queries, though 15 queries are few. (The detector’s brid pipeline (margin plus out-of-scope rejection)       415
+
+374  gain over the fixed rule on the same 15 queries has blocks 3 of its 6 such answers on v0.2, including        416
+
+375  p = 0.25 in the v0.1 run and p = 0.0625 in the the two out-of-scope requests, but not the config,            417
+
+376  v0.2 run, because each run tunes its own thresh- permissions or “system” answers. The classifier             418
+
+377  olds; neither is significant, and the second is not a itself is scored against the benchmark’s own risk la-  419
+
+378  replication.)                                           bels (gold commands of all non-OOD queries with      420
+
+                                                          5
+                             v0.1     v0.2                        7 Conclusion                                       456
+
+                             Shipped Hybrid Shipped Hybrid
+
+     Answered                146 150 192 209 A published natural-language command retriever                          457
+
+     High/critical returned  20 23    21 26 shows its users a confidence that, on our bench-                         458
+
+     of which wrong          2     3  2     6 mark, is no better than a constant forecaster. On the                  459
+
+     at max. conf.           1     1  1     1                     same benchmark, post-hoc recalibration fixes most  460
+
+     Table 3: Returned commands the rule-based classifier of that. A threshold on the shipped score, tuned on        461
+
+     rates high or critical risk, how many are wrong answers, held-out folds, rejects more out-of-scope requests     462
+
+     and how many of those are shown at the system’s maxi- than a hybrid detector (46 vs. 34 of 50; 12 vs. 9 on      463
+
+     mum confidence band (shipped: 100%; hybrid: fused the 15 not screened by retrieval score) but refuses           464
+
+     score 1.0). Unlike Table 1, the population is every query more in-scope queries (20 vs. 11 of 134), and most    465
+
+     of each version (150 and 209, controls and out-of-scope of these requests are everyday rather than terminal     466
+     requests included), because a risky command can be
+     returned for any of them. The classifier misses at least     tasks. The hybrid mainly improves how confidence   467
+
+     one destructive command, so counts are lower bounds. ranks its own errors. Next steps, in order: finish the     468
+
+                                                                  two-annotator label study and release a corrected  469
+
+                                                                  benchmark; confirm the findings with an analysis   470
+
+421  a gold command: 125 in v0.1): it flags 19 of 20 specified in advance; add answerable and terminal-              471
+
+422  high- or critical-risk commands in v0.1 and misses task out-of-scope queries judged by people; build            472
+
+423  git checkout -- ., which discards uncom- an independent safety set; and study whether cal-                      473
+
+424  mitted work (1/20, Wilson 95% CI [0.9, 23.6]%); ibrated confidence and risk prompts change what                 474
+
+425  v0.2 adds two misses that trace to inconsistent la- users run.                                                  475
+
+426  bels (3/22). We therefore make no safety claim. On
+
+427  the 15 benchmark queries whose gold commands Limitations                                                        476
+
+428  can run safely in a sandbox, all gold commands
+
+429  and 14 of 15 hybrid answers executed successfully.           • Small, dependent, partly AI-authored             477
+
+                                                                  benchmark. 150 and 209 queries, the sec-           478
+
+430  6 Discussion                                                 ond containing the first; 59 queries drafted       479
+
+                                                                  by an AI agent, whose labels were checked          480
+
+431  For a shipped closed-set assistant the three prob-           only by one partially independent reviewer         481
+
+432  lems separate cleanly. The displayed confidence              (κ = 0.63, interval [0.39, 1.00], n = 14); the     482
+
+433  was the weakest part, and standard recalibration on          two-annotator study has no results yet. Two        483
+
+434  held-out labels repairs most of it on our benchmark          items have gold commands outside the cor-          484
+
+435  (a result outside the corrected family); on queries          pus and one an acceptable command. Queries         485
+
+436  like these, the number a user sees can become in-            were written by the authors and an AI agent,       486
+
+437  formative without changing the retriever. Whether            not collected from users, so calibration and       487
+
+438  a better-calibrated number changes what users run            out-of-scope rates depend on this mix.             488
+
+439  is untested. Out-of-scope rejection needed a better
+
+440  threshold, not a new retriever: the shipped score,           • Exploratory statistics. Every analysis was       489
+
+441  thresholded well, did at least as well as the hy-            specified after results were seen, including the   490
+
+442  brid detector at equal false-rejection counts, and           Holm family, the controls exclusion, the equal-    491
+
+443  the tuned threshold rejected more out-of-scope re-           false-rejection comparison (whose thresholds       492
+
+444  quests by refusing more in-scope queries, a trade-           are chosen in-sample) and the sensitivity sub-     493
+
+445  off that should be set by the relative cost of a wrong       sets. Accuracy tests rest on 7–8 discordant        494
+
+446  command and a refusal. The hybrid’s value lies in            queries. Results come from one fold partition      495
+
+447  ranking its own errors, which matters for abstention.        (seed 42).                                         496
+
+448  For users of a tool that runs a command on Enter,
+
+449  the risky wrong answers suggest safeguards inde-             • Out-of-scope evidence. Only 10 out-of-scope      497
+
+450  pendent of calibration: showing the risk level and           queries are terminal tasks outside the cor-        498
+
+451  asking for confirmation (PowerShell’s -Confirm)              pus; the kind labels are AI-assigned; the          499
+
+452  or offering a dry run (-WhatIf) before destructive           added queries were checked with raw retrieval      500
+
+453  commands, or requiring higher confidence before              scores, which favors the shipped score; and        501
+
+454  returning a high-risk command. We did not evalu-             the hybrid detector’s features were chosen on      502
+
+455  ate any of these.                                            the full data, which may flatter it.               503
+
+                                                               6
+504  • Scope. One tool, one platform (Windows; Glenn W. Brier. 1950. Verification of forecasts ex-                      554
+
+505  results depend on the platform-filtered cor- pressed in terms of probability. Monthly Weather                      555
+
+506  pus), 279 commands, one small sentence                   Review, 78(1):1–3.                                        556
+
+507  encoder and one fusion rule, exact-match Dallas Card, Peter Henderson, Urvashi Khandelwal,                         557
+
+508  scoring against gold commands, and single- Robin Jia, Kyle Mahowald, and Dan Jurafsky. 2020.                       558
+
+509  machine latencies. No generative system, user            With little power comes great responsibility. In          559
+
+510  study, or public benchmark is evaluated.                 Proceedings of the 2020 Conference on Empirical           560
+
+                                                              Methods in Natural Language Processing (EMNLP),           561
+
+511  • Safety. The risk classifier is scored against          pages 9263–9274. Association for Computational            562
+                                                              Linguistics.                                              563
+     the benchmark’s own labels, two of which are
+512
+
+513  inconsistent, and misses at least one destruc- Jacob Cohen. 1960. A coefficient of agreement for                   564
+
+514  tive command; functional evaluation covers               nominal scales. Educational and Psychological Mea-        565
+                                                              surement, 20(1):37–46.                                    566
+515  15 queries and treats exit code 0 as success.
+
+     • Literature. Our search was targeted (natural-          Li Dong, Chris Quirk, and Mirella Lapata. 2018. Con-      567
+
+516                                                           fidence modeling for neural semantic parsing. In          568
+
+517  language-to-shell generation and retrieval, cal- Proceedings of the 56th Annual Meeting of the As-                 569
+
+518  ibration, selective prediction, out-of-scope de- sociation for Computational Linguistics (Volume 1:                570
+
+519  tection); the novelty claim is limited to the            Long Papers), pages 743–753, Melbourne, Australia.        571
+                                                              Association for Computational Linguistics.                572
+     combination evaluated here.
+520
+
+     Ethical Considerations                                   Yonatan Geifman and Ran El-Yaniv. 2017. Selec-            573
+
+521                                                           tive classification for deep neural networks. In Ad-      574
+
+522  The published tool runs the command it retrieves         vances in Neural Information Processing Systems,          575
+                                                              volume 30.                                                576
+     when the user presses Enter, and our results show
+523
+
+524  it can offer a destructive command for a benign Yonatan Geifman, Guy Uziel, and Ran El-Yaniv. 2019.                577
+
+525  request, sometimes at maximum confidence. We             Bias-reduced uncertainty estimation for deep neural       578
+                                                              classifiers. In International Conference on Learning      579
+     report these cases rather than a safety claim, and
+526                                                           Representations (ICLR).                                   580
+
+527  recommend that such tools show a risk level and re-
+
+528  quire explicit confirmation for high-risk commands. Chuan Guo, Geoff Pleiss, Yu Sun, and Kilian Q. Wein-           581
+
+529  This study does not change the published package,        berger. 2017. On calibration of modern neural net-        582
+                                                              works. In Proceedings of the 34th International Con-      583
+
+530  so its findings apply to current users. No command       ference on Machine Learning, volume 70 of Pro-            584
+
+531  was run on a user’s system: functional evaluation        ceedings of Machine Learning Research, pages 1321–        585
+
+532  ran in disposable sandboxed directories. We dis- 1330.                                                             586
+
+533  close that part of the benchmark was written by an Dan Hendrycks and Kevin Gimpel. 2017. A baseline for            587
+
+534  AI agent and that our own label check fell below         detecting misclassified and out-of-distribution exam-     588
+
+535  target. Code, benchmark files, result files and a re- ples in neural networks. In International Conference         589
+
+536  production guide will be released with the camera-       on Learning Representations (ICLR).                       590
+
+537  ready version; they are withheld from the review Sture Holm. 1979. A simple sequentially rejective mul-            591
+
+538  version for anonymity.                                   tiple test procedure. Scandinavian Journal of Statis-     592
+
+                                                              tics, 6(2):65–70.                                         593
+
+539  References                                               Amita Kamath, Robin Jia, and Percy Liang. 2020. Se-       594
+
+                                                              lective question answering under domain shift. In         595
+
+540  Mayank Agarwal, Jorge J. Barroso, Tathagata              Proceedings of the 58th Annual Meeting of the Asso-       596
+
+541  Chakraborti, Eli M. Dow, Kshitij Fadnis, Borja           ciation for Computational Linguistics, pages 5684–        597
+
+542  Godoy, Madhavan Pallan, and Kartik Talamadupula.         5696. Association for Computational Linguistics.          598
+
+543  2020. Project CLAI: Instrumenting the command
+     line as a new environment for AI agents. Preprint, Stefan Larson, Anish Mahendran, Joseph J. Peper,                599
+544
+                                                              Christopher Clarke, Andrew Lee, Parker Hill,              600
+545  arXiv:2002.00762.
+                                                              Jonathan K. Kummerfeld, Kevin Leach, Michael A.           601
+
+546  Mayank Agarwal, Tathagata Chakraborti, Quchen Fu,        Laurenzano, Lingjia Tang, and Jason Mars. 2019. An        602
+
+547  David Gros, Xi Victoria Lin, Jaron Maene, Kartik Ta-     evaluation dataset for intent classification and out-of-  603
+
+548  lamadupula, Zhongwei Teng, and Jules White. 2021.        scope prediction. In Proceedings of the 2019 Confer-      604
+
+549  NeurIPS 2020 NLC2CMD competition: Translating            ence on Empirical Methods in Natural Language Pro-        605
+
+550  natural language to Bash commands. In Proceedings        cessing and the 9th International Joint Conference        606
+
+551  of the NeurIPS 2020 Competition and Demonstra-           on Natural Language Processing (EMNLP-IJCNLP),            607
+
+552  tion Track, volume 133 of Proceedings of Machine         pages 1311–1316, Hong Kong, China. Association            608
+
+553  Learning Research, pages 302–324.                        for Computational Linguistics.                            609
+
+                                                           7
+610  Shangao Li, Yao Zhang, Volker Tresp, and Yuanyuan          Chiricescu. 2025. LLM-supported natural language          666
+
+611  Yang. 2026. QuoteBench: How matched scores                 to Bash translation. In Proceedings of the 2025 Con-      667
+
+612  can hide command-path failures. Preprint,                  ference of the Nations of the Americas Chapter of the     668
+
+613  arXiv:2608.13547.                                          Association for Computational Linguistics: Human          669
+
+                                                                Language Technologies (Volume 1: Long Papers),            670
+
+614  Xi Victoria Lin, Chenglong Wang, Luke Zettlemoyer,         pages 11135–11147, Albuquerque, New Mexico. As-           671
+
+615  and Michael D. Ernst. 2018. NL2Bash: A corpus              sociation for Computational Linguistics.                  672
+
+616  and semantic parser for natural language interface
+
+617  to the Linux operating system. In Proceedings of Edwin B. Wilson. 1927. Probable inference, the law of               673
+
+618  the Eleventh International Conference on Language          succession, and statistical inference. Journal of the     674
+
+619  Resources and Evaluation (LREC 2018), Miyazaki,            American Statistical Association, 22(158):209–212.        675
+
+620  Japan. European Language Resources Association
+
+621  (ELRA).                                                    Lei Yu, Peng Wang, Jia Xu, Jingyuan Zhang, Xin Wang,      676
+
+     Quinn McNemar. 1947. Note on the sampling error            Jiajia Ma, Li Yang, Changzhi Deng, Zenghua Wang,          677
+
+622                                                             and Fengjun Zhang. 2026. BashCoder-R1: Towards            678
+
+623  of the difference between correlated proportions or        robust and explainable Bash script generation with        679
+
+624  percentages. Psychometrika, 12(2):153–157.                 robustness-aware group relative policy optimization.      680
+
+625  Mahdi Pakdaman Naeini, Gregory Cooper, and Milos           In Proceedings of the ACM SIGSOFT International           681
+626     Hauskrecht. 2015. Obtaining well calibrated proba-      Symposium on Software Testing and Analysis (ISSTA         682
+627     bilities using Bayesian binning. In Proceedings of      2026).                                                    683
+
+628  the AAAI Conference on Artificial Intelligence, vol- Bianca Zadrozny and Charles Elkan. 2001. Obtaining              684
+
+629  ume 29.                                                    calibrated probability estimates from decision trees      685
+
+630  John C. Platt. 2000. Probabilistic outputs for sup-        and naive Bayesian classifiers. In Proceedings of         686
+
+631  port vector machines and comparisons to regularized        the Eighteenth International Conference on Machine        687
+632  likelihood methods. In Alexander J. Smola, Peter           Learning (ICML), pages 609–616.                           688
+
+633  Bartlett, Bernhard Schölkopf, and Dale Schuurmans,         Bianca Zadrozny and Charles Elkan. 2002. Transform-       689
+634  editors, Advances in Large Margin Classifiers, pages          ing classifier scores into accurate multiclass proba-  690
+635  61–74. MIT Press, Cambridge, MA.                              bility estimates. In Proceedings of the Eighth ACM     691
+
+636  Nils Reimers and Iryna Gurevych. 2019. Sentence-           SIGKDD International Conference on Knowledge              692
+
+637  BERT: Sentence embeddings using Siamese BERT-              Discovery and Data Mining, pages 694–699. ACM.            693
+
+638  networks. In Proceedings of the 2019 Conference on
+     Empirical Methods in Natural Language Processing Neng Zhang, Chao Liu, Xin Xia, Christoph Treude,                    694
+639
+                                                                Ying Zou, David Lo, and Zibin Zheng. 2022. Shell-         695
+640  and the 9th International Joint Conference on Natu-
+                                                                Fusion: Answer generation for shell programming           696
+641  ral Language Processing (EMNLP-IJCNLP), pages
+                                                                tasks via knowledge fusion. In Proceedings of the         697
+642  3982–3992, Hong Kong, China. Association for Com-
+                                                                44th International Conference on Software Engineer-       698
+643  putational Linguistics.
+                                                                ing (ICSE), pages 1970–1981. ACM.                         699
+
+644  Stephen Robertson and Hugo Zaragoza. 2009. The
+
+645  probabilistic relevance framework: BM25 and be- Shuyan Zhou, Uri Alon, Frank F. Xu, Zhiruo                           700
+
+646  yond. Foundations and Trends in Information Re-            Wang, Zhengbao Jiang, and Graham Neubig. 2023.            701
+
+647  trieval, 3(4):333–389.                                     DocPrompting: Generating code by retrieving the           702
+
+                                                                docs. In International Conference on Learning Rep-        703
+
+648  Oleg Somov and Elena Tutubalina. 2025. Confidence          resentations (ICLR).                                      704
+
+649  estimation for error detection in text-to-SQL systems.
+
+650  In Proceedings of the AAAI Conference on Artificial A System Specification                                           705
+
+651  Intelligence, volume 39, pages 25137–25145.
+
+652  Jeremias Traub, Till J. Bungert, Carsten T. Lüth, B Secondary Analyses                                               706
+
+653  Michael Baumgartner, Klaus H. Maier-Hein, Lena             Holm family. Table 5 gives the pre-named family,          707
+654  Maier-Hein, and Paul F. Jäger. 2024. Overcoming
+     common flaws in the evaluation of selective classifi- computed with the canonical controls included; the
+655                                                                                                                       708
+
+656  cation systems. In Advances in Neural Information controls never enter discordant pairs, so accuracy p-              709
+
+657  Processing Systems, volume 37, pages 2323–2347. values are the same without them. The calibration                    710
+
+658  Wenhui Wang, Furu Wei, Li Dong, Hangbo Bao, Nan p is a bootstrap bound (one-sided, resolution 10−4),                 711
+
+659  Yang, and Ming Zhou. 2020. MiniLM: Deep self- so its Holm value is also a bound.                                     712
+
+660  attention distillation for task-agnostic compression
+
+661  of pre-trained transformers. In Advances in Neural Bare-keyword sensitivity. Dropping single-                        713
+
+662  Information Processing Systems, volume 33, pages token ambiguous queries (a rule stated before the                   714
+
+663  5776–5788.                                                 subset results were computed, though the full-            715
+
+664  Finnian Westenfelder, Erik Hemberg, Miguel Tulla, benchmark result was known) leaves the BM25-                       716
+
+665  Stephen Moskal, Una-May O’Reilly, and Silviu to-hybrid gain at +4.9 to +5.8 points, each subset                      717
+
+                                                             8
+     Component                Definition
+
+     Dense encoder            Xenova/all-MiniLM-L6-v2; each record embedded as “Intent / Description / Category /
+
+                              Platform” text; cosine similarity.
+
+     Fusion                   Per query, BM25 (with bonus) and cosine scores are min-max normalized over all 279 candidates;
+
+                              score = α BM25norm + (1 − α) densenorm; top-1 is the argmax.
+
+     α                        Grid {0.0, 0.1, . . . , 1.0}; maximizes non-OOD accuracy on the four development folds; ties go
+
+                              to 0.5. Selected: v0.1 0.3, 0.3, 0.3, 0.3, 0.5; v0.2 0.5 in every fold.
+
+     Hybrid confidence        Fused top-1 score (1.0 when the BM25 and dense top-1 coincide).
+
+     Margin, entropy          Top-1 minus top-2 fused score among the top 10; Shannon entropy of the top-10 scores shifted to
+
+     Out-of-scope detector    a minimum of 0 and normalized, divided by log2 10.
+                              Reject if the fused top-1 score is below a per-fold threshold maximizing F1 on development folds
+
+                              (v0.1 0.833–0.895; v0.2 0.884–0.925).
+
+     Tuned shipped threshold Same protocol on the shipped top score s (v0.1 5.42–6.19; v0.2 6.50–7.20).
+
+     Ambiguity detector, A4, Flag if margin is below an F1-maximizing threshold; A4 abstains on that flag, A5 on A4’s flag or
+
+     A5                       the out-of-scope detector.
+
+     Calibrators              Isotonic regression (pooled adjacent violators), Platt scaling, histogram binning (10 bins); fit on
+
+                              development folds only.
+
+     Table 4: Specification of the research system (the hybrid is a research prototype, not part of the published tool).
+
+     Ver. Comparison                Raw p Holm Sig. and 0.72. Removing the substring bonus changes                                 736
+
+     v0.1 Acc., hybrid vs. BM25 0.0156 0.0469 Yes no top-1 answer on either version. Adding mar-                                   737
+
+     v0.1 Acc., hybrid vs. dense 0.1460 0.2920 No gin rejection (A4) and out-of-scope rejection (A5)                               738
+
+     v0.1 OOD rej., tuned vs. base  0.25 0.2920 No                   raises selective accuracy to 90.1% at 69.5% cov-              739
+
+     v0.1 Calib. ECE reduction ≤0.0001 ≤0.0004 Yes
+     v0.2 Acc., hybrid vs. BM25 0.0703 0.0703 No erage on v0.1, but A5 is lower on v0.2 (82.2% at
+                                                                                                                                   740
+
+     v0.2 Acc., hybrid vs. dense 0.0127 0.0255 Yes 58.9%), which we did not analyze further. Fig-                                  741
+     v0.2 OOD rej., tuned vs. base 0.000015 0.00006 Yes
+     v0.2 Calib. ECE reduction ≤0.0001 ≤0.0003 Yes                   ures 1–5 show accuracy, the reliability diagrams,             742
+
+                                                                     accuracy by query type, the risk-coverage curves              743
+
+     Table 5: Holm-corrected family (α = 0.05; ex- and the ablation; they include the canonical con-                               744
+
+     ploratory). “OOD rej., tuned vs. base” is the hybrid trols.                                                                   745
+
+     detector against the shipped fixed rule. Accuracy and
+
+     out-of-scope p are two-sided exact McNemar; the cali-
+
+     bration p is a one-sided bootstrap bound. The shipped-
+
+     confidence recalibration and the tuned shipped threshold
+
+     are not in this family.
+
+718  7–0 in discordant queries, but the v0.2 hybrid-over-
+
+719  dense advantage falls to raw p = 0.057 without
+
+720  the new bare-keyword queries and p = 0.227 on
+
+721  answerable queries only; the calibration gain is
+
+722  unchanged (Table 6).
+
+723  Split B. Grouping folds by derived intent group
+
+724  (171 groups on v0.2, 125 on v0.1; none split across
+
+725  folds) leaves hybrid accuracy unchanged and OOD
+
+726  AUROC nearly so, while the ECE reduction atten-
+
+727  uates (Table 7). This table includes the controls
+
+728  and reports OOD AUROC as a mean over folds,
+
+729  so its values (0.867, 0.901) differ from the pooled,
+
+730  non-control values in §5. Because only 3–4 pa-
+
+731  rameters are tuned and the corpus always holds the
+
+732  gold intent, this is a check for tuning leakage, not
+
+733  evidence about unseen commands.
+
+734  Ambiguity and ablation. Ambiguity detection is
+
+735  weak: F1 0.31 (v0.1) and 0.50 (v0.2), AUROC 0.78
+
+                                                                  9
+             Ver.  Evaluated on                n BM25→Hyb. Dense→Hyb. ECE red.
+
+             v0.1  all queries          135                      +5.2 (0.016)  +4.4 (0.146)     80%
+                                                                 +5.6 (0.016)  +4.8 (0.146)     80%
+             v0.1  w/o 9 bare-keyword   126                      +3.8 (0.070)  +6.9 (0.013)     77%
+                                                                 +4.9 (0.016)  +5.6 (0.057)     81%
+             v0.2  all queries          159                      +5.3 (0.016)  +6.0 (0.057)     84%
+                                                                 +5.8 (0.016)  +4.1 (0.227)  78/81%
+             v0.2  w/o 17 new bare-keyword 142
+
+             v0.2  w/o all 26 bare-keyword 133
+
+             v0.1/v0.2 answerable only  121
+
+Table 6: Sensitivity to bare-keyword ambiguous queries (post hoc; canonical controls included). Cells show the
+hybrid’s accuracy gain in points over BM25 and over dense retrieval, with the exact McNemar p (unadjusted); ECE
+red. is the relative ECE reduction from isotonic calibration re-fit on the subset; n counts non-OOD queries. Fusion
+weight and thresholds were not re-tuned.
+
+Figure 1: Accuracy on non-OOD queries (pooled; n = 135 and 159, including the 25 canonical controls) for BM25,
+dense-only, and hybrid retrieval. Left: v0.1. Right: v0.2.
+
+Ver. Metric        Split A Split B      ∆
+
+v0.1 Non-OOD acc. 104/135 104/135       0
+
+v0.1 OOD AUROC     0.867         0.849 −0.018
+
+v0.1 Ambig. F1     0.310         0.300 −0.010
+
+v0.1 Calib. ECE .274→.054 .274→.065 +0.011
+
+v0.2 Non-OOD acc. 126/159 126/159       0
+
+v0.2 OOD AUROC     0.901         0.898 −0.003
+
+v0.2 Ambig. F1     0.496         0.479 −0.017
+
+v0.2 Calib. ECE .324→.074 .324→.101 +0.027
+
+Table 7: Split A (class-stratified) vs. Split B (grouped by
+intent), controls included; hybrid system. For ECE, ∆
+is the change in post-calibration ECE (higher is worse).
+AUROC values are means over folds.
+
+                                                             10
+Figure 2: Reliability diagram for the hybrid system’s fused-score confidence, before vs. after isotonic calibration
+(10 equal-width bins; dot area grows with the number of predictions; dashed line: perfect calibration). Left: v0.1.
+Right: v0.2.
+
+Figure 3: Accuracy by query type, BM25 (A0) vs. hybrid (A3). Single-keyword queries are 0% for both systems, so
+their bars are empty. Left: v0.1. Right: v0.2.
+
+Figure 4: Risk-coverage curve for the hybrid system: queries are answered in order of decreasing confidence, and
+the error rate is computed over the answered share. Tied confidences are answered in benchmark order, so points
+inside a tie block depend on that order; tie-aware values are in the text. Left: v0.1. Right: v0.2.
+
+                                                             11
+Figure 5: Ablation A0–A6. A0–A3: accuracy on all non-OOD queries (pooled). A4–A6: selective accuracy on the
+queries each configuration answers (mean over folds), at reduced coverage, so not directly comparable to A0–A3.
+Left: v0.1. Right: v0.2.
+
+                                                             12
+
