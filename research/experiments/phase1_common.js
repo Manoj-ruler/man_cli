@@ -122,6 +122,8 @@ function guard(label, got, want, tol = 1e-4) { const ok = typeof want === 'numbe
 function assertGuards(scriptName) {
   checks.forEach(c => console.log(`${c.ok ? 'OK  ' : 'FAIL'} reproduce ${c.label}: got ${JSON.stringify(c.got)}, committed ${JSON.stringify(c.want)}`));
   const bad = checks.filter(c => !c.ok).length;
+  // failures also go to stderr: run_phase1.js / run_review_r1.js discard their children's stdout
+  checks.filter(c => !c.ok).forEach(c => console.error(`FAIL reproduce ${c.label}: got ${JSON.stringify(c.got)}, committed ${JSON.stringify(c.want)}`.slice(0, 400)));
   if (bad) { console.error(`\nABORT (${scriptName}): ${bad} reproduction check(s) failed -- nothing written.`); process.exit(1); }
   console.log(`all ${checks.length} reproduction checks passed\n`);
   return checks.map(({ label, got, want }) => ({ label, got, want }));
