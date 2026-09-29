@@ -1,0 +1,1773 @@
+{
+  "checked_at": "2026-09-29T17:36:14.395Z",
+  "n": 30,
+  "refs": [
+    {
+      "key": "lin-etal-2018-nl2bash",
+      "bib": {
+        "title": "NL2Bash: A Corpus and Semantic Parser for Natural Language Interface to the Linux Operating System",
+        "authors": [
+          "lin",
+          "wang",
+          "zettlemoyer",
+          "ernst"
+        ],
+        "year": "2018",
+        "venue": "Proceedings of the Eleventh International Conference on Language Resources and Evaluation (LREC 2018)"
+      },
+      "sources": [
+        {
+          "src": "arxiv",
+          "url": "https://arxiv.org/abs/1802.08979",
+          "title": "NL2Bash: A Corpus and Semantic Parser for Natural Language Interface to the Linux Operating System",
+          "authors": [
+            "lin",
+            "wang",
+            "zettlemoyer",
+            "ernst"
+          ],
+          "year": "2018",
+          "comment": "Accepted at the Language Resource and Evaluation Conference (LREC) 2018"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/429b65937d4922578a81e1f0ef5aeab7361ae36b",
+          "title": "NL2Bash: A Corpus and Semantic Parser for Natural Language Interface to the Linux Operating System",
+          "authors": [
+            "lin",
+            "wang",
+            "zettlemoyer",
+            "ernst"
+          ],
+          "year": 2018,
+          "venue": "International Conference on Language Resources and Evaluation",
+          "doi": "10.63317/42er6x4bacdf",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "arxiv",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "4 vs bib 4",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "4 vs bib 4",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "agarwal2021nlc2cmd",
+      "bib": {
+        "title": "NeurIPS 2020 NLC2CMD Competition: Translating Natural Language to Bash Commands",
+        "authors": [
+          "agarwal",
+          "chakraborti",
+          "fu",
+          "gros",
+          "lin",
+          "maene",
+          "talamadupula",
+          "teng",
+          "white"
+        ],
+        "year": "2021",
+        "venue": "Proceedings of the NeurIPS 2020 Competition and Demonstration Track",
+        "volume": "133",
+        "pages": "302--324"
+      },
+      "sources": [
+        {
+          "src": "arxiv",
+          "url": "https://arxiv.org/abs/2103.02523",
+          "title": "NeurIPS 2020 NLC2CMD Competition: Translating Natural Language to Bash Commands",
+          "authors": [
+            "agarwal",
+            "chakraborti",
+            "fu",
+            "gros",
+            "lin",
+            "maene",
+            "talamadupula",
+            "teng",
+            "white"
+          ],
+          "year": "2021",
+          "comment": "Appears in PMLR Volume 133: NeurIPS 2020 Competition and Demonstration Track. Competition URL: http://ibm.biz/nlc2cmd"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/642e280df732665249315d6c144871f0e2ceeae6",
+          "title": "NeurIPS 2020 NLC2CMD Competition: Translating Natural Language to Bash Commands",
+          "authors": [
+            "agarwal",
+            "chakraborti",
+            "fu",
+            "gros",
+            "lin",
+            "maene",
+            "talamadupula",
+            "teng",
+            "white"
+          ],
+          "year": 2021,
+          "venue": "Neural Information Processing Systems",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "arxiv",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "9 vs bib 9",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "9 vs bib 9",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "westenfelder2025nl2sh",
+      "bib": {
+        "title": "LLM-Supported Natural Language to Bash Translation",
+        "authors": [
+          "westenfelder",
+          "hemberg",
+          "tulla",
+          "moskal",
+          "o reilly",
+          "chiricescu"
+        ],
+        "year": "2025",
+        "venue": "Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers)",
+        "pages": "11135--11147",
+        "doi": "10.18653/v1/2025.naacl-long.555"
+      },
+      "sources": [
+        {
+          "src": "crossref",
+          "url": "https://api.crossref.org/works/10.18653%2Fv1%2F2025.naacl-long.555",
+          "title": "LLM-Supported Natural Language to Bash Translation",
+          "authors": [
+            "westenfelder",
+            "hemberg",
+            "moskal",
+            "o reilly",
+            "chiricescu"
+          ],
+          "year": 2025,
+          "venue": "Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers)",
+          "pages": "11135-11147"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/ee8bbb6cb3d5e5a73dd5eaa50e2a13ab861862dd",
+          "title": "LLM-Supported Natural Language to Bash Translation",
+          "authors": [
+            "westenfelder",
+            "hemberg",
+            "tulla",
+            "moskal",
+            "o reilly",
+            "chiricescu"
+          ],
+          "year": 2025,
+          "venue": "North American Chapter of the Association for Computational Linguistics",
+          "doi": "10.48550/arXiv.2502.06858",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "crossref",
+          "title_match": true,
+          "authors_match": false,
+          "author_count": "5 vs bib 6",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "6 vs bib 6",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "li2026quotebench",
+      "bib": {
+        "title": "QuoteBench: How Matched Scores Can Hide Command-Path Failures",
+        "authors": [
+          "li",
+          "zhang",
+          "tresp",
+          "yang"
+        ],
+        "year": "2026",
+        "venue": ""
+      },
+      "sources": [
+        {
+          "src": "arxiv",
+          "url": "https://arxiv.org/abs/2608.13547",
+          "title": "QuoteBench: How Matched Scores Can Hide Command-Path Failures",
+          "authors": [
+            "li",
+            "zhang",
+            "tresp",
+            "yang"
+          ],
+          "year": "2026",
+          "comment": "29 pages, 5 figures. Project page: https://quotebench.lsamc.website/"
+        },
+        {
+          "src": "s2",
+          "url": "https://api.semanticscholar.org/graph/v1/paper/search/match?fields=title,authors,year,venue,externalIds,publicationVenue&query=QuoteBench%3A%20How%20Matched%20Scores%20Can%20Hide%20Command-Path%20Failures",
+          "error": "API_UNAVAILABLE"
+        }
+      ],
+      "checks": [
+        {
+          "src": "arxiv",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "4 vs bib 4",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "yu2026bashcoderr1",
+      "bib": {
+        "title": "BashCoder-R1: Towards Robust and Explainable Bash Script Generation with Robustness-Aware Group Relative Policy Optimization",
+        "authors": [
+          "yu",
+          "wang",
+          "xu",
+          "zhang",
+          "wang",
+          "ma",
+          "yang",
+          "deng",
+          "wang",
+          "zhang"
+        ],
+        "year": "2026",
+        "venue": "Proceedings of the ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA 2026)"
+      },
+      "sources": [
+        {
+          "src": "arxiv",
+          "url": "https://arxiv.org/abs/2606.27733",
+          "title": "BashCoder-R1: Towards Robust and Explainable Bash Code Generation with Robustness-Aware Group Relative Policy Optimization",
+          "authors": [
+            "yu",
+            "wang",
+            "xu",
+            "zhang",
+            "wang",
+            "ma",
+            "yang",
+            "deng",
+            "wang",
+            "zhang"
+          ],
+          "year": "2026",
+          "comment": "Accepted to ISSTA 2026"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/a96ab23aea50f1444639bd05a9deaa6d9d3a3166",
+          "title": "BashCoder-R1: Towards Robust and Explainable Bash Script Generation with Robustness-Aware Group Relative Policy Optimization",
+          "authors": [
+            "yang",
+            "zhang",
+            "yu",
+            "wang",
+            "ma",
+            "xu",
+            "zhang",
+            "wang",
+            "deng",
+            "wang"
+          ],
+          "year": null,
+          "venue": "",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "arxiv",
+          "title_match": false,
+          "authors_match": true,
+          "author_count": "10 vs bib 10",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": false,
+          "author_count": "10 vs bib 10",
+          "year_match": null
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "card2020littlepower",
+      "bib": {
+        "title": "With Little Power Comes Great Responsibility",
+        "authors": [
+          "card",
+          "henderson",
+          "khandelwal",
+          "jia",
+          "mahowald",
+          "jurafsky"
+        ],
+        "year": "2020",
+        "venue": "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+        "pages": "9263--9274",
+        "doi": "10.18653/v1/2020.emnlp-main.745"
+      },
+      "sources": [
+        {
+          "src": "crossref",
+          "url": "https://api.crossref.org/works/10.18653%2Fv1%2F2020.emnlp-main.745",
+          "title": "With Little Power Comes Great Responsibility",
+          "authors": [
+            "card",
+            "henderson",
+            "khandelwal",
+            "jia",
+            "mahowald",
+            "jurafsky"
+          ],
+          "year": 2020,
+          "venue": "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+          "pages": "9263-9274"
+        },
+        {
+          "src": "s2",
+          "url": "https://api.semanticscholar.org/graph/v1/paper/search/match?fields=title,authors,year,venue,externalIds,publicationVenue&query=With%20Little%20Power%20Comes%20Great%20Responsibility",
+          "error": "API_UNAVAILABLE"
+        }
+      ],
+      "checks": [
+        {
+          "src": "crossref",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "6 vs bib 6",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "robertson2009bm25",
+      "bib": {
+        "title": "The Probabilistic Relevance Framework: BM25 and Beyond",
+        "authors": [
+          "robertson",
+          "zaragoza"
+        ],
+        "year": "2009",
+        "venue": "Foundations and Trends in Information Retrieval",
+        "volume": "3",
+        "pages": "333--389",
+        "doi": "10.1561/1500000019"
+      },
+      "sources": [
+        {
+          "src": "crossref",
+          "url": "https://api.crossref.org/works/10.1561%2F1500000019",
+          "title": "The Probabilistic Relevance Framework: BM25 and Beyond",
+          "authors": [
+            "robertson",
+            "zaragoza"
+          ],
+          "year": 2009,
+          "venue": "Foundations and Trends® in Information Retrieval",
+          "volume": "4",
+          "pages": "1-174"
+        },
+        {
+          "src": "s2",
+          "url": "https://api.semanticscholar.org/graph/v1/paper/search/match?fields=title,authors,year,venue,externalIds,publicationVenue&query=The%20Probabilistic%20Relevance%20Framework%3A%20BM25%20and%20Beyond",
+          "error": "API_UNAVAILABLE"
+        }
+      ],
+      "checks": [
+        {
+          "src": "crossref",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "2 vs bib 2",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "reimers-gurevych-2019-sentence",
+      "bib": {
+        "title": "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks",
+        "authors": [
+          "reimers",
+          "gurevych"
+        ],
+        "year": "2019",
+        "venue": "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",
+        "pages": "3982--3992",
+        "doi": "10.18653/v1/D19-1410"
+      },
+      "sources": [
+        {
+          "src": "crossref",
+          "url": "https://api.crossref.org/works/10.18653%2Fv1%2FD19-1410",
+          "title": "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks",
+          "authors": [
+            "reimers",
+            "gurevych"
+          ],
+          "year": 2019,
+          "venue": "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",
+          "pages": "3980-3990"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/93d63ec754f29fa22572615320afe0521f7ec66d",
+          "title": "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks",
+          "authors": [
+            "reimers",
+            "gurevych"
+          ],
+          "year": 2019,
+          "venue": "Conference on Empirical Methods in Natural Language Processing",
+          "doi": "10.18653/v1/D19-1410",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "crossref",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "2 vs bib 2",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "2 vs bib 2",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "wang2020minilm",
+      "bib": {
+        "title": "MiniLM: Deep Self-Attention Distillation for Task-Agnostic Compression of Pre-Trained Transformers",
+        "authors": [
+          "wang",
+          "wei",
+          "dong",
+          "bao",
+          "yang",
+          "zhou"
+        ],
+        "year": "2020",
+        "venue": "Advances in Neural Information Processing Systems",
+        "volume": "33",
+        "pages": "5776--5788"
+      },
+      "sources": [
+        {
+          "src": "arxiv",
+          "url": "https://arxiv.org/abs/2002.10957",
+          "title": "MiniLM: Deep Self-Attention Distillation for Task-Agnostic Compression of Pre-Trained Transformers",
+          "authors": [
+            "wang",
+            "wei",
+            "dong",
+            "bao",
+            "yang",
+            "zhou"
+          ],
+          "year": "2020",
+          "comment": "Code and models: https://github.com/microsoft/unilm/tree/master/minilm"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/c6c734e16f66fbfcefac7625cc64599e83292c1e",
+          "title": "MiniLM: Deep Self-Attention Distillation for Task-Agnostic Compression of Pre-Trained Transformers",
+          "authors": [
+            "wang",
+            "wei",
+            "dong",
+            "bao",
+            "yang",
+            "zhou"
+          ],
+          "year": 2020,
+          "venue": "Neural Information Processing Systems",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "arxiv",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "6 vs bib 6",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "6 vs bib 6",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "guo2017calibration",
+      "bib": {
+        "title": "On Calibration of Modern Neural Networks",
+        "authors": [
+          "guo",
+          "pleiss",
+          "sun",
+          "weinberger"
+        ],
+        "year": "2017",
+        "venue": "Proceedings of the 34th International Conference on Machine Learning",
+        "volume": "70",
+        "pages": "1321--1330"
+      },
+      "sources": [
+        {
+          "src": "arxiv",
+          "url": "https://arxiv.org/abs/1706.04599",
+          "title": "On Calibration of Modern Neural Networks",
+          "authors": [
+            "guo",
+            "pleiss",
+            "sun",
+            "weinberger"
+          ],
+          "year": "2017",
+          "comment": "ICML 2017"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/d65ce2b8300541414bfe51d03906fca72e93523c",
+          "title": "On Calibration of Modern Neural Networks",
+          "authors": [
+            "guo",
+            "pleiss",
+            "sun",
+            "weinberger"
+          ],
+          "year": 2017,
+          "venue": "International Conference on Machine Learning",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "arxiv",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "4 vs bib 4",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "4 vs bib 4",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "naeini2015ece",
+      "bib": {
+        "title": "Obtaining Well Calibrated Probabilities Using Bayesian Binning",
+        "authors": [
+          "pakdaman naeini",
+          "cooper",
+          "hauskrecht"
+        ],
+        "year": "2015",
+        "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+        "volume": "29",
+        "doi": "10.1609/aaai.v29i1.9602"
+      },
+      "sources": [
+        {
+          "src": "crossref",
+          "url": "https://api.crossref.org/works/10.1609%2Faaai.v29i1.9602",
+          "title": "Obtaining Well Calibrated Probabilities Using Bayesian Binning",
+          "authors": [
+            "pakdaman naeini",
+            "cooper",
+            "hauskrecht"
+          ],
+          "year": 2015,
+          "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+          "volume": "29"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/8d115c3b2ee80e0754360a154a9369bc1658b607",
+          "title": "Obtaining Well Calibrated Probabilities Using Bayesian Binning",
+          "authors": [
+            "naeini",
+            "cooper",
+            "hauskrecht"
+          ],
+          "year": 2015,
+          "venue": "AAAI Conference on Artificial Intelligence",
+          "doi": "10.1609/aaai.v29i1.9602",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "crossref",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "3 vs bib 3",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": false,
+          "author_count": "3 vs bib 3",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "zadrozny2002isotonic",
+      "bib": {
+        "title": "Transforming Classifier Scores into Accurate Multiclass Probability Estimates",
+        "authors": [
+          "zadrozny",
+          "elkan"
+        ],
+        "year": "2002",
+        "venue": "Proceedings of the Eighth ACM SIGKDD International Conference on Knowledge Discovery and Data Mining",
+        "pages": "694--699",
+        "doi": "10.1145/775047.775151"
+      },
+      "sources": [
+        {
+          "src": "crossref",
+          "url": "https://api.crossref.org/works/10.1145%2F775047.775151",
+          "title": "Transforming classifier scores into accurate multiclass probability estimates",
+          "authors": [
+            "zadrozny",
+            "elkan"
+          ],
+          "year": 2002,
+          "venue": "Proceedings of the eighth ACM SIGKDD international conference on Knowledge discovery and data mining",
+          "pages": "694-699"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/04e10f745a7267453788a22f5150b5a32b2b3951",
+          "title": "Transforming classifier scores into accurate multiclass probability estimates",
+          "authors": [
+            "zadrozny",
+            "elkan"
+          ],
+          "year": 2002,
+          "venue": "Knowledge Discovery and Data Mining",
+          "doi": "10.1145/775047.775151",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "crossref",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "2 vs bib 2",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "2 vs bib 2",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "zadrozny2001binning",
+      "bib": {
+        "title": "Obtaining Calibrated Probability Estimates from Decision Trees and Naive Bayesian Classifiers",
+        "authors": [
+          "zadrozny",
+          "elkan"
+        ],
+        "year": "2001",
+        "venue": "Proceedings of the Eighteenth International Conference on Machine Learning (ICML)",
+        "pages": "609--616"
+      },
+      "sources": [
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/4f67a122ec3723f08ad5cbefecad119b432b3304",
+          "title": "Obtaining calibrated probability estimates from decision trees and naive Bayesian classifiers",
+          "authors": [
+            "zadrozny",
+            "elkan"
+          ],
+          "year": 2001,
+          "venue": "International Conference on Machine Learning",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "2 vs bib 2",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "platt2000probabilistic",
+      "bib": {
+        "title": "Probabilistic Outputs for Support Vector Machines and Comparisons to Regularized Likelihood Methods",
+        "authors": [
+          "platt"
+        ],
+        "year": "2000",
+        "venue": "Advances in Large Margin Classifiers",
+        "pages": "61--74"
+      },
+      "sources": [
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/42e5ed832d4310ce4378c44d05570439df28a393",
+          "title": "Probabilistic Outputs for Support vector Machines and Comparisons to Regularized Likelihood Methods",
+          "authors": [
+            "platt"
+          ],
+          "year": 1999,
+          "venue": "",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "1 vs bib 1",
+          "year_match": false
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "brier1950verification",
+      "bib": {
+        "title": "Verification of Forecasts Expressed in Terms of Probability",
+        "authors": [
+          "brier"
+        ],
+        "year": "1950",
+        "venue": "Monthly Weather Review",
+        "volume": "78",
+        "pages": "1--3",
+        "doi": "10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2"
+      },
+      "sources": [
+        {
+          "src": "crossref",
+          "url": "https://api.crossref.org/works/10.1175%2F1520-0493(1950)078%3C0001%3AVOFEIT%3E2.0.CO%3B2",
+          "title": "VERIFICATION OF FORECASTS EXPRESSED IN TERMS OF PROBABILITY",
+          "authors": [
+            "brier"
+          ],
+          "year": 1950,
+          "venue": "Monthly Weather Review",
+          "volume": "78",
+          "pages": "1-3"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/feee6551179612b9691f021b583d8a99b81b9b86",
+          "title": "VERIFICATION OF FORECASTS EXPRESSED IN TERMS OF PROBABILITY",
+          "authors": [
+            "brier"
+          ],
+          "year": 1950,
+          "venue": "",
+          "doi": "10.1175/1520-0493(1950)078<0001:VOFEIT>2.0.CO;2",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "crossref",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "1 vs bib 1",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "1 vs bib 1",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "geifman2017selective",
+      "bib": {
+        "title": "Selective Classification for Deep Neural Networks",
+        "authors": [
+          "geifman",
+          "el yaniv"
+        ],
+        "year": "2017",
+        "venue": "Advances in Neural Information Processing Systems",
+        "volume": "30"
+      },
+      "sources": [
+        {
+          "src": "arxiv",
+          "url": "https://arxiv.org/abs/1705.08500",
+          "title": "Selective Classification for Deep Neural Networks",
+          "authors": [
+            "geifman",
+            "el yaniv"
+          ],
+          "year": "2017"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/2ed7cc027367295b1a7d7cd49406acfa5c580138",
+          "title": "Selective Classification for Deep Neural Networks",
+          "authors": [
+            "geifman",
+            "el yaniv"
+          ],
+          "year": 2017,
+          "venue": "Neural Information Processing Systems",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "arxiv",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "2 vs bib 2",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "2 vs bib 2",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "geifman2019aurc",
+      "bib": {
+        "title": "Bias-Reduced Uncertainty Estimation for Deep Neural Classifiers",
+        "authors": [
+          "geifman",
+          "uziel",
+          "el yaniv"
+        ],
+        "year": "2019",
+        "venue": "International Conference on Learning Representations (ICLR)"
+      },
+      "sources": [
+        {
+          "src": "arxiv",
+          "url": "https://arxiv.org/abs/1805.08206",
+          "title": "Bias-Reduced Uncertainty Estimation for Deep Neural Classifiers",
+          "authors": [
+            "geifman",
+            "uziel",
+            "el yaniv"
+          ],
+          "year": "2018",
+          "comment": "Accepted to ICLR 2019"
+        },
+        {
+          "src": "s2",
+          "url": "https://api.semanticscholar.org/graph/v1/paper/search/match?fields=title,authors,year,venue,externalIds,publicationVenue&query=Bias-Reduced%20Uncertainty%20Estimation%20for%20Deep%20Neural%20Classifiers",
+          "error": "API_UNAVAILABLE"
+        }
+      ],
+      "checks": [
+        {
+          "src": "arxiv",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "3 vs bib 3",
+          "year_match": false
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "traub2024overcoming",
+      "bib": {
+        "title": "Overcoming Common Flaws in the Evaluation of Selective Classification Systems",
+        "authors": [
+          "traub",
+          "bungert",
+          "luth",
+          "baumgartner",
+          "maier hein",
+          "maier hein",
+          "jager"
+        ],
+        "year": "2024",
+        "venue": "Advances in Neural Information Processing Systems",
+        "volume": "37",
+        "pages": "2323--2347"
+      },
+      "sources": [
+        {
+          "src": "arxiv",
+          "url": "https://arxiv.org/abs/2407.01032",
+          "title": "Overcoming Common Flaws in the Evaluation of Selective Classification Systems",
+          "authors": [
+            "traub",
+            "bungert",
+            "luth",
+            "baumgartner",
+            "maier hein",
+            "maier hein",
+            "jaeger"
+          ],
+          "year": "2024"
+        },
+        {
+          "src": "s2",
+          "url": "https://api.semanticscholar.org/graph/v1/paper/search/match?fields=title,authors,year,venue,externalIds,publicationVenue&query=Overcoming%20Common%20Flaws%20in%20the%20Evaluation%20of%20Selective%20Classification%20Systems",
+          "error": "API_UNAVAILABLE"
+        }
+      ],
+      "checks": [
+        {
+          "src": "arxiv",
+          "title_match": true,
+          "authors_match": false,
+          "author_count": "7 vs bib 7",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "hendrycks2017baseline",
+      "bib": {
+        "title": "A Baseline for Detecting Misclassified and Out-of-Distribution Examples in Neural Networks",
+        "authors": [
+          "hendrycks",
+          "gimpel"
+        ],
+        "year": "2017",
+        "venue": "International Conference on Learning Representations (ICLR)"
+      },
+      "sources": [
+        {
+          "src": "arxiv",
+          "url": "https://arxiv.org/abs/1610.02136",
+          "title": "A Baseline for Detecting Misclassified and Out-of-Distribution Examples in Neural Networks",
+          "authors": [
+            "hendrycks",
+            "gimpel"
+          ],
+          "year": "2016",
+          "comment": "Published as a conference paper at ICLR 2017. 1 Figure in 1 Appendix. Minor changes from the previous version",
+          "journal_ref": "International Conference on Learning Representations 2017"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/6ff2a434578ff2746b9283e45abf296887f48a2d",
+          "title": "A Baseline for Detecting Misclassified and Out-of-Distribution Examples in Neural Networks",
+          "authors": [
+            "hendrycks",
+            "gimpel"
+          ],
+          "year": 2016,
+          "venue": "International Conference on Learning Representations",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "arxiv",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "2 vs bib 2",
+          "year_match": false
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "2 vs bib 2",
+          "year_match": false
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "kamath-etal-2020-selective",
+      "bib": {
+        "title": "Selective Question Answering under Domain Shift",
+        "authors": [
+          "kamath",
+          "jia",
+          "liang"
+        ],
+        "year": "2020",
+        "venue": "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+        "pages": "5684--5696",
+        "doi": "10.18653/v1/2020.acl-main.503"
+      },
+      "sources": [
+        {
+          "src": "crossref",
+          "url": "https://api.crossref.org/works/10.18653%2Fv1%2F2020.acl-main.503",
+          "title": "Selective Question Answering under Domain Shift",
+          "authors": [
+            "kamath",
+            "jia",
+            "liang"
+          ],
+          "year": 2020,
+          "venue": "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+          "pages": "5684-5696"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/cb693ce346f44e6b89ee814c6bb9f0e5cc2fa9d2",
+          "title": "Selective Question Answering under Domain Shift",
+          "authors": [
+            "kamath",
+            "jia",
+            "liang"
+          ],
+          "year": 2020,
+          "venue": "Annual Meeting of the Association for Computational Linguistics",
+          "doi": "10.18653/v1/2020.acl-main.503",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "crossref",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "3 vs bib 3",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "3 vs bib 3",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "larson-etal-2019-evaluation",
+      "bib": {
+        "title": "An Evaluation Dataset for Intent Classification and Out-of-Scope Prediction",
+        "authors": [
+          "larson",
+          "mahendran",
+          "peper",
+          "clarke",
+          "lee",
+          "hill",
+          "kummerfeld",
+          "leach",
+          "laurenzano",
+          "tang",
+          "mars"
+        ],
+        "year": "2019",
+        "venue": "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",
+        "pages": "1311--1316",
+        "doi": "10.18653/v1/D19-1131"
+      },
+      "sources": [
+        {
+          "src": "crossref",
+          "url": "https://api.crossref.org/works/10.18653%2Fv1%2FD19-1131",
+          "title": "An Evaluation Dataset for Intent Classification and Out-of-Scope Prediction",
+          "authors": [
+            "larson",
+            "mahendran",
+            "peper",
+            "clarke",
+            "lee",
+            "hill",
+            "kummerfeld",
+            "leach",
+            "laurenzano",
+            "tang",
+            "mars"
+          ],
+          "year": 2019,
+          "venue": "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)",
+          "pages": "1311-1316"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/499556c6ed1daec62e5a57456213cf4f921460f1",
+          "title": "An Evaluation Dataset for Intent Classification and Out-of-Scope Prediction",
+          "authors": [
+            "larson",
+            "mahendran",
+            "peper",
+            "clarke",
+            "lee",
+            "hill",
+            "kummerfeld",
+            "leach",
+            "laurenzano",
+            "tang",
+            "mars"
+          ],
+          "year": 2019,
+          "venue": "Conference on Empirical Methods in Natural Language Processing",
+          "doi": "10.18653/v1/D19-1131",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "crossref",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "11 vs bib 11",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "11 vs bib 11",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "dong-etal-2018-confidence",
+      "bib": {
+        "title": "Confidence Modeling for Neural Semantic Parsing",
+        "authors": [
+          "dong",
+          "quirk",
+          "lapata"
+        ],
+        "year": "2018",
+        "venue": "Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+        "pages": "743--753",
+        "doi": "10.18653/v1/P18-1069"
+      },
+      "sources": [
+        {
+          "src": "crossref",
+          "url": "https://api.crossref.org/works/10.18653%2Fv1%2FP18-1069",
+          "title": "Confidence Modeling for Neural Semantic Parsing",
+          "authors": [
+            "dong",
+            "quirk",
+            "lapata"
+          ],
+          "year": 2018,
+          "venue": "Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+          "pages": "743-753"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/105d015a0f8b652f26857fdde9c2f4abba6cc7ce",
+          "title": "Confidence Modeling for Neural Semantic Parsing",
+          "authors": [
+            "dong",
+            "quirk",
+            "lapata"
+          ],
+          "year": 2018,
+          "venue": "Annual Meeting of the Association for Computational Linguistics",
+          "doi": "10.18653/v1/P18-1069",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "crossref",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "3 vs bib 3",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "3 vs bib 3",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "somov2025texttosql",
+      "bib": {
+        "title": "Confidence Estimation for Error Detection in Text-to-SQL Systems",
+        "authors": [
+          "somov",
+          "tutubalina"
+        ],
+        "year": "2025",
+        "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+        "volume": "39",
+        "pages": "25137--25145",
+        "doi": "10.1609/aaai.v39i23.34699"
+      },
+      "sources": [
+        {
+          "src": "crossref",
+          "url": "https://api.crossref.org/works/10.1609%2Faaai.v39i23.34699",
+          "title": "Confidence Estimation for Error Detection in Text-to-SQL Systems",
+          "authors": [
+            "somov",
+            "tutubalina"
+          ],
+          "year": 2025,
+          "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+          "volume": "39",
+          "pages": "25137-25145"
+        },
+        {
+          "src": "arxiv",
+          "url": "https://arxiv.org/abs/2501.09527",
+          "title": "Confidence Estimation for Error Detection in Text-to-SQL Systems",
+          "authors": [
+            "somov",
+            "tutubalina"
+          ],
+          "year": "2025",
+          "comment": "15 pages, 11 figures, to be published in AAAI 2025 Proceedings"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/bab25966da1a5a19d59c897c1cc0e032acfb4b83",
+          "title": "Confidence Estimation for Error Detection in Text-to-SQL Systems",
+          "authors": [
+            "somov",
+            "tutubalina"
+          ],
+          "year": 2025,
+          "venue": "AAAI Conference on Artificial Intelligence",
+          "doi": "10.1609/aaai.v39i23.34699",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "crossref",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "2 vs bib 2",
+          "year_match": true
+        },
+        {
+          "src": "arxiv",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "2 vs bib 2",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "2 vs bib 2",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "mcnemar1947note",
+      "bib": {
+        "title": "Note on the Sampling Error of the Difference Between Correlated Proportions or Percentages",
+        "authors": [
+          "mcnemar"
+        ],
+        "year": "1947",
+        "venue": "Psychometrika",
+        "volume": "12",
+        "pages": "153--157",
+        "doi": "10.1007/BF02295996"
+      },
+      "sources": [
+        {
+          "src": "crossref",
+          "url": "https://api.crossref.org/works/10.1007%2FBF02295996",
+          "title": "Note on the Sampling Error of the Difference Between Correlated Proportions or Percentages",
+          "authors": [
+            "mcnemar"
+          ],
+          "year": 1947,
+          "venue": "Psychometrika",
+          "volume": "12",
+          "pages": "153-157"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/cdb48a96036b8cd2367eea596cff2db828305150",
+          "title": "Note on the sampling error of the difference between correlated proportions or percentages",
+          "authors": [
+            "mcnemar"
+          ],
+          "year": 1947,
+          "venue": "Psychometrika",
+          "doi": "10.1007/BF02295996",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "crossref",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "1 vs bib 1",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "1 vs bib 1",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "holm1979simple",
+      "bib": {
+        "title": "A Simple Sequentially Rejective Multiple Test Procedure",
+        "authors": [
+          "holm"
+        ],
+        "year": "1979",
+        "venue": "Scandinavian Journal of Statistics",
+        "volume": "6",
+        "pages": "65--70"
+      },
+      "sources": [
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/b0ebbcf713b3ddf3f94325bc58dc39ff76fdc412",
+          "title": "A Simple Sequentially Rejective Multiple Test Procedure",
+          "authors": [
+            "holm"
+          ],
+          "year": 1979,
+          "venue": "",
+          "doi": "10.2307/4615733",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "1 vs bib 1",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "wilson1927probable",
+      "bib": {
+        "title": "Probable Inference, the Law of Succession, and Statistical Inference",
+        "authors": [
+          "wilson"
+        ],
+        "year": "1927",
+        "venue": "Journal of the American Statistical Association",
+        "volume": "22",
+        "pages": "209--212",
+        "doi": "10.1080/01621459.1927.10502953"
+      },
+      "sources": [
+        {
+          "src": "crossref",
+          "url": "https://api.crossref.org/works/10.1080%2F01621459.1927.10502953",
+          "title": "Probable Inference, the Law of Succession, and Statistical Inference",
+          "authors": [
+            "wilson"
+          ],
+          "year": 1927,
+          "venue": "Journal of the American Statistical Association",
+          "volume": "22",
+          "pages": "209-212"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/b14f4269f09ef77ad310581ea82d502402d90fb9",
+          "title": "Probable Inference, the Law of Succession, and Statistical Inference",
+          "authors": [
+            "wilson"
+          ],
+          "year": 1927,
+          "venue": "",
+          "doi": "10.1080/01621459.1927.10502953",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "crossref",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "1 vs bib 1",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "1 vs bib 1",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "cohen1960coefficient",
+      "bib": {
+        "title": "A Coefficient of Agreement for Nominal Scales",
+        "authors": [
+          "cohen"
+        ],
+        "year": "1960",
+        "venue": "Educational and Psychological Measurement",
+        "volume": "20",
+        "pages": "37--46",
+        "doi": "10.1177/001316446002000104"
+      },
+      "sources": [
+        {
+          "src": "crossref",
+          "url": "https://api.crossref.org/works/10.1177%2F001316446002000104",
+          "title": "A Coefficient of Agreement for Nominal Scales",
+          "authors": [
+            "cohen"
+          ],
+          "year": 1960,
+          "venue": "Educational and Psychological Measurement",
+          "volume": "20",
+          "pages": "37-46"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/9e463eefadbcd336c69270a299666e4104d50159",
+          "title": "A Coefficient of Agreement for Nominal Scales",
+          "authors": [
+            "cohen"
+          ],
+          "year": 1960,
+          "venue": "",
+          "doi": "10.1177/001316446002000104",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "crossref",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "1 vs bib 1",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "1 vs bib 1",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "zhang2022shellfusion",
+      "bib": {
+        "title": "ShellFusion: Answer Generation for Shell Programming Tasks via Knowledge Fusion",
+        "authors": [
+          "zhang",
+          "liu",
+          "xia",
+          "treude",
+          "zou",
+          "lo",
+          "zheng"
+        ],
+        "year": "2022",
+        "venue": "Proceedings of the 44th International Conference on Software Engineering (ICSE)",
+        "pages": "1970--1981",
+        "doi": "10.1145/3510003.3510131"
+      },
+      "sources": [
+        {
+          "src": "crossref",
+          "url": "https://api.crossref.org/works/10.1145%2F3510003.3510131",
+          "title": "ShellFusion",
+          "authors": [
+            "zhang",
+            "liu",
+            "xia",
+            "treude",
+            "zou",
+            "lo",
+            "zheng"
+          ],
+          "year": 2022,
+          "venue": "Proceedings of the 44th International Conference on Software Engineering",
+          "pages": "1970-1981"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/94ac02f13ac3252a55b8740b7b310383cdf53445",
+          "title": "ShellFusion: Answer Generation for Shell Programming Tasks via Knowledge Fusion",
+          "authors": [
+            "zhang",
+            "liu",
+            "xia",
+            "treude",
+            "zou",
+            "lo",
+            "zheng"
+          ],
+          "year": 2022,
+          "venue": "International Conference on Software Engineering",
+          "doi": "10.1145/3510003.3510131",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "crossref",
+          "title_match": false,
+          "authors_match": true,
+          "author_count": "7 vs bib 7",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "7 vs bib 7",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "zhou2023docprompting",
+      "bib": {
+        "title": "DocPrompting: Generating Code by Retrieving the Docs",
+        "authors": [
+          "zhou",
+          "alon",
+          "xu",
+          "wang",
+          "jiang",
+          "neubig"
+        ],
+        "year": "2023",
+        "venue": "International Conference on Learning Representations (ICLR)"
+      },
+      "sources": [
+        {
+          "src": "arxiv",
+          "url": "https://arxiv.org/abs/2207.05987",
+          "title": "DocPrompting: Generating Code by Retrieving the Docs",
+          "authors": [
+            "zhou",
+            "alon",
+            "xu",
+            "wang",
+            "jiang",
+            "neubig"
+          ],
+          "year": "2022",
+          "comment": "ICLR 2023 (notable-top-25%); code and data are available at https://github.com/shuyanzhou/docprompting"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/0a39442979d6e678dd36bb443ad529c14e86a86e",
+          "title": "DocPrompting: Generating Code by Retrieving the Docs",
+          "authors": [
+            "zhou",
+            "alon",
+            "xu",
+            "wang",
+            "jiang",
+            "neubig"
+          ],
+          "year": 2022,
+          "venue": "International Conference on Learning Representations",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "arxiv",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "6 vs bib 6",
+          "year_match": false
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "6 vs bib 6",
+          "year_match": false
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "agarwal2020clai",
+      "bib": {
+        "title": "Project CLAI: Instrumenting the Command Line as a New Environment for AI Agents",
+        "authors": [
+          "agarwal",
+          "barroso",
+          "chakraborti",
+          "dow",
+          "fadnis",
+          "godoy",
+          "pallan",
+          "talamadupula"
+        ],
+        "year": "2020",
+        "venue": ""
+      },
+      "sources": [
+        {
+          "src": "arxiv",
+          "url": "https://arxiv.org/abs/2002.00762",
+          "title": "Project CLAI: Instrumenting the Command Line as a New Environment for AI Agents",
+          "authors": [
+            "agarwal",
+            "barroso",
+            "chakraborti",
+            "dow",
+            "fadnis",
+            "godoy",
+            "pallan",
+            "talamadupula"
+          ],
+          "year": "2020",
+          "comment": "http://ibm.biz/clai-home"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/40edd65248a83bb89889d1830a54155962f547f9",
+          "title": "Project CLAI: Instrumenting the Command Line as a New Environment for AI Agents",
+          "authors": [
+            "agarwal",
+            "barroso",
+            "chakraborti",
+            "dow",
+            "fadnis",
+            "godoy",
+            "pallan",
+            "talamadupula"
+          ],
+          "year": 2020,
+          "venue": "",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "arxiv",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "8 vs bib 8",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "8 vs bib 8",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    }
+  ]
+}
