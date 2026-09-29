@@ -63,7 +63,11 @@ Every new script must first reproduce the current reported values and refuse to 
 
 ## Phase 3 — Two-annotator study (🟡 waiting on annotators)
 
-- [ ] **T9 🟡 Practice round**
+- [x] **T9 ✅ Practice round (returns scored 2026-09-29).**
+  - Both annotators matched 8/8 core items and 11/11 overall; there were no flags.
+  - The returns are stored in the gitignored `returned/practice/`, and the identities in the gitignored `coordinator/ANNOTATOR_IDS.md`.
+  - **Open (gate G0):** the independence check. The practice comments are near-identical across the two returns.
+  - The end-to-end plan is in `research/RESEARCH_PLAN_E2E.md`.
   - *Work:*
     1. Run `node research/experiments/build_practice_set.js`.
     2. Send each annotator the codebook, `corpus_view_win32.tsv`, `HOW_TO_RETURN.md` and the practice sheet.
