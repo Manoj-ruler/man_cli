@@ -125,6 +125,41 @@ This needs a LaTeX installation with `pdflatex` and `bibtex` (tested with MiKTeX
 both `main.pdf` (camera-ready) and `main_review.pdf` (anonymous). It fails if the body runs past
 8 pages.
 
+### 7. Tests of the shipped tool
+
+```bash
+node --test "research/tests/*.test.js"
+```
+
+These 23 tests check the behaviour of `cli/` that the paper describes:
+
+- golden retrieval outputs;
+- the confidence formula and the refusal rule;
+- the size of the win32 index (280);
+- the CLI's flow from prompt to execution.
+
+The CLI tests replace command execution, the prompt and the network with recorders, so no shell
+command is ever run. See `research/tests/README.md`.
+
+### 8. Re-running the analyses on benchmark v0.2.1
+
+After the annotation study, `build_v0_2_1.js --confirm` writes benchmark v0.2.1. Then run:
+
+```bash
+node research/experiments/run_v0_2_1.js
+```
+
+The script works in a disposable git worktree, where it places v0.2.1 at the v0.2 paths. It runs the
+v0.2 chain and the review scripts there, without the `generate_*` renderers, and writes the results
+to `research/results/v0.2.1/` together with `RUN_MANIFEST.json`, which records input and output
+SHA-256. No frozen file is touched.
+
+The published-value guards run only on the frozen benchmarks; the guards that compare regenerated
+files with each other still run.
+
+To test it first on a synthetic build, pass `--dry-run --bench-dir <dir>`. Its outputs go outside
+`research/` and are stamped SYNTHETIC. A dry run on 2026-09-29 completed in 152 s.
+
 ## What does not reproduce exactly, by design
 
 - **Latency.** Every latency or millisecond value is a single wall-clock measurement on one machine.
