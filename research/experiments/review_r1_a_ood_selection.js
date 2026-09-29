@@ -27,10 +27,15 @@ const ood = D.ids.filter(D.isOOD), non = D.ids.filter(id => !D.isOOD(id));
 const orig = ood.filter(id => num(id) <= 150), added = ood.filter(id => num(id) > 150);
 
 // ---- guards ----
-C.guard('drafted OOD candidates', drafts.length, 35, 0);
-C.guard('added OOD queries identical to drafts', added.filter(id => drafts.includes(D.qById.get(id).query)).length, 35, 0);
-C.guard('max top-1 BM25 over added OOD (report: 7.39)', +Math.max(...added.map(id => raw.get(id).bm25)).toFixed(2), 7.39, 0.005);
-C.guard('max top-1 cosine over added OOD (report: 0.31)', +Math.max(...added.map(id => raw.get(id).cos)).toFixed(2), 0.31, 0.005);
+// Hard-coded published values apply only to the frozen v0.2 benchmark (C.frozen). On a re-labelled
+// benchmark (v0.2.1, run through run_v0_2_1.js) the OOD set can change, so they are skipped there;
+// the guards below that compare with regenerated result files still apply.
+if (C.frozen('v0.2')) {
+  C.guard('drafted OOD candidates', drafts.length, 35, 0);
+  C.guard('added OOD queries identical to drafts', added.filter(id => drafts.includes(D.qById.get(id).query)).length, 35, 0);
+  C.guard('max top-1 BM25 over added OOD (report: 7.39)', +Math.max(...added.map(id => raw.get(id).bm25)).toFixed(2), 7.39, 0.005);
+  C.guard('max top-1 cosine over added OOD (report: 0.31)', +Math.max(...added.map(id => raw.get(id).cos)).toFixed(2), 0.31, 0.005);
+}
 const t2 = C.rd('research/results/phase1/phase1_t2_ood_breakdown.json').versions['v0.2'].groups;
 const g = name => t2.find(x => x.group.startsWith(name));
 // per-query detector decisions, reconstructed exactly as T2 does: fold threshold on top1_score
@@ -41,7 +46,7 @@ C.guard('detector rejects, original 15', orig.filter(detRejects).length, g('sour
 C.guard('detector rejects, added 35', added.filter(detRejects).length, g('source: added').tuned_rejects.k, 0);
 C.guard('baseline rejects, original 15', orig.filter(baseRejects).length, g('source: original').baseline_rejects.k, 0);
 C.guard('baseline rejects, added 35', added.filter(baseRejects).length, g('source: added').baseline_rejects.k, 0);
-C.guard('detector false rejections (11/159)', non.filter(detRejects).length, 11, 0);
+if (C.frozen('v0.2')) C.guard('detector false rejections (11/159)', non.filter(detRejects).length, 11, 0); // hard-coded: frozen benchmark only
 
 // ---- 1. raw-score profile ----
 const screen = id => raw.get(id).bm25 <= 7.39 && raw.get(id).cos <= 0.31;

@@ -1,5 +1,5 @@
 {
-  "status": "PROPOSED 2026-09-28 -- needs the author's approval before the real v0.2.1 build (build_v0_2_1.js refuses --confirm while status starts with PROPOSED)",
+  "status": "APPROVED 2026-09-29 by the author (proposed 2026-09-28)",
   "purpose": "Corrections to TermAssist-Bench v0.2 items that violate spec 4.1 (gold and acceptable commands must be records of the win32 corpus view). Declared before annotation in ANNOTATION_PROTOCOL.md section 6. Applied in addition to the adjudicated relabels; v0.2 itself stays frozen.",
   "fixes": [
     {

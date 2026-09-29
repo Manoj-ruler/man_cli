@@ -30,10 +30,14 @@ for (const v of ['v0.1', 'v0.2']) {
   const sDet = id => -D.featById.get(id).top1_score;         // hybrid fused top-1 (the detector's feature)
 
   const want = { 'v0.1': { bo: 4, do: 7, df: 6 }, 'v0.2': { bo: 17, do: 34, df: 11 } }[v];
-  C.guard(`${v} baseline OOD rejections`, ood.filter(baseRejects).length, want.bo, 0);
-  C.guard(`${v} detector OOD rejections`, ood.filter(detRejects).length, want.do, 0);
-  C.guard(`${v} detector false rejections`, non.filter(detRejects).length, want.df, 0);
-  C.guard(`${v} baseline false rejections`, non.filter(baseRejects).length, 0, 0);
+  if (C.frozen(v)) { // hard-coded published counts: frozen benchmark only
+    C.guard(`${v} baseline OOD rejections`, ood.filter(baseRejects).length, want.bo, 0);
+    C.guard(`${v} detector OOD rejections`, ood.filter(detRejects).length, want.do, 0);
+    C.guard(`${v} detector false rejections`, non.filter(detRejects).length, want.df, 0);
+    C.guard(`${v} baseline false rejections`, non.filter(baseRejects).length, 0, 0);
+  }
+  // the sweep's "detector_observed" target uses the detector's actual false rejections on any benchmark
+  want.df = non.filter(detRejects).length;
   const t3 = C.rd('research/results/phase1/phase1_t3_selective_ties.json').versions[v].detection_auroc.ood.pooled_auroc;
   const items = s => D.ids.map(id => ({ score: s(id), pos: D.isOOD(id) }));
   C.guard(`${v} pooled detector AUROC (T3)`, C.r4(C.auroc(items(sDet))), t3);

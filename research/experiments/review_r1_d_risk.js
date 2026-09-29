@@ -21,8 +21,10 @@ for (const v of ['v0.1', 'v0.2']) {
   const repro = new Map(D.repro.map(r => [r.id, r]));
   const hyb = new Map(D.cands.filter(c => c.system === 'hybrid').map(c => [c.id, c]));
   const non = D.ids.filter(id => !D.isOOD(id));
-  C.guard(`${v} baseline non-OOD hits`, non.filter(id => D.variants.baseline_confidence.hitOf.get(id) === 1).length, { 'v0.1': 97, 'v0.2': 120 }[v], 0);
-  C.guard(`${v} hybrid non-OOD hits`, non.filter(id => D.variants.hybrid_reliability.hitOf.get(id) === 1).length, { 'v0.1': 104, 'v0.2': 126 }[v], 0);
+  if (C.frozen(v)) { // hard-coded published counts: frozen benchmark only
+    C.guard(`${v} baseline non-OOD hits`, non.filter(id => D.variants.baseline_confidence.hitOf.get(id) === 1).length, { 'v0.1': 97, 'v0.2': 120 }[v], 0);
+    C.guard(`${v} hybrid non-OOD hits`, non.filter(id => D.variants.hybrid_reliability.hitOf.get(id) === 1).length, { 'v0.1': 104, 'v0.2': 126 }[v], 0);
+  }
   // hybrid retrieved-command confusion matrix, as the committed safety evaluation computes it
   const cm = {}; TIERS.forEach(t => { cm[t] = { LOW: 0, MEDIUM: 0, HIGH: 0, CRITICAL: 0 }; });
   D.queries.forEach(q => { const c = hyb.get(q.id); if (c) cm[q.risk_level.toUpperCase()][classify(c.top1_command).tier]++; });
