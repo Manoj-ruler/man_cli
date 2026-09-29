@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-29T04:23:52.518Z",
+  "generated_at": "2026-09-29T06:03:54.639Z",
   "status": "post hoc, exploratory (answers review round 1)",
   "task": "T18 / REV-49: OOD detection as a ranking and at matched false-rejection rates",
   "note": "Sweep thresholds are chosen in-sample for both scores (descriptive upper bound on equal footing); the committed detector is nested.",
@@ -253,11 +253,13 @@
           "baseline_score": {
             "ood_rejected": 5,
             "false_rejected": 0,
+            "controls_among_false_rejected": 0,
             "rate": 0.3333
           },
           "detector_feature": {
             "ood_rejected": 1,
             "false_rejected": 0,
+            "controls_among_false_rejected": 0,
             "rate": 0.0667
           }
         },
@@ -267,11 +269,13 @@
           "baseline_score": {
             "ood_rejected": 10,
             "false_rejected": 6,
+            "controls_among_false_rejected": 0,
             "rate": 0.6667
           },
           "detector_feature": {
             "ood_rejected": 7,
             "false_rejected": 6,
+            "controls_among_false_rejected": 0,
             "rate": 0.4667
           }
         },
@@ -281,11 +285,13 @@
           "baseline_score": {
             "ood_rejected": 10,
             "false_rejected": 6,
+            "controls_among_false_rejected": 0,
             "rate": 0.6667
           },
           "detector_feature": {
             "ood_rejected": 7,
             "false_rejected": 6,
+            "controls_among_false_rejected": 0,
             "rate": 0.4667
           }
         },
@@ -295,11 +301,13 @@
           "baseline_score": {
             "ood_rejected": 12,
             "false_rejected": 13,
+            "controls_among_false_rejected": 0,
             "rate": 0.8
           },
           "detector_feature": {
             "ood_rejected": 9,
             "false_rejected": 13,
+            "controls_among_false_rejected": 0,
             "rate": 0.6
           }
         }
@@ -478,11 +486,13 @@
           "baseline_score": {
             "ood_rejected": 23,
             "false_rejected": 0,
+            "controls_among_false_rejected": 0,
             "rate": 0.46
           },
           "detector_feature": {
             "ood_rejected": 21,
             "false_rejected": 0,
+            "controls_among_false_rejected": 0,
             "rate": 0.42
           }
         },
@@ -492,11 +502,13 @@
           "baseline_score": {
             "ood_rejected": 37,
             "false_rejected": 10,
+            "controls_among_false_rejected": 0,
             "rate": 0.74
           },
           "detector_feature": {
             "ood_rejected": 36,
             "false_rejected": 11,
+            "controls_among_false_rejected": 0,
             "rate": 0.72
           }
         },
@@ -506,11 +518,13 @@
           "baseline_score": {
             "ood_rejected": 33,
             "false_rejected": 7,
+            "controls_among_false_rejected": 0,
             "rate": 0.66
           },
           "detector_feature": {
             "ood_rejected": 33,
             "false_rejected": 7,
+            "controls_among_false_rejected": 0,
             "rate": 0.66
           }
         },
@@ -520,11 +534,13 @@
           "baseline_score": {
             "ood_rejected": 43,
             "false_rejected": 15,
+            "controls_among_false_rejected": 0,
             "rate": 0.86
           },
           "detector_feature": {
             "ood_rejected": 37,
             "false_rejected": 15,
+            "controls_among_false_rejected": 0,
             "rate": 0.74
           }
         }

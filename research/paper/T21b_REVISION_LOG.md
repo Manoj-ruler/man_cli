@@ -135,3 +135,41 @@ study, which changed none of its executable code and none of the corpus fields i
 
 A scoped re-review of the round-3 items, using ARS `academic-paper-reviewer` re-review mode against the T22
 residual list. Then T15 (claim trace table), T17 (read-through) and T23 (mentorship draft, due Nov 6, 2026).
+
+## Minor-revision fixes after the T22b re-review (2026-09-29)
+
+**Context.** The T22b decision was Minor Revision, from rule B5, derived by hand:
+`review_round3/phase2b_verification_report.md`. Under the protocol a Minor Revision goes straight to final
+integrity with no further re-review round. The fixes below close that report's §A list of decision-affecting
+residuals. They have not been re-verified by a reviewer.
+
+| Item | Fix | Location |
+|---|---|---|
+| REV-02 | Table 3 now uses Table 1's non-control population (answered 121, 125, 167, 184). No control returns a high- or critical-risk command, so the other rows are unchanged. The counts come from `review_r1_d.controls_excluded`, which has a new guard confirming the wrong-and-risky counts are unchanged. The repeated §5 sentence "These reductions were not in the corrected family" is deleted. | Table 3; §5 |
+| REV-03 | The Abstract gives all three rules' counts on the 15 original items: 4, 12 and 9. | Abstract (199 words) |
+| REV-15 | Added the hybrid's equal-mass and sweep ECE after recalibration (0.108 and 0.058; 0.055 and 0.071). Added that before recalibration all three estimators agree, for both confidences (`review_r1_b`). | §5 Recalibration |
+| NEW-8 | "Tuned on held-out folds" is now "tuned by cross-validation". | Abstract; §7 |
+| NEW-9 | The 12/9 counts are labelled as coming from the v0.2 run, with the v0.1-run counts 4, 10 and 7 given alongside. | §5; §7 ("on v0.2") |
+| NEW-10 | Only exactly equal false-rejection points are used now: v0.2 23/21 at 0, 33/33 at 7, 43/37 at 15; v0.1 5/1 at 0, 10/7 at 6. §6 now says "the hybrid's feature … (in-sample)". `review_r1_e` records that no control is among any of these false rejections. | Table 1; §5; §6 |
+| NEW-11 | Holm-table rows relabelled "detector vs. fixed". | App. B |
+| NEW-12 | A0–A6 defined. | App. B |
+| NEW-1 (consider) | The Limitations bullet now lists the results that may be flattered and says there is no bound on the bias. | Limitations |
+| REV-34 | MiniLM scoping added to C2, §6 and §7. The Abstract now says "BM25–MiniLM". | as listed |
+| REV-43 | Names the existing safeguard: execution needs an explicit keypress and never happens on its own. | §6 |
+
+**Not changed:**
+- REV-10: still no main-text figure.
+- REV-18, REV-23, REV-33 and REV-39 remain contested.
+
+**Human-checkpoint items (for the author):**
+- Submit only the review PDF. `main.tex` and this log name the tool.
+- The registry-lookup risk from the §1 and §3 details remains.
+- Spot-check the NL2SH author line (ADJ-1).
+- Resolve BashCoder-R1's DOI to confirm the full title.
+
+**Checks:**
+- 0 overfull boxes, 0 undefined references and 0 BibTeX warnings; the body ends on page 6.
+- The review PDF contains no identifying strings.
+- `review_r1_d` passes 10 guards and `review_r1_e` 20.
+
+**Correction to the round-3 REV-12 row.** DOI 10.1145/3832094, which I added in round 3, did not resolve when checked on 2026-09-29: doi.org returns 404 and Crossref has no record. It has been removed from `references.bib` until it is registered. The title, including "with Robustness-Aware …", matches both ISSTA pages.

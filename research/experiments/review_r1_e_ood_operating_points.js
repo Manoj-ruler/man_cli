@@ -55,8 +55,11 @@ for (const v of ['v0.1', 'v0.2']) {
     let best = { ood_rejected: 0, false_rejected: 0 };
     for (const t of cands) { // reject if score >= t
       const fr = non.filter(id => s(id) >= t).length, tp = ood.filter(id => s(id) >= t).length;
-      if (fr <= maxFr && tp > best.ood_rejected) best = { ood_rejected: tp, false_rejected: fr };
+      if (fr <= maxFr && tp > best.ood_rejected) best = { ood_rejected: tp, false_rejected: fr, t };
     }
+    // (round 3, NEW-10) how many of the false rejections are canonical controls
+    const t0 = best.t; delete best.t;
+    best.controls_among_false_rejected = t0 === undefined ? 0 : non.filter(id => D.isCanonical(id) && s(id) >= t0).length;
     return best;
   }
   const targets = { zero: 0, detector_observed: want.df, five_pct: Math.floor(0.05 * non.length), ten_pct: Math.floor(0.10 * non.length) };

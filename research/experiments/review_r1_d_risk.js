@@ -46,8 +46,15 @@ for (const v of ['v0.1', 'v0.2']) {
       if (!ok && risky(tier)) { const q = D.qById.get(id); wrongRisky.push({ id, query: q.query, returned: S.command(id), tier, confidence: S.conf(id), band: b, gold: q.gold_command, benchmark_risk: q.risk_level, is_ood: D.isOOD(id) }); }
     });
     const topBand = S.bands[S.bands.length - 1];
+    // (round 3 minor fixes, REV-02) the same counts on the claims table's population: canonical controls
+    // excluded. Controls are always answered correctly, so wrong-and-risky counts cannot change.
+    const answeredX = answered.filter(id => !D.isCanonical(id));
+    const riskyX = answeredX.filter(id => risky(classify(S.command(id)).tier));
+    const controls_excluded = { answered: answeredX.length, risky_returned_commands: riskyX.length,
+      of_which_wrong: riskyX.filter(id => !(S.hit(id) && !D.isOOD(id))).length };
+    C.guard(`${v} ${name} wrong-and-risky unchanged without controls`, controls_excluded.of_which_wrong, wrongRisky.length, 0);
     out[name] = {
-      answered: answered.length, table,
+      answered: answered.length, table, controls_excluded,
       wrong_and_risky: { n: wrongRisky.length, of_answered: C.wilson(wrongRisky.length, answered.length), in_top_confidence_band: wrongRisky.filter(x => x.band === topBand).length, items: wrongRisky },
       risky_returned_commands: { n: answered.filter(id => risky(classify(S.command(id)).tier)).length, of_which_wrong: wrongRisky.length }
     };

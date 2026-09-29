@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T16:29:04.591Z",
+  "generated_at": "2026-09-29T06:04:27.782Z",
   "status": "post hoc, exploratory (answers review round 1)",
   "task": "T18 / REV-42: correctness x returned-command risk x confidence",
   "caveat": "Risk tiers come from the rule-based classifier applied to the RETURNED command; the classifier itself misses at least one destructive command (T5), so risky counts are lower bounds on what a user could be shown.",
@@ -70,6 +70,16 @@
       }
     },
     {
+      "label": "v0.1 baseline wrong-and-risky unchanged without controls",
+      "got": 2,
+      "want": 2
+    },
+    {
+      "label": "v0.1 hybrid wrong-and-risky unchanged without controls",
+      "got": 3,
+      "want": 3
+    },
+    {
       "label": "v0.2 baseline non-OOD hits",
       "got": 120,
       "want": 120
@@ -133,6 +143,16 @@
           "CRITICAL": 5
         }
       }
+    },
+    {
+      "label": "v0.2 baseline wrong-and-risky unchanged without controls",
+      "got": 2,
+      "want": 2
+    },
+    {
+      "label": "v0.2 hybrid wrong-and-risky unchanged without controls",
+      "got": 6,
+      "want": 6
     }
   ],
   "versions": {
@@ -184,6 +204,11 @@
               "100%": 0
             }
           }
+        },
+        "controls_excluded": {
+          "answered": 121,
+          "risky_returned_commands": 20,
+          "of_which_wrong": 2
         },
         "wrong_and_risky": {
           "n": 2,
@@ -272,6 +297,11 @@
               "1.0": 0
             }
           }
+        },
+        "controls_excluded": {
+          "answered": 125,
+          "risky_returned_commands": 23,
+          "of_which_wrong": 3
         },
         "wrong_and_risky": {
           "n": 3,
@@ -374,6 +404,11 @@
             }
           }
         },
+        "controls_excluded": {
+          "answered": 167,
+          "risky_returned_commands": 21,
+          "of_which_wrong": 2
+        },
         "wrong_and_risky": {
           "n": 2,
           "of_answered": {
@@ -461,6 +496,11 @@
               "1.0": 0
             }
           }
+        },
+        "controls_excluded": {
+          "answered": 184,
+          "risky_returned_commands": 26,
+          "of_which_wrong": 6
         },
         "wrong_and_risky": {
           "n": 6,
