@@ -118,12 +118,12 @@ function main() {
   const outDir = path.join(projectRoot, 'research/results/v0.2');
   fs.writeFileSync(path.join(outDir, 'selective-prediction-results.json'), JSON.stringify(output, null, 2), 'utf-8');
 
-  console.log('=== v0.2 OOD DETECTION (n=50, feature: top1_score) ===');
+  console.log(`=== v0.2 OOD DETECTION (n=${ood.pooled_confusion.tp + ood.pooled_confusion.fn}, feature: top1_score) ===`);
   console.log(`Mean test F1: ${ood.mean_test_f1_across_folds}, Mean test AUROC: ${ood.mean_test_auroc}`);
   console.log(`Pooled: precision=${ood.pooled_precision} recall=${ood.pooled_recall} f1=${ood.pooled_f1}`);
   console.log(`Pooled confusion: TP=${ood.pooled_confusion.tp} FP=${ood.pooled_confusion.fp} FN=${ood.pooled_confusion.fn} TN=${ood.pooled_confusion.tn}`);
 
-  console.log('\n=== v0.2 AMBIGUITY DETECTION (n=38, feature: margin) ===');
+  console.log(`\n=== v0.2 AMBIGUITY DETECTION (n=${ambiguity.pooled_confusion.tp + ambiguity.pooled_confusion.fn}, feature: margin) ===`);
   console.log(`Mean test F1: ${ambiguity.mean_test_f1_across_folds}, Mean test AUROC: ${ambiguity.mean_test_auroc}`);
   console.log(`Pooled: precision=${ambiguity.pooled_precision} recall=${ambiguity.pooled_recall} f1=${ambiguity.pooled_f1}`);
 

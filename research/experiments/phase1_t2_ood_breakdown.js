@@ -64,7 +64,13 @@ function analyse(v) {
       queries_with_top_confidence_1: ids.filter(id => D.featById.get(id).top1_score === 1).map(id => `${id} ${D.qById.get(id).query}`) };
   }
   const groups = [group('all OOD', ood)];
-  if (v === 'v0.2') { groups.push(group('source: original v0.1 OOD (TA-B078-092)', ood.filter(id => num(id) <= 150))); groups.push(group('source: added in v0.2 (TA-B151-185)', ood.filter(id => num(id) > 150))); }
+  // Source = the release that added the item (ID <= 150: v0.1). The ID ranges in these labels hold only
+  // for the frozen OOD set; on a relabelled benchmark the labels name the release, not a range.
+  if (v === 'v0.2') {
+    const fz = C.frozen(v);
+    groups.push(group(fz ? 'source: original v0.1 OOD (TA-B078-092)' : 'source: original v0.1 items (ID <= 150)', ood.filter(id => num(id) <= 150)));
+    groups.push(group(fz ? 'source: added in v0.2 (TA-B151-185)' : 'source: added in v0.2 (ID > 150)', ood.filter(id => num(id) > 150)));
+  }
   groups.push(group('terminal-task OOD (near_ood + unsupported_tool_ood)', ood.filter(id => TERMINAL.has(subtypeOf.get(id)))));
   groups.push(group('other OOD (far_ood + non_terminal + nonsensical)', ood.filter(id => subtypeOf.has(id) && !TERMINAL.has(subtypeOf.get(id)))));
   for (const s of Object.keys(labels.vocabulary)) { const ids = ood.filter(id => subtypeOf.get(id) === s); if (ids.length) groups.push(group(`subtype: ${s}`, ids)); }
