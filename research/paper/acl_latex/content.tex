@@ -29,9 +29,9 @@ Natural-language shell assistance can lower the barrier to command-line tools, b
 destroy data. Research since NL2Bash \citep{lin-etal-2018-nl2bash} has mostly generated commands: neural
 translation (the NLC2CMD competition, \citealp{agarwal2021nlc2cmd}), then large language model (LLM)
 systems (NL2SH; \citealp{westenfelder2025nl2sh}), most recently trained with reinforcement learning on
-static-analysis rewards (BashCoder-R1; \citealp{yu2026bashcoderr1}). Retrieval over a fixed command list is an
-older alternative that NLC2CMD also tested \citep{agarwal2021nlc2cmd} and ShellFusion developed
-\citep{zhang2022shellfusion}. It cannot invent a command, and a small lexical retriever runs offline and
+static-analysis rewards (BashCoder-R1; \citealp{yu2026bashcoderr1}). Retrieving commands instead of generating
+them is an older alternative, tested in NLC2CMD \citep{agarwal2021nlc2cmd} and developed in ShellFusion
+\citep{zhang2022shellfusion}. Retrieval over a fixed command list cannot invent a command, and a small lexical retriever runs offline and
 deterministically, so queries need not leave the user's machine and every answer is a record from a fixed
 list that can be inspected; the price is coverage.
 
@@ -65,10 +65,12 @@ entry used TF-IDF retrieval with a logistic-regression model that lowered confid
 predictions, and came within 12\% of the best system. That metric folds confidence into one accuracy-like score;
 it does not separate calibration, the ranking of errors and out-of-scope rejection, which we measure
 separately. ShellFusion \citep{zhang2022shellfusion} retrieves
-commands from question-answer posts and re-ranks them against manual pages; DocPrompting
-\citep{zhou2023docprompting} retrieves documentation, including tldr pages, before generating code; Project
+commands from question-answer posts, filters them with manual-page and TLDR descriptions, and ranks them
+against the query; DocPrompting \citep{zhou2023docprompting} retrieves documentation (for Bash, manual-page
+paragraphs) before generating code; Project
 CLAI \citep{agarwal2020clai} treats the command line as an environment for AI agents. NL2SH
-\citep{westenfelder2025nl2sh} improves LLM translation with parsing and constrained decoding, and QuoteBench
+\citep{westenfelder2025nl2sh} improves LLM translation with parsing, in-context and in-weight learning, and
+constrained decoding, and QuoteBench
 \citep{li2026quotebench} shows that matched execution scores can hide command-path failures. We run no
 generative system, so our comparison with generation is conceptual.
 
