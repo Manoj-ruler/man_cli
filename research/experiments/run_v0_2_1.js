@@ -88,6 +88,18 @@ try {
   ok = true;
   console.log(`\nwrote ${Object.keys(outFiles).length} result files + RUN_MANIFEST.json to ${outRoot}${DRY ? ' [SYNTHETIC]' : ''}`);
 } finally {
+  // A failed DRY run keeps whatever the worktree produced, for diagnosis, in <out>_FAILED_PARTIAL
+  // (outside research/, like every dry-run output). A failed real run keeps nothing.
+  if (!ok && DRY) {
+    try {
+      const failDir = outRoot + '_FAILED_PARTIAL';
+      for (const r of ['research/results/v0.2', 'research/results/phase1', 'research/results/review_r1', 'research/results/stats', 'research/datasets']) {
+        const src = path.join(wt, r);
+        if (fs.existsSync(src)) fs.cpSync(src, path.join(failDir, path.relative('research', r)), { recursive: true, filter: s => !s.includes('node_modules') });
+      }
+      console.error(`partial outputs of the failed dry run kept in ${failDir}`);
+    } catch (e) { console.error('warning: could not keep partial outputs: ' + e.message); }
+  }
   // The node_modules link MUST go before the worktree: on Windows `git worktree remove --force`
   // follows a junction and deletes the target's contents (it emptied research/node_modules, and with
   // it the pinned model cache, on 2026-09-29). Unlink it, confirm it is gone, and only then remove the
