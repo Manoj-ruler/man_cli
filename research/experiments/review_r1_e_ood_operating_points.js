@@ -127,8 +127,16 @@ for (const v of ['v0.1', 'v0.2']) {
     auroc: { baseline_raw_bm25: C.r4(aBX), baseline_ci95: ci(bX), detector_fused_top1: C.r4(aDX), detector_ci95: ci(tX), difference_detector_minus_baseline: C.r4(aDX - aBX), difference_ci95: ci(dX) }
   };
 
+  // 7. (analysis freeze v1.0) the legitimate queries each rule refuses, item by item, non-control
+  //    in-scope queries (controls are never refused, see 6)
+  const frItems = f => nonX.filter(f).map(id => ({ id, query: D.qById.get(id).query, label: D.cls.get(id), query_type: D.qById.get(id).query_type,
+    shipped_correct: D.variants.baseline_confidence.hitOf.get(id) === 1, hybrid_correct: D.variants.hybrid_reliability.hitOf.get(id) === 1,
+    raw_bm25: C.r4(rawScore(id)), fused_top1: D.featById.get(id).top1_score }));
+  const falseRejectionItems = Object.fromEntries(Object.entries(rules).map(([r, f]) => [r, frItems(f)]));
+  for (const [r, it] of Object.entries(falseRejectionItems)) C.guard(`${v} ${r} false-rejection item list length`, it.length, controlsExcluded.false_rejected[r], 0);
+
   result.versions[v] = {
-    n_ood: ood.length, n_non_ood: non.length, nested_tuned_baseline_threshold: nestedBaseline,
+    n_ood: ood.length, n_non_ood: non.length, nested_tuned_baseline_threshold: nestedBaseline, false_rejection_items: falseRejectionItems,
     rejections_by_source: bySource, rejections_by_kind: byKind, controls_excluded: controlsExcluded,
     auroc: { baseline_raw_bm25: C.r4(aBase), baseline_ci95: ci(bv), detector_fused_top1: C.r4(aDet), detector_ci95: ci(tv), difference_detector_minus_baseline: C.r4(aDet - aBase), difference_ci95: ci(dv) },
     committed_operating_points: { baseline_rule_bm25_lt_2: { ood_rejected: C.wilson(ood.filter(baseRejects).length, ood.length), false_rejected: C.wilson(non.filter(baseRejects).length, non.length) },
