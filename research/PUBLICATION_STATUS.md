@@ -223,6 +223,7 @@ This is opinion, based on the three simulated review rounds. All of it is disclo
 | Build, with the 8-page guard | `research/paper/acl_latex/build.sh` |
 | Mentorship package and checklist | `research/paper/T23_MENTORSHIP_SUBMISSION.md` |
 | Claim trace (checker and output) | `research/experiments/trace_claims.js`, `research/paper/CLAIMS_TRACE.md` |
+| **Frozen analysis report v1.0** (pre-annotation; generated, with SHA-256 of all inputs) | `research/ANALYSIS_FREEZE_v1.0.md`, from `research/experiments/freeze_analysis_report.js` |
 | Revision logs | `research/paper/T21_REVISION_LOG.md`, `research/paper/T21b_REVISION_LOG.md` |
 | Review records | `research/paper/review_round1/`, `review_round2/`, `review_round3/` |
 | Post-review analyses | `research/results/review_r1/` (notes: `REVIEW_R1_NOTES.md`), `research/results/seed_repeat/` |
