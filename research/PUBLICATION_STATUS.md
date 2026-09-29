@@ -7,6 +7,38 @@
 Every number below comes from a committed result file, and `research/experiments/trace_claims.js` checks the
 paper's numbers against those files. Where something is an opinion, it says so.
 
+> **Update, end of 2026-09-29 (the "everything ready in 3 days" push).** This box supersedes the
+> sections below wherever they differ. Everything that does not need a human is done.
+>
+> **Done:**
+>
+> - **Stage 4.5 final integrity check:** PASS WITH NOTES (`paper/STAGE4_5_INTEGRITY_REPORT.md`).
+>   - 30/30 references verified fresh against primary records.
+>   - All 22 citing sentences checked. One MEDIUM citation-context error (DocPrompting) and three
+>     MINOR ones were fixed in bf194f0.
+>   - 475/475 numbers traced.
+>   - 16/28 paragraphs originality-checked, all original.
+> - **Tests of the shipped tool:** 23/23 pass (`research/tests/`), with execution stubbed.
+> - **v0.2.1 harness and annotation pipeline** rehearsed end to end on synthetic returns: validate →
+>   adjudication → κ → relabel → build → full re-analysis. It found and fixed a latent
+>   `seed_repeat_cv` bug; frozen outputs are unchanged.
+> - **Freeze v1.0 inputs:** verified 27/27 unchanged (`verify_freeze_inputs.js`). The report can no
+>   longer be overwritten.
+> - **AI-use disclosure ledger:** built (`paper/AI_DISCLOSURE_LEDGER.md`). It is **halted on 3
+>   questions only the author can answer.**
+> - **CLI 1.1:** implemented and tested on the local branch `product/1.1`.
+>   - It is not pushed and not published; see `PRODUCT_1_1.md` there.
+>   - Accuracy is unchanged against frozen 1.0.1, and raw ECE improves.
+>
+> **Left, all human:**
+>
+> - G0 independence check, then the main sheets, then a third reader (see
+>   `ANNOTATION_TO_SUBMISSION_RUNBOOK.md`);
+> - the 3 disclosure answers;
+> - your own read-through of the final text;
+> - submission;
+> - the npm publish.
+
 ---
 
 ## 1. Bottom line
