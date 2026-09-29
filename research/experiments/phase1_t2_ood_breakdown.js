@@ -31,8 +31,13 @@ function analyse(v) {
   C.guard(`${v} detector TP`, tp, pc.tp, 0); C.guard(`${v} detector FP`, fp, pc.fp, 0);
   C.guard(`${v} detector FN`, ood.length - tp, pc.fn, 0); C.guard(`${v} detector TN`, non.length - fp, pc.tn, 0);
   if (C.frozen(v)) C.guard(`${v} baseline OOD rejections`, ood.filter(baseRejects).length, v === 'v0.1' ? 4 : 17, 0); // hard-coded: frozen benchmark only
-  C.guard(`${v} subtype labels cover all OOD`, ood.filter(id => subtypeOf.has(id)).length, ood.length, 0);
-  ood.forEach(id => C.guard(`${v} ${id} label text`, labels.labels.find(l => l.id === id).query, D.qById.get(id).query, 0));
+  // The AI-assigned subtype labels cover the frozen OOD sets only. On a relabelled benchmark (v0.2.1 at
+  // the v0.2 path), items that became OOD have no label; they are reported as 'subtype: unlabelled'
+  // (as review_r1_e does) and kept out of the terminal/other split, never given a label here.
+  const unlabelled = ood.filter(id => !subtypeOf.has(id));
+  if (C.frozen(v)) C.guard(`${v} subtype labels cover all OOD`, ood.length - unlabelled.length, ood.length, 0);
+  else if (unlabelled.length) console.log(`note: ${v} is not the frozen benchmark; ${unlabelled.length} OOD item(s) without a subtype label: ${unlabelled.join(', ')}`);
+  ood.filter(id => subtypeOf.has(id)).forEach(id => C.guard(`${v} ${id} label text`, labels.labels.find(l => l.id === id).query, D.qById.get(id).query, 0));
   if (v === 'v0.2') {
     const st = C.rd('research/results/v0.2/statistical-analysis-results.json').contingency;
     let both = 0, bOnly = 0, tOnly = 0, none = 0;
@@ -61,8 +66,9 @@ function analyse(v) {
   const groups = [group('all OOD', ood)];
   if (v === 'v0.2') { groups.push(group('source: original v0.1 OOD (TA-B078-092)', ood.filter(id => num(id) <= 150))); groups.push(group('source: added in v0.2 (TA-B151-185)', ood.filter(id => num(id) > 150))); }
   groups.push(group('terminal-task OOD (near_ood + unsupported_tool_ood)', ood.filter(id => TERMINAL.has(subtypeOf.get(id)))));
-  groups.push(group('other OOD (far_ood + non_terminal + nonsensical)', ood.filter(id => !TERMINAL.has(subtypeOf.get(id)))));
+  groups.push(group('other OOD (far_ood + non_terminal + nonsensical)', ood.filter(id => subtypeOf.has(id) && !TERMINAL.has(subtypeOf.get(id)))));
   for (const s of Object.keys(labels.vocabulary)) { const ids = ood.filter(id => subtypeOf.get(id) === s); if (ids.length) groups.push(group(`subtype: ${s}`, ids)); }
+  if (unlabelled.length) groups.push(group('subtype: unlabelled', unlabelled));
 
   // cost on legitimate queries
   const hyb = new Map(D.ablation.conditions.A3.per_query.map(r => [r.id, r.hit]));
