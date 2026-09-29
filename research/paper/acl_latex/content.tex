@@ -13,11 +13,11 @@ alternative: a BM25 retriever over 279 Windows commands that shows its user a co
 chosen command on Enter. Its confidence is no better than a constant forecaster, and wrong answers
 average 86\% confidence. Under cross-validation on two benchmark versions (the second adds 59
 out-of-scope and ambiguous queries), excluding 25 verbatim-copy controls, isotonic recalibration cuts
-the shipped confidence's expected calibration error by 79\% on both versions, to about the noise floor
-of a calibrated forecaster (outside our corrected test family). On v0.2, a rejection threshold on the
+the shipped confidence's expected calibration error by 79\% and 78\%, to about a calibrated
+forecaster's noise floor (outside our corrected test family). On v0.2, a rejection threshold on the
 shipped score, tuned by cross-validation, rejects 46 of 50 out-of-scope requests but also 20 of 134
-in-scope ones; the fixed rule rejects 17 and none, a hybrid BM25--MiniLM detector 34 and 11. Most are
-everyday, not computing, requests; the 35 added ones were screened for low scores, and on the 15
+in-scope ones; the fixed rule rejects 17 and none, a hybrid BM25--MiniLM detector 34 and 11. Most
+out-of-scope requests are everyday, not computing, ones; the 35 added were screened for low scores, and on the 15
 original ones the fixed rule, threshold and detector reject 4, 12 and 9. The hybrid's confidence
 ranks its own errors better, but its accuracy gain is fragile; both systems sometimes return
 destructive commands for benign requests. All analyses are exploratory; a two-annotator study is under way.
@@ -85,7 +85,7 @@ cost; to our knowledge, that combination is what is new here, not any single met
 \section{System and Benchmark}
 \label{sec:system}
 
-\paragraph{The published tool.} Queries are tokenized (lowercase, punctuation stripped, 10-word stopword list)
+\paragraph{The published tool.} Queries are tokenized (lowercase, punctuation stripped, 16-word stopword list)
 and scored with BM25 ($k_1=1.2$, $b=0.75$) over each record's intent, category and description, plus a flat
 $+15$ bonus when the query nearly matches an intent. Confidence is $\min(\mathrm{round}(s/8\times100),100)$ for
 top score $s$, and is 0 when $s<2.0$. The command-line tool prints the top command with ``confidence: $N$\%'',
@@ -101,7 +101,7 @@ few Windows-visible records are Linux commands (e.g., \texttt{sudo reboot}).
 
 \paragraph{Benchmark.} v0.1 has 150 hand-adjudicated queries of 9 types, labeled CORRECT (119), AMBIGUOUS
 (14), OOD (15; here, out-of-scope requests that no record serves) or NEEDS\_CORRECTION (2), with a risk level for the
-gold command. All 25 \emph{canonical} queries repeat a corpus intent verbatim and every system answers them, so
+gold command. All 25 \emph{canonical} queries repeat a corpus intent verbatim and every system answers them correctly, so
 we treat them as positive controls and exclude them from headline figures. v0.2 contains all of v0.1 plus 35
 out-of-scope and 24 ambiguous queries, so the versions share their 121 answerable queries and are not
 independent. The new queries were drafted and adjudicated by an AI agent under human direction, and every
@@ -172,7 +172,7 @@ Table~\ref{tab:claims} summarizes every claim; the population throughout is non-
     \toprule
     \textbf{Claim} & \textbf{v0.1} & \textbf{v0.2} & \textbf{Status} \\
     \midrule
-    Shipped confidence: ECE before $\to$ after isotonic & .323$\to$.069; $-$79\% [44, 84] & .293$\to$.063; $-$79\% [52, 87] & robust \\
+    Shipped confidence: ECE before $\to$ after isotonic & .323$\to$.069; $-$79\% [44, 84] & .293$\to$.063; $-$78\% [52, 87] & robust \\
     Shipped confidence: Brier skill vs.\ no-skill, raw / recalibrated & $-$.23 [$-$.45, .01] / .20 [.04, .36] & $-$.06 [$-$.26, .15] / .33 [.19, .46] & raw: no skill; recal.: robust \\
     Hybrid confidence: ECE before $\to$ after isotonic (pre-named test) & .329$\to$.108; $-$67\% [43, 83] & .368$\to$.071; $-$81\% [62, 86] & robust \\
     Out-of-scope rejected: fixed rule / tuned threshold / hybrid detector & 4 / 10 / 7 of 15 & 17 / 46 / 34 of 50 & threshold, not hybrid \\
@@ -203,7 +203,7 @@ and $-0.06$, intervals including zero). A heuristic score such as $s/8$ capped a
 calibrated; what the audit adds is how far off it is, and that the tool shows it to users as a percentage.
 
 \paragraph{Recalibration.} Isotonic regression fit on development folds lowers the shipped confidence's ECE to
-0.069 on v0.1 and 0.063 on v0.2, a 79\% reduction on both versions and within the noise floor's 95th percentile
+0.069 on v0.1 and 0.063 on v0.2, reductions of 79\% and 78\%, within the noise floor's 95th percentile
 (0.105 and 0.080). Equal-mass bins give 0.110 and 0.070 (noise-floor 95th percentiles 0.122 and 0.092) and the
 bin-count sweep 0.060 and 0.047; before recalibration all three estimators give the same 0.323 and 0.293. Brier skill becomes positive (0.20 and 0.33, intervals excluding zero), so the
 recalibrated number carries information about correctness.
@@ -215,7 +215,7 @@ Brier skill is $-0.32$ and $-0.30$, both intervals excluding zero; after recalib
 (0.079). Its raw ECE is the same under all three estimators; after recalibration, equal-mass bins give 0.108 and
 0.058 and the sweep 0.055 and 0.071. This hybrid reduction is the pre-named comparison, tested with controls included, and it survives Holm
 correction on both versions (Table~\ref{tab:holm}). Recalibration changes the number shown, not the answer or its
-ranking: correctness AUROC even drops slightly (shipped, v0.1: 0.742 to 0.686), because each fold gets its own map.
+ranking: correctness AUROC even drops (shipped, v0.1: 0.742 to 0.686), because each fold gets its own map.
 The maps are fit on benchmark queries written by the authors and an AI agent, so they hold for queries like these;
 a deployed calibrator would be fit on all labeled queries, and whether its map transfers to real user queries is
 untested.
@@ -223,7 +223,7 @@ untested.
 \paragraph{Out-of-scope requests.}
 \label{sec:ood}
 The shipped fixed rule rejects 17 of v0.2's 50 out-of-scope requests. The hybrid detector rejects 34 (two-sided
-exact McNemar, Holm-adjusted $p=0.00006$), at a cost of 11 false rejections among 134 in-scope queries, three of
+exact McNemar against the fixed rule, Holm-adjusted $p=0.00006$), at a cost of 11 false rejections among 134 in-scope queries, three of
 which the hybrid had answered correctly. But the gain comes from the threshold, not the hybrid. The shipped score
 itself separates out-of-scope requests better than the hybrid's fused score (pooled AUROC 0.956 vs.\ 0.889 on v0.2,
 0.939 vs.\ 0.837 on v0.1), and a threshold on the shipped score tuned exactly like the detector rejects 46 of 50
@@ -390,6 +390,8 @@ anonymity.
 \section{System Specification}
 \label{app:spec}
 
+Table~\ref{tab:spec} specifies the research system; the published tool is specified in \S\ref{sec:system}.
+
 \begin{table*}[t]
   \centering
   \small
@@ -445,7 +447,7 @@ calibration $p$ is a bootstrap bound (one-sided, resolution $10^{-4}$), so its H
   \label{tab:holm}
 \end{table}
 
-\paragraph{Bare-keyword sensitivity.} Dropping single-token ambiguous queries (a rule stated before the subset results
+\paragraph{Bare-keyword sensitivity.} Dropping single-token ambiguous queries, or all ambiguous ones (a rule stated before the subset results
 were computed, though the full-benchmark result was known) leaves the BM25-to-hybrid gain at $+4.9$ to $+5.8$ points,
 each subset 7--0 in discordant queries, but the v0.2 hybrid-over-dense advantage falls to raw $p=0.057$ without the new
 bare-keyword queries and $p=0.227$ on answerable queries only; the calibration gain is unchanged (Table~\ref{tab:sens}).
@@ -494,7 +496,8 @@ not evidence about unseen commands.
 \paragraph{Ambiguity and ablation.} The ablation configurations are A0 (BM25), A1 (BM25 without the substring bonus),
 A2 (dense), A3 (hybrid), A4 (A3 plus margin rejection), A5 (A4 plus out-of-scope rejection) and A6 (A5 plus
 calibration, which changes confidence but no decision). Ambiguity detection is weak: F1 0.31 (v0.1) and 0.50 (v0.2), AUROC 0.78 and 0.72.
-Removing the substring bonus changes no top-1 answer on either version. Adding margin rejection (A4) and out-of-scope
+Removing the substring bonus changes no top-1 answer on v0.1 and one on v0.2 (\qid{187}, from one wrong command
+to another), so accuracy is unchanged. Adding margin rejection (A4) and out-of-scope
 rejection (A5) raises selective accuracy to 90.1\% at 69.5\% coverage on v0.1, but A5 is lower on v0.2 (82.2\% at 58.9\%),
 which we did not analyze further. Figures~\ref{fig:accuracy}--\ref{fig:ablation} show accuracy, the reliability diagrams,
 accuracy by query type, the risk-coverage curves and the ablation; they include the canonical controls.

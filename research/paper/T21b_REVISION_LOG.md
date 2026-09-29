@@ -172,4 +172,25 @@ residuals. They have not been re-verified by a reviewer.
 - The review PDF contains no identifying strings.
 - `review_r1_d` passes 10 guards and `review_r1_e` 20.
 
+**Errors found by the T15 trace (2026-09-29), corrected in the paper:**
+
+1. **v0.2 shipped-confidence ECE reduction.**
+   - It is 78.47% (`review_r1_b`; `phase1_t1` gives 78.4653), which rounds to 78%.
+   - Rounds 2 and 3 printed "79% on both versions", which double-rounded 78.5.
+   - Corrected in the Abstract, Table 1 and §5.
+   - This log's round-3 rows that quote "79%" for both versions are superseded.
+2. **Stopword list.**
+   - It has 16 words (`cli/search.js:9`, identical on master), not 10.
+   - The "10" came from `research/FINAL_RESEARCH_REPORT.md` and was never checked against the code.
+   - Corrected in §3.
+3. **Substring-bonus ablation.**
+   - Removing the bonus changes one top-1 answer on v0.2: item 187 ("tar") changes from one wrong command to another.
+   - Accuracy is unchanged.
+   - Round-1 text said "0 command differences on 150 or 209 queries", and rounds 2–3 said "no top-1 answer on either version". Both were wrong for v0.2.
+   - Corrected in App. B.
+
+Two further checks, not errors:
+- The v0.2 Split B ΔECE is stored as 0.0275, a rounding tie; the paper's 0.027 is the difference of the displayed cells.
+- The v0.2 lower bound 0.7 of the BM25-to-hybrid gain is 1/134 = 0.746 pp, stored at two decimals as 0.75.
+
 **Correction to the round-3 REV-12 row.** DOI 10.1145/3832094, which I added in round 3, did not resolve when checked on 2026-09-29: doi.org returns 404 and Crossref has no record. It has been removed from `references.bib` until it is registered. The title, including "with Robustness-Aware …", matches both ISSTA pages.

@@ -100,11 +100,26 @@ Every new script must first reproduce the current reported values and refuse to 
     - Reword Split B as a "tuning-leakage check across intent groups".
     - Replace "in-use" with "published", and state that the hybrid is research-only. Add the new citations.
     - Citation placement: §6 of `research/paper/T6_LITERATURE_VERIFICATION.md`.
-- [ ] **T15 🔵 Claim-to-result trace table**
+- [x] **T15 ✅ Claim-to-result trace table (2026-09-29).** The checker is `research/experiments/trace_claims.js`; its generated output is `research/paper/CLAIMS_TRACE.md`.
+  - Coverage: 405 numbers across 156 snippets of `content.tex`.
+  - It checks that each snippet is still present and that each value rounds to what the paper shows.
+  - **It found three errors in the paper, all corrected:**
+    - the v0.2 shipped ECE reduction is 78.47%, so "78%", not "79% on both versions";
+    - the shipped stopword list has 16 words, not 10. The "10" came from `FINAL_RESEARCH_REPORT.md`, which was never checked against `cli/search.js:9`;
+    - removing the substring bonus changes one v0.2 answer (TA-B187, wrong either way), not zero.
   - *Work:* map every number in the paper to a result file and field (appendix or `research/paper/CLAIMS_TRACE.md`).
 - [x] **T16 ✅ Reproducibility (2026-09-28).** Guide: `research/REPRODUCE.md`. A fresh clone, fresh `npm ci` and fresh model download regenerate everything; 0 files DIFFERENT (38 identical, 40 timestamp/timing-only). Scripts: `run_all_v0_2.js`, `check_model_cache.js` (model SHA-256 pin), `compare_reproduction.js`. `.nvmrc` and engines pin Node 24. Exact reproduction needs Windows. Latency is single-machine and indicative only (the paper must say so; T14).
   - *Work:* write a `run_all_v0_2.js` runner (or a documented script order), add an `engines` pin, and write down how to cache the embedding model offline. Then reproduce once from a clean clone and diff the outputs.
-- [ ] **T17 🔵 Final build and read-through**
+- [x] **T17 ✅ Read-through (2026-09-29)** of all 12 rendered pages of the review PDF, for the mentorship draft. Edits:
+  - the abstract's out-of-scope antecedent;
+  - "answers them correctly" for the controls;
+  - McNemar comparator named;
+  - "drops slightly" changed to "drops";
+  - an intro sentence for Appendix A;
+  - the bare-keyword range now says it includes the all-ambiguous subsets;
+  - the abstract trimmed to under 200 words.
+
+  A final read-through is still due before the Dec 15 submission, after T12.
   - *Work:* rebuild both PDFs with the page guard and re-read every rendered page.
   - **Decision G3 (submit):** every MUST item in §10 of the roadmap is closed.
 
@@ -154,7 +169,9 @@ Every new script must first reproduce the current reported values and refuse to 
   - Scope: the T22 residuals (REV-03, REV-14, REV-49 must_fix; REV-11 after the D7 reversal; should_fix residuals; NEW-2 to NEW-7).
   - New traced numbers: `review_r1_e` split by source and kind plus a controls-excluded block; `review_r1_f` κ intervals. Both are deterministic and guarded.
   - Next: a scoped re-review of the round-3 items (not yet run).
-- [ ] **T23 🔵 Mentorship draft, due Nov 6, 2026**
+- [ ] **T23 🟡 Mentorship draft, due Nov 6, 2026. The package is prepared; submission is the author's.**
+  - Guide: `research/paper/T23_MENTORSHIP_SUBMISSION.md` (what to upload, the pre-upload checklist, author checks).
+  - Before submitting, the author verifies on the official call: the submission system, the mentorship format, and whether the checklist is required.
   - *Work:* T15 trace table, T17 read-through, then submit to the EACL 2027 SRW mentorship program. Annotation results appear as clearly marked pending text.
 
 ---
