@@ -125,6 +125,19 @@ This needs a LaTeX installation with `pdflatex` and `bibtex` (tested with MiKTeX
 both `main.pdf` (camera-ready) and `main_review.pdf` (anonymous). It fails if the body runs past
 8 pages.
 
+To check that nothing an analysis freeze report used has changed since the freeze, run:
+
+```bash
+node research/experiments/verify_freeze_inputs.js research/ANALYSIS_FREEZE_v1.0.md
+```
+
+It compares every SHA-256 in the report with the committed file, in both LF and CRLF form. v1.0
+hashed raw working-copy bytes, so line endings vary from file to file. Result on 2026-09-29: 27/27
+unchanged.
+
+`freeze_analysis_report.js` never overwrites an existing report. Pass `--out <new file>` to
+regenerate one for comparison; new reports hash LF-normalized bytes.
+
 ### 7. Tests of the shipped tool
 
 ```bash

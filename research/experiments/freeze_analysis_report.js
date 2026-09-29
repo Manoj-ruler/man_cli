@@ -6,9 +6,17 @@
 // Read-only with respect to results: it writes only the report.
 const fs = require('fs'), path = require('path'), crypto = require('crypto'), { execSync } = require('child_process');
 const ROOT = path.resolve(__dirname, '..', '..');
+// Never overwrites: a freeze report is a record. The default target is written only if it does not
+// exist; to regenerate for comparison, pass --out <new file> (which must not exist either).
+const argOut = process.argv.includes('--out') ? process.argv[process.argv.indexOf('--out') + 1] : null;
+const OUT = argOut ? path.resolve(argOut) : path.join(ROOT, 'research/ANALYSIS_FREEZE_v1.0.md');
+if (fs.existsSync(OUT)) { console.error(`ABORT: ${OUT} exists; a freeze report is never overwritten. Pass --out <new file> to regenerate for comparison.`); process.exit(1); }
 const inputs = {};
-const R = rel => { const p = path.join(ROOT, rel), buf = fs.readFileSync(p); inputs[rel] = crypto.createHash('sha256').update(buf).digest('hex'); return JSON.parse(buf.toString('utf8')); };
-const hashOnly = rel => { inputs[rel] = crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT, rel))).digest('hex'); };
+// SHA-256 of the LF-normalized bytes (as the benchmark manifests), so a Windows checkout with
+// core.autocrlf=true gives the same hashes as the committed blobs.
+const lfSha = buf => crypto.createHash('sha256').update(buf.toString('utf8').replace(/\r\n/g, '\n')).digest('hex');
+const R = rel => { const p = path.join(ROOT, rel), buf = fs.readFileSync(p); inputs[rel] = lfSha(buf); return JSON.parse(buf.toString('utf8')); };
+const hashOnly = rel => { inputs[rel] = lfSha(fs.readFileSync(path.join(ROOT, rel))); };
 
 const b = R('research/results/review_r1/review_r1_b_calibration.json');
 const t1 = R('research/results/phase1/phase1_t1_controls_excluded.json');
@@ -298,5 +306,5 @@ P('**SHA-256 of every input at freeze time:**');
 P('');
 P(table(['File', 'SHA-256'], Object.entries(inputs).sort().map(([k, h]) => ['`' + k + '`', '`' + h + '`'])));
 P('');
-fs.writeFileSync(path.join(ROOT, 'research/ANALYSIS_FREEZE_v1.0.md'), L.join('\n') + '\n');
-console.log(`wrote research/ANALYSIS_FREEZE_v1.0.md (${L.length} lines, ${Object.keys(inputs).length} hashed inputs, results at ${commit})`);
+fs.writeFileSync(OUT, L.join('\n') + '\n');
+console.log(`wrote ${path.relative(ROOT, OUT)} (${L.length} lines, ${Object.keys(inputs).length} hashed inputs, results at ${commit})`);
