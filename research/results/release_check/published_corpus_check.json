@@ -1,0 +1,962 @@
+{
+  "task": "RELEASE-01: published npm 1.0.1 vs the evaluated repository corpus",
+  "published_package": {
+    "name": "@manoj-ruler/termassist",
+    "version": "1.0.1",
+    "tarball_sha256": "dc07484d43ecc94c2f261d8f32306b83d314330f4b3ade7b825e31113bd3929a",
+    "corpus_records": 380,
+    "corpus_win32_visible": 240
+  },
+  "evaluated_repository": {
+    "corpus_records": 431,
+    "corpus_win32_visible": 279,
+    "unpublished_records": 51,
+    "unpublished_win32_visible": 39,
+    "unpublished_command_ids": [
+      "tac-0381",
+      "tac-0382",
+      "tac-0383",
+      "tac-0384",
+      "tac-0385",
+      "tac-0386",
+      "tac-0387",
+      "tac-0388",
+      "tac-0389",
+      "tac-0390",
+      "tac-0391",
+      "tac-0392",
+      "tac-0393",
+      "tac-0394",
+      "tac-0395",
+      "tac-0396",
+      "tac-0397",
+      "tac-0398",
+      "tac-0399",
+      "tac-0400",
+      "tac-0401",
+      "tac-0402",
+      "tac-0403",
+      "tac-0404",
+      "tac-0405",
+      "tac-0406",
+      "tac-0407",
+      "tac-0408",
+      "tac-0409",
+      "tac-0410",
+      "tac-0411",
+      "tac-0412",
+      "tac-0413",
+      "tac-0414",
+      "tac-0415",
+      "tac-0416",
+      "tac-0417",
+      "tac-0418",
+      "tac-0419",
+      "tac-0420",
+      "tac-0421",
+      "tac-0422",
+      "tac-0423",
+      "tac-0424",
+      "tac-0425",
+      "tac-0426",
+      "tac-0427",
+      "tac-0428",
+      "tac-0429",
+      "tac-0430",
+      "tac-0431"
+    ]
+  },
+  "code_identity": "index.js, search.js, interactive.js, sync.js, test_filter.js and custom_snippets.json are identical after LF normalization; config.js, package.json and README.md are byte-identical (see research/release_check/RELEASE-01_result.md)",
+  "input_sha256": {
+    "research/datasets/termassist_bench_v0.1_validated.json": "3fd73347196bddd34fa34127c4dbf9cc5b75af1a097a06890949d923dff1d5e7",
+    "research/datasets/review/human_review_results.json": "d82e1dfd8ba29921ac73b528a730e6ae10f0a7d329ac517144b57efa968d7313",
+    "research/results/baseline/reproduction-results.json": "3494724f2894c84330aff849d520d6c1a5c5b61c622a003be36b91e5514edddc",
+    "research/datasets/termassist_bench_v0.2_validated.json": "9a19406e69c51979ead2c466814d7f3a662c75d47754c37259aa5da1a71b63b8",
+    "research/datasets/review/human_review_results_v0.2.json": "72de6cd2cf2ec0a590ff8ac23c6ffae7355eb145d73d7ccf21ded1374ecb13a8",
+    "research/results/v0.2/reproduction-results.json": "81c96731814081618baf4b023f8ae35d77c09f8dc57cedc20a550dc330b840de"
+  },
+  "reproduction_checks": [
+    {
+      "label": "v0.1 repository search() reproduces committed command and status for every row",
+      "ok": true
+    },
+    {
+      "label": "v0.1 repository raw ECE (controls excluded) equals review_r1_b",
+      "ok": true
+    },
+    {
+      "label": "v0.2 repository search() reproduces committed command and status for every row",
+      "ok": true
+    },
+    {
+      "label": "v0.2 repository raw ECE (controls excluded) equals review_r1_b",
+      "ok": true
+    }
+  ],
+  "versions": {
+    "v0.1": {
+      "n": 150,
+      "evaluated_repository_corpus": {
+        "raw_ece_controls_excluded": 0.323,
+        "status_counts": {
+          "CORRECT": 93,
+          "INCORRECT": 28,
+          "AMBIGUOUS_CORRECT": 4,
+          "OOD_FALSE_ACCEPT": 11,
+          "OOD_CORRECT_REJECTION": 4,
+          "AMBIGUOUS_INCORRECT": 10
+        },
+        "overall_accuracy": {
+          "k": 101,
+          "n": 150
+        },
+        "non_control_in_scope_hits": {
+          "k": 72,
+          "n": 110
+        },
+        "ood_rejected": {
+          "k": 4,
+          "n": 15
+        },
+        "wrong_answered": 49,
+        "mean_confidence_of_wrong_answered": 86.06
+      },
+      "published_npm_corpus": {
+        "raw_ece_controls_excluded": 0.3718,
+        "status_counts": {
+          "CORRECT": 80,
+          "INCORRECT": 40,
+          "REJECTED": 2,
+          "AMBIGUOUS_CORRECT": 4,
+          "OOD_FALSE_ACCEPT": 11,
+          "OOD_CORRECT_REJECTION": 4,
+          "AMBIGUOUS_INCORRECT": 9
+        },
+        "overall_accuracy": {
+          "k": 88,
+          "n": 150
+        },
+        "non_control_in_scope_hits": {
+          "k": 62,
+          "n": 110
+        },
+        "ood_rejected": {
+          "k": 4,
+          "n": 15
+        },
+        "wrong_answered": 60,
+        "mean_confidence_of_wrong_answered": 84.37
+      },
+      "changed_items": [
+        {
+          "id": "TA-B017",
+          "query": "show all kubernetes pods in all namespaces",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "kubectl get pods --all-namespaces",
+            "score": 33.4456,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "Get-LocalUser | Select-Object Name",
+            "score": 3.6997,
+            "confidence": 46,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B023",
+          "query": "list all s3 buckets in the aws account",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "aws s3 ls",
+            "score": 40.9761,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "runas /user:username cmd",
+            "score": 5.6045,
+            "confidence": 70,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B024",
+          "query": "extract a specific field from json output using jq",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
+            "score": 43.1845,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "curl -O https://example.com/file.zip",
+            "score": 7.6048,
+            "confidence": 95,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B046",
+          "query": "convert mkv video to mp4",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+            "score": 14.8327,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "git reset --soft HEAD~1",
+            "score": 0,
+            "confidence": 0,
+            "status": "REJECTED"
+          }
+        },
+        {
+          "id": "TA-B061",
+          "query": "take the audio out of this movie file",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+            "score": 8.1321,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "docker cp container-name:/path/in/container ./local-path",
+            "score": 6.7168,
+            "confidence": 84,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B087",
+          "query": "set up a Python Flask web server",
+          "expected": "OOD",
+          "repository": {
+            "command": "Resolve-DnsName example.com -Type ALL",
+            "score": 5.4377,
+            "confidence": 68,
+            "status": "OOD_FALSE_ACCEPT"
+          },
+          "published": {
+            "command": "$env:VAR_NAME = 'value'",
+            "score": 5.1633,
+            "confidence": 65,
+            "status": "OOD_FALSE_ACCEPT"
+          }
+        },
+        {
+          "id": "TA-B094",
+          "query": "remove all files from the current directory",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+            "score": 8.8038,
+            "confidence": 100,
+            "status": "INCORRECT"
+          },
+          "published": {
+            "command": "docker build -t image-name:tag .",
+            "score": 8.6739,
+            "confidence": 100,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B104",
+          "query": "create a new volume",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "docker volume create my-volume",
+            "score": 11.0165,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "npm init -y",
+            "score": 7.1692,
+            "confidence": 90,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B118",
+          "query": "kubernetes",
+          "expected": "AMBIGUOUS",
+          "repository": {
+            "command": "kubectl describe deployment deployment-name -n namespace",
+            "score": 20.2224,
+            "confidence": 100,
+            "status": "AMBIGUOUS_INCORRECT"
+          },
+          "published": {
+            "command": "git reset --soft HEAD~1",
+            "score": 0,
+            "confidence": 0,
+            "status": "REJECTED"
+          }
+        },
+        {
+          "id": "TA-B132",
+          "query": "delete all completed or failed pods in a namespace",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "kubectl delete pods --field-selector=status.phase=Failed -n namespace",
+            "score": 44.3501,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "Get-ChildItem -Recurse -Filter '.DS_Store' | Remove-Item",
+            "score": 6.3892,
+            "confidence": 80,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B135",
+          "query": "remove all unused docker volumes",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "docker volume prune -f",
+            "score": 32.949,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "docker image prune -a",
+            "score": 16.7927,
+            "confidence": 100,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B138",
+          "query": "deploy my kubernetes cluster to production with rolling updates",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "kubectl get events --sort-by='.lastTimestamp' -n namespace",
+            "score": 8.578,
+            "confidence": 100,
+            "status": "INCORRECT"
+          },
+          "published": {
+            "command": "Get-Content 'C:\\path\\to\\file.log' -Wait -Tail 10",
+            "score": 4.6021,
+            "confidence": 58,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B141",
+          "query": "find the commit that broke my tests using binary search",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "git bisect start && git bisect bad HEAD && git bisect good <good-commit>",
+            "score": 18.8717,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "git log -S 'search_string' --oneline",
+            "score": 9.4239,
+            "confidence": 100,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B142",
+          "query": "squash my last 5 commits into one before pushing",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "git rebase -i HEAD~5",
+            "score": 19.7768,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "git log --oneline -20",
+            "score": 10.7356,
+            "confidence": 100,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B144",
+          "query": "forward port 8080 on my machine to port 80 on the kubernetes pod",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+            "score": 28.6582,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "ssh -L 8080:localhost:80 user@hostname",
+            "score": 20.5082,
+            "confidence": 100,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B149",
+          "query": "find which process is hogging port 3000 on my machine",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }",
+            "score": 17.709,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "Get-Process -Name 'process_name' | Select-Object Id",
+            "score": 6.909,
+            "confidence": 86,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B150",
+          "query": "take a specific file from the feature branch without merging everything",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "git checkout feature-branch -- path/to/file.txt",
+            "score": 13.8067,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "Add-Content 'filename.txt' 'new line'",
+            "score": 6.7168,
+            "confidence": 84,
+            "status": "INCORRECT"
+          }
+        }
+      ],
+      "items_whose_every_valid_command_is_unpublished": [
+        "TA-B017",
+        "TA-B023",
+        "TA-B024",
+        "TA-B046",
+        "TA-B061",
+        "TA-B104",
+        "TA-B132",
+        "TA-B135",
+        "TA-B138",
+        "TA-B141",
+        "TA-B142",
+        "TA-B144",
+        "TA-B145",
+        "TA-B149",
+        "TA-B150"
+      ]
+    },
+    "v0.2": {
+      "n": 209,
+      "evaluated_repository_corpus": {
+        "raw_ece_controls_excluded": 0.2926,
+        "status_counts": {
+          "CORRECT": 93,
+          "INCORRECT": 28,
+          "AMBIGUOUS_CORRECT": 27,
+          "OOD_FALSE_ACCEPT": 33,
+          "OOD_CORRECT_REJECTION": 17,
+          "AMBIGUOUS_INCORRECT": 11
+        },
+        "overall_accuracy": {
+          "k": 137,
+          "n": 209
+        },
+        "non_control_in_scope_hits": {
+          "k": 95,
+          "n": 134
+        },
+        "ood_rejected": {
+          "k": 17,
+          "n": 50
+        },
+        "wrong_answered": 72,
+        "mean_confidence_of_wrong_answered": 79.5
+      },
+      "published_npm_corpus": {
+        "raw_ece_controls_excluded": 0.3145,
+        "status_counts": {
+          "CORRECT": 80,
+          "INCORRECT": 40,
+          "REJECTED": 5,
+          "AMBIGUOUS_CORRECT": 24,
+          "OOD_FALSE_ACCEPT": 29,
+          "OOD_CORRECT_REJECTION": 21,
+          "AMBIGUOUS_INCORRECT": 10
+        },
+        "overall_accuracy": {
+          "k": 125,
+          "n": 209
+        },
+        "non_control_in_scope_hits": {
+          "k": 82,
+          "n": 134
+        },
+        "ood_rejected": {
+          "k": 21,
+          "n": 50
+        },
+        "wrong_answered": 79,
+        "mean_confidence_of_wrong_answered": 79.84
+      },
+      "changed_items": [
+        {
+          "id": "TA-B017",
+          "query": "show all kubernetes pods in all namespaces",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "kubectl get pods --all-namespaces",
+            "score": 33.4456,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "Get-LocalUser | Select-Object Name",
+            "score": 3.6997,
+            "confidence": 46,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B023",
+          "query": "list all s3 buckets in the aws account",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "aws s3 ls",
+            "score": 40.9761,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "runas /user:username cmd",
+            "score": 5.6045,
+            "confidence": 70,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B024",
+          "query": "extract a specific field from json output using jq",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "Get-Content data.json | ConvertFrom-Json | Select-Object -ExpandProperty users | Select-Object -ExpandProperty name",
+            "score": 43.1845,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "curl -O https://example.com/file.zip",
+            "score": 7.6048,
+            "confidence": 95,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B046",
+          "query": "convert mkv video to mp4",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+            "score": 14.8327,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "git reset --soft HEAD~1",
+            "score": 0,
+            "confidence": 0,
+            "status": "REJECTED"
+          }
+        },
+        {
+          "id": "TA-B061",
+          "query": "take the audio out of this movie file",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "ffmpeg -i input.mp4 -vn -acodec copy output.aac",
+            "score": 8.1321,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "docker cp container-name:/path/in/container ./local-path",
+            "score": 6.7168,
+            "confidence": 84,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B087",
+          "query": "set up a Python Flask web server",
+          "expected": "OOD",
+          "repository": {
+            "command": "Resolve-DnsName example.com -Type ALL",
+            "score": 5.4377,
+            "confidence": 68,
+            "status": "OOD_FALSE_ACCEPT"
+          },
+          "published": {
+            "command": "$env:VAR_NAME = 'value'",
+            "score": 5.1633,
+            "confidence": 65,
+            "status": "OOD_FALSE_ACCEPT"
+          }
+        },
+        {
+          "id": "TA-B094",
+          "query": "remove all files from the current directory",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+            "score": 8.8038,
+            "confidence": 100,
+            "status": "INCORRECT"
+          },
+          "published": {
+            "command": "docker build -t image-name:tag .",
+            "score": 8.6739,
+            "confidence": 100,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B104",
+          "query": "create a new volume",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "docker volume create my-volume",
+            "score": 11.0165,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "npm init -y",
+            "score": 7.1692,
+            "confidence": 90,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B118",
+          "query": "kubernetes",
+          "expected": "AMBIGUOUS",
+          "repository": {
+            "command": "kubectl describe deployment deployment-name -n namespace",
+            "score": 20.2224,
+            "confidence": 100,
+            "status": "AMBIGUOUS_INCORRECT"
+          },
+          "published": {
+            "command": "git reset --soft HEAD~1",
+            "score": 0,
+            "confidence": 0,
+            "status": "REJECTED"
+          }
+        },
+        {
+          "id": "TA-B132",
+          "query": "delete all completed or failed pods in a namespace",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "kubectl delete pods --field-selector=status.phase=Failed -n namespace",
+            "score": 44.3501,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "Get-ChildItem -Recurse -Filter '.DS_Store' | Remove-Item",
+            "score": 6.3892,
+            "confidence": 80,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B135",
+          "query": "remove all unused docker volumes",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "docker volume prune -f",
+            "score": 32.949,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "docker image prune -a",
+            "score": 16.7927,
+            "confidence": 100,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B138",
+          "query": "deploy my kubernetes cluster to production with rolling updates",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "kubectl get events --sort-by='.lastTimestamp' -n namespace",
+            "score": 8.578,
+            "confidence": 100,
+            "status": "INCORRECT"
+          },
+          "published": {
+            "command": "Get-Content 'C:\\path\\to\\file.log' -Wait -Tail 10",
+            "score": 4.6021,
+            "confidence": 58,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B141",
+          "query": "find the commit that broke my tests using binary search",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "git bisect start && git bisect bad HEAD && git bisect good <good-commit>",
+            "score": 18.8717,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "git log -S 'search_string' --oneline",
+            "score": 9.4239,
+            "confidence": 100,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B142",
+          "query": "squash my last 5 commits into one before pushing",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "git rebase -i HEAD~5",
+            "score": 19.7768,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "git log --oneline -20",
+            "score": 10.7356,
+            "confidence": 100,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B144",
+          "query": "forward port 8080 on my machine to port 80 on the kubernetes pod",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "kubectl port-forward pod/pod-name 8080:80 -n namespace",
+            "score": 28.6582,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "ssh -L 8080:localhost:80 user@hostname",
+            "score": 20.5082,
+            "confidence": 100,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B149",
+          "query": "find which process is hogging port 3000 on my machine",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "Get-NetTCPConnection -LocalPort 3000 | Select-Object -Property LocalPort,State,OwningProcess | ForEach-Object { $_ | Add-Member -PassThru NoteProperty ProcessName (Get-Process -Id $_.OwningProcess).ProcessName }",
+            "score": 17.709,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "Get-Process -Name 'process_name' | Select-Object Id",
+            "score": 6.909,
+            "confidence": 86,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B150",
+          "query": "take a specific file from the feature branch without merging everything",
+          "expected": "CORRECT",
+          "repository": {
+            "command": "git checkout feature-branch -- path/to/file.txt",
+            "score": 13.8067,
+            "confidence": 100,
+            "status": "CORRECT"
+          },
+          "published": {
+            "command": "Add-Content 'filename.txt' 'new line'",
+            "score": 6.7168,
+            "confidence": 84,
+            "status": "INCORRECT"
+          }
+        },
+        {
+          "id": "TA-B151",
+          "query": "recommend me a good recipe for dinner",
+          "expected": "OOD",
+          "repository": {
+            "command": "git bisect good",
+            "score": 4.4153,
+            "confidence": 55,
+            "status": "OOD_FALSE_ACCEPT"
+          },
+          "published": {
+            "command": "git reset --soft HEAD~1",
+            "score": 0,
+            "confidence": 0,
+            "status": "OOD_CORRECT_REJECTION"
+          }
+        },
+        {
+          "id": "TA-B158",
+          "query": "order a pizza for delivery",
+          "expected": "OOD",
+          "repository": {
+            "command": "kubectl get events --sort-by='.lastTimestamp' -n namespace",
+            "score": 4.2507,
+            "confidence": 53,
+            "status": "OOD_FALSE_ACCEPT"
+          },
+          "published": {
+            "command": "git reset --soft HEAD~1",
+            "score": 0,
+            "confidence": 0,
+            "status": "OOD_CORRECT_REJECTION"
+          }
+        },
+        {
+          "id": "TA-B170",
+          "query": "recommend a good movie to watch tonight",
+          "expected": "OOD",
+          "repository": {
+            "command": "git bisect good",
+            "score": 4.4153,
+            "confidence": 55,
+            "status": "OOD_FALSE_ACCEPT"
+          },
+          "published": {
+            "command": "git reset --soft HEAD~1",
+            "score": 0,
+            "confidence": 0,
+            "status": "OOD_CORRECT_REJECTION"
+          }
+        },
+        {
+          "id": "TA-B176",
+          "query": "brew a batch of homemade beer",
+          "expected": "OOD",
+          "repository": {
+            "command": "Get-ChildItem -Filter '*.wav' | ForEach-Object { ffmpeg -i $_.FullName -codec:a libmp3lame -q:a 2 (_.BaseName + '.mp3') }",
+            "score": 4.0358,
+            "confidence": 50,
+            "status": "OOD_FALSE_ACCEPT"
+          },
+          "published": {
+            "command": "git reset --soft HEAD~1",
+            "score": 0,
+            "confidence": 0,
+            "status": "OOD_CORRECT_REJECTION"
+          }
+        },
+        {
+          "id": "TA-B190",
+          "query": "jq",
+          "expected": "AMBIGUOUS",
+          "repository": {
+            "command": "(Get-Content data.json | ConvertFrom-Json).users.Count",
+            "score": 20.5451,
+            "confidence": 100,
+            "status": "AMBIGUOUS_CORRECT"
+          },
+          "published": {
+            "command": "git reset --soft HEAD~1",
+            "score": 0,
+            "confidence": 0,
+            "status": "REJECTED"
+          }
+        },
+        {
+          "id": "TA-B191",
+          "query": "ffmpeg",
+          "expected": "AMBIGUOUS",
+          "repository": {
+            "command": "ffmpeg -i input.mkv -c:v libx264 -crf 23 -c:a aac output.mp4",
+            "score": 20.0256,
+            "confidence": 100,
+            "status": "AMBIGUOUS_CORRECT"
+          },
+          "published": {
+            "command": "git reset --soft HEAD~1",
+            "score": 0,
+            "confidence": 0,
+            "status": "REJECTED"
+          }
+        },
+        {
+          "id": "TA-B192",
+          "query": "aws",
+          "expected": "AMBIGUOUS",
+          "repository": {
+            "command": "aws s3 ls",
+            "score": 21.0292,
+            "confidence": 100,
+            "status": "AMBIGUOUS_CORRECT"
+          },
+          "published": {
+            "command": "git reset --soft HEAD~1",
+            "score": 0,
+            "confidence": 0,
+            "status": "REJECTED"
+          }
+        },
+        {
+          "id": "TA-B195",
+          "query": "shell",
+          "expected": "AMBIGUOUS",
+          "repository": {
+            "command": "kubectl exec -it pod-name -n namespace -- /bin/sh",
+            "score": 18.0447,
+            "confidence": 100,
+            "status": "AMBIGUOUS_CORRECT"
+          },
+          "published": {
+            "command": "$env:VAR_NAME",
+            "score": 2.571,
+            "confidence": 32,
+            "status": "AMBIGUOUS_CORRECT"
+          }
+        }
+      ],
+      "items_whose_every_valid_command_is_unpublished": [
+        "TA-B017",
+        "TA-B023",
+        "TA-B024",
+        "TA-B046",
+        "TA-B061",
+        "TA-B104",
+        "TA-B132",
+        "TA-B135",
+        "TA-B138",
+        "TA-B141",
+        "TA-B142",
+        "TA-B144",
+        "TA-B145",
+        "TA-B149",
+        "TA-B150",
+        "TA-B190",
+        "TA-B191",
+        "TA-B192"
+      ]
+    }
+  },
+  "generated_at": "2026-09-29T16:51:50.597Z"
+}

@@ -9,7 +9,7 @@
 
 \begin{abstract}
 Natural-language shell assistants are usually built by generation. We audit a published closed-set
-alternative: a BM25 retriever over 279 Windows commands that shows its user a confidence and runs the
+alternative: a BM25 retriever over a fixed Windows command list that shows its user a confidence and runs the
 chosen command on Enter. Its confidence is no better than a constant forecaster, and wrong answers
 average 86\% confidence. Under cross-validation on two benchmark versions (the second adds 59
 out-of-scope and ambiguous queries), excluding 25 verbatim-copy controls, isotonic recalibration cuts
@@ -39,9 +39,11 @@ We audit one such system as it is published: \toolname{}\toolnote{}, \toolhost{}
 Windows commands with BM25 \citep{robertson2009bm25}, prints the command with a confidence percentage,
 refuses below 30\%, and runs the pre-filled, editable command when the user presses Enter (\S\ref{sec:system}).
 It was written and released by \authorrel{} before this study, which changed none of its executable code
-and none of the corpus fields it reads.
-The printed confidence is the only reliability signal a user gets, and our reproduction of the published
-baseline found it frequently confidently wrong. We therefore ask: \emph{how reliable is the confidence of a
+and none of the corpus fields it reads. We evaluate the released code with the corpus in its source repository,
+which adds 51 records committed shortly after the release; the released corpus makes the tool less accurate and
+its confidence less calibrated (\S\ref{sec:system}).
+The printed confidence is the only reliability signal a user gets, and our reproduction of the tool's baseline
+outputs found it frequently confidently wrong. We therefore ask: \emph{how reliable is the confidence of a
 shipped closed-set command retriever, and what do post-hoc recalibration, a tuned rejection threshold, and a
 hybrid lexical--dense retriever each contribute?}
 
@@ -85,19 +87,27 @@ cost; to our knowledge, that combination is what is new here, not any single met
 \section{System and Benchmark}
 \label{sec:system}
 
-\paragraph{The published tool.} Queries are tokenized (lowercase, punctuation stripped, 16-word stopword list)
-and scored with BM25 ($k_1=1.2$, $b=0.75$) over each record's intent, category and description, plus a flat
-$+15$ bonus when the query nearly matches an intent. Confidence is $\min(\mathrm{round}(s/8\times100),100)$ for
+\paragraph{The published tool.} Queries are tokenized (lowercase, all characters except ASCII letters, digits,
+spaces and hyphens removed, 16-word stopword list), so non-English queries are refused. Each record's intent,
+category and description is scored with BM25 ($k_1=1.2$, $b=0.75$), plus $+15$ when the query, stripped to
+letters and digits, is a substring of the equally stripped intent or contains it; this can fire on an accidental
+substring (the bare query ``tar'' matches ``start''). Confidence is $\min(\mathrm{round}(s/8\times100),100)$ for
 top score $s$, and is 0 when $s<2.0$. The command-line tool prints the top command with ``confidence: $N$\%'',
-refuses when $N<30$, and otherwise opens an editable prompt pre-filled with the command, which runs (in
-PowerShell on Windows) when the user presses Enter; no risk level is shown. Retrieval is local; an optional
-query-sync feature is off by default. Our evaluation counts a query as answered when $s\geq2.0$; no benchmark
-query scores between 2.0 and 2.4, so this makes the same decisions as the 30\% rule. We reproduced the published
-outputs exactly (0/150 mismatches). Mean latency was 3.3\,ms in one run on one machine, an indicative figure.
+refuses when $N<30$, and otherwise opens an editable prompt pre-filled with the command; a single Enter runs it
+through PowerShell on Windows (the default POSIX shell elsewhere). No risk level is shown. Retrieval is local; an
+optional query-sync feature is off by default. Our evaluation counts a query as answered when $s\geq2.0$; no
+benchmark query scores between 2.0 and 2.4, so this makes the same decisions as the 30\% rule. We reproduced the
+archived baseline outputs exactly (0/150 mismatches). Mean latency of one retrieval call, which rebuilds the index,
+was 3.3\,ms in one run on one machine (process start-up excluded), an indicative figure.
 
 \paragraph{Corpus.} 431 records, of which 279 are visible on Windows (145 cross-platform, 134
-Windows-specific), each a distinct intent. The records were checked by script rather than one by one, and a
-few Windows-visible records are Linux commands (e.g., \texttt{sudo reboot}).
+Windows-specific), each a distinct intent; the tool also indexes one packaged user snippet, so its Windows index
+holds 280 records. The records were checked by script rather than one by one, and a few Windows-visible records
+are Linux commands (e.g., \texttt{sudo reboot}). The released package has identical code but an earlier corpus of
+380 records (240 visible on Windows); the 51 later records were committed shortly after the release and never
+published. Rerun with the released corpus, 17 of the 150 v0.1 answers change, accuracy falls from 67.3\% to
+58.7\%, and the raw ECE of its confidence rises from 0.323 to 0.372 (v0.2: 0.293 to 0.315); 15 v0.1 items can be
+answered only with the later records, so we evaluate the repository corpus.
 
 \paragraph{Benchmark.} v0.1 has 150 hand-adjudicated queries of 9 types, labeled CORRECT (119), AMBIGUOUS
 (14), OOD (15; here, out-of-scope requests that no record serves) or NEEDS\_CORRECTION (2), with a risk level for the
@@ -130,7 +140,9 @@ sentence encoder (\texttt{all-MiniLM-L6-v2}; \citealp{wang2020minilm,reimers-gur
 that min-max normalizes both score lists over each query's candidates and ranks by
 $\alpha\,\mathrm{BM25}_{\mathrm{norm}}+(1-\alpha)\,\mathrm{dense}_{\mathrm{norm}}$. The hybrid's confidence is
 its fused top-1 score, which equals 1 whenever the two retrievers agree on the top command; its detector rejects
-when that score falls below a threshold. Appendix~\ref{app:spec} gives the full specification.
+when that score falls below a threshold. Appendix~\ref{app:spec} gives the full specification. None of the
+calibrators, tuned thresholds, detectors, the risk classifier or the dense and hybrid retrievers is part of the
+published tool; all are offline analyses of its outputs.
 
 \paragraph{Protocol.} Five folds (seed 42, stratified by label; Split A). For each test fold, $\alpha$ (grid
 0.0--1.0, maximizing non-OOD accuracy), the detector thresholds (maximizing F1) and the calibrators are chosen
@@ -301,8 +313,8 @@ play guitar'' to an elevated PowerShell. The full hybrid pipeline (margin plus o
 (gold commands of all non-OOD queries with a gold command: 125 in v0.1): it flags 19 of 20 high- or critical-risk commands in
 v0.1 and misses \texttt{git checkout -{}- .}, which discards uncommitted work (1/20, Wilson 95\% CI [0.9, 23.6]\%); v0.2
 adds two misses that trace to inconsistent labels (3/22). We therefore make no safety claim. On the 15 benchmark
-queries whose gold commands can run safely in a sandbox, all gold commands and 14 of 15 hybrid answers executed
-successfully.
+queries whose gold commands are safe to run, executed in disposable temporary directories on the host (not an
+OS-level sandbox), all gold commands and 14 of 15 hybrid answers exited successfully.
 
 \begin{table}[t]
   \centering
@@ -339,7 +351,7 @@ as well as the hybrid's feature at equal false-rejection counts (in-sample), and
 more in-scope queries, a trade-off that should be set by the relative cost of a wrong command and a refusal. The
 hybrid's value, with the one encoder we tested, lies in ranking its own errors, which matters for abstention. For
 users of a tool that runs a command on Enter, the risky wrong answers suggest safeguards independent of calibration.
-The tool already requires an explicit keypress and never executes on its own; beyond that, it could show the risk level and
+The tool runs a command only after a single Enter on a prompt pre-filled with it; beyond that, it could show the risk level and
 ask for confirmation (PowerShell's \texttt{-Confirm}) or offer a dry run (\texttt{-WhatIf}) before destructive
 commands, or require higher confidence before returning a high-risk command. We did not evaluate any of these.
 
@@ -367,7 +379,9 @@ safety set; and study whether calibrated confidence and risk prompts change what
   59 queries drafted by an AI agent, whose labels were checked only by one partially independent reviewer
   ($\kappa=0.63$, interval [0.39, 1.00], $n=14$); the two-annotator study has no results yet. Two items have gold
   commands outside the corpus and one an acceptable command. Queries were written by the authors and an AI agent,
-  not collected from users, so calibration and out-of-scope rates depend on this mix.
+  not collected from users, so calibration and out-of-scope rates depend on this mix. A few accepted commands are
+  POSIX-only and would not run in PowerShell; the shipped tool is credited with 3 such answers on v0.1 and 4 on v0.2
+  (e.g., \texttt{sudo reboot} for the bare query ``system''), so its accuracy is slightly overstated.
   \item \textbf{Exploratory statistics.} Every analysis was specified after results were seen, including the Holm
   family, the controls exclusion, the equal-false-rejection comparison (whose thresholds are chosen in-sample) and
   the sensitivity subsets. Accuracy tests rest on 7--8 discordant queries. Headline results use one fold partition
@@ -376,7 +390,8 @@ safety set; and study whether calibrated confidence and risk prompts change what
   labels are AI-assigned; the added queries were checked with raw retrieval scores, which favors the shipped score;
   and the hybrid detector's features were chosen on the full data, which may flatter its out-of-scope counts and
   AUROC, the ambiguity-detection results and A4/A5; we have no bound on this bias.
-  \item \textbf{Scope.} One tool, one platform (Windows; results depend on the platform-filtered corpus), 279 commands,
+  \item \textbf{Scope.} One tool, evaluated with its repository corpus rather than the smaller released one
+  (\S\ref{sec:system}), one platform (Windows; results depend on the platform-filtered corpus), 279 commands,
   one small sentence encoder and one fusion rule, exact-match scoring against gold commands, and single-machine
   latencies. No generative system, user study, or public benchmark is evaluated.
   \item \textbf{Safety.} The risk classifier is scored against the benchmark's own labels, two of which are
@@ -391,8 +406,10 @@ safety set; and study whether calibrated confidence and risk prompts change what
 The published tool runs the command it retrieves when the user presses Enter, and our results show it can offer a
 destructive command for a benign request, sometimes at maximum confidence. We report these cases rather than a safety
 claim, and recommend that such tools show a risk level and require explicit confirmation for high-risk commands. This
-study does not change the published package, so its findings apply to current users. No command was run on a user's
-system: functional evaluation ran in disposable sandboxed directories. We disclose that part of the benchmark was
+study does not change the published package, so its findings apply to current users; with the released corpus the
+tool is, if anything, less accurate and less calibrated (\S\ref{sec:system}). No command was run on a user's system:
+the functional check ran commands in disposable temporary directories on our own machine, not in an OS-level
+sandbox. We disclose that part of the benchmark was
 written by an AI agent and that our own label check fell below target. Code, benchmark files, result files and a
 reproduction guide will be released with the camera-ready version; they are withheld from the review version for
 anonymity.
@@ -415,7 +432,7 @@ Table~\ref{tab:spec} specifies the research system; the published tool is specif
     \textbf{Component} & \textbf{Definition} \\
     \midrule
     Dense encoder & \texttt{Xenova/all-MiniLM-L6-v2}; each record embedded as ``Intent / Description / Category / Platform'' text; cosine similarity. \\
-    Fusion & Per query, BM25 (with bonus) and cosine scores are min-max normalized over all 279 candidates; score $=\alpha\,\mathrm{BM25}_{\mathrm{norm}}+(1-\alpha)\,\mathrm{dense}_{\mathrm{norm}}$; top-1 is the argmax. \\
+    Fusion & Per query, BM25 (with bonus) and cosine scores are min-max normalized over all candidates (279 corpus records and the packaged snippet, which has no dense score); score $=\alpha\,\mathrm{BM25}_{\mathrm{norm}}+(1-\alpha)\,\mathrm{dense}_{\mathrm{norm}}$; top-1 is the argmax. \\
     $\alpha$ & Grid $\{0.0,0.1,\dots,1.0\}$; maximizes non-OOD accuracy on the four development folds; ties go to 0.5. Selected: v0.1 0.3, 0.3, 0.3, 0.3, 0.5; v0.2 0.5 in every fold. \\
     Hybrid confidence & Fused top-1 score (1.0 when the BM25 and dense top-1 coincide). \\
     Margin, entropy & Top-1 minus top-2 fused score among the top 10; Shannon entropy of the top-10 scores shifted to a minimum of 0 and normalized, divided by $\log_2 10$. \\

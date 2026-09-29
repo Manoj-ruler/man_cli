@@ -1,0 +1,145 @@
+{
+  "task": "RESEARCH-01: platform-inconsistent accepted commands in the Windows benchmark (read-only)",
+  "heuristic_regex": "(^|[\\s|;&(])(sudo|apt|apt-get|yum|dnf|brew|systemctl|systemd-resolve|chmod|chown|killall|grep|awk|sed|xargs|crontab|tmux|lsof|ifconfig|reboot)\\b|\\/etc\\/|\\/dev\\/",
+  "note": "Lower-bound heuristic; labels are unchanged and nothing is re-scored.",
+  "input_sha256": {
+    "research/datasets/termassist_bench_v0.1_validated.json": "3fd73347196bddd34fa34127c4dbf9cc5b75af1a097a06890949d923dff1d5e7",
+    "research/datasets/review/human_review_results.json": "d82e1dfd8ba29921ac73b528a730e6ae10f0a7d329ac517144b57efa968d7313",
+    "research/results/baseline/reproduction-results.json": "3494724f2894c84330aff849d520d6c1a5c5b61c622a003be36b91e5514edddc",
+    "research/datasets/termassist_bench_v0.2_validated.json": "9a19406e69c51979ead2c466814d7f3a662c75d47754c37259aa5da1a71b63b8",
+    "research/datasets/review/human_review_results_v0.2.json": "72de6cd2cf2ec0a590ff8ac23c6ffae7355eb145d73d7ccf21ded1374ecb13a8",
+    "research/results/v0.2/reproduction-results.json": "81c96731814081618baf4b023f8ae35d77c09f8dc57cedc20a550dc330b840de"
+  },
+  "versions": {
+    "v0.1": {
+      "n_items": 150,
+      "items_accepting_a_posix_only_command": [
+        {
+          "id": "TA-B025",
+          "query": "start a new tmux session",
+          "posix_valid": [
+            "tmux new -s session-name"
+          ]
+        },
+        {
+          "id": "TA-B129",
+          "query": "reboot the system",
+          "posix_valid": [
+            "sudo reboot"
+          ]
+        },
+        {
+          "id": "TA-B130",
+          "query": "shut down the system",
+          "posix_valid": [
+            "sudo shutdown -h now"
+          ]
+        }
+      ],
+      "items_whose_every_accepted_command_is_posix_only": [
+        "TA-B025",
+        "TA-B129",
+        "TA-B130"
+      ],
+      "shipped_answers_credited_correct_but_posix_only": [
+        {
+          "id": "TA-B025",
+          "query": "start a new tmux session",
+          "returned": "tmux new -s session-name",
+          "status": "CORRECT",
+          "confidence": 100
+        },
+        {
+          "id": "TA-B129",
+          "query": "reboot the system",
+          "returned": "sudo reboot",
+          "status": "CORRECT",
+          "confidence": 100
+        },
+        {
+          "id": "TA-B130",
+          "query": "shut down the system",
+          "returned": "sudo shutdown -h now",
+          "status": "CORRECT",
+          "confidence": 100
+        }
+      ]
+    },
+    "v0.2": {
+      "n_items": 209,
+      "items_accepting_a_posix_only_command": [
+        {
+          "id": "TA-B025",
+          "query": "start a new tmux session",
+          "posix_valid": [
+            "tmux new -s session-name"
+          ]
+        },
+        {
+          "id": "TA-B129",
+          "query": "reboot the system",
+          "posix_valid": [
+            "sudo reboot"
+          ]
+        },
+        {
+          "id": "TA-B130",
+          "query": "shut down the system",
+          "posix_valid": [
+            "sudo shutdown -h now"
+          ]
+        },
+        {
+          "id": "TA-B194",
+          "query": "system",
+          "posix_valid": [
+            "sudo reboot"
+          ]
+        },
+        {
+          "id": "TA-B196",
+          "query": "terminal",
+          "posix_valid": [
+            "tmux attach -t session-name"
+          ]
+        }
+      ],
+      "items_whose_every_accepted_command_is_posix_only": [
+        "TA-B025",
+        "TA-B129",
+        "TA-B130"
+      ],
+      "shipped_answers_credited_correct_but_posix_only": [
+        {
+          "id": "TA-B025",
+          "query": "start a new tmux session",
+          "returned": "tmux new -s session-name",
+          "status": "CORRECT",
+          "confidence": 100
+        },
+        {
+          "id": "TA-B129",
+          "query": "reboot the system",
+          "returned": "sudo reboot",
+          "status": "CORRECT",
+          "confidence": 100
+        },
+        {
+          "id": "TA-B130",
+          "query": "shut down the system",
+          "returned": "sudo shutdown -h now",
+          "status": "CORRECT",
+          "confidence": 100
+        },
+        {
+          "id": "TA-B194",
+          "query": "system",
+          "returned": "sudo reboot",
+          "status": "AMBIGUOUS_CORRECT",
+          "confidence": 100
+        }
+      ]
+    }
+  },
+  "generated_at": "2026-09-29T16:54:23.875Z"
+}
