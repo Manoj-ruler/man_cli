@@ -6,7 +6,7 @@
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
-| 2 E1 protocol | E1-01 to 09 | 1 | 0 |
+| 2 E1 protocol | E1-01 to 09 | 2 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
@@ -423,6 +423,33 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **Session note (not a project issue):** the Bash tool lost its PATH during this task (even `ls`
   and `git` were "not found"), after several "no verdict" safety-check failures. The download and
   the checks were done in PowerShell instead.
+- **Committed:** in `6bba840`.
+
+### E1-02: E1 question and scope (DONE 2026-09-30)
+
+- **Deliverable:** `research/publication_tasks/e1/E1_PROTOCOL.md` §1–§2, **approved by the author**.
+  - §1: the question, and the three rules R1–R3 with their frozen v0.2 thresholds.
+  - §2.1: the population (D4 = c).
+  - §2.2: the unit of analysis. P1 intervals must come from a **cluster bootstrap over intents**,
+    because the 30 queries in each intent are correlated.
+  - §2.3: what E1 can show.
+  - §2.4: what E1 **cannot** show:
+    1. terminal-task OOD;
+    2. the cost in refused legitimate queries (CLINC has no in-scope shell queries, so E1 must be
+       read with v0.2's false rejections: 20/134, 11/134, 0/134);
+    3. v0.2.1;
+    4. real users, or languages other than English;
+    5. calibration or accuracy.
+  - §2.5: the thresholds are frozen from v0.2 (D7 = yes).
+  - §2.6: the E1 integrity rules.
+- **Acceptance criteria:**
+  1. The scope lists at least the three required "cannot show" items; it lists five: **pass**.
+  2. The author approved the scope: **pass**.
+  - Nothing has been scored, and gate G-E1 holds.
+- **Values used:**
+  - the thresholds (6.4952 ×4 and 7.1978; 0.9179, 0.9219, 0.8841, 0.9247 and 0.9219; α = 0.5),
+    read during planning from the committed result files and to be formally verified in E1-04;
+  - the false-rejection counts, from freeze §6.
 
 ## Decisions
 
@@ -437,6 +464,8 @@ Recorded by VERIFY-01 on 2026-09-30.
 | — | PAPER-05 item 8: option (a), "natural-language-to-Bash" to match §3 | 2026-09-30 | author |
 | — | LIT-01 (P2, ISSUE-05) is added to `TASKS.md` (Phase 5, before FINAL-03) | 2026-09-30 | author |
 | D5 | Download CLINC150 `data_full.json` and `domains.json`, pinned to commit 828f809, now, for use in E1-03's class review; **commit them to the repository** | 2026-09-30 | author ("approve download, commit it") |
+| D4 | E1 population: **both CLINC test sets, reported separately, never pooled**. P1 = `test` (4,500, 150 intents; primary; class-level exclusions); P2 = `oos_test` (1,000; secondary; kept whole). The train and val splits are not used. | 2026-09-30 | author |
+| D7 | E1 uses the **frozen v0.2 thresholds**, even if the final paper reports v0.2.1 | 2026-09-30 | author |
 
 ## Issues
 
@@ -457,9 +486,11 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **Author action:** PAPER-07. Submit `research/paper/acl_latex/main_review.pdf` (SHA-256 prefix
   `7c129b946bcd928b`) to the EACL 2027 SRW mentorship programme by **Nov 6**, and tell Claude when it
   is done, so it can be recorded.
-- **Recommended Claude task:** E1-02 (E1 question and scope; P0). It needs decision D4 (which
-  CLINC splits to use) and decision D7 (E1 uses the frozen v0.2 thresholds). E1-04 is also
-  unblocked.
+- **Recommended Claude task:** E1-04 (verify the frozen v0.2 thresholds and how they were derived;
+  decision D2). It is independent, and E1-07 needs D2.
+- **Or:** E1-03 (P1 class exclusions from intent names and examples only; decision D3). It depends
+  on E1-02, which is done.
+- Both are P0.
 - **Phase 1 is complete** apart from the author's submission.
 - **E1-01 and E1-04** are unblocked in parallel.
 - **LIT-01** (P2) is in the backlog.

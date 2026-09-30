@@ -1,25 +1,31 @@
 # Current task
 
-**Last completed:** E1-01 (2026-09-30). CLINC150 is verified, downloaded (with the author's approval)
-and committed to `research/data_external/clinc150/`; it is byte-identical to upstream, and its
-provenance and CC BY 3.0 attribution are recorded.
+**Last completed:** E1-02 (2026-09-30). E1 §1–§2 are approved:
+
+- D4 = both CLINC test sets reported separately; P1 `test` is primary, P2 `oos_test` secondary.
+- D7 = the thresholds are frozen from v0.2.
 
 **Author action still open:** PAPER-07. Submit `research/paper/acl_latex/main_review.pdf` (SHA-256
 prefix `7c129b946bcd928b`) to the mentorship programme by Nov 6.
 
-**Next (recommended): E1-02: E1 question and scope.** Status: NOT STARTED. It waits for "Start E1-02".
+## Next: two P0 tasks are available; recommended order E1-04, then E1-03
 
-- **Priority:** P0. **Type:** experiment (writing the protocol). **Depends on:** E1-01 (done).
-- **Deliverable:** `research/publication_tasks/e1/E1_PROTOCOL.md` §1–§2, a draft.
-- **Decisions needed:**
-  - **D4:** which CLINC150 splits make up E1's population. Options include the `oos_test` split
-    (1,000 queries, no classes), the in-scope `test` split (4,500 queries, 150 classes), or both.
-    E1-01 found that CLINC's in-scope requests are mostly out of scope for a shell tool too.
-  - **D7:** E1 uses the frozen **v0.2** thresholds, even if the final paper reports v0.2.1.
-- **Must state what E1 cannot show:**
-  - performance on terminal-task out-of-scope requests;
-  - false rejections of in-scope shell queries (CLINC has none);
-  - anything about v0.2.1.
-- **Nothing is scored** (gate G-E1).
+### E1-04: verify the frozen v0.2 thresholds and how they were derived (recommended first)
 
-**Also unblocked:** E1-04 (verify the frozen v0.2 thresholds and how they were derived; decision D2).
+- **Type:** verify. **Depends on:** none.
+- **Files:**
+  - `research/results/review_r1/review_r1_e_ood_operating_points.json`
+    (`nested_tuned_baseline_threshold.per_fold_thresholds_raw_bm25`);
+  - `research/results/v0.2/selective-prediction-results.json` (`ood_detection.per_fold`);
+  - `research/results/v0.2/hybrid-nested-cv-results.json` (`selected_alpha_per_fold`);
+  - `research/experiments/review_r1_e_ood_operating_points.js`.
+- **Output:** `research/publication_tasks/e1/E1_THRESHOLDS.md`, and decision **D2** (how to apply
+  five per-fold thresholds to external data).
+  - **Recommended option:** apply all five, and report the median with the min–max.
+- **Why first:** it is independent, and E1-07's analysis plan needs D2.
+
+### E1-03: P1 class exclusions (intent names and example queries only; decision D3)
+
+- **Type:** experiment (protocol). **Depends on:** E1-02 (done).
+- **Output:** `E1_PROTOCOL.md` §3 and `e1/E1_EXCLUSIONS.md`.
+- It includes cross-checking `domains.json` against the paper's supplementary list. **No scoring.**
