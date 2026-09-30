@@ -1,34 +1,38 @@
 # Current task
 
-**Last completed:** E1-11 (2026-09-30).
+**Last completed:** E1-12 (2026-09-30). All implementation checks pass (17 of 17):
 
-- The guard passed in the same session: 0 mismatches out of 209.
-- P1 and P2 are scored (4,500 and 1,000 rows).
-- The decisions stage ran; its logical checks pass (0 failures), and the manifest is complete.
-- The frozen code was unchanged before and after the run.
-- **No rates have been read.**
+- row counts and ids;
+- no NaN;
+- fresh `search()` values bit-identical on all 5,500 queries;
+- the decisions re-derived independently;
+- a deterministic re-run;
+- a 20-row spot check with an independent BM25 and fusion.
+
+See `e1_run/E1_IMPLEMENTATION_CHECKS.md`. **No rates have been read yet.**
 
 **Author action still open:** PAPER-07, the mentorship submission, by Nov 6.
 
-**Next (recommended): E1-12, the implementation checks.** Status: NOT STARTED. It waits for "Start
-E1-12".
+**Next (recommended): E1-13, run the planned analysis.** Status: NOT STARTED. It waits for "Start
+E1-13".
 
-- **Priority:** P0. **Type:** verify.
-- **Checks:**
-  1. **Row counts:** scores, decisions and prepared data all have 4,500 / 1,000 rows, with ids in
-     one-to-one correspondence.
-  2. **No NaN or empty scores** in any field the rules use.
-  3. **The shipped score agrees with a fresh, independent call** of the frozen `cli/search.js`
-     `search()` on every query (s, confidence, command), and the decisions agree with a fresh
-     application of §6.2.
-  4. **A deterministic re-run** of the scoring and the decisions stage, into the scratchpad, is
-     byte-identical apart from timestamps.
-  5. **A spot-check of 20 random rows** (seed fixed in advance). For each, recompute s by hand from
-     the BM25 formula and check the fused score's inputs. **This checks scoring correctness only**,
-     never labels or outcomes.
+- **Priority:** P0. **Type:** experiment.
+- **Steps:**
+  1. Confirm the frozen set is unchanged (`git diff --exit-code e1-protocol-v1 -- …`).
+  2. Run `node research/experiments/e1_analyze.js --scores-p1 … --scores-p2 … --meta-p1
+     data/p1_queries.json --out-dir research/results/e1_clinc150_v1 --stage summary`. It first
+     confirms that the stored decisions equal the recomputed ones.
+  3. Write `DEVIATIONS.md`, which is currently empty: no deviation has occurred.
+  4. **Report every protocol quantity with its denominator and interval.** This covers:
+     - the primary comparison and its pre-stated reading;
+     - the matched comparison;
+     - the secondary and sensitivity results;
+     - the v0.2 comparison.
+
+     Anything not in the protocol is labelled "post hoc".
 - **Acceptance criteria:**
-  - All checks pass, with the evidence logged.
-  - Any failure sets the status to BLOCKED and opens a new issue; results are never corrected by
-    hand.
-- **Deliverable:** `e1/E1_IMPLEMENTATION_CHECKS.md`. This file is not in the frozen set.
-- **Rates stay unread until E1-13.**
+  - `summary.json` and `summary.md` contain every protocol metric, with its denominator and
+    interval.
+  - The deviation log is present, even if empty.
+- **Rule:** results are reported as computed. No re-analysis, re-thresholding or selective emphasis.
+  The interpretation against the expected directions is E1-14.

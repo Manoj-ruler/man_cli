@@ -517,7 +517,10 @@ v0.2 thresholds frozen?
   5. Spot-check 20 random rows by hand, **for scoring correctness only**, never for labels.
 - **Acceptance:** all checks pass, with the evidence logged. Any failure becomes BLOCKED plus a new
   issue; results are never "fixed" by hand.
-- **Deliverable:** `e1/E1_IMPLEMENTATION_CHECKS.md`.
+- **Deliverable:** `e1_run/E1_IMPLEMENTATION_CHECKS.md`.
+  - *Moved from `e1/` in E1-12 (2026-09-30). A new file in `e1/` would make the frozen check
+    `git diff --exit-code e1-protocol-v1 -- research/publication_tasks/e1 …` report a difference.
+    This is a location change only; no rule changes.*
 
 ### E1-13: Run the planned analysis
 - **Priority:** P0. **Type:** experiment. **Depends on:** E1-12.
@@ -539,7 +542,7 @@ v0.2 thresholds frozen?
   - Every statement cites the summary.
   - The general-domain limitation is explicit.
   - The author reviews it.
-- **Deliverable:** `e1/E1_RESULTS_MEMO.md`.
+- **Deliverable:** `e1_run/E1_RESULTS_MEMO.md` (moved from `e1/`, for the same reason as E1-12).
 
 ---
 

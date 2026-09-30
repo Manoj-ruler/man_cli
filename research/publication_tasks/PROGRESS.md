@@ -7,7 +7,7 @@
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
-| 3 E1 execution | E1-10 to 14 | 2 | 0 |
+| 3 E1 execution | E1-10 to 14 | 3 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
 
@@ -895,6 +895,36 @@ Recorded by VERIFY-01 on 2026-09-30.
   2. Every prepared query has one output row (4,500 / 1,000): **pass**.
   3. The manifest is complete: **pass**.
   4. The logical checks pass: **pass**.
+- **Committed:** in `63d71af`.
+
+### E1-12: implementation checks (DONE 2026-09-30)
+
+- **Deliverable:** `research/publication_tasks/e1_run/E1_IMPLEMENTATION_CHECKS.md`.
+- **Script:** `research/experiments/e1_implementation_checks.js` (new, not frozen). It computes no
+  rates or aggregates.
+- **Result: 17 of 17 checks pass.**
+  1. **Row counts** and one-to-one ids across data, scores and decisions: 4,500 and 1,000.
+  2. **No NaN, missing or ill-typed score field;** `command_shipped` is null exactly when the query
+     has no tokens.
+  3. **Re-derivation:**
+     - (a) a fresh call of the frozen `search()` gives a bit-identical s, and equal confidence and
+       command, on **all 5,500** queries;
+     - (b) the 4-dp rounding is exact;
+     - (c) the decisions equal an independent re-application of §6.2 (0 mismatches).
+  4. **Deterministic re-run** into the scratchpad: the decisions are byte-identical, and the scores,
+     logical checks and manifest are identical apart from timestamps, the commit and the re-run
+     copies' own hashes.
+  5. **Spot check of 20 random rows** (seed 20260930). An independent BM25 and independent fusion
+     match within 1.8e-15 on s and 1.1e-16 on fused.
+     - The sample includes 4 lexical-null rows, each with s = 0 and fused = 0.5.
+     - The worked example, `test:3921`, was verified by hand: 5.232890 + … gives 12.703244 = the
+       stored s.
+- **Plan adjustment (location only):** the E1-12 and E1-14 deliverables moved from `e1/` to
+  `e1_run/`, because a new file in `e1/` would make the frozen check's directory diff report a
+  difference. `TASKS.md` is updated. **No protocol text or rule changed.**
+- **The frozen set is unchanged:** exit 0.
+- **Acceptance criteria:** all checks pass, with the evidence logged; there was no failure, so
+  BLOCKED was not needed: **pass**.
 
 ## Decisions
 
@@ -953,15 +983,14 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
   - E1-08 stays open until E1-07c is done and items 5 and 7 are re-checked.
 - **Phase 2 is complete.** The E1 protocol was frozen at `e1-protocol-v1` (`970c54f`) on
   2026-09-30.
-- **E1-10 and E1-11 are done.** The scores, decisions, logical checks and manifest are written. No
-  rates have been read.
-- **Recommended Claude task:** E1-12 (P0), the implementation checks, before any summary:
-  1. row counts;
-  2. no NaN or empty scores;
-  3. the shipped score agrees with the frozen `cli/search.js` `search()` on every query;
-  4. a deterministic re-run is byte-identical, apart from timestamps;
-  5. a hand spot-check of 20 random rows, **for scoring correctness only**.
-  - Rates are still not read.
+- **E1-10, E1-11 and E1-12 are done.** All implementation checks pass (17 of 17). No rates have been
+  read.
+- **Recommended Claude task:** E1-13 (P0), running the planned analysis.
+  - Run the frozen `e1_analyze.js --stage summary`, unchanged. It first confirms that the stored
+    decisions equal the recomputed ones.
+  - It writes `summary.json` and `summary.md`, plus `DEVIATIONS.md` (currently empty).
+  - Report every protocol quantity with its denominator and interval, and label anything else
+    "post hoc".
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 
