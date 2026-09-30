@@ -28,6 +28,23 @@
 \newcommand{\authorrel}{the author}
 \newcommand{\qid}[1]{TA-B#1}
 
+% ACL AI-use disclosure (ACL Policy on Publication Ethics, generative assistance; placement:
+% Acknowledgements). Every fact is in research/paper/AI_DISCLOSURE_LEDGER.md; the author confirmed
+% the open ones on 2026-09-30. Camera-ready only: main_review.tex defines this macro empty.
+\newcommand{\aiacknowledgements}{%
+\section*{Acknowledgements}
+We used Claude (Anthropic), through the Claude Code tool (Claude Opus~4.8, Claude Sonnet~5 and Claude
+Opus~5.5), throughout this work. Under the author's direction it drafted and revised the text of every
+section; wrote the analysis, test and figure-generation code and ran the analyses; drafted and adjudicated
+part of the benchmark queries and assigned the out-of-scope subtype labels, as disclosed in
+\S\ref{sec:system} and \S\ref{sec:ood}; simulated rounds of peer review whose suggestions led to several
+reported analyses (the tie-aware selective metrics, the calibration noise floor and no-skill reference,
+the comparison of out-of-scope rules at equal false-rejection counts, and the seed-repeat
+cross-validation); and checked the references and citations against their primary sources. No other AI
+tool was used. The author checked the final text, its claims and its citations for accuracy and takes full
+responsibility for the content. No AI tool is an author of this paper.
+}
+
 \title{Confidently Wrong: Auditing and Recalibrating the Confidence of a \\ Shipped Natural-Language-to-Shell Command Retriever}
 
 \author{

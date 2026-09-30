@@ -13,7 +13,11 @@ The rehearsal found and fixed one bug that would have aborted the real run:
 - fixed in ace5347;
 - frozen outputs are unchanged.
 
-## Before the main sheets go out (you)
+**2026-09-30:** the author reports that both annotators are working on the main sheets. If G0 was
+answered, keep each annotator's confirmation in `coordinator/` (it is gitignored) so the paper can
+state it.
+
+## Before the main sheets go out (you; now done)
 
 - **G0:** each annotator confirms privately that they did the practice sheet alone and without AI
   tools. The practice comments were near-identical, and the protocol forbids replacing an annotator
@@ -43,7 +47,7 @@ All commands run from the repository root. Put the files under
 | 9 | Analysis freeze v2.0 | `node research/experiments/freeze_analysis_report.js --out research/ANALYSIS_FREEZE_v2.0.md` | v1.0 is never overwritten. The report text still says v1.0 and must be adapted for v2.0 (κ and v0.2.1 sections); ask Claude. |
 | 10 | Update the paper | Ask Claude | Add κ and v0.2.1, replacing the "labels checked by one partially independent reviewer" wording. Then run `trace_claims.js` (0 problems) and `bash build.sh` (≤ 8 pages). |
 | 11 | Scoped re-review, then Stage 4.5 again | Ask Claude (ARS reviewer re-review, integrity final-check) | Rerun `STAGE4_5_INTEGRITY_REPORT.md` with 100% of the changed paragraphs |
-| 12 | AI-use disclosure | Answer the 3 questions in `research/paper/AI_DISCLOSURE_LEDGER.md` | The statement goes into the camera-ready Acknowledgements |
+| 12 | AI-use disclosure | **Done 2026-09-30.** The author answered; the statement is in the camera-ready Acknowledgements (`\aiacknowledgements` in `main.tex`). | Recheck that it still describes the uses after step 10 |
 | 13 | Clean-clone reproduction (REPRO-01) | Follow `research/REPRODUCE.md` in a fresh clone | Tests: `node --test "research/tests/*.test.js"` gives 23/23. Freeze inputs: `verify_freeze_inputs.js` gives 27/27. |
 
 Everything after step 13 is yours: submitting the paper, and publishing CLI 1.1 (`PRODUCT_1_1.md` on

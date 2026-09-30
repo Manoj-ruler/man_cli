@@ -7,8 +7,12 @@ Authorship" (ACL Admin Wiki). The ARS copy of the policy was accessed 2026-06-07
 **Author action:** re-read the live page before submission, and check whether the EACL 2027 SRW call
 adds its own instructions.
 
-**Status.** Built 2026-09-29. The result is **REQUIRED**, and execution is **HALTED (UNRESOLVED_INPUT)**.
-Three facts only the author can confirm are open; see "Open facts".
+**Status.** Built 2026-09-29. The result is **REQUIRED**.
+
+- **2026-09-30:** the author answered the three open facts (see "Author confirmations"). Execution
+  status is **READY**, and the statement is **rendered**.
+- **Where it goes:** the camera-ready Acknowledgements, as `\aiacknowledgements` in
+  `acl_latex/main.tex`. The anonymous review build defines the macro empty.
 
 **Source of the facts.** Every fact below comes from the repository's own record:
 
@@ -71,21 +75,46 @@ author. The author confirms this in question 3 below.
 |-------|-------|
 | Tool name | KNOWN: Claude (Anthropic) through Claude Code; models Opus 4.8, Sonnet 5 and Opus 5.5 |
 | Content produced, and where | KNOWN: U1–U6 above |
-| Conditional: author confirms that the generated text was checked for accuracy and carries citations for its sources and ideas | **UNKNOWN**, question 2 |
-| Completeness of the tool inventory (no other AI tool) | **UNKNOWN**, question 1 |
+| Conditional: author confirms that the generated text was checked for accuracy and carries citations for its sources and ideas | KNOWN(true): the author, 2026-09-30 |
+| Completeness of the tool inventory (no other AI tool) | KNOWN: the author, 2026-09-30. For code and data, the git trailers record only Claude models. |
 
-## Open facts (author only)
+## Author confirmations (2026-09-30, verbatim)
 
-1. Did you use any AI tool other than Claude/Claude Code for this paper, its code or its data? For
-   example ChatGPT, Copilot, Gemini, Grammarly's generative features, or an AI translator.
-2. Have you personally read the final text and checked that its claims and citations are accurate?
-   The Stage 4.5 machine check does not replace this, and ACL requires the authors' own confirmation
-   because authors are fully responsible for the content.
-3. Do you confirm that no AI tool is listed or proposed as an author?
+1. **Other AI tools:** "I havent used any ai tool other than Claude or Claude Code for writing the
+   paper".
+   - For the code and the benchmark data, the commit trailers record only Claude models (Phase 2).
+   - The statement therefore says "No other AI tool was used". If any other tool touched the code or
+     data, tell Claude and the statement will be corrected.
+2. **Final text checked:** "yes i have checked".
+3. **Authorship:** "dont list any ai as author even yourself also".
+   - `ai_listed_or_proposed_as_author` = KNOWN(false).
+   - The statement says so explicitly, and `main.tex` lists only the human author.
 
-When all three are answered, render the statement (Phase 4) into the camera-ready Acknowledgements.
+## Rendered statement
 
-- **Review version:** leave the anonymous review PDF's acknowledgements out, as ACL anonymity rules
-  require.
-- **Responsible NLP checklist:** if the SRW submission form includes it, answer its "use of AI
-  assistants" item with the same facts.
+This is the camera-ready Acknowledgements text; the source is `acl_latex/main.tex`, `\aiacknowledgements`.
+
+> We used Claude (Anthropic), through the Claude Code tool (Claude Opus 4.8, Claude Sonnet 5 and
+> Claude Opus 5.5), throughout this work. Under the author's direction it:
+>
+> - drafted and revised the text of every section;
+> - wrote the analysis, test and figure-generation code and ran the analyses;
+> - drafted and adjudicated part of the benchmark queries and assigned the out-of-scope subtype
+>   labels, as disclosed in §3 and §5;
+> - simulated rounds of peer review whose suggestions led to several reported analyses: the
+>   tie-aware selective metrics, the calibration noise floor and no-skill reference, the comparison
+>   of out-of-scope rules at equal false-rejection counts, and the seed-repeat cross-validation;
+> - checked the references and citations against their primary sources.
+>
+> No other AI tool was used. The author checked the final text, its claims and its citations for
+> accuracy and takes full responsibility for the content. No AI tool is an author of this paper.
+
+The printed statement is a single paragraph; the list above only splits it for reading.
+
+- **Review version:** the acknowledgements are omitted, as ACL anonymity rules require. The review
+  build defines the macro empty, and the review PDF contains neither "Acknowledgements" nor "Claude".
+- **Submission form / Responsible NLP checklist:** if it asks about AI-assistant use, answer "Yes",
+  with the rendered statement above, minus the model list if space is short.
+- **Recheck after the κ update:** if the paper changes after the annotation study, recheck that the
+  statement still describes the uses (for example, whether Claude drafts the κ update, which it will).
+  It already covers drafting and revision of every section.

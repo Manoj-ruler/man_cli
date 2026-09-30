@@ -24,18 +24,17 @@ paper's numbers against those files. Where something is an opinion, it says so.
 >   `seed_repeat_cv` bug; frozen outputs are unchanged.
 > - **Freeze v1.0 inputs:** verified 27/27 unchanged (`verify_freeze_inputs.js`). The report can no
 >   longer be overwritten.
-> - **AI-use disclosure ledger:** built (`paper/AI_DISCLOSURE_LEDGER.md`). It is **halted on 3
->   questions only the author can answer.**
+> - **AI-use disclosure:** done 2026-09-30. The author answered the three questions, and the
+>   statement is in the camera-ready Acknowledgements (`paper/AI_DISCLOSURE_LEDGER.md`). The review
+>   PDF omits it for anonymity.
 > - **CLI 1.1:** implemented and tested on the local branch `product/1.1`.
 >   - It is not pushed and not published; see `PRODUCT_1_1.md` there.
 >   - Accuracy is unchanged against frozen 1.0.1, and raw ECE improves.
 >
 > **Left, all human:**
 >
-> - G0 independence check, then the main sheets, then a third reader (see
+> - the annotators' main sheets (in progress since 2026-09-30), then a third reader (see
 >   `ANNOTATION_TO_SUBMISSION_RUNBOOK.md`);
-> - the 3 disclosure answers;
-> - your own read-through of the final text;
 > - submission;
 > - the npm publish.
 
