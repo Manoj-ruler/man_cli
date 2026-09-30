@@ -1,35 +1,36 @@
 # Current task
 
-**Last completed:** E1-09 (2026-09-30). **The E1 protocol is FROZEN** at the annotated tag
-`e1-protocol-v1`, which points to `970c54f` and is pushed.
+**Last completed:** E1-10 (2026-09-30). `research/results/e1_clinc150_v1/data/` holds P1 (4,500
+rows, 0 excluded) and P2 (1,000 rows), prepared under the frozen rules.
 
-- 8 files are frozen; their SHA-256 values are in `PROGRESS.md` and in the tag message.
-- **Any change to them is now a numbered deviation** needing the author's approval (§6.9).
-- **The authoritative "unchanged" check:** `git diff --exit-code e1-protocol-v1 --
-  research/publication_tasks/e1 research/experiments/e1_score_queries.js
-  research/experiments/e1_analyze.js`.
+- All 18 reconciliation checks pass, and the preparation is deterministic.
+- Nothing was scored or downloaded.
+- The frozen set is unchanged since `e1-protocol-v1`.
 
 **Author action still open:** PAPER-07, the mentorship submission, by Nov 6.
 
-**Next (recommended): E1-10, prepare the data under the frozen rules (Phase 3).**
-Status: NOT STARTED. It waits for "Start E1-10".
+**Next (recommended): E1-11, run the scoring and the rejection rules.** Status: NOT STARTED. It
+waits for "Start E1-11".
 
-- **Priority:** P0. **Type:** experiment (data preparation, with no scoring).
-- **Depends on:** E1-09 (done) and D5. The CLINC150 files were already downloaded and committed at
-  `6bba840`, so **nothing new is downloaded**.
-- **Steps:**
-  1. Verify `data_full.json` and `domains.json` against the SHA-256 values in
-     `research/data_external/clinc150/PROVENANCE.md`.
-  2. Build `research/results/e1_clinc150_v1/data/` in the frozen §6.7 format:
-     - `p1_queries.json`: `{id: "test:<i>", text, intent, domain, subgroup}`;
-     - `p2_queries.json`: `{id: "oos_test:<i>", text}`.
-
-     The text is taken unchanged.
-  3. Apply Rule A (0 exclusions) and the subgroup labels, exactly as frozen.
-  4. Write `DATA_PROVENANCE.md`: source hashes, and counts per intent, domain, subgroup and in total,
-     reconciled against the source counts.
+- **This is the first step that produces E1 outcomes.** Everything it runs is frozen code, used
+  unchanged. Before running, it checks with `git diff --exit-code e1-protocol-v1 -- …`.
+- **Steps, all in one session:**
+  1. `node research/experiments/e1_score_queries.js --guard --out
+     research/results/e1_clinc150_v1/guard_v0_2.json`. It must pass (0 mismatches out of 209);
+     otherwise stop (BLOCKED).
+  2. `--input data/p1_queries.json --out scores_p1.json`, and the same for P2. The pre-flight runs
+     each time.
+  3. `node research/experiments/e1_analyze.js --scores-p1 … --scores-p2 … --meta-p1
+     data/p1_queries.json --out-dir research/results/e1_clinc150_v1 --stage decisions`. This
+     writes `decisions_p1.json`, `decisions_p2.json`, `logical_checks.json` and
+     `RUN_MANIFEST.json`. **No `--synthetic` flag.**
+  4. **Stop there.** Do not run `--stage summary`; that is E1-13, after the E1-12 implementation
+     checks.
 - **Acceptance criteria:**
-  - The counts equal the source counts minus the declared exclusions (4,500 and 1,000).
-  - The hashes are recorded.
-  - Nothing is excluded outside the frozen rules.
-  - **No scoring.**
+  - The guard passes in the same run.
+  - Every prepared query has one output row (4,500 and 1,000).
+  - The logical checks pass.
+  - The manifest is complete.
+- **Reporting rule:** in E1-11, only the pass/fail status of the checks and the row counts are
+  reported. Rates and comparisons are not read or reported until E1-13, so that the E1-12 checks
+  are done first.

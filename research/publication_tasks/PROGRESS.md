@@ -7,7 +7,7 @@
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
-| 3 E1 execution | E1-10 to 14 | 0 | 0 |
+| 3 E1 execution | E1-10 to 14 | 1 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
 
@@ -814,6 +814,43 @@ Recorded by VERIFY-01 on 2026-09-30.
   1. The tag exists on the remote: **pass**.
   2. The committed protocol's hash is recorded: **pass**.
   3. No E1 result exists before this commit: **pass**.
+- **Committed:** the freeze in `970c54f`, the record in `e4b932c`.
+
+### E1-10: prepare the data under the frozen rules (DONE 2026-09-30)
+
+- **Script:** `research/experiments/e1_prepare_data.js`, new and **outside the frozen set**.
+  - It hard-codes only frozen values: the source SHA-256 values from `PROVENANCE.md`, Rule A's
+    empty exclusion list, the subgroup-S lists (§3), and the §6.1 counts.
+  - It aborts on any mismatch, never overwrites a file, and **never prints query text**.
+- **Nothing was downloaded.** It used the committed copy from D5 (`6bba840`).
+  - Source SHA-256 values equal `PROVENANCE.md`: `data_full.json` `36923c37…56e0`, `domains.json`
+    `b947b579…1b3a`.
+- **Outputs** in `research/results/e1_clinc150_v1/data/`:
+  - `p1_queries.json`: 4,500 rows of `{id: "test:<i>", text, intent, domain, subgroup}`; SHA-256
+    `5d047d2681327fb02bf87147e2553070cfb2e85f861e0334a9aac6bfa67e47d2`;
+  - `p2_queries.json`: 1,000 rows of `{id: "oos_test:<i>", text}`; SHA-256
+    `d6f0c207c0079e6db23f63d65d2e5f5107a10a8eeed54998c04f234a12e7c344`;
+  - `DATA_PROVENANCE.md`: source citation, licence and hashes; the rules applied; the reconciliation;
+    the per-domain table; the output hashes.
+- **Also added:** `research/results/e1_clinc150_v1/.gitattributes` (`* -text`), so every E1
+  output stays byte-exact in checkouts and its recorded hashes hold. This is the same approach as
+  the source data folder. It is not a frozen file and changes no rule.
+- **Reconciliation: 18 of 18 checks pass.**
+  - P1 = 4,500 = 4,500 source rows − 0 excluded; P2 = 1,000.
+  - 150 intents × 30; 10 domains × 450.
+  - All 13 S intents are present: S-clear 180, S-borderline 210, without S-clear 4,320, without
+    either tier 4,110.
+  - The 5,500 ids are unique, and the text was copied unchanged (checked row by row against the
+    source).
+  - The utility domain holds 6 S-clear and 3 S-borderline intents, consistent with T-4.
+- **Determinism:** a second run into the scratchpad gave byte-identical `p1_queries.json` and
+  `p2_queries.json`.
+- **The frozen set is unchanged:** `git diff --exit-code e1-protocol-v1 -- …` gives exit 0.
+- **Acceptance criteria:**
+  1. The counts equal the source counts minus the declared exclusions: **pass** (reconciled table).
+  2. The hashes are recorded: **pass**.
+  3. Nothing is excluded outside the frozen rules: **pass** (0 excluded; no per-query exclusion).
+  4. No scoring: **pass**.
 
 ## Decisions
 
@@ -872,12 +909,14 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
   - E1-08 stays open until E1-07c is done and items 5 and 7 are re-checked.
 - **Phase 2 is complete.** The E1 protocol was frozen at `e1-protocol-v1` (`970c54f`) on
   2026-09-30.
-- **Recommended Claude task:** E1-10 (P0), preparing the data under the frozen rules.
-  - Build `research/results/e1_clinc150_v1/data/` from the **committed** CLINC150 copy. D5's
-    download is already done and committed at `6bba840`; its hashes are checked against
-    `PROVENANCE.md`.
-  - Apply Rule A (0 exclusions), attach intent, domain and subgroup, and reconcile the counts.
-  - **No scoring.**
+- **E1-10 is done:** the data is prepared (4,500 + 1,000).
+- **Recommended Claude task:** E1-11 (P0), running the scoring and the rules. **This is the first
+  step that produces E1 outcomes.**
+  1. Re-run the scorer's v0.2 guard in the same session (`guard_v0_2.json`), and require it to pass.
+  2. Score P1 and P2 (`scores_p1.json`, `scores_p2.json`).
+  3. Run `e1_analyze.js --stage decisions`, which writes the decisions, the logical checks and
+     `RUN_MANIFEST.json`.
+  4. Stop before the summary. The summary is E1-13, after the E1-12 implementation checks.
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 

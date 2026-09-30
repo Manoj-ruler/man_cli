@@ -1,0 +1,4002 @@
+[
+ {
+  "id": "oos_test:0",
+  "text": "how much has the dow changed today"
+ },
+ {
+  "id": "oos_test:1",
+  "text": "how many prime numbers are there between 0 and 100"
+ },
+ {
+  "id": "oos_test:2",
+  "text": "can you tell me how to solve simple algebraic equations with one variable"
+ },
+ {
+  "id": "oos_test:3",
+  "text": "can you dim the brightness of my screen"
+ },
+ {
+  "id": "oos_test:4",
+  "text": "what is the account number to the internet service i have"
+ },
+ {
+  "id": "oos_test:5",
+  "text": "can you see a hdmi cord"
+ },
+ {
+  "id": "oos_test:6",
+  "text": "what veggies can i pair with mushrooms"
+ },
+ {
+  "id": "oos_test:7",
+  "text": "can you put the car in fuel efficient mode"
+ },
+ {
+  "id": "oos_test:8",
+  "text": "at what age can someone get a card"
+ },
+ {
+  "id": "oos_test:9",
+  "text": "please find today's most read stories from the new york times todayi"
+ },
+ {
+  "id": "oos_test:10",
+  "text": "how do i get red wine out of a couch cushion"
+ },
+ {
+  "id": "oos_test:11",
+  "text": "can you tell me who sells dixie paper plates"
+ },
+ {
+  "id": "oos_test:12",
+  "text": "who invented the internet"
+ },
+ {
+  "id": "oos_test:13",
+  "text": "what big news happened over the weekend"
+ },
+ {
+  "id": "oos_test:14",
+  "text": "what is happening in politicsu"
+ },
+ {
+  "id": "oos_test:15",
+  "text": "how is my driving"
+ },
+ {
+  "id": "oos_test:16",
+  "text": "is the earth flat"
+ },
+ {
+  "id": "oos_test:17",
+  "text": "what is the best way to clean ceiling fans"
+ },
+ {
+  "id": "oos_test:18",
+  "text": "please tell me the status of the government shutdown"
+ },
+ {
+  "id": "oos_test:19",
+  "text": "what oil is best for chicken"
+ },
+ {
+  "id": "oos_test:20",
+  "text": "what is today's big article in the washington post"
+ },
+ {
+  "id": "oos_test:21",
+  "text": "has there been anything breaking this afternoon"
+ },
+ {
+  "id": "oos_test:22",
+  "text": "what are yahoo's top stories right now"
+ },
+ {
+  "id": "oos_test:23",
+  "text": "what's at movies"
+ },
+ {
+  "id": "oos_test:24",
+  "text": "what is the amount of blood needed to stay alive"
+ },
+ {
+  "id": "oos_test:25",
+  "text": "can you add a bag to my reservation"
+ },
+ {
+  "id": "oos_test:26",
+  "text": "can you auto-pilot the car"
+ },
+ {
+  "id": "oos_test:27",
+  "text": "wash windshield"
+ },
+ {
+  "id": "oos_test:28",
+  "text": "can you tell me what credit cards i have open"
+ },
+ {
+  "id": "oos_test:29",
+  "text": "did the stock market finish up for the day"
+ },
+ {
+  "id": "oos_test:30",
+  "text": "what is the population of south africa"
+ },
+ {
+  "id": "oos_test:31",
+  "text": "watch the fbi"
+ },
+ {
+  "id": "oos_test:32",
+  "text": "can you find the answer to number 26 in this algebra two textbook"
+ },
+ {
+  "id": "oos_test:33",
+  "text": "how to remove a stripped bolt"
+ },
+ {
+  "id": "oos_test:34",
+  "text": "which stocks have lost the least today"
+ },
+ {
+  "id": "oos_test:35",
+  "text": "what are some things i can do on the way to work"
+ },
+ {
+  "id": "oos_test:36",
+  "text": "how many steps have i taken today"
+ },
+ {
+  "id": "oos_test:37",
+  "text": "can you fill in my credit card number on the screen"
+ },
+ {
+  "id": "oos_test:38",
+  "text": "who won the patriots game last nightu"
+ },
+ {
+  "id": "oos_test:39",
+  "text": "is anything being newscasted about the threat of famine in chadu"
+ },
+ {
+  "id": "oos_test:40",
+  "text": "what are the different types of tvs"
+ },
+ {
+  "id": "oos_test:41",
+  "text": "do laundry"
+ },
+ {
+  "id": "oos_test:42",
+  "text": "what did trump do todayu"
+ },
+ {
+  "id": "oos_test:43",
+  "text": "how many miles does my car currently have"
+ },
+ {
+  "id": "oos_test:44",
+  "text": "close all internet tabs"
+ },
+ {
+  "id": "oos_test:45",
+  "text": "can you sell stocks for me"
+ },
+ {
+  "id": "oos_test:46",
+  "text": "how do you treat an iron skillet"
+ },
+ {
+  "id": "oos_test:47",
+  "text": "how much has microsoft's stock changed over the last year"
+ },
+ {
+  "id": "oos_test:48",
+  "text": "what is the best product for removing soap scum"
+ },
+ {
+  "id": "oos_test:49",
+  "text": "read text"
+ },
+ {
+  "id": "oos_test:50",
+  "text": "park the car"
+ },
+ {
+  "id": "oos_test:51",
+  "text": "show me a list of top rated airlines"
+ },
+ {
+  "id": "oos_test:52",
+  "text": "may i finish washing then i give you please"
+ },
+ {
+  "id": "oos_test:53",
+  "text": "do i have overdraft protection"
+ },
+ {
+  "id": "oos_test:54",
+  "text": "can you delete my saved credit card"
+ },
+ {
+  "id": "oos_test:55",
+  "text": "can you give me the most current market news"
+ },
+ {
+  "id": "oos_test:56",
+  "text": "did the supreme court nominee get approvedu"
+ },
+ {
+  "id": "oos_test:57",
+  "text": "which company has gone up the most today"
+ },
+ {
+  "id": "oos_test:58",
+  "text": "who were the superbowl 23 champions"
+ },
+ {
+  "id": "oos_test:59",
+  "text": "can you tell me how to clean a fish tank"
+ },
+ {
+  "id": "oos_test:60",
+  "text": "open cnn websiteo"
+ },
+ {
+  "id": "oos_test:61",
+  "text": "how do i make my android phone more secure"
+ },
+ {
+  "id": "oos_test:62",
+  "text": "i need to update my address"
+ },
+ {
+  "id": "oos_test:63",
+  "text": "what is that crunchy stuff on creme bruleo"
+ },
+ {
+  "id": "oos_test:64",
+  "text": "which airports do southwest service around the greater new york city area"
+ },
+ {
+  "id": "oos_test:65",
+  "text": "can you retrieve client d's file please"
+ },
+ {
+  "id": "oos_test:66",
+  "text": "can you list all channels of a certain category"
+ },
+ {
+  "id": "oos_test:67",
+  "text": "where does jelly come from"
+ },
+ {
+  "id": "oos_test:68",
+  "text": "can you tell me the s&p average"
+ },
+ {
+  "id": "oos_test:69",
+  "text": "how would you rate the airport i am traveling to"
+ },
+ {
+  "id": "oos_test:70",
+  "text": "am i too old to be a sugar babyo"
+ },
+ {
+  "id": "oos_test:71",
+  "text": "what was the closing number of the nasdaq today"
+ },
+ {
+  "id": "oos_test:72",
+  "text": "has ko gone up or down"
+ },
+ {
+  "id": "oos_test:73",
+  "text": "how many cars average are on the road daily"
+ },
+ {
+  "id": "oos_test:74",
+  "text": "what does the plus sign mean on my dashboard"
+ },
+ {
+  "id": "oos_test:75",
+  "text": "how is ford's stock doing"
+ },
+ {
+  "id": "oos_test:76",
+  "text": "what is my checking account number"
+ },
+ {
+  "id": "oos_test:77",
+  "text": "when should i remove my snow tires"
+ },
+ {
+  "id": "oos_test:78",
+  "text": "which stocks gained the most today"
+ },
+ {
+  "id": "oos_test:79",
+  "text": "what is the fee for a cash advance"
+ },
+ {
+  "id": "oos_test:80",
+  "text": "tell me about the earthquake in california that happened this morning"
+ },
+ {
+  "id": "oos_test:81",
+  "text": "change color contrast"
+ },
+ {
+  "id": "oos_test:82",
+  "text": "what is the golden ratio's number"
+ },
+ {
+  "id": "oos_test:83",
+  "text": "is the bank open on mlk day"
+ },
+ {
+  "id": "oos_test:84",
+  "text": "can i deposit a check"
+ },
+ {
+  "id": "oos_test:85",
+  "text": "from the second of the left ,the pink one"
+ },
+ {
+  "id": "oos_test:86",
+  "text": "go and check the fridge"
+ },
+ {
+  "id": "oos_test:87",
+  "text": "can you tell me the score of the heat game"
+ },
+ {
+  "id": "oos_test:88",
+  "text": "can you mark this note as important"
+ },
+ {
+  "id": "oos_test:89",
+  "text": "can you tell me how to multiply two fractions"
+ },
+ {
+  "id": "oos_test:90",
+  "text": "i want to find a new car under $25000"
+ },
+ {
+  "id": "oos_test:91",
+  "text": "when is the next full moon"
+ },
+ {
+  "id": "oos_test:92",
+  "text": "how do i change the windshield wipers"
+ },
+ {
+  "id": "oos_test:93",
+  "text": "why is the sky blue"
+ },
+ {
+  "id": "oos_test:94",
+  "text": "should i do a complete stop at red lights"
+ },
+ {
+  "id": "oos_test:95",
+  "text": "are all televisions high definition"
+ },
+ {
+  "id": "oos_test:96",
+  "text": "can you tell me today's headlines pleasei"
+ },
+ {
+  "id": "oos_test:97",
+  "text": "who invented custardo"
+ },
+ {
+  "id": "oos_test:98",
+  "text": "how to be millionare"
+ },
+ {
+  "id": "oos_test:99",
+  "text": "when does the stock market update"
+ },
+ {
+  "id": "oos_test:100",
+  "text": "can you tell me how to get gum out of my rug"
+ },
+ {
+  "id": "oos_test:101",
+  "text": "how can i get a better rate on my card"
+ },
+ {
+  "id": "oos_test:102",
+  "text": "open up internet browser"
+ },
+ {
+  "id": "oos_test:103",
+  "text": "it is white colour"
+ },
+ {
+  "id": "oos_test:104",
+  "text": "what makes pi so mathematically important"
+ },
+ {
+  "id": "oos_test:105",
+  "text": "why can you have the square root of a negative number"
+ },
+ {
+  "id": "oos_test:106",
+  "text": "how much time do i have left on my 0% apr"
+ },
+ {
+  "id": "oos_test:107",
+  "text": "what are the highest-rated android phones"
+ },
+ {
+  "id": "oos_test:108",
+  "text": "what time do i need to arrive to make it on time"
+ },
+ {
+  "id": "oos_test:109",
+  "text": "find articles about the protests in parisi"
+ },
+ {
+  "id": "oos_test:110",
+  "text": "can you tell me how fast the average airplane enroute to california goes"
+ },
+ {
+  "id": "oos_test:111",
+  "text": "how many hurricanes are in an average hurricane season"
+ },
+ {
+  "id": "oos_test:112",
+  "text": "how does my current htc phone compare to other android phones"
+ },
+ {
+  "id": "oos_test:113",
+  "text": "what movies are available"
+ },
+ {
+  "id": "oos_test:114",
+  "text": "how many items are in a bakers dozen"
+ },
+ {
+  "id": "oos_test:115",
+  "text": "what articles are written at the cnn site about the women's march"
+ },
+ {
+  "id": "oos_test:116",
+  "text": "when does napa close"
+ },
+ {
+  "id": "oos_test:117",
+  "text": "what is the current price of tsla"
+ },
+ {
+  "id": "oos_test:118",
+  "text": "when will world war 3 begin"
+ },
+ {
+  "id": "oos_test:119",
+  "text": "what's going on in the world today"
+ },
+ {
+  "id": "oos_test:120",
+  "text": "what battery percentage is my phone at"
+ },
+ {
+  "id": "oos_test:121",
+  "text": "can you sign out of my bank login"
+ },
+ {
+  "id": "oos_test:122",
+  "text": "what is one standard deviation"
+ },
+ {
+  "id": "oos_test:123",
+  "text": "has the market been up or down since the beginning of this year"
+ },
+ {
+  "id": "oos_test:124",
+  "text": "how many moons does mars have"
+ },
+ {
+  "id": "oos_test:125",
+  "text": "what is the cashback rate for my credit card"
+ },
+ {
+  "id": "oos_test:126",
+  "text": "who has the best record in the nba"
+ },
+ {
+  "id": "oos_test:127",
+  "text": "how long is the bank open until"
+ },
+ {
+  "id": "oos_test:128",
+  "text": "what are some good games for my android phone"
+ },
+ {
+  "id": "oos_test:129",
+  "text": "can my grace period be extended any possible way"
+ },
+ {
+  "id": "oos_test:130",
+  "text": "how much over will overdraft protection cover"
+ },
+ {
+  "id": "oos_test:131",
+  "text": "how fast am i going"
+ },
+ {
+  "id": "oos_test:132",
+  "text": "who was the first person to discover cells"
+ },
+ {
+  "id": "oos_test:133",
+  "text": "how many people died in yesterday's storm"
+ },
+ {
+  "id": "oos_test:134",
+  "text": "how much memory do i have left on this phone"
+ },
+ {
+  "id": "oos_test:135",
+  "text": "can i set up mobile deposits"
+ },
+ {
+  "id": "oos_test:136",
+  "text": "sell three calls of of nvda"
+ },
+ {
+  "id": "oos_test:137",
+  "text": "what bills is congress talking about passing or blocking today"
+ },
+ {
+  "id": "oos_test:138",
+  "text": "how much data does my phone have left this month"
+ },
+ {
+  "id": "oos_test:139",
+  "text": "how do i add someone to my account"
+ },
+ {
+  "id": "oos_test:140",
+  "text": "how much money would my house sell for"
+ },
+ {
+  "id": "oos_test:141",
+  "text": "how do i install new cabinets"
+ },
+ {
+  "id": "oos_test:142",
+  "text": "is there a fee for cancelling a flight i've booked"
+ },
+ {
+  "id": "oos_test:143",
+  "text": "delete the contact uncle john from my phone"
+ },
+ {
+  "id": "oos_test:144",
+  "text": "search my contacts for the auto repair place"
+ },
+ {
+  "id": "oos_test:145",
+  "text": "does my carrier have coverage in europe"
+ },
+ {
+  "id": "oos_test:146",
+  "text": "is there a cheaper rate with another carrier for my mobile"
+ },
+ {
+  "id": "oos_test:147",
+  "text": "what are the limits in my phone plan"
+ },
+ {
+  "id": "oos_test:148",
+  "text": "is there a way to change your houses address"
+ },
+ {
+  "id": "oos_test:149",
+  "text": "does dhl deliver to my address"
+ },
+ {
+  "id": "oos_test:150",
+  "text": "how frequently is the bus running today"
+ },
+ {
+  "id": "oos_test:151",
+  "text": "is there a better bus route i should be taking"
+ },
+ {
+  "id": "oos_test:152",
+  "text": "what stores are at my local mall"
+ },
+ {
+  "id": "oos_test:153",
+  "text": "i need to get kalee added to my phone plan"
+ },
+ {
+  "id": "oos_test:154",
+  "text": "what is the price of other company's similar phone plans"
+ },
+ {
+  "id": "oos_test:155",
+  "text": "how long do i have to wait to get my refund"
+ },
+ {
+  "id": "oos_test:156",
+  "text": "how long does it take the irs to issue a tax refund"
+ },
+ {
+  "id": "oos_test:157",
+  "text": "do you know if it is possible to close my savings account"
+ },
+ {
+  "id": "oos_test:158",
+  "text": "how hard is it to close a bank account at wells fargo"
+ },
+ {
+  "id": "oos_test:159",
+  "text": "add my wife as an authorized user to checking account 20905432"
+ },
+ {
+  "id": "oos_test:160",
+  "text": "i would like to upgrade to full coverage for my car"
+ },
+ {
+  "id": "oos_test:161",
+  "text": "who has the cheapest insurance for my model car in the area"
+ },
+ {
+  "id": "oos_test:162",
+  "text": "tell me the value on my current car"
+ },
+ {
+  "id": "oos_test:163",
+  "text": "where can i list my vehicle for sell"
+ },
+ {
+  "id": "oos_test:164",
+  "text": "what is the price to buy more data on my phone"
+ },
+ {
+  "id": "oos_test:165",
+  "text": "i need to add a person to my bank account"
+ },
+ {
+  "id": "oos_test:166",
+  "text": "who is the best local real estate agent"
+ },
+ {
+  "id": "oos_test:167",
+  "text": "i want to install new tiles in my kitchen"
+ },
+ {
+  "id": "oos_test:168",
+  "text": "what's the way for delta to cancel a flight"
+ },
+ {
+  "id": "oos_test:169",
+  "text": "read the phone number for mom in my phone contacts"
+ },
+ {
+  "id": "oos_test:170",
+  "text": "create a contact labeled mom"
+ },
+ {
+  "id": "oos_test:171",
+  "text": "do other providers have better coverage than my cell carrier"
+ },
+ {
+  "id": "oos_test:172",
+  "text": "does centurytel offer any better plans than the one i'm on"
+ },
+ {
+  "id": "oos_test:173",
+  "text": "what's going on in the world today, anything major"
+ },
+ {
+  "id": "oos_test:174",
+  "text": "what is the extra digits that are sometimes included on my zip code"
+ },
+ {
+  "id": "oos_test:175",
+  "text": "what's the extended zipcode for my address"
+ },
+ {
+  "id": "oos_test:176",
+  "text": "is there an alternate bus stop close to my home i can use"
+ },
+ {
+  "id": "oos_test:177",
+  "text": "what stores are in the local mall"
+ },
+ {
+  "id": "oos_test:178",
+  "text": "add mary to my phone plan, please"
+ },
+ {
+  "id": "oos_test:179",
+  "text": "how much is it to get more data on my phone plan"
+ },
+ {
+  "id": "oos_test:180",
+  "text": "can i use direct deposit for my tax refund"
+ },
+ {
+  "id": "oos_test:181",
+  "text": "how much of a refund will i get this year"
+ },
+ {
+  "id": "oos_test:182",
+  "text": "please take all my money out of my checking account and close the account"
+ },
+ {
+  "id": "oos_test:183",
+  "text": "what are cars like mine selling for online"
+ },
+ {
+  "id": "oos_test:184",
+  "text": "what's the blue book value of my car"
+ },
+ {
+  "id": "oos_test:185",
+  "text": "what are the last 4 digits of my credit card number"
+ },
+ {
+  "id": "oos_test:186",
+  "text": "switch over to low power mode to preserve battery life"
+ },
+ {
+  "id": "oos_test:187",
+  "text": "show me the most popular nonfiction book currently on the market"
+ },
+ {
+  "id": "oos_test:188",
+  "text": "can you recommend some fiction books"
+ },
+ {
+  "id": "oos_test:189",
+  "text": "how can i repair a broken watch"
+ },
+ {
+  "id": "oos_test:190",
+  "text": "what's out at the theaters right now"
+ },
+ {
+  "id": "oos_test:191",
+  "text": "what is the most popular movie currently in theaters"
+ },
+ {
+  "id": "oos_test:192",
+  "text": "what is the cheapest new car for this year"
+ },
+ {
+  "id": "oos_test:193",
+  "text": "show me new cars with the highest safety rating"
+ },
+ {
+  "id": "oos_test:194",
+  "text": "i am looking for a suit for work"
+ },
+ {
+  "id": "oos_test:195",
+  "text": "i need to find a black suit under $100"
+ },
+ {
+  "id": "oos_test:196",
+  "text": "what is a good laptop for gaming"
+ },
+ {
+  "id": "oos_test:197",
+  "text": "show me laptops for sale that are under $2,000"
+ },
+ {
+  "id": "oos_test:198",
+  "text": "which element on the periodic table is k"
+ },
+ {
+  "id": "oos_test:199",
+  "text": "what kind of bonds do molecules have"
+ },
+ {
+  "id": "oos_test:200",
+  "text": "how much is my car worth used"
+ },
+ {
+  "id": "oos_test:201",
+  "text": "look up prices for parking at the airport over the weekend"
+ },
+ {
+  "id": "oos_test:202",
+  "text": "what is the best way for dealing with the airport"
+ },
+ {
+  "id": "oos_test:203",
+  "text": "what are my hours this week at work"
+ },
+ {
+  "id": "oos_test:204",
+  "text": "can you check my voicemail"
+ },
+ {
+  "id": "oos_test:205",
+  "text": "how many voicemails are currently in my inbox"
+ },
+ {
+  "id": "oos_test:206",
+  "text": "i would like to know how long a charge is suppose to last on my phone"
+ },
+ {
+  "id": "oos_test:207",
+  "text": "check battery health on this device"
+ },
+ {
+  "id": "oos_test:208",
+  "text": "what is a well reviewed book for a teenage girl to read"
+ },
+ {
+  "id": "oos_test:209",
+  "text": "i want to find new cyberpunk fiction books"
+ },
+ {
+  "id": "oos_test:210",
+  "text": "what channel is cw on"
+ },
+ {
+  "id": "oos_test:211",
+  "text": "what is the most rented movie this week"
+ },
+ {
+  "id": "oos_test:212",
+  "text": "what is a good movie to go see in theaters for a family with young kids"
+ },
+ {
+  "id": "oos_test:213",
+  "text": "i would like to find a stylish suit for a party"
+ },
+ {
+  "id": "oos_test:214",
+  "text": "can you give me suggestions for a professional suit under $200"
+ },
+ {
+  "id": "oos_test:215",
+  "text": "when is it cheapest to travel to hawaii"
+ },
+ {
+  "id": "oos_test:216",
+  "text": "i need a laptop with 16gb of ram"
+ },
+ {
+  "id": "oos_test:217",
+  "text": "what is the best reviewed laptop available on the market"
+ },
+ {
+  "id": "oos_test:218",
+  "text": "give me information about the element carbon and its reactions with hydrogen"
+ },
+ {
+  "id": "oos_test:219",
+  "text": "what is a good chemistry experiment to learn from"
+ },
+ {
+  "id": "oos_test:220",
+  "text": "how much is this years model of my car cost"
+ },
+ {
+  "id": "oos_test:221",
+  "text": "how do i best deal with the airport"
+ },
+ {
+  "id": "oos_test:222",
+  "text": "remind me of the address for my workplace please"
+ },
+ {
+  "id": "oos_test:223",
+  "text": "what time do i have to go to work today"
+ },
+ {
+  "id": "oos_test:224",
+  "text": "how many voicemail messages do i have"
+ },
+ {
+  "id": "oos_test:225",
+  "text": "erase all voicemails in my inbox please"
+ },
+ {
+  "id": "oos_test:226",
+  "text": "can you look up grocery coupons for me"
+ },
+ {
+  "id": "oos_test:227",
+  "text": "what is money used for"
+ },
+ {
+  "id": "oos_test:228",
+  "text": "what are some natural remedies to help ease stress"
+ },
+ {
+  "id": "oos_test:229",
+  "text": "what are some good methods of relieving stress"
+ },
+ {
+  "id": "oos_test:230",
+  "text": "how do you make sure a bridge doesn't fall down"
+ },
+ {
+  "id": "oos_test:231",
+  "text": "what is the median salary for someone with an engineering degree"
+ },
+ {
+  "id": "oos_test:232",
+  "text": "what size pipes are used for sinks"
+ },
+ {
+  "id": "oos_test:233",
+  "text": "why would the water be turned off"
+ },
+ {
+  "id": "oos_test:234",
+  "text": "what is a good sink filter for water"
+ },
+ {
+  "id": "oos_test:235",
+  "text": "what does water taste like"
+ },
+ {
+  "id": "oos_test:236",
+  "text": "are there any sales on groceries today"
+ },
+ {
+  "id": "oos_test:237",
+  "text": "when was my lawn last mowed"
+ },
+ {
+  "id": "oos_test:238",
+  "text": "what store has the best deals going on right now"
+ },
+ {
+  "id": "oos_test:239",
+  "text": "can you tell me the best time to visit downtown when driving"
+ },
+ {
+  "id": "oos_test:240",
+  "text": "am i currently connected to wifi"
+ },
+ {
+  "id": "oos_test:241",
+  "text": "is there an internet outage in my area"
+ },
+ {
+  "id": "oos_test:242",
+  "text": "tell me about personal finance"
+ },
+ {
+  "id": "oos_test:243",
+  "text": "does amazon collect my personal information"
+ },
+ {
+  "id": "oos_test:244",
+  "text": "check the status of my amazon orders for me"
+ },
+ {
+  "id": "oos_test:245",
+  "text": "what is the official language of romania"
+ },
+ {
+  "id": "oos_test:246",
+  "text": "show me the best times to book flights for traveling to another country"
+ },
+ {
+  "id": "oos_test:247",
+  "text": "disconnect from wifi immediately please"
+ },
+ {
+  "id": "oos_test:248",
+  "text": "am i connected to wifi"
+ },
+ {
+  "id": "oos_test:249",
+  "text": "list the contents of my safety deposit box at the bank"
+ },
+ {
+  "id": "oos_test:250",
+  "text": "what's the more secure bank vault"
+ },
+ {
+  "id": "oos_test:251",
+  "text": "what coupons do i have for restaurants"
+ },
+ {
+  "id": "oos_test:252",
+  "text": "how do i make money"
+ },
+ {
+  "id": "oos_test:253",
+  "text": "can you give me some stress management tips"
+ },
+ {
+  "id": "oos_test:254",
+  "text": "how unhealthy is stress"
+ },
+ {
+  "id": "oos_test:255",
+  "text": "what's the best way to build a skyscraper"
+ },
+ {
+  "id": "oos_test:256",
+  "text": "find engineering programs to apply to"
+ },
+ {
+  "id": "oos_test:257",
+  "text": "what kind of glue is used for gluing pipes together"
+ },
+ {
+  "id": "oos_test:258",
+  "text": "check to see how many miles are on my car"
+ },
+ {
+  "id": "oos_test:259",
+  "text": "how do i change my windshield wipers"
+ },
+ {
+  "id": "oos_test:260",
+  "text": "how many ppm of particulate is in my local water"
+ },
+ {
+  "id": "oos_test:261",
+  "text": "what color is water"
+ },
+ {
+  "id": "oos_test:262",
+  "text": "is anything on my grocery list on sale today"
+ },
+ {
+  "id": "oos_test:263",
+  "text": "how long does it take for grass seed to grow on my lawn"
+ },
+ {
+  "id": "oos_test:264",
+  "text": "please activate a wireless hotspot so i can use the internet"
+ },
+ {
+  "id": "oos_test:265",
+  "text": "look up a good broker for mutual funds"
+ },
+ {
+  "id": "oos_test:266",
+  "text": "what are the best personal finance practices"
+ },
+ {
+  "id": "oos_test:267",
+  "text": "will amazon ship an order even if there was a pricing mistake"
+ },
+ {
+  "id": "oos_test:268",
+  "text": "where did mandarin originate from"
+ },
+ {
+  "id": "oos_test:269",
+  "text": "what are some of the most visited countries for people looking to travel abroad"
+ },
+ {
+  "id": "oos_test:270",
+  "text": "tell me which wifi network you are connected to right now"
+ },
+ {
+  "id": "oos_test:271",
+  "text": "what is my current signal strength"
+ },
+ {
+  "id": "oos_test:272",
+  "text": "if i'm locked in a bank vault what's the best way to get out"
+ },
+ {
+  "id": "oos_test:273",
+  "text": "how do i upgrade my operating system"
+ },
+ {
+  "id": "oos_test:274",
+  "text": "how much ram does my computer have"
+ },
+ {
+  "id": "oos_test:275",
+  "text": "is it ok to feed dogs people food"
+ },
+ {
+  "id": "oos_test:276",
+  "text": "how do you fix a leaking sink"
+ },
+ {
+  "id": "oos_test:277",
+  "text": "how do you unclog a toilet"
+ },
+ {
+  "id": "oos_test:278",
+  "text": "can you tell me local crime in my area"
+ },
+ {
+  "id": "oos_test:279",
+  "text": "what's the power consumption of my fridge"
+ },
+ {
+  "id": "oos_test:280",
+  "text": "what is the warranty on my microwave"
+ },
+ {
+  "id": "oos_test:281",
+  "text": "how do i use my microwaves defrost"
+ },
+ {
+  "id": "oos_test:282",
+  "text": "how do you get red wine out of the carpet"
+ },
+ {
+  "id": "oos_test:283",
+  "text": "how do i get stains out of the carpet"
+ },
+ {
+  "id": "oos_test:284",
+  "text": "what is the highest quality carpet available"
+ },
+ {
+  "id": "oos_test:285",
+  "text": "has everyone come home from school"
+ },
+ {
+  "id": "oos_test:286",
+  "text": "what time did my daughter get home from her date"
+ },
+ {
+  "id": "oos_test:287",
+  "text": "is my computer free from viruses"
+ },
+ {
+  "id": "oos_test:288",
+  "text": "are you allowed to call someone a dirty name as part of free speech"
+ },
+ {
+  "id": "oos_test:289",
+  "text": "can you really get arrested for yelling fire in a crowded theater"
+ },
+ {
+  "id": "oos_test:290",
+  "text": "what amendment guarantees the freedom of speech to americans"
+ },
+ {
+  "id": "oos_test:291",
+  "text": "do employers have to honor freedom of speech"
+ },
+ {
+  "id": "oos_test:292",
+  "text": "what's the average score on a round of golf"
+ },
+ {
+  "id": "oos_test:293",
+  "text": "where is the closest driving range"
+ },
+ {
+  "id": "oos_test:294",
+  "text": "when does tiger woods play next"
+ },
+ {
+  "id": "oos_test:295",
+  "text": "how can i improve my golf swing"
+ },
+ {
+  "id": "oos_test:296",
+  "text": "are your step-parent's parents considered your grandparents"
+ },
+ {
+  "id": "oos_test:297",
+  "text": "what's a good gift to get for your grandparents"
+ },
+ {
+  "id": "oos_test:298",
+  "text": "what year did my grandparents get married"
+ },
+ {
+  "id": "oos_test:299",
+  "text": "fun gift ideas to give to grandparents"
+ },
+ {
+  "id": "oos_test:300",
+  "text": "which came first; greek mythology or roman mythology"
+ },
+ {
+  "id": "oos_test:301",
+  "text": "how many greek mythology characters are there"
+ },
+ {
+  "id": "oos_test:302",
+  "text": "who created the world in greek mythology"
+ },
+ {
+  "id": "oos_test:303",
+  "text": "what was hercules the god of"
+ },
+ {
+  "id": "oos_test:304",
+  "text": "how many harry potter books are there"
+ },
+ {
+  "id": "oos_test:305",
+  "text": "what is harry's real name"
+ },
+ {
+  "id": "oos_test:306",
+  "text": "who played ronald weasly"
+ },
+ {
+  "id": "oos_test:307",
+  "text": "how do you repel a bear when you're out on a hike"
+ },
+ {
+  "id": "oos_test:308",
+  "text": "where's the best place to hike in the rockies"
+ },
+ {
+  "id": "oos_test:309",
+  "text": "what should i wear to hike"
+ },
+ {
+  "id": "oos_test:310",
+  "text": "what is the main cause of becoming homeless"
+ },
+ {
+  "id": "oos_test:311",
+  "text": "how many people are jobless in america"
+ },
+ {
+  "id": "oos_test:312",
+  "text": "how many homeless people are there"
+ },
+ {
+  "id": "oos_test:313",
+  "text": "where are most homeless people"
+ },
+ {
+  "id": "oos_test:314",
+  "text": "are indians nowadays reminiscent of a decade ago"
+ },
+ {
+  "id": "oos_test:315",
+  "text": "what were indians like 100 years ago"
+ },
+ {
+  "id": "oos_test:316",
+  "text": "how old is jennifer aniston"
+ },
+ {
+  "id": "oos_test:317",
+  "text": "i need tips on how to overcome insomnia"
+ },
+ {
+  "id": "oos_test:318",
+  "text": "how many people have insomnia"
+ },
+ {
+  "id": "oos_test:319",
+  "text": "what causes dyslexia"
+ },
+ {
+  "id": "oos_test:320",
+  "text": "is insomnia curable"
+ },
+ {
+  "id": "oos_test:321",
+  "text": "what are sigmund freud's most famous books"
+ },
+ {
+  "id": "oos_test:322",
+  "text": "what year was jane austen born"
+ },
+ {
+  "id": "oos_test:323",
+  "text": "where is te lawrence"
+ },
+ {
+  "id": "oos_test:324",
+  "text": "who is jane goodall"
+ },
+ {
+  "id": "oos_test:325",
+  "text": "how long does it take to get your yellow belt in karate"
+ },
+ {
+  "id": "oos_test:326",
+  "text": "what's the most practiced form of mma in the world"
+ },
+ {
+  "id": "oos_test:327",
+  "text": "what is the highest belt in karate"
+ },
+ {
+  "id": "oos_test:328",
+  "text": "where does jiu jitsu originate"
+ },
+ {
+  "id": "oos_test:329",
+  "text": "what's the proper subject verb order in japanese"
+ },
+ {
+  "id": "oos_test:330",
+  "text": "how do i learn more about linguistics"
+ },
+ {
+  "id": "oos_test:331",
+  "text": "what kind of paint do makeup artists use"
+ },
+ {
+  "id": "oos_test:332",
+  "text": "the bus moves with tyre"
+ },
+ {
+  "id": "oos_test:333",
+  "text": "how the bus moves"
+ },
+ {
+  "id": "oos_test:334",
+  "text": "what are some good resources to learn about mental illness"
+ },
+ {
+  "id": "oos_test:335",
+  "text": "are people with a mental illness eligible for disability"
+ },
+ {
+  "id": "oos_test:336",
+  "text": "how many people suffer from mental illness"
+ },
+ {
+  "id": "oos_test:337",
+  "text": "how can i get help for my mental health"
+ },
+ {
+  "id": "oos_test:338",
+  "text": "what's trending now"
+ },
+ {
+  "id": "oos_test:339",
+  "text": "what's the first romantic movie ever made"
+ },
+ {
+  "id": "oos_test:340",
+  "text": "when was the term \"zombie\" first used"
+ },
+ {
+  "id": "oos_test:341",
+  "text": "what kind of traits do vampires have"
+ },
+ {
+  "id": "oos_test:342",
+  "text": "what do mummies eat"
+ },
+ {
+  "id": "oos_test:343",
+  "text": "send information on flood clean up to my phone"
+ },
+ {
+  "id": "oos_test:344",
+  "text": "what's the cost of buying a sump pump"
+ },
+ {
+  "id": "oos_test:345",
+  "text": "recommend a flood clean up service"
+ },
+ {
+  "id": "oos_test:346",
+  "text": "what is the safest model of airplane to fly in"
+ },
+ {
+  "id": "oos_test:347",
+  "text": "what year was the first airplane built in"
+ },
+ {
+  "id": "oos_test:348",
+  "text": "what's the best reviewed local roof repair place"
+ },
+ {
+  "id": "oos_test:349",
+  "text": "what's the best type of plan to upgrade to"
+ },
+ {
+  "id": "oos_test:350",
+  "text": "give me a suggestion for roofers"
+ },
+ {
+  "id": "oos_test:351",
+  "text": "where can i buy new shingles"
+ },
+ {
+  "id": "oos_test:352",
+  "text": "what's the safest pet to be around toddlers"
+ },
+ {
+  "id": "oos_test:353",
+  "text": "why is my dog vomiting after eating"
+ },
+ {
+  "id": "oos_test:354",
+  "text": "tiger"
+ },
+ {
+  "id": "oos_test:355",
+  "text": "what's the average rent of apartments in my city"
+ },
+ {
+  "id": "oos_test:356",
+  "text": "are there any apartments for rent nearby"
+ },
+ {
+  "id": "oos_test:357",
+  "text": "what are apartment prices now"
+ },
+ {
+  "id": "oos_test:358",
+  "text": "what's the highest building in the world"
+ },
+ {
+  "id": "oos_test:359",
+  "text": "where is the closest architecture college"
+ },
+ {
+  "id": "oos_test:360",
+  "text": "where can i submit my architecture plans"
+ },
+ {
+  "id": "oos_test:361",
+  "text": "who is the best architecture"
+ },
+ {
+  "id": "oos_test:362",
+  "text": "please give me a listing of all the bottled water brands in the area"
+ },
+ {
+  "id": "oos_test:363",
+  "text": "what are the lowest prices of bottled water at costco"
+ },
+ {
+  "id": "oos_test:364",
+  "text": "how do they filter pollutants out of bottled water"
+ },
+ {
+  "id": "oos_test:365",
+  "text": "what's the cost of bottled water"
+ },
+ {
+  "id": "oos_test:366",
+  "text": "what's the cost to have a business card printed"
+ },
+ {
+  "id": "oos_test:367",
+  "text": "when can i get a business card printed locally"
+ },
+ {
+  "id": "oos_test:368",
+  "text": "what to use to design my business cards"
+ },
+ {
+  "id": "oos_test:369",
+  "text": "download all the photos off my phone into the cloud"
+ },
+ {
+  "id": "oos_test:370",
+  "text": "tell me about that kind of cameras"
+ },
+ {
+  "id": "oos_test:371",
+  "text": "how much is the new nikon camera"
+ },
+ {
+  "id": "oos_test:372",
+  "text": "what kind of camera should i buy"
+ },
+ {
+  "id": "oos_test:373",
+  "text": "how much candy have i consumed this week"
+ },
+ {
+  "id": "oos_test:374",
+  "text": "how many flavors of mnm's are there"
+ },
+ {
+  "id": "oos_test:375",
+  "text": "who makes milky way bars"
+ },
+ {
+  "id": "oos_test:376",
+  "text": "how safe is it to consume the substance h2o"
+ },
+ {
+  "id": "oos_test:377",
+  "text": "how many elements are on the periodic table"
+ },
+ {
+  "id": "oos_test:378",
+  "text": "what's the chemical composition of a fart"
+ },
+ {
+  "id": "oos_test:379",
+  "text": "what is phosphorus on the periodic table"
+ },
+ {
+  "id": "oos_test:380",
+  "text": "look up some christmas songs for me"
+ },
+ {
+  "id": "oos_test:381",
+  "text": "is espn covering the golden state warriors game"
+ },
+ {
+  "id": "oos_test:382",
+  "text": "how many calories does doing 20 situps burn"
+ },
+ {
+  "id": "oos_test:383",
+  "text": "what is a normal resting heart rate"
+ },
+ {
+  "id": "oos_test:384",
+  "text": "should i run every day"
+ },
+ {
+  "id": "oos_test:385",
+  "text": "how many months do i left in my hbo subscription"
+ },
+ {
+  "id": "oos_test:386",
+  "text": "when does game of thrones return on hbo"
+ },
+ {
+  "id": "oos_test:387",
+  "text": "cancel my subscription to scientific american"
+ },
+ {
+  "id": "oos_test:388",
+  "text": "i'd like to renew my subscription to playboy"
+ },
+ {
+  "id": "oos_test:389",
+  "text": "what are popular lifestyle magazines"
+ },
+ {
+  "id": "oos_test:390",
+  "text": "what are popular sports magazines"
+ },
+ {
+  "id": "oos_test:391",
+  "text": "how can i use make up to cover a cut on my cheek"
+ },
+ {
+  "id": "oos_test:392",
+  "text": "what's the best make-up to cover a black eye"
+ },
+ {
+  "id": "oos_test:393",
+  "text": "send me videos of how to do a smoky eye"
+ },
+ {
+  "id": "oos_test:394",
+  "text": "whats the best rated lipstick"
+ },
+ {
+  "id": "oos_test:395",
+  "text": "when will the government file another antitrust suit against microsoft"
+ },
+ {
+  "id": "oos_test:396",
+  "text": "when will microsoft drop support for windows 7"
+ },
+ {
+  "id": "oos_test:397",
+  "text": "how do i make a sentence have stylized strike out in microsoft word"
+ },
+ {
+  "id": "oos_test:398",
+  "text": "how can i control where microsoft word inserts a page break"
+ },
+ {
+  "id": "oos_test:399",
+  "text": "what are the current prices for mushrooms"
+ },
+ {
+  "id": "oos_test:400",
+  "text": "what bands are touring in my city this week"
+ },
+ {
+  "id": "oos_test:401",
+  "text": "i need for you to look up some of the major gods in mythology"
+ },
+ {
+  "id": "oos_test:402",
+  "text": "what was the original name of jesus in egyptian myth"
+ },
+ {
+  "id": "oos_test:403",
+  "text": "was the god osiris a titan or an old god"
+ },
+ {
+  "id": "oos_test:404",
+  "text": "tell me who aphrodite is"
+ },
+ {
+  "id": "oos_test:405",
+  "text": "what activities can i to do outside today"
+ },
+ {
+  "id": "oos_test:406",
+  "text": "when will the daffodils bloom this year"
+ },
+ {
+  "id": "oos_test:407",
+  "text": "what zelda games are available on the switch"
+ },
+ {
+  "id": "oos_test:408",
+  "text": "i want to buy some nintendo switch game"
+ },
+ {
+  "id": "oos_test:409",
+  "text": "how much does a nintendo switch cost"
+ },
+ {
+  "id": "oos_test:410",
+  "text": "show me a cool nintendo switch game"
+ },
+ {
+  "id": "oos_test:411",
+  "text": "can you check how many miles i walked today when i was out get the info from my phone"
+ },
+ {
+  "id": "oos_test:412",
+  "text": "can you check how many steps i have walked in the last week from my phone app"
+ },
+ {
+  "id": "oos_test:413",
+  "text": "what should i do if it hurts when i pee"
+ },
+ {
+  "id": "oos_test:414",
+  "text": "what are the symptoms of cancer"
+ },
+ {
+  "id": "oos_test:415",
+  "text": "how many pokemon have i caught in my pokemon go app"
+ },
+ {
+  "id": "oos_test:416",
+  "text": "tell me what pokemon is"
+ },
+ {
+  "id": "oos_test:417",
+  "text": "has the school my kids go to been in the news for any reason"
+ },
+ {
+  "id": "oos_test:418",
+  "text": "are there any school closures today"
+ },
+ {
+  "id": "oos_test:419",
+  "text": "how long is the school year"
+ },
+ {
+  "id": "oos_test:420",
+  "text": "why did a bunch of christians go off murdering muslims in the middle ages"
+ },
+ {
+  "id": "oos_test:421",
+  "text": "what was the point of the crusades"
+ },
+ {
+  "id": "oos_test:422",
+  "text": "what other countries speak the english language"
+ },
+ {
+  "id": "oos_test:423",
+  "text": "why doesn't english have consistent forms"
+ },
+ {
+  "id": "oos_test:424",
+  "text": "do they speak english in australia"
+ },
+ {
+  "id": "oos_test:425",
+  "text": "who teaches english near me"
+ },
+ {
+  "id": "oos_test:426",
+  "text": "can you see what the budget for the united states military was in 2018"
+ },
+ {
+  "id": "oos_test:427",
+  "text": "can you look at what the oldest age is someone can enlist in the army"
+ },
+ {
+  "id": "oos_test:428",
+  "text": "how many years do you need to be in the army to get a college tuition"
+ },
+ {
+  "id": "oos_test:429",
+  "text": "where are most the servicemen right now"
+ },
+ {
+  "id": "oos_test:430",
+  "text": "what movies are playing at my local cinemax"
+ },
+ {
+  "id": "oos_test:431",
+  "text": "what time is a star is born showing"
+ },
+ {
+  "id": "oos_test:432",
+  "text": "what movies are playing"
+ },
+ {
+  "id": "oos_test:433",
+  "text": "can you get me the scores from the games that were played last night"
+ },
+ {
+  "id": "oos_test:434",
+  "text": "has there been any times when lebron james was arrested"
+ },
+ {
+  "id": "oos_test:435",
+  "text": "what are the new player rankings for the nhl"
+ },
+ {
+  "id": "oos_test:436",
+  "text": "who won in the gsw vs suns game last night"
+ },
+ {
+  "id": "oos_test:437",
+  "text": "give me the news on the newspaper today"
+ },
+ {
+  "id": "oos_test:438",
+  "text": "tell me a list of my local papers"
+ },
+ {
+  "id": "oos_test:439",
+  "text": "what's the newspaper today"
+ },
+ {
+  "id": "oos_test:440",
+  "text": "would you let me know who won the gold metal in gymnastics at the olympics"
+ },
+ {
+  "id": "oos_test:441",
+  "text": "at the olympics, what country won the gold medal in basketball"
+ },
+ {
+  "id": "oos_test:442",
+  "text": "where will the next olympics be hosted"
+ },
+ {
+  "id": "oos_test:443",
+  "text": "when are the winter olympic games"
+ },
+ {
+  "id": "oos_test:444",
+  "text": "what films are in the running for best song at this year's oscars"
+ },
+ {
+  "id": "oos_test:445",
+  "text": "who are the nominees for best picture this year"
+ },
+ {
+  "id": "oos_test:446",
+  "text": "give me information on the oscars"
+ },
+ {
+  "id": "oos_test:447",
+  "text": "tell me about the oscars"
+ },
+ {
+  "id": "oos_test:448",
+  "text": "why did we elect this woman who made amazon leave and take its jobs with it"
+ },
+ {
+  "id": "oos_test:449",
+  "text": "how many people live in vermillion"
+ },
+ {
+  "id": "oos_test:450",
+  "text": "what's a good way to organize my tools in my garage"
+ },
+ {
+  "id": "oos_test:451",
+  "text": "what's the cost of a good pegboard"
+ },
+ {
+  "id": "oos_test:452",
+  "text": "is the stop sign around the corner still knocked over"
+ },
+ {
+  "id": "oos_test:453",
+  "text": "is there a fork in the road sign at main & 1st avenue"
+ },
+ {
+  "id": "oos_test:454",
+  "text": "are there cameras hidden in stop lights"
+ },
+ {
+  "id": "oos_test:455",
+  "text": "what does a flashing yellow light mean"
+ },
+ {
+  "id": "oos_test:456",
+  "text": "what is the deadline to register at university of georgia"
+ },
+ {
+  "id": "oos_test:457",
+  "text": "what universities are nearby to me and highly rated"
+ },
+ {
+  "id": "oos_test:458",
+  "text": "what are the top rated universities within my state"
+ },
+ {
+  "id": "oos_test:459",
+  "text": "will the anti-vaxxers die off if no one gives them vaccines"
+ },
+ {
+  "id": "oos_test:460",
+  "text": "how safe is the herpes vaccine they give women"
+ },
+ {
+  "id": "oos_test:461",
+  "text": "where can i get the flu shot"
+ },
+ {
+  "id": "oos_test:462",
+  "text": "when do i have to get the mmr"
+ },
+ {
+  "id": "oos_test:463",
+  "text": "how much are the clorox detergents"
+ },
+ {
+  "id": "oos_test:464",
+  "text": "when will nightwish be touring through my city"
+ },
+ {
+  "id": "oos_test:465",
+  "text": "does iron maiden have any new releases"
+ },
+ {
+  "id": "oos_test:466",
+  "text": "tell me something about linkin park"
+ },
+ {
+  "id": "oos_test:467",
+  "text": "i need you to check the resistance of a coil wrapped 6 times with an id of 25mm"
+ },
+ {
+  "id": "oos_test:468",
+  "text": "can you tell me whether the knicks will play the lakers this week"
+ },
+ {
+  "id": "oos_test:469",
+  "text": "what do you do if your 4 year old just ate playdoh"
+ },
+ {
+  "id": "oos_test:470",
+  "text": "when do the kids get out of school today"
+ },
+ {
+  "id": "oos_test:471",
+  "text": "please check up on my son's homework"
+ },
+ {
+  "id": "oos_test:472",
+  "text": "give me a list of the top three landscaping companies nearby"
+ },
+ {
+  "id": "oos_test:473",
+  "text": "when should you mow your grass after it's rained"
+ },
+ {
+  "id": "oos_test:474",
+  "text": "how much sugar was in my urine this morning"
+ },
+ {
+  "id": "oos_test:475",
+  "text": "what's a good blouse to wear with pink shoes"
+ },
+ {
+  "id": "oos_test:476",
+  "text": "what are the best jeans in my size"
+ },
+ {
+  "id": "oos_test:477",
+  "text": "how much does it cost to spay a puppy"
+ },
+ {
+  "id": "oos_test:478",
+  "text": "what's the best style shoe to wear to the prom"
+ },
+ {
+  "id": "oos_test:479",
+  "text": "can you tell me about that tornado that just tore up alabama"
+ },
+ {
+  "id": "oos_test:480",
+  "text": "tell me what the hot topics are that are trending on google"
+ },
+ {
+  "id": "oos_test:481",
+  "text": "what happened with the summit between trump and jong"
+ },
+ {
+  "id": "oos_test:482",
+  "text": "check and see what the local news in broadcasting"
+ },
+ {
+  "id": "oos_test:483",
+  "text": "please uninstall this intrusive social media app"
+ },
+ {
+  "id": "oos_test:484",
+  "text": "upload the pictures to the correct album"
+ },
+ {
+  "id": "oos_test:485",
+  "text": "i have a super runny nose and want to find a doctor"
+ },
+ {
+  "id": "oos_test:486",
+  "text": "which medicine to relieve my cough"
+ },
+ {
+  "id": "oos_test:487",
+  "text": "how do i get rid of blocked nose at home"
+ },
+ {
+  "id": "oos_test:488",
+  "text": "how do i get rid of sore throat at home"
+ },
+ {
+  "id": "oos_test:489",
+  "text": "how can i make my living room appear to be bigger than it is"
+ },
+ {
+  "id": "oos_test:490",
+  "text": "i'd like to find some curtains that look good in this room"
+ },
+ {
+  "id": "oos_test:491",
+  "text": "how to paint walls"
+ },
+ {
+  "id": "oos_test:492",
+  "text": "how to fix walls"
+ },
+ {
+  "id": "oos_test:493",
+  "text": "can you tell me the purpose of a safe deposit box"
+ },
+ {
+  "id": "oos_test:494",
+  "text": "can you store a gun in a safe deposit box"
+ },
+ {
+  "id": "oos_test:495",
+  "text": "how do you get a safe deposit box"
+ },
+ {
+  "id": "oos_test:496",
+  "text": "look up how to apply cream to smooth itchiness"
+ },
+ {
+  "id": "oos_test:497",
+  "text": "how do i deal with angry, painful red bumps"
+ },
+ {
+  "id": "oos_test:498",
+  "text": "where should i go if i hammered a nail through my foot"
+ },
+ {
+  "id": "oos_test:499",
+  "text": "how long does it take to call an ambulance"
+ },
+ {
+  "id": "oos_test:500",
+  "text": "how to get the right medicine"
+ },
+ {
+  "id": "oos_test:501",
+  "text": "how to take care of the sick"
+ },
+ {
+  "id": "oos_test:502",
+  "text": "do vegans really want to blame cows for climate change"
+ },
+ {
+  "id": "oos_test:503",
+  "text": "give me a recommendation for a local landscaper"
+ },
+ {
+  "id": "oos_test:504",
+  "text": "i need to hire a grass treatment specialist"
+ },
+ {
+  "id": "oos_test:505",
+  "text": "when is the best time of year for pruning"
+ },
+ {
+  "id": "oos_test:506",
+  "text": "find someone local who mows lawns"
+ },
+ {
+  "id": "oos_test:507",
+  "text": "create a speech on historical events surrounding albert einstein"
+ },
+ {
+  "id": "oos_test:508",
+  "text": "create a pamphlet on albert einsteins childhood"
+ },
+ {
+  "id": "oos_test:509",
+  "text": "what is albert einstein famous for"
+ },
+ {
+  "id": "oos_test:510",
+  "text": "when was albert einstein born"
+ },
+ {
+  "id": "oos_test:511",
+  "text": "when will cameron release the sequel to avatar"
+ },
+ {
+  "id": "oos_test:512",
+  "text": "can you please start the avatar movie for me"
+ },
+ {
+  "id": "oos_test:513",
+  "text": "is the movie avatar culturally insensitive"
+ },
+ {
+  "id": "oos_test:514",
+  "text": "could you create a new avatar for me"
+ },
+ {
+  "id": "oos_test:515",
+  "text": "does bill gates still have any material participation in the running of microsoft"
+ },
+ {
+  "id": "oos_test:516",
+  "text": "tell me more about bill gates"
+ },
+ {
+  "id": "oos_test:517",
+  "text": "give me the weather forecast for today"
+ },
+ {
+  "id": "oos_test:518",
+  "text": "what is bitcoin trading for currently"
+ },
+ {
+  "id": "oos_test:519",
+  "text": "where can i have a black and white photo blown up to poster size"
+ },
+ {
+  "id": "oos_test:520",
+  "text": "adjust the contrast of the black and white photos"
+ },
+ {
+  "id": "oos_test:521",
+  "text": "can you colorize a black and white photo"
+ },
+ {
+  "id": "oos_test:522",
+  "text": "add color to the black and white photos"
+ },
+ {
+  "id": "oos_test:523",
+  "text": "how many people were killed in the boston marathon by bombers"
+ },
+ {
+  "id": "oos_test:524",
+  "text": "compile a list of historical events from the boston marathon"
+ },
+ {
+  "id": "oos_test:525",
+  "text": "time my next run at the boston marathon"
+ },
+ {
+  "id": "oos_test:526",
+  "text": "when will the next boston marathon be"
+ },
+ {
+  "id": "oos_test:527",
+  "text": "look up which animal is represented in this year's chinese new year"
+ },
+ {
+  "id": "oos_test:528",
+  "text": "what is the animal for this chinese new year"
+ },
+ {
+  "id": "oos_test:529",
+  "text": "would it be legal to have battles to the death in a homemade colosseum"
+ },
+ {
+  "id": "oos_test:530",
+  "text": "do the romans still use the colosseum for anything today"
+ },
+ {
+  "id": "oos_test:531",
+  "text": "where is the colosseum"
+ },
+ {
+  "id": "oos_test:532",
+  "text": "can you really time your compressions to queen's \"another one bites the dust\""
+ },
+ {
+  "id": "oos_test:533",
+  "text": "do i have to put my mouth on theirs when doing cpr"
+ },
+ {
+  "id": "oos_test:534",
+  "text": "what is the breath to compression ratio for cpr"
+ },
+ {
+  "id": "oos_test:535",
+  "text": "tell me how to perform cpr"
+ },
+ {
+  "id": "oos_test:536",
+  "text": "create a for-while loop that continues 10 times"
+ },
+ {
+  "id": "oos_test:537",
+  "text": "where are classes taught near me for c++"
+ },
+ {
+  "id": "oos_test:538",
+  "text": "declare a variable named \"golf\""
+ },
+ {
+  "id": "oos_test:539",
+  "text": "how do i write c++"
+ },
+ {
+  "id": "oos_test:540",
+  "text": "is the depiction of gold mining in the movie the ballad of buster scruggs realistic"
+ },
+ {
+  "id": "oos_test:541",
+  "text": "do you own the mineral rights to gold nuggets you find in your back yard"
+ },
+ {
+  "id": "oos_test:542",
+  "text": "where is the best place to mine for gold"
+ },
+ {
+  "id": "oos_test:543",
+  "text": "when was the gold rush"
+ },
+ {
+  "id": "oos_test:544",
+  "text": "make a list of facts about green book"
+ },
+ {
+  "id": "oos_test:545",
+  "text": "find out when green book was created"
+ },
+ {
+  "id": "oos_test:546",
+  "text": "who wrote green book"
+ },
+ {
+  "id": "oos_test:547",
+  "text": "what's the main export by the peoples of greenland"
+ },
+ {
+  "id": "oos_test:548",
+  "text": "how many people still live on greenland"
+ },
+ {
+  "id": "oos_test:549",
+  "text": "scan my photos and tell me which hair style is most suiting for my face"
+ },
+ {
+  "id": "oos_test:550",
+  "text": "create several photos of me with different hair styles"
+ },
+ {
+  "id": "oos_test:551",
+  "text": "latest hair styles for long natural hair"
+ },
+ {
+  "id": "oos_test:552",
+  "text": "show video of hair styling tips"
+ },
+ {
+  "id": "oos_test:553",
+  "text": "did a man really die trying to be loved by a horse"
+ },
+ {
+  "id": "oos_test:554",
+  "text": "how many acres do you need to buy a horse"
+ },
+ {
+  "id": "oos_test:555",
+  "text": "get me a picture of a horse"
+ },
+ {
+  "id": "oos_test:556",
+  "text": "does eating poop really help your gut fauna"
+ },
+ {
+  "id": "oos_test:557",
+  "text": "is there a vaccine for ebola"
+ },
+ {
+  "id": "oos_test:558",
+  "text": "find out how many latin scholars there are at the university of chicago"
+ },
+ {
+  "id": "oos_test:559",
+  "text": "make a list of side hustles i could start today to make a little extra cash"
+ },
+ {
+  "id": "oos_test:560",
+  "text": "make a list of stocks that would be good to invest in to start making money"
+ },
+ {
+  "id": "oos_test:561",
+  "text": "how can i add my signature to the proposed bill legalizing prostitution"
+ },
+ {
+  "id": "oos_test:562",
+  "text": "what's the roi doing arbitrage with ebay"
+ },
+ {
+  "id": "oos_test:563",
+  "text": "do women still bare their chests for beads at mardi gras"
+ },
+ {
+  "id": "oos_test:564",
+  "text": "when's the next mardi gras going to be"
+ },
+ {
+  "id": "oos_test:565",
+  "text": "what is the best way to kill microbes"
+ },
+ {
+  "id": "oos_test:566",
+  "text": "start a speech on microbes for me"
+ },
+ {
+  "id": "oos_test:567",
+  "text": "inform me of what microbes are"
+ },
+ {
+  "id": "oos_test:568",
+  "text": "what is the top 10 best modems"
+ },
+ {
+  "id": "oos_test:569",
+  "text": "what is the time signature for the castlevania song bloody tears"
+ },
+ {
+  "id": "oos_test:570",
+  "text": "can you tell me what key frank zappa's keep it greasy is in"
+ },
+ {
+  "id": "oos_test:571",
+  "text": "please go to wikipedia and search for articles related to nsa"
+ },
+ {
+  "id": "oos_test:572",
+  "text": "can the nsa crack the encryption on my iphone"
+ },
+ {
+  "id": "oos_test:573",
+  "text": "does the nsa listen to me"
+ },
+ {
+  "id": "oos_test:574",
+  "text": "could you pull up the nsa website"
+ },
+ {
+  "id": "oos_test:575",
+  "text": "can you see if the octopus eggs have hatched yet"
+ },
+ {
+  "id": "oos_test:576",
+  "text": "what do you do if your cat eats an octopus"
+ },
+ {
+  "id": "oos_test:577",
+  "text": "find out which museum houses the most post modern art in new york state"
+ },
+ {
+  "id": "oos_test:578",
+  "text": "look up the top 3 selling post modern artists in the united states"
+ },
+ {
+  "id": "oos_test:579",
+  "text": "create a portrait for me using post modern art"
+ },
+ {
+  "id": "oos_test:580",
+  "text": "find me examples of post modern art"
+ },
+ {
+  "id": "oos_test:581",
+  "text": "find the names of all the rain forests located in south america"
+ },
+ {
+  "id": "oos_test:582",
+  "text": "does cutting down the rain forest really add to global warming"
+ },
+ {
+  "id": "oos_test:583",
+  "text": "what's the current demand for wood from rain forests"
+ },
+ {
+  "id": "oos_test:584",
+  "text": "what's the current prevailing interest rate for mortgages in my area"
+ },
+ {
+  "id": "oos_test:585",
+  "text": "how's the real estate market doing this week"
+ },
+ {
+  "id": "oos_test:586",
+  "text": "please list my real estate for sale"
+ },
+ {
+  "id": "oos_test:587",
+  "text": "make an ad to sell my real estate"
+ },
+ {
+  "id": "oos_test:588",
+  "text": "what's the status of robotic servants from japan"
+ },
+ {
+  "id": "oos_test:589",
+  "text": "finish the final touches on my newest robotic creation"
+ },
+ {
+  "id": "oos_test:590",
+  "text": "can a robot really travel back in time"
+ },
+ {
+  "id": "oos_test:591",
+  "text": "program my new robot to bring me snacks"
+ },
+ {
+  "id": "oos_test:592",
+  "text": "how long would it take you to die of thirst in the sahara desert"
+ },
+ {
+  "id": "oos_test:593",
+  "text": "can a samurai sword deflect a bullet"
+ },
+ {
+  "id": "oos_test:594",
+  "text": "how much for a samurai sword"
+ },
+ {
+  "id": "oos_test:595",
+  "text": "make a list of what materials have been used for spacesuits"
+ },
+ {
+  "id": "oos_test:596",
+  "text": "what size space suit should you get based on your girth"
+ },
+ {
+  "id": "oos_test:597",
+  "text": "see if you can purchase a spacesuit online"
+ },
+ {
+  "id": "oos_test:598",
+  "text": "compile a folder of paintings of sparta"
+ },
+ {
+  "id": "oos_test:599",
+  "text": "display history of sparta"
+ },
+ {
+  "id": "oos_test:600",
+  "text": "compile a list of articles pertaining to venture capital funding for me"
+ },
+ {
+  "id": "oos_test:601",
+  "text": "start a portfolio on venture capital funding for me to look over"
+ },
+ {
+  "id": "oos_test:602",
+  "text": "how do i get venture capital for my app"
+ },
+ {
+  "id": "oos_test:603",
+  "text": "what's the latest vc funded company"
+ },
+ {
+  "id": "oos_test:604",
+  "text": "i'd like to hire a wedding planner and need help finding one"
+ },
+ {
+  "id": "oos_test:605",
+  "text": "how to plan for weddings"
+ },
+ {
+  "id": "oos_test:606",
+  "text": "find out how many whales are currently in monterey bay"
+ },
+ {
+  "id": "oos_test:607",
+  "text": "make a chart of the different types of whales"
+ },
+ {
+  "id": "oos_test:608",
+  "text": "what did my best friend do in the kitchen while we were gone"
+ },
+ {
+  "id": "oos_test:609",
+  "text": "what's my boss' home address"
+ },
+ {
+  "id": "oos_test:610",
+  "text": "what's it like to have parents who actually love you"
+ },
+ {
+  "id": "oos_test:611",
+  "text": "is there any news if my parents survived the crash"
+ },
+ {
+  "id": "oos_test:612",
+  "text": "tell me who gives the best motivational speeches on the web"
+ },
+ {
+  "id": "oos_test:613",
+  "text": "find an article on celebrities who made it out of poverty"
+ },
+ {
+  "id": "oos_test:614",
+  "text": "send me a motivational quote everyday for the next week"
+ },
+ {
+  "id": "oos_test:615",
+  "text": "who is the hardest working man in hollywood"
+ },
+ {
+  "id": "oos_test:616",
+  "text": "tell me where i can get more information on getting a job at the post office"
+ },
+ {
+  "id": "oos_test:617",
+  "text": "pull up the classifieds and read the career section to me"
+ },
+ {
+  "id": "oos_test:618",
+  "text": "help me find a new position as a programmer"
+ },
+ {
+  "id": "oos_test:619",
+  "text": "what's the best career search website"
+ },
+ {
+  "id": "oos_test:620",
+  "text": "write the next chapter of my biography and let me know when you have finished it"
+ },
+ {
+  "id": "oos_test:621",
+  "text": "give me a list of the biographies written by nyu professors after 2001"
+ },
+ {
+  "id": "oos_test:622",
+  "text": "i would like for you to start a biography on me"
+ },
+ {
+  "id": "oos_test:623",
+  "text": "show me all biographies on teddy kennedy"
+ },
+ {
+  "id": "oos_test:624",
+  "text": "find out what supplies i am missing and will need on my upcoming camping trip"
+ },
+ {
+  "id": "oos_test:625",
+  "text": "what are the camping restrictions at bear island"
+ },
+ {
+  "id": "oos_test:626",
+  "text": "find articles that can help me advance my position in my work field"
+ },
+ {
+  "id": "oos_test:627",
+  "text": "show me what one should do to get ahead in a tech corporation"
+ },
+ {
+  "id": "oos_test:628",
+  "text": "get me a copy of a book on negotiation in the workplace"
+ },
+ {
+  "id": "oos_test:629",
+  "text": "look up ways for me to advance my job placement"
+ },
+ {
+  "id": "oos_test:630",
+  "text": "see if there is a recipe to make a casserole without any dairy"
+ },
+ {
+  "id": "oos_test:631",
+  "text": "tell me in how many different colors i can get dinner plates from pier one imports"
+ },
+ {
+  "id": "oos_test:632",
+  "text": "tell me amazon's choice for a set of 4 dinner plates"
+ },
+ {
+  "id": "oos_test:633",
+  "text": "find out where i can by melamine dinner plates"
+ },
+ {
+  "id": "oos_test:634",
+  "text": "find out what the maximum memory size is that i can buy in a dvd"
+ },
+ {
+  "id": "oos_test:635",
+  "text": "tell me who makes the best dvd's for movie storage"
+ },
+ {
+  "id": "oos_test:636",
+  "text": "how many dvds do i currently have on file"
+ },
+ {
+  "id": "oos_test:637",
+  "text": "give me a listing of all my dvd's"
+ },
+ {
+  "id": "oos_test:638",
+  "text": "look up the conversion rate for the euro to dollar exchange"
+ },
+ {
+  "id": "oos_test:639",
+  "text": "how do i put a lens that's fallen out back in my glasses"
+ },
+ {
+  "id": "oos_test:640",
+  "text": "i need you to order a new pair of eyeglasses for me"
+ },
+ {
+  "id": "oos_test:641",
+  "text": "tell me what my current eyeglasses prescription is"
+ },
+ {
+  "id": "oos_test:642",
+  "text": "show me examples of cute eyeglass frames"
+ },
+ {
+  "id": "oos_test:643",
+  "text": "make a list of all sites in the us where spirits have been seen at night"
+ },
+ {
+  "id": "oos_test:644",
+  "text": "tell me how to get rid of a spirit that's haunting me"
+ },
+ {
+  "id": "oos_test:645",
+  "text": "show me how to contact a paranormal spirit"
+ },
+ {
+  "id": "oos_test:646",
+  "text": "tell me a scary story"
+ },
+ {
+  "id": "oos_test:647",
+  "text": "show me the goals of my local police department in terms of reducing crime"
+ },
+ {
+  "id": "oos_test:648",
+  "text": "make a list of goals i need to meet in order to write a book"
+ },
+ {
+  "id": "oos_test:649",
+  "text": "what is the distance between the goal posts in football"
+ },
+ {
+  "id": "oos_test:650",
+  "text": "remind me what my weight loss goals are"
+ },
+ {
+  "id": "oos_test:651",
+  "text": "give me a list of tax attorneys that practice in my city"
+ },
+ {
+  "id": "oos_test:652",
+  "text": "tell me how i can file a pleading in circuit court"
+ },
+ {
+  "id": "oos_test:653",
+  "text": "give me the number of a traffic attorney near here"
+ },
+ {
+  "id": "oos_test:654",
+  "text": "what are the top rated local lawyers"
+ },
+ {
+  "id": "oos_test:655",
+  "text": "find out how many miles the mississippi waterway runs"
+ },
+ {
+  "id": "oos_test:656",
+  "text": "tell me what the longest tributary is in venezuela"
+ },
+ {
+  "id": "oos_test:657",
+  "text": "please book another boat for this weekends trip"
+ },
+ {
+  "id": "oos_test:658",
+  "text": "get me a list of universities that provide full scholarships in arizona"
+ },
+ {
+  "id": "oos_test:659",
+  "text": "tell me where to go to get my son enrolled in public kindergarten"
+ },
+ {
+  "id": "oos_test:660",
+  "text": "do a job search on monstercom for jobs in the tech field in arlington, va"
+ },
+ {
+  "id": "oos_test:661",
+  "text": "i need to find work, help me connect to a local business through linkedin"
+ },
+ {
+  "id": "oos_test:662",
+  "text": "detail a list of possible job openings in the miami public school system"
+ },
+ {
+  "id": "oos_test:663",
+  "text": "look for a position similar to mine that is open around my area"
+ },
+ {
+  "id": "oos_test:664",
+  "text": "find out where one can get involved in discussing local election issues"
+ },
+ {
+  "id": "oos_test:665",
+  "text": "give me a list of the top 5 issues people have in this country"
+ },
+ {
+  "id": "oos_test:666",
+  "text": "what is the government department that regulates emissions"
+ },
+ {
+  "id": "oos_test:667",
+  "text": "what's the highest rated social services non-profit"
+ },
+ {
+  "id": "oos_test:668",
+  "text": "explain to me the process of evaporation"
+ },
+ {
+  "id": "oos_test:669",
+  "text": "how do i write an iep for a high schooler"
+ },
+ {
+  "id": "oos_test:670",
+  "text": "tell me how to refinish a wooden desk"
+ },
+ {
+  "id": "oos_test:671",
+  "text": "tell me how to make a lesson plan"
+ },
+ {
+  "id": "oos_test:672",
+  "text": "tell me where i can get the cheapest tennis balls on the internet"
+ },
+ {
+  "id": "oos_test:673",
+  "text": "play the current tennis match on the tv in the living room"
+ },
+ {
+  "id": "oos_test:674",
+  "text": "give me a list of the top 10 tennis players in the world"
+ },
+ {
+  "id": "oos_test:675",
+  "text": "make a chart of all the tennis scores from this year"
+ },
+ {
+  "id": "oos_test:676",
+  "text": "find the best prices for toothpaste at any store within a 5 mile radius of my location"
+ },
+ {
+  "id": "oos_test:677",
+  "text": "tell me what the best shampoo is for someone with dry scalp"
+ },
+ {
+  "id": "oos_test:678",
+  "text": "what's the best price on a gray xl ll bean men's parka"
+ },
+ {
+  "id": "oos_test:679",
+  "text": "tell me who has the cheapest watch bands on ebay"
+ },
+ {
+  "id": "oos_test:680",
+  "text": "how do i set the time on my tag heuer"
+ },
+ {
+  "id": "oos_test:681",
+  "text": "tell me the steps as to how to begin a career as a journalist"
+ },
+ {
+  "id": "oos_test:682",
+  "text": "give me prices on a copy of the mla grammar handbook"
+ },
+ {
+  "id": "oos_test:683",
+  "text": "put words on the paper about what you want"
+ },
+ {
+  "id": "oos_test:684",
+  "text": "put into words what you want"
+ },
+ {
+  "id": "oos_test:685",
+  "text": "what kind of foods are border collies allergic to"
+ },
+ {
+  "id": "oos_test:686",
+  "text": "find out how i can best clip my dog's nails"
+ },
+ {
+  "id": "oos_test:687",
+  "text": "what is the lifespan of a border collie"
+ },
+ {
+  "id": "oos_test:688",
+  "text": "look up daily dog kennels in my area"
+ },
+ {
+  "id": "oos_test:689",
+  "text": "give me a list of grocery stores that sell japanese sweet potatoes"
+ },
+ {
+  "id": "oos_test:690",
+  "text": "tell me the price of bananas at whole foods this week"
+ },
+ {
+  "id": "oos_test:691",
+  "text": "call the grocery store and get their operational hours"
+ },
+ {
+  "id": "oos_test:692",
+  "text": "call an uber to take me to the closest grocery store"
+ },
+ {
+  "id": "oos_test:693",
+  "text": "show me how many community centers are located within 5 miles of my location"
+ },
+ {
+  "id": "oos_test:694",
+  "text": "which houses do not have automatic spot lights in front of their garage"
+ },
+ {
+  "id": "oos_test:695",
+  "text": "are all the street lamps working on my street"
+ },
+ {
+  "id": "oos_test:696",
+  "text": "make a list of all community gardens near me"
+ },
+ {
+  "id": "oos_test:697",
+  "text": "tell me where to send my resume in order to get a job at delta airlines"
+ },
+ {
+  "id": "oos_test:698",
+  "text": "review my resume for spelling errors"
+ },
+ {
+  "id": "oos_test:699",
+  "text": "please print out copies of my resume"
+ },
+ {
+  "id": "oos_test:700",
+  "text": "please spell check my resume"
+ },
+ {
+  "id": "oos_test:701",
+  "text": "where can i get 100% merino wool t-shirts on the internet"
+ },
+ {
+  "id": "oos_test:702",
+  "text": "show me all listings on amazon for leather belts for men"
+ },
+ {
+  "id": "oos_test:703",
+  "text": "tell me how many blue ties i own"
+ },
+ {
+  "id": "oos_test:704",
+  "text": "who is the start of the movie almost famous"
+ },
+ {
+  "id": "oos_test:705",
+  "text": "search up someone who plays in a movie"
+ },
+ {
+  "id": "oos_test:706",
+  "text": "search up the cast in the walking dead"
+ },
+ {
+  "id": "oos_test:707",
+  "text": "tell me about the amusement park"
+ },
+ {
+  "id": "oos_test:708",
+  "text": "what's the amusement park like"
+ },
+ {
+  "id": "oos_test:709",
+  "text": "take a ride on the ferris wheel"
+ },
+ {
+  "id": "oos_test:710",
+  "text": "go on the ferris wheel"
+ },
+ {
+  "id": "oos_test:711",
+  "text": "what is the cost of four double a batteries"
+ },
+ {
+  "id": "oos_test:712",
+  "text": "instruct a list of all the brands of cereal manufactured by kelloggs"
+ },
+ {
+  "id": "oos_test:713",
+  "text": "compare prices of malt-o-meal to kelloggs"
+ },
+ {
+  "id": "oos_test:714",
+  "text": "what kinds of cereal are gluten free"
+ },
+ {
+  "id": "oos_test:715",
+  "text": "what kinds of cereal are low sugar"
+ },
+ {
+  "id": "oos_test:716",
+  "text": "what is the last time the living room was vacuumed"
+ },
+ {
+  "id": "oos_test:717",
+  "text": "search all movies created by disney in the 1980's"
+ },
+ {
+  "id": "oos_test:718",
+  "text": "does disney world close when it storms"
+ },
+ {
+  "id": "oos_test:719",
+  "text": "mickey mouse is a huge part of disney"
+ },
+ {
+  "id": "oos_test:720",
+  "text": "what are the hours for disney world"
+ },
+ {
+  "id": "oos_test:721",
+  "text": "what time did i get the last text message i received"
+ },
+ {
+  "id": "oos_test:722",
+  "text": "please read me the last text message i received"
+ },
+ {
+  "id": "oos_test:723",
+  "text": "read my friend's text message"
+ },
+ {
+  "id": "oos_test:724",
+  "text": "watch the stories on instagram"
+ },
+ {
+  "id": "oos_test:725",
+  "text": "update my status on instagram"
+ },
+ {
+  "id": "oos_test:726",
+  "text": "can you check on what it would cost me to upgrade my iphone with t-mobile"
+ },
+ {
+  "id": "oos_test:727",
+  "text": "please alert me when my iphone battery falls below 30%"
+ },
+ {
+  "id": "oos_test:728",
+  "text": "can you look at when the next iphone is due out"
+ },
+ {
+  "id": "oos_test:729",
+  "text": "what type of industries do innovation managers work in"
+ },
+ {
+  "id": "oos_test:730",
+  "text": "what are the requirements of a lab technician"
+ },
+ {
+  "id": "oos_test:731",
+  "text": "generate a list of 20 songs that include the word love in the title"
+ },
+ {
+  "id": "oos_test:732",
+  "text": "create a 500 word letter expressing love"
+ },
+ {
+  "id": "oos_test:733",
+  "text": "find a couple's therapist who can help me and my wife"
+ },
+ {
+  "id": "oos_test:734",
+  "text": "what does the average cost of an engagement ring"
+ },
+ {
+  "id": "oos_test:735",
+  "text": "what is popular in fashion right now"
+ },
+ {
+  "id": "oos_test:736",
+  "text": "does denim go with anything"
+ },
+ {
+  "id": "oos_test:737",
+  "text": "accept incoming phone call"
+ },
+ {
+  "id": "oos_test:738",
+  "text": "deny incoming phone call"
+ },
+ {
+  "id": "oos_test:739",
+  "text": "what do i wear on my feet when it rains"
+ },
+ {
+  "id": "oos_test:740",
+  "text": "what do i put on my feet"
+ },
+ {
+  "id": "oos_test:741",
+  "text": "what are the words to the chorus for this song"
+ },
+ {
+  "id": "oos_test:742",
+  "text": "display the song lyrics for me"
+ },
+ {
+  "id": "oos_test:743",
+  "text": "google \"odell beckham free agency\""
+ },
+ {
+  "id": "oos_test:744",
+  "text": "clear my search history"
+ },
+ {
+  "id": "oos_test:745",
+  "text": "compare the new life growth in trees when the seasons change"
+ },
+ {
+  "id": "oos_test:746",
+  "text": "plant all your flowers just after easter in early april"
+ },
+ {
+  "id": "oos_test:747",
+  "text": "find a good toy to give a 5 year old boy that costs less than $40"
+ },
+ {
+  "id": "oos_test:748",
+  "text": "find out where i can buy a barbie doll for my niece"
+ },
+ {
+  "id": "oos_test:749",
+  "text": "look on amazon for the price of a nitendo switch"
+ },
+ {
+  "id": "oos_test:750",
+  "text": "what brand was the last advertisement for"
+ },
+ {
+  "id": "oos_test:751",
+  "text": "how do i skip all of the advertisements"
+ },
+ {
+  "id": "oos_test:752",
+  "text": "make a list of decor i would need to have a titanic themed birthday party"
+ },
+ {
+  "id": "oos_test:753",
+  "text": "aquire the soundtracks from the movie if i stay and add them to my ipod"
+ },
+ {
+  "id": "oos_test:754",
+  "text": "i watched \"were the millers\" on netflix last night"
+ },
+ {
+  "id": "oos_test:755",
+  "text": "can you find \"were the millers\" on hulu"
+ },
+ {
+  "id": "oos_test:756",
+  "text": "how many people have held the role of county attorney bearing the family name \"dixon\""
+ },
+ {
+  "id": "oos_test:757",
+  "text": "tell me about the candidates running for local office in my area"
+ },
+ {
+  "id": "oos_test:758",
+  "text": "find out who is the representative of my district"
+ },
+ {
+  "id": "oos_test:759",
+  "text": "generate a list of the past 10 judge executives"
+ },
+ {
+  "id": "oos_test:760",
+  "text": "look up the email address of the local police"
+ },
+ {
+  "id": "oos_test:761",
+  "text": "how many hits have i done today"
+ },
+ {
+  "id": "oos_test:762",
+  "text": "change out the older photos with the newer ones"
+ },
+ {
+  "id": "oos_test:763",
+  "text": "organize photos by year they were taken"
+ },
+ {
+  "id": "oos_test:764",
+  "text": "can you group my photos by location"
+ },
+ {
+  "id": "oos_test:765",
+  "text": "organize my photos by date please"
+ },
+ {
+  "id": "oos_test:766",
+  "text": "tell me what my local park's policy is on letting dogs off of leashes"
+ },
+ {
+  "id": "oos_test:767",
+  "text": "look up the operating hours of my local park on weekends"
+ },
+ {
+  "id": "oos_test:768",
+  "text": "how many parks are within 20 miles of me"
+ },
+ {
+  "id": "oos_test:769",
+  "text": "check to see if i still have allergy medication"
+ },
+ {
+  "id": "oos_test:770",
+  "text": "sign me up for the writing class you told me about 2 days ago"
+ },
+ {
+  "id": "oos_test:771",
+  "text": "find articles on essay writing for beginners"
+ },
+ {
+  "id": "oos_test:772",
+  "text": "how long should an essay be"
+ },
+ {
+  "id": "oos_test:773",
+  "text": "how do you start an essay"
+ },
+ {
+  "id": "oos_test:774",
+  "text": "what should you do if your laundry machine is making a high pitched whine"
+ },
+ {
+  "id": "oos_test:775",
+  "text": "find out who the best appliance repairman is for the downtown area"
+ },
+ {
+  "id": "oos_test:776",
+  "text": "look up local repair shops that work on vacuum cleaners"
+ },
+ {
+  "id": "oos_test:777",
+  "text": "can i get a sear's appliance repairman"
+ },
+ {
+  "id": "oos_test:778",
+  "text": "find directions to the sunshine car wash from my house"
+ },
+ {
+  "id": "oos_test:779",
+  "text": "can you book me an appointment at a car wash"
+ },
+ {
+  "id": "oos_test:780",
+  "text": "what brush can i use to wash my car that won't scratch it"
+ },
+ {
+  "id": "oos_test:781",
+  "text": "please clean the car windows"
+ },
+ {
+  "id": "oos_test:782",
+  "text": "vacuum out the car"
+ },
+ {
+  "id": "oos_test:783",
+  "text": "schedule an appointment with the credit counselor for tuesday"
+ },
+ {
+  "id": "oos_test:784",
+  "text": "find a credit mentoring service number for me please"
+ },
+ {
+  "id": "oos_test:785",
+  "text": "how much does it cost to get two jackets dry cleaned"
+ },
+ {
+  "id": "oos_test:786",
+  "text": "look up articles on the green dry cleaning industry"
+ },
+ {
+  "id": "oos_test:787",
+  "text": "find a cleaner that specializes in suede"
+ },
+ {
+  "id": "oos_test:788",
+  "text": "when should you use a dry cleaner"
+ },
+ {
+  "id": "oos_test:789",
+  "text": "create emergency phone numbers list"
+ },
+ {
+  "id": "oos_test:790",
+  "text": "do sets of 25 set-ups each morning til you have completed your goal"
+ },
+ {
+  "id": "oos_test:791",
+  "text": "keep a note of how many miles you walk a day"
+ },
+ {
+  "id": "oos_test:792",
+  "text": "how much weight should i lift to get buff"
+ },
+ {
+  "id": "oos_test:793",
+  "text": "what's a good stretch to do to limber up"
+ },
+ {
+  "id": "oos_test:794",
+  "text": "look up the most requested famous person for quotes"
+ },
+ {
+  "id": "oos_test:795",
+  "text": "what is the most famous quote on the internet"
+ },
+ {
+  "id": "oos_test:796",
+  "text": "make a list of the top 100 famous quotes"
+ },
+ {
+  "id": "oos_test:797",
+  "text": "show me the top 10 quotes by mark twain"
+ },
+ {
+  "id": "oos_test:798",
+  "text": "what do you do if you can't stop vomiting"
+ },
+ {
+  "id": "oos_test:799",
+  "text": "what should i take for a cold"
+ },
+ {
+  "id": "oos_test:800",
+  "text": "i have too many credit cards, is there any way you can help me organize them"
+ },
+ {
+  "id": "oos_test:801",
+  "text": "find a credit counseling service for me on the web"
+ },
+ {
+  "id": "oos_test:802",
+  "text": "explain how to reduce my debt burden"
+ },
+ {
+  "id": "oos_test:803",
+  "text": "look up the current auto loan rate at chase bank"
+ },
+ {
+  "id": "oos_test:804",
+  "text": "look up student loan offers on google"
+ },
+ {
+  "id": "oos_test:805",
+  "text": "check current prime mortgage rate"
+ },
+ {
+  "id": "oos_test:806",
+  "text": "what should you do if you can't be bothered to get out of bed"
+ },
+ {
+  "id": "oos_test:807",
+  "text": "send me a quote from a motivational speaker twice a day"
+ },
+ {
+  "id": "oos_test:808",
+  "text": "find me a book on motivational speaking from amazon"
+ },
+ {
+  "id": "oos_test:809",
+  "text": "check to see if i need a pass to use the parking garages downtown"
+ },
+ {
+  "id": "oos_test:810",
+  "text": "can you check to see which parking garages are open downtown"
+ },
+ {
+  "id": "oos_test:811",
+  "text": "how much does it cost to use the parking garage downtown"
+ },
+ {
+  "id": "oos_test:812",
+  "text": "what's a good way of backing out of a parking spot"
+ },
+ {
+  "id": "oos_test:813",
+  "text": "search the web for monthly parking near my house"
+ },
+ {
+  "id": "oos_test:814",
+  "text": "find out where parking is close to the stadium"
+ },
+ {
+  "id": "oos_test:815",
+  "text": "how do i get perfect alignment with the curb"
+ },
+ {
+  "id": "oos_test:816",
+  "text": "describe to me how i can learn to make small talk"
+ },
+ {
+  "id": "oos_test:817",
+  "text": "explain how small talk helps bind groups together"
+ },
+ {
+  "id": "oos_test:818",
+  "text": "what do you do all day while i'm at work"
+ },
+ {
+  "id": "oos_test:819",
+  "text": "so, hang out around this house often"
+ },
+ {
+  "id": "oos_test:820",
+  "text": "tell me the best way to freshen the smell in my car"
+ },
+ {
+  "id": "oos_test:821",
+  "text": "where's the closest car wash my car smells"
+ },
+ {
+  "id": "oos_test:822",
+  "text": "how much is auto febreeze on amazon"
+ },
+ {
+  "id": "oos_test:823",
+  "text": "find out how to deodorize a car"
+ },
+ {
+  "id": "oos_test:824",
+  "text": "see if you can find a good vegetable wash for me"
+ },
+ {
+  "id": "oos_test:825",
+  "text": "look up website on container gardening"
+ },
+ {
+  "id": "oos_test:826",
+  "text": "are we allowed to wash our cars during the drought"
+ },
+ {
+  "id": "oos_test:827",
+  "text": "request a refund on the car wax i bought yesterday"
+ },
+ {
+  "id": "oos_test:828",
+  "text": "i'd like to hire someone to wash my car"
+ },
+ {
+  "id": "oos_test:829",
+  "text": "find out what gentlemen are wearing to weddings these days"
+ },
+ {
+  "id": "oos_test:830",
+  "text": "find me articles on appropriate wedding attire"
+ },
+ {
+  "id": "oos_test:831",
+  "text": "zip the back of the brides maid dress"
+ },
+ {
+  "id": "oos_test:832",
+  "text": "rent the tuxedo the day before"
+ },
+ {
+  "id": "oos_test:833",
+  "text": "find available letter writing classes at the local community college"
+ },
+ {
+  "id": "oos_test:834",
+  "text": "find me a graphic tutorial on writing longhand"
+ },
+ {
+  "id": "oos_test:835",
+  "text": "order me a book of stamps and envelopes"
+ },
+ {
+  "id": "oos_test:836",
+  "text": "start listening to me dictate a letter"
+ },
+ {
+  "id": "oos_test:837",
+  "text": "email my boss, tell him i wont be in today"
+ },
+ {
+  "id": "oos_test:838",
+  "text": "are the schools closed"
+ },
+ {
+  "id": "oos_test:839",
+  "text": "let me know what time the patriots game starts"
+ },
+ {
+  "id": "oos_test:840",
+  "text": "tell me how long until the nascar race begins"
+ },
+ {
+  "id": "oos_test:841",
+  "text": "are there any sales on liquor"
+ },
+ {
+  "id": "oos_test:842",
+  "text": "what shows are on tonight"
+ },
+ {
+  "id": "oos_test:843",
+  "text": "are there any new job postings in my area in the last hour for jobs on craigslist"
+ },
+ {
+  "id": "oos_test:844",
+  "text": "see if there are any employment agencies hiring managers right now"
+ },
+ {
+  "id": "oos_test:845",
+  "text": "can you tell me what the best places are to look for a job online"
+ },
+ {
+  "id": "oos_test:846",
+  "text": "sign me up for the slack employment forum"
+ },
+ {
+  "id": "oos_test:847",
+  "text": "please replay the last five minutes"
+ },
+ {
+  "id": "oos_test:848",
+  "text": "can you enable subtitles"
+ },
+ {
+  "id": "oos_test:849",
+  "text": "consult the gq website to find what men wear to weddings"
+ },
+ {
+  "id": "oos_test:850",
+  "text": "order me a blue pin stripe suit from saville row"
+ },
+ {
+  "id": "oos_test:851",
+  "text": "what's in fashion this month"
+ },
+ {
+  "id": "oos_test:852",
+  "text": "is it too late to wear white"
+ },
+ {
+  "id": "oos_test:853",
+  "text": "how many calories does jumping up and down burn"
+ },
+ {
+  "id": "oos_test:854",
+  "text": "how many push-ups do i need to do to get ripped"
+ },
+ {
+  "id": "oos_test:855",
+  "text": "fill up my water bottle for the gym"
+ },
+ {
+  "id": "oos_test:856",
+  "text": "pick out an excerise outfit for me"
+ },
+ {
+  "id": "oos_test:857",
+  "text": "find out how long a cold should last before i call a doctor"
+ },
+ {
+  "id": "oos_test:858",
+  "text": "what should i take for nausea"
+ },
+ {
+  "id": "oos_test:859",
+  "text": "how do you relieve a hangover"
+ },
+ {
+  "id": "oos_test:860",
+  "text": "what is a good home remedy for a rash"
+ },
+ {
+  "id": "oos_test:861",
+  "text": "i have a rash, what can i use for it"
+ },
+ {
+  "id": "oos_test:862",
+  "text": "can you order some ointment for me"
+ },
+ {
+  "id": "oos_test:863",
+  "text": "how do i get rid of an itchy rash"
+ },
+ {
+  "id": "oos_test:864",
+  "text": "forward the text i just got from henry to giselle"
+ },
+ {
+  "id": "oos_test:865",
+  "text": "please read the text message i just received"
+ },
+ {
+  "id": "oos_test:866",
+  "text": "save my text on my laptop hard drive"
+ },
+ {
+  "id": "oos_test:867",
+  "text": "what time does my ex-boss leave the office"
+ },
+ {
+  "id": "oos_test:868",
+  "text": "how much does gun ammunition cost"
+ },
+ {
+  "id": "oos_test:869",
+  "text": "restart my newspaper delivery for monday"
+ },
+ {
+  "id": "oos_test:870",
+  "text": "are there any messages"
+ },
+ {
+  "id": "oos_test:871",
+  "text": "what's that smell"
+ },
+ {
+  "id": "oos_test:872",
+  "text": "get me a list of the best savings account rates right now"
+ },
+ {
+  "id": "oos_test:873",
+  "text": "is beer legal in this state"
+ },
+ {
+  "id": "oos_test:874",
+  "text": "get me articles and pics of different types of household bugs for this area"
+ },
+ {
+  "id": "oos_test:875",
+  "text": "what should i do if i saw a cockroach in my house"
+ },
+ {
+  "id": "oos_test:876",
+  "text": "look up articles on squealing brakes for ford f-150's"
+ },
+ {
+  "id": "oos_test:877",
+  "text": "please answer the phone and put it on speaker on the tv"
+ },
+ {
+  "id": "oos_test:878",
+  "text": "can you tell me who's calling me"
+ },
+ {
+  "id": "oos_test:879",
+  "text": "answer the phone"
+ },
+ {
+  "id": "oos_test:880",
+  "text": "ignore call"
+ },
+ {
+  "id": "oos_test:881",
+  "text": "find out what type of wax is needed for a late model ford sedan"
+ },
+ {
+  "id": "oos_test:882",
+  "text": "what's the first thing you should do to wash your car"
+ },
+ {
+  "id": "oos_test:883",
+  "text": "what supplies do i need to clean my car"
+ },
+ {
+  "id": "oos_test:884",
+  "text": "look up articles on car washing at home"
+ },
+ {
+  "id": "oos_test:885",
+  "text": "how old is the oldest person that is in the guiness book of world records"
+ },
+ {
+  "id": "oos_test:886",
+  "text": "how could i get into the guiness book of world records"
+ },
+ {
+  "id": "oos_test:887",
+  "text": "what person is the heaviest ever recorded"
+ },
+ {
+  "id": "oos_test:888",
+  "text": "who has the longest hair ever"
+ },
+ {
+  "id": "oos_test:889",
+  "text": "can you look at what average reviews say about the new windows phone on amazon for me"
+ },
+ {
+  "id": "oos_test:890",
+  "text": "tell me a summary of reviews that oakley frogskins get on amazon"
+ },
+ {
+  "id": "oos_test:891",
+  "text": "make me a list of the top ten reviewed hiking boots on jetcom"
+ },
+ {
+  "id": "oos_test:892",
+  "text": "show me a tabulation of reviews for lcd tv's on amazon"
+ },
+ {
+  "id": "oos_test:893",
+  "text": "can you tell me what happened to han solo in episode 4"
+ },
+ {
+  "id": "oos_test:894",
+  "text": "how many movies are in the star wars series"
+ },
+ {
+  "id": "oos_test:895",
+  "text": "how many star wars movies are there"
+ },
+ {
+  "id": "oos_test:896",
+  "text": "who plays han solo"
+ },
+ {
+  "id": "oos_test:897",
+  "text": "which movie is it that someone says perfectly balanced as all things should be"
+ },
+ {
+  "id": "oos_test:898",
+  "text": "what movie is the line today is our independence day from"
+ },
+ {
+  "id": "oos_test:899",
+  "text": "what movie is it that says today is a good day to die"
+ },
+ {
+  "id": "oos_test:900",
+  "text": "what movie does it's just a flesh wound come from"
+ },
+ {
+  "id": "oos_test:901",
+  "text": "is michonne wrong for not working with the kingdom to put on the fair"
+ },
+ {
+  "id": "oos_test:902",
+  "text": "which actors have played more than 1 comic book character"
+ },
+ {
+  "id": "oos_test:903",
+  "text": "what marvel movie did mark ruffalo first appear in"
+ },
+ {
+  "id": "oos_test:904",
+  "text": "why did negan return to his jail cell"
+ },
+ {
+  "id": "oos_test:905",
+  "text": "is there more than one occult that a person can join"
+ },
+ {
+  "id": "oos_test:906",
+  "text": "can i summon a demon using just an ouija board"
+ },
+ {
+  "id": "oos_test:907",
+  "text": "what's the best way to drown a witch"
+ },
+ {
+  "id": "oos_test:908",
+  "text": "what does it mean to join the occult"
+ },
+ {
+  "id": "oos_test:909",
+  "text": "did madison really bathe in the potomac naked"
+ },
+ {
+  "id": "oos_test:910",
+  "text": "can you explain a good risk strategy to me"
+ },
+ {
+  "id": "oos_test:911",
+  "text": "what are the rules for chess"
+ },
+ {
+  "id": "oos_test:912",
+  "text": "fill out the paperwork for tonys new daycare center"
+ },
+ {
+  "id": "oos_test:913",
+  "text": "i need to find a new babysitter"
+ },
+ {
+  "id": "oos_test:914",
+  "text": "get me a list of divorce attorneys in the new york area"
+ },
+ {
+  "id": "oos_test:915",
+  "text": "how long does it take to get a divorce finalized"
+ },
+ {
+  "id": "oos_test:916",
+  "text": "where can i find the best divorce lawyer"
+ },
+ {
+  "id": "oos_test:917",
+  "text": "make me a map of all earthquake hotspots in the continental us"
+ },
+ {
+  "id": "oos_test:918",
+  "text": "how much damage did the last earthquake here do"
+ },
+ {
+  "id": "oos_test:919",
+  "text": "what was the latest tremor on the richter scale"
+ },
+ {
+  "id": "oos_test:920",
+  "text": "get me articles on earthquake preparedness"
+ },
+ {
+  "id": "oos_test:921",
+  "text": "what is appropriate to spend on a bouquet of flowers for mother's day"
+ },
+ {
+  "id": "oos_test:922",
+  "text": "get me a list of personal conservation tips that i can use around the house"
+ },
+ {
+  "id": "oos_test:923",
+  "text": "look up the average temperature changes over the last 30 years for my area"
+ },
+ {
+  "id": "oos_test:924",
+  "text": "is the polar vortex of 2019 apart of global warming"
+ },
+ {
+  "id": "oos_test:925",
+  "text": "what is global warming"
+ },
+ {
+  "id": "oos_test:926",
+  "text": "can you book me a tee time at cantigny at 2 pm on saturday"
+ },
+ {
+  "id": "oos_test:927",
+  "text": "what's the best golf club to use on the lower nine"
+ },
+ {
+  "id": "oos_test:928",
+  "text": "how do i stop my child from setting small animals on fire for amusement"
+ },
+ {
+  "id": "oos_test:929",
+  "text": "review chapter 6 with my son and verify his math homework answers"
+ },
+ {
+  "id": "oos_test:930",
+  "text": "can you look up how i shoot a time lapse video on my iphone camera or is it even possible"
+ },
+ {
+  "id": "oos_test:931",
+  "text": "how do i turn up the resolution that i am taking pictures in on my camera phone"
+ },
+ {
+  "id": "oos_test:932",
+  "text": "print out the photos i took today"
+ },
+ {
+  "id": "oos_test:933",
+  "text": "can you find me sheet music for the beatles white album online"
+ },
+ {
+  "id": "oos_test:934",
+  "text": "find me a good band instructor or two to compare in my area"
+ },
+ {
+  "id": "oos_test:935",
+  "text": "can i get a starter course for the trumpet"
+ },
+ {
+  "id": "oos_test:936",
+  "text": "how many keys does a xylophone have"
+ },
+ {
+  "id": "oos_test:937",
+  "text": "how many polar bears are still alive in the arctic"
+ },
+ {
+  "id": "oos_test:938",
+  "text": "are polar bears on the endangered species list"
+ },
+ {
+  "id": "oos_test:939",
+  "text": "what is the life expectancy of a polar bear"
+ },
+ {
+  "id": "oos_test:940",
+  "text": "can a polar bear live in alabama"
+ },
+ {
+  "id": "oos_test:941",
+  "text": "when will george rr martin publish the next game of thrones book"
+ },
+ {
+  "id": "oos_test:942",
+  "text": "show me the new york times most popular book list for this week"
+ },
+ {
+  "id": "oos_test:943",
+  "text": "how many books are in piers anthony virtual mode series"
+ },
+ {
+  "id": "oos_test:944",
+  "text": "order the new book titled \"ghost work\""
+ },
+ {
+  "id": "oos_test:945",
+  "text": "please check if god is really living in a small apartment in brussels"
+ },
+ {
+  "id": "oos_test:946",
+  "text": "what did the mesopotamians call the creator of the universe"
+ },
+ {
+  "id": "oos_test:947",
+  "text": "put on an educational program about buddhism"
+ },
+ {
+  "id": "oos_test:948",
+  "text": "what happens if you're skydiving and your parachute doesn't open"
+ },
+ {
+  "id": "oos_test:949",
+  "text": "research how many deaths has resulted from skydiving"
+ },
+ {
+  "id": "oos_test:950",
+  "text": "how many people die each year while skydiving"
+ },
+ {
+  "id": "oos_test:951",
+  "text": "google the price of skydiving in florida"
+ },
+ {
+  "id": "oos_test:952",
+  "text": "in what movie did mrs congeniality feature a contestant championing for world peace"
+ },
+ {
+  "id": "oos_test:953",
+  "text": "has there ever been total world peace, where no nations in the world are at war"
+ },
+ {
+  "id": "oos_test:954",
+  "text": "name the leader from tibet that stands firm for world peace"
+ },
+ {
+  "id": "oos_test:955",
+  "text": "what will it take to achieve world peace"
+ },
+ {
+  "id": "oos_test:956",
+  "text": "was einstein right to be scared of spooky action at a distance"
+ },
+ {
+  "id": "oos_test:957",
+  "text": "what is the nature of the big bang theory"
+ },
+ {
+  "id": "oos_test:958",
+  "text": "how does the etheric body operate"
+ },
+ {
+  "id": "oos_test:959",
+  "text": "do we actually have a soul"
+ },
+ {
+  "id": "oos_test:960",
+  "text": "where can i find cheap rental skis nearby"
+ },
+ {
+  "id": "oos_test:961",
+  "text": "check the nanny cam and send the feed to my phone"
+ },
+ {
+  "id": "oos_test:962",
+  "text": "how much should i tip on this bill"
+ },
+ {
+  "id": "oos_test:963",
+  "text": "send me live feed of the pre-game prediction show on my phone"
+ },
+ {
+  "id": "oos_test:964",
+  "text": "what are the scores of other teams in this division"
+ },
+ {
+  "id": "oos_test:965",
+  "text": "look up pitcher stats on jake rooney"
+ },
+ {
+  "id": "oos_test:966",
+  "text": "what teams are playing right now"
+ },
+ {
+  "id": "oos_test:967",
+  "text": "is it too late to upgrade to first class"
+ },
+ {
+  "id": "oos_test:968",
+  "text": "according to my fitness tracker, how many push ups have i done today"
+ },
+ {
+  "id": "oos_test:969",
+  "text": "renew gym membership"
+ },
+ {
+  "id": "oos_test:970",
+  "text": "what's my budget for today's shopping trip"
+ },
+ {
+  "id": "oos_test:971",
+  "text": "can you find my car in the parking lot"
+ },
+ {
+  "id": "oos_test:972",
+  "text": "what's the best hand to have in texas hold em"
+ },
+ {
+  "id": "oos_test:973",
+  "text": "is gambling legal in my state"
+ },
+ {
+  "id": "oos_test:974",
+  "text": "fold my hand"
+ },
+ {
+  "id": "oos_test:975",
+  "text": "what time did i put in my first load of laundry"
+ },
+ {
+  "id": "oos_test:976",
+  "text": "how much time is left on my laundry"
+ },
+ {
+  "id": "oos_test:977",
+  "text": "report outage to my electric provider"
+ },
+ {
+  "id": "oos_test:978",
+  "text": "power up my generator"
+ },
+ {
+  "id": "oos_test:979",
+  "text": "call up instructables website and find article on bike assembly"
+ },
+ {
+  "id": "oos_test:980",
+  "text": "find schematics for ikea desk assembly"
+ },
+ {
+  "id": "oos_test:981",
+  "text": "search information on how to apply foundation"
+ },
+ {
+  "id": "oos_test:982",
+  "text": "find instructions on how to play taboo"
+ },
+ {
+  "id": "oos_test:983",
+  "text": "what casino game has the best odds"
+ },
+ {
+  "id": "oos_test:984",
+  "text": "tell me how much energy i have consumed so far this year"
+ },
+ {
+  "id": "oos_test:985",
+  "text": "give me an energy usage breakdown for march"
+ },
+ {
+  "id": "oos_test:986",
+  "text": "how many kilowatts have i used this month"
+ },
+ {
+  "id": "oos_test:987",
+  "text": "what's my current electric bill"
+ },
+ {
+  "id": "oos_test:988",
+  "text": "can you locate the television remote"
+ },
+ {
+  "id": "oos_test:989",
+  "text": "where did i last place my remote"
+ },
+ {
+  "id": "oos_test:990",
+  "text": "do you know where the remote is"
+ },
+ {
+  "id": "oos_test:991",
+  "text": "have you seen the remote"
+ },
+ {
+  "id": "oos_test:992",
+  "text": "please ping the rfid in my wallet and tell me where it's at right now"
+ },
+ {
+  "id": "oos_test:993",
+  "text": "can you detect where i placed my wallet"
+ },
+ {
+  "id": "oos_test:994",
+  "text": "give me my wallet location"
+ },
+ {
+  "id": "oos_test:995",
+  "text": "find my wallet"
+ },
+ {
+  "id": "oos_test:996",
+  "text": "can you give me the gps location of harvey"
+ },
+ {
+  "id": "oos_test:997",
+  "text": "where's my buddy steve right this second"
+ },
+ {
+  "id": "oos_test:998",
+  "text": "locate jenny at her present position"
+ },
+ {
+  "id": "oos_test:999",
+  "text": "let me know where jim is right now"
+ }
+]
