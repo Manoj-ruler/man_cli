@@ -1,0 +1,24 @@
+{
+  "protocol": "E1_PROTOCOL.md §6.8",
+  "generated_at": "2026-09-30T14:40:02.553Z",
+  "pass": true,
+  "checks": [
+    "1 R1 within R1-CLI",
+    "2 R1 within R2 (both thresholds)",
+    "3 R2(6.4952) within R2(7.1978)",
+    "3 R3 nested in threshold order",
+    "4 lexical-null has s = 0",
+    "4 lexical-null has fused4 = 0.5",
+    "5 row count",
+    "5 unique ids",
+    "5 no NaN or missing score",
+    "5 cluster structure",
+    "5 metadata join",
+    "D2 median identity"
+  ],
+  "failures": [],
+  "lexical_null_dense_degenerate": {
+    "P1": [],
+    "P2": []
+  }
+}

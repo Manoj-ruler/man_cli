@@ -7,7 +7,7 @@
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
-| 3 E1 execution | E1-10 to 14 | 1 | 0 |
+| 3 E1 execution | E1-10 to 14 | 2 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
 
@@ -851,6 +851,50 @@ Recorded by VERIFY-01 on 2026-09-30.
   2. The hashes are recorded: **pass**.
   3. Nothing is excluded outside the frozen rules: **pass** (0 excluded; no per-query exclusion).
   4. No scoring: **pass**.
+- **Committed:** in `86114a2`.
+
+### E1-11: run the scoring and the rejection rules (DONE 2026-09-30)
+
+- **Frozen code only, used unchanged.** `git diff --exit-code e1-protocol-v1 -- …` gave exit 0
+  both before and after the run.
+- **Commands** (one session, Node v24.2.0):
+  1. `e1_score_queries.js --guard --out …/guard_v0_2.json`: pre-flight OK; **0 mismatches out of
+     209** for `s4`, `confidence` and `fused4`; the lexical and dense lists were bit-identical
+     (maximum difference 0); **GUARD PASS**; about 5 seconds.
+  2. `e1_score_queries.js --input data/p1_queries.json --out scores_p1.json`, and the same for P2.
+     Pre-flight OK for both; **4,500 and 1,000 rows**; exit 0.
+  3. `e1_analyze.js … --stage decisions`, without `--synthetic`. **The logical checks pass, with 0
+     failures**, and no lexical-null query had all-equal dense scores. It wrote 4,500 and 1,000
+     decision rows, with R1, R1-CLI, R2 and R3 (median and all five folds) and R2m and R3m.
+- **The manifest is complete** (§6.7):
+  - the commit is `86114a2`. `tag_at_head` is null because HEAD is after the tag, so the frozen
+    set was confirmed with the `git diff` check against `e1-protocol-v1`;
+  - Node v24.2.0;
+  - the CLINC source SHA-256 values, which equal `PROVENANCE.md`;
+  - the three scoring-input hashes and the model cache (OK, OK), from the scorer's pre-flight;
+  - the script SHA-256 values, which **equal the frozen values exactly**
+    (`e1_analyze.js` `b56674d9…`, `e1_score_queries.js` `5f2b39a5…`);
+  - B = 10,000, seed 42.
+- **Outputs** (SHA-256, raw bytes, kept byte-exact by `.gitattributes`):
+
+  | File | Bytes | SHA-256 |
+  |---|---|---|
+  | `guard_v0_2.json` | 97,179 | `177f6aaf24a8a6a9e4ebec59b1695ca187a0f94a47a2d9beb30cebb229429a45` |
+  | `scores_p1.json` | 2,065,820 | `c5810044a008cd12015f101ad77f44a3cc8471e4ea349f1c7f94f7ee7be30f34` |
+  | `scores_p2.json` | 473,667 | `7710f59b3e1746b285700c85f72d93fc82e081e3c946c66640477410ee96fa6c` |
+  | `decisions_p1.json` | 1,224,390 | `2231eb6a8d3dd76b927ae5c95d3899e0f0cbf6ece70a5d4f4449da4e26e4cf8e` |
+  | `decisions_p2.json` | 275,742 | `85739e3bddf090245b03e0162fb391392a2cbaafa0a1c2f121f98d710de349d5` |
+  | `logical_checks.json` | 568 | `7402c40b586561c34879aec0bed247205e3bf41f3bfaec5417d24dedc66b9d97` |
+  | `RUN_MANIFEST.json` | 2,244 | `5b60d97fb9da44a1636a3a3c0d595b2b0afab61e0e2d71cc9b7eaf1fec5f1034` |
+
+- **Reporting rule kept:** no rejection rate, count of rejections or comparison was read or
+  reported. Only the pass/fail status of the checks and the row counts were. `--stage summary`
+  was not run.
+- **Acceptance criteria:**
+  1. The guard passes in the same run: **pass**.
+  2. Every prepared query has one output row (4,500 / 1,000): **pass**.
+  3. The manifest is complete: **pass**.
+  4. The logical checks pass: **pass**.
 
 ## Decisions
 
@@ -909,14 +953,15 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
   - E1-08 stays open until E1-07c is done and items 5 and 7 are re-checked.
 - **Phase 2 is complete.** The E1 protocol was frozen at `e1-protocol-v1` (`970c54f`) on
   2026-09-30.
-- **E1-10 is done:** the data is prepared (4,500 + 1,000).
-- **Recommended Claude task:** E1-11 (P0), running the scoring and the rules. **This is the first
-  step that produces E1 outcomes.**
-  1. Re-run the scorer's v0.2 guard in the same session (`guard_v0_2.json`), and require it to pass.
-  2. Score P1 and P2 (`scores_p1.json`, `scores_p2.json`).
-  3. Run `e1_analyze.js --stage decisions`, which writes the decisions, the logical checks and
-     `RUN_MANIFEST.json`.
-  4. Stop before the summary. The summary is E1-13, after the E1-12 implementation checks.
+- **E1-10 and E1-11 are done.** The scores, decisions, logical checks and manifest are written. No
+  rates have been read.
+- **Recommended Claude task:** E1-12 (P0), the implementation checks, before any summary:
+  1. row counts;
+  2. no NaN or empty scores;
+  3. the shipped score agrees with the frozen `cli/search.js` `search()` on every query;
+  4. a deterministic re-run is byte-identical, apart from timestamps;
+  5. a hand spot-check of 20 random rows, **for scoring correctness only**.
+  - Rates are still not read.
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 

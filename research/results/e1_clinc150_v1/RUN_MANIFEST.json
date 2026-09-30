@@ -1,0 +1,65 @@
+{
+  "protocol_tag": "e1-protocol-v1",
+  "tag_at_head": null,
+  "commit": "86114a2fe1e3939ff5ae43a7985c6af13b5ec513",
+  "node": "v24.2.0",
+  "synthetic_test_run": false,
+  "data_sha256": {
+    "research/data_external/clinc150/data_full.json": "36923c3705a59e08fe9c3883d8bc2dd966ef93e22cb78ac41171782a698d56e0",
+    "research/data_external/clinc150/domains.json": "b947b579d3b8e74b06f93b01083d8efaff2888b43a3e362533bd88a6e1211b3a"
+  },
+  "input_files_sha256": {
+    "scores_p1": "c5810044a008cd12015f101ad77f44a3cc8471e4ea349f1c7f94f7ee7be30f34",
+    "scores_p2": "7710f59b3e1746b285700c85f72d93fc82e081e3c946c66640477410ee96fa6c",
+    "meta_p1": "5d047d2681327fb02bf87147e2553070cfb2e85f861e0334a9aac6bfa67e47d2"
+  },
+  "scorer_preflight": {
+    "P1": {
+      "platform": "win32",
+      "input_sha256": {
+        "cli/data/commands.json": "cc5217af4f76dd03d7c2f8075951142017508b795f5e01b88c8a4fa7f72e06ea",
+        "cli/data/custom_snippets.json": "1f7d5e32407b665c28de7d5515c09062498fb52c498f3003c91ee147436a217a",
+        "research/models/corpus_embeddings.json": "7b8f198ff20b6cf0e6f5f2180404f6f2ac261745551e55ac3a14dfc1afdcb7d1"
+      },
+      "model_cache": "OK",
+      "alpha_per_fold": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "P2": {
+      "platform": "win32",
+      "input_sha256": {
+        "cli/data/commands.json": "cc5217af4f76dd03d7c2f8075951142017508b795f5e01b88c8a4fa7f72e06ea",
+        "cli/data/custom_snippets.json": "1f7d5e32407b665c28de7d5515c09062498fb52c498f3003c91ee147436a217a",
+        "research/models/corpus_embeddings.json": "7b8f198ff20b6cf0e6f5f2180404f6f2ac261745551e55ac3a14dfc1afdcb7d1"
+      },
+      "model_cache": "OK",
+      "alpha_per_fold": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  },
+  "scorer_node": {
+    "P1": "v24.2.0",
+    "P2": "v24.2.0"
+  },
+  "script_sha256": {
+    "e1_analyze.js": "b56674d9b682bc3577ce9db816df7f22dfa16161d75900bbc838505de7f84f62",
+    "e1_score_queries.js": "5f2b39a566663a7cb8a71a772bf0c757e7317fa90a76dc333294eafd9f6536af"
+  },
+  "bootstrap": {
+    "B": 10000,
+    "seed": 42,
+    "rng": "mulberry32"
+  },
+  "started": "2026-09-30T14:40:02.463Z",
+  "finished": "2026-09-30T14:40:02.818Z"
+}
