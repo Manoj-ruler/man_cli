@@ -9,15 +9,15 @@
 
 \begin{abstract}
 Natural-language shell assistants are usually built by generation. We audit a published closed-set
-alternative: a BM25 retriever over a fixed Windows command list that shows its user a confidence and runs the
+alternative: a BM25 retriever over a fixed Windows command list that shows users a confidence and runs the
 chosen command on Enter. Its confidence is no better than a constant forecaster, and wrong answers
-average 86\% confidence. Under cross-validation on two benchmark versions (the second adds 59
+average 86\% confidence (v0.1). Under cross-validation on two benchmark versions (the second adds 59
 out-of-scope and ambiguous queries), excluding 25 verbatim-copy controls, isotonic recalibration cuts
 the shipped confidence's expected calibration error by 79\% and 78\%, to about a calibrated
-forecaster's noise floor (outside our corrected test family). On v0.2, a rejection threshold on the
-shipped score, tuned by cross-validation, rejects 46 of 50 out-of-scope requests but also 20 of 134
+forecaster's noise floor (outside our corrected test family). On v0.2, a cross-validated rejection threshold on the
+shipped score rejects 46 of 50 out-of-scope requests but also 20 of 134
 in-scope ones; the fixed rule rejects 17 and none, a hybrid BM25--MiniLM detector 34 and 11. Most
-out-of-scope requests are everyday, not computing, ones; the 35 added were screened for low scores, and on the 15
+out-of-scope requests are everyday, not computing, ones (AI-assigned labels); the 35 added were screened for low scores, and on the 15
 original ones the fixed rule, threshold and detector reject 4, 12 and 9. The hybrid's confidence
 ranks its own errors better, but its accuracy gain is fragile; both systems sometimes return
 destructive commands for benign requests. All analyses are exploratory; a two-annotator study is under way.

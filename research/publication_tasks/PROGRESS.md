@@ -5,7 +5,7 @@
 | Phase | Tasks | Done | Blocked |
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
-| 1 Contribution | PAPER-01 to 08, TRACE-01 | 3 | 0 |
+| 1 Contribution | PAPER-01 to 08, TRACE-01 | 4 | 0 |
 | 2 E1 protocol | E1-01 to 09 | 0 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
@@ -211,6 +211,43 @@ Recorded by VERIFY-01 on 2026-09-30.
   - In the camera-ready PDF, the §2 sentence and the dated Limitations bullet appear as written.
   - In the review PDF, the date is present but hyphenated ("de- tection") and interleaved with the
     reference column in the text extraction. It is a layout artefact, not a content difference.
+- **Committed:** in `da00504`.
+
+### PAPER-08: The abstract's 86% gets its version; ISSUE-03 handled here (DONE 2026-09-30)
+
+- **Author's decisions:** handle ISSUE-03 in this task; the draft is approved as shown, with "(AI-assigned
+  labels)".
+- **What changed:** `content.tex`, Abstract only (diff hunks at lines 12, 14, 17–18 and 20), plus the
+  rebuilt PDFs. The four edits:
+
+  | ID | Before | After | Words |
+  |---|---|---|---|
+  | c | "wrong answers average 86% confidence." | "…86% confidence (v0.1)." | +1 |
+  | d (ISSUE-03) | "…everyday, not computing, ones;" | "…ones (AI-assigned labels);" | +2 |
+  | t1 | "shows its user a confidence" | "shows users a confidence" | −1 |
+  | t2 | "a rejection threshold on the shipped score, tuned by cross-validation, rejects" | "a cross-validated rejection threshold on the shipped score rejects" | −2 |
+
+  No claim or number was dropped.
+- **Acceptance criteria:**
+  1. The abstract states which version the 86% refers to: "(v0.1)", matching Contribution 1:
+     **pass**.
+  2. Abstract ≤ 200 words: it has **199** (unchanged count, same rule as before): **pass**.
+  3. Trace **186 snippets, 499 numbers, 0 problems**, with all 8 registered abstract snippets still
+     matching, so no trace edit was needed. Build exit 0; the body ends on **page 7** in both PDFs;
+     0 overfull boxes; 0 undefined references: **pass**.
+  4. Only the abstract, the PDFs and the task files changed; no trace entry was needed: **pass**.
+  5. The author approved the text: **pass**.
+- **Verification details:**
+  - The applied abstract equals the approved draft byte for byte (scratchpad `paper08_check.js`).
+  - The camera-ready PDF contains all four changes, and the old "tuned by cross-validation" is gone.
+  - The review PDF also contains all four. Its text layer interleaves carriage returns and the
+    review-mode margin line numbers, for example "(AI-assigned^M 022^M labels)" and "a cross-^M
+    016^M validated rejection threshold". That is a layout artefact, confirmed by printing the raw
+    context around each change.
+- **Result:** ISSUE-02 (the abstract part) and ISSUE-03 are resolved.
+- **Note for later:** the abstract has 1 word of headroom again. The label-study drafter's abstract
+  sentence (`draft_label_study_update.js`) was measured on the old abstract, so re-run it after the
+  study; it reports the word count.
 
 ## Decisions
 
@@ -220,7 +257,7 @@ Recorded by VERIFY-01 on 2026-09-30.
 | D8 (PAPER-02) | Contributions text: Option A with (b) and (c) | 2026-09-30 | author |
 | — | TRACE-01 (P0) and PAPER-08 (P1) are added to `TASKS.md` | 2026-09-30 | author |
 | — | Commit now: the task files, the PAPER-02 edit and the rebuilt PDFs | 2026-09-30 | author |
-| — | ISSUE-03 handling: not yet decided | — | — |
+| — | ISSUE-03 is handled in PAPER-08 (the abstract) | 2026-09-30 | author |
 | — | ISSUE-04 is folded into PAPER-05 (added as checklist item 9 in `TASKS.md`) | 2026-09-30 | author |
 
 ## Issues
@@ -238,12 +275,10 @@ Recorded by VERIFY-01 on 2026-09-30.
 
 ## Next
 
-- **Recommended:** PAPER-08 (P1: add the version to the abstract's 86%; the abstract has 1 word of
-  headroom).
-- **Then:** PAPER-05 (P1: the Limitations checklist, including ISSUE-04 and possibly ISSUE-03),
-  PAPER-04 (P1) and PAPER-01 (P1). After those comes the PAPER-06 gate.
+- **Recommended:** PAPER-05 (P1): the Limitations and threats checklist, including ISSUE-04 (the
+  "7–8 discordant queries" wording).
+- **Then:** PAPER-04 (P1), PAPER-01 (P1), and the PAPER-06 gate.
 - **E1-01 and E1-04** are unblocked in parallel.
-- **Pending decision:** ISSUE-03 handling. It could be decided within PAPER-08, since both touch the
-  abstract.
+- **No pending decisions.**
 
 Waiting for the author's instruction.
