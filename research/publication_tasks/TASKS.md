@@ -417,8 +417,36 @@ v0.2 thresholds frozen?
 - **Deliverable:** the committed script and the synthetic test log in `PROGRESS.md`. The script is
   frozen with the protocol at E1-09, and E1-13 runs it unchanged.
 
+### E1-07c: Review fixes to the analysis code, before the freeze (added 2026-09-30; ISSUE-10 = b, C-1)
+- **Priority:** P0. **Type:** code. **Depends on:** E1-07b, plus the E1-08 decisions.
+- **Files:** `research/experiments/e1_analyze.js`, and `E1_PROTOCOL.md` §6.4 (the recorded values).
+- **Steps:**
+  1. **Derive the matched thresholds** t_m for `s4` and `fused4` (m = 11), using v0.2's 159
+     in-scope queries only, as defined in protocol §6.4.
+     - Record the values, and each rule's v0.2 in-scope and out-of-scope counts (in-sample,
+       descriptive), in the protocol.
+  2. **Add R2m and R3m to `e1_analyze.js`:**
+     - it re-derives the thresholds from the committed files and aborts if they differ from the
+       recorded values;
+     - it adds the per-query decisions;
+     - it reports the rates, R2m − R3m on P1 (paired cluster bootstrap) and on P2 (exact
+       McNemar, unadjusted), all labelled secondary.
+  3. **Reword the output strings** to protocol §6.4's readings.
+  4. **Relabel the recomputed comparisons** (reduced S sets and the overlap subset) "sensitivity
+     (descriptive)" (C-1).
+  5. **Extend the synthetic tests.** Re-run all existing tests, and add known-answer tests for the
+     matched rules and the new labels. Synthetic data only; no CLINC data.
+- **Acceptance:**
+  - The thresholds are derived from v0.2's in-scope scores only.
+  - All tests pass.
+  - No CLINC input.
+  - No other existing file changed.
+- **Deliverable:** the committed script, the recorded thresholds, and the test log in
+  `PROGRESS.md`.
+
 ### E1-08: Protocol review for leakage, selection bias and ambiguity
-- **Priority:** P0. **Type:** verify. **Depends on:** E1-07 and E1-07b.
+- **Priority:** P0. **Type:** verify. **Depends on:** E1-07 and E1-07b. It closes after E1-07c,
+  with a re-check of items 5 and 7 and of the changed code.
 - **Steps:** check the protocol against a written checklist:
   1. no threshold is tuned on E1 data;
   2. exclusions are class-level and were decided without scores;
@@ -629,4 +657,5 @@ v0.2 thresholds frozen?
 | D7 | E1 uses the frozen **v0.2** thresholds even if the final paper reports v0.2.1 | E1-02 | Yes: v0.2 is frozen and pre-annotation; state this in the protocol |
 | D8 | Each paper edit's text (Phase 1 and Phase 4) | per task | — |
 | D9 | External preregistration (e.g. OSF), beyond the git tag | E1-09 | Optional; a git tag is sufficient for SRW |
+| D11 | E1-08 review findings | E1-08 | **Decided 2026-09-30:** ISSUE-10 = (b), a secondary matched-operating-point comparison (m = 11) plus reworded readings; ISSUE-09 = (a), P2 assumed out of scope, stated as a limitation; C-1 approved; E1-07c added |
 | D10 | E1's primary comparison and multiplicity | E1-07 | **Decided (a), 2026-09-30:** one primary comparison, R2 − R3 on P1, with a paired cluster-bootstrap interval. P2's pairs are secondary (exact McNemar, Holm over 3); everything else is descriptive. |

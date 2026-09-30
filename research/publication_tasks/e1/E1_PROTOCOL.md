@@ -20,7 +20,11 @@ them? The rules' thresholds are **frozen from v0.2**, with no tuning on E1 data.
 How do those rejection rates compare with the rates the paper reports on its own out-of-scope set?
 
 **Why E1 exists.** In the paper's v0.2 results, 35 of the 50 out-of-scope queries were written for
-the benchmark and **screened for low retrieval scores**. That screening favours a threshold on the
+the benchmark and **screened for low retrieval scores**.
+
+- They were checked after drafting, and none was discarded or edited
+  (`results/review_r1/review_r1_a_ood_selection.json`, `facts`).
+- Any selection effect therefore comes from how they were drafted (clarified in E1-08, T-5). That screening favours a threshold on the
 shipped score, which is the main threat to the paper's out-of-scope finding (freeze §6; paper §5,
 Limitations). E1 uses requests that no project retriever has ever seen.
 
@@ -45,8 +49,13 @@ Limitations). E1 uses requests that no project retriever has ever seen.
 ### 2.1 Population (decision D4: **(c), both sets reported separately**, author 2026-09-30)
 
 CLINC150 (`research/data_external/clinc150/data_full.json`, pinned to upstream commit 828f809) has
-two test sets. **Every query in both is out of scope for a Windows command retriever**, apart from a
-few intent classes that could have a shell answer (E1-03 handles these):
+two test sets. **Every query in both is out of scope for this tool** under the benchmark's own
+definition (§3, Rule A: no corpus record performs the request). The intents a stock shell could
+answer stay in, and are reported as subgroup S (§3).
+
+- *Amended in E1-08 (T-2), to match D3. The earlier wording, "apart from a few intent classes that
+  could have a shell answer", predated Rule A.*
+- For P2, the status is assumed rather than checked query by query (§2.4; ISSUE-09).
 
 | Set | Size | Structure | What it is |
 |---|---|---|---|
@@ -102,9 +111,22 @@ few intent classes that could have a shell answer (E1-03 handles these):
 4. **Real user traffic** to this tool, or languages other than English. CLINC queries are
    crowd-written, lowercased and without final punctuation.
 5. **Calibration or accuracy.** E1 measures rejection only.
+6. **That every P2 query is out of scope for this corpus** (ISSUE-09, author decision (a),
+   2026-09-30).
+   - P2 has no classes, and its queries are not read before scoring, so its out-of-scope status
+     is **assumed, not verified**.
+   - If a P2 query asked for something a corpus record performs, rejecting it would be wrong,
+     but E1 would count it as correct.
+   - P1, the primary population, was checked at class level (Rule A).
+7. **Which rule is better overall.**
+   - The primary comparison sets R2 and R3 at their v0.2 operating points, which have different
+     false-rejection counts (20 vs 11 of 134).
+   - The matched-operating-point comparison (§6.4) addresses the scores' separation at equal
+     cost, but only as a secondary result (ISSUE-10).
 
-### 2.5 Thresholds are frozen from v0.2 (decision D7: **yes**, author 2026-09-30) E1 applies the v0.2 thresholds as they stand in the committed results, which
-the git tag `v0.2-validated-benchmark` pins. It applies them even if the final paper later reports
+### 2.5 Thresholds are frozen from v0.2 (decision D7: **yes**, author 2026-09-30)
+
+E1 applies the v0.2 thresholds as they stand in the committed results, which the git tag `v0.2-validated-benchmark` pins. It applies them even if the final paper later reports
 benchmark v0.2.1 from the annotation study.
 
 - **Why:** v0.2 is frozen and was produced before annotation. Re-deriving thresholds on v0.2.1 would
@@ -220,6 +242,9 @@ Everything below is fixed before any CLINC query is scored.
 always a correct decision, and **the rejection rate is the only outcome**. There is no in-scope
 query in E1 (§2.4, point 2).
 
+- For P1 this was checked at class level.
+- For P2 it is assumed (§2.4, point 6).
+
 ### 6.2 Decision rules (exactly as in §1, §4 and §5)
 
 Each rule is computed per query from the scorer's output:
@@ -230,6 +255,7 @@ Each rule is computed per query from the scorer's output:
 | R1-CLI | `confidence < 30 \|\| command_shipped === null` | — |
 | R2(t) | `s4 < t` | t ∈ {6.4952, 7.1978}. The fold map is 6.4952 for folds 0, 1, 2 and 4, and 7.1978 for fold 3. |
 | R3(u) | `fused4 < u` | u ∈ {0.9179, 0.9219, 0.8841, 0.9247, 0.9219} for folds 0–4 |
+| R2m, R3m (secondary) | `s4 < t_m(s4)`; `fused4 < t_m(fused4)` | Matched operating points, m = 11 (§6.4). Values are recorded in E1-07c. |
 
 - **Primary thresholds (D2 = a): the medians, R2 at 6.4952 and R3 at 0.9219.** Unless a threshold
   is named, "R2" and "R3" below mean these.
@@ -271,10 +297,12 @@ on requests nobody screened?
 
 | Interval | Reading |
 |---|---|
-| Entirely above 0 | R2's lead holds on external data |
-| Includes 0 | No evidence of a difference |
-| Entirely below 0 | The lead reverses |
+| Entirely above 0 | R2 rejects more external out-of-scope requests than R3 **at their v0.2 operating points**. R2's operating point also has more v0.2 false rejections (20 vs 11 of 134), so this **does not by itself show that R2 is the better rule**. |
+| Includes 0 | No evidence of a difference in external rejection at these operating points |
+| Entirely below 0 | R3 rejects more external out-of-scope requests than R2, even though R3's v0.2 operating point has fewer false rejections |
 
+- *The reading was reworded in E1-08, following ISSUE-10 (author decision (b), 2026-09-30). It
+  previously said "R2's lead holds on external data".*
 - The size of the difference is reported whatever the interval.
 - **Degenerate case:** if every bootstrap value is identical (for example, both rules reject
   everything), the interval is reported as degenerate. No reading is made beyond the point estimate.
@@ -292,6 +320,40 @@ on requests nobody screened?
   - Exact McNemar is also shown, labelled "ignores clustering".
 - **The full 2×2 agreement table** for every pair, in each population.
 
+**The matched-operating-point comparison** (secondary; ISSUE-10, author decision (b), 2026-09-30).
+It compares the two **scores** at equal v0.2 cost, free of the v0.2 out-of-scope screening.
+
+- **Thresholds:**
+  - For each score (the shipped `s4` and the fused `fused4`), take the 159 v0.2 queries whose
+    label is not OOD.
+  - The in-scope scores are:
+    - for `s4`, `results/v0.2/reproduction-results.json` `actual.score`;
+    - for `fused4`, `results/v0.2/reliability_features.json` `top1_score`.
+  - Set **t_m = the (m + 1)-th smallest in-scope score**, counting ties, with **m = 11** (R3's
+    observed v0.2 false-rejection count).
+  - A query is rejected iff its score < t_m (strict), so at most m of the 159 in-scope queries are
+    rejected (fewer if ties sit at t_m).
+  - **t_m depends only on v0.2's in-scope scores.** It uses no out-of-scope query (so none of the
+    screened ones), and no CLINC data.
+- **The two rules are R2m (s4 < t_m on s4) and R3m (fused4 < t_m on fused4).**
+  - E1-07c derives both thresholds from the committed files and records them here **before the
+    freeze**. The analysis script re-derives them and aborts if they differ.
+  - For context (in-sample, descriptive), report each rule's actual count of v0.2 in-scope
+    rejections (of 159, and of the 134 without controls) and its v0.2 out-of-scope rejections
+    (of 50).
+- **What is reported:**
+  - the rates of R2m and R3m, with the same intervals as §6.3;
+  - **R2m − R3m on P1**, with a paired cluster-bootstrap interval (same B and seed);
+  - R2m − R3m on P2, with exact McNemar (unadjusted);
+  - both labelled **secondary**. No claim rests on them alone.
+- **Pre-stated reading:**
+
+  | Interval | Reading |
+  |---|---|
+  | Entirely above 0 | At equal v0.2 cost, the shipped score rejects more external out-of-scope requests than the fused score |
+  | Includes 0 | No evidence of a difference at equal cost |
+  | Entirely below 0 | At equal cost, the fused score rejects more |
+
 **Alternatives considered and not chosen:**
 
 - **(b) Fully descriptive.** Every estimate has an interval, and there is no primary test.
@@ -299,8 +361,11 @@ on requests nobody screened?
 
 ### 6.5 Other pre-specified quantities (descriptive)
 
-1. **R1 vs R1-CLI.** Count the queries with 2.0 ≤ s < 2.36, per population. Because the rules are
-   nested (6.8), this equals R1-CLI's rejections minus R1's.
+1. **R1 vs R1-CLI.** Report, per population, R1-CLI's rejections minus R1's; this is
+   **authoritative**. The rules are nested (6.8).
+   - The count of queries with 2.0 ≤ s < 2.36 is reported as a **cross-check**. The two can
+     differ only if s is exactly the floating-point value 2.36, and an equality flag is reported
+     (T-6, E1-08).
 2. **Subgroup S** (§3):
    - rates for S-clear and for S-borderline;
    - the P1 rates recomputed **without S-clear** and **without S-clear and S-borderline**, with
@@ -308,6 +373,9 @@ on requests nobody screened?
    - the primary comparison (R2 − R3) recomputed on both reduced sets.
 3. **Per domain (P1):** k/450 and the rate for each rule and domain. There are no tests and no
    intervals.
+   - **9 of the 13 subgroup-S intents are in `utility`** (with 2 in travel, 1 in home and 1 in
+     auto_and_commute). The utility domain's rate is therefore largely a subgroup-S result (T-4,
+     E1-08).
 4. **Ties:** the number of queries with `s4` exactly equal to 6.4952 or to 7.1978, or with `fused4`
    exactly equal to any R3 threshold, per population and threshold. None of them is rejected.
 5. **Queries with no tokens:**
@@ -354,10 +422,15 @@ on requests nobody screened?
 - **ED-1 (screening).** If v0.2's score screening inflated the tuned shipped threshold:
   - R2's rejection rate on P1 and P2 will be **below 92%** (46/50);
   - and R2 − R3 will be **smaller than v0.2's 24 points**, or reversed.
-- **ED-2 (a property of the scores).** If R2's lead reflects how well the two scores separate
-  out-of-scope requests, rather than the screening, R2 − R3 will be **above 0** on P1 (the primary
-  interval) and on P2.
-  - ED-1 and ED-2 can both hold: a smaller lead that is still positive.
+- **ED-2 (a property of the scores).** If the shipped score separates out-of-scope requests at least
+  as well as the fused score, independently of the screening, then **R2m − R3m will not be below
+  0** on P1 or P2. At matched cost on v0.2, in-sample, the shipped score was never worse: 23 vs 21
+  at 0 false rejections, 33 vs 33 at 7, 37 vs 36 at up to 11, and 43 vs 37 at 15.
+  - R2 − R3 at the v0.2 operating points is expected to be above 0 whatever the case, because R2's
+    operating point rejects more in general (ISSUE-10). That is why ED-2 is stated on the matched
+    comparison.
+  - *Reworded in E1-08, following ISSUE-10.*
+  - ED-1 and ED-2 can both hold: a smaller unmatched lead, and no matched deficit.
 - **ED-3 (vocabulary): a floor that holds by construction, not an expectation.** Every rule
   rejects every lexical-null query (6.8, item 4; for R3, provided its dense scores are not all
   equal). So:
@@ -377,10 +450,10 @@ All outputs go in `research/results/e1_clinc150_v1/`:
 
 | File | Task | Content |
 |---|---|---|
-| `data/p1_queries.json`, `data/p2_queries.json`, `data/DATA_PROVENANCE.md` | E1-10 | `{id, text, intent, domain, subgroup}` (P1) and `{id, text}` (P2), taken unchanged from the committed `data_full.json`. The provenance file gives source hashes and counts. |
+| `data/p1_queries.json`, `data/p2_queries.json`, `data/DATA_PROVENANCE.md` | E1-10 | `{id, text, intent, domain, subgroup}` (P1) and `{id, text}` (P2), taken unchanged from the committed `data_full.json`. `domain` is the `domains.json` key. `subgroup` is exactly `"S-clear"`, `"S-borderline"` or `null` (T-3, E1-08). The provenance file gives source hashes and counts. |
 | `guard_v0_2.json` | E1-11 | The scorer's `--guard` run, in the same session as the scoring. It must pass. |
 | `scores_p1.json`, `scores_p2.json` | E1-11 | The scorer's per-query output (E1-06). |
-| `decisions_p1.json`, `decisions_p2.json` | E1-11 | Per query: R1, R1-CLI, R2 at both distinct thresholds, and R3 at all five. |
+| `decisions_p1.json`, `decisions_p2.json` | E1-11 | Per query: R1, R1-CLI, R2 at both distinct thresholds, R3 at all five, and R2m and R3m. |
 | `RUN_MANIFEST.json` | E1-11 | See the list below. |
 | `summary.json`, `summary.md` | E1-13 | Every quantity in 6.3–6.5, with numerator, denominator and interval. |
 | `DEVIATIONS.md` | E1-13 | Present even if empty. |

@@ -709,6 +709,7 @@ Recorded by VERIFY-01 on 2026-09-30.
 | D7 | E1 uses the **frozen v0.2 thresholds**, even if the final paper reports v0.2.1 | 2026-09-30 | author |
 | D2 | **(a)**: apply all five per-fold thresholds. The primary result is the median rate, which equals the rate at the median threshold (R2 6.4952, R3 0.9219); the min–max is a sensitivity range. | 2026-09-30 | author |
 | — | ISSUE-06 **option 1**: R1 stays s < 2.0 (primary); add R1-CLI (s < 2.36) as secondary; correct the approved §1 wording ("on the benchmark, equivalently") | 2026-09-30 | author |
+| D11 | E1-08 findings: **ISSUE-10 = (b).** The primary reading and ED-2 are reworded, and a secondary matched-operating-point comparison R2m − R3m is added (m = 11; thresholds from v0.2's 159 in-scope queries only). **ISSUE-09 = (a):** P2's out-of-scope status is stated as assumed. **C-1 is approved.** **E1-07c is added.** | 2026-09-30 | author ("ISSUE-10 = b, ISSUE-09 = a, approve C-1, add E1-07c") |
 | D10 | **(a)**: one pre-specified primary comparison, R2 − R3 on P1, with a paired cluster-bootstrap 95% interval (B = 10,000, seed 42). P2's three pairs are secondary (exact McNemar, Holm over 3); all else is descriptive. §6 is approved as drafted. | 2026-09-30 | author |
 | — | ISSUE-08: **add E1-07b** (P1). `e1_analyze.js` is written and tested on synthetic data before the freeze, frozen at E1-09, and run unchanged at E1-13. E1-08 now depends on E1-07b. | 2026-09-30 | author |
 | D3 | **Rule A** (exclude an intent iff a Windows-visible corpus record performs its typical request; the benchmark's own OOD definition): **0 exclusions**, P1 = all 150 intents and 4,500 queries. **Subgroup S** is reported, not excluded: S-clear = date, calculator, measurement_conversion, flip_coin, roll_dice, timer; S-borderline = time, timezone, alarm, reminder_update, weather, exchange_rate, current_location. A sensitivity check drops S-clear, then S-clear and S-borderline. | 2026-09-30 | author |
@@ -717,6 +718,9 @@ Recorded by VERIFY-01 on 2026-09-30.
 
 | ID | Found in | Issue | Evidence | Blocks? | Proposed task |
 |---|---|---|---|---|---|
+| ISSUE-10 (DECIDED (b) 2026-09-30; the text is applied; the code goes in E1-07c) | E1-08 | **Operating-point confound (checklist item 7).** E1 counts only rejections of out-of-scope requests, so the rule set to reject more scores higher. R2 and R3 sit at different v0.2 operating points (20 vs 11 false rejections of 134). The primary comparison's reading, "R2's lead holds", could therefore be misread as "R2 is the better rule". A threshold matched to m in-scope rejections depends only on v0.2's in-scope scores, so it is free of the screening under test. | `E1_PROTOCOL_REVIEW.md` §4; `review_r1_e_ood_operating_points.json` `in_sample_matched_false_rejection` | **Yes: it blocks E1-08, and so E1-09** | Options: (a) text only, plus output strings; **(b) recommended:** (a) plus a pre-specified secondary R2m − R3m comparison at matched operating points (m = 11, thresholds from v0.2's in-scope queries only); (c) like (b), but co-primary. Every option needs a code task, **E1-07c**. |
+| ISSUE-09 (RESOLVED (a) 2026-09-30; the text is in protocol §2.1, §2.4 point 6 and §6.1) | E1-08 | P2 (`oos_test`) is assumed out of scope for this corpus, but this was not checked query by query; P1 was checked at class level (Rule A). | `E1_PROTOCOL_REVIEW.md` §4 | Yes, until decided | **(a) recommended:** state it as an assumption and a limitation (§2.4, §6.1). (b) The author reviews the 1,000 queries against a pre-specified rule, and flagged queries become a sensitivity line (no AI annotation). |
+| C-1 (APPROVED 2026-09-30; the fix goes in E1-07c) | E1-08 | `e1_analyze.js` gives the recomputed R2 − R3 comparisons (reduced S sets, overlap subset) the primary-reading text | `E1_PROTOCOL_REVIEW.md` §4 | Yes: a code change before the freeze | Relabel them "sensitivity (descriptive)" in E1-07c |
 | ISSUE-08 (RESOLVED by adding E1-07b, author, 2026-09-30) | E1-07 | The plan writes the E1 analysis code after the freeze (E1-11/E1-13). The protocol text fixes every metric, but code written after the freeze still leaves room for undeclared implementation choices, such as bootstrap indexing or how ties are handled in code. | `TASKS.md` E1-11 and E1-13; protocol §6 | No | **Proposed E1-07b (P1, code):** write `research/experiments/e1_analyze.js` **before** the freeze. Test it only on synthetic score files, including the 6.8 logical checks, never on CLINC. Freeze it with the protocol, so that E1-13 only runs frozen code. **This changes the plan, so it needs the author's approval.** |
 | ISSUE-07 | E1-05 | Two scoring inputs are not covered by the analysis freeze's input hashes: `cli/data/custom_snippets.json` (the packaged snippet in the lexical index) and `research/models/corpus_embeddings.json`. The freeze hashes only `commands.json` (`ANALYSIS_FREEZE_v1.0.md:372`). Both files are tracked in git, but `termassist sync` overwrites the snippet file (`cli/index.js:30-40`), and any change to it alters every score. | `E1_SCORING_DESIGN.md` §3, §4 (risk 2), §6; SHA-256 values recorded there | No | **No plan change.** The E1-06 scorer asserts the three SHA-256 values before scoring, and E1-09 lists them among E1's frozen inputs. `ANALYSIS_FREEZE_v1.0.md` is not touched. |
 | ISSUE-05 | PAPER-05 | Possible related-work gap. A web search during Stage 4.5 (2026-09-29, the D1 originality check) returned an arXiv paper titled "Execution-Based Evaluation of Natural Language to Bash and PowerShell for Incident Remediation" (arXiv 2405.06807). It is **unverified**: I have not read or checked it, and the paper does not cite it. If it is real and relevant, it is a public NL-to-**PowerShell** benchmark, which a reviewer may expect in §2 given the tool's Windows corpus. It does **not** contradict §3's or the Limitations' "natural-language-to-**Bash** benchmarks target Linux". | the Stage 4.5 web-search result list, 2026-09-29 (in the session record) | No: the current wording is accurate. It is a completeness risk. | **LIT-01 (P2):** verify arXiv 2405.06807 against its primary record (authors, venue, content). If it holds, decide with the author whether to cite it in §2, and whether its PowerShell data could serve any purpose. That would be a new dataset, which needs approval under the plan's rules. Run it before FINAL-03. |
@@ -734,9 +738,18 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **Author action:** PAPER-07. Submit `research/paper/acl_latex/main_review.pdf` (SHA-256 prefix
   `7c129b946bcd928b`) to the EACL 2027 SRW mentorship programme by **Nov 6**, and tell Claude when it
   is done, so it can be recorded.
-- **Recommended Claude task:** E1-08 (P0). Review the protocol against its 7-item checklist
-  (leakage, selection bias, ambiguity), and also review the two frozen-to-be scripts.
-- **Then:** E1-09 (the freeze and tag; needs the author's explicit approval).
+- **In progress: E1-08.** `e1/E1_PROTOCOL_REVIEW.md` is written.
+  - Checklist items 1–6 pass; the denominators were verified from the labels, and no text was read.
+  - Text fixes T-1 to T-6 are applied to the protocol.
+  - **The author decided (D11):** ISSUE-10 = (b), ISSUE-09 = (a), C-1 approved, and E1-07c added.
+    The protocol text is updated accordingly.
+  - E1-08 stays open until E1-07c is done and items 5 and 7 are re-checked.
+- **Recommended Claude task:** E1-07c (P0).
+  - Derive and record the matched thresholds (m = 11, from v0.2's in-scope queries only).
+  - Add R2m and R3m to `e1_analyze.js`, reword the output strings, and relabel the recomputed
+    comparisons.
+  - Extend the synthetic tests.
+- **Then:** the E1-08 re-check, and E1-09 (the freeze).
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 
