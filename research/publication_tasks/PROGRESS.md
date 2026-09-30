@@ -8,7 +8,7 @@
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
 | 3 E1 execution | E1-10 to 14 | 5 (**complete**) | 0 |
-| 4 Integration | INTEG-01 to 07 | 0 | 0 |
+| 4 Integration | INTEG-01 to 07 | 1 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
 
 ## Planning entry (2026-09-30)
@@ -1001,6 +1001,41 @@ Recorded by VERIFY-01 on 2026-09-30.
   1. Every statement cites the summary: **pass**.
   2. The general-domain limitation is explicit (§4 point 1, §5): **pass**.
   3. The author reviewed the memo: **pass**.
+- **Committed:** in `d8cba4c`.
+
+### INTEG-01: decide which claims E1 supports (DONE 2026-09-30)
+
+- **Deliverable:** the "E1 rows (INTEG-01)" section of `CLAIM_EVIDENCE_MAP.md`.
+- **Existing claims E1 bears on (13):**
+  - **3 supported:**
+    - E1-A: the shipped tool accepts most out-of-scope requests. R1 rejects 25.3% / 19.1%,
+      and only lexical-null queries.
+    - E1-B: the tuned threshold at a cost (86.0% / 83.4%).
+    - E1-C: the lead persists on unscreened requests, but smaller (+0.0827 [0.0502, 0.1164]).
+  - **6 weakened by E1** (E1-D to I). These are the claims that the shipped score separates
+    better, or that the hybrid adds nothing beyond the threshold:
+    - `content.tex` ll. 257–259 and 265;
+    - Table 1 ll. 197–198;
+    - Discussion ll. 353–355;
+    - Conclusion ll. 365–366.
+
+    All are true on v0.2. The external matched comparison points the other way: −0.1251
+    [−0.1618, −0.0887] on P1 and −0.173 on P2.
+  - **4 disclosures to update** (E1-J to M): "All analyses are exploratory"; the screening-bias
+    limitation; the detector-features limitation; the next step "an analysis specified in
+    advance".
+- **4 new candidate claims** (E1-N1 to N4). Each needs a trace entry at INTEG-04. The caveats
+  that must accompany any E1 claim are recorded.
+- Each row cites `summary.json` by path. Every paper line reference was read in `content.tex` at
+  `29ee6c3`.
+- **Correction while drafting:** the first tally was stated as 4 / 7 / 4. The correct tally is
+  **3 supported, 6 weakened and 4 disclosures** (13 in total).
+- **Author's decision (D12): option B, a proportionate reframe.**
+  - Scope the v0.2 claims to the benchmark, and report E1 as a pre-specified external check.
+  - Rephrase the weakened claims.
+  - Update the Limitations, the next steps and the "exploratory" disclosure.
+- **Acceptance criteria:** `CLAIM_EVIDENCE_MAP.md` has E1 rows, and the author has decided the
+  wording (D12 = B): **pass**.
 
 ## Decisions
 
@@ -1021,6 +1056,7 @@ Recorded by VERIFY-01 on 2026-09-30.
 | — | ISSUE-06 **option 1**: R1 stays s < 2.0 (primary); add R1-CLI (s < 2.36) as secondary; correct the approved §1 wording ("on the benchmark, equivalently") | 2026-09-30 | author |
 | D6 | **Freeze the E1 protocol (gate G-E1):** approved. Tag `e1-protocol-v1` → `970c54f` | 2026-09-30 | author ("Approve freeze, D9 = git tag only. Start E1-09") |
 | D9 | External preregistration: **none; the git tag only** | 2026-09-30 | author |
+| D12 | How the paper words the claims E1 weakens: **option B, a proportionate reframe.** The v0.2 claims are scoped to the benchmark, E1 is reported as a pre-specified external check, and ll. 257, 265 and 353–355 and the Conclusion lead are rephrased. The Limitations, the next steps and "exploratory" are updated. | 2026-09-30 | author ("D12 = B") |
 | D11 | E1-08 findings: **ISSUE-10 = (b).** The primary reading and ED-2 are reworded, and a secondary matched-operating-point comparison R2m − R3m is added (m = 11; thresholds from v0.2's 159 in-scope queries only). **ISSUE-09 = (a):** P2's out-of-scope status is stated as assumed. **C-1 is approved.** **E1-07c is added.** | 2026-09-30 | author ("ISSUE-10 = b, ISSUE-09 = a, approve C-1, add E1-07c") |
 | D10 | **(a)**: one pre-specified primary comparison, R2 − R3 on P1, with a paired cluster-bootstrap 95% interval (B = 10,000, seed 42). P2's three pairs are secondary (exact McNemar, Holm over 3); all else is descriptive. §6 is approved as drafted. | 2026-09-30 | author |
 | — | ISSUE-08: **add E1-07b** (P1). `e1_analyze.js` is written and tested on synthetic data before the freeze, frozen at E1-09, and run unchanged at E1-13. E1-08 now depends on E1-07b. | 2026-09-30 | author |
@@ -1065,11 +1101,13 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
   2026-09-30.
 - **E1-10 to E1-13 are done.** The results are computed; see the E1-13 entry.
 - **Phase 3 is complete.** E1-14's memo is approved.
-- **Recommended Claude task:** INTEG-01 (P0), deciding which claims E1 supports.
-  - Add the E1 rows to `CLAIM_EVIDENCE_MAP.md`, each citing `summary.json`.
-  - Mark the paper claims E1 supports, and the ones it weakens (`content.tex` lines 258 and 265).
-  - Propose wording options for the author's decision. **The paper is not edited in INTEG-01.**
-- **Then:** INTEG-02, the page budget and placement (the body is at 7 of 8 pages).
+- **INTEG-01 is done** (D12 = B).
+- **Recommended Claude task:** INTEG-02 (P0), the page budget and placement.
+  - Measure the current body length.
+  - Draft a placement plan for option B: which sentences go where in §3, §4, §5, the Discussion,
+    the Conclusion and the Limitations, and an appendix table for E1.
+  - Estimate the length, and name what could be trimmed if the body would exceed 8 pages.
+  - **It is a plan for approval. No paper edits.**
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 

@@ -90,6 +90,99 @@ All intervals are 95%. "Non-control" means excluding the 25 verbatim-copy contro
   4. AI-assigned, unchecked kind labels (A11, K4);
   5. the ranking cost of recalibration (A7, C2b, K2).
 
+## E1 rows (INTEG-01, 2026-09-30)
+
+**Evidence:**
+
+- `research/results/e1_clinc150_v1/summary.json`, cited as `S:` plus a path;
+- the frozen protocol `e1-protocol-v1`;
+- the approved memo `e1_run/E1_RESULTS_MEMO.md`.
+
+**Where E1 applies:** external, general-domain (CLINC150), unscreened out-of-scope requests. **There
+are no in-scope queries**, so there is no false-rejection evidence; the costs are v0.2's.
+
+- P1 = `test` (4,500, primary; interval = intent-cluster bootstrap).
+- P2 = `oos_test` (1,000; Wilson).
+
+**Extra labels for this section:**
+
+- **Weakened by E1:** the statement is true as a benchmark (v0.2) result, but pre-specified
+  external evidence points the other way, so it cannot stand as a general claim.
+- **Disclosure to update:** a limitation or plan that E1 now partly answers.
+
+### Existing paper claims that E1 bears on
+
+| # | Claim (`content.tex` line) | E1 evidence | Label |
+|---|---|---|---|
+| E1-A | The shipped tool accepts most out-of-scope requests: the fixed rule rejects 17 of 50 on v0.2 (Abstract l. 19; §5 l. 255; Table 1 l. 195) | R1 rejects **25.3% [21.8, 29.0]** (P1) and **19.1% [16.8, 21.7]** (P2) (`S: P1.rates.R1`, `P2.rates.R1`). It rejects only queries sharing no word with the corpus: 0 of 3,361 and 0 of 809 overlap queries (`S: P*.lexical_null.overlap_subset.rates.R1`). | **Supported**, and strengthened on external data |
+| E1-B | "a tuned threshold on the shipped score handles out-of-scope requests at a cost in refused in-scope queries" (Contribution, ll. 53–54) | R2 rejects **86.0% [83.0, 88.8]** (P1) and **83.4% [81.0, 85.6]** (P2), against 92% on v0.2 (`S: P*.rates.R2`). The cost is v0.2's (20/134) and is not measured by E1. | **Supported with caveat.** The rate is lower than on v0.2, and there is no external cost evidence. |
+| E1-C | "The threshold's lead over the detector therefore also appears on the unscreened queries, though 15 queries are few" (ll. 275–276); Conclusion "46 vs. 34 … 12 vs. 9 on the 15 not screened" (ll. 368–369) | **Primary:** R2 − R3 = **+0.0827 [0.0502, 0.1164]** on P1 (`S: P1.primary_comparison`); P2 **+0.053**, Holm p = 0.0012 (`S: P2.secondary_p2[0]`). The lead persists on 5,500 unscreened queries, but it is smaller than 24 points (v0.2) or 20 points (the 15). | **Supported**, at the v0.2 operating points. The lead is smaller externally. |
+| E1-D | "But the gain comes from the threshold, not the hybrid" (l. 257) | **Matched secondary:** at equal v0.2 cost, R2m − R3m = **−0.1251 [−0.1618, −0.0887]** (P1) and **−0.173** (P2, p = 5.8e-19) (`S: P*.matched_operating_point`). Thresholding the fused score rejects more external out-of-scope requests than thresholding the shipped score at the same cost. | **Weakened by E1.** On v0.2 it holds; externally, the hybrid's feature adds beyond the threshold. |
+| E1-E | "The shipped score itself separates out-of-scope requests better than the hybrid's fused score (pooled AUROC 0.956 vs. 0.889 on v0.2, 0.939 vs. 0.837 on v0.1)" (ll. 257–259) | E1 cannot compute AUROC, since it has no in-scope queries. The matched comparison (E1-D) is E1's equal-cost evidence, and it points the other way. | **Weakened by E1.** The AUROC values are correct, but they are benchmark-internal. The general wording ("separates … better") is not supported. |
+| E1-F | "The shipped score is never worse at the points we checked" (l. 265); Table 1 "equal false rejections … 33 / 33 at 7; 43 / 37 at 15" (l. 197) | The points checked are v0.2 in-sample. At m = 11 (v0.2 in-sample: 37 vs 36), E1 gives the shipped score **64.6% vs 77.1%** (P1) and **59.7% vs 77.0%** (P2) (`S: P*.matched_operating_point.rates`). | **Weakened by E1.** It is literally true of the points checked, but it invites a general reading that E1 contradicts. |
+| E1-G | Table 1 status "robust" for the out-of-scope AUROC difference (l. 198) | As E1-E. "Robust" describes the v0.2 interval, not generality. | **Weakened by E1** (the status wording) |
+| E1-H | Discussion: "Out-of-scope rejection needed a better threshold, not a new retriever: the shipped score, thresholded well, separated out-of-scope requests at least as well as the hybrid's feature at equal false-rejection counts (in-sample)" (ll. 353–355) | As E1-D and E1-F | **Weakened by E1** |
+| E1-I | Conclusion lead: "a better retriever was not the remedy for out-of-scope requests" (ll. 365–366) | E1-C supports "the threshold is the main lever". E1-D contradicts "the hybrid adds nothing" on external data. | **Weakened by E1.** It is true on the benchmark, and contested externally. |
+| E1-J | Abstract: "All analyses are exploratory" (l. 23) | E1 is **pre-specified and frozen before scoring** (tag `e1-protocol-v1`, `970c54f`). | **Disclosure to update** if E1 enters the paper (INTEG-06) |
+| E1-K | Limitations: "the added queries were checked with raw retrieval scores, which favors the shipped score … we have no bound on this bias" (ll. 397–400) | E1 is an external test of that threat. ED-1's predicted pattern was observed (R2 < 92%, a smaller lead), and ED-2 was contradicted. That is consistent with the bias being real, but E1 cannot separate screening from the population difference (memo §4 point 3). | **Disclosure to update.** E1 gives partial evidence, not a bound. |
+| E1-L | Limitations: the hybrid detector's features "may flatter its out-of-scope counts and AUROC" (ll. 399–400) | Externally, R3 rejects **77.8%** (P1) and **78.1%** (P2), against 68% on v0.2 (`S: P*.rates.R3`), with fixed features and thresholds. | **Disclosure to update.** No sign of flattering on this external set, which is general-domain. |
+| E1-M | Next steps: "confirm the findings with an analysis specified in advance" (ll. 372–373) | E1 is such an analysis, for the out-of-scope findings, on general-domain data | **Disclosure to update** |
+
+### New claims E1 makes possible (each would need a trace entry; INTEG-04)
+
+| # | Candidate claim | Evidence | Label |
+|---|---|---|---|
+| E1-N1 | On 5,500 external, unscreened requests written for another assistant, the shipped rule rejects only 19–25% | `S: P*.rates.R1` | **Supported** |
+| E1-N2 | At the v0.2 operating points, the tuned shipped threshold rejects 86% / 83% and the hybrid detector 78% / 78%; the lead is +8.3 points [5.0, 11.6] | `S: P1.primary_comparison`, `P*.rates` | **Supported.** It is the pre-specified primary comparison. The operating-point caveat must go with it. |
+| E1-N3 | At equal v0.2 cost, the fused score rejects more external out-of-scope requests than the shipped score (−12.5 [−16.2, −8.9] on P1; −17.3 on P2) | `S: P*.matched_operating_point` | **Supported as secondary.** Caveats: the cost tie (10 vs 11), in-sample thresholds, general-domain data. |
+| E1-N4 | The external check was specified and frozen before any scoring, with no deviations | Tag `e1-protocol-v1`; `DEVIATIONS.md` | **Supported** (a design fact) |
+
+**Must accompany any E1 claim:**
+
+- it is general-domain, not terminal-task (§2.4 point 1);
+- it has no false-rejection evidence (§2.4 point 2);
+- P2 is assumed out of scope (§2.4 point 6).
+
+### Wording options for the weakened claims (the author decides; INTEG-03 to 07 edit)
+
+**Decided: D12 = B (proportionate reframe), author, 2026-09-30.** INTEG-03 to INTEG-07 follow
+option B. The example sentences below are the starting point, not final text; each edit is shown to
+the author as a draft before it is applied.
+
+- **Option A: minimal scoping.**
+  - Keep every v0.2 sentence, adding "on our benchmark" or "in-sample on v0.2" where missing.
+  - Add one §5 sentence reporting E1's primary result and its matched reversal. Leave the
+    Discussion and Conclusion leads as they are.
+  - *Risk:* the Discussion and Conclusion would still read as a general claim that E1 contradicts.
+- **Option B: proportionate reframe. Recommended.**
+  - Keep the v0.2 results, scoped to the benchmark. Report E1 as a pre-specified external check.
+  - Rephrase the claims E1 weakens. Examples, for wording only:
+    - l. 257: "On our benchmark, the gain comes from the threshold rather than the hybrid: the
+      shipped score separates … (AUROC …). On 5,500 external general-domain requests, checked by
+      an analysis frozen before scoring, the tuned threshold still rejects more at its operating
+      point (86% vs. 78%), but at equal v0.2 cost the hybrid's feature rejects more (77% vs.
+      65%)."
+    - Discussion ll. 353–355: "Out-of-scope rejection depended mostly on the threshold. Which score
+      to threshold is not settled: the shipped score did as well as the hybrid's feature on our
+      benchmark, and worse on external requests at equal cost."
+    - Conclusion l. 366: "… and on our benchmark a better retriever was not needed for
+      out-of-scope requests, although on external requests the hybrid's feature rejected more at
+      equal cost."
+  - Update Limitations (E1-K, E1-L), the next steps (E1-M) and the "exploratory" disclosure
+    (E1-J).
+- **Option C: make E1 the headline.**
+  - Lead the out-of-scope story with E1: "the benchmark's apparent advantage of the shipped score
+    did not survive an external pre-specified test".
+  - Revise the Abstract and Conclusion around that.
+  - *Risk:* this overweights a general-domain secondary comparison. The primary comparison still
+    favours R2 at its operating point.
+
+**Related decisions for later tasks (not needed now):**
+
+- **Placement** (INTEG-02): the body is at 7 of 8 pages. Option B needs roughly 4–6 main-text
+  sentences plus an appendix table.
+- **Whether the Abstract gains an E1 sentence** (INTEG-07; the abstract is at 199/200 words).
+
 ## Issues raised
 
 Details are in `PROGRESS.md`:

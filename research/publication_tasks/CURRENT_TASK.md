@@ -1,24 +1,25 @@
 # Current task
 
-**Last completed:** E1-14 (2026-09-30). The results memo `e1_run/E1_RESULTS_MEMO.md` is approved.
-**Phase 3 (E1 execution) is complete.**
+**Last completed:** INTEG-01 (2026-09-30). The E1 rows are in `CLAIM_EVIDENCE_MAP.md`: 3 claims
+supported, 6 weakened and 4 disclosures to update, plus 4 new candidate claims. **D12 = B**, a
+proportionate reframe.
 
 **Author action still open:** PAPER-07, the mentorship submission, by Nov 6.
 
-**Next (recommended): INTEG-01, decide which claims E1 supports.** Status: NOT STARTED. It waits
-for "Start INTEG-01".
+**Next (recommended): INTEG-02, the page budget and placement.** Status: NOT STARTED. It waits for
+"Start INTEG-02".
 
-- **Priority:** P0. **Type:** paper (decision). **Depends on:** E1-14 (done).
+- **Priority:** P0: the body is at 7 of 8 pages (VERIFY-01). **Type:** paper (plan).
 - **Steps:**
-  1. Add E1 rows to `CLAIM_EVIDENCE_MAP.md`, each citing a `summary.json` path.
-  2. For each paper claim that E1 bears on, mark it as supported, weakened or not addressed.
-     The claims include:
-     - the shipped tool accepting most out-of-scope requests;
-     - the tuned threshold at its operating point;
-     - `content.tex` line 258 (the shipped score separates better);
-     - `content.tex` line 265 (never worse);
-     - Limitations on screening.
-  3. Propose wording options for each weakened claim.
-- **The paper is not edited here.** The author decides the wording; the edits happen in
-  INTEG-03 to INTEG-07.
-- **Deliverable:** the updated `CLAIM_EVIDENCE_MAP.md`, plus the author's wording decision.
+  1. Rebuild the PDF read-only and measure the body length. Where does §7 end, and how much of page
+     8 is free?
+  2. Draft a placement plan for option B:
+     - §4, methods: one short E1 paragraph (INTEG-03);
+     - §5: the E1 results sentences, with the rephrased ll. 257 and 265 (INTEG-04);
+     - Table 1: two new E1 rows, or an appendix table;
+     - the Discussion (ll. 353–355) and the Conclusion lead (ll. 365–366), rephrased;
+     - the Limitations (general-domain E1, the screening-bias and features items; INTEG-05);
+     - the next steps and "exploratory" (INTEG-06);
+     - an appendix E1 table with the full results.
+  3. Estimate the added lines, and list what could be trimmed if the body would exceed 8 pages.
+- **Deliverable:** a placement plan, approved by the author. **No paper edits in INTEG-02.**
