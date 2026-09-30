@@ -6,7 +6,7 @@
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
-| 2 E1 protocol | E1-01 to 09, plus E1-07b | 7 | 0 |
+| 2 E1 protocol | E1-01 to 09, plus E1-07b | 8 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
@@ -649,6 +649,48 @@ Recorded by VERIFY-01 on 2026-09-30.
   1. Every metric is defined, with its denominators (§6.1–§6.5): **pass**.
   2. The output paths are new and versioned (`research/results/e1_clinc150_v1/`, §6.7): **pass**.
   3. The author approved the protocol (D10 = a): **pass**.
+- **Committed:** in `7b8f4d6`.
+
+### E1-07b: analysis code written and tested before the freeze (DONE 2026-09-30)
+
+- **Deliverable:** `research/experiments/e1_analyze.js` (new).
+  - It implements §6.2 (the rules), §6.3–§6.5 (every quantity) and §6.8 (the logical checks), using
+    the `phase1_common.js` statistics: `wilson`, `exactMcNemar`, `mulberry32`, `percentile`.
+  - It adds Holm step-down and an intent-cluster percentile bootstrap: B = 10,000, seed 42, with
+    rates and paired differences taken from the same resamples.
+  - It has stages `decisions` (E1-11) and `summary` (E1-13), and never overwrites a file.
+- **Built-in checks on frozen inputs:**
+  - It re-reads the R2 and R3 thresholds from the committed results, and the v0.2 reference counts
+    (17/46/34 of 50; 4/12/9 of 15; 13/34/25 of 35; 0/20/11 of 134), and asserts they equal the
+    protocol's values.
+  - It aborts if they differ.
+- **Tests:** scratchpad `e1_07b_test.js`, on **synthetic score files only**, with answers worked out
+  by hand from the §6.2 rules. **61 passed, 0 failed.**
+  - The first run found 3 failures, all in T7. The cause was a bug in the test harness: the
+    script's argument parser takes the first `--expect-p1`, and the harness passed the default
+    before the test's own value. The harness was fixed, and the script was not changed.
+
+  | Test | What it covers | Result |
+  |---|---|---|
+  | T1 | Hand-computable data: P1 = 4 intents × 3 queries, P2 = 5 queries. Checks every §6 field: rates; the five-threshold counts (R2 7,7,7,9,7; R3 4,4,2,5,4); the median identity; the primary difference (3/12) and discordant counts; all 2×2 tables; R1 vs R1-CLI (2); ties (s = 2.0, s4 = 6.4952, fused4 = 0.9219, each 1); the no-token query (the "the" case: R1, R1-CLI and R2 reject, R3 accepts); the lexical-null query (all reject); the overlap subset; S-clear and S-borderline; both reduced sets; domains; P2 McNemar and Holm; Wilson; the v0.2 comparison; the manifest; all output files | pass |
+  | T2 | The intent-cluster bootstrap re-implemented independently in the test (same RNG): R2 rate and primary-difference intervals identical | pass |
+  | T3 | Holm on (0.01, 0.04, 0.03) gives (0.03, 0.06, 0.06) | pass |
+  | T4 | A degenerate bootstrap (R2 and R3 reject every query) is flagged, and no reading is made | pass |
+  | T5–T8b | Broken inputs are caught: R1 outside R1-CLI; lexical-null with fused4 ≠ 0.5; lexical-null with s ≠ 0; the wrong row count; a missing score; the wrong cluster structure. Each exits 1 and writes no summary. | pass |
+  | T9 | A staged run (decisions, then summary) gives the same summary as a one-shot run; overwriting is refused (exit 2); tampered stored decisions are refused (exit 1) | pass |
+  | T10 | Two runs are identical apart from timestamps | pass |
+
+- **Protocol clarifications** (text only, before the freeze; §6.5 point 6 and §6.7):
+  - the overlap-subset and reduced-set bootstraps resample only intents that have remaining
+    queries;
+  - how the stages and the `--synthetic` flag are used.
+- **Acceptance criteria:**
+  1. Every §6 quantity has an output field with its numerator and denominator (T1 exercises each):
+     **pass**.
+  2. The synthetic tests match their known answers: **pass**.
+  3. The logical checks fail on the broken cases (T5–T8b): **pass**.
+  4. No existing file changed. `git status` showed only the new script. No CLINC input and no E1
+     output were used: **pass**.
 
 ## Decisions
 
@@ -692,9 +734,9 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **Author action:** PAPER-07. Submit `research/paper/acl_latex/main_review.pdf` (SHA-256 prefix
   `7c129b946bcd928b`) to the EACL 2027 SRW mentorship programme by **Nov 6**, and tell Claude when it
   is done, so it can be recorded.
-- **Recommended Claude task:** E1-07b (P1). Write `research/experiments/e1_analyze.js` to
-  protocol §6, and test it on synthetic score files only. **No CLINC input.**
-- **Then:** E1-08 (protocol review) and E1-09 (the freeze and tag).
+- **Recommended Claude task:** E1-08 (P0). Review the protocol against its 7-item checklist
+  (leakage, selection bias, ambiguity), and also review the two frozen-to-be scripts.
+- **Then:** E1-09 (the freeze and tag; needs the author's explicit approval).
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 

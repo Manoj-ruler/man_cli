@@ -320,6 +320,11 @@ on requests nobody screened?
    - the primary comparison recomputed on that subset.
 
    The rules can differ only on the overlap subset (E1-05).
+
+   - **Clarified in E1-07b:** the subset's cluster bootstrap resamples the intents that have at
+     least one overlap query.
+   - The same rule applies to the reduced sets in point 2: intents with no remaining query are
+     dropped before resampling.
 7. **Score distributions:** the median, the quartiles and the 5th/95th percentiles of `s`, `s4` and
    `fused4`, per population.
 8. **Comparison with v0.2 (descriptive; different populations, no test).**
@@ -388,6 +393,17 @@ All outputs go in `research/results/e1_clinc150_v1/`:
 - the model-cache result;
 - the SHA-256 of `e1_score_queries.js` and of the analysis script;
 - B, the seed, and the start and end times.
+
+**How the analysis script is run (E1-07b):**
+
+- **E1-11:** `e1_analyze.js --stage decisions` writes the decisions, `logical_checks.json` and
+  `RUN_MANIFEST.json`.
+- **E1-13:** `--stage summary` writes `summary.json` and `summary.md`. It first confirms that the
+  stored decisions equal the ones it recomputes from the scores.
+- **The `--synthetic` flag is for tests only, and must not be used on E1 data.** It skips the
+  manifest's hashes of the CLINC files.
+- The script never overwrites a file. If any logical check fails, it writes
+  `logical_checks_FAILED_<stage>.json` and stops with exit code 1.
 
 ### 6.8 Logical checks (E1-12)
 

@@ -1,28 +1,25 @@
 # Current task
 
-**Last completed:** E1-07 (2026-09-30). Protocol §6 is approved, D10 = (a), and E1-07b was added
-(ISSUE-08).
+**Last completed:** E1-07b (2026-09-30). `research/experiments/e1_analyze.js` implements protocol §6.
+Its synthetic tests gave 61 passed, 0 failed; no CLINC input was used.
 
 **Author action still open:** PAPER-07. Submit `research/paper/acl_latex/main_review.pdf` (SHA-256
 prefix `7c129b946bcd928b`) to the mentorship programme by Nov 6.
 
-**Next (recommended): E1-07b, the analysis code, written and tested before the freeze.**
-Status: NOT STARTED. It waits for "Start E1-07b".
+**Next (recommended): E1-08, a protocol review for leakage, selection bias and ambiguity.**
+Status: NOT STARTED. It waits for "Start E1-08".
 
-- **Priority:** P1. **Type:** code. **Depends on:** E1-06 and E1-07 (done).
-- **File:** a new script, `research/experiments/e1_analyze.js`. It implements protocol §6.2–§6.5
-  and the logical checks in §6.8, reusing the `phase1_common.js` statistics.
-- **Tests:** synthetic score files only, generated in the scratchpad with known answers. They cover:
-  - hand-computable rates;
-  - a threshold tie;
-  - a query with no tokens;
-  - a lexical-null query;
-  - a degenerate bootstrap;
-  - a broken nesting, which the logical checks must catch.
-- **Acceptance criteria:**
-  - Every §6 quantity has an output field with its numerator and denominator.
-  - The synthetic tests match their known answers.
-  - The logical checks fail on the broken case.
-  - No existing file changed; **no CLINC input and no E1 output**.
-- **Then:** E1-08 (the protocol review, which now also covers the analysis code) and E1-09 (the
-  freeze and tag).
+- **Priority:** P0. **Type:** verify. **Depends on:** E1-07 and E1-07b (done).
+- **The checklist** (from `TASKS.md`):
+  1. no threshold is tuned on E1 data;
+  2. exclusions are class-level and were decided without scores;
+  3. no outcome was viewed;
+  4. the protocol states that CLINC150 is general-domain;
+  5. multiple comparisons are handled, or the secondary outcomes are labelled descriptive;
+  6. the denominators are right;
+  7. no rule is favoured by construction.
+- **Also:** check that `e1_score_queries.js` and `e1_analyze.js` implement the protocol as written,
+  since both are frozen at E1-09.
+- **Rules:** record every finding, and fix only protocol text. Ask the author about anything that
+  affects validity.
+- **Deliverable:** `e1/E1_PROTOCOL_REVIEW.md`.
