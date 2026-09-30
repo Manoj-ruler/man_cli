@@ -3,19 +3,37 @@
 // limitations -- generated only from committed result files (no hand-typed numbers). It records the
 // SHA-256 of every input file and the benchmark files, so any later change to an input is detectable.
 // Superseded by v2.0 after the annotation study and the v0.2.1 re-run (PLAN_TASKS T11-T12).
+//
+// v2.0 mode (after the annotation study):
+//   node freeze_analysis_report.js --results-root research/results/v0.2.1 --version 2.0 \
+//        [--annotation research/results/annotation/annotation_results.json] [--out <file>]
+// reads the v0.2-layout result folders (v0.2, phase1, review_r1, seed_repeat, stats) from the v0.2.1
+// run (run_v0_2_1.js) instead of research/results/, hashes benchmark v0.2.1, adds the two-annotator
+// results to section 10, and marks every sentence that states a v1.0 observation (rather than a
+// definition) "[VERIFY for v0.2.1]" -- those must be checked against the new numbers and reworded by
+// hand in the generator before the report is used. Tables are always computed from the files.
 // Read-only with respect to results: it writes only the report.
 const fs = require('fs'), path = require('path'), crypto = require('crypto'), { execSync } = require('child_process');
 const ROOT = path.resolve(__dirname, '..', '..');
 // Never overwrites: a freeze report is a record. The default target is written only if it does not
 // exist; to regenerate for comparison, pass --out <new file> (which must not exist either).
-const argOut = process.argv.includes('--out') ? process.argv[process.argv.indexOf('--out') + 1] : null;
-const OUT = argOut ? path.resolve(argOut) : path.join(ROOT, 'research/ANALYSIS_FREEZE_v1.0.md');
+const arg = k => (process.argv.includes(k) ? process.argv[process.argv.indexOf(k) + 1] : null);
+const argOut = arg('--out');
+const RESULTS_ROOT = arg('--results-root') ? path.resolve(ROOT, arg('--results-root')) : null;
+const V2 = !!RESULTS_ROOT;
+const VERSION = arg('--version') || (V2 ? '2.0' : '1.0');
+if (V2 && VERSION === '1.0') { console.error('ABORT: --results-root needs a version other than 1.0'); process.exit(1); }
+const V02 = V2 ? 'v0.2.1' : 'v0.2'; // the benchmark the "v0.2" sections describe
+const OUT = argOut ? path.resolve(argOut) : path.join(ROOT, `research/ANALYSIS_FREEZE_v${VERSION}.md`);
 if (fs.existsSync(OUT)) { console.error(`ABORT: ${OUT} exists; a freeze report is never overwritten. Pass --out <new file> to regenerate for comparison.`); process.exit(1); }
 const inputs = {};
 // SHA-256 of the LF-normalized bytes (as the benchmark manifests), so a Windows checkout with
 // core.autocrlf=true gives the same hashes as the committed blobs.
 const lfSha = buf => crypto.createHash('sha256').update(buf.toString('utf8').replace(/\r\n/g, '\n')).digest('hex');
-const R = rel => { const p = path.join(ROOT, rel), buf = fs.readFileSync(p); inputs[rel] = lfSha(buf); return JSON.parse(buf.toString('utf8')); };
+// In v2.0 mode the folders the v0.2.1 run regenerates are read from RESULTS_ROOT (same layout).
+const REMAPPED = /^research\/results\/(v0\.2|phase1|review_r1|seed_repeat|stats)\//;
+const src = rel => (path.isAbsolute(rel) ? rel : V2 && REMAPPED.test(rel) ? path.join(RESULTS_ROOT, rel.replace('research/results/', '')) : path.join(ROOT, rel));
+const R = rel => { const p = src(rel), buf = fs.readFileSync(p); inputs[path.relative(ROOT, p).replace(/\\/g, '/')] = lfSha(buf); return JSON.parse(buf.toString('utf8')); };
 const hashOnly = rel => { inputs[rel] = lfSha(fs.readFileSync(path.join(ROOT, rel))); };
 
 const b = R('research/results/review_r1/review_r1_b_calibration.json');
@@ -39,7 +57,8 @@ const fx = R('research/results/functional/functional-eval-results.json');
 const repSum = R('research/results/baseline/reproduction-summary.json');
 const selp = { 'v0.1': R('research/results/reliability/selective-prediction-results.json'), 'v0.2': R('research/results/v0.2/selective-prediction-results.json') };
 const detThr = v => selp[v].ood_detection.per_fold.map(x => x.selected_threshold);
-['research/datasets/termassist_bench_v0.1_validated.json', 'research/datasets/termassist_bench_v0.2_validated.json', 'research/datasets/ood_subtypes_v0.2_ai_assigned.json', 'cli/search.js', 'cli/data/commands.json'].forEach(hashOnly);
+// --bench overrides the v0.2.1 benchmark path (for testing v2.0 mode before v0.2.1 exists)
+['research/datasets/termassist_bench_v0.1_validated.json', V2 ? (arg('--bench') || 'research/datasets/termassist_bench_v0.2.1_validated.json') : 'research/datasets/termassist_bench_v0.2_validated.json', 'research/datasets/ood_subtypes_v0.2_ai_assigned.json', 'cli/search.js', 'cli/data/commands.json'].forEach(hashOnly);
 
 // guards: every analysis file this report reads passed its own reproduction checks when written
 const guardFiles = { b, t1, t2, t3, t3b, t4, t5, a, c, d, e, f, g, sr };
@@ -56,12 +75,20 @@ let commit = 'unknown'; try { commit = execSync('git rev-parse --short HEAD', { 
 
 const L = [];
 const P = s => L.push(s);
-P('# Analysis freeze v1.0 (pre-annotation)');
+// A sentence that states an observation about the v1.0 numbers. In v2.0 mode it is printed with a
+// marker, so it cannot silently carry over to v0.2.1 data it was never checked against.
+const PV = s => P(V2 ? '**[VERIFY for v0.2.1]** ' + s : s);
+P(V2 ? `# Analysis freeze v${VERSION} (post-annotation)` : '# Analysis freeze v1.0 (pre-annotation)');
 P('');
 P(`**Frozen:** ${new Date().toISOString().slice(0, 10)}, from committed results at \`${commit}\` (\`research/improvement\`).`);
 P('**Generated by:** `research/experiments/freeze_analysis_report.js`. Do not edit by hand: change an analysis, rerun it, then regenerate this file.');
-P('**Status:** this is the analysis used by the EACL 2027 SRW mentorship draft.');
-P('**Supersession:** v2.0 replaces it after the two-annotator study and the v0.2.1 re-run (T11–T12). Every number below comes from the result files listed in §12.');
+if (V2) {
+  P(`**Status:** the analysis after the two-annotator study, on benchmark v0.2.1. It supersedes v1.0, which stays unchanged as the pre-annotation record. Every number below comes from the result files listed in §12.`);
+  P(`**Reading this report:** columns and rows labelled "v0.2" describe **benchmark v0.2.1** (the corrected v0.2), read from \`${path.relative(ROOT, RESULTS_ROOT).split(path.sep).join('/')}\`. v0.1 is unchanged. Sentences marked **[VERIFY for v0.2.1]** restate a v1.0 observation and must be checked before this report is used.`);
+} else {
+  P('**Status:** this is the analysis used by the EACL 2027 SRW mentorship draft.');
+  P('**Supersession:** v2.0 replaces it after the two-annotator study and the v0.2.1 re-run (T11–T12). Every number below comes from the result files listed in §12.');
+}
 P('');
 P('**Conventions used throughout:**');
 P('');
@@ -106,7 +133,7 @@ P('**Calibrator comparison** (shipped confidence, ECE / Brier; differences betwe
 P('');
 P(table(['Ver.', 'none', 'isotonic', 'Platt', 'histogram binning'], V.map(v => [v, ...['none', 'isotonic', 'platt', 'histogram_binning'].map(k => `${n3(m(v, 'baseline_confidence', k).ece)} / ${n3(m(v, 'baseline_confidence', k).brier)}`)])));
 P('');
-P('- Histogram binning is scored on the bins it fits, and has the worst Brier score of the three calibrators in every case.');
+PV('- Histogram binning is scored on the bins it fits, and has the worst Brier score of the three calibrators in every case.');
 P('- Recalibration changes the confidence shown, not the answer.');
 P(`- Shipped correctness AUROC falls from ${n3(m('v0.1', 'baseline_confidence', 'none').correctness_auroc)} to ${n3(m('v0.1', 'baseline_confidence', 'isotonic').correctness_auroc)} (v0.1), because each fold has its own map.`);
 P('');
@@ -124,7 +151,7 @@ P('**Paired differences, hybrid minus shipped** (paired bootstrap):');
 P('');
 P(table(['Ver.', 'AURC', 'AUGRC', 'Correctness AUROC'], V.map(v => [v, `${n3(t3.versions[v].selective.controls_excluded.aurc_difference_hybrid_minus_baseline.point)} ${ci(t3.versions[v].selective.controls_excluded.aurc_difference_hybrid_minus_baseline.ci95)}`, `${n3(t3b.versions[v].controls_excluded.augrc_difference_hybrid_minus_baseline.point)} ${ci(t3b.versions[v].controls_excluded.augrc_difference_hybrid_minus_baseline.ci95)}`, `${n3(c.versions[v].controls_excluded.difference)} ${ci(c.versions[v].controls_excluded.difference_ci95)}`])));
 P('');
-P('AURC and AUGRC mix ranking with accuracy. Correctness AUROC isolates ranking; its v0.2 interval includes zero.');
+PV('AURC and AUGRC mix ranking with accuracy. Correctness AUROC isolates ranking; its v0.2 interval includes zero.');
 P('');
 
 // 4. Accuracy
@@ -136,10 +163,10 @@ P('');
 const cmpRow = (v, k, lab) => { const x = t1.versions[v].comparisons[k].controls_excluded, gt = g.versions[v].tests[k === 'BM25_to_hybrid' ? 'accuracy_hybrid_vs_bm25' : 'accuracy_hybrid_vs_dense']; return [v, lab, `${x.a_only_correct}–${x.b_only_correct}`, `${x.delta_pp.toFixed(2)} ${ci(x.ci95_pp, y => (+y).toFixed(2))}`, pv(gt.exact), pv(gt.mid_p), pv(gt.asymptotic)]; };
 P(table(['Ver.', 'Comparison', 'Discordant (other only – hybrid only)', 'Gain, pp', 'Exact McNemar p', 'Mid-p', 'Asymptotic p'], V.flatMap(v => [cmpRow(v, 'BM25_to_hybrid', 'hybrid vs BM25'), cmpRow(v, 'dense_to_hybrid', 'hybrid vs dense')])));
 P('');
-P('- **Ties with the tests.** Controls are never discordant, so the p values are identical with the controls included.');
+PV('- **Ties with the tests.** Controls are never discordant, so the p values are identical with the controls included.');
 P('- **Bootstrap vs exact test.** The bootstrap intervals are not dual to the exact test.');
-P('- **Rounding.** Intervals are shown at the 2 decimals stored in `phase1_t1`. The v0.2 lower bound 0.75 is the bootstrap quantile 1/134 = 0.746 pp, which the paper shows as 0.7.');
-P('- **v0.2 hybrid vs BM25** is the only comparison whose side of 0.05 depends on the test used.');
+PV('- **Rounding.** Intervals are shown at the 2 decimals stored in `phase1_t1`. The v0.2 lower bound 0.75 is the bootstrap quantile 1/134 = 0.746 pp, which the paper shows as 0.7.');
+PV('- **v0.2 hybrid vs BM25** is the only comparison whose side of 0.05 depends on the test used.');
 P('');
 
 // 5. Holm family
@@ -162,7 +189,7 @@ P('- **Fixed:** the shipped rule, raw BM25 < 2.0.');
 P('- **Tuned threshold:** raw BM25 below an F1-maximizing threshold, chosen per fold on development folds.');
 P('- **Detector:** the hybrid fused top-1 score, thresholded the same way.');
 P('');
-P('False rejections are counted over non-control in-scope queries; no rule ever rejects a control.');
+PV('False rejections are counted over non-control in-scope queries; no rule ever rejects a control.');
 P('');
 const eo = v => e.versions[v];
 P(table(['Ver.', 'Rule', 'OOD rejected (Wilson)', 'False rejections', 'Thresholds per fold'], V.flatMap(v => [
@@ -183,7 +210,7 @@ P('**At equal false-rejection counts** (thresholds for both scores picked on the
 P('');
 P(table(['Ver.', 'False rejections ≤', 'Shipped score rejects', 'Hybrid feature rejects'], V.flatMap(v => Object.values(eo(v).in_sample_matched_false_rejection).filter((x, i, arr) => arr.findIndex(y => y.max_false_rejections === x.max_false_rejections) === i).map(x => [v, x.max_false_rejections, `${x.baseline_score.ood_rejected} (at ${x.baseline_score.false_rejected})`, `${x.detector_feature.ood_rejected} (at ${x.detector_feature.false_rejected})`]))));
 P('');
-P('No control is among these false rejections.');
+PV('No control is among these false rejections.');
 P('');
 P('**By source and kind (v0.2).** Kind labels were assigned by an AI assistant and are unchecked.');
 P('');
@@ -219,7 +246,7 @@ for (const v of V) for (const [r, lab] of [['tuned_shipped_threshold', 'Tuned sh
   P(table(['ID', 'Query', 'Label', 'Type', 'S', 'H', 'Raw BM25', 'Fused top-1'], it.map(x => [x.id, `"${x.query}"`, x.label, x.query_type, x.shipped_correct ? '✓' : '', x.hybrid_correct ? '✓' : '', x.raw_bm25, x.fused_top1])));
   P('');
 }
-P('The fixed rule refuses no legitimate query on either version.');
+PV('The fixed rule refuses no legitimate query on either version.');
 P('');
 
 // 8. Safety
@@ -233,7 +260,7 @@ P('- Population: non-control queries, with OOD included.');
 P('');
 P(table(['Ver.', 'System', 'Answered', 'High/critical returned', 'Of which wrong', 'Wrong at max confidence'], V.flatMap(v => ['baseline', 'hybrid'].map(s => { const x = d.versions[v][s]; return [v, s === 'baseline' ? 'Shipped' : 'Hybrid', x.controls_excluded.answered, x.controls_excluded.risky_returned_commands, x.controls_excluded.of_which_wrong, x.wrong_and_risky.in_top_confidence_band]; }))));
 P('');
-P('**Wrong and risky answers.** No control is among them. Confidence is on each system\'s own scale: the shipped tool in %, the hybrid as a fused score in [0, 1].');
+PV('**Wrong and risky answers.** No control is among them. Confidence is on each system\'s own scale: the shipped tool in %, the hybrid as a fused score in [0, 1].');
 P('');
 P(table(['Ver.', 'System', 'ID', 'Query', 'Returned command', 'Tier', 'Confidence', 'OOD'], V.flatMap(v => ['baseline', 'hybrid'].flatMap(s => d.versions[v][s].wrong_and_risky.items.map(x => [v, s === 'baseline' ? 'Shipped' : 'Hybrid', x.id, `"${x.query}"`, '`' + x.returned.replace(/\|/g, '\\|') + '`', x.tier, x.confidence, x.is_ood ? 'yes' : ''])))));
 P('');
@@ -241,8 +268,8 @@ P('**Classifier scored against the benchmark\'s own risk labels.** These are gol
 P('');
 P(table(['Ver.', 'Gold commands', 'High/critical labelled low/medium (Wilson)', 'Items'], V.map(v => { const x = t5.versions[v].gold_commands; return [v, x.n, wil(x.dangerous_direction_misses_spec), x.dangerous_direction_misses_spec.items.map(i => `${i.id} \`${i.command.replace(/\|/g, '\\|')}\` (${i.truth}→${i.pred})`).join('; ')]; })));
 P('');
-P('- **The one genuine miss:** `git checkout -- .`, which discards uncommitted work.');
-P('- **The two added v0.2 misses** trace to inconsistent benchmark labels.');
+PV('- **The one genuine miss:** `git checkout -- .`, which discards uncommitted work.');
+PV('- **The two added v0.2 misses** trace to inconsistent benchmark labels.');
 P(`- **Functional check:** ${fx.summary.n_evaluated} sandbox-safe queries; gold success ${pc(fx.summary.gold_functional_success_rate, 0)}, hybrid success ${pc(fx.summary.retrieved_functional_success_rate, 1)}. Exit code 0 counts as success.`);
 P('');
 
@@ -278,7 +305,21 @@ P('');
 P(`- **κ.** A partially independent reviewer re-labelled ${f.kappa.n} AI-authored v0.2 queries: Cohen's κ = ${f.kappa.point}. The percentile bootstrap 95% interval is ${ci(f.kappa.bootstrap_ci95, n3)} (${f.kappa.bootstrap.valid_resamples}/${f.kappa.bootstrap.B} valid resamples). This is below the pre-specified 0.7 target.`);
 P(`- **OOD labels.** The reviewer agreed on ${f.ood_agreement.k}/${f.ood_agreement.n} (Clopper–Pearson ${ci(f.ood_agreement.clopper_pearson_ci95, y => pc(y, 0))}). Of these, 7 were everyday requests and 1 a far-from-corpus task; none was a terminal task.`);
 P('- **Disagreements.** All three were on ambiguous labels (3 of 6).');
-P('- **Pending.** The two-annotator study of all 59 AI-authored queries is under way. Its results will go into v2.0 of this report.');
+if (!V2) P('- **Pending.** The two-annotator study of all 59 AI-authored queries is under way. Its results will go into v2.0 of this report.');
+else {
+  const annPath = arg('--annotation') || 'research/results/annotation/annotation_results.json';
+  const A = R(annPath);
+  if (A.stamp && !process.argv.includes('--allow-synthetic')) { console.error('ABORT: the annotation results are stamped ' + A.stamp); process.exit(1); }
+  if (A.stamp) P(`**[SYNTHETIC TEST RENDERING: ${A.stamp}]**`);
+  const k = A.primary, kt = A.targets_only, cr = A.criteria;
+  P('');
+  P('**Two-annotator study** (protocol fixed before any label existed: `research/datasets/annotation/ANNOTATION_PROTOCOL.md`). The reviewer check above is the earlier, smaller check; it is kept as history.');
+  P('');
+  P(`- **Primary κ** (unweighted Cohen's κ, 3 classes, ${k.n} items): ${n3(k.kappa)}, 95% bootstrap interval ${ci(k.ci95, n3)}; agreement ${k.percent_agreement}%.`);
+  P(`- **Targets only** (${kt.n}): κ = ${n3(kt.kappa)} ${ci(kt.ci95, n3)}; agreement ${kt.percent_agreement}%.`);
+  P(`- **Pre-declared criteria:** κ ≥ ${cr.kappa_ge_0_70.target}: ${cr.kappa_ge_0_70.met ? 'MET' : 'NOT MET'}; OOD confirmed ≥ 90%: ${cr.ood_confirmed_ge_90pct.met ? 'MET' : 'NOT MET'}. ${A.all_pre_declared_criteria_met ? 'Both met.' : 'Not both met: per protocol, the result is reported as measured.'}`);
+  if (A.secondary) P(`- **Secondary:** κ OOD vs not ${n3(A.secondary.kappa_ood_vs_not.kappa)} ${ci(A.secondary.kappa_ood_vs_not.ci95, n3)}; AMBIGUOUS vs not ${n3(A.secondary.kappa_ambiguous_vs_not.kappa)} ${ci(A.secondary.kappa_ambiguous_vs_not.ci95, n3)}.`);
+}
 P('');
 
 // 11. Limitations
@@ -292,7 +333,7 @@ P('');
   'Scope: one tool, one platform (Windows corpus of 279 commands), one small encoder (all-MiniLM-L6-v2), one fusion rule, exact-match scoring, and single-machine latency. No generative system, user study or public benchmark.',
   'The risk classifier is scored against the benchmark\'s own labels, two of which are inconsistent. It misses at least one destructive command. The functional check covers 15 queries and treats exit code 0 as success.',
   'Ground-truth defects: TA-B145 and TA-B187 (v0.2 only) have gold commands outside the corpus; TA-B149 has an acceptable command outside it. They lower non-OOD accuracy by 1 (v0.1) and 2 (v0.2) queries for every system.'
-].forEach(x => P('- ' + x));
+].forEach(x => PV('- ' + x));
 P('');
 
 // 12. Mapping and inputs
