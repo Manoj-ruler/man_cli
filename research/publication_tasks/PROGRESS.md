@@ -5,7 +5,7 @@
 | Phase | Tasks | Done | Blocked |
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
-| 1 Contribution | PAPER-01 to 08, TRACE-01 | 6 | 0 |
+| 1 Contribution | PAPER-01 to 08, TRACE-01 | 7 | 0 |
 | 2 E1 protocol | E1-01 to 09 | 0 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
@@ -318,6 +318,32 @@ Recorded by VERIFY-01 on 2026-09-30.
      (12 vs 9 of the 15 unscreened queries; 20 vs 11 refused): **pass**.
   4. The author approved the text: **pass**.
   - The abstract is unchanged: 199 words. The camera-ready PDF shows the sentence as written.
+- **Committed:** in `29ee6c3`.
+
+### PAPER-01: Review the research question (DONE 2026-09-30, decision: keep, no edit)
+
+- **The question** (`content.tex` lines 46–48): "how reliable is the confidence of a shipped
+  closed-set command retriever, and what do post-hoc recalibration, a tuned rejection threshold, and
+  a hybrid lexical–dense retriever each contribute?"
+- **Mapping to the paper:**
+
+  | The question asks | §4 "What is compared" | Answered in §5 | And in §6/§7 |
+  |---|---|---|---|
+  | how reliable is the shipped confidence | the shipped confidence | "The shipped confidence"; "Risky wrong answers" | Conclusion: "no better than a constant forecaster" |
+  | recalibration | (i) before and after post-hoc recalibration | "Recalibration" | "recalibration fixes most of that"; Contribution 2 "largely corrects" |
+  | tuned rejection threshold | (ii) three out-of-scope rules | "Out-of-scope requests" | 46 vs 34 of 50; 20 vs 11 of 134 |
+  | hybrid lexical–dense retriever | (iii) three retrievers; the hybrid's detector | "What the hybrid adds" | "mainly improves how confidence ranks its own errors" |
+
+- **Acceptance criteria:**
+  1. The question names exactly the three levers the paper evaluates: **pass**.
+  2. Nothing it asks is left unanswered by §5–§7: **pass**.
+  3. There was no edit, so the trace, build and approval conditions do not apply.
+  4. The decision is recorded here: **pass**.
+- **Consistency with the edits since VERIFY-02** (PAPER-02 "largely corrects"; PAPER-04's attribution
+  lead): the question is neutral ("each contribute") and does not conflict with either. The secondary
+  analyses (ambiguity detection, A4/A5, Split B, the functional check) sit outside the question, in
+  the Appendix and Limitations, which is appropriate.
+- **Author:** the recommendation is "keep". The author may override it; no paper file changed.
 
 ## Decisions
 
@@ -348,9 +374,8 @@ Recorded by VERIFY-01 on 2026-09-30.
 
 ## Next
 
-- **Recommended:** PAPER-01 (P1): review the research question. It is the last Phase 1 content task
-  before the PAPER-06 gate.
-- **Then:** PAPER-06, the Phase 1 gate and mentorship snapshot (due Nov 6).
+- **Recommended:** PAPER-06 (P0): the Phase 1 gate and mentorship snapshot (due Nov 6). Every
+  Phase 1 content task is done: PAPER-01 to 05, PAPER-08 and TRACE-01.
 - **E1-01 and E1-04** are unblocked in parallel.
 - **LIT-01** (P2) is in the backlog.
 

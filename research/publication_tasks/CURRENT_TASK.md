@@ -1,34 +1,43 @@
 # Current task
 
-**Last completed:** PAPER-04 (2026-09-30), the Conclusion's attribution lead sentence.
+**Last completed:** PAPER-01 (2026-09-30). The research question is kept unchanged: it maps
+one-to-one onto §4 (i)–(iii), §5 and §7.
 
-**Next (recommended): PAPER-01: review the research question.** Status: NOT STARTED. It waits for the
-author to say "Start PAPER-01".
+**Next (recommended): PAPER-06: Phase 1 gate, the mentorship-ready snapshot.** Status: NOT STARTED.
+It waits for the author to say "Start PAPER-06".
 
-- **Priority:** P1. The question already matches the evidence, so this is a check, not a rewrite.
-- **Type:** paper. **Depends on:** VERIFY-02 (done).
-- **Files:** `research/paper/acl_latex/content.tex`, the Introduction (the research question,
-  lines ~46–48).
+- **Priority:** P0: it guards the Nov 6 mentorship submission.
+- **Type:** verify. **Depends on:** PAPER-01 to 05, TRACE-01 and PAPER-08, all done.
 
 ## Steps
 
-1. Quote the current research question.
-2. Check each of its parts against `CLAIM_EVIDENCE_MAP.md`. Every lever it names must be answered in
-   §5 and §6, and it must name nothing the paper does not answer.
-3. Check its consistency with the edits made since VERIFY-02:
-   - Contribution 2 now says "largely corrects";
-   - the Conclusion now opens with the attribution sentence.
-4. Propose "keep", or a minimal edit with a reason. **Edit only after approval.**
+1. On a clean tree, run the full VERIFY-01 check set:
+   - `node research/experiments/verify_freeze_inputs.js research/ANALYSIS_FREEZE_v1.0.md`;
+   - `node research/experiments/trace_claims.js`;
+   - `node --test "research/tests/*.test.js"`;
+   - `cd research/paper/acl_latex && bash build.sh` (page lines, overfull and undefined counts);
+   - the abstract word count.
+2. **Anonymity scan of `main_review.pdf`.** Its extracted text must contain none of:
+   - the tool's name ("TermAssist", "MAN-CLI");
+   - the package scope ("manoj-ruler", "@manoj");
+   - the author's name or email;
+   - "Claude" or "Antigravity" (the acknowledgements must be absent);
+   - the repository URL.
+3. Compare the numbers with the VERIFY-01 baseline, and explain every difference by a Phase 1 edit.
+4. Restore any tracked file that changed only because of timestamps. Commit and push if anything
+   changed.
+5. Record the snapshot commit hash. This is the version the author submits to the mentorship
+   programme (PAPER-07).
 
 ## Acceptance criteria
 
-- [ ] The question names exactly the three levers the paper evaluates (recalibration, a tuned
-      threshold, the hybrid retriever).
-- [ ] Nothing it asks is left unanswered by §5–§7.
-- [ ] If edited: trace 0 problems, build ≤ 8 pages, 0 overfull boxes, and the author approved the
-      text.
-- [ ] The decision is recorded in `PROGRESS.md`.
+- [ ] Freeze 27/27; trace 0 problems (counts recorded); tests all pass; build succeeds with the body
+      ≤ 8 pages and 0 overfull boxes; abstract ≤ 200 words.
+- [ ] `main_review.pdf` contains none of the identifying strings above; the scan output is recorded.
+- [ ] Every difference from the VERIFY-01 baseline is explained.
+- [ ] The snapshot commit is pushed to `research/improvement`, and its hash is recorded in
+      `PROGRESS.md`.
 
-## After this
+## Must not change
 
-PAPER-06, the Phase 1 gate (full checks, anonymity scan, commit): the mentorship snapshot.
+Any paper, code, result or freeze file. This task only verifies and records.
