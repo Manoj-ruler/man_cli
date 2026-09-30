@@ -1,6 +1,19 @@
 # E1 protocol: external out-of-scope check on CLINC150
 
-**Status:** DRAFT. §1–§2 were **approved by the author on 2026-09-30** ("approve, D4 = c, D7 = yes").
+**Status: FROZEN at git tag `e1-protocol-v1` (2026-09-30).**
+
+- The author approved the freeze: "Approve freeze, D9 = git tag only. Start E1-09" (D6).
+  **D9 = the git tag only; there is no external preregistration.**
+- The frozen set is this file; `E1_EXCLUSIONS.md`, `E1_THRESHOLDS.md`, `E1_SCORING_DESIGN.md`,
+  `E1_PROTOCOL_REVIEW.md` and `E1_DATA_SOURCE.md` in `research/publication_tasks/e1/`; and
+  `research/experiments/e1_score_queries.js` and `research/experiments/e1_analyze.js`.
+- **Any change to them after the tag is a numbered deviation** (§6.9).
+- **The authoritative check:** `git diff --exit-code e1-protocol-v1 -- research/publication_tasks/e1
+  research/experiments/e1_score_queries.js research/experiments/e1_analyze.js`. The SHA-256 values
+  (LF-normalised) are in the tag message and in `PROGRESS.md` (E1-09).
+
+**History before the freeze:** §1–§2 were **approved by the author on 2026-09-30** ("approve, D4 =
+c, D7 = yes").
 
 - §4 (thresholds) was written in E1-04 and approved on 2026-09-30 (D2 = a); the R1 wording was
   amended (ISSUE-06).
