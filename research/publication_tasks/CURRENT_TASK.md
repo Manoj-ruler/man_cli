@@ -1,38 +1,33 @@
 # Current task
 
-**Last completed:** E1-12 (2026-09-30). All implementation checks pass (17 of 17):
+**Last completed:** E1-13 (2026-09-30). The frozen summary stage ran unchanged, and the outputs are
+`summary.json`, `summary.md` and `DEVIATIONS.md` (no deviations; reporting notes N1 and N2). The
+headline results:
 
-- row counts and ids;
-- no NaN;
-- fresh `search()` values bit-identical on all 5,500 queries;
-- the decisions re-derived independently;
-- a deterministic re-run;
-- a 20-row spot check with an independent BM25 and fusion.
-
-See `e1_run/E1_IMPLEMENTATION_CHECKS.md`. **No rates have been read yet.**
+- **Primary, R2 − R3 on P1:** +0.0827 [0.0502, 0.1164]. R2 rejects 86.0% and R3 77.8%, at their
+  v0.2 operating points.
+- **Matched secondary, R2m − R3m:** −0.1251 [−0.1618, −0.0887] on P1, and −0.173 on P2 (p =
+  5.8e-19). At equal v0.2 cost, the fused score rejects more.
+- **R1:** 25.3% (P1) and 19.1% (P2). This is exactly the lexical-null share: R1 rejects no query
+  that shares a word with the corpus.
 
 **Author action still open:** PAPER-07, the mentorship submission, by Nov 6.
 
-**Next (recommended): E1-13, run the planned analysis.** Status: NOT STARTED. It waits for "Start
-E1-13".
+**Next (recommended): E1-14, the results memo, with uncertainty and limitations. There are no paper
+edits.** Status: NOT STARTED. It waits for "Start E1-14".
 
-- **Priority:** P0. **Type:** experiment.
-- **Steps:**
-  1. Confirm the frozen set is unchanged (`git diff --exit-code e1-protocol-v1 -- …`).
-  2. Run `node research/experiments/e1_analyze.js --scores-p1 … --scores-p2 … --meta-p1
-     data/p1_queries.json --out-dir research/results/e1_clinc150_v1 --stage summary`. It first
-     confirms that the stored decisions equal the recomputed ones.
-  3. Write `DEVIATIONS.md`, which is currently empty: no deviation has occurred.
-  4. **Report every protocol quantity with its denominator and interval.** This covers:
-     - the primary comparison and its pre-stated reading;
-     - the matched comparison;
-     - the secondary and sensitivity results;
-     - the v0.2 comparison.
+- **Priority:** P1. **Type:** experiment (write-up).
+- **Deliverable:** `research/publication_tasks/e1_run/E1_RESULTS_MEMO.md`.
+- **Content:** what the results do and do not support, against:
+  - protocol §2.3 and §2.4;
+  - the expected directions ED-1 to ED-5, stated before the run;
+  - the pre-stated readings.
 
-     Anything not in the protocol is labelled "post hoc".
+  **Every statement cites `summary.json`.** The general-domain limitation (§2.4) and the P2
+  assumption are explicit. Anything beyond the protocol is labelled "post hoc".
 - **Acceptance criteria:**
-  - `summary.json` and `summary.md` contain every protocol metric, with its denominator and
-    interval.
-  - The deviation log is present, even if empty.
-- **Rule:** results are reported as computed. No re-analysis, re-thresholding or selective emphasis.
-  The interpretation against the expected directions is E1-14.
+  - Every statement cites the summary.
+  - The general-domain limitation is explicit.
+  - **The author reviews the memo.**
+- **Then:** Phase 4 (INTEG-01 to 07), including INTEG-05, which carries E1 into the paper. That
+  needs separate approval.

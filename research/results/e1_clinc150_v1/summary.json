@@ -1,0 +1,1514 @@
+{
+  "protocol": "research/publication_tasks/e1/E1_PROTOCOL.md §6 (tag e1-protocol-v1)",
+  "generated_at": "2026-09-30T14:47:01.022Z",
+  "synthetic_test_run": false,
+  "script_sha256": {
+    "e1_analyze.js": "b56674d9b682bc3577ce9db816df7f22dfa16161d75900bbc838505de7f84f62",
+    "e1_score_queries.js": "5f2b39a566663a7cb8a71a772bf0c757e7317fa90a76dc333294eafd9f6536af"
+  },
+  "thresholds": {
+    "R2": [
+      6.4952,
+      6.4952,
+      6.4952,
+      7.1978,
+      6.4952
+    ],
+    "R3": [
+      0.9179,
+      0.9219,
+      0.8841,
+      0.9247,
+      0.9219
+    ],
+    "R2_median": 6.4952,
+    "R3_median": 0.9219,
+    "R2m_s4": 5.4377,
+    "R3m_fused4": 0.9179
+  },
+  "matched_thresholds_derivation": {
+    "m": 11,
+    "n_in_scope": 159,
+    "s4": {
+      "t_m": 5.4377,
+      "in_scope_rejected_of_159": 10,
+      "in_scope_rejected_of_134_without_controls": 10,
+      "ood_rejected_of_50_in_sample": 37
+    },
+    "fused4": {
+      "t_m": 0.9179,
+      "in_scope_rejected_of_159": 11,
+      "in_scope_rejected_of_134_without_controls": 11,
+      "ood_rejected_of_50_in_sample": 36
+    },
+    "note": "thresholds set from v0.2 in-scope queries only; the OOD counts are in-sample context"
+  },
+  "logical_checks_pass": true,
+  "P1": {
+    "population": "P1",
+    "n": 4500,
+    "rates": {
+      "R1": {
+        "k": 1139,
+        "n": 4500,
+        "rate": 0.2531,
+        "pct": 25.31,
+        "wilson95": {
+          "lo": 0.2406,
+          "hi": 0.266,
+          "label": "ignores clustering; too narrow"
+        },
+        "cluster_bootstrap95": {
+          "lo": 0.2184,
+          "hi": 0.2898,
+          "degenerate": false,
+          "label": "primary interval (P1)"
+        }
+      },
+      "R1_CLI": {
+        "k": 1149,
+        "n": 4500,
+        "rate": 0.2553,
+        "pct": 25.53,
+        "wilson95": {
+          "lo": 0.2428,
+          "hi": 0.2683,
+          "label": "ignores clustering; too narrow"
+        },
+        "cluster_bootstrap95": {
+          "lo": 0.2207,
+          "hi": 0.2924,
+          "degenerate": false,
+          "label": "primary interval (P1)"
+        }
+      },
+      "R2": {
+        "k": 3871,
+        "n": 4500,
+        "rate": 0.8602,
+        "pct": 86.02,
+        "wilson95": {
+          "lo": 0.8498,
+          "hi": 0.87,
+          "label": "ignores clustering; too narrow"
+        },
+        "cluster_bootstrap95": {
+          "lo": 0.8302,
+          "hi": 0.888,
+          "degenerate": false,
+          "label": "primary interval (P1)"
+        }
+      },
+      "R3": {
+        "k": 3499,
+        "n": 4500,
+        "rate": 0.7776,
+        "pct": 77.76,
+        "wilson95": {
+          "lo": 0.7652,
+          "hi": 0.7895,
+          "label": "ignores clustering; too narrow"
+        },
+        "cluster_bootstrap95": {
+          "lo": 0.7413,
+          "hi": 0.8127,
+          "degenerate": false,
+          "label": "primary interval (P1)"
+        }
+      }
+    },
+    "five_threshold_sensitivity": {
+      "R2": {
+        "median_threshold": 6.4952,
+        "per_fold": [
+          {
+            "fold": 0,
+            "threshold": 6.4952,
+            "k": 3871,
+            "n": 4500,
+            "rate": 0.8602,
+            "pct": 86.02
+          },
+          {
+            "fold": 1,
+            "threshold": 6.4952,
+            "k": 3871,
+            "n": 4500,
+            "rate": 0.8602,
+            "pct": 86.02
+          },
+          {
+            "fold": 2,
+            "threshold": 6.4952,
+            "k": 3871,
+            "n": 4500,
+            "rate": 0.8602,
+            "pct": 86.02
+          },
+          {
+            "fold": 3,
+            "threshold": 7.1978,
+            "k": 4149,
+            "n": 4500,
+            "rate": 0.922,
+            "pct": 92.2
+          },
+          {
+            "fold": 4,
+            "threshold": 6.4952,
+            "k": 3871,
+            "n": 4500,
+            "rate": 0.8602,
+            "pct": 86.02
+          }
+        ],
+        "median_of_five_k": 3871,
+        "min_k": 3871,
+        "max_k": 4149,
+        "min_rate": 0.8602,
+        "max_rate": 0.922,
+        "median_equals_rate_at_median_threshold": true,
+        "label": "sensitivity range, not an interval"
+      },
+      "R3": {
+        "median_threshold": 0.9219,
+        "per_fold": [
+          {
+            "fold": 0,
+            "threshold": 0.9179,
+            "k": 3468,
+            "n": 4500,
+            "rate": 0.7707,
+            "pct": 77.07
+          },
+          {
+            "fold": 1,
+            "threshold": 0.9219,
+            "k": 3499,
+            "n": 4500,
+            "rate": 0.7776,
+            "pct": 77.76
+          },
+          {
+            "fold": 2,
+            "threshold": 0.8841,
+            "k": 3117,
+            "n": 4500,
+            "rate": 0.6927,
+            "pct": 69.27
+          },
+          {
+            "fold": 3,
+            "threshold": 0.9247,
+            "k": 3517,
+            "n": 4500,
+            "rate": 0.7816,
+            "pct": 78.16
+          },
+          {
+            "fold": 4,
+            "threshold": 0.9219,
+            "k": 3499,
+            "n": 4500,
+            "rate": 0.7776,
+            "pct": 77.76
+          }
+        ],
+        "median_of_five_k": 3499,
+        "min_k": 3117,
+        "max_k": 3517,
+        "min_rate": 0.6927,
+        "max_rate": 0.7816,
+        "median_equals_rate_at_median_threshold": true,
+        "label": "sensitivity range, not an interval"
+      }
+    },
+    "pairs": [
+      {
+        "a": "R2",
+        "b": "R3",
+        "both": 3140,
+        "a_only": 731,
+        "b_only": 359,
+        "neither": 270,
+        "n": 4500,
+        "difference": 0.0827
+      },
+      {
+        "a": "R3",
+        "b": "R1",
+        "both": 1139,
+        "a_only": 2360,
+        "b_only": 0,
+        "neither": 1001,
+        "n": 4500,
+        "difference": 0.5244
+      },
+      {
+        "a": "R2",
+        "b": "R1",
+        "both": 1139,
+        "a_only": 2732,
+        "b_only": 0,
+        "neither": 629,
+        "n": 4500,
+        "difference": 0.6071
+      }
+    ],
+    "bootstrap": {
+      "B": 10000,
+      "seed": 42,
+      "clusters": 150,
+      "method": "intent-cluster percentile bootstrap"
+    },
+    "primary_comparison": {
+      "label": "PRIMARY (D10 = a): R2 - R3 on P1, paired intent-cluster bootstrap",
+      "difference": 0.0827,
+      "a_only": 731,
+      "b_only": 359,
+      "ci95": {
+        "lo": 0.0502,
+        "hi": 0.1164
+      },
+      "degenerate": false,
+      "reading": "interval entirely above 0: R2 rejects more external out-of-scope requests than R3 at their v0.2 operating points; R2's operating point also has more v0.2 false rejections (20 vs 11 of 134), so this does not by itself show that R2 is the better rule"
+    },
+    "secondary_p1": [
+      {
+        "label": "secondary",
+        "pair": "R3 - R1",
+        "difference": 0.5244,
+        "ci95_cluster_bootstrap": {
+          "lo": 0.4904,
+          "hi": 0.5576,
+          "degenerate": false
+        },
+        "exact_mcnemar_p": 0,
+        "exact_mcnemar_label": "ignores clustering"
+      },
+      {
+        "label": "secondary",
+        "pair": "R2 - R1",
+        "difference": 0.6071,
+        "ci95_cluster_bootstrap": {
+          "lo": 0.5722,
+          "hi": 0.6404,
+          "degenerate": false
+        },
+        "exact_mcnemar_p": 0,
+        "exact_mcnemar_label": "ignores clustering"
+      }
+    ],
+    "p1_mcnemar_primary_pair": {
+      "exact_mcnemar_p": 7.445e-30,
+      "label": "ignores clustering; not the primary inference"
+    },
+    "r1_vs_r1_cli": {
+      "count_s_in_2_0_to_2_36": 10,
+      "r1_cli_rejects_minus_r1_rejects": 10,
+      "equal": true
+    },
+    "ties": {
+      "s_exactly_2_0": 0,
+      "s4_exactly": {
+        "6.4952": 12,
+        "7.1978": 34
+      },
+      "fused4_exactly": {
+        "0.8841": 1,
+        "0.9179": 0,
+        "0.9219": 0,
+        "0.9247": 1
+      },
+      "note": "a score exactly at a threshold is not rejected (strict <)"
+    },
+    "no_token": {
+      "count": 0,
+      "ids": [],
+      "rejected_by": {
+        "R1": 0,
+        "R1_CLI": 0,
+        "R2": 0,
+        "R3": 0
+      },
+      "rates_excluding_them": null
+    },
+    "lexical_null": {
+      "count": 1139,
+      "share": {
+        "k": 1139,
+        "n": 4500,
+        "rate": 0.2531,
+        "pct": 25.31
+      },
+      "rejected_by": {
+        "R1": 1139,
+        "R1_CLI": 1139,
+        "R2": 1139,
+        "R3": 1139
+      },
+      "overlap_subset": {
+        "n": 3361,
+        "rates": {
+          "R1": {
+            "k": 0,
+            "n": 3361,
+            "rate": 0,
+            "pct": 0
+          },
+          "R1_CLI": {
+            "k": 10,
+            "n": 3361,
+            "rate": 0.003,
+            "pct": 0.3
+          },
+          "R2": {
+            "k": 2732,
+            "n": 3361,
+            "rate": 0.8129,
+            "pct": 81.29
+          },
+          "R3": {
+            "k": 2360,
+            "n": 3361,
+            "rate": 0.7022,
+            "pct": 70.22
+          }
+        },
+        "pairs": [
+          {
+            "a": "R2",
+            "b": "R3",
+            "both": 2001,
+            "a_only": 731,
+            "b_only": 359,
+            "neither": 270,
+            "n": 3361,
+            "difference": 0.1107
+          },
+          {
+            "a": "R3",
+            "b": "R1",
+            "both": 0,
+            "a_only": 2360,
+            "b_only": 0,
+            "neither": 1001,
+            "n": 3361,
+            "difference": 0.7022
+          },
+          {
+            "a": "R2",
+            "b": "R1",
+            "both": 0,
+            "a_only": 2732,
+            "b_only": 0,
+            "neither": 629,
+            "n": 3361,
+            "difference": 0.8129
+          }
+        ],
+        "primary_comparison": {
+          "label": "sensitivity (descriptive); not a primary result",
+          "difference": 0.1107,
+          "ci95": {
+            "lo": 0.0678,
+            "hi": 0.1546
+          },
+          "degenerate": false,
+          "clusters": 150,
+          "interval_position": "above 0"
+        }
+      }
+    },
+    "matched_operating_point": {
+      "label": "secondary: matched v0.2 operating points (m = 11 in-scope rejections; thresholds from v0.2 in-scope queries only)",
+      "thresholds": {
+        "R2m_s4": 5.4377,
+        "R3m_fused4": 0.9179
+      },
+      "rates": {
+        "R2m": {
+          "k": 2905,
+          "n": 4500,
+          "rate": 0.6456,
+          "pct": 64.56,
+          "wilson95": {
+            "lo": 0.6315,
+            "hi": 0.6594,
+            "label": "ignores clustering; too narrow"
+          },
+          "cluster_bootstrap95": {
+            "lo": 0.6033,
+            "hi": 0.6856,
+            "degenerate": false
+          }
+        },
+        "R3m": {
+          "k": 3468,
+          "n": 4500,
+          "rate": 0.7707,
+          "pct": 77.07,
+          "wilson95": {
+            "lo": 0.7582,
+            "hi": 0.7827,
+            "label": "ignores clustering; too narrow"
+          },
+          "cluster_bootstrap95": {
+            "lo": 0.7338,
+            "hi": 0.8062,
+            "degenerate": false
+          }
+        }
+      },
+      "pair": {
+        "a": "R2m",
+        "b": "R3m",
+        "both": 2453,
+        "a_only": 452,
+        "b_only": 1015,
+        "neither": 580,
+        "n": 4500,
+        "difference": -0.1251
+      },
+      "comparison": {
+        "difference": -0.1251,
+        "a_only": 452,
+        "b_only": 1015,
+        "ci95_cluster_bootstrap": {
+          "lo": -0.1618,
+          "hi": -0.0887
+        },
+        "degenerate": false,
+        "reading": "interval entirely below 0: at equal v0.2 cost, the fused score rejects more"
+      }
+    },
+    "distributions": {
+      "s": {
+        "p5": 0,
+        "q1": 0,
+        "median": 5.0481,
+        "q3": 5.702,
+        "p95": 7.5682
+      },
+      "s4": {
+        "p5": 0,
+        "q1": 0,
+        "median": 5.0481,
+        "q3": 5.702,
+        "p95": 7.5682
+      },
+      "fused4": {
+        "p5": 0.5,
+        "q1": 0.5,
+        "median": 0.809,
+        "q3": 0.908,
+        "p95": 1
+      }
+    },
+    "v0_2_comparison": {
+      "label": "descriptive; different populations; no test",
+      "rules": {
+        "R1": {
+          "e1_rate": 0.2531,
+          "v0_2_all_50": {
+            "k": 17,
+            "n": 50,
+            "rate": 0.34,
+            "pct": 34
+          },
+          "v0_2_unscreened_15": {
+            "k": 4,
+            "n": 15,
+            "rate": 0.2667,
+            "pct": 26.67
+          },
+          "v0_2_added_35": {
+            "k": 13,
+            "n": 35,
+            "rate": 0.3714,
+            "pct": 37.14
+          },
+          "e1_minus_v0_2_all_50": -0.0869,
+          "e1_minus_v0_2_unscreened_15": -0.0136,
+          "v0_2_false_rejections": "0/134"
+        },
+        "R2": {
+          "e1_rate": 0.8602,
+          "v0_2_all_50": {
+            "k": 46,
+            "n": 50,
+            "rate": 0.92,
+            "pct": 92
+          },
+          "v0_2_unscreened_15": {
+            "k": 12,
+            "n": 15,
+            "rate": 0.8,
+            "pct": 80
+          },
+          "v0_2_added_35": {
+            "k": 34,
+            "n": 35,
+            "rate": 0.9714,
+            "pct": 97.14
+          },
+          "e1_minus_v0_2_all_50": -0.0598,
+          "e1_minus_v0_2_unscreened_15": 0.0602,
+          "v0_2_false_rejections": "20/134"
+        },
+        "R3": {
+          "e1_rate": 0.7776,
+          "v0_2_all_50": {
+            "k": 34,
+            "n": 50,
+            "rate": 0.68,
+            "pct": 68
+          },
+          "v0_2_unscreened_15": {
+            "k": 9,
+            "n": 15,
+            "rate": 0.6,
+            "pct": 60
+          },
+          "v0_2_added_35": {
+            "k": 25,
+            "n": 35,
+            "rate": 0.7143,
+            "pct": 71.43
+          },
+          "e1_minus_v0_2_all_50": 0.0976,
+          "e1_minus_v0_2_unscreened_15": 0.1776,
+          "v0_2_false_rejections": "11/134"
+        }
+      },
+      "r2_minus_r3": {
+        "e1": 0.0826,
+        "v0_2_all_50": 0.24,
+        "v0_2_unscreened_15": 0.2
+      },
+      "caveats": [
+        "v0.2 rates are out-of-fold (each query met its own fold's threshold); E1 applies all five thresholds to queries in no fold",
+        "CLINC150 is general-domain; E1 says nothing about terminal-task out-of-scope requests (protocol §2.4)",
+        "E1 cannot measure false rejections; read every E1 rate beside the v0.2 false rejections (0, 20 and 11 of 134 for R1, R2 and R3)"
+      ]
+    }
+  },
+  "P2": {
+    "population": "P2",
+    "n": 1000,
+    "rates": {
+      "R1": {
+        "k": 191,
+        "n": 1000,
+        "rate": 0.191,
+        "pct": 19.1,
+        "wilson95": {
+          "lo": 0.1678,
+          "hi": 0.2165
+        }
+      },
+      "R1_CLI": {
+        "k": 198,
+        "n": 1000,
+        "rate": 0.198,
+        "pct": 19.8,
+        "wilson95": {
+          "lo": 0.1745,
+          "hi": 0.2238
+        }
+      },
+      "R2": {
+        "k": 834,
+        "n": 1000,
+        "rate": 0.834,
+        "pct": 83.4,
+        "wilson95": {
+          "lo": 0.8097,
+          "hi": 0.8558
+        }
+      },
+      "R3": {
+        "k": 781,
+        "n": 1000,
+        "rate": 0.781,
+        "pct": 78.1,
+        "wilson95": {
+          "lo": 0.7543,
+          "hi": 0.8055
+        }
+      }
+    },
+    "five_threshold_sensitivity": {
+      "R2": {
+        "median_threshold": 6.4952,
+        "per_fold": [
+          {
+            "fold": 0,
+            "threshold": 6.4952,
+            "k": 834,
+            "n": 1000,
+            "rate": 0.834,
+            "pct": 83.4
+          },
+          {
+            "fold": 1,
+            "threshold": 6.4952,
+            "k": 834,
+            "n": 1000,
+            "rate": 0.834,
+            "pct": 83.4
+          },
+          {
+            "fold": 2,
+            "threshold": 6.4952,
+            "k": 834,
+            "n": 1000,
+            "rate": 0.834,
+            "pct": 83.4
+          },
+          {
+            "fold": 3,
+            "threshold": 7.1978,
+            "k": 894,
+            "n": 1000,
+            "rate": 0.894,
+            "pct": 89.4
+          },
+          {
+            "fold": 4,
+            "threshold": 6.4952,
+            "k": 834,
+            "n": 1000,
+            "rate": 0.834,
+            "pct": 83.4
+          }
+        ],
+        "median_of_five_k": 834,
+        "min_k": 834,
+        "max_k": 894,
+        "min_rate": 0.834,
+        "max_rate": 0.894,
+        "median_equals_rate_at_median_threshold": true,
+        "label": "sensitivity range, not an interval"
+      },
+      "R3": {
+        "median_threshold": 0.9219,
+        "per_fold": [
+          {
+            "fold": 0,
+            "threshold": 0.9179,
+            "k": 770,
+            "n": 1000,
+            "rate": 0.77,
+            "pct": 77
+          },
+          {
+            "fold": 1,
+            "threshold": 0.9219,
+            "k": 781,
+            "n": 1000,
+            "rate": 0.781,
+            "pct": 78.1
+          },
+          {
+            "fold": 2,
+            "threshold": 0.8841,
+            "k": 693,
+            "n": 1000,
+            "rate": 0.693,
+            "pct": 69.3
+          },
+          {
+            "fold": 3,
+            "threshold": 0.9247,
+            "k": 786,
+            "n": 1000,
+            "rate": 0.786,
+            "pct": 78.6
+          },
+          {
+            "fold": 4,
+            "threshold": 0.9219,
+            "k": 781,
+            "n": 1000,
+            "rate": 0.781,
+            "pct": 78.1
+          }
+        ],
+        "median_of_five_k": 781,
+        "min_k": 693,
+        "max_k": 786,
+        "min_rate": 0.693,
+        "max_rate": 0.786,
+        "median_equals_rate_at_median_threshold": true,
+        "label": "sensitivity range, not an interval"
+      }
+    },
+    "pairs": [
+      {
+        "a": "R2",
+        "b": "R3",
+        "both": 677,
+        "a_only": 157,
+        "b_only": 104,
+        "neither": 62,
+        "n": 1000,
+        "difference": 0.053
+      },
+      {
+        "a": "R3",
+        "b": "R1",
+        "both": 191,
+        "a_only": 590,
+        "b_only": 0,
+        "neither": 219,
+        "n": 1000,
+        "difference": 0.59
+      },
+      {
+        "a": "R2",
+        "b": "R1",
+        "both": 191,
+        "a_only": 643,
+        "b_only": 0,
+        "neither": 166,
+        "n": 1000,
+        "difference": 0.643
+      }
+    ],
+    "secondary_p2": [
+      {
+        "label": "secondary: replication check of the primary comparison",
+        "pair": "R2 - R3",
+        "difference": 0.053,
+        "a_only": 157,
+        "b_only": 104,
+        "exact_mcnemar_p": 0.001245,
+        "holm_adjusted_p": 0.001245,
+        "holm_family": "the three P2 pairs"
+      },
+      {
+        "label": "secondary",
+        "pair": "R3 - R1",
+        "difference": 0.59,
+        "a_only": 590,
+        "b_only": 0,
+        "exact_mcnemar_p": 4.936e-178,
+        "holm_adjusted_p": 9.871e-178,
+        "holm_family": "the three P2 pairs"
+      },
+      {
+        "label": "secondary",
+        "pair": "R2 - R1",
+        "difference": 0.643,
+        "a_only": 643,
+        "b_only": 0,
+        "exact_mcnemar_p": 5.48e-194,
+        "holm_adjusted_p": 1.644e-193,
+        "holm_family": "the three P2 pairs"
+      }
+    ],
+    "r1_vs_r1_cli": {
+      "count_s_in_2_0_to_2_36": 7,
+      "r1_cli_rejects_minus_r1_rejects": 7,
+      "equal": true
+    },
+    "ties": {
+      "s_exactly_2_0": 0,
+      "s4_exactly": {
+        "6.4952": 6,
+        "7.1978": 5
+      },
+      "fused4_exactly": {
+        "0.8841": 0,
+        "0.9179": 0,
+        "0.9219": 0,
+        "0.9247": 0
+      },
+      "note": "a score exactly at a threshold is not rejected (strict <)"
+    },
+    "no_token": {
+      "count": 0,
+      "ids": [],
+      "rejected_by": {
+        "R1": 0,
+        "R1_CLI": 0,
+        "R2": 0,
+        "R3": 0
+      },
+      "rates_excluding_them": null
+    },
+    "lexical_null": {
+      "count": 191,
+      "share": {
+        "k": 191,
+        "n": 1000,
+        "rate": 0.191,
+        "pct": 19.1
+      },
+      "rejected_by": {
+        "R1": 191,
+        "R1_CLI": 191,
+        "R2": 191,
+        "R3": 191
+      },
+      "overlap_subset": {
+        "n": 809,
+        "rates": {
+          "R1": {
+            "k": 0,
+            "n": 809,
+            "rate": 0,
+            "pct": 0
+          },
+          "R1_CLI": {
+            "k": 7,
+            "n": 809,
+            "rate": 0.0087,
+            "pct": 0.87
+          },
+          "R2": {
+            "k": 643,
+            "n": 809,
+            "rate": 0.7948,
+            "pct": 79.48
+          },
+          "R3": {
+            "k": 590,
+            "n": 809,
+            "rate": 0.7293,
+            "pct": 72.93
+          }
+        },
+        "pairs": [
+          {
+            "a": "R2",
+            "b": "R3",
+            "both": 486,
+            "a_only": 157,
+            "b_only": 104,
+            "neither": 62,
+            "n": 809,
+            "difference": 0.0655
+          },
+          {
+            "a": "R3",
+            "b": "R1",
+            "both": 0,
+            "a_only": 590,
+            "b_only": 0,
+            "neither": 219,
+            "n": 809,
+            "difference": 0.7293
+          },
+          {
+            "a": "R2",
+            "b": "R1",
+            "both": 0,
+            "a_only": 643,
+            "b_only": 0,
+            "neither": 166,
+            "n": 809,
+            "difference": 0.7948
+          }
+        ]
+      }
+    },
+    "matched_operating_point": {
+      "label": "secondary: matched v0.2 operating points (m = 11 in-scope rejections; thresholds from v0.2 in-scope queries only)",
+      "thresholds": {
+        "R2m_s4": 5.4377,
+        "R3m_fused4": 0.9179
+      },
+      "rates": {
+        "R2m": {
+          "k": 597,
+          "n": 1000,
+          "rate": 0.597,
+          "pct": 59.7,
+          "wilson95": {
+            "lo": 0.5663,
+            "hi": 0.627
+          }
+        },
+        "R3m": {
+          "k": 770,
+          "n": 1000,
+          "rate": 0.77,
+          "pct": 77,
+          "wilson95": {
+            "lo": 0.7429,
+            "hi": 0.795
+          }
+        }
+      },
+      "pair": {
+        "a": "R2m",
+        "b": "R3m",
+        "both": 490,
+        "a_only": 107,
+        "b_only": 280,
+        "neither": 123,
+        "n": 1000,
+        "difference": -0.173
+      },
+      "comparison": {
+        "difference": -0.173,
+        "a_only": 107,
+        "b_only": 280,
+        "exact_mcnemar_p": 5.761e-19,
+        "exact_mcnemar_label": "unadjusted; secondary"
+      }
+    },
+    "distributions": {
+      "s": {
+        "p5": 0,
+        "q1": 4.2814,
+        "median": 5.1477,
+        "q3": 6.0023,
+        "p95": 8.6488
+      },
+      "s4": {
+        "p5": 0,
+        "q1": 4.2814,
+        "median": 5.1477,
+        "q3": 6.0023,
+        "p95": 8.6488
+      },
+      "fused4": {
+        "p5": 0.5,
+        "q1": 0.6865,
+        "median": 0.8184,
+        "q3": 0.9067,
+        "p95": 1
+      }
+    },
+    "v0_2_comparison": {
+      "label": "descriptive; different populations; no test",
+      "rules": {
+        "R1": {
+          "e1_rate": 0.191,
+          "v0_2_all_50": {
+            "k": 17,
+            "n": 50,
+            "rate": 0.34,
+            "pct": 34
+          },
+          "v0_2_unscreened_15": {
+            "k": 4,
+            "n": 15,
+            "rate": 0.2667,
+            "pct": 26.67
+          },
+          "v0_2_added_35": {
+            "k": 13,
+            "n": 35,
+            "rate": 0.3714,
+            "pct": 37.14
+          },
+          "e1_minus_v0_2_all_50": -0.149,
+          "e1_minus_v0_2_unscreened_15": -0.0757,
+          "v0_2_false_rejections": "0/134"
+        },
+        "R2": {
+          "e1_rate": 0.834,
+          "v0_2_all_50": {
+            "k": 46,
+            "n": 50,
+            "rate": 0.92,
+            "pct": 92
+          },
+          "v0_2_unscreened_15": {
+            "k": 12,
+            "n": 15,
+            "rate": 0.8,
+            "pct": 80
+          },
+          "v0_2_added_35": {
+            "k": 34,
+            "n": 35,
+            "rate": 0.9714,
+            "pct": 97.14
+          },
+          "e1_minus_v0_2_all_50": -0.086,
+          "e1_minus_v0_2_unscreened_15": 0.034,
+          "v0_2_false_rejections": "20/134"
+        },
+        "R3": {
+          "e1_rate": 0.781,
+          "v0_2_all_50": {
+            "k": 34,
+            "n": 50,
+            "rate": 0.68,
+            "pct": 68
+          },
+          "v0_2_unscreened_15": {
+            "k": 9,
+            "n": 15,
+            "rate": 0.6,
+            "pct": 60
+          },
+          "v0_2_added_35": {
+            "k": 25,
+            "n": 35,
+            "rate": 0.7143,
+            "pct": 71.43
+          },
+          "e1_minus_v0_2_all_50": 0.101,
+          "e1_minus_v0_2_unscreened_15": 0.181,
+          "v0_2_false_rejections": "11/134"
+        }
+      },
+      "r2_minus_r3": {
+        "e1": 0.053,
+        "v0_2_all_50": 0.24,
+        "v0_2_unscreened_15": 0.2
+      },
+      "caveats": [
+        "v0.2 rates are out-of-fold (each query met its own fold's threshold); E1 applies all five thresholds to queries in no fold",
+        "CLINC150 is general-domain; E1 says nothing about terminal-task out-of-scope requests (protocol §2.4)",
+        "E1 cannot measure false rejections; read every E1 rate beside the v0.2 false rejections (0, 20 and 11 of 134 for R1, R2 and R3)"
+      ]
+    }
+  },
+  "P1_extras": {
+    "subgroup_S": {
+      "S_clear": {
+        "n": 180,
+        "intents": 6,
+        "rates": {
+          "R1": {
+            "k": 75,
+            "n": 180,
+            "rate": 0.4167,
+            "pct": 41.67
+          },
+          "R1_CLI": {
+            "k": 75,
+            "n": 180,
+            "rate": 0.4167,
+            "pct": 41.67
+          },
+          "R2": {
+            "k": 158,
+            "n": 180,
+            "rate": 0.8778,
+            "pct": 87.78
+          },
+          "R3": {
+            "k": 145,
+            "n": 180,
+            "rate": 0.8056,
+            "pct": 80.56
+          }
+        }
+      },
+      "S_borderline": {
+        "n": 210,
+        "intents": 7,
+        "rates": {
+          "R1": {
+            "k": 53,
+            "n": 210,
+            "rate": 0.2524,
+            "pct": 25.24
+          },
+          "R1_CLI": {
+            "k": 55,
+            "n": 210,
+            "rate": 0.2619,
+            "pct": 26.19
+          },
+          "R2": {
+            "k": 194,
+            "n": 210,
+            "rate": 0.9238,
+            "pct": 92.38
+          },
+          "R3": {
+            "k": 144,
+            "n": 210,
+            "rate": 0.6857,
+            "pct": 68.57
+          }
+        }
+      }
+    },
+    "sensitivity_without_S": {
+      "without_S_clear": {
+        "n": 4320,
+        "intents": 144,
+        "rates": {
+          "R1": {
+            "k": 1064,
+            "n": 4320,
+            "rate": 0.2463,
+            "pct": 24.63,
+            "cluster_bootstrap95": {
+              "lo": 0.2116,
+              "hi": 0.2833
+            }
+          },
+          "R1_CLI": {
+            "k": 1074,
+            "n": 4320,
+            "rate": 0.2486,
+            "pct": 24.86,
+            "cluster_bootstrap95": {
+              "lo": 0.2137,
+              "hi": 0.2859
+            }
+          },
+          "R2": {
+            "k": 3713,
+            "n": 4320,
+            "rate": 0.8595,
+            "pct": 85.95,
+            "cluster_bootstrap95": {
+              "lo": 0.828,
+              "hi": 0.8891
+            }
+          },
+          "R3": {
+            "k": 3354,
+            "n": 4320,
+            "rate": 0.7764,
+            "pct": 77.64,
+            "cluster_bootstrap95": {
+              "lo": 0.7384,
+              "hi": 0.8134
+            }
+          }
+        },
+        "primary_comparison": {
+          "label": "sensitivity (descriptive); not a primary result",
+          "difference": 0.0831,
+          "ci95": {
+            "lo": 0.0488,
+            "hi": 0.1174
+          },
+          "degenerate": false,
+          "interval_position": "above 0"
+        }
+      },
+      "without_S_clear_and_S_borderline": {
+        "n": 4110,
+        "intents": 137,
+        "rates": {
+          "R1": {
+            "k": 1011,
+            "n": 4110,
+            "rate": 0.246,
+            "pct": 24.6,
+            "cluster_bootstrap95": {
+              "lo": 0.2105,
+              "hi": 0.283
+            }
+          },
+          "R1_CLI": {
+            "k": 1019,
+            "n": 4110,
+            "rate": 0.2479,
+            "pct": 24.79,
+            "cluster_bootstrap95": {
+              "lo": 0.2124,
+              "hi": 0.2849
+            }
+          },
+          "R2": {
+            "k": 3519,
+            "n": 4110,
+            "rate": 0.8562,
+            "pct": 85.62,
+            "cluster_bootstrap95": {
+              "lo": 0.8241,
+              "hi": 0.8866
+            }
+          },
+          "R3": {
+            "k": 3210,
+            "n": 4110,
+            "rate": 0.781,
+            "pct": 78.1,
+            "cluster_bootstrap95": {
+              "lo": 0.7436,
+              "hi": 0.8178
+            }
+          }
+        },
+        "primary_comparison": {
+          "label": "sensitivity (descriptive); not a primary result",
+          "difference": 0.0752,
+          "ci95": {
+            "lo": 0.0423,
+            "hi": 0.109
+          },
+          "degenerate": false,
+          "interval_position": "above 0"
+        }
+      }
+    },
+    "per_domain": {
+      "auto_and_commute": {
+        "R1": {
+          "k": 84,
+          "n": 450,
+          "rate": 0.1867,
+          "pct": 18.67
+        },
+        "R1_CLI": {
+          "k": 86,
+          "n": 450,
+          "rate": 0.1911,
+          "pct": 19.11
+        },
+        "R2": {
+          "k": 346,
+          "n": 450,
+          "rate": 0.7689,
+          "pct": 76.89
+        },
+        "R3": {
+          "k": 340,
+          "n": 450,
+          "rate": 0.7556,
+          "pct": 75.56
+        }
+      },
+      "banking": {
+        "R1": {
+          "k": 89,
+          "n": 450,
+          "rate": 0.1978,
+          "pct": 19.78
+        },
+        "R1_CLI": {
+          "k": 92,
+          "n": 450,
+          "rate": 0.2044,
+          "pct": 20.44
+        },
+        "R2": {
+          "k": 359,
+          "n": 450,
+          "rate": 0.7978,
+          "pct": 79.78
+        },
+        "R3": {
+          "k": 329,
+          "n": 450,
+          "rate": 0.7311,
+          "pct": 73.11
+        }
+      },
+      "credit_cards": {
+        "R1": {
+          "k": 136,
+          "n": 450,
+          "rate": 0.3022,
+          "pct": 30.22
+        },
+        "R1_CLI": {
+          "k": 137,
+          "n": 450,
+          "rate": 0.3044,
+          "pct": 30.44
+        },
+        "R2": {
+          "k": 413,
+          "n": 450,
+          "rate": 0.9178,
+          "pct": 91.78
+        },
+        "R3": {
+          "k": 358,
+          "n": 450,
+          "rate": 0.7956,
+          "pct": 79.56
+        }
+      },
+      "home": {
+        "R1": {
+          "k": 74,
+          "n": 450,
+          "rate": 0.1644,
+          "pct": 16.44
+        },
+        "R1_CLI": {
+          "k": 74,
+          "n": 450,
+          "rate": 0.1644,
+          "pct": 16.44
+        },
+        "R2": {
+          "k": 344,
+          "n": 450,
+          "rate": 0.7644,
+          "pct": 76.44
+        },
+        "R3": {
+          "k": 327,
+          "n": 450,
+          "rate": 0.7267,
+          "pct": 72.67
+        }
+      },
+      "kitchen_and_dining": {
+        "R1": {
+          "k": 99,
+          "n": 450,
+          "rate": 0.22,
+          "pct": 22
+        },
+        "R1_CLI": {
+          "k": 100,
+          "n": 450,
+          "rate": 0.2222,
+          "pct": 22.22
+        },
+        "R2": {
+          "k": 402,
+          "n": 450,
+          "rate": 0.8933,
+          "pct": 89.33
+        },
+        "R3": {
+          "k": 363,
+          "n": 450,
+          "rate": 0.8067,
+          "pct": 80.67
+        }
+      },
+      "meta": {
+        "R1": {
+          "k": 121,
+          "n": 450,
+          "rate": 0.2689,
+          "pct": 26.89
+        },
+        "R1_CLI": {
+          "k": 121,
+          "n": 450,
+          "rate": 0.2689,
+          "pct": 26.89
+        },
+        "R2": {
+          "k": 345,
+          "n": 450,
+          "rate": 0.7667,
+          "pct": 76.67
+        },
+        "R3": {
+          "k": 340,
+          "n": 450,
+          "rate": 0.7556,
+          "pct": 75.56
+        }
+      },
+      "small_talk": {
+        "R1": {
+          "k": 145,
+          "n": 450,
+          "rate": 0.3222,
+          "pct": 32.22
+        },
+        "R1_CLI": {
+          "k": 146,
+          "n": 450,
+          "rate": 0.3244,
+          "pct": 32.44
+        },
+        "R2": {
+          "k": 438,
+          "n": 450,
+          "rate": 0.9733,
+          "pct": 97.33
+        },
+        "R3": {
+          "k": 404,
+          "n": 450,
+          "rate": 0.8978,
+          "pct": 89.78
+        }
+      },
+      "travel": {
+        "R1": {
+          "k": 127,
+          "n": 450,
+          "rate": 0.2822,
+          "pct": 28.22
+        },
+        "R1_CLI": {
+          "k": 128,
+          "n": 450,
+          "rate": 0.2844,
+          "pct": 28.44
+        },
+        "R2": {
+          "k": 419,
+          "n": 450,
+          "rate": 0.9311,
+          "pct": 93.11
+        },
+        "R3": {
+          "k": 388,
+          "n": 450,
+          "rate": 0.8622,
+          "pct": 86.22
+        }
+      },
+      "utility": {
+        "R1": {
+          "k": 176,
+          "n": 450,
+          "rate": 0.3911,
+          "pct": 39.11
+        },
+        "R1_CLI": {
+          "k": 177,
+          "n": 450,
+          "rate": 0.3933,
+          "pct": 39.33
+        },
+        "R2": {
+          "k": 419,
+          "n": 450,
+          "rate": 0.9311,
+          "pct": 93.11
+        },
+        "R3": {
+          "k": 365,
+          "n": 450,
+          "rate": 0.8111,
+          "pct": 81.11
+        }
+      },
+      "work": {
+        "R1": {
+          "k": 88,
+          "n": 450,
+          "rate": 0.1956,
+          "pct": 19.56
+        },
+        "R1_CLI": {
+          "k": 88,
+          "n": 450,
+          "rate": 0.1956,
+          "pct": 19.56
+        },
+        "R2": {
+          "k": 386,
+          "n": 450,
+          "rate": 0.8578,
+          "pct": 85.78
+        },
+        "R3": {
+          "k": 285,
+          "n": 450,
+          "rate": 0.6333,
+          "pct": 63.33
+        }
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
-| 3 E1 execution | E1-10 to 14 | 3 | 0 |
+| 3 E1 execution | E1-10 to 14 | 4 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
 
@@ -925,6 +925,52 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **The frozen set is unchanged:** exit 0.
 - **Acceptance criteria:** all checks pass, with the evidence logged; there was no failure, so
   BLOCKED was not needed: **pass**.
+- **Committed:** in `4afb2f2`.
+
+### E1-13: run the planned analysis (DONE 2026-09-30)
+
+- **Frozen code, unchanged** (`git diff … e1-protocol-v1` gave exit 0).
+- **Command:** `e1_analyze.js … --stage summary`. The stored decisions equal the recomputed ones,
+  the logical checks pass, and the exit code was 0.
+- **Outputs:** `summary.json` (SHA-256 `36788eee…6832`), `summary.md` (`09920d96…1c3a`) and
+  `DEVIATIONS.md` (`24de024b…a2be`: **no deviations**, plus reporting notes N1 and N2), all in
+  `research/results/e1_clinc150_v1/`.
+- **Results, as computed.** Readings are the pre-stated ones; interpretation is E1-14.
+
+  | | P1 (`test`, n = 4,500; interval = intent-cluster bootstrap) | P2 (`oos_test`, n = 1,000; Wilson) |
+  |---|---|---|
+  | R1 (s < 2.0) | 1,139 (25.31%) [21.84, 28.98] | 191 (19.10%) [16.78, 21.65] |
+  | R1-CLI | 1,149 (25.53%) [22.07, 29.24] | 198 (19.80%) [17.45, 22.38] |
+  | R2 (s4 < 6.4952) | 3,871 (86.02%) [83.02, 88.80] | 834 (83.40%) [80.97, 85.58] |
+  | R3 (fused4 < 0.9219) | 3,499 (77.76%) [74.13, 81.27] | 781 (78.10%) [75.43, 80.55] |
+  | R2, five-threshold range | 86.02–92.20% | 83.4–89.4% |
+  | R3, five-threshold range | 69.27–78.16% | 69.3–78.6% |
+  | **Primary: R2 − R3 (P1)** | **+0.0827 [0.0502, 0.1164]**; discordant 731 / 359. *Pre-stated reading:* R2 rejects more at the v0.2 operating points, which also carry more v0.2 false rejections (20 vs 11 of 134); this does not by itself show that R2 is the better rule. | R2 − R3 +0.053; discordant 157 / 104; exact McNemar p = 0.001245 (Holm 0.001245). This is the replication check. |
+  | **Matched: R2m − R3m (secondary)** | R2m 2,905 (64.56%) [60.33, 68.56]; R3m 3,468 (77.07%) [73.38, 80.62]; **−0.1251 [−0.1618, −0.0887]**. *Pre-stated reading:* at equal v0.2 cost, the fused score rejects more. | R2m 597 (59.7%), R3m 770 (77.0%); **−0.173**; discordant 107 / 280; exact McNemar p = 5.761e-19 (unadjusted) |
+  | R3 − R1, R2 − R1 (secondary) | +0.5244 [0.4904, 0.5576]; +0.6071 [0.5722, 0.6404] | +0.59, +0.643; Holm p = 9.871e-178 and 1.644e-193 |
+  | Queries with 2.0 ≤ s < 2.36 (R1-CLI minus R1) | 10 | 7 |
+  | Queries with no tokens | 0 | 0 |
+  | Lexical-null queries (share) | 1,139 (25.31%). R1 rejects exactly these: 0 of 3,361 overlap queries. | 191 (19.1%); R1 rejects 0 of 809 overlap queries |
+  | Overlap subset: R2 − R3 | +0.1107 [0.0678, 0.1546] (sensitivity) | +0.0655 (descriptive) |
+  | Ties exactly at a threshold (not rejected) | s4 = 6.4952: 12; s4 = 7.1978: 34; fused4 = 0.8841: 1; fused4 = 0.9247: 1 | s4 = 6.4952: 6; s4 = 7.1978: 5 |
+
+- **P1 subgroup S** (descriptive):
+  - S-clear (180): R1 75, R1-CLI 75, R2 158, R3 145.
+  - S-borderline (210): R1 53, R1-CLI 55, R2 194, R3 144.
+  - Without S-clear (4,320): R2 − R3 +0.0831 [0.0488, 0.1174].
+  - Without either tier (4,110): R2 − R3 +0.0752 [0.0423, 0.1090].
+- **The per-domain table** is in `summary.md`.
+- **Reporting notes** (`DEVIATIONS.md`; they change no analysis):
+  - **N1:** the v0.2 comparison line prints R2 − R3 = 0.0826, because it subtracts rates after
+    rounding. The exact value is 0.082667, reported as **0.0827** by the primary field, which is
+    authoritative.
+  - **N2:** the P1 secondary exact McNemar p-values print as 0 because of underflow. The true value
+    is about 10^-710, i.e. < 1e-300. They are labelled "ignores clustering".
+- **Nothing outside the protocol was computed.** There are no post-hoc analyses.
+- **Acceptance criteria:**
+  1. The summary JSON and MD contain every protocol metric, with its denominator and interval:
+     **pass**. The matched-rule intervals and all §6.5 fields are in `summary.json`.
+  2. The deviation log is present: **pass** (no deviations).
 
 ## Decisions
 
@@ -970,6 +1016,10 @@ Recorded by VERIFY-01 on 2026-09-30.
 *(none.)* The protocol was frozen at `e1-protocol-v1` (`970c54f`) on 2026-09-30. Any change after
 that is logged here as DEV-E1-01, … (protocol §6.9).
 
+- E1-11 to E1-13 ran with **no deviation**.
+- There are two reporting notes, N1 and N2, about how values are printed. They are in
+  `research/results/e1_clinc150_v1/DEVIATIONS.md`, and they are not deviations.
+
 ## Next
 
 - **Author action:** PAPER-07. Submit `research/paper/acl_latex/main_review.pdf` (SHA-256 prefix
@@ -983,14 +1033,12 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
   - E1-08 stays open until E1-07c is done and items 5 and 7 are re-checked.
 - **Phase 2 is complete.** The E1 protocol was frozen at `e1-protocol-v1` (`970c54f`) on
   2026-09-30.
-- **E1-10, E1-11 and E1-12 are done.** All implementation checks pass (17 of 17). No rates have been
-  read.
-- **Recommended Claude task:** E1-13 (P0), running the planned analysis.
-  - Run the frozen `e1_analyze.js --stage summary`, unchanged. It first confirms that the stored
-    decisions equal the recomputed ones.
-  - It writes `summary.json` and `summary.md`, plus `DEVIATIONS.md` (currently empty).
-  - Report every protocol quantity with its denominator and interval, and label anything else
-    "post hoc".
+- **E1-10 to E1-13 are done.** The results are computed; see the E1-13 entry.
+- **Recommended Claude task:** E1-14 (P1), the results memo.
+  - It covers what the results do and do not support, measured against §2.3, §2.4 and the expected
+    directions ED-1 to ED-5.
+  - Every statement cites `summary.json`, and the general-domain limitation is explicit.
+  - **The author reviews it. There are no paper edits.**
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 
