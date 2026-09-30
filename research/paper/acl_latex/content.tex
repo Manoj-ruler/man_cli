@@ -48,13 +48,15 @@ shipped closed-set command retriever, and what do post-hoc recalibration, a tune
 hybrid lexical--dense retriever each contribute?}
 
 \paragraph{Contributions.} (1) An audit of a published tool's confidence: it is no better than a constant
-forecaster, wrong answers average 86\% confidence, and some wrong answers are destructive commands. (2) An
+forecaster, wrong answers average 86\% confidence (v0.1), and some wrong answers are destructive commands. (2) An
 attribution of what fixes what, under cross-validation on two benchmark versions with verbatim-copy controls
-excluded: standard recalibration fixes the confidence level, a tuned threshold on the shipped score handles
+excluded: standard recalibration largely corrects the confidence level, a tuned threshold on the shipped score handles
 out-of-scope requests at a cost in refused in-scope queries, and a hybrid retriever (a research prototype with one small
-MiniLM encoder, not part of the package) mainly improves how confidence ranks the system's own errors. (3) Evaluation practice for
-small closed-set benchmarks: tie-aware selective-prediction metrics, a noise floor and no-skill reference for
-calibration, and out-of-scope rules compared under the same tuning protocol and at equal false-rejection counts.
+MiniLM encoder, not part of the package) mainly improves how confidence ranks the system's own errors. (3) The two
+benchmark versions, the code, and a trace from every reported number to its result file, released with the
+camera-ready version. The measures are established ones, applied with care for small samples: tie-aware
+risk-coverage areas (AURC, AUGRC), a noise floor and a no-skill reference for calibration, and out-of-scope rules
+tuned under one protocol and compared at equal false-rejection counts (\S\ref{sec:methods}, \S\ref{sec:ood}).
 
 \section{Related Work}
 
