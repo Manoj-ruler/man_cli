@@ -6,7 +6,7 @@
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
-| 2 E1 protocol | E1-01 to 09 | 2 | 0 |
+| 2 E1 protocol | E1-01 to 09 | 3 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
@@ -450,6 +450,41 @@ Recorded by VERIFY-01 on 2026-09-30.
   - the thresholds (6.4952 ×4 and 7.1978; 0.9179, 0.9219, 0.8841, 0.9247 and 0.9219; α = 0.5),
     read during planning from the committed result files and to be formally verified in E1-04;
   - the false-rejection counts, from freeze §6.
+- **Committed:** in `4e115db`.
+
+### E1-04: Verify the frozen v0.2 thresholds and how they were derived (DONE 2026-09-30)
+
+- **Deliverable:** `research/publication_tasks/e1/E1_THRESHOLDS.md`. The protocol gains §4 and an
+  amended §1.
+- **Values** (each read from its source field, then **re-derived** from the committed per-query data
+  with the same selection logic; scratchpad `e1_04_thresholds.js`):
+  - **R2:** 6.4952 (folds 0, 1, 2, 4; the score of TA-B053) and 7.1978 (fold 3; TA-B051). Dev F1
+    0.7912 to 0.8409. The exact thresholds reject **46/50**, as frozen.
+  - **R3:** 0.9179, 0.9219, 0.8841, 0.9247 and 0.9219. All re-select identically.
+  - α = 0.5 in all folds; folds: k = 5, seed 42.
+- **Derivation, confirmed in code:**
+  - candidates are the distinct development-fold scores;
+  - predict out-of-scope iff score < t;
+  - maximise F1, with ties to the lowest t;
+  - apply once per test fold.
+  - Sources: `review_r1_e_ood_operating_points.js:76–88`; `run_selective_prediction_v0_2.js:39–54`.
+- **Scales:**
+  - R2's field `…raw_bm25` is really the **shipped score s including the +15 bonus** (`:80`). The
+    name is misleading; the paper's wording is correct.
+  - s and the fused score were stored, tuned and applied **rounded to 4 decimals**
+    (`reproduce_baseline_v0_2.js:60`; `build_candidates_v0_2.js:54`).
+  - R1 uses the unrounded live values (`:44`).
+- **Acceptance criteria:**
+  1. The values match the files exactly: **pass**, and they also re-derive exactly.
+  2. The scales are confirmed from code with file and line numbers: **pass**.
+  3. Decision D2 is recorded: **(a)**: **pass**.
+  4. No result file changed (`git status` showed only task files): **pass**.
+- **New issue, ISSUE-06, resolved by the author's decision (option 1).** The approved §1 said that R1
+  (s < 2.0) is "equivalently" the CLI's 30% rule. In fact the CLI refuses iff **s < 2.36**; the two
+  agree only because no benchmark query scores in [2.0, 2.36).
+  - The §1 wording is amended, and the amendment recorded in the protocol.
+  - R1-CLI is added as a secondary line, and the count of CLINC queries in [2.0, 2.36) will be
+    reported.
 
 ## Decisions
 
@@ -466,6 +501,8 @@ Recorded by VERIFY-01 on 2026-09-30.
 | D5 | Download CLINC150 `data_full.json` and `domains.json`, pinned to commit 828f809, now, for use in E1-03's class review; **commit them to the repository** | 2026-09-30 | author ("approve download, commit it") |
 | D4 | E1 population: **both CLINC test sets, reported separately, never pooled**. P1 = `test` (4,500, 150 intents; primary; class-level exclusions); P2 = `oos_test` (1,000; secondary; kept whole). The train and val splits are not used. | 2026-09-30 | author |
 | D7 | E1 uses the **frozen v0.2 thresholds**, even if the final paper reports v0.2.1 | 2026-09-30 | author |
+| D2 | **(a)**: apply all five per-fold thresholds. The primary result is the median rate, which equals the rate at the median threshold (R2 6.4952, R3 0.9219); the min–max is a sensitivity range. | 2026-09-30 | author |
+| — | ISSUE-06 **option 1**: R1 stays s < 2.0 (primary); add R1-CLI (s < 2.36) as secondary; correct the approved §1 wording ("on the benchmark, equivalently") | 2026-09-30 | author |
 
 ## Issues
 
@@ -486,11 +523,10 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **Author action:** PAPER-07. Submit `research/paper/acl_latex/main_review.pdf` (SHA-256 prefix
   `7c129b946bcd928b`) to the EACL 2027 SRW mentorship programme by **Nov 6**, and tell Claude when it
   is done, so it can be recorded.
-- **Recommended Claude task:** E1-04 (verify the frozen v0.2 thresholds and how they were derived;
-  decision D2). It is independent, and E1-07 needs D2.
-- **Or:** E1-03 (P1 class exclusions from intent names and examples only; decision D3). It depends
-  on E1-02, which is done.
-- Both are P0.
+- **Recommended Claude task:** E1-03 (P0). Decide the P1 class exclusions from intent names and
+  example queries only (decision D3), and cross-check `domains.json` against the paper's
+  supplementary list. **No scoring.**
+- **Then:** E1-05 (the scoring design, from reading the code), which depends on E1-04 (done).
 - **Phase 1 is complete** apart from the author's submission.
 - **E1-01 and E1-04** are unblocked in parallel.
 - **LIT-01** (P2) is in the backlog.

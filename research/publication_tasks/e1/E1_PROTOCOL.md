@@ -2,8 +2,10 @@
 
 **Status:** DRAFT. §1–§2 were **approved by the author on 2026-09-30** ("approve, D4 = c, D7 = yes").
 
-- §3 (exclusions, E1-03), §4 (thresholds, E1-04), §5 (scoring, E1-05/06) and §6 (analysis and
-  outputs, E1-07) are not written yet.
+- §4 (thresholds) was written in E1-04 and approved on 2026-09-30 (D2 = a); the R1 wording was
+  amended (ISSUE-06).
+- §3 (exclusions, E1-03), §5 (scoring, E1-05/06) and §6 (analysis and outputs, E1-07) are not
+  written yet.
 - **Nothing may be scored until the whole protocol is frozen** (E1-09, gate G-E1).
 
 ## 1. Question
@@ -23,9 +25,17 @@ Limitations). E1 uses requests that no project retriever has ever seen.
 
 | Rule | Rejects when | Tuning |
 |---|---|---|
-| R1, the fixed rule (the shipped tool) | shipped score s < 2.0 (equivalently, the displayed confidence is below 30%) | none |
-| R2, the tuned shipped threshold | s below an F1-maximising threshold chosen on the v0.2 development folds | frozen from v0.2: 6.4952 in four folds, 7.1978 in one. How the five apply to external data is decision D2 (E1-04). |
-| R3, the hybrid detector | the hybrid's fused top-1 score (α = 0.5 in every fold) falls below a per-fold threshold | frozen from v0.2: 0.9179, 0.9219, 0.8841, 0.9247, 0.9219. D2 applies here too. |
+| R1, the fixed rule (the paper's definition) | shipped score s < 2.0, on the unrounded live values. **On the benchmark** this equals the CLI's 30% rule, because no benchmark query scores in [2.0, 2.36). | none |
+| R1-CLI, the shipped CLI's refusal rule (secondary; ISSUE-06, option 1) | displayed confidence below 30%, where confidence = min(round(100·s/8), 100); that is, **s < 2.36** | none |
+| R2, the tuned shipped threshold | s, rounded to 4 decimals, below an F1-maximising threshold chosen on the v0.2 development folds | frozen from v0.2: 6.4952 in four folds, 7.1978 in one. They are applied to external data by decision D2 = (a) (§4). |
+| R3, the hybrid detector | the hybrid's fused top-1 score (α = 0.5 in every fold, rounded to 4 decimals) falls below a per-fold threshold | frozen from v0.2: 0.9179, 0.9219, 0.8841, 0.9247, 0.9219. D2 = (a) applies too. |
+
+- **Amendment, 2026-09-30 (author, ISSUE-06, option 1).** The approved §1 said "(equivalently, the
+  displayed confidence is below 30%)" for R1. That equivalence holds only on the benchmark, so the
+  wording was corrected, and R1-CLI was added as a secondary line.
+- **R1-CLI's reporting:** the number of CLINC queries whose score falls in [2.0, 2.36), where R1
+  and R1-CLI differ, is reported.
+- **The primary R1 is unchanged** (s < 2.0), for continuity with the paper's v0.2 numbers.
 
 ## 2. Scope
 
@@ -105,3 +115,26 @@ benchmark v0.2.1 from the annotation study.
   **before any scoring**.
 - No E1 outcome is looked at before the protocol freeze (E1-09).
 - Any change after the freeze is a numbered deviation that needs the author's approval.
+
+## 4. Thresholds and how they are applied (E1-04; D2 = (a), author 2026-09-30)
+
+The values and their derivation are verified and re-derived in `e1/E1_THRESHOLDS.md`.
+
+- **R2:** 6.4952 (folds 0, 1, 2, 4) and 7.1978 (fold 3).
+- **R3:** 0.9179, 0.9219, 0.8841, 0.9247 and 0.9219, with α = 0.5.
+
+**How they are applied (D2 = a):**
+
+1. **Every threshold is applied separately.** For R2 and R3 separately, each CLINC query is compared
+   with each of the five per-fold thresholds, giving five rejection rates per rule and population.
+   - **Primary point estimate:** the **median of the five rates**. Rejection is monotone in the
+     threshold and there are five thresholds, so it equals the rate at the median threshold (R2
+     6.4952; R3 0.9219).
+   - **Sensitivity:** the min–max over the five rates, reported next to the median. It is **not** an
+     interval.
+2. **Comparison rule:** reject iff score < threshold (strict), as in the tuning code.
+3. **Rounding:** s and the fused score are rounded to 4 decimals before the comparison, exactly as
+   the frozen pipeline stored them (`reproduce_baseline_v0_2.js:60`; `build_candidates_v0_2.js:54`).
+   R1 and R1-CLI use the unrounded live values (`reproduce_baseline_v0_2.js:44`; `cli/search.js`,
+   `cli/index.js`).
+4. **No threshold is re-tuned.** No refit on v0.2 (option c was rejected), and none on CLINC.
