@@ -6,7 +6,7 @@
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
-| 2 E1 protocol | E1-01 to 09 | 0 | 0 |
+| 2 E1 protocol | E1-01 to 09 | 1 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
@@ -390,6 +390,39 @@ Recorded by VERIFY-01 on 2026-09-30.
   were restored with `git checkout --`, and the tree was clean afterwards.
 - **Proposed for later (not done):** add the anonymity scan with its positive control to the
   repository as a reusable check for FINAL-02. For now it lives only in the session scratchpad.
+- **Committed:** in `2d19b33`.
+
+### E1-01: CLINC150 source, access and licence (DONE 2026-09-30)
+
+- **Source record:** `research/publication_tasks/e1/E1_DATA_SOURCE.md`.
+  - **Paper:** checked on the ACL Anthology (D19-1131): 11 authors, EMNLP-IJCNLP 2019,
+    pp. 1311–1316. It matches `references.bib`.
+  - **Official release:** `github.com/clinc/oos-eval`, pinned to commit `828f809…` (2021-06-01).
+  - **Licence:** **CC BY 3.0 Unported**, from the LICENSE text. The GitHub API only says "Other".
+  - **Variants and sizes:** taken from the paper's §2–§3 and from the repository metadata.
+- **Download (D5, the author's approval):** `data_full.json` and `domains.json` are now in
+  `research/data_external/clinc150/`, and **committed** as the author chose.
+  - Sizes 2,495,390 and 3,818 bytes. The **git blob SHA-1 values equal GitHub's**
+    (`7a7b26c5…`, `60a74358…`), so the files are byte-identical to upstream.
+  - SHA-256 `36923c37…` and `b947b579…`, recorded in `PROVENANCE.md` with the CC BY 3.0
+    attribution.
+  - `.gitattributes` (`* -text`) keeps the LF files byte-exact under `core.autocrlf`.
+- **Structure check:** train/val/test = 15,000 / 3,000 / 4,500 over 150 intents; oos
+  train/val/test = 100 / 100 / 1,000; entries are `[text, label]`. This matches the paper.
+  `domains.json` covers exactly the 150 intents (10 domains, no missing, extra or repeated intent).
+- **Acceptance criteria:**
+  1. The source URL, licence, variants, split sizes and download size are recorded with evidence
+     links: **pass**.
+  2. The author's download decision is recorded (D5): **pass**.
+  3. No E1 result exists: nothing was scored, and gate G-E1 still holds: **pass**.
+- **Findings passed on to E1-02 and E1-03:**
+  - CLINC's "out-of-scope" is relative to its own 150 intents, so most of its in-scope requests are
+    also out of scope for a shell tool.
+  - The `oos` split has no classes, so a class-level exclusion rule cannot filter it.
+  - `domains.json` is a contributor file: its coverage is verified, but not each assignment.
+- **Session note (not a project issue):** the Bash tool lost its PATH during this task (even `ls`
+  and `git` were "not found"), after several "no verdict" safety-check failures. The download and
+  the checks were done in PowerShell instead.
 
 ## Decisions
 
@@ -403,6 +436,7 @@ Recorded by VERIFY-01 on 2026-09-30.
 | — | ISSUE-04 is folded into PAPER-05 (added as checklist item 9 in `TASKS.md`) | 2026-09-30 | author |
 | — | PAPER-05 item 8: option (a), "natural-language-to-Bash" to match §3 | 2026-09-30 | author |
 | — | LIT-01 (P2, ISSUE-05) is added to `TASKS.md` (Phase 5, before FINAL-03) | 2026-09-30 | author |
+| D5 | Download CLINC150 `data_full.json` and `domains.json`, pinned to commit 828f809, now, for use in E1-03's class review; **commit them to the repository** | 2026-09-30 | author ("approve download, commit it") |
 
 ## Issues
 
@@ -423,8 +457,9 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **Author action:** PAPER-07. Submit `research/paper/acl_latex/main_review.pdf` (SHA-256 prefix
   `7c129b946bcd928b`) to the EACL 2027 SRW mentorship programme by **Nov 6**, and tell Claude when it
   is done, so it can be recorded.
-- **Recommended Claude task:** E1-01 (CLINC150 source and licence; P0; no dependencies). Phase 2
-  (the E1 protocol) is the next research-validity work. E1-04 is also unblocked.
+- **Recommended Claude task:** E1-02 (E1 question and scope; P0). It needs decision D4 (which
+  CLINC splits to use) and decision D7 (E1 uses the frozen v0.2 thresholds). E1-04 is also
+  unblocked.
 - **Phase 1 is complete** apart from the author's submission.
 - **E1-01 and E1-04** are unblocked in parallel.
 - **LIT-01** (P2) is in the backlog.

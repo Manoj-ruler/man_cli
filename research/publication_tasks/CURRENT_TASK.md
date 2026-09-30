@@ -1,34 +1,25 @@
 # Current task
 
-**Last completed:** PAPER-06 (2026-09-30), the Phase 1 gate. Everything is green, and the anonymity
-scan passes with a valid positive control.
+**Last completed:** E1-01 (2026-09-30). CLINC150 is verified, downloaded (with the author's approval)
+and committed to `research/data_external/clinc150/`; it is byte-identical to upstream, and its
+provenance and CC BY 3.0 attribution are recorded.
 
-**Snapshot to submit:** `research/paper/acl_latex/main_review.pdf`, SHA-256 prefix
-`7c129b946bcd928b`. The paper content was last changed in `29ee6c3` on `research/improvement`.
+**Author action still open:** PAPER-07. Submit `research/paper/acl_latex/main_review.pdf` (SHA-256
+prefix `7c129b946bcd928b`) to the mentorship programme by Nov 6.
 
-## Author action: PAPER-07
+**Next (recommended): E1-02: E1 question and scope.** Status: NOT STARTED. It waits for "Start E1-02".
 
-Submit the review PDF above to the EACL 2027 SRW pre-submission mentorship programme by
-**Nov 6, 2026**. Then tell Claude, so the submission can be recorded in `PROGRESS.md`.
-
-## Next Claude task (recommended): E1-01: CLINC150 source, access and licence
-
-Status: NOT STARTED. It waits for "Start E1-01".
-
-- **Priority:** P0: the E1 data must be legitimately usable and exactly identifiable.
-- **Type:** experiment (read-only research on sources). **Depends on:** none.
-- **Steps:**
-  1. Verify the CLINC150 paper (ACL Anthology D19-1131, `larson-etal-2019-evaluation`, already
-     cited).
-  2. Locate the official data release.
-  3. Record the licence, the variants (full, small, imbalanced, OOS-plus), the split sizes and the
-     file sizes.
-  4. **Download nothing.** Ask the author's permission first, stating the file, source and size
-     (decision D5).
-- **Acceptance:**
-  - The source URL, licence, variants, split sizes and download size are recorded with evidence
-    links in `research/publication_tasks/e1/E1_DATA_SOURCE.md`.
-  - The author's download decision is recorded.
-  - No E1 data or result exists yet.
+- **Priority:** P0. **Type:** experiment (writing the protocol). **Depends on:** E1-01 (done).
+- **Deliverable:** `research/publication_tasks/e1/E1_PROTOCOL.md` §1–§2, a draft.
+- **Decisions needed:**
+  - **D4:** which CLINC150 splits make up E1's population. Options include the `oos_test` split
+    (1,000 queries, no classes), the in-scope `test` split (4,500 queries, 150 classes), or both.
+    E1-01 found that CLINC's in-scope requests are mostly out of scope for a shell tool too.
+  - **D7:** E1 uses the frozen **v0.2** thresholds, even if the final paper reports v0.2.1.
+- **Must state what E1 cannot show:**
+  - performance on terminal-task out-of-scope requests;
+  - false rejections of in-scope shell queries (CLINC has none);
+  - anything about v0.2.1.
+- **Nothing is scored** (gate G-E1).
 
 **Also unblocked:** E1-04 (verify the frozen v0.2 thresholds and how they were derived; decision D2).
