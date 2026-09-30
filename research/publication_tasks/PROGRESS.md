@@ -6,7 +6,7 @@
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
-| 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 10 | 0 |
+| 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
@@ -769,6 +769,51 @@ Recorded by VERIFY-01 on 2026-09-30.
   and nothing was scored.
 - **Acceptance criteria:** every checklist item is marked pass, or was fixed with the author's
   approval (D11): **pass**.
+- **Committed:** in `db300d9`.
+
+### E1-09: freeze the protocol, gate G-E1 (DONE 2026-09-30)
+
+- **Author's approval (D6):** "Approve freeze, D9 = git tag only. Start E1-09". **D9 = the git tag
+  only.**
+- **Pre-freeze checks:**
+  - the working tree was clean;
+  - all 8 frozen files were tracked;
+  - no `e1-*` tag existed;
+  - `research/results/e1_clinc150_v1/` did not exist, and its git log was empty.
+- **Freeze commit: `970c54f00536926fbfdf5712b028513454c600ca`.** The protocol status was set to
+  FROZEN, naming the frozen set and the authoritative check.
+- **Tag:** `e1-protocol-v1`, annotated (tag object `6e3bcd4f…`). It points to `970c54f`, and its
+  message carries the hashes below.
+- **Pushed:**
+  - `git ls-remote --tags origin e1-protocol-v1` gives `6e3bcd4fd3ceaa43cb9c75fed9c371e5436a7786
+    refs/tags/e1-protocol-v1`;
+  - the remote branch is at `970c54f`.
+- **Frozen files.** The SHA-256 values are LF-normalised and read from the commit's git objects
+  (`core.autocrlf` is true, so the raw bytes of a checkout can differ):
+
+  | SHA-256 | Git blob | File |
+  |---|---|---|
+  | `56a500a3a3145152ba14d3c9b50271a4db1951d57d73e8cdc8f74e66a7828942` | `2ef65eee` | `research/publication_tasks/e1/E1_PROTOCOL.md` |
+  | `d8a1bab7cb9480359562c7726c45ac9c4e6c9c8f057e686b1c883de5be751059` | `574bebeb` | `…/e1/E1_EXCLUSIONS.md` |
+  | `b0e9602a9fe2c51f862d459edaeca33b04f3263ca44b982fae9640d6d81397fd` | `807ea796` | `…/e1/E1_THRESHOLDS.md` |
+  | `fb1861712bb67b04799154dab973db876ba45c1d48efdb2d9510733f489ded9c` | `d6cff74b` | `…/e1/E1_SCORING_DESIGN.md` |
+  | `2951677568577c0679a7568290c1292575d05bfbadc91de067d365d7bd75edc3` | `40d6831b` | `…/e1/E1_PROTOCOL_REVIEW.md` |
+  | `a347c923324196663be4f1ceeb09d1ae6fe2902a604d14a8a033935094041018` | `10099483` | `…/e1/E1_DATA_SOURCE.md` |
+  | `5f2b39a566663a7cb8a71a772bf0c757e7317fa90a76dc333294eafd9f6536af` | `91cab6a0` | `research/experiments/e1_score_queries.js` |
+  | `b56674d9b682bc3577ce9db816df7f22dfa16161d75900bbc838505de7f84f62` | `3dc236f6` | `research/experiments/e1_analyze.js` |
+
+- **Verification:**
+  - `git log --oneline e1-protocol-v1 -- research/results/e1_clinc150_v1` is **empty**;
+  - `git diff --exit-code e1-protocol-v1 -- research/publication_tasks/e1
+    research/experiments/e1_score_queries.js research/experiments/e1_analyze.js` gives **exit 0**.
+- **A note for E1-11.** `RUN_MANIFEST.json` records the **raw-byte** SHA-256 of the two scripts. On
+  a CRLF checkout it can differ from the LF-normalised values above even when nothing changed.
+  E1-11 and E1-12 must use the `git diff` check against the tag as the authoritative test of
+  "unchanged".
+- **Acceptance criteria:**
+  1. The tag exists on the remote: **pass**.
+  2. The committed protocol's hash is recorded: **pass**.
+  3. No E1 result exists before this commit: **pass**.
 
 ## Decisions
 
@@ -787,6 +832,8 @@ Recorded by VERIFY-01 on 2026-09-30.
 | D7 | E1 uses the **frozen v0.2 thresholds**, even if the final paper reports v0.2.1 | 2026-09-30 | author |
 | D2 | **(a)**: apply all five per-fold thresholds. The primary result is the median rate, which equals the rate at the median threshold (R2 6.4952, R3 0.9219); the min–max is a sensitivity range. | 2026-09-30 | author |
 | — | ISSUE-06 **option 1**: R1 stays s < 2.0 (primary); add R1-CLI (s < 2.36) as secondary; correct the approved §1 wording ("on the benchmark, equivalently") | 2026-09-30 | author |
+| D6 | **Freeze the E1 protocol (gate G-E1):** approved. Tag `e1-protocol-v1` → `970c54f` | 2026-09-30 | author ("Approve freeze, D9 = git tag only. Start E1-09") |
+| D9 | External preregistration: **none; the git tag only** | 2026-09-30 | author |
 | D11 | E1-08 findings: **ISSUE-10 = (b).** The primary reading and ED-2 are reworded, and a secondary matched-operating-point comparison R2m − R3m is added (m = 11; thresholds from v0.2's 159 in-scope queries only). **ISSUE-09 = (a):** P2's out-of-scope status is stated as assumed. **C-1 is approved.** **E1-07c is added.** | 2026-09-30 | author ("ISSUE-10 = b, ISSUE-09 = a, approve C-1, add E1-07c") |
 | D10 | **(a)**: one pre-specified primary comparison, R2 − R3 on P1, with a paired cluster-bootstrap 95% interval (B = 10,000, seed 42). P2's three pairs are secondary (exact McNemar, Holm over 3); all else is descriptive. §6 is approved as drafted. | 2026-09-30 | author |
 | — | ISSUE-08: **add E1-07b** (P1). `e1_analyze.js` is written and tested on synthetic data before the freeze, frozen at E1-09, and run unchanged at E1-13. E1-08 now depends on E1-07b. | 2026-09-30 | author |
@@ -809,7 +856,8 @@ Recorded by VERIFY-01 on 2026-09-30.
 
 ## Deviations (E1)
 
-*(none; E1 protocol not yet frozen)*
+*(none.)* The protocol was frozen at `e1-protocol-v1` (`970c54f`) on 2026-09-30. Any change after
+that is logged here as DEV-E1-01, … (protocol §6.9).
 
 ## Next
 
@@ -822,12 +870,14 @@ Recorded by VERIFY-01 on 2026-09-30.
   - **The author decided (D11):** ISSUE-10 = (b), ISSUE-09 = (a), C-1 approved, and E1-07c added.
     The protocol text is updated accordingly.
   - E1-08 stays open until E1-07c is done and items 5 and 7 are re-checked.
-- **E1-07c and E1-08 are done.**
-- **Next: E1-09, the freeze (gate G-E1).** It needs the author's explicit approval (D6).
-  - Tag `e1-protocol-v1` on the commit that contains the protocol, the `e1/` documents and both
-    scripts.
-  - Push the branch and the tag, and record the hash.
-  - D9 (optional external preregistration) is to be decided.
+- **Phase 2 is complete.** The E1 protocol was frozen at `e1-protocol-v1` (`970c54f`) on
+  2026-09-30.
+- **Recommended Claude task:** E1-10 (P0), preparing the data under the frozen rules.
+  - Build `research/results/e1_clinc150_v1/data/` from the **committed** CLINC150 copy. D5's
+    download is already done and committed at `6bba840`; its hashes are checked against
+    `PROVENANCE.md`.
+  - Apply Rule A (0 exclusions), attach intent, domain and subgroup, and reconcile the counts.
+  - **No scoring.**
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 

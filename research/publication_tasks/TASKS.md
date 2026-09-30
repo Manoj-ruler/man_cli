@@ -653,9 +653,9 @@ v0.2 thresholds frozen?
 | D3 | Exclusion rules for CLINC classes with plausible shell answers | E1-03 | Decide after E1-03's written list |
 | D4 | Which CLINC150 variant and split(s) | E1-02 | Decide after E1-01's facts |
 | D5 | Permission to download the CLINC150 file | E1-01 / E1-10 | Decide once the file, source and size are stated |
-| D6 | Protocol freeze approval (gate G-E1) | E1-09 | — |
+| D6 | Protocol freeze approval (gate G-E1) | E1-09 | **Approved 2026-09-30.** Tag `e1-protocol-v1` → `970c54f` |
 | D7 | E1 uses the frozen **v0.2** thresholds even if the final paper reports v0.2.1 | E1-02 | Yes: v0.2 is frozen and pre-annotation; state this in the protocol |
 | D8 | Each paper edit's text (Phase 1 and Phase 4) | per task | — |
-| D9 | External preregistration (e.g. OSF), beyond the git tag | E1-09 | Optional; a git tag is sufficient for SRW |
+| D9 | External preregistration (e.g. OSF), beyond the git tag | E1-09 | **Decided 2026-09-30: git tag only** |
 | D11 | E1-08 review findings | E1-08 | **Decided 2026-09-30:** ISSUE-10 = (b), a secondary matched-operating-point comparison (m = 11) plus reworded readings; ISSUE-09 = (a), P2 assumed out of scope, stated as a limitation; C-1 approved; E1-07c added |
 | D10 | E1's primary comparison and multiplicity | E1-07 | **Decided (a), 2026-09-30:** one primary comparison, R2 − R3 on P1, with a paired cluster-bootstrap interval. P2's pairs are secondary (exact McNemar, Holm over 3); everything else is descriptive. |

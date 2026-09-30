@@ -1,25 +1,35 @@
 # Current task
 
-**Last completed:** E1-08 (2026-09-30). The protocol review passed all 7 checklist items, after
-decisions D11 and E1-07c. Text fixes T-1 to T-8 are applied. See `e1/E1_PROTOCOL_REVIEW.md` §7.
+**Last completed:** E1-09 (2026-09-30). **The E1 protocol is FROZEN** at the annotated tag
+`e1-protocol-v1`, which points to `970c54f` and is pushed.
+
+- 8 files are frozen; their SHA-256 values are in `PROGRESS.md` and in the tag message.
+- **Any change to them is now a numbered deviation** needing the author's approval (§6.9).
+- **The authoritative "unchanged" check:** `git diff --exit-code e1-protocol-v1 --
+  research/publication_tasks/e1 research/experiments/e1_score_queries.js
+  research/experiments/e1_analyze.js`.
 
 **Author action still open:** PAPER-07, the mentorship submission, by Nov 6.
 
-**Next: E1-09, freeze the protocol (gate G-E1).** Status: NOT STARTED. **It needs the author's
-explicit approval (D6)**, for example "Approve freeze, D9 = git tag only. Start E1-09".
+**Next (recommended): E1-10, prepare the data under the frozen rules (Phase 3).**
+Status: NOT STARTED. It waits for "Start E1-10".
 
+- **Priority:** P0. **Type:** experiment (data preparation, with no scoring).
+- **Depends on:** E1-09 (done) and D5. The CLINC150 files were already downloaded and committed at
+  `6bba840`, so **nothing new is downloaded**.
 - **Steps:**
-  1. Confirm the working tree is clean, and that the commit to be tagged contains:
-     - `E1_PROTOCOL.md`, `E1_EXCLUSIONS.md`, `E1_THRESHOLDS.md`, `E1_SCORING_DESIGN.md` and
-       `E1_PROTOCOL_REVIEW.md`;
-     - `research/experiments/e1_score_queries.js` and `research/experiments/e1_analyze.js`.
-  2. Record the SHA-256 of the protocol and of both scripts. Mark the protocol status **FROZEN**.
-  3. Create the annotated git tag `e1-protocol-v1`, and push the branch and the tag.
-  4. Record the commit hash and the date in `PROGRESS.md`.
+  1. Verify `data_full.json` and `domains.json` against the SHA-256 values in
+     `research/data_external/clinc150/PROVENANCE.md`.
+  2. Build `research/results/e1_clinc150_v1/data/` in the frozen §6.7 format:
+     - `p1_queries.json`: `{id: "test:<i>", text, intent, domain, subgroup}`;
+     - `p2_queries.json`: `{id: "oos_test:<i>", text}`.
+
+     The text is taken unchanged.
+  3. Apply Rule A (0 exclusions) and the subgroup labels, exactly as frozen.
+  4. Write `DATA_PROVENANCE.md`: source hashes, and counts per intent, domain, subgroup and in total,
+     reconciled against the source counts.
 - **Acceptance criteria:**
-  - The tag exists on the remote (`git ls-remote --tags origin e1-protocol-v1`).
+  - The counts equal the source counts minus the declared exclusions (4,500 and 1,000).
   - The hashes are recorded.
-  - No E1 result exists before this commit (`git log -- research/results/e1_clinc150_v1` is
-    empty).
-- **D9:** external preregistration (for example, OSF) is optional. The recommendation is the git
-  tag only, which is sufficient for the SRW.
+  - Nothing is excluded outside the frozen rules.
+  - **No scoring.**
