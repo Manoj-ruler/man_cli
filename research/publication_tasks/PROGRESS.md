@@ -5,7 +5,7 @@
 | Phase | Tasks | Done | Blocked |
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
-| 1 Contribution | PAPER-01 to 08, TRACE-01 | 4 | 0 |
+| 1 Contribution | PAPER-01 to 08, TRACE-01 | 5 | 0 |
 | 2 E1 protocol | E1-01 to 09 | 0 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
@@ -248,6 +248,50 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **Note for later:** the abstract has 1 word of headroom again. The label-study drafter's abstract
   sentence (`draft_label_study_update.js`) was measured on the old abstract, so re-run it after the
   study; it reports the word count.
+- **Committed:** in `acfe3a9`.
+
+### PAPER-05: Limitations and threats-to-validity checklist (DONE 2026-09-30)
+
+**Checklist.** Line numbers refer to `content.tex` before the edit.
+
+| # | Threat | Status before | Where stated | Action |
+|---|---|---|---|---|
+| 1 | OOD screening bias | present | Limitations l. 395; abstract l. 20 | none |
+| 2 | Detector features chosen on the full data | present | Limitations ll. 396–397 | none |
+| 3 | Repository corpus vs released corpus | present | Limitations ll. 398–399; §1 ll. 42–44; §3; Ethics | none |
+| 4 | The author audits their own tool | partial: the fact is in §1 l. 41, but not named as a threat | — | **added** a sentence to the benchmark bullet |
+| 5 | Exploratory status | present | Limitations ll. 390–393; abstract | none |
+| 6 | POSIX-only gold answers | present | Limitations ll. 387–389 | none |
+| 7 | Exact-match scoring | present | Limitations l. 400; functional-check limits l. 403 | none |
+| 8 | No LLM baseline, and why | partial: the absence is stated (l. 401; §2 ll. 76–77), not the reason | — | **added** the reason to the Scope bullet |
+| 9 | ISSUE-04: "7--8 discordant queries" | inaccurate: it holds only against BM25 | l. 392 | **reworded**, with the trace updated |
+
+- **Author's decisions:** "approve all". Item 8 was then held, because the approved "natural-language-to-**shell**" was broader than §3's "natural-language-to-**Bash**" and possibly false (see ISSUE-05). The author chose option **(a)**: match §3.
+- **What changed:**
+  - `content.tex`, Limitations only (diff hunks at 389–391, 394 and 403–404).
+  - `trace_claims.js`: the ISSUE-04 entry now registers 7, 8, **12 and 17**. The last two are
+    computed as `a_only_correct + b_only_correct` from `phase1_t1…json :: comparisons.dense_to_hybrid`.
+  - The regenerated `CLAIMS_TRACE.md`.
+  - The rebuilt PDFs.
+- **The applied text:**
+  - Item 4: "The tool, its corpus and the benchmark were built by the same people, so queries may
+    follow the corpus's phrasing more closely than users' would; we exclude verbatim copies of corpus
+    intents, but milder overlap may remain."
+  - Item 8: "No generative system or user study is evaluated, since our question is the shipped
+    retriever's confidence, and public natural-language-to-Bash benchmarks target Linux rather than
+    this Windows corpus."
+  - Item 9: "Accuracy tests rest on 7--8 discordant queries against BM25 and 12--17 against dense."
+- **Acceptance criteria:**
+  1. The checklist above lists every threat with its line, or marks it partial or inaccurate:
+     **pass**.
+  2. Only the partial and inaccurate items got edits, and ISSUE-04 is resolved: **pass**.
+  3. Trace **186 snippets, 501 numbers, 0 problems**; the coverage check counts Limitations at 20
+     numerals, 0 unregistered. Build exit 0; the body ends on **page 7** in both PDFs; 0 overfull
+     boxes; 0 undefined references: **pass**.
+  4. The author approved the text: **pass**.
+  - The abstract is unchanged: 199 words.
+- **Rendering:** the camera-ready PDF text contains all three sentences.
+- **Result:** ISSUE-04 resolved; ISSUE-05 recorded.
 
 ## Decisions
 
@@ -264,7 +308,8 @@ Recorded by VERIFY-01 on 2026-09-30.
 
 | ID | Found in | Issue | Evidence | Blocks? | Proposed task |
 |---|---|---|---|---|---|
-| ISSUE-04 | TRACE-01 | Limitations says "Accuracy tests rest on 7--8 discordant queries". That is true for **hybrid vs BM25** (0+7 on v0.1, 1+7 on v0.2) but **not** for hybrid vs dense, which rests on 3+9 = 12 (v0.1) and 3+14 = 17 (v0.2), per freeze §4. The sentence generalises. | `phase1_t1_controls_excluded.json` comparisons; freeze §4 table | No: it concerns the wording only, and the registered values are correct for hybrid vs BM25 | Fold into **PAPER-05** (the Limitations checklist), for example "Accuracy tests against BM25 rest on 7–8 discordant queries (against dense, 12–17)". Once reworded, the trace entry must be updated. |
+| ISSUE-05 | PAPER-05 | Possible related-work gap. A web search during Stage 4.5 (2026-09-29, the D1 originality check) returned an arXiv paper titled "Execution-Based Evaluation of Natural Language to Bash and PowerShell for Incident Remediation" (arXiv 2405.06807). It is **unverified**: I have not read or checked it, and the paper does not cite it. If it is real and relevant, it is a public NL-to-**PowerShell** benchmark, which a reviewer may expect in §2 given the tool's Windows corpus. It does **not** contradict §3's or the Limitations' "natural-language-to-**Bash** benchmarks target Linux". | the Stage 4.5 web-search result list, 2026-09-29 (in the session record) | No: the current wording is accurate. It is a completeness risk. | **LIT-01 (P2):** verify arXiv 2405.06807 against its primary record (authors, venue, content). If it holds, decide with the author whether to cite it in §2, and whether its PowerShell data could serve any purpose. That would be a new dataset, which needs approval under the plan's rules. Run it before FINAL-03. |
+| ISSUE-04 (RESOLVED by PAPER-05, 2026-09-30) | TRACE-01 | Limitations says "Accuracy tests rest on 7--8 discordant queries". That is true for **hybrid vs BM25** (0+7 on v0.1, 1+7 on v0.2) but **not** for hybrid vs dense, which rests on 3+9 = 12 (v0.1) and 3+14 = 17 (v0.2), per freeze §4. The sentence generalises. | `phase1_t1_controls_excluded.json` comparisons; freeze §4 table | No: it concerns the wording only, and the registered values are correct for hybrid vs BM25 | Fold into **PAPER-05** (the Limitations checklist), for example "Accuracy tests against BM25 rest on 7–8 discordant queries (against dense, 12–17)". Once reworded, the trace entry must be updated. |
 | ISSUE-01 (RESOLVED by TRACE-01, 2026-09-30; had been escalated to P0 by PAPER-02) | VERIFY-02 | The claim trace does not cover the **Conclusion**. Its stated coverage is "Abstract, §1–§5, Tables 1–3, Appendix A, Appendix B". The Conclusion's 9 numbers (46, 34, 50, 12, 9, 15, 20, 11, 134) are unregistered, and so are most Limitations numbers (only the POSIX counts 3 and 4 are). All 9 Conclusion numbers were checked by hand against `review_r1_e_ood_operating_points.json` today and are **correct**. | `paper/CLAIMS_TRACE.md` header; no "Conclusion" location in the trace; grep of `trace_claims.js` | No. It is a process gap: a future edit could drift unnoticed. It matters for FINAL-01. | **TRACE-01 (P1, code):** register the Conclusion, Limitations and Ethics numbers in `trace_claims.js` and extend its coverage line. Do it before PAPER-06, so that the Phase 1 edits are checked. Needs approval to be added to the backlog. |
 | ISSUE-02 | VERIFY-02 | "Wrong answers average 86% confidence" (Abstract; Contribution 1) is **v0.1 only**; the sentence gives no version. On v0.2 the value is 79.50. | Trace entry "Abstract; §1 C1 = 86" (v0.1 source); a new computation from `results/v0.2/reproduction-results.json` | No, but it is an accuracy-of-wording risk a reviewer could catch | **PAPER-08 (P1, paper):** add the version to the 86% in the Abstract and in Contribution 1, or give both values. The abstract has **1 word** of headroom (VERIFY-01), so the fix must trim elsewhere. If 79.50 is quoted, it must be registered in the trace. Could be folded into PAPER-02 (Contribution 1) plus an abstract edit. Needs approval. |
 | ISSUE-03 | VERIFY-02 | The abstract's "Most out-of-scope requests are everyday" rests on **AI-assigned, unchecked** kind labels (34/50). Body §5 says so; the abstract does not. | Freeze §6 ("Kind labels were assigned by an AI assistant and are unchecked"); abstract line 20 | No | **P2.** Add it to the PAPER-05 limitations checklist, or rely on the body disclosure given the abstract's word budget. It is the author's call. |
@@ -275,10 +320,11 @@ Recorded by VERIFY-01 on 2026-09-30.
 
 ## Next
 
-- **Recommended:** PAPER-05 (P1): the Limitations and threats checklist, including ISSUE-04 (the
-  "7–8 discordant queries" wording).
-- **Then:** PAPER-04 (P1), PAPER-01 (P1), and the PAPER-06 gate.
+- **Recommended:** PAPER-04 (P1): make the attribution result ("three failures, three remedies; a
+  better retriever is not the out-of-scope fix") the lead of the Introduction's last paragraph and the
+  Conclusion's first sentences.
+- **Then:** PAPER-01 (P1), and the PAPER-06 gate (the mentorship snapshot).
 - **E1-01 and E1-04** are unblocked in parallel.
-- **No pending decisions.**
+- **Proposed:** LIT-01 (P2, ISSUE-05); it needs approval to be added to `TASKS.md`.
 
 Waiting for the author's instruction.

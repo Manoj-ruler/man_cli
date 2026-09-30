@@ -386,10 +386,12 @@ safety set; and study whether calibrated confidence and risk prompts change what
   commands outside the corpus and one an acceptable command. Queries were written by the authors and an AI agent,
   not collected from users, so calibration and out-of-scope rates depend on this mix. A few accepted commands are
   POSIX-only and would not run in PowerShell; the shipped tool is credited with 3 such answers on v0.1 and 4 on v0.2
-  (e.g., \texttt{sudo reboot} for the bare query ``system''), so its accuracy is slightly overstated.
+  (e.g., \texttt{sudo reboot} for the bare query ``system''), so its accuracy is slightly overstated. The tool, its
+  corpus and the benchmark were built by the same people, so queries may follow the corpus's phrasing more closely
+  than users' would; we exclude verbatim copies of corpus intents, but milder overlap may remain.
   \item \textbf{Exploratory statistics.} Every analysis was specified after results were seen, including the Holm
   family, the controls exclusion, the equal-false-rejection comparison (whose thresholds are chosen in-sample) and
-  the sensitivity subsets. Accuracy tests rest on 7--8 discordant queries. Headline results use one fold partition
+  the sensitivity subsets. Accuracy tests rest on 7--8 discordant queries against BM25 and 12--17 against dense. Headline results use one fold partition
   (seed 42); Appendix~\ref{app:secondary} repeats every fold-dependent step on 20 partitions, as point estimates.
   \item \textbf{Out-of-scope evidence.} Only 10 out-of-scope queries are terminal tasks outside the corpus; the kind
   labels are AI-assigned; the added queries were checked with raw retrieval scores, which favors the shipped score;
@@ -398,7 +400,8 @@ safety set; and study whether calibrated confidence and risk prompts change what
   \item \textbf{Scope.} One tool, evaluated with its repository corpus rather than the smaller released one
   (\S\ref{sec:system}), one platform (Windows; results depend on the platform-filtered corpus), 279 commands,
   one small sentence encoder and one fusion rule, exact-match scoring against gold commands, and single-machine
-  latencies. No generative system, user study, or public benchmark is evaluated.
+  latencies. No generative system or user study is evaluated, since our question is the shipped retriever's
+  confidence, and public natural-language-to-Bash benchmarks target Linux rather than this Windows corpus.
   \item \textbf{Safety.} The risk classifier is scored against the benchmark's own labels, two of which are
   inconsistent, and misses at least one destructive command; functional evaluation covers 15 queries and treats exit
   code 0 as success.
