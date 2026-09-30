@@ -1,47 +1,40 @@
 # Current task
 
-**Last completed:** TRACE-01 (2026-09-30). The claim trace now covers the Conclusion, Limitations and
-Ethics, and has an automatic numeral-coverage check: 185 snippets, 498 numbers, 0 problems.
+**Last completed:** PAPER-03 (2026-09-30), the §2 novelty sentence aligned with the contributions, and
+the literature search dated in the Limitations.
 
-**Next (recommended): PAPER-03: novelty wording bounded by the literature search.** Status: NOT
-STARTED. It waits for the author to say "Start PAPER-03".
+**Next (recommended): PAPER-08: give the abstract's "86%" its version.** Status: NOT STARTED. It
+waits for the author to say "Start PAPER-08".
 
-- **Priority:** P0: it removes an overclaim risk. **Type:** paper. **Depends on:** PAPER-02 (done).
-- **Files:**
-  - `research/paper/acl_latex/content.tex`: the Introduction, §2 and the Limitations "Literature"
-    bullet (lines ~404–405);
-  - `research/paper/T6_LITERATURE_VERIFICATION.md`;
-  - `research/paper/PHASE14_LITERATURE_RECHECK.md`.
+- **Priority:** P1. **Type:** paper. **Depends on:** VERIFY-02 and PAPER-02 (both done).
+- **Why next:**
+  - the abstract is the most-read text;
+  - "wrong answers average 86% confidence" is true only for v0.1 (v0.2: 79.5%);
+  - Contribution 1 already says "(v0.1)", so the abstract is now inconsistent with it.
+- **Files:** `research/paper/acl_latex/content.tex`, the Abstract only (lines 10–24).
 
 ## Steps
 
-1. Search `content.tex` for "first", "novel", "unique", "only", "no prior", "to our knowledge",
-   "new". List every hit with its line and context.
-2. Classify each hit:
-   - a novelty claim;
-   - an unrelated use (for example "only 10 queries");
-   - already qualified.
-3. For each novelty claim, draft a replacement that is limited by the search (it points to the
-   documented search in §2 and the Limitations "Literature" bullet), or remove it. Never write
-   "first".
-4. **Show the drafts to the author; edit only after approval.**
-5. Apply the edits, then run the trace (0 problems, including the coverage check) and the build
-   (body ≤ 8 pages).
+1. Draft an abstract edit that adds the version to the 86% ("86% on v0.1"), or gives both values
+   ("86% and 80%" or similar).
+2. The abstract is **199/200 words**, so the edit needs a compensating trim elsewhere in the abstract
+   that drops no claim. Show every changed phrase.
+3. Optionally, if the author decides to handle ISSUE-03 here, make the "everyday" claim say the kind
+   labels are AI-assigned, within the same word budget.
+4. If the v0.2 value is quoted, register it in `trace_claims.js`, and keep the existing snippet
+   "wrong answers average 86\% confidence" matching, or update that entry.
+5. **Show the draft to the author; edit only after approval.**
+6. Apply, then run the trace (0 problems) and the build, and count the abstract words.
 
 ## Acceptance criteria
 
-- [ ] The paper has no unqualified "first", "novel" or "no prior work". Every remaining hit is
-      classified as an unrelated use or as qualified.
-- [ ] Every gap claim points to the documented search.
-- [ ] Trace: 0 problems. Build: body ≤ 8 pages, 0 overfull boxes.
-- [ ] The abstract stays within 200 words, if it is touched.
+- [ ] The abstract states which version the 86% refers to.
+- [ ] Abstract ≤ **200** words (count recorded, using the same rule as before).
+- [ ] Trace **0 problems**, including the coverage check. The build passes with the body ≤ 8 pages
+      and 0 overfull boxes.
+- [ ] Only the abstract, the rebuilt PDFs and any needed trace entry changed.
 - [ ] The author has approved the text.
 
-## Must not change
+## Pending decision
 
-Anything outside the approved passages, any result, the freeze or the benchmarks.
-
-## Pending decisions
-
-- ISSUE-03 handling.
-- Whether to fold ISSUE-04 into PAPER-05.
+ISSUE-03: handle it here, or in PAPER-05, or not at all.

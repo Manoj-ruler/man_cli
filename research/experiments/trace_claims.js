@@ -323,6 +323,9 @@ add('Fig. accuracy caption', '$n=135$ and $159$, including the 25 canonical cont
   add('Limitations', 'repeats every fold-dependent step on 20 partitions', [['20', X(R('seed_repeat/seed_repeat_cv.json').seeds.length, 'results/seed_repeat/seed_repeat_cv.json :: seeds (length)')]]);
   add('Limitations', 'Only 10 out-of-scope queries are terminal tasks outside the corpus', [['10', X(bk.near_ood.n + bk.unsupported_tool_ood.n, `computed: near_ood.n + unsupported_tool_ood.n, results/${e} :: versions.v0.2.rejections_by_kind (AI-assigned kinds)`)]]);
   add('Limitations', 'results depend on the platform-filtered corpus), 279 commands', [['279', X(winVisible.length, 'cli/data/commands.json, records visible on win32')]]);
+  { const bib = fs.readFileSync(rel('research/paper/acl_latex/references.bib'), 'utf8'), rc = fs.readFileSync(rel('research/paper/PHASE14_LITERATURE_RECHECK.md'), 'utf8');
+    const last = [...bib.matchAll(/verified (\d{4})-(\d{2})-\d{2}/g), ...rc.matchAll(/re-check \((\d{4})-(\d{2})-\d{2}\)/g)].map(m => m[1] + '-' + m[2]).sort().pop();
+    add('Limitations', 'last updated in September 2026', [['2026', X(last === '2026-09' ? 2026 : NaN, `latest literature-search date ${last}: references.bib "verified 2026-09-28" (fresh search section) and PHASE14_LITERATURE_RECHECK.md (2026-09-14); month must be September`)]], 'PAPER-03 (b)'); }
   add('Limitations', 'functional evaluation covers 15 queries and treats exit code 0 as success', [['15', F('functional/functional-eval-results.json', 'summary.n_evaluated')], ['0', X(/gold_functional_success: goldResult\.exitCode === (\d+)/.test(fs.readFileSync(rel('research/experiments/run_functional_eval.js'), 'utf8')) ? +RegExp.$1 : NaN, 'research/experiments/run_functional_eval.js: success = exitCode === 0')]]);
 }
 

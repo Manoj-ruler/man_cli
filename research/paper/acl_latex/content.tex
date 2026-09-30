@@ -84,9 +84,10 @@ out-of-scope queries \citep{larson-etal-2019-evaluation}; the closest methods ar
 abstention under domain shift \citep{kamath-etal-2020-selective} and confidence estimation for mapping language to
 programs \citep{dong-etal-2018-confidence}. In text-to-SQL, selective classifiers mostly catch irrelevant questions
 rather than wrong queries \citep{somov2025texttosql}, which our out-of-scope breakdown echoes (\S\ref{sec:ood}).
-Within our targeted search (Limitations), natural-language-to-shell retrieval work has not evaluated the calibration of a
-deployed tool's confidence, tie-aware selective prediction, or out-of-scope rejection with its false-rejection
-cost; to our knowledge, that combination is what is new here, not any single method.
+Within our targeted search (Limitations), natural-language-to-shell retrieval work has not audited the confidence
+a released tool shows its users, nor separated what recalibration, a tuned rejection threshold and a hybrid
+retriever each fix, with out-of-scope rejection weighed against its false-rejection cost; to our knowledge, that
+combination is what is new here, not any single method.
 
 \section{System and Benchmark}
 \label{sec:system}
@@ -402,7 +403,8 @@ safety set; and study whether calibrated confidence and risk prompts change what
   inconsistent, and misses at least one destructive command; functional evaluation covers 15 queries and treats exit
   code 0 as success.
   \item \textbf{Literature.} Our search was targeted (natural-language-to-shell generation and retrieval, calibration,
-  selective prediction, out-of-scope detection); the novelty claim is limited to the combination evaluated here.
+  selective prediction, out-of-scope detection), last updated in September 2026; the novelty claim is limited to the
+  combination evaluated here.
 \end{itemize}
 
 \section*{Ethical Considerations}

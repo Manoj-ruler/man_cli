@@ -180,7 +180,11 @@ author's approval of the proposed text before the edit.
   5. the exploratory status;
   6. POSIX-only gold answers;
   7. exact-match scoring;
-  8. that there is no LLM baseline, and why.
+  8. that there is no LLM baseline, and why;
+  9. *(added 2026-09-30, ISSUE-04)* the sentence "Accuracy tests rest on 7--8 discordant queries",
+     which holds only for hybrid vs BM25. Hybrid vs dense rests on 12 (v0.1) and 17 (v0.2). If it is
+     reworded, update its `trace_claims.js` entry ("Limitations", "Accuracy tests rest on 7--8
+     discordant queries") so the coverage check still passes.
 - **Acceptance:**
   - A checklist in `PROGRESS.md` shows, for each threat, the line where the paper states it.
   - Only missing threats are added.

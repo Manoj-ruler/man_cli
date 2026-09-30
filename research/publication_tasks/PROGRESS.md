@@ -5,7 +5,7 @@
 | Phase | Tasks | Done | Blocked |
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
-| 1 Contribution | PAPER-01 to 08, TRACE-01 | 2 | 0 |
+| 1 Contribution | PAPER-01 to 08, TRACE-01 | 3 | 0 |
 | 2 E1 protocol | E1-01 to 09 | 0 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
@@ -165,9 +165,52 @@ Recorded by VERIFY-01 on 2026-09-30.
   347–361) and **§7 Conclusion**. I checked Discussion: it contains **no numerals**, so the paper's
   "every reported number" claim is not affected. I then added Discussion to the automatic check and
   corrected the line before completing the task.
+- **Committed:** in `d1a90f6`.
 - **Result for ISSUE-01:** resolved. Contribution 3's "a trace from every reported number to its
   result file" is now backed by the trace for every numeral in the body, Limitations and Ethics.
   Number words ("Two items") remain unchecked, as they always were; the header states this.
+
+### PAPER-03: Novelty wording bounded by the literature search (DONE 2026-09-30)
+
+- **Search.** I searched `content.tex` for first, novel, unique, only, no prior, "to our knowledge",
+  new, gap, unexplored, has not been, never been, and similar words.
+  - There were **26 hits outside comments.** Only **2** were novelty claims, and both were already
+    qualified: §2, lines 87–89, and the Limitations "Literature" bullet. The other 24 are ordinary
+    uses ("only 10 queries", "the new queries", "novelty criteria" for the query drafts, "misses the
+    first two", …).
+  - The paper contained no "first" claim, no "no prior work" and no unqualified "novel" **before**
+    the edit.
+  - The one inconsistency: the §2 sentence counted "tie-aware selective prediction" as new, while
+    PAPER-02 now calls these measures established.
+- **Author's decision:** "A with b".
+  - **A:** the §2 sentence now places the novelty in the audit of the confidence a released tool
+    shows and in the attribution of three remedies (recalibration, a tuned threshold, a hybrid). It
+    keeps "within our targeted search", "to our knowledge" and "not any single method", and the
+    narrow scope ("retrieval work"). It grew from 42 to 55 words.
+  - **(b):** the Limitations "Literature" bullet now says "…out-of-scope detection), last updated in
+    September 2026;".
+- **What changed:**
+  - `content.tex`: diff hunks at §2 (lines 87–90) and the Limitations bullet (lines 406–407).
+  - The rebuilt PDFs.
+  - `trace_claims.js`: one new registration, "last updated in September 2026". The year is
+    recomputed from the latest documented search date: `references.bib` "verified 2026-09-28"
+    (fresh-search section) and `PHASE14_LITERATURE_RECHECK.md` (2026-09-14). The entry fails
+    unless the latest date is in September 2026.
+  - The regenerated `CLAIMS_TRACE.md`.
+- **Acceptance criteria:**
+  1. No unqualified "first", "novel" or "no prior work". The remaining hits (lines 124, 130, 383,
+     406) are ordinary uses or the qualified Limitations sentence: **pass**.
+  2. Every gap claim points to the documented search: §2 says "Within our targeted search
+     (Limitations)", and the Limitations bullet names the search scope and now its date: **pass**.
+  3. Trace **186 snippets, 499 numbers, 0 problems**. The coverage check counts Limitations at 18
+     numerals, 0 unregistered. Build exit 0; the body ends on **page 7** in both PDFs; 0 overfull
+     boxes; 0 undefined references: **pass**.
+  4. Abstract not touched, still 199 words: **pass**.
+  5. The author approved the text: **pass**.
+- **Rendering.**
+  - In the camera-ready PDF, the §2 sentence and the dated Limitations bullet appear as written.
+  - In the review PDF, the date is present but hyphenated ("de- tection") and interleaved with the
+    reference column in the text extraction. It is a layout artefact, not a content difference.
 
 ## Decisions
 
@@ -178,6 +221,7 @@ Recorded by VERIFY-01 on 2026-09-30.
 | — | TRACE-01 (P0) and PAPER-08 (P1) are added to `TASKS.md` | 2026-09-30 | author |
 | — | Commit now: the task files, the PAPER-02 edit and the rebuilt PDFs | 2026-09-30 | author |
 | — | ISSUE-03 handling: not yet decided | — | — |
+| — | ISSUE-04 is folded into PAPER-05 (added as checklist item 9 in `TASKS.md`) | 2026-09-30 | author |
 
 ## Issues
 
@@ -194,12 +238,12 @@ Recorded by VERIFY-01 on 2026-09-30.
 
 ## Next
 
-- **Recommended:** PAPER-03 (novelty wording bounded by the documented literature search; P0).
-- **Then:** PAPER-08 (P1: the version for the abstract's 86%), PAPER-05 (P1, now also carrying
-  ISSUE-04), PAPER-01 (P1) and PAPER-04 (P1).
+- **Recommended:** PAPER-08 (P1: add the version to the abstract's 86%; the abstract has 1 word of
+  headroom).
+- **Then:** PAPER-05 (P1: the Limitations checklist, including ISSUE-04 and possibly ISSUE-03),
+  PAPER-04 (P1) and PAPER-01 (P1). After those comes the PAPER-06 gate.
 - **E1-01 and E1-04** are unblocked in parallel.
-- **Pending decisions:**
-  - how to handle ISSUE-03;
-  - whether to fold ISSUE-04 into PAPER-05.
+- **Pending decision:** ISSUE-03 handling. It could be decided within PAPER-08, since both touch the
+  abstract.
 
 Waiting for the author's instruction.
