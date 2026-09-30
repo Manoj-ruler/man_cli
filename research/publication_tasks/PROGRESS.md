@@ -7,7 +7,7 @@
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
-| 3 E1 execution | E1-10 to 14 | 4 | 0 |
+| 3 E1 execution | E1-10 to 14 | 5 (**complete**) | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
 
@@ -971,6 +971,36 @@ Recorded by VERIFY-01 on 2026-09-30.
   1. The summary JSON and MD contain every protocol metric, with its denominator and interval:
      **pass**. The matched-rule intervals and all §6.5 fields are in `summary.json`.
   2. The deviation log is present: **pass** (no deviations).
+- **Committed:** in `8bcc035`.
+
+### E1-14: results memo, with uncertainty and limitations (DONE 2026-09-30)
+
+- **Deliverable:** `research/publication_tasks/e1_run/E1_RESULTS_MEMO.md`. **Approved by the
+  author** ("approve memo").
+- **Every statement cites `summary.json`** by JSON path. The protocol results and the post-hoc
+  observations are labelled separately.
+- **Content:**
+  - the summary;
+  - answers to §2.3 Q1–Q3;
+  - the expected directions:
+    - ED-1: the predicted pattern was observed, which is consistent with screening but not proof;
+    - **ED-2: contradicted** (at equal v0.2 cost, the fused score rejects more);
+    - ED-3: the floor holds;
+    - **ED-4: contradicted** (S-clear is rejected more);
+    - ED-5: no direction was stated;
+  - the limits, including general-domain data, no false-rejection measurement, the P2
+    assumption, the 10 vs 11 cost tie, and screening vs population;
+  - implications for the paper, flagged for INTEG. The claims at `content.tex` lines 258 and 265
+    are weakened by the matched result;
+  - post-hoc hypotheses, labelled as untested;
+  - follow-ups, each needing approval; none is started.
+- **Corrected while drafting:**
+  - S-clear's lexical-null share **equals** its R1 rate (41.7%); the first draft said "at least";
+  - example words and phrasings that had not been checked against the data were removed.
+- **Acceptance criteria:**
+  1. Every statement cites the summary: **pass**.
+  2. The general-domain limitation is explicit (§4 point 1, §5): **pass**.
+  3. The author reviewed the memo: **pass**.
 
 ## Decisions
 
@@ -1034,11 +1064,12 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
 - **Phase 2 is complete.** The E1 protocol was frozen at `e1-protocol-v1` (`970c54f`) on
   2026-09-30.
 - **E1-10 to E1-13 are done.** The results are computed; see the E1-13 entry.
-- **Recommended Claude task:** E1-14 (P1), the results memo.
-  - It covers what the results do and do not support, measured against §2.3, §2.4 and the expected
-    directions ED-1 to ED-5.
-  - Every statement cites `summary.json`, and the general-domain limitation is explicit.
-  - **The author reviews it. There are no paper edits.**
+- **Phase 3 is complete.** E1-14's memo is approved.
+- **Recommended Claude task:** INTEG-01 (P0), deciding which claims E1 supports.
+  - Add the E1 rows to `CLAIM_EVIDENCE_MAP.md`, each citing `summary.json`.
+  - Mark the paper claims E1 supports, and the ones it weakens (`content.tex` lines 258 and 265).
+  - Propose wording options for the author's decision. **The paper is not edited in INTEG-01.**
+- **Then:** INTEG-02, the page budget and placement (the body is at 7 of 8 pages).
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 
