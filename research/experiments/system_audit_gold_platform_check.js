@@ -10,7 +10,8 @@
 const fs = require('fs'), path = require('path'), crypto = require('crypto');
 const ROOT = path.resolve(__dirname, '..', '..');
 const rel = p => path.join(ROOT, p);
-const sha = p => crypto.createHash('sha256').update(fs.readFileSync(rel(p))).digest('hex');
+// LF-normalized, like the benchmark manifests, so a CRLF checkout records the same hashes (REPRO-01)
+const sha = p => crypto.createHash('sha256').update(fs.readFileSync(rel(p), 'utf8').replace(/\r\n/g, '\n')).digest('hex');
 
 const POSIX_ONLY = /(^|[\s|;&(])(sudo|apt|apt-get|yum|dnf|brew|systemctl|systemd-resolve|chmod|chown|killall|grep|awk|sed|xargs|crontab|tmux|lsof|ifconfig|reboot)\b|\/etc\/|\/dev\//;
 const isPosix = c => POSIX_ONLY.test(c || '');

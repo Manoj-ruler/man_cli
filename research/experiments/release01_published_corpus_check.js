@@ -27,7 +27,10 @@ if (os.platform() !== 'win32') { console.error('ABORT: must run on win32'); proc
 const PUB = rel('research/release_check/npm-1.0.1/package');
 const repoSearch = require(rel('cli/search.js')).search;
 const pubSearch = require(path.join(PUB, 'search.js')).search;
-const sha = f => crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');
+const sha = f => crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');             // binary (the tarball)
+// text inputs: LF-normalized, like the benchmark manifests, so a CRLF checkout (core.autocrlf=true)
+// records the same hashes (found by the REPRO-01 clean-clone run, 2026-09-30)
+const textSha = f => crypto.createHash('sha256').update(fs.readFileSync(f, 'utf8').replace(/\r\n/g, '\n')).digest('hex');
 
 const checks = [];
 const guard = (label, got, want) => { const ok = JSON.stringify(got) === JSON.stringify(want); checks.push({ label, got, want, ok }); return ok; };
@@ -55,7 +58,7 @@ const VERS = {
 const inputs = {};
 const out = { versions: {} };
 for (const [v, P] of Object.entries(VERS)) {
-  [P.bench, P.review, P.repro].forEach(p => { inputs[p] = sha(rel(p)); });
+  [P.bench, P.review, P.repro].forEach(p => { inputs[p] = textSha(rel(p)); });
   const queries = JSON.parse(fs.readFileSync(rel(P.bench), 'utf8')).queries;
   const reviews = new Map(JSON.parse(fs.readFileSync(rel(P.review), 'utf8')).map(r => [r.id, r]));
   const repro = new Map(JSON.parse(fs.readFileSync(rel(P.repro), 'utf8')).map(r => [r.id, r]));

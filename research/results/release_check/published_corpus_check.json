@@ -68,9 +68,9 @@
   },
   "code_identity": "index.js, search.js, interactive.js, sync.js, test_filter.js and custom_snippets.json are identical after LF normalization; config.js, package.json and README.md are byte-identical (see research/release_check/RELEASE-01_result.md)",
   "input_sha256": {
-    "research/datasets/termassist_bench_v0.1_validated.json": "3fd73347196bddd34fa34127c4dbf9cc5b75af1a097a06890949d923dff1d5e7",
-    "research/datasets/review/human_review_results.json": "d82e1dfd8ba29921ac73b528a730e6ae10f0a7d329ac517144b57efa968d7313",
-    "research/results/baseline/reproduction-results.json": "3494724f2894c84330aff849d520d6c1a5c5b61c622a003be36b91e5514edddc",
+    "research/datasets/termassist_bench_v0.1_validated.json": "2a554d3c3c425192e0fa295f2dc2eae833f92a2ae77feaf0f3ef70996e8c02a0",
+    "research/datasets/review/human_review_results.json": "dda9361373a3f87276ed8c755c7d405541f2449077d2e343efa8e899311319a1",
+    "research/results/baseline/reproduction-results.json": "ce29b6a6ae647620aa38536b2ce31d5e252c7a63484e75acc01a55a454c7ddfa",
     "research/datasets/termassist_bench_v0.2_validated.json": "9a19406e69c51979ead2c466814d7f3a662c75d47754c37259aa5da1a71b63b8",
     "research/datasets/review/human_review_results_v0.2.json": "72de6cd2cf2ec0a590ff8ac23c6ffae7355eb145d73d7ccf21ded1374ecb13a8",
     "research/results/v0.2/reproduction-results.json": "81c96731814081618baf4b023f8ae35d77c09f8dc57cedc20a550dc330b840de"
@@ -958,5 +958,5 @@
       ]
     }
   },
-  "generated_at": "2026-09-29T16:51:50.597Z"
+  "generated_at": "2026-09-30T04:51:58.366Z"
 }

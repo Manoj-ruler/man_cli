@@ -23,7 +23,8 @@ const ROOT = path.resolve(__dirname, '..', '..');
 const args = process.argv.slice(2), flag = f => args.includes(f), val = f => (args.includes(f) ? args[args.indexOf(f) + 1] : null);
 const DRY = flag('--dry-run');
 const die = m => { console.error('ABORT: ' + m); process.exit(1); };
-const sha = f => crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');
+// LF-normalized (all inputs and outputs are text), so the manifest is the same in a CRLF checkout
+const sha = f => crypto.createHash('sha256').update(fs.readFileSync(f, 'utf8').replace(/\r\n/g, '\n')).digest('hex');
 const git = (a, cwd = ROOT) => execFileSync('git', a, { cwd, encoding: 'utf8' }).trim();
 const inside = (base, p) => { const r = path.relative(base, path.resolve(p)); return !r.startsWith('..') && !path.isAbsolute(r); };
 
