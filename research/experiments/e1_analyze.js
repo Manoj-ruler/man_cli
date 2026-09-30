@@ -10,6 +10,10 @@
 //                      [--expect-p1 4500 --expect-p2 1000 --expect-intents 150 --expect-per-intent 30]
 //                      [--synthetic]   (tests only: skips hashing the CLINC data files in the manifest)
 //
+// E1-07c (E1-08 review, ISSUE-10 = b and C-1): adds the secondary matched-operating-point rules R2m
+// and R3m, the reworded §6.4 readings, and "sensitivity (descriptive)" labels on the recomputed
+// R2 - R3 comparisons.
+//
 // Stages: `decisions` applies the §6.2 rules, runs the §6.8 logical checks and writes
 // decisions_p{1,2}.json, logical_checks.json and RUN_MANIFEST.json (E1-11); `summary` writes
 // summary.json and summary.md with every §6.3-§6.5 quantity (E1-13). Any failed logical check
@@ -34,6 +38,14 @@ const R3_MED = median5(R3_U); // 0.9219
 const RULES = ['R1', 'R1_CLI', 'R2', 'R3'];
 const PAIRS = [['R2', 'R3'], ['R3', 'R1'], ['R2', 'R1']]; // difference = rate(first) - rate(second)
 
+// Matched operating points (§6.4, ISSUE-10 = b; E1-07c): t_m = the (m+1)-th smallest score among
+// v0.2's 159 in-scope queries (ties counted), reject iff score < t_m. Recorded 2026-09-30 and
+// re-derived from the committed files on every run.
+const M_MATCH = 11;
+const MATCHED = { s4: 5.4377, fused4: 0.9179 };
+const MATCHED_RULES = ['R2m', 'R3m'];
+const MATCHED_PAIR = [['R2m', 'R3m']];
+
 function frozenInputs() {
   const problems = [];
   const e = rd('research/results/review_r1/review_r1_e_ood_operating_points.json').versions['v0.2'];
@@ -51,7 +63,37 @@ function frozenInputs() {
   const want = { all_50: [17, 46, 34], unscreened_15: [4, 12, 9], added_35: [13, 34, 25], false_rejections_of_134: [0, 20, 11] };
   for (const [k, w] of Object.entries(want)) if (JSON.stringify([v02[k].R1, v02[k].R2, v02[k].R3]) !== JSON.stringify(w)) problems.push(`v0.2 ${k} = ${[v02[k].R1, v02[k].R2, v02[k].R3]}, protocol says ${w}`);
   if (v02.false_rejections_of_134.n !== 134) problems.push(`v0.2 in-scope n = ${v02.false_rejections_of_134.n}, protocol says 134`);
-  return { problems, v02 };
+  const matched = deriveMatched();
+  matched.problems.forEach(p => problems.push(p));
+  // cross-check against the committed in-sample matched sweep (review_r1_e, detector_observed: at most 11)
+  const sweep = e.in_sample_matched_false_rejection.detector_observed;
+  if (matched.s4.ood_rejected_of_50_in_sample !== sweep.baseline_score.ood_rejected || matched.s4.in_scope_rejected_of_159 !== sweep.baseline_score.false_rejected) problems.push('matched s4 counts differ from the committed in-sample sweep');
+  if (matched.fused4.ood_rejected_of_50_in_sample !== sweep.detector_feature.ood_rejected || matched.fused4.in_scope_rejected_of_159 !== sweep.detector_feature.false_rejected) problems.push('matched fused4 counts differ from the committed in-sample sweep');
+  return { problems, v02, matched };
+}
+
+// Derives the matched thresholds from v0.2's in-scope queries ONLY (the OOD counts are in-sample
+// context, never used to set a threshold).
+function deriveMatched() {
+  const problems = [];
+  const feats = rd('research/results/v0.2/reliability_features.json').features;
+  const repro = new Map(rd('research/results/v0.2/reproduction-results.json').map(r => [r.id, r]));
+  const bench = new Map(rd('research/datasets/termassist_bench_v0.2_validated.json').queries.map(q => [q.id, q]));
+  if (!feats.every(f => f.is_ood === (repro.get(f.id).expected.classification === 'OOD'))) problems.push('v0.2 OOD labels disagree between reliability_features and reproduction-results');
+  const inScope = feats.filter(f => !f.is_ood), ood = feats.filter(f => f.is_ood);
+  if (inScope.length !== 159 || ood.length !== 50) problems.push(`v0.2 has ${inScope.length} in-scope and ${ood.length} OOD queries, protocol says 159 and 50`);
+  const out = { m: M_MATCH, n_in_scope: inScope.length, problems };
+  for (const [k, g] of Object.entries({ s4: f => repro.get(f.id).actual.score, fused4: f => f.top1_score })) {
+    const t = inScope.map(g).sort((a, b) => a - b)[M_MATCH];
+    if (t !== MATCHED[k]) problems.push(`matched threshold for ${k} derives to ${t}, recorded ${MATCHED[k]}`);
+    out[k] = {
+      t_m: t,
+      in_scope_rejected_of_159: inScope.filter(f => g(f) < t).length,
+      in_scope_rejected_of_134_without_controls: inScope.filter(f => bench.get(f.id).query_type !== 'canonical' && g(f) < t).length,
+      ood_rejected_of_50_in_sample: ood.filter(f => g(f) < t).length
+    };
+  }
+  return out;
 }
 
 // ---- §6.2 decision rules ----
@@ -63,7 +105,8 @@ function decide(row) {
     R1: row.s < 2.0,
     R1_CLI: row.confidence < 30 || row.command_shipped === null,
     R2: row.s4 < R2_MED, R3: row.fused4 < R3_MED,
-    R2_fold, R3_fold
+    R2_fold, R3_fold,
+    R2m: row.s4 < MATCHED.s4, R3m: row.fused4 < MATCHED.fused4
   };
 }
 
@@ -111,17 +154,17 @@ function holm(ps) { // Holm step-down adjusted p-values, returned in input order
 // Cluster bootstrap over the given clusters (arrays of row indices), resampling clusters with
 // replacement (B, mulberry32 seed 42). Returns percentile intervals for every rule's pooled rate
 // and every pair's paired difference, all from the same resamples.
-function clusterBootstrap(clusters, decs) {
+function clusterBootstrap(clusters, decs, rules = RULES, pairs = PAIRS) {
   const C = clusters.length;
-  const stats = clusters.map(idx => { const k = {}; RULES.forEach(R => { k[R] = idx.filter(i => decs[i][R]).length; }); return { n: idx.length, k }; });
+  const stats = clusters.map(idx => { const k = {}; rules.forEach(R => { k[R] = idx.filter(i => decs[i][R]).length; }); return { n: idx.length, k }; });
   const rng = mulberry32(SEED), vals = {};
-  const keys = [...RULES, ...PAIRS.map(([a, b]) => `${a}-${b}`)];
+  const keys = [...rules, ...pairs.map(([a, b]) => `${a}-${b}`)];
   keys.forEach(k => { vals[k] = []; });
   for (let b = 0; b < B; b++) {
-    let n = 0; const k = { R1: 0, R1_CLI: 0, R2: 0, R3: 0 };
-    for (let c = 0; c < C; c++) { const s = stats[Math.floor(rng() * C)]; n += s.n; RULES.forEach(R => { k[R] += s.k[R]; }); }
-    RULES.forEach(R => vals[R].push(k[R] / n));
-    PAIRS.forEach(([a, bb]) => vals[`${a}-${bb}`].push((k[a] - k[bb]) / n));
+    let n = 0; const k = Object.fromEntries(rules.map(R => [R, 0]));
+    for (let c = 0; c < C; c++) { const s = stats[Math.floor(rng() * C)]; n += s.n; rules.forEach(R => { k[R] += s.k[R]; }); }
+    rules.forEach(R => vals[R].push(k[R] / n));
+    pairs.forEach(([a, bb]) => vals[`${a}-${bb}`].push((k[a] - k[bb]) / n));
   }
   const out = {};
   keys.forEach(key => {
@@ -130,13 +173,26 @@ function clusterBootstrap(clusters, decs) {
   });
   return { B, seed: SEED, clusters: C, method: 'intent-cluster percentile bootstrap', ci: out };
 }
-function reading(ci) {
-  if (ci.degenerate) return 'degenerate: every bootstrap value identical; no reading beyond the point estimate';
-  if (ci.lo > 0) return 'interval entirely above 0: R2 lead holds on external data';
-  if (ci.hi < 0) return 'interval entirely below 0: the lead reverses';
-  return 'interval includes 0: no evidence of a difference';
+// Pre-stated readings (§6.4, as reworded in E1-08 under ISSUE-10).
+const DEGENERATE = 'degenerate: every bootstrap value identical; no reading beyond the point estimate';
+function reading(ci) { // primary: R2 - R3 at the v0.2 operating points
+  if (ci.degenerate) return DEGENERATE;
+  if (ci.lo > 0) return 'interval entirely above 0: R2 rejects more external out-of-scope requests than R3 at their v0.2 operating points; R2\'s operating point also has more v0.2 false rejections (20 vs 11 of 134), so this does not by itself show that R2 is the better rule';
+  if (ci.hi < 0) return 'interval entirely below 0: R3 rejects more external out-of-scope requests than R2, although R3\'s v0.2 operating point has fewer false rejections';
+  return 'interval includes 0: no evidence of a difference in external rejection at these operating points';
 }
-function ratesOf(idx, decs) { const o = {}; RULES.forEach(R => { o[R] = rate(idx.filter(i => decs[i][R]).length, idx.length); }); return o; }
+function matchedReading(ci) { // secondary: R2m - R3m at equal v0.2 cost
+  if (ci.degenerate) return DEGENERATE;
+  if (ci.lo > 0) return 'interval entirely above 0: at equal v0.2 cost, the shipped score rejects more external out-of-scope requests than the fused score';
+  if (ci.hi < 0) return 'interval entirely below 0: at equal v0.2 cost, the fused score rejects more';
+  return 'interval includes 0: no evidence of a difference at equal cost';
+}
+function position(ci) { // sensitivity recomputations (C-1): where the interval lies, with no reading
+  if (ci.degenerate) return 'degenerate';
+  return ci.lo > 0 ? 'above 0' : ci.hi < 0 ? 'below 0' : 'includes 0';
+}
+const SENSITIVITY = 'sensitivity (descriptive); not a primary result';
+function ratesOf(idx, decs, rules = RULES) { const o = {}; rules.forEach(R => { o[R] = rate(idx.filter(i => decs[i][R]).length, idx.length); }); return o; }
 function pairTable(idx, decs, a, b) {
   let both = 0, aOnly = 0, bOnly = 0, neither = 0;
   idx.forEach(i => { const x = decs[i][a], y = decs[i][b]; if (x && y) both++; else if (x) aOnly++; else if (y) bOnly++; else neither++; });
@@ -230,8 +286,24 @@ function analysePopulation(pop, rows, decs, clusterOf) {
     const oc = [...clusterOf.values()].map(idx => idx.filter(i => !rows[i].lexical_all_equal)).filter(c => c.length);
     if (oc.length) {
       const cb = clusterBootstrap(oc, decs);
-      out.lexical_null.overlap_subset.primary_comparison = { difference: out.lexical_null.overlap_subset.pairs[0].difference, ci95: { lo: cb.ci['R2-R3'].lo, hi: cb.ci['R2-R3'].hi }, degenerate: cb.ci['R2-R3'].degenerate, clusters: oc.length, reading: reading(cb.ci['R2-R3']) };
+      out.lexical_null.overlap_subset.primary_comparison = { label: SENSITIVITY, difference: out.lexical_null.overlap_subset.pairs[0].difference, ci95: { lo: cb.ci['R2-R3'].lo, hi: cb.ci['R2-R3'].hi }, degenerate: cb.ci['R2-R3'].degenerate, clusters: oc.length, interval_position: position(cb.ci['R2-R3']) };
     }
+  }
+
+  // §6.4 matched operating points (secondary; ISSUE-10 = b)
+  const mr = ratesOf(all, decs, MATCHED_RULES), mp = pairTable(all, decs, 'R2m', 'R3m');
+  out.matched_operating_point = {
+    label: 'secondary: matched v0.2 operating points (m = 11 in-scope rejections; thresholds from v0.2 in-scope queries only)',
+    thresholds: { R2m_s4: MATCHED.s4, R3m_fused4: MATCHED.fused4 },
+    rates: Object.fromEntries(MATCHED_RULES.map(R => [R, { ...mr[R], wilson95: (({ lo, hi }) => ({ lo, hi }))(wilson(mr[R].k, mr[R].n)) }])),
+    pair: mp
+  };
+  if (clusterOf) {
+    const cb = clusterBootstrap([...clusterOf.values()], decs, MATCHED_RULES, MATCHED_PAIR), ci = cb.ci['R2m-R3m'];
+    MATCHED_RULES.forEach(R => { out.matched_operating_point.rates[R].wilson95.label = 'ignores clustering; too narrow'; out.matched_operating_point.rates[R].cluster_bootstrap95 = { lo: cb.ci[R].lo, hi: cb.ci[R].hi, degenerate: cb.ci[R].degenerate }; });
+    out.matched_operating_point.comparison = { difference: mp.difference, a_only: mp.a_only, b_only: mp.b_only, ci95_cluster_bootstrap: { lo: ci.lo, hi: ci.hi }, degenerate: ci.degenerate, reading: matchedReading(ci) };
+  } else {
+    out.matched_operating_point.comparison = { difference: mp.difference, a_only: mp.a_only, b_only: mp.b_only, exact_mcnemar_p: p4(exactMcNemar(mp.a_only, mp.b_only)), exact_mcnemar_label: 'unadjusted; secondary' };
   }
 
   // §6.5 point 7: score distributions
@@ -255,7 +327,7 @@ function p1Extras(rows, decs, meta, clusterOf, v02) {
     out.sensitivity_without_S[k] = {
       n: idx.length, intents: cl.length,
       rates: Object.fromEntries(RULES.map(R => [R, { ...rt[R], cluster_bootstrap95: { lo: cb.ci[R].lo, hi: cb.ci[R].hi } }])),
-      primary_comparison: { difference: pr.difference, ci95: { lo: cb.ci['R2-R3'].lo, hi: cb.ci['R2-R3'].hi }, degenerate: cb.ci['R2-R3'].degenerate, reading: reading(cb.ci['R2-R3']) }
+      primary_comparison: { label: SENSITIVITY, difference: pr.difference, ci95: { lo: cb.ci['R2-R3'].lo, hi: cb.ci['R2-R3'].hi }, degenerate: cb.ci['R2-R3'].degenerate, interval_position: position(cb.ci['R2-R3']) }
     };
   });
   // §6.5 point 3: per domain (descriptive; no tests, no intervals)
@@ -308,7 +380,10 @@ function md(summary) {
     L.push(`- Ties: s = 2.0: ${s.ties.s_exactly_2_0}; s4 at ${JSON.stringify(s.ties.s4_exactly)}; fused4 at ${JSON.stringify(s.ties.fused4_exactly)}.`);
     L.push(`- No-token queries: ${s.no_token.count}; rejected by ${JSON.stringify(s.no_token.rejected_by)}.`);
     L.push(`- Lexical-null queries: ${s.lexical_null.count} (${s.lexical_null.share.rate}); overlap subset n = ${s.lexical_null.overlap_subset.n}, rates ${RULES.map(R => `${R} ${s.lexical_null.overlap_subset.rates[R].k}/${s.lexical_null.overlap_subset.rates[R].n}`).join(', ')}.`);
-    if (s.lexical_null.overlap_subset.primary_comparison) { const p = s.lexical_null.overlap_subset.primary_comparison; L.push(`- Primary comparison on the overlap subset: ${p.difference} [${p.ci95.lo}, ${p.ci95.hi}]; ${p.reading}.`); }
+    if (s.lexical_null.overlap_subset.primary_comparison) { const p = s.lexical_null.overlap_subset.primary_comparison; L.push(`- R2 − R3 on the overlap subset (${p.label}): ${p.difference} [${p.ci95.lo}, ${p.ci95.hi}]; interval ${p.interval_position}.`); }
+    { const m = s.matched_operating_point, c = m.comparison;
+      L.push(`- **Matched operating points (secondary):** R2m (s4 < ${m.thresholds.R2m_s4}) ${m.rates.R2m.k}/${m.rates.R2m.n}, R3m (fused4 < ${m.thresholds.R3m_fused4}) ${m.rates.R3m.k}/${m.rates.R3m.n}; R2m − R3m ${c.difference}` +
+        (c.ci95_cluster_bootstrap ? ` [${c.ci95_cluster_bootstrap.lo}, ${c.ci95_cluster_bootstrap.hi}] (cluster bootstrap); ${c.reading}.` : `; exact McNemar p ${c.exact_mcnemar_p} (unadjusted).`)); }
     L.push(`- Distributions: s median ${s.distributions.s.median}; fused4 median ${s.distributions.fused4.median}.`, '');
     const v = s.v0_2_comparison;
     L.push('Comparison with v0.2 (descriptive; different populations; no test):', '', '| Rule | E1 rate | v0.2, 50 | v0.2, 15 unscreened | v0.2 false rejections |', '|---|---|---|---|---|');
@@ -318,7 +393,7 @@ function md(summary) {
   const x = summary.P1_extras;
   L.push('## P1 subgroup S and domains (descriptive)', '');
   Object.entries(x.subgroup_S).forEach(([k, v]) => L.push(`- ${k} (n = ${v.n}): ${RULES.map(R => `${R} ${v.rates[R].k}/${v.rates[R].n}`).join(', ')}`));
-  Object.entries(x.sensitivity_without_S).forEach(([k, v]) => L.push(`- ${k} (n = ${v.n}, ${v.intents} intents): ${RULES.map(R => `${R} ${v.rates[R].rate} [${v.rates[R].cluster_bootstrap95.lo}, ${v.rates[R].cluster_bootstrap95.hi}]`).join('; ')}; R2 − R3 ${v.primary_comparison.difference} [${v.primary_comparison.ci95.lo}, ${v.primary_comparison.ci95.hi}]`));
+  Object.entries(x.sensitivity_without_S).forEach(([k, v]) => L.push(`- ${k} (n = ${v.n}, ${v.intents} intents): ${RULES.map(R => `${R} ${v.rates[R].rate} [${v.rates[R].cluster_bootstrap95.lo}, ${v.rates[R].cluster_bootstrap95.hi}]`).join('; ')}; R2 − R3 ${v.primary_comparison.difference} [${v.primary_comparison.ci95.lo}, ${v.primary_comparison.ci95.hi}] (${v.primary_comparison.label}; interval ${v.primary_comparison.interval_position})`));
   L.push('', '| Domain | ' + RULES.join(' | ') + ' |', '|---|' + RULES.map(() => '---').join('|') + '|');
   Object.entries(x.per_domain).forEach(([d, r]) => L.push(`| ${d} | ${RULES.map(R => `${r[R].k}/${r[R].n}`).join(' | ')} |`));
   L.push('', 'Caveats: ' + summary.P1.v0_2_comparison.caveats.join('; ') + '.');
@@ -344,7 +419,7 @@ function main() {
   const expect = { p1: +arg(args, '--expect-p1', 4500), p2: +arg(args, '--expect-p2', 1000), intents: +arg(args, '--expect-intents', 150), perIntent: +arg(args, '--expect-per-intent', 30) };
   const synthetic = args.includes('--synthetic');
 
-  const { problems, v02 } = frozenInputs();
+  const { problems, v02, matched } = frozenInputs();
   if (problems.length) { problems.forEach(p => console.error('FROZEN INPUT FAIL  ' + p)); process.exit(1); }
 
   const load = f => JSON.parse(fs.readFileSync(f, 'utf-8'));
@@ -386,8 +461,9 @@ function main() {
   const scriptSha = { 'e1_analyze.js': sha(__filename), 'e1_score_queries.js': sha(path.join(__dirname, 'e1_score_queries.js')) };
   if (stage === 'decisions' || stage === 'all') {
     writeNew(path.join(outDir, 'logical_checks.json'), JSON.stringify(checks, null, 2));
-    writeNew(path.join(outDir, 'decisions_p1.json'), JSON.stringify({ thresholds: { R2: R2_T, R3: R3_U, R2_median: R2_MED, R3_median: R3_MED }, rows: dec1 }, null, 1));
-    writeNew(path.join(outDir, 'decisions_p2.json'), JSON.stringify({ thresholds: { R2: R2_T, R3: R3_U, R2_median: R2_MED, R3_median: R3_MED }, rows: dec2 }, null, 1));
+    const thr = { R2: R2_T, R3: R3_U, R2_median: R2_MED, R3_median: R3_MED, R2m_s4: MATCHED.s4, R3m_fused4: MATCHED.fused4 };
+    writeNew(path.join(outDir, 'decisions_p1.json'), JSON.stringify({ thresholds: thr, rows: dec1 }, null, 1));
+    writeNew(path.join(outDir, 'decisions_p2.json'), JSON.stringify({ thresholds: thr, rows: dec2 }, null, 1));
     const git = a => { try { return execFileSync('git', a, { cwd: path.join(__dirname, '..', '..') }).toString().trim(); } catch (e) { return null; } };
     const root = path.join(__dirname, '..', '..');
     const manifest = {
@@ -412,7 +488,8 @@ function main() {
     P1.v0_2_comparison = v02Comparison(P1, v02); P2.v0_2_comparison = v02Comparison(P2, v02);
     const summary = {
       protocol: 'research/publication_tasks/e1/E1_PROTOCOL.md §6 (tag e1-protocol-v1)', generated_at: new Date().toISOString(),
-      synthetic_test_run: synthetic, script_sha256: scriptSha, thresholds: { R2: R2_T, R3: R3_U, R2_median: R2_MED, R3_median: R3_MED },
+      synthetic_test_run: synthetic, script_sha256: scriptSha, thresholds: { R2: R2_T, R3: R3_U, R2_median: R2_MED, R3_median: R3_MED, R2m_s4: MATCHED.s4, R3m_fused4: MATCHED.fused4 },
+      matched_thresholds_derivation: { ...matched, problems: undefined, note: 'thresholds set from v0.2 in-scope queries only; the OOD counts are in-sample context' },
       logical_checks_pass: true, P1, P2, P1_extras: p1Extras(rows1, dec1, meta, clusterOf, v02)
     };
     writeNew(path.join(outDir, 'summary.json'), JSON.stringify(summary, null, 2));
@@ -423,4 +500,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { decide, logicalChecks, holm, clusterBootstrap, analysePopulation, R2_T, R3_U, R2_MED, R3_MED };
+module.exports = { decide, logicalChecks, holm, clusterBootstrap, analysePopulation, deriveMatched, R2_T, R3_U, R2_MED, R3_MED, MATCHED, M_MATCH };

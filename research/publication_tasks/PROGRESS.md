@@ -6,7 +6,7 @@
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
-| 2 E1 protocol | E1-01 to 09, plus E1-07b | 8 | 0 |
+| 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 9 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
@@ -692,6 +692,53 @@ Recorded by VERIFY-01 on 2026-09-30.
   4. No existing file changed. `git status` showed only the new script. No CLINC input and no E1
      output were used: **pass**.
 
+### E1-07c: review fixes to the analysis code, before the freeze (DONE 2026-09-30)
+
+- **Matched thresholds** (scratchpad `e1_07c_derive.js`, read-only), from v0.2's 159 in-scope
+  queries only:
+  - the three v0.2 OOD label sources agree (`reliability_features.is_ood`,
+    `reproduction-results`, ablation A3);
+  - **R2m: s4 < 5.4377.** It rejects 10 in-scope queries: two in-scope queries tie at the
+    threshold, so it is 10, not 11. In-sample it rejects 37/50 OOD.
+  - **R3m: fused4 < 0.9179.** It rejects 11 in-scope queries and 36/50 OOD, in-sample.
+  - Both equal the committed in-sample sweep (`review_r1_e…json`,
+    `in_sample_matched_false_rejection.detector_observed`: 37 at 10, 36 at 11).
+  - They are recorded in protocol §6.2 and §6.4.
+- **`e1_analyze.js` changes:**
+  - `deriveMatched()` re-derives both thresholds from the committed files on every run. The run
+    aborts if they differ from the recorded values, or if the counts differ from the committed
+    sweep.
+  - Per-query R2m and R3m decisions.
+  - A `matched_operating_point` section per population:
+    - rates, with Wilson intervals, and a cluster bootstrap on P1;
+    - R2m − R3m on P1 with a paired cluster-bootstrap interval and the §6.4 reading;
+    - R2m − R3m on P2 with exact McNemar, unadjusted;
+    - labelled secondary, and **kept out of the P2 Holm family**.
+  - The primary reading is reworded (ISSUE-10).
+  - **C-1:** the recomputed R2 − R3 comparisons (reduced S sets, overlap subset) now carry
+    "sensitivity (descriptive); not a primary result" and a neutral `interval_position`, with no
+    reading.
+  - The markdown output is updated. The bootstrap now takes the rule list as a parameter; the
+    default behaviour is unchanged.
+- **Tests** (scratchpad `e1_07b_test.js`, synthetic only): **80 passed, 0 failed.**
+  - The 61 E1-07b checks re-ran unchanged, and all passed.
+  - 19 new checks:
+    - T11: matched rates and pairs on P1 and P2; the matched pair is not in the P2 Holm family;
+      the derivation counts are recorded.
+    - T12: the C-1 labels; no "lead holds" wording anywhere; the decisions carry the matched
+      thresholds.
+    - T13: ties exactly at both matched thresholds are not rejected, and rows separate the matched
+      rules from the median rules.
+    - T14: the derivation is clean from the committed files, and a wrong recorded threshold is
+      caught.
+- **Acceptance criteria:**
+  1. The thresholds come from v0.2's in-scope scores only: **pass** (`deriveMatched` filters on
+     `!is_ood` before sorting; the OOD counts are context).
+  2. All tests pass (80/80): **pass**.
+  3. No CLINC input: **pass**.
+  4. No other existing file changed. `git status` showed only `e1_analyze.js`, before the task-file
+     updates: **pass**.
+
 ## Decisions
 
 | ID | Decision | Date | By |
@@ -744,12 +791,10 @@ Recorded by VERIFY-01 on 2026-09-30.
   - **The author decided (D11):** ISSUE-10 = (b), ISSUE-09 = (a), C-1 approved, and E1-07c added.
     The protocol text is updated accordingly.
   - E1-08 stays open until E1-07c is done and items 5 and 7 are re-checked.
-- **Recommended Claude task:** E1-07c (P0).
-  - Derive and record the matched thresholds (m = 11, from v0.2's in-scope queries only).
-  - Add R2m and R3m to `e1_analyze.js`, reword the output strings, and relabel the recomputed
-    comparisons.
-  - Extend the synthetic tests.
-- **Then:** the E1-08 re-check, and E1-09 (the freeze).
+- **E1-07c is done.**
+- **Recommended Claude task:** finish E1-08. Re-check checklist items 5 and 7 against the changed
+  protocol and code, add §7 to the review, and close E1-08.
+- **Then:** E1-09 (the freeze and tag; needs the author's explicit approval).
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 

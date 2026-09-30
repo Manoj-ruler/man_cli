@@ -255,7 +255,7 @@ Each rule is computed per query from the scorer's output:
 | R1-CLI | `confidence < 30 \|\| command_shipped === null` | — |
 | R2(t) | `s4 < t` | t ∈ {6.4952, 7.1978}. The fold map is 6.4952 for folds 0, 1, 2 and 4, and 7.1978 for fold 3. |
 | R3(u) | `fused4 < u` | u ∈ {0.9179, 0.9219, 0.8841, 0.9247, 0.9219} for folds 0–4 |
-| R2m, R3m (secondary) | `s4 < t_m(s4)`; `fused4 < t_m(fused4)` | Matched operating points, m = 11 (§6.4). Values are recorded in E1-07c. |
+| R2m, R3m (secondary) | `s4 < 5.4377`; `fused4 < 0.9179` | Matched operating points, m = 11 (§6.4), recorded in E1-07c |
 
 - **Primary thresholds (D2 = a): the medians, R2 at 6.4952 and R3 at 0.9219.** Unless a threshold
   is named, "R2" and "R3" below mean these.
@@ -341,6 +341,22 @@ It compares the two **scores** at equal v0.2 cost, free of the v0.2 out-of-scope
   - For context (in-sample, descriptive), report each rule's actual count of v0.2 in-scope
     rejections (of 159, and of the 134 without controls) and its v0.2 out-of-scope rejections
     (of 50).
+  - **The recorded values** (E1-07c, 2026-09-30; derived from v0.2's 159 in-scope queries only;
+    the v0.2 OOD labels agree across `reliability_features`, `reproduction-results` and ablation
+    A3):
+
+    | Rule | Threshold t_m | v0.2 in-scope rejected (of 159 / of 134) | v0.2 OOD rejected, in-sample (of 50) |
+    |---|---|---|---|
+    | R2m (`s4`) | **5.4377** | 10 / 10. Two in-scope queries tie at 5.4377, so this is 10, not 11. | 37 |
+    | R3m (`fused4`) | **0.9179** | 11 / 11 | 36 |
+
+    - These counts equal the committed in-sample matched sweep
+      (`review_r1_e_ood_operating_points.json`,
+      `in_sample_matched_false_rejection.detector_observed`: 37 at 10, and 36 at 11). The
+      analysis script asserts this.
+    - **The two operating points are equal to within one in-scope query (10 vs 11)**, because of
+      the tie. This is reported with the result.
+    - R3m's threshold equals R3's fold-0 threshold (0.9179).
 - **What is reported:**
   - the rates of R2m and R3m, with the same intervals as §6.3;
   - **R2m − R3m on P1**, with a paired cluster-bootstrap interval (same B and seed);
