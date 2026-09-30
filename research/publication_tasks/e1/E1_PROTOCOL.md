@@ -5,7 +5,8 @@
 - §4 (thresholds) was written in E1-04 and approved on 2026-09-30 (D2 = a); the R1 wording was
   amended (ISSUE-06).
 - §3 (exclusions) was approved on 2026-09-30 (D3 = Rule A with subgroup S).
-- §5 (scoring): the design was written in E1-05 (2026-09-30). The guard result is added in E1-06.
+- §5 (scoring): the design was written in E1-05, and the scorer was implemented and passed its guard
+  in E1-06 (both 2026-09-30).
 - §6 (analysis and outputs, E1-07) is not written yet.
 - **Nothing may be scored until the whole protocol is frozen** (E1-09, gate G-E1).
 
@@ -158,7 +159,7 @@ The values and their derivation are verified and re-derived in `e1/E1_THRESHOLDS
    `cli/index.js`).
 4. **No threshold is re-tuned.** No refit on v0.2 (option c was rejected), and none on CLINC.
 
-## 5. Scoring (E1-05 design; E1-06 implementation and guard pending)
+## 5. Scoring (E1-05 design; E1-06 implementation, guard passed 2026-09-30)
 
 The full data flow, risks and specification are in `e1/E1_SCORING_DESIGN.md`.
 
@@ -177,3 +178,13 @@ The full data flow, risks and specification are in `e1/E1_SCORING_DESIGN.md`.
   - the model cache check passes;
   - α = 0.5 in all five v0.2 folds.
 - **The scorer must first reproduce all 209 v0.2 scores exactly (E1-06).**
+  - **Done 2026-09-30.** `research/experiments/e1_score_queries.js --guard` gave 0 mismatches on
+    209 queries for `s4`, for `confidence` and for `fused4`.
+  - The live lexical and dense lists were bit-identical to the v0.2 cache.
+  - The full log is in `PROGRESS.md`, E1-06.
+- **Queries with no tokens** (only stop-words or punctuation) follow each system's own code. The
+  E1-06 edge cases show what this means:
+  - `search()` gives s = 0, so R1, R1-CLI and R2 reject such a query;
+  - the replica's substring bonus can still fire. For example, "the" gives a fused score of 1, so
+    R3 would accept it.
+  - **§6 must pre-specify:** how many such queries there are, and how each rule decides on them.

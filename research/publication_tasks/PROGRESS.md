@@ -6,7 +6,7 @@
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
-| 2 E1 protocol | E1-01 to 09 | 5 | 0 |
+| 2 E1 protocol | E1-01 to 09 | 6 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
@@ -558,6 +558,66 @@ Recorded by VERIFY-01 on 2026-09-30.
      (§4): **pass**.
   3. No code was written. The only script is the read-only fact check, kept in the scratchpad and
      not in the repository: **pass**.
+- **Committed:** in `1d5a025`.
+
+### E1-06: external-query scorer, proven on the benchmark only (DONE 2026-09-30)
+
+- **Deliverable:** `research/experiments/e1_score_queries.js` (new), written to the specification in
+  `E1_SCORING_DESIGN.md` §5.
+  - **Modes:** `--guard`, `--edge`, and `--input <[{id,text}]>`; `--out` is required.
+  - **It imports only** `cli/search.js` (read-only), `lexical_search.js`, `dense_search.js` and
+    `hybrid_fusion.js`.
+  - **It records scores only.** No rule decisions are made in this script.
+- **Pre-flight checks** (the run aborts on any failure):
+  - the platform is `win32`;
+  - the SHA-256 of the three scoring inputs match (ISSUE-07);
+  - `check_model_cache.js` passes (run as a child `node` process);
+  - α = 0.5 in all five v0.2 folds;
+  - remote model download is then disabled (`env.allowRemoteModels = false`).
+- **Guard log** (`node research/experiments/e1_score_queries.js --guard --out <scratchpad>`, Node
+  v24.2.0):
+  - `preflight OK: win32, 3 input hashes, model cache, alpha 0.5/0.5/0.5/0.5/0.5`
+  - **Required checks, all 0 mismatches out of 209** (tolerance 1e-9 after 4-dp rounding):
+    - `s4` against `reproduction-results.json` `actual.score`;
+    - `confidence` against `actual.confidence`;
+    - `fused4` against `reliability_features.json` `top1_score`.
+  - **Informative checks:**
+    - the shipped top-1 command differs from the reproduction on 0 queries;
+    - the hybrid top-1 command differs from `candidates.json` on 0 queries;
+    - list lengths differ from the cache on 0 queries;
+    - the maximum absolute difference against the v0.2 cache is **0** for the lexical scores, **0**
+      for the dense cosines and **0** for the unrounded s. These are bit-identical.
+    - 0 queries have no tokens; 17 have all-equal lexical scores. All 17 have `fused4` = 0.5,
+      matching the zero-overlap property from E1-05.
+  - **Result: `GUARD PASS`, exit 0.**
+  - **The guard is not vacuous:** there are 82 distinct `fused4` values (range 0.5–1) and 176
+    distinct `s4` values.
+- **Synthetic edge cases** (`--edge`; never CLINC):
+
+  | Input | Tokens | s (shipped) | Replica's lexical top-1 | All lexical scores equal | `fused4` |
+  |---|---|---|---|---|---|
+  | `""` | 0 | 0 (no command) | 15 | yes | 0.5 |
+  | `"   "` | 0 | 0 (no command) | 15 | yes | 0.5 |
+  | `"?!"` | 0 | 0 (no command) | 15 | yes | 0.5 |
+  | `"how do i"` | 0 | 0 (no command) | 0 | yes | 0.5 |
+  | `"the"` | 0 | 0 (no command) | 15 | **no** | **1** |
+  | `"café"` | 1 (`caf`) | 0 | 0 | yes | 0.5 |
+
+  - **New observation.** For a query made only of stop-words, the replica's substring bonus can fire
+    on records whose intent contains the query string: "the" matches intents containing "the".
+    R1, R1-CLI and R2 would then reject the query while R3 accepts it.
+  - For the empty and punctuation-only strings, every record gets +15, so the lexical scores are
+    all equal and R3 rejects, like the others.
+  - **This is now noted in protocol §5. E1-07 must pre-specify** that such queries are counted and
+    their decisions reported, before any scoring.
+- **Acceptance criteria:**
+  1. 0 mismatches on all 209 v0.2 queries for both scores (and for confidence): **pass**.
+  2. The model cache check passes: **pass**.
+  3. No CLINC input: the only inputs were the v0.2 benchmark and 6 synthetic strings: **pass**.
+  4. No existing file changed. `git status` shows only the new script (before the task-file
+     updates): **pass**.
+- **Not exercised:** the pre-flight failure paths (a wrong platform, a changed input hash, a missing
+  model). They are straightforward checks, but they have not been tested.
 
 ## Decisions
 
@@ -598,11 +658,18 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **Author action:** PAPER-07. Submit `research/paper/acl_latex/main_review.pdf` (SHA-256 prefix
   `7c129b946bcd928b`) to the EACL 2027 SRW mentorship programme by **Nov 6**, and tell Claude when it
   is done, so it can be recorded.
-- **Recommended Claude task:** E1-06 (P0). Write
-  `research/experiments/e1_score_queries.js` to the specification in `E1_SCORING_DESIGN.md` §5.
-  - Prove it on the 209 v0.2 queries only (0 mismatches), and run the synthetic edge cases.
-  - **No CLINC input; no existing file changed.**
-- **Then:** E1-07 (the analysis protocol).
+- **Recommended Claude task:** E1-07 (P0). Complete `E1_PROTOCOL.md` §6, the analysis
+  protocol. It must include:
+  - the primary rates with Wilson and cluster-bootstrap intervals;
+  - McNemar between rules;
+  - D2's median and range;
+  - R1-CLI and the [2.0, 2.36) count;
+  - the subgroup-S sensitivity check;
+  - ties at exact threshold values;
+  - the no-token and zero-overlap counts;
+  - expected-direction statements;
+  - the output files.
+- **Then:** E1-08 (protocol review) and E1-09 (the freeze and tag).
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 
