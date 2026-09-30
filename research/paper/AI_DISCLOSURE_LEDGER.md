@@ -53,6 +53,7 @@ chat.
 | U6 | Research assistance: ideas | OTHER_CONFIRMED (AI-suggested analyses) | RESEARCH_PROCESS: analyses proposed in the simulated reviews and then adopted. Examples: tie-aware selective metrics (T3), the calibration noise floor and no-skill reference, comparing out-of-scope rules at equal false-rejection counts (REV-14/22), seed-repeat CV (S11) | Research | `review_round*/`, `PLAN_TASKS.md` |
 | U7 | Citation checking | CHECKED_CITATIONS | REFERENCE_OR_CITATION: citations verified against primary records (T6, Stage 4.5) | Manuscript | `T6_LITERATURE_VERIFICATION.md`, `STAGE4_5_INTEGRITY_REPORT.md` |
 | U8 | Research assistance: literature search | SEARCHED | REFERENCE_OR_CITATION | Manuscript | `PHASE14_LITERATURE_RECHECK.md`. ACL requires no special disclosure for this use; it is recorded for completeness. |
+| U9 | Other: product code outside the study | GENERATED | CODE: the tool's optional web dashboard (Next.js app, API routes, Supabase), built in April 2026 with **Google Antigravity** using Gemini and Claude models | Neither. The paper does not evaluate the dashboard; it mentions only that the query-sync feature is off by default. | The author, 2026-09-30. The dashboard commits (2026-04-14 onward) carry no AI trailer. |
 
 **Not used:** AI image generation. Every figure is an SVG drawn directly from the committed result
 JSON by `research/experiments/generate_figures.js`, a script the assistant wrote (U3), and then
@@ -73,8 +74,8 @@ author. The author confirms this in question 3 below.
 
 | Field | State |
 |-------|-------|
-| Tool name | KNOWN: Claude (Anthropic) through Claude Code; models Opus 4.8, Sonnet 5 and Opus 5.5 |
-| Content produced, and where | KNOWN: U1–U6 above |
+| Tool name | KNOWN: Claude (Anthropic) through Claude Code, with models Opus 4.8, Sonnet 5 and Opus 5.5 (U1–U8); Google Antigravity, with Gemini and Claude models (U9) |
+| Content produced, and where | KNOWN: U1–U6 and U9 above |
 | Conditional: author confirms that the generated text was checked for accuracy and carries citations for its sources and ideas | KNOWN(true): the author, 2026-09-30 |
 | Completeness of the tool inventory (no other AI tool) | KNOWN: the author, 2026-09-30. For code and data, the git trailers record only Claude models. |
 
@@ -83,8 +84,14 @@ author. The author confirms this in question 3 below.
 1. **Other AI tools:** "I havent used any ai tool other than Claude or Claude Code for writing the
    paper".
    - For the code and the benchmark data, the commit trailers record only Claude models (Phase 2).
-   - The statement therefore says "No other AI tool was used". If any other tool touched the code or
-     data, tell Claude and the statement will be corrected.
+   - The first rendering said "No other AI tool was used".
+   - **Correction the same day:** "at starting antigravity was used for code rather than that only
+     claude or claude code was used".
+   - Asked which parts, the author answered: **only the web app/dashboard**, with **both Gemini and
+     Claude** models inside Antigravity.
+   - The audited CLI, the research code, the benchmarks and the paper were not built with Antigravity.
+   - The statement now scopes "No other AI tool" to the paper's text, code and data, and names
+     Antigravity for the dashboard (U9).
 2. **Final text checked:** "yes i have checked".
 3. **Authorship:** "dont list any ai as author even yourself also".
    - `ai_listed_or_proposed_as_author` = KNOWN(false).
@@ -106,8 +113,10 @@ This is the camera-ready Acknowledgements text; the source is `acl_latex/main.te
 >   of out-of-scope rules at equal false-rejection counts, and the seed-repeat cross-validation;
 > - checked the references and citations against their primary sources.
 >
-> No other AI tool was used. The author checked the final text, its claims and its citations for
-> accuracy and takes full responsibility for the content. No AI tool is an author of this paper.
+> No other AI tool was used for this paper's text, code or data. The tool's optional web dashboard,
+> which this study does not evaluate, was built with Google Antigravity (Gemini and Claude models).
+> The author checked the final text, its claims and its citations for accuracy and takes full
+> responsibility for the content. No AI tool is an author of this paper.
 
 The printed statement is a single paragraph; the list above only splits it for reading.
 
