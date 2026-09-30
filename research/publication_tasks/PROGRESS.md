@@ -6,7 +6,7 @@
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
-| 2 E1 protocol | E1-01 to 09 | 3 | 0 |
+| 2 E1 protocol | E1-01 to 09 | 4 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
@@ -485,6 +485,39 @@ Recorded by VERIFY-01 on 2026-09-30.
   - The §1 wording is amended, and the amendment recorded in the protocol.
   - R1-CLI is added as a secondary line, and the count of CLINC queries in [2.0, 2.36) will be
     reported.
+- **Committed:** in `6ed2506`.
+
+### E1-03: P1 exclusion rules, decided before any scoring (DONE 2026-09-30)
+
+- **Deliverables:** `research/publication_tasks/e1/E1_EXCLUSIONS.md` and `E1_PROTOCOL.md` §3.
+- **What was looked at:**
+  - the 150 intent names by domain;
+  - 4 **train-split** examples for each of 43 candidate intents;
+  - the Windows-visible corpus (its intents, descriptions and commands);
+  - the codebook's and design doc's OOD definition;
+  - CLINC Table 1.
+- **Not looked at:** any `test` or `oos_test` query; any system output. Nothing was run or scored.
+- **Finding:** no Windows-visible corpus record performs any CLINC intent's typical request. The
+  near-misses are documented, for example:
+  - `Get-Date` appears only inside uptime and modified-files commands;
+  - `Get-Volume` is about disk volumes;
+  - `Start-Sleep` appears only in a repeat loop;
+  - the only random record makes a password.
+- **Author's decision (D3):** Rule A, with 0 exclusions (P1 = 4,500 queries, 150 intents), plus
+  subgroup S (6 clear and 7 borderline intents), reported descriptively with a planned sensitivity
+  check.
+- **Acceptance criteria:**
+  1. Every excluded class has a written reason. There are none; every candidate's non-performance
+     is documented. There are no per-query exclusions: **pass**.
+  2. A log states what was and was not consulted, including that no system output was: **pass**.
+  3. The author approved the rules (D3): **pass**.
+- **Domain map:** all 10 of Table 1's pairs match `domains.json`; the extracted table was
+  re-aligned by one row. The full supplementary list was not checked, as it would need another
+  download. The map only groups results for description.
+- **Note on the plan's wording:** the plan asked to exclude requests "that may have a legitimate
+  shell answer". The benchmark's own codebook instead defines OOD as "the list cannot perform this,
+  not a shell cannot" (W9). The author chose to follow the codebook, so that E1 is comparable with
+  v0.2. The shell-answerable requests are made visible through subgroup S rather than excluded.
 
 ## Decisions
 
@@ -503,6 +536,7 @@ Recorded by VERIFY-01 on 2026-09-30.
 | D7 | E1 uses the **frozen v0.2 thresholds**, even if the final paper reports v0.2.1 | 2026-09-30 | author |
 | D2 | **(a)**: apply all five per-fold thresholds. The primary result is the median rate, which equals the rate at the median threshold (R2 6.4952, R3 0.9219); the min–max is a sensitivity range. | 2026-09-30 | author |
 | — | ISSUE-06 **option 1**: R1 stays s < 2.0 (primary); add R1-CLI (s < 2.36) as secondary; correct the approved §1 wording ("on the benchmark, equivalently") | 2026-09-30 | author |
+| D3 | **Rule A** (exclude an intent iff a Windows-visible corpus record performs its typical request; the benchmark's own OOD definition): **0 exclusions**, P1 = all 150 intents and 4,500 queries. **Subgroup S** is reported, not excluded: S-clear = date, calculator, measurement_conversion, flip_coin, roll_dice, timer; S-borderline = time, timezone, alarm, reminder_update, weather, exchange_rate, current_location. A sensitivity check drops S-clear, then S-clear and S-borderline. | 2026-09-30 | author |
 
 ## Issues
 
@@ -523,10 +557,10 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **Author action:** PAPER-07. Submit `research/paper/acl_latex/main_review.pdf` (SHA-256 prefix
   `7c129b946bcd928b`) to the EACL 2027 SRW mentorship programme by **Nov 6**, and tell Claude when it
   is done, so it can be recorded.
-- **Recommended Claude task:** E1-03 (P0). Decide the P1 class exclusions from intent names and
-  example queries only (decision D3), and cross-check `domains.json` against the paper's
-  supplementary list. **No scoring.**
-- **Then:** E1-05 (the scoring design, from reading the code), which depends on E1-04 (done).
+- **Recommended Claude task:** E1-05 (P0). Write the scoring design by reading the code: how the
+  frozen pipeline computes s and the fused top-1 score for a query, what a new script needs, and the
+  risks. **No code written, nothing scored.**
+- **Then:** E1-06 (the scorer, proven on the v0.2 benchmark only).
 - **Phase 1 is complete** apart from the author's submission.
 - **E1-01 and E1-04** are unblocked in parallel.
 - **LIT-01** (P2) is in the backlog.

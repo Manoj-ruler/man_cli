@@ -4,8 +4,8 @@
 
 - §4 (thresholds) was written in E1-04 and approved on 2026-09-30 (D2 = a); the R1 wording was
   amended (ISSUE-06).
-- §3 (exclusions, E1-03), §5 (scoring, E1-05/06) and §6 (analysis and outputs, E1-07) are not
-  written yet.
+- §3 (exclusions) was approved on 2026-09-30 (D3 = Rule A with subgroup S).
+- §5 (scoring, E1-05/06) and §6 (analysis and outputs, E1-07) are not written yet.
 - **Nothing may be scored until the whole protocol is frozen** (E1-09, gate G-E1).
 
 ## 1. Question
@@ -115,6 +115,24 @@ benchmark v0.2.1 from the annotation study.
   **before any scoring**.
 - No E1 outcome is looked at before the protocol freeze (E1-09).
 - Any change after the freeze is a numbered deviation that needs the author's approval.
+
+## 3. Exclusions (E1-03; D3 = Rule A with subgroup S, approved by the author on 2026-09-30)
+
+Full reasoning, and exactly what was looked at, are in `e1/E1_EXCLUSIONS.md`.
+
+- **Primary rule, Rule A.** Exclude a P1 intent iff a Windows-visible corpus record performs its
+  typical request. This is the benchmark's own out-of-scope definition: codebook line 47, and W9,
+  "the list cannot perform this, not a shell cannot".
+  - **Result: 0 exclusions.** P1 = all 150 intents, 4,500 queries.
+- **Subgroup S (descriptive, not excluded).** These are intents a stock Windows shell could answer
+  but the corpus cannot. They are reported separately, and a planned sensitivity analysis drops them.
+  - **S-clear:** date, calculator, measurement_conversion, flip_coin, roll_dice, timer.
+  - **S-borderline:** time, timezone, alarm, reminder_update, weather, exchange_rate,
+    current_location.
+- **P2 (`oos_test`)** is kept whole (D4).
+- **No per-query exclusions anywhere.**
+- **What was decided before any scoring:** everything here. Only intent names, train-split examples
+  and the corpus were read; no `test` or `oos_test` query, and no system output.
 
 ## 4. Thresholds and how they are applied (E1-04; D2 = (a), author 2026-09-30)
 
