@@ -181,4 +181,69 @@ code before E1-09.
 **Update after the decisions:**
 
 - Items 5 and 7 now rest on text that has been applied, and on code still to be written in E1-07c.
-- **E1-08 closes after E1-07c, with a re-check** (§7, to be added then).
+- **E1-08 closes after E1-07c, with a re-check** (§7).
+
+## 7. Re-check after E1-07c (2026-09-30), and close
+
+**What was re-read:**
+
+- the protocol sections changed by D11 and E1-07c: §2.1, §2.3, §2.4, §6.1, §6.2, §6.4, §6.5,
+  §6.6 and §6.7;
+- `e1_analyze.js` at commit `4829d57`: every `reading`, `label` and `secondary` site, and the
+  matched section.
+
+**Item 5 (multiplicity and labels): pass.**
+
+- There is one primary comparison (D10 = a), with the reworded reading.
+- The P2 Holm family is still exactly the three pairs. The matched pair is kept out of it and
+  labelled "unadjusted; secondary" (E1-07c test T11).
+- The recomputed R2 − R3 comparisons carry "sensitivity (descriptive); not a primary result" and an
+  `interval_position` with no reading. No "lead holds" wording remains in any output (T12).
+- **Protocol text aligned (T-8):** §6.5 points 2 and 6 now say these are labelled sensitivity.
+- **Residual, cosmetic, not fixed:** in `summary.json` the sensitivity objects are still stored
+  under the key `primary_comparison`, inside `sensitivity_without_S.*` and
+  `lexical_null.overlap_subset`. Their `label` field is authoritative, and `summary.md` prints the
+  label. Renaming the key would be a code change needing a re-test, for no gain in content. It is
+  left as it is, and noted here.
+
+**Item 7 (no rule favoured by construction): pass.**
+
+- **The confound is now stated wherever a reading is made:**
+  - the primary reading names the operating points and the 20 vs 11 false rejections (§6.4, and
+    the code's `reading`);
+  - §2.4 point 7 says E1 cannot rank the rules overall;
+  - ED-2 is stated on the matched comparison.
+- **A comparison at equal cost now exists,** with thresholds set from v0.2's in-scope queries only.
+  So it does not depend on the screened set it is meant to test. The code re-derives the
+  thresholds on every run.
+- **Protocol text aligned (T-7):** §2.3 point 2 and the §6.4 lead sentence.
+- **Residual asymmetries, disclosed and accepted:**
+  1. **The matched costs differ by one query** (10 vs 11 in-scope rejections), because of a tie at
+     5.4377. This makes R3m marginally more aggressive, which favours R3m slightly. It is recorded
+     in §6.4.
+  2. **Queries with no tokens:** R1, R1-CLI and R2 reject them, while R3 may accept them. This is
+     each system's own behaviour, and it is reported separately (§6.5 point 5).
+
+**Consistency of T-1 to T-8 and the D11 text:** no remaining sentence contradicts:
+
+- Rule A;
+- the P2 assumption;
+- the reworded readings;
+- the matched specification.
+
+(Checked by searching for "apart from", "lead", "advantage", "recomputed" and "every query".)
+
+**Final checklist:**
+
+| # | Item | Verdict |
+|---|---|---|
+| 1 | No threshold tuned on E1 data | pass |
+| 2 | Class-level exclusions decided without scores | pass |
+| 3 | No outcome viewed | pass (re-confirmed: `research/results/e1_clinc150_v1/` still does not exist) |
+| 4 | General-domain stated | pass |
+| 5 | Multiplicity handled or labelled | pass |
+| 6 | Denominators right | pass |
+| 7 | No rule favoured by construction | pass (with the disclosed residuals) |
+
+**E1-08 is closed.** The protocol is ready for the freeze, which needs the author's explicit
+approval (E1-09, D6).

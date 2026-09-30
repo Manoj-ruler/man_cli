@@ -6,7 +6,7 @@
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
-| 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 9 | 0 |
+| 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 10 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
@@ -739,6 +739,37 @@ Recorded by VERIFY-01 on 2026-09-30.
   4. No other existing file changed. `git status` showed only `e1_analyze.js`, before the task-file
      updates: **pass**.
 
+- **Committed:** in `4829d57`.
+
+### E1-08: protocol review for leakage, selection bias and ambiguity (DONE 2026-09-30)
+
+- **Deliverable:** `e1/E1_PROTOCOL_REVIEW.md` (§1–§7).
+- **First pass** (committed in `36bd901`):
+  - checklist items 1–6 passed;
+  - the denominators were verified from the labels only, with no CLINC text read;
+  - item 7 found ISSUE-10, and the review raised ISSUE-09 and C-1;
+  - text fixes T-1 to T-6 were applied.
+- **Author's decisions (D11):** ISSUE-10 = (b), ISSUE-09 = (a), C-1 approved, and E1-07c added
+  (now done).
+- **Re-check (§7):**
+  - **Item 5 passes.** There is one primary comparison. The P2 Holm family is exactly 3 pairs,
+    with the matched pair outside it. The recomputed comparisons are labelled sensitivity, with no
+    reading.
+  - **Item 7 passes.** The operating points are named in every reading, and there is a matched
+    comparison at equal cost with thresholds from in-scope queries only.
+  - Two new text-only alignments were made:
+    - T-7: §2.3 point 2 and the §6.4 lead sentence;
+    - T-8: §6.5 points 2 and 6 now say the recomputed comparisons are labelled sensitivity.
+  - **Residuals, disclosed rather than fixed:**
+    - the matched costs are 10 vs 11, because of a tie, which slightly favours R3m;
+    - the no-token asymmetry;
+    - the sensitivity objects keep the JSON key `primary_comparison`, but their `label` field is
+      authoritative. This is cosmetic.
+- **Re-confirmed:** `research/results/e1_clinc150_v1/` does not exist. No CLINC text was read,
+  and nothing was scored.
+- **Acceptance criteria:** every checklist item is marked pass, or was fixed with the author's
+  approval (D11): **pass**.
+
 ## Decisions
 
 | ID | Decision | Date | By |
@@ -791,10 +822,12 @@ Recorded by VERIFY-01 on 2026-09-30.
   - **The author decided (D11):** ISSUE-10 = (b), ISSUE-09 = (a), C-1 approved, and E1-07c added.
     The protocol text is updated accordingly.
   - E1-08 stays open until E1-07c is done and items 5 and 7 are re-checked.
-- **E1-07c is done.**
-- **Recommended Claude task:** finish E1-08. Re-check checklist items 5 and 7 against the changed
-  protocol and code, add §7 to the review, and close E1-08.
-- **Then:** E1-09 (the freeze and tag; needs the author's explicit approval).
+- **E1-07c and E1-08 are done.**
+- **Next: E1-09, the freeze (gate G-E1).** It needs the author's explicit approval (D6).
+  - Tag `e1-protocol-v1` on the commit that contains the protocol, the `e1/` documents and both
+    scripts.
+  - Push the branch and the tag, and record the hash.
+  - D9 (optional external preregistration) is to be decided.
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 

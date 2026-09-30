@@ -1,19 +1,25 @@
 # Current task
 
-**Last completed:** E1-07c (2026-09-30).
-
-- **Matched thresholds:** R2m is s4 < 5.4377, which rejects 10 of v0.2's 159 in-scope queries
-  because of a tie. R3m is fused4 < 0.9179, which rejects 11.
-- `e1_analyze.js` gained the matched comparison, the reworded readings and the C-1 labels.
-- Synthetic tests: 80 passed, 0 failed.
+**Last completed:** E1-08 (2026-09-30). The protocol review passed all 7 checklist items, after
+decisions D11 and E1-07c. Text fixes T-1 to T-8 are applied. See `e1/E1_PROTOCOL_REVIEW.md` §7.
 
 **Author action still open:** PAPER-07, the mentorship submission, by Nov 6.
 
-**Next (recommended): finish E1-08, the re-check.** Status: IN PROGRESS. It waits for "Finish
-E1-08" or "Start E1-08 re-check".
+**Next: E1-09, freeze the protocol (gate G-E1).** Status: NOT STARTED. **It needs the author's
+explicit approval (D6)**, for example "Approve freeze, D9 = git tag only. Start E1-09".
 
-- Re-check checklist item 5 (multiplicity and labels) and item 7 (no rule favoured by
-  construction) against the changed protocol (§2.4, §6.2, §6.4, §6.6) and `e1_analyze.js`.
-- Confirm that the text fixes T-1 to T-6 and the D11 text are consistent.
-- Write §7 of `E1_PROTOCOL_REVIEW.md`, and close E1-08 if every item passes.
-- **Then:** E1-09, the freeze. It needs the author's explicit approval.
+- **Steps:**
+  1. Confirm the working tree is clean, and that the commit to be tagged contains:
+     - `E1_PROTOCOL.md`, `E1_EXCLUSIONS.md`, `E1_THRESHOLDS.md`, `E1_SCORING_DESIGN.md` and
+       `E1_PROTOCOL_REVIEW.md`;
+     - `research/experiments/e1_score_queries.js` and `research/experiments/e1_analyze.js`.
+  2. Record the SHA-256 of the protocol and of both scripts. Mark the protocol status **FROZEN**.
+  3. Create the annotated git tag `e1-protocol-v1`, and push the branch and the tag.
+  4. Record the commit hash and the date in `PROGRESS.md`.
+- **Acceptance criteria:**
+  - The tag exists on the remote (`git ls-remote --tags origin e1-protocol-v1`).
+  - The hashes are recorded.
+  - No E1 result exists before this commit (`git log -- research/results/e1_clinc150_v1` is
+    empty).
+- **D9:** external preregistration (for example, OSF) is optional. The recommendation is the git
+  tag only, which is sufficient for the SRW.

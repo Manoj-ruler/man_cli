@@ -9,6 +9,8 @@
   in E1-06 (both 2026-09-30).
 - §6 (analysis and outputs) was approved on 2026-09-30 (D10 = a). The analysis code is written
   before the freeze (E1-07b).
+- The E1-08 review (`e1/E1_PROTOCOL_REVIEW.md`) passed all 7 checklist items on 2026-09-30,
+  after decisions D11 and E1-07c. The text fixes T-1 to T-8 are applied.
 - **Nothing may be scored until the whole protocol is frozen** (E1-09, gate G-E1).
 
 ## 1. Question
@@ -94,9 +96,11 @@ answer stay in, and are reported as subgroup S (§3).
 1. Whether each rule's rejection rate on unscreened, third-party, general-domain requests is close
    to, below or above its rate on the paper's out-of-scope set: all 50 on v0.2, and the 15
    unscreened ones.
-2. In particular, whether the tuned shipped threshold (R2) keeps its advantage over the hybrid
-   detector (R3) on requests that were **not** screened for low scores. This bears directly on the
-   screening-bias threat.
+2. In particular, whether the tuned shipped threshold (R2) still rejects more than the hybrid
+   detector (R3) **at their v0.2 operating points** on requests that were **not** screened for
+   low scores. Separately, it asks whether the two scores differ at equal v0.2 cost (the
+   matched comparison, §6.4). This bears directly on the screening-bias threat.
+   - *Wording aligned with ISSUE-10 in E1-08 (T-7).*
 3. The rules' rank order on external data, and per-domain rejection rates (descriptive).
 
 ### 2.4 What E1 cannot show (to be carried into the paper; INTEG-05)
@@ -290,8 +294,8 @@ There is **one pre-specified primary comparison**:
 - with a paired cluster-bootstrap 95% interval. The same resampled intents are used for both
   rules, with the same B and seed as above.
 
-It answers §2.3, point 2: does the tuned shipped threshold keep its lead over the hybrid detector
-on requests nobody screened?
+It answers the first half of §2.3, point 2: at their v0.2 operating points, does the tuned shipped
+threshold still reject more than the hybrid detector on requests nobody screened? (T-7)
 
 **Pre-stated reading:**
 
@@ -386,7 +390,8 @@ It compares the two **scores** at equal v0.2 cost, free of the v0.2 out-of-scope
    - rates for S-clear and for S-borderline;
    - the P1 rates recomputed **without S-clear** and **without S-clear and S-borderline**, with
      cluster-bootstrap intervals (144 and 137 intents);
-   - the primary comparison (R2 − R3) recomputed on both reduced sets.
+   - R2 − R3 recomputed on both reduced sets. These are labelled "sensitivity (descriptive); not a
+     primary result", and report where the interval lies with no reading (C-1; T-8).
 3. **Per domain (P1):** k/450 and the rate for each rule and domain. There are no tests and no
    intervals.
    - **9 of the 13 subgroup-S intents are in `utility`** (with 2 in travel, 1 in home and 1 in
@@ -401,7 +406,7 @@ It compares the two **scores** at equal v0.2 cost, free of the v0.2 out-of-scope
 6. **Lexical-null queries:**
    - their count and share, per population;
    - each rule's rate on the **overlap subset** (all other queries);
-   - the primary comparison recomputed on that subset.
+   - R2 − R3 recomputed on that subset, labelled as in point 2 (C-1; T-8).
 
    The rules can differ only on the overlap subset (E1-05).
 
