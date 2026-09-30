@@ -5,7 +5,7 @@
 | Phase | Tasks | Done | Blocked |
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
-| 1 Contribution | PAPER-01 to 08, TRACE-01 | 7 | 0 |
+| 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
 | 2 E1 protocol | E1-01 to 09 | 0 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
@@ -344,6 +344,52 @@ Recorded by VERIFY-01 on 2026-09-30.
   analyses (ambiguity detection, A4/A5, Split B, the functional check) sit outside the question, in
   the Appendix and Limitations, which is appropriate.
 - **Author:** the recommendation is "keep". The author may override it; no paper file changed.
+- **Committed:** in `74f674b`.
+
+### PAPER-06: Phase 1 gate and mentorship snapshot (DONE 2026-09-30)
+
+- **Start state:** `research/improvement` at `74f674b`, the same as origin; clean tree.
+- **Checks against the VERIFY-01 baseline:**
+
+  | Check | VERIFY-01 (`c3b9f40`) | PAPER-06 (`74f674b`) | Explanation |
+  |---|---|---|---|
+  | Freeze inputs | 27/27 | **27/27** | unchanged |
+  | Claim trace | 176 snippets, 475 numbers, 0 problems | **186 snippets, 501 numbers, 0 problems** | TRACE-01 (+9 snippets, +23 numbers), PAPER-03 (+1, "2026"), PAPER-05 (+2, "12", "17") |
+  | Tests | 24/24 | **24/24** | unchanged |
+  | Body end (both PDFs) | page 7 | **page 7** | unchanged; about one page of headroom remains for E1 |
+  | Total pages | 13 / 13 | **14 (camera-ready) / 13 (review)** | The PAPER-05 Limitations additions push the camera-ready end matter (Limitations, Ethics, Acknowledgements, references, appendix) past a page break. These sections do not count toward the 8-page limit. |
+  | Overfull boxes / undefined references | 0 / 0 | **0 / 0** | unchanged |
+  | BibTeX warnings | not checked | **0** | `.blg` line "warning$ -- 0" is the function's usage count, meaning none were issued |
+  | Abstract | 199 words | **199 words** | PAPER-08 was word-neutral |
+
+- **Anonymity scan** (`main_review.pdf`, the committed file):
+  - It checks 15 case-insensitive strings: termassist, man-cli, man_cli, manoj, manoj-ruler, @manoj,
+    gaddam, gmail, srkr, claude, antigravity, github.com, vercel, npmjs, acknowledg.
+  - Both pdftotext modes are searched, raw and layout, after removing CR/NUL, the review margin
+    line numbers and line-break hyphens.
+  - **Review PDF: 0 hits for all 15. Its metadata** (Title, Author, Subject, Keywords) **is empty.**
+  - "npm": 0 in the review PDF, which uses "a publicly released package"; 1 in the camera-ready.
+  - **Positive control:** the same scan on the camera-ready `main.pdf` finds termassist 3, gaddam 8,
+    claude 24, acknowledg 4, and more, so the method can detect the strings. **PASS.**
+  - **Correction during the task:** my first scan used grep on text joined into a single line. It
+    returned 0 everywhere, **including the control**. Cause: an invalidly encoded character (an en
+    dash) on that one line made grep in a UTF-8 locale match nothing. That result was discarded and
+    replaced by a Node scan (scratchpad `anon_scan.js`), which passes the control.
+- **Snapshot for the mentorship submission (PAPER-07):**
+  - Branch `research/improvement`. The paper content was last changed in **`29ee6c3`**; the task-log
+    commits since then touch no paper file.
+  - **`research/paper/acl_latex/main_review.pdf`**, SHA-256 prefix **`7c129b946bcd928b`**. This is
+    the file to submit.
+- **Acceptance criteria:**
+  1. Freeze 27/27, trace 0, tests 24/24, build OK (page 7, 0 overfull), abstract 199: **pass**.
+  2. The review PDF has none of the identifying strings, with a valid positive control; the scan
+     output is recorded above: **pass**.
+  3. Every difference from VERIFY-01 is explained (table above): **pass**.
+  4. The snapshot is pushed and recorded (this commit): **pass**.
+- **Nothing in the paper, code, results or freeze changed.** The build's timestamp-only PDF changes
+  were restored with `git checkout --`, and the tree was clean afterwards.
+- **Proposed for later (not done):** add the anonymity scan with its positive control to the
+  repository as a reusable check for FINAL-02. For now it lives only in the session scratchpad.
 
 ## Decisions
 
@@ -374,8 +420,12 @@ Recorded by VERIFY-01 on 2026-09-30.
 
 ## Next
 
-- **Recommended:** PAPER-06 (P0): the Phase 1 gate and mentorship snapshot (due Nov 6). Every
-  Phase 1 content task is done: PAPER-01 to 05, PAPER-08 and TRACE-01.
+- **Author action:** PAPER-07. Submit `research/paper/acl_latex/main_review.pdf` (SHA-256 prefix
+  `7c129b946bcd928b`) to the EACL 2027 SRW mentorship programme by **Nov 6**, and tell Claude when it
+  is done, so it can be recorded.
+- **Recommended Claude task:** E1-01 (CLINC150 source and licence; P0; no dependencies). Phase 2
+  (the E1 protocol) is the next research-validity work. E1-04 is also unblocked.
+- **Phase 1 is complete** apart from the author's submission.
 - **E1-01 and E1-04** are unblocked in parallel.
 - **LIT-01** (P2) is in the backlog.
 

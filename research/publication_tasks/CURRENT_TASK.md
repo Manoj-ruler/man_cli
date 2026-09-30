@@ -1,43 +1,34 @@
 # Current task
 
-**Last completed:** PAPER-01 (2026-09-30). The research question is kept unchanged: it maps
-one-to-one onto §4 (i)–(iii), §5 and §7.
+**Last completed:** PAPER-06 (2026-09-30), the Phase 1 gate. Everything is green, and the anonymity
+scan passes with a valid positive control.
 
-**Next (recommended): PAPER-06: Phase 1 gate, the mentorship-ready snapshot.** Status: NOT STARTED.
-It waits for the author to say "Start PAPER-06".
+**Snapshot to submit:** `research/paper/acl_latex/main_review.pdf`, SHA-256 prefix
+`7c129b946bcd928b`. The paper content was last changed in `29ee6c3` on `research/improvement`.
 
-- **Priority:** P0: it guards the Nov 6 mentorship submission.
-- **Type:** verify. **Depends on:** PAPER-01 to 05, TRACE-01 and PAPER-08, all done.
+## Author action: PAPER-07
 
-## Steps
+Submit the review PDF above to the EACL 2027 SRW pre-submission mentorship programme by
+**Nov 6, 2026**. Then tell Claude, so the submission can be recorded in `PROGRESS.md`.
 
-1. On a clean tree, run the full VERIFY-01 check set:
-   - `node research/experiments/verify_freeze_inputs.js research/ANALYSIS_FREEZE_v1.0.md`;
-   - `node research/experiments/trace_claims.js`;
-   - `node --test "research/tests/*.test.js"`;
-   - `cd research/paper/acl_latex && bash build.sh` (page lines, overfull and undefined counts);
-   - the abstract word count.
-2. **Anonymity scan of `main_review.pdf`.** Its extracted text must contain none of:
-   - the tool's name ("TermAssist", "MAN-CLI");
-   - the package scope ("manoj-ruler", "@manoj");
-   - the author's name or email;
-   - "Claude" or "Antigravity" (the acknowledgements must be absent);
-   - the repository URL.
-3. Compare the numbers with the VERIFY-01 baseline, and explain every difference by a Phase 1 edit.
-4. Restore any tracked file that changed only because of timestamps. Commit and push if anything
-   changed.
-5. Record the snapshot commit hash. This is the version the author submits to the mentorship
-   programme (PAPER-07).
+## Next Claude task (recommended): E1-01: CLINC150 source, access and licence
 
-## Acceptance criteria
+Status: NOT STARTED. It waits for "Start E1-01".
 
-- [ ] Freeze 27/27; trace 0 problems (counts recorded); tests all pass; build succeeds with the body
-      ≤ 8 pages and 0 overfull boxes; abstract ≤ 200 words.
-- [ ] `main_review.pdf` contains none of the identifying strings above; the scan output is recorded.
-- [ ] Every difference from the VERIFY-01 baseline is explained.
-- [ ] The snapshot commit is pushed to `research/improvement`, and its hash is recorded in
-      `PROGRESS.md`.
+- **Priority:** P0: the E1 data must be legitimately usable and exactly identifiable.
+- **Type:** experiment (read-only research on sources). **Depends on:** none.
+- **Steps:**
+  1. Verify the CLINC150 paper (ACL Anthology D19-1131, `larson-etal-2019-evaluation`, already
+     cited).
+  2. Locate the official data release.
+  3. Record the licence, the variants (full, small, imbalanced, OOS-plus), the split sizes and the
+     file sizes.
+  4. **Download nothing.** Ask the author's permission first, stating the file, source and size
+     (decision D5).
+- **Acceptance:**
+  - The source URL, licence, variants, split sizes and download size are recorded with evidence
+    links in `research/publication_tasks/e1/E1_DATA_SOURCE.md`.
+  - The author's download decision is recorded.
+  - No E1 data or result exists yet.
 
-## Must not change
-
-Any paper, code, result or freeze file. This task only verifies and records.
+**Also unblocked:** E1-04 (verify the frozen v0.2 thresholds and how they were derived; decision D2).
