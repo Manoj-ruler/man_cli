@@ -5,7 +5,7 @@
 | Phase | Tasks | Done | Blocked |
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
-| 1 Contribution | PAPER-01 to 08, TRACE-01 | 5 | 0 |
+| 1 Contribution | PAPER-01 to 08, TRACE-01 | 6 | 0 |
 | 2 E1 protocol | E1-01 to 09 | 0 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
@@ -292,6 +292,32 @@ Recorded by VERIFY-01 on 2026-09-30.
   - The abstract is unchanged: 199 words.
 - **Rendering:** the camera-ready PDF text contains all three sentences.
 - **Result:** ISSUE-04 resolved; ISSUE-05 recorded.
+- **Committed:** in `8ee7a21`.
+
+### PAPER-04: Lead with the attribution result (DONE 2026-09-30)
+
+- **Finding.** The attribution result was already stated in the Introduction (Contribution 2,
+  directly after the research question) and in §6 Discussion ("the three problems separate cleanly…
+  needed a better threshold, not a new retriever"). Only the §7 **Conclusion** lacked the synthesis:
+  it listed the findings one by one.
+- **Author's decision:** "A". This is one lead sentence in the Conclusion; the Introduction is
+  unchanged (option B, not recommended as redundant, was not chosen).
+- **What changed:** `content.tex`, one diff hunk (Conclusion, line 365); the rebuilt PDFs; the
+  regenerated `CLAIMS_TRACE.md`, with no entry change.
+- **The applied text:** "On our benchmark, the three reliability problems of a shipped closed-set
+  retriever had three different remedies, and a better retriever was not the remedy for out-of-scope
+  requests."
+- **Acceptance criteria:**
+  1. The sentence has no numbers. Its evidence is already registered: the §5 AUROC 0.956 vs 0.889,
+     and the Conclusion's 46 vs 34 of 50. Trace **186 snippets, 501 numbers, 0 problems**; the
+     coverage check counts the Conclusion at 9 numerals, 0 unregistered: **pass**.
+  2. Build exit 0; the body ends on **page 7** in both PDFs; 0 overfull boxes; 0 undefined
+     references: **pass**.
+  3. No new claim beyond `CLAIM_EVIDENCE_MAP.md`. It restates C2c and K3; the scope is bounded by
+     "on our benchmark" and the past tense; the screening caveat is carried by the next sentences
+     (12 vs 9 of the 15 unscreened queries; 20 vs 11 refused): **pass**.
+  4. The author approved the text: **pass**.
+  - The abstract is unchanged: 199 words. The camera-ready PDF shows the sentence as written.
 
 ## Decisions
 
@@ -303,6 +329,8 @@ Recorded by VERIFY-01 on 2026-09-30.
 | — | Commit now: the task files, the PAPER-02 edit and the rebuilt PDFs | 2026-09-30 | author |
 | — | ISSUE-03 is handled in PAPER-08 (the abstract) | 2026-09-30 | author |
 | — | ISSUE-04 is folded into PAPER-05 (added as checklist item 9 in `TASKS.md`) | 2026-09-30 | author |
+| — | PAPER-05 item 8: option (a), "natural-language-to-Bash" to match §3 | 2026-09-30 | author |
+| — | LIT-01 (P2, ISSUE-05) is added to `TASKS.md` (Phase 5, before FINAL-03) | 2026-09-30 | author |
 
 ## Issues
 
@@ -320,11 +348,10 @@ Recorded by VERIFY-01 on 2026-09-30.
 
 ## Next
 
-- **Recommended:** PAPER-04 (P1): make the attribution result ("three failures, three remedies; a
-  better retriever is not the out-of-scope fix") the lead of the Introduction's last paragraph and the
-  Conclusion's first sentences.
-- **Then:** PAPER-01 (P1), and the PAPER-06 gate (the mentorship snapshot).
+- **Recommended:** PAPER-01 (P1): review the research question. It is the last Phase 1 content task
+  before the PAPER-06 gate.
+- **Then:** PAPER-06, the Phase 1 gate and mentorship snapshot (due Nov 6).
 - **E1-01 and E1-04** are unblocked in parallel.
-- **Proposed:** LIT-01 (P2, ISSUE-05); it needs approval to be added to `TASKS.md`.
+- **LIT-01** (P2) is in the backlog.
 
 Waiting for the author's instruction.

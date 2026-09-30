@@ -362,7 +362,8 @@ commands, or require higher confidence before returning a high-risk command. We 
 
 \section{Conclusion}
 
-A published natural-language command retriever shows its users a confidence that, on our benchmark, is no better
+On our benchmark, the three reliability problems of a shipped closed-set retriever had three different remedies,
+and a better retriever was not the remedy for out-of-scope requests. A published natural-language command retriever shows its users a confidence that, on our benchmark, is no better
 than a constant forecaster. On the same benchmark, post-hoc recalibration fixes most of that. A threshold on the
 shipped score, tuned by cross-validation, rejects more out-of-scope requests than a hybrid detector (on v0.2, 46 vs.\
 34 of 50, and 12 vs.\ 9 on the 15 not screened by retrieval score) but refuses more in-scope queries (20 vs.\ 11 of 134), and

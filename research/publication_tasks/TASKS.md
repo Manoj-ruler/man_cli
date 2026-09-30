@@ -539,6 +539,27 @@ v0.2 thresholds frozen?
 - **Verify:** `bash build.sh`; body at most 8 pages; no overfull boxes; abstract at most 200 words;
   review PDF free of the tool's and author's names.
 
+### LIT-01: Verify a possible NL-to-PowerShell benchmark paper (ISSUE-05)
+*(Added 2026-09-30 with the author's approval.)*
+- **Priority:** P2: a related-work completeness risk; the current wording is accurate.
+- **Type:** paper (literature). **Depends on:** none. Run it before FINAL-03.
+- **Steps:**
+  1. Verify arXiv 2405.06807 ("Execution-Based Evaluation of Natural Language to Bash and
+     PowerShell for Incident Remediation") against its primary record: arXiv API or abstract page,
+     authors, version, venue.
+  2. Read enough of it to say what it evaluates, whether its data is public, and whether it bears on
+     §2 or §3.
+  3. Recommend cite or not-cite, with a reason. Any **use of its data** would be a new dataset and
+     needs a separate, explicit approval.
+  4. If citing is approved, draft the §2 sentence and the bib entry, and show both before editing.
+- **Acceptance:**
+  - The record is verified, with an audit trail (the query, URL and fields confirmed), or the paper
+    is marked NOT_FOUND.
+  - The recommendation is recorded and the author has decided.
+  - If cited: trace 0 problems, build ≤ 8 pages, BibTeX 0 warnings, and the reference added to the
+    Stage 4.5 audit list.
+- **Deliverable:** a `PROGRESS.md` entry, plus the §2 and bib edits if approved.
+
 ### FINAL-03: Scoped rerun of Stage 4.5 integrity (references, citations, changed paragraphs)
 - **Priority:** P0.
 - **Files:** `research/paper/STAGE4_5_INTEGRITY_REPORT.md`, `research/paper/integrity/verify_refs.js`.

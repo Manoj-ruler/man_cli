@@ -1,41 +1,34 @@
 # Current task
 
-**Last completed:** PAPER-05 (2026-09-30), the Limitations checklist. Three additions were made:
-the self-audit sentence, the reason for having no generative baseline, and the ISSUE-04 discordant
-counts. ISSUE-05 is recorded.
+**Last completed:** PAPER-04 (2026-09-30), the Conclusion's attribution lead sentence.
 
-**Next (recommended): PAPER-04: lead with the attribution result.** Status: NOT STARTED. It waits for
-the author to say "Start PAPER-04".
+**Next (recommended): PAPER-01: review the research question.** Status: NOT STARTED. It waits for the
+author to say "Start PAPER-01".
 
-- **Priority:** P1, the defence against the "trivial finding" objection.
-- **Type:** paper. **Depends on:** PAPER-02 (done).
-- **Files:** `research/paper/acl_latex/content.tex`: the last paragraph of the Introduction, before
-  the Contributions (the research question, lines ~45–48), and the Conclusion's first sentences
-  (lines ~364–366).
+- **Priority:** P1. The question already matches the evidence, so this is a check, not a rewrite.
+- **Type:** paper. **Depends on:** VERIFY-02 (done).
+- **Files:** `research/paper/acl_latex/content.tex`, the Introduction (the research question,
+  lines ~46–48).
 
 ## Steps
 
-1. Read both passages and check whether the attribution result is already stated.
-   - The result: three failures need three different remedies, and a better retriever is not the
-     remedy for out-of-scope requests.
-   - The Discussion (§6) already says "Out-of-scope rejection needed a better threshold, not a new
-     retriever".
-2. Draft at most 2 sentences, using only facts backed by the freeze and already registered, or to be
-   registered: shipped raw-score OOD AUROC 0.956 vs hybrid 0.889 on v0.2; the tuned threshold's
-   20/134 false rejections.
-3. Watch the page budget: the body ends on page 7 of 8.
-4. **Show the drafts to the author; edit only after approval.**
-5. Apply, register any new numbers in `trace_claims.js`, and run the trace (0 problems, including
-   coverage) and the build.
+1. Quote the current research question.
+2. Check each of its parts against `CLAIM_EVIDENCE_MAP.md`. Every lever it names must be answered in
+   §5 and §6, and it must name nothing the paper does not answer.
+3. Check its consistency with the edits made since VERIFY-02:
+   - Contribution 2 now says "largely corrects";
+   - the Conclusion now opens with the attribution sentence.
+4. Propose "keep", or a minimal edit with a reason. **Edit only after approval.**
 
 ## Acceptance criteria
 
-- [ ] Every number is registered in the trace. Trace: 0 problems.
-- [ ] The body ends on ≤ 8 pages; 0 overfull boxes.
-- [ ] No new claim goes beyond `CLAIM_EVIDENCE_MAP.md`.
-- [ ] The author has approved the text.
+- [ ] The question names exactly the three levers the paper evaluates (recalibration, a tuned
+      threshold, the hybrid retriever).
+- [ ] Nothing it asks is left unanswered by §5–§7.
+- [ ] If edited: trace 0 problems, build ≤ 8 pages, 0 overfull boxes, and the author approved the
+      text.
+- [ ] The decision is recorded in `PROGRESS.md`.
 
-## Pending decision
+## After this
 
-Approve adding LIT-01 (P2, ISSUE-05: verify arXiv 2405.06807 and decide whether to cite it) to the
-backlog.
+PAPER-06, the Phase 1 gate (full checks, anonymity scan, commit): the mentorship snapshot.
