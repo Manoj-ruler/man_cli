@@ -5,7 +5,7 @@
 | Phase | Tasks | Done | Blocked |
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
-| 1 Contribution | PAPER-01 to 08, TRACE-01 | 1 | 0 |
+| 1 Contribution | PAPER-01 to 08, TRACE-01 | 2 | 0 |
 | 2 E1 protocol | E1-01 to 09 | 0 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
@@ -127,8 +127,47 @@ Recorded by VERIFY-01 on 2026-09-30.
     true only once they are registered.
   - TRACE-01 therefore blocks the truth of a stated contribution, and is **P0** under the plan's
     definition. It should run before PAPER-06.
-- **Not committed:** the paper edit and the rebuilt PDFs are in the working tree, pending the
-  author's commit decision.
+- **Committed:** in `8c5dcd5`, with the task files, at the author's instruction.
+
+### TRACE-01: Register the Conclusion, Limitations and Ethics numbers (DONE 2026-09-30)
+
+- **What changed:** `research/experiments/trace_claims.js` and the regenerated
+  `research/paper/CLAIMS_TRACE.md`. `content.tex`, the results, the freeze and the benchmarks are
+  untouched.
+  1. **9 new snippets with 23 numbers:**
+     - Conclusion: 2 snippets, 9 numbers.
+     - Limitations: 7 snippets, 14 numbers. Two further Limitations numbers (3 and 4) were already
+       registered.
+     - Every source is the same result field or computation the earlier duplicate entries use.
+  2. **A permanent coverage check.** For §6 Discussion, §7 Conclusion, Limitations and Ethical
+     Considerations, it extracts every numeral (identifiers such as v0.1, A4 or TA-B145 and number
+     words are excluded). Each numeral must be registered at that location or be a listed design
+     constant; the only one is the fold seed 42. Anything unregistered fails the trace.
+  3. **The header's coverage line** now reads: Abstract, §1–§5, §6 Discussion (no numerals), §7
+     Conclusion, Limitations, Ethical Considerations, the tables and the appendix text. It also
+     prints the automatic check's counts.
+- **Acceptance criteria:**
+  1. Every numeral in the three sections is registered or a stated constant: Conclusion **9/9**,
+     Limitations **17/17** (16 registered, plus the seed 42), Ethics 0 numerals: **pass**.
+  2. Trace **0 problems**; counts went from 176 snippets and 475 numbers to **185 snippets and 498
+     numbers** (+9 and +23): **pass**.
+  3. No change to `content.tex`, any result, the freeze or the benchmarks. `git status` lists only
+     `trace_claims.js` and `CLAIMS_TRACE.md`: **pass**.
+  4. `CLAIMS_TRACE.md` shows the new rows, the updated coverage line and the automatic-check line:
+     **pass**.
+- **Negative test:** changing "one fusion rule" to "1 fusion rule" in Limitations made the trace fail
+  ("1 problem(s)"). `content.tex` was then restored from a copy and the trace was back to 0 problems;
+  git confirms `content.tex` is unmodified.
+- **Values:** every new row recomputes to the value printed in the paper, for example κ 0.6316 → 0.63
+  and the interval end 1 → 1.00.
+- **Correction during the task:** I first wrote the coverage line as "§1–§6 (including the
+  Conclusion)", assuming the Conclusion was §6. The section list shows **§6 Discussion** (lines
+  347–361) and **§7 Conclusion**. I checked Discussion: it contains **no numerals**, so the paper's
+  "every reported number" claim is not affected. I then added Discussion to the automatic check and
+  corrected the line before completing the task.
+- **Result for ISSUE-01:** resolved. Contribution 3's "a trace from every reported number to its
+  result file" is now backed by the trace for every numeral in the body, Limitations and Ethics.
+  Number words ("Two items") remain unchecked, as they always were; the header states this.
 
 ## Decisions
 
@@ -144,7 +183,8 @@ Recorded by VERIFY-01 on 2026-09-30.
 
 | ID | Found in | Issue | Evidence | Blocks? | Proposed task |
 |---|---|---|---|---|---|
-| ISSUE-01 (escalated to P0 by PAPER-02: Contribution 3 now claims a trace for every reported number) | VERIFY-02 | The claim trace does not cover the **Conclusion**. Its stated coverage is "Abstract, §1–§5, Tables 1–3, Appendix A, Appendix B". The Conclusion's 9 numbers (46, 34, 50, 12, 9, 15, 20, 11, 134) are unregistered, and so are most Limitations numbers (only the POSIX counts 3 and 4 are). All 9 Conclusion numbers were checked by hand against `review_r1_e_ood_operating_points.json` today and are **correct**. | `paper/CLAIMS_TRACE.md` header; no "Conclusion" location in the trace; grep of `trace_claims.js` | No. It is a process gap: a future edit could drift unnoticed. It matters for FINAL-01. | **TRACE-01 (P1, code):** register the Conclusion, Limitations and Ethics numbers in `trace_claims.js` and extend its coverage line. Do it before PAPER-06, so that the Phase 1 edits are checked. Needs approval to be added to the backlog. |
+| ISSUE-04 | TRACE-01 | Limitations says "Accuracy tests rest on 7--8 discordant queries". That is true for **hybrid vs BM25** (0+7 on v0.1, 1+7 on v0.2) but **not** for hybrid vs dense, which rests on 3+9 = 12 (v0.1) and 3+14 = 17 (v0.2), per freeze §4. The sentence generalises. | `phase1_t1_controls_excluded.json` comparisons; freeze §4 table | No: it concerns the wording only, and the registered values are correct for hybrid vs BM25 | Fold into **PAPER-05** (the Limitations checklist), for example "Accuracy tests against BM25 rest on 7–8 discordant queries (against dense, 12–17)". Once reworded, the trace entry must be updated. |
+| ISSUE-01 (RESOLVED by TRACE-01, 2026-09-30; had been escalated to P0 by PAPER-02) | VERIFY-02 | The claim trace does not cover the **Conclusion**. Its stated coverage is "Abstract, §1–§5, Tables 1–3, Appendix A, Appendix B". The Conclusion's 9 numbers (46, 34, 50, 12, 9, 15, 20, 11, 134) are unregistered, and so are most Limitations numbers (only the POSIX counts 3 and 4 are). All 9 Conclusion numbers were checked by hand against `review_r1_e_ood_operating_points.json` today and are **correct**. | `paper/CLAIMS_TRACE.md` header; no "Conclusion" location in the trace; grep of `trace_claims.js` | No. It is a process gap: a future edit could drift unnoticed. It matters for FINAL-01. | **TRACE-01 (P1, code):** register the Conclusion, Limitations and Ethics numbers in `trace_claims.js` and extend its coverage line. Do it before PAPER-06, so that the Phase 1 edits are checked. Needs approval to be added to the backlog. |
 | ISSUE-02 | VERIFY-02 | "Wrong answers average 86% confidence" (Abstract; Contribution 1) is **v0.1 only**; the sentence gives no version. On v0.2 the value is 79.50. | Trace entry "Abstract; §1 C1 = 86" (v0.1 source); a new computation from `results/v0.2/reproduction-results.json` | No, but it is an accuracy-of-wording risk a reviewer could catch | **PAPER-08 (P1, paper):** add the version to the 86% in the Abstract and in Contribution 1, or give both values. The abstract has **1 word** of headroom (VERIFY-01), so the fix must trim elsewhere. If 79.50 is quoted, it must be registered in the trace. Could be folded into PAPER-02 (Contribution 1) plus an abstract edit. Needs approval. |
 | ISSUE-03 | VERIFY-02 | The abstract's "Most out-of-scope requests are everyday" rests on **AI-assigned, unchecked** kind labels (34/50). Body §5 says so; the abstract does not. | Freeze §6 ("Kind labels were assigned by an AI assistant and are unchecked"); abstract line 20 | No | **P2.** Add it to the PAPER-05 limitations checklist, or rely on the body disclosure given the abstract's word budget. It is the author's call. |
 
@@ -154,13 +194,12 @@ Recorded by VERIFY-01 on 2026-09-30.
 
 ## Next
 
-- **Recommended:** TRACE-01 (P0), if the author approves adding it: register the Conclusion,
-  Limitations and Ethics numbers in `trace_claims.js`, so that Contribution 3's "trace from every
-  reported number" is true.
-- **Otherwise:** PAPER-03 (novelty wording; P0), now unblocked by PAPER-02.
-- **Also unblocked:** PAPER-01, PAPER-04, PAPER-05, E1-01, E1-04.
+- **Recommended:** PAPER-03 (novelty wording bounded by the documented literature search; P0).
+- **Then:** PAPER-08 (P1: the version for the abstract's 86%), PAPER-05 (P1, now also carrying
+  ISSUE-04), PAPER-01 (P1) and PAPER-04 (P1).
+- **E1-01 and E1-04** are unblocked in parallel.
 - **Pending decisions:**
-  - approve adding TRACE-01 (now P0) and PAPER-08, and how to handle ISSUE-03;
-  - commit now (task files, the PAPER-02 edit and the PDFs), or at PAPER-06?
+  - how to handle ISSUE-03;
+  - whether to fold ISSUE-04 into PAPER-05.
 
 Waiting for the author's instruction.

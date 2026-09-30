@@ -310,6 +310,48 @@ add('Fig. accuracy caption', '$n=135$ and $159$, including the 25 canonical cont
   add('Limitations', 'the shipped tool is credited with 3 such answers on v0.1 and 4 on v0.2', [['3', X(gp['v0.1'].shipped_answers_credited_correct_but_posix_only.length, 'results/system_audit/gold_platform_check.json :: versions.v0.1.shipped_answers_credited_correct_but_posix_only')], ['4', X(gp['v0.2'].shipped_answers_credited_correct_but_posix_only.length, '... versions.v0.2')]]);
 }
 
+// TRACE-01 (research/publication_tasks, 2026-09-30): the Conclusion, Limitations and Ethics, so that
+// Contribution 3's "a trace from every reported number to its result file" holds. Sources are the same
+// fields the earlier entries for these numbers use. The coverage check below enforces completeness.
+{ const kf = 'review_r1/review_r1_f_kappa_intervals.json', bk = R(e).versions['v0.2'].rejections_by_kind;
+  const disc = v => { const c = R(t1).versions[v].comparisons.BM25_to_hybrid.controls_excluded; return c.a_only_correct + c.b_only_correct; };
+  add('Conclusion', '46 vs.\\ 34 of 50, and 12 vs.\\ 9 on the 15 not screened by retrieval score', [['46', F(e, 'versions.v0.2.nested_tuned_baseline_threshold.ood_rejected.k')], ['34', F(e, 'versions.v0.2.committed_operating_points.tuned_detector_nested.ood_rejected.k')], ['50', F(e, 'versions.v0.2.n_ood')], ['12', F(e, 'versions.v0.2.rejections_by_source.original_v0_1_items.tuned_shipped_threshold')], ['9', F(e, 'versions.v0.2.rejections_by_source.original_v0_1_items.hybrid_detector')], ['15', F(e, 'versions.v0.2.rejections_by_source.original_v0_1_items.n')]]);
+  add('Conclusion', 'refuses more in-scope queries (20 vs.\\ 11 of 134)', [['20', F(e, 'versions.v0.2.controls_excluded.false_rejected.tuned_shipped_threshold')], ['11', F(e, 'versions.v0.2.controls_excluded.false_rejected.hybrid_detector')], ['134', F(e, 'versions.v0.2.controls_excluded.n_non_ood')]]);
+  add('Limitations', '150 and 209 queries, the second containing the first; 59 queries drafted by an AI agent', [['150', X(D1.ids.length, 'computed: v0.1 ids (results/hybrid/folds.json)')], ['209', X(D2.ids.length, 'computed: v0.2 ids (results/v0.2/folds.json)')], ['59', X(D2.ids.length - D1.ids.length, 'computed: 209 minus 150')]]);
+  add('Limitations', '($\\kappa=0.63$, interval [0.39, 1.00], $n=14$)', [['0.63', F(kf, 'kappa.point')], ['0.39', F(kf, 'kappa.bootstrap_ci95[0]')], ['1.00', F(kf, 'kappa.bootstrap_ci95[1]')], ['14', F(kf, 'kappa.n')]]);
+  add('Limitations', 'Accuracy tests rest on 7--8 discordant queries', [['7', X(disc('v0.1'), `computed: a_only_correct + b_only_correct, results/${t1} :: versions.v0.1.comparisons.BM25_to_hybrid.controls_excluded`)], ['8', X(disc('v0.2'), '... versions.v0.2')]], 'hybrid vs BM25 only; hybrid vs dense rests on 12 and 17 (see PROGRESS ISSUE-04)');
+  add('Limitations', 'repeats every fold-dependent step on 20 partitions', [['20', X(R('seed_repeat/seed_repeat_cv.json').seeds.length, 'results/seed_repeat/seed_repeat_cv.json :: seeds (length)')]]);
+  add('Limitations', 'Only 10 out-of-scope queries are terminal tasks outside the corpus', [['10', X(bk.near_ood.n + bk.unsupported_tool_ood.n, `computed: near_ood.n + unsupported_tool_ood.n, results/${e} :: versions.v0.2.rejections_by_kind (AI-assigned kinds)`)]]);
+  add('Limitations', 'results depend on the platform-filtered corpus), 279 commands', [['279', X(winVisible.length, 'cli/data/commands.json, records visible on win32')]]);
+  add('Limitations', 'functional evaluation covers 15 queries and treats exit code 0 as success', [['15', F('functional/functional-eval-results.json', 'summary.n_evaluated')], ['0', X(/gold_functional_success: goldResult\.exitCode === (\d+)/.test(fs.readFileSync(rel('research/experiments/run_functional_eval.js'), 'utf8')) ? +RegExp.$1 : NaN, 'research/experiments/run_functional_eval.js: success = exitCode === 0')]]);
+}
+
+// Coverage check (TRACE-01): every numeral in the Conclusion, Limitations and Ethics must be registered
+// above at that location, or be a listed design constant. Identifiers (v0.1, A4, TA-B145, model names)
+// are not numerals; number words ("Two items") are not checked, as elsewhere in this trace.
+const SECTIONS = [
+  ['Discussion', '\\section{Discussion}', '\\section{Conclusion}'],   // §6: no numerals today; checked so none slip in
+  ['Conclusion', '\\section{Conclusion}', '\\label{endofbody}'],       // §7
+  ['Limitations', '\\section*{Limitations}', '\\section*{Ethical Considerations}'],
+  ['Ethics', '\\section*{Ethical Considerations}', '\\aiacknowledgements']
+];
+const DESIGN_CONSTANTS = { Limitations: { '42': 'fold seed, a design parameter (listed in the header exclusions)' } };
+const coverage = [];
+for (const [name, from, to] of SECTIONS) {
+  const i = tex.indexOf(from), j = tex.indexOf(to, i + 1);
+  if (i < 0 || j < 0) { coverage.push({ name, error: `section markers not found (${from} … ${to})` }); continue; }
+  const body = tex.slice(i + from.length, j).replace(/--/g, ' -- ').replace(/\\(ref|label|citep?|citealp)\{[^}]*\}/g, ' ');
+  const found = (body.match(/(?<![A-Za-z0-9.:\-])\d+(?:\.\d+)?(?![A-Za-z0-9])/g) || []);
+  const pool = E.filter(x => x.where.split(';').map(s => s.trim()).includes(name)).flatMap(x => x.items.map(([shown]) => shown));
+  const missing = [];
+  for (const n of found) {
+    const k = pool.indexOf(n);
+    if (k >= 0) pool.splice(k, 1);
+    else if (!(DESIGN_CONSTANTS[name] || {})[n]) missing.push(n);
+  }
+  coverage.push({ name, numerals: found.length, missing });
+}
+
 // ---------- check ----------
 function matches(shown, v) {
   if (typeof v === 'string') return v === shown;
@@ -329,6 +371,11 @@ for (const x of E) {
   }
 }
 if (!a5Guard) { bad++; console.error('A5 per-fold accepted counts did not reproduce'); }
+for (const c of coverage) {
+  if (c.error) { bad++; rows.push(`| ${c.name} | — | — | **COVERAGE CHECK FAILED: ${c.error}** |`); }
+  else if (c.missing.length) { bad++; rows.push(`| ${c.name} | ${c.missing.join(', ')} | — | **UNREGISTERED numeral(s) in this section** |`); }
+}
+const coverageLine = coverage.map(c => c.error ? `${c.name}: error` : `${c.name} ${c.numerals} numeral(s), ${c.missing.length} unregistered`).join('; ');
 const md = [
   '# CLAIMS_TRACE: every number in the paper body, traced to its source (T15)',
   '',
@@ -338,7 +385,9 @@ const md = [
   '',
   `**Status: ${bad ? bad + ' PROBLEM(S)' : 'all ' + nNum + ' numbers in ' + E.length + ' snippets match'}.**`,
   '',
-  'Coverage: every number in the Abstract, §1–§5, Tables 1–3, Appendix A and the Appendix B text and Tables 5 and 7.',
+  'Coverage: every number in the Abstract, §1–§5, §6 Discussion (no numerals), §7 Conclusion, Limitations, Ethical Considerations,',
+  'Tables 1–3, Appendix A and the Appendix B text and Tables 5 and 7.',
+  `Automatic coverage check (numerals only; identifiers and number words excluded): ${coverageLine}.`,
   'Not traced here, with the reason:',
   '- Table 6 (`table_sensitivity.tex`) is generated from `stats/sensitivity-bare-keyword-results.json` by its own',
   '  script; the §B sentence that quotes it is traced.',

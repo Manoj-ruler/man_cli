@@ -1,45 +1,47 @@
 # Current task
 
-**Last completed:** PAPER-02 (2026-09-30): the Contributions paragraph was rewritten as Option A with
-changes (b) and (c). Evidence is in `PROGRESS.md`.
+**Last completed:** TRACE-01 (2026-09-30). The claim trace now covers the Conclusion, Limitations and
+Ethics, and has an automatic numeral-coverage check: 185 snippets, 498 numbers, 0 problems.
 
-**Next (recommended, pending approval): TRACE-01: register the Conclusion, Limitations and Ethics
-numbers in the claim trace.**
+**Next (recommended): PAPER-03: novelty wording bounded by the literature search.** Status: NOT
+STARTED. It waits for the author to say "Start PAPER-03".
 
-- **Status:** PROPOSED. It is not yet in `TASKS.md`; the author must approve adding it.
-- **Priority:** P0. PAPER-02's approved Contribution 3 states "a trace from every reported number to
-  its result file", and ISSUE-01 shows that the Conclusion and most Limitations numbers are not
-  registered.
-- **Type:** code (`research/experiments/trace_claims.js` only).
-- **Depends on:** VERIFY-02 (done). It should run before PAPER-06.
+- **Priority:** P0: it removes an overclaim risk. **Type:** paper. **Depends on:** PAPER-02 (done).
+- **Files:**
+  - `research/paper/acl_latex/content.tex`: the Introduction, §2 and the Limitations "Literature"
+    bullet (lines ~404–405);
+  - `research/paper/T6_LITERATURE_VERIFICATION.md`;
+  - `research/paper/PHASE14_LITERATURE_RECHECK.md`.
 
 ## Steps
 
-1. Using the same `add(...)` pattern as the existing entries in `trace_claims.js`, register every
-   number in the Conclusion (lines 360–370 of `content.tex`), the Limitations section and the Ethics
-   section, against the same result files their duplicates already use.
-2. Update the coverage line in the header of the generated `CLAIMS_TRACE.md` (it is set in
-   `trace_claims.js`) to include the Conclusion, Limitations and Ethics.
-3. Run `node research/experiments/trace_claims.js`.
+1. Search `content.tex` for "first", "novel", "unique", "only", "no prior", "to our knowledge",
+   "new". List every hit with its line and context.
+2. Classify each hit:
+   - a novelty claim;
+   - an unrelated use (for example "only 10 queries");
+   - already qualified.
+3. For each novelty claim, draft a replacement that is limited by the search (it points to the
+   documented search in §2 and the Limitations "Literature" bullet), or remove it. Never write
+   "first".
+4. **Show the drafts to the author; edit only after approval.**
+5. Apply the edits, then run the trace (0 problems, including the coverage check) and the build
+   (body ≤ 8 pages).
 
 ## Acceptance criteria
 
-- [ ] Every number in the Conclusion, Limitations and Ethics is registered. Check this with a
-      script that lists every numeral in those sections against the registered snippets, and
-      report the count.
-- [ ] Trace: **0 problems**. The snippet and number counts rise by the number registered, and both
-      counts are recorded.
-- [ ] No change to `content.tex`, any result, the freeze or the benchmarks.
-- [ ] The regenerated `CLAIMS_TRACE.md` shows the new locations and the updated coverage line.
+- [ ] The paper has no unqualified "first", "novel" or "no prior work". Every remaining hit is
+      classified as an unrelated use or as qualified.
+- [ ] Every gap claim points to the documented search.
+- [ ] Trace: 0 problems. Build: body ≤ 8 pages, 0 overfull boxes.
+- [ ] The abstract stays within 200 words, if it is touched.
+- [ ] The author has approved the text.
 
-## If not approved
+## Must not change
 
-The alternative next task is PAPER-03 (novelty wording, P0). Also unblocked: PAPER-01, PAPER-04,
-PAPER-05, E1-01, E1-04.
+Anything outside the approved passages, any result, the freeze or the benchmarks.
 
 ## Pending decisions
 
-- Add TRACE-01 (P0) and PAPER-08 (P1).
 - ISSUE-03 handling.
-- Commit now or at PAPER-06. The working tree holds the PAPER-02 edit, the rebuilt PDFs and the task
-  files.
+- Whether to fold ISSUE-04 into PAPER-05.
