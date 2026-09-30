@@ -3,8 +3,25 @@
 This guide regenerates every result file, table and figure under `research/` from a clean checkout,
 then checks them against the committed versions.
 
-**Last verified:** 2026-09-28, on commit `f3ba649` plus the T16 files. Method: a fresh `git clone`, a
-fresh `npm ci`, and the model downloaded from the Hugging Face Hub (so no copied cache).
+**Last verified:** 2026-09-30 (REPRO-01), on commit `16a4120` plus the test fix in the next commit.
+Method: a fresh `git clone` from GitHub on Windows with Git's default `core.autocrlf=true`, a fresh
+`npm ci`, and the model downloaded from the Hugging Face Hub (no copied cache).
+
+| Check | Result |
+|-------|--------|
+| Freeze inputs, on the untouched clone (step 0) | 27/27 unchanged |
+| Steps 1–3 and 3b (`run_review_r1.js` and the release and gold-platform checks) | All exited 0 |
+| Step 4 comparison | 0 DIFFERENT; all changes are volatile fields only (40 files after steps 1–3, 51 after step 3b) |
+| Tests (step 7, after `cd cli && npm ci`) | 24/24 pass |
+| `trace_claims.js` | 475 numbers, 0 problems |
+| Paper build | Clean; body ends on page 7 of 8 |
+
+The run found three problems, all fixed:
+
+- Two checks recorded raw-byte input hashes that differ in a CRLF checkout. They now use
+  LF-normalized hashes.
+- This guide said the CLI has no dependencies. It has two, which the tests need.
+- This guide did not list `run_review_r1.js`.
 
 ## Requirements
 
@@ -20,12 +37,23 @@ fresh `npm ci`, and the model downloaded from the Hugging Face Hub (so no copied
   cache (see Step 2).
 - **Git**, so the comparison step can read the committed versions.
 
-The shipped CLI itself needs nothing: it has no dependencies and no model. Everything below is
-research-only.
+The shipped retriever (`cli/search.js`) needs no dependencies and no model. The CLI around it needs
+two UI packages (`chalk`, `@inquirer/prompts`), which only the tests in step 7 use. Everything else
+below is research-only.
 
 ## Steps
 
 Run these from the repository root.
+
+### 0. Check the freeze inputs first, on the untouched clone
+
+```bash
+node research/experiments/verify_freeze_inputs.js research/ANALYSIS_FREEZE_v1.0.md
+```
+
+The check needs every working-copy file to equal its committed version. Run it **before** step 3,
+which rewrites the result files with new timestamps; after step 3 it reports those files as
+changed. Expected: 27/27 unchanged.
 
 ### 1. Install the research dependencies
 
@@ -84,6 +112,19 @@ sequence takes a few minutes.
 `research/paper/acl_latex/table_sensitivity.tex`. Run them in a separate clone if you want to keep your
 working tree untouched.
 
+### 3b. Review-round analyses and release checks
+
+```bash
+node research/experiments/run_review_r1.js
+node research/experiments/release01_published_corpus_check.js
+node research/experiments/system_audit_gold_platform_check.js
+```
+
+- `run_review_r1.js` runs the eight review-round analyses (`review_r1_a` to `review_r1_h`) and the
+  seed-repeat cross-validation. Several of the paper's numbers come from these.
+- The other two produce the released-corpus comparison and the POSIX-credit counts.
+- Every script checks the committed numbers it builds on, and aborts if they do not match.
+
 ### 4. Compare with the committed versions
 
 ```bash
@@ -125,15 +166,9 @@ This needs a LaTeX installation with `pdflatex` and `bibtex` (tested with MiKTeX
 both `main.pdf` (camera-ready) and `main_review.pdf` (anonymous). It fails if the body runs past
 8 pages.
 
-To check that nothing an analysis freeze report used has changed since the freeze, run:
-
-```bash
-node research/experiments/verify_freeze_inputs.js research/ANALYSIS_FREEZE_v1.0.md
-```
-
-It compares every SHA-256 in the report with the committed file, in both LF and CRLF form. v1.0
-hashed raw working-copy bytes, so line endings vary from file to file. Result on 2026-09-29: 27/27
-unchanged.
+**How the freeze check in step 0 works.** It compares every SHA-256 in the report with the committed
+file, in both LF and CRLF form, because v1.0 hashed raw working-copy bytes and line endings vary from
+file to file.
 
 `freeze_analysis_report.js` never overwrites an existing report. Pass `--out <new file>` to
 regenerate one for comparison; new reports hash LF-normalized bytes.
@@ -141,10 +176,13 @@ regenerate one for comparison; new reports hash LF-normalized bytes.
 ### 7. Tests of the shipped tool
 
 ```bash
+cd cli && npm ci && cd ..
 node --test "research/tests/*.test.js"
 ```
 
-These 23 tests check the behaviour of `cli/` that the paper describes:
+These 24 tests check the behaviour of `cli/` that the paper describes. If `npm ci` in `cli/` was
+skipped, one test fails with "run: cd cli && npm ci", and the 7 CLI-flow tests are skipped. The
+tests cover:
 
 - golden retrieval outputs;
 - the confidence formula and the refusal rule;

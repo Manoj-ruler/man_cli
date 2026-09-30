@@ -5,14 +5,24 @@ These tests check that the shipped tool (`cli/`) behaves the way the paper descr
 their own guards, which abort when a result does not reproduce.
 
 ```bash
+cd cli && npm ci && cd ..
 node --test "research/tests/*.test.js"
 ```
 
-Requirements: Node 24 or later. No npm install is needed, because the tests use only `node:test`,
-`node:assert` and `cli/`. Run the command from the repository root. Keep the quotes: Node expands
-the pattern itself, so the command works the same in bash and PowerShell. Checked 2026-09-29 on
-Node 24.2.0 (win32): 23 tests, 23 pass. Do not pass the directory instead
-(`node --test research/tests/`); Node 24 then fails with one error and runs no tests.
+**Requirements:** Node 24 or later, and the CLI's two UI dependencies. `cd cli && npm ci` installs
+them. The tests themselves use only `node:test` and `node:assert`. If the dependencies are missing,
+the check "CLI dependencies are installed" fails with that instruction, and the 7 CLI-flow tests are
+skipped rather than failing for an unrelated reason.
+
+**Running:**
+
+- Run the command from the repository root.
+- Keep the quotes: Node expands the pattern itself, so the command works the same in bash and
+  PowerShell.
+- Do not pass the directory instead (`node --test research/tests/`); Node 24 then fails with one
+  error and runs no tests.
+
+**Checked** 2026-09-30 on Node 24.2.0 (win32), in a fresh clone (REPRO-01): 24 tests, 24 pass.
 
 | File | What it checks |
 |------|----------------|

@@ -14,6 +14,17 @@ const CLI = path.join(ROOT, 'cli/index.js');
 const STUB = path.join(__dirname, 'helpers/stub_exec.js');
 const { search } = require(path.join(ROOT, 'cli/search.js'));
 
+// The CLI needs its two UI dependencies (chalk, @inquirer/prompts) installed in cli/. Without them it
+// exits 1 before doing anything, and every flow test below would fail for an unrelated reason.
+let cliDepsMissing = null;
+for (const dep of ['chalk', '@inquirer/prompts']) {
+  try { require.resolve(dep, { paths: [path.join(ROOT, 'cli')] }); } catch { cliDepsMissing = dep; }
+}
+test('CLI dependencies are installed (run: cd cli && npm ci)', () => {
+  assert.strictEqual(cliDepsMissing, null, `cannot resolve "${cliDepsMissing}" from cli/; run: cd cli && npm ci`);
+});
+
+const flow = (name, fn) => test(name, { skip: cliDepsMissing ? 'CLI dependencies missing (cd cli && npm ci)' : false }, fn);
 const realCfg = path.join(os.homedir(), '.termassist', 'config.json');
 const realCfgStat = fs.existsSync(realCfg) ? fs.statSync(realCfg).mtimeMs : null;
 
@@ -29,20 +40,20 @@ function run(query, env = {}) {
 }
 const execs = ev => ev.filter(e => e.kind === 'exec');
 
-test('stub is active before the CLI runs', () => {
+flow('stub is active before the CLI runs', () => {
   const r = run('teach me how to play guitar');
   assert.notStrictEqual(r.status, 99, 'stub self-check failed: ' + r.stderr);
   assert.ok(r.events.some(e => e.kind === 'stub_ready'));
 });
 
-test('refusal: "No confident match found", exit 1, nothing executed', () => {
+flow('refusal: "No confident match found", exit 1, nothing executed', () => {
   const r = run('teach me how to play guitar');
   assert.strictEqual(r.status, 1);
   assert.match(r.stdout, /No confident match found/);
   assert.strictEqual(execs(r.events).length, 0);
 });
 
-test('match + Enter: prompt pre-filled with the command; one execSync through the platform shell', () => {
+flow('match + Enter: prompt pre-filled with the command; one execSync through the platform shell', () => {
   const q = 'list running processes';
   const want = search(q);
   assert.ok(want.confidence >= 30, 'fixture query must be answered');
@@ -58,25 +69,25 @@ test('match + Enter: prompt pre-filled with the command; one execSync through th
   assert.match(r.stdout, new RegExp(`confidence: ${want.confidence}%`));
 });
 
-test('Ctrl+C at the prompt: exit 0, nothing executed', () => {
+flow('Ctrl+C at the prompt: exit 0, nothing executed', () => {
   const r = run('list running processes', { TA_STUB_PROMPT: 'exit' });
   assert.strictEqual(r.status, 0);
   assert.strictEqual(execs(r.events).length, 0);
 });
 
-test('clearing the prompt: nothing executed', () => {
+flow('clearing the prompt: nothing executed', () => {
   const r = run('list running processes', { TA_STUB_PROMPT: 'clear' });
   assert.strictEqual(execs(r.events).length, 0);
 });
 
-test('sync off by default: config created with sync_enabled false, no network call', () => {
+flow('sync off by default: config created with sync_enabled false, no network call', () => {
   const r = run('list running processes', { TA_STUB_PROMPT: 'accept' });
   assert.ok(r.config, 'config.json should be created on first matched query');
   assert.strictEqual(r.config.sync_enabled, false);
   assert.strictEqual(r.events.filter(e => e.kind === 'network').length, 0);
 });
 
-test('a failing command prints the failure message but exits 0 (audit I-10)', () => {
+flow('a failing command prints the failure message but exits 0 (audit I-10)', () => {
   const r = run('list running processes', { TA_STUB_PROMPT: 'accept', TA_STUB_EXEC: 'throw' });
   assert.strictEqual(r.status, 0);
   assert.match(r.stderr, /Command failed to execute or was aborted/);
