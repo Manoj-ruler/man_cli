@@ -5,7 +5,8 @@
 - §4 (thresholds) was written in E1-04 and approved on 2026-09-30 (D2 = a); the R1 wording was
   amended (ISSUE-06).
 - §3 (exclusions) was approved on 2026-09-30 (D3 = Rule A with subgroup S).
-- §5 (scoring, E1-05/06) and §6 (analysis and outputs, E1-07) are not written yet.
+- §5 (scoring): the design was written in E1-05 (2026-09-30). The guard result is added in E1-06.
+- §6 (analysis and outputs, E1-07) is not written yet.
 - **Nothing may be scored until the whole protocol is frozen** (E1-09, gate G-E1).
 
 ## 1. Question
@@ -156,3 +157,23 @@ The values and their derivation are verified and re-derived in `e1/E1_THRESHOLDS
    R1 and R1-CLI use the unrounded live values (`reproduce_baseline_v0_2.js:44`; `cli/search.js`,
    `cli/index.js`).
 4. **No threshold is re-tuned.** No refit on v0.2 (option c was rejected), and none on CLINC.
+
+## 5. Scoring (E1-05 design; E1-06 implementation and guard pending)
+
+The full data flow, risks and specification are in `e1/E1_SCORING_DESIGN.md`.
+
+- **s** (for R1, R1-CLI and R2) is the output of the shipped `cli/search.js` `search(text)`, imported
+  read-only as in the frozen reproduction.
+  - R1 rejects iff unrounded s < 2.0.
+  - R1-CLI rejects iff `confidence < 30` or there is no command (`cli/index.js:58`).
+  - R2 rejects iff `+s.toFixed(4)` < t.
+- **The fused top-1 score** (R3) is `fuseQuery({lexical, dense}, 0.5)` over the full lexical
+  (`lexicalSearchAll`) and dense (`denseSearch`) candidate lists, rounded with `+x.toFixed(4)`.
+- **The only per-query input is the CLINC text, exactly as stored.**
+- **Before scoring, the run aborts unless:**
+  - the platform is `win32`;
+  - the SHA-256 of `commands.json`, `custom_snippets.json` and `corpus_embeddings.json` match the
+    values in the design, §3;
+  - the model cache check passes;
+  - α = 0.5 in all five v0.2 folds.
+- **The scorer must first reproduce all 209 v0.2 scores exactly (E1-06).**

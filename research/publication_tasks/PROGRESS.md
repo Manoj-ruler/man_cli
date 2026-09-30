@@ -6,7 +6,7 @@
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
-| 2 E1 protocol | E1-01 to 09 | 4 | 0 |
+| 2 E1 protocol | E1-01 to 09 | 5 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
@@ -518,6 +518,46 @@ Recorded by VERIFY-01 on 2026-09-30.
   shell answer". The benchmark's own codebook instead defines OOD as "the list cannot perform this,
   not a shell cannot" (W9). The author chose to follow the codebook, so that E1 is comparable with
   v0.2. The shell-answerable requests are made visible through subgroup S rather than excluded.
+- **Committed:** in `08b8d56`.
+
+### E1-05: can external queries be scored exactly like the frozen pipeline? (DONE 2026-09-30)
+
+- **Deliverable:** `research/publication_tasks/e1/E1_SCORING_DESIGN.md`. `E1_PROTOCOL.md` §5 now
+  points to it.
+- **Method:** code reading, plus one read-only fact check (scratchpad `e1_05_facts.js`) over
+  committed files. `check_model_cache.js` was run in verify mode.
+  - **No scorer was written, nothing was scored, no CLINC data was read, and no model was run.**
+- **Answer: yes.**
+  - s (for R1, R1-CLI and R2) comes from the shipped `cli/search.js` `search()`.
+  - The fused top-1 score (R3) comes from `lexicalSearchAll`, `denseSearch` and `fuseQuery`, with
+    α = 0.5.
+  - Both depend only on the query text, the platform and four pinned inputs. No benchmark-only
+    field affects a score, and α = 0.5 in all five folds.
+- **Checked today:**
+  - the cached lexical top-1, rounded to 4 dp, matches the reproduction's s on **209/209** queries;
+  - the lexical index holds 280 records (279 corpus records + 1 packaged snippet, as the paper
+    discloses), and the dense list 279;
+  - no Windows-visible command string is duplicated;
+  - the model cache is OK.
+- **New observations** (recorded in the design, §4):
+  - **Risk 3, the empty-token divergence.** For a query with no tokens left, `search()` returns
+    s = 0, but `lexicalSearchAll` has no such guard. This never occurred on v0.2 (0 queries).
+    Pre-specified handling is proposed for E1-07.
+  - **The zero-overlap property** (code-derived, not an E1 outcome). A query sharing no token with
+    any record, and firing no bonus, has s = 0, and its fused top-1 score is 0.5. Every rule
+    therefore rejects it: 0.5 is below every R3 threshold, the lowest of which is 0.8841.
+    **The rules can differ only on queries with some lexical overlap.** On v0.2, 17 of 209 queries
+    had all-equal lexical scores.
+    - **Recommendation for E1-07:** report the zero-overlap count, and compare the rules on the
+      overlap subset as well.
+  - **ISSUE-07** (see Issues).
+- **Acceptance criteria:**
+  1. A written data flow with file:line references (design §1–§2): **pass**.
+  2. The risks are named: min-max normalisation, candidate-set size, α, 4-dp rounding, the model
+     cache, the tokenizer, plus platform, side effects on import, size and the empty-token case
+     (§4): **pass**.
+  3. No code was written. The only script is the read-only fact check, kept in the scratchpad and
+     not in the repository: **pass**.
 
 ## Decisions
 
@@ -542,6 +582,7 @@ Recorded by VERIFY-01 on 2026-09-30.
 
 | ID | Found in | Issue | Evidence | Blocks? | Proposed task |
 |---|---|---|---|---|---|
+| ISSUE-07 | E1-05 | Two scoring inputs are not covered by the analysis freeze's input hashes: `cli/data/custom_snippets.json` (the packaged snippet in the lexical index) and `research/models/corpus_embeddings.json`. The freeze hashes only `commands.json` (`ANALYSIS_FREEZE_v1.0.md:372`). Both files are tracked in git, but `termassist sync` overwrites the snippet file (`cli/index.js:30-40`), and any change to it alters every score. | `E1_SCORING_DESIGN.md` §3, §4 (risk 2), §6; SHA-256 values recorded there | No | **No plan change.** The E1-06 scorer asserts the three SHA-256 values before scoring, and E1-09 lists them among E1's frozen inputs. `ANALYSIS_FREEZE_v1.0.md` is not touched. |
 | ISSUE-05 | PAPER-05 | Possible related-work gap. A web search during Stage 4.5 (2026-09-29, the D1 originality check) returned an arXiv paper titled "Execution-Based Evaluation of Natural Language to Bash and PowerShell for Incident Remediation" (arXiv 2405.06807). It is **unverified**: I have not read or checked it, and the paper does not cite it. If it is real and relevant, it is a public NL-to-**PowerShell** benchmark, which a reviewer may expect in §2 given the tool's Windows corpus. It does **not** contradict §3's or the Limitations' "natural-language-to-**Bash** benchmarks target Linux". | the Stage 4.5 web-search result list, 2026-09-29 (in the session record) | No: the current wording is accurate. It is a completeness risk. | **LIT-01 (P2):** verify arXiv 2405.06807 against its primary record (authors, venue, content). If it holds, decide with the author whether to cite it in §2, and whether its PowerShell data could serve any purpose. That would be a new dataset, which needs approval under the plan's rules. Run it before FINAL-03. |
 | ISSUE-04 (RESOLVED by PAPER-05, 2026-09-30) | TRACE-01 | Limitations says "Accuracy tests rest on 7--8 discordant queries". That is true for **hybrid vs BM25** (0+7 on v0.1, 1+7 on v0.2) but **not** for hybrid vs dense, which rests on 3+9 = 12 (v0.1) and 3+14 = 17 (v0.2), per freeze §4. The sentence generalises. | `phase1_t1_controls_excluded.json` comparisons; freeze §4 table | No: it concerns the wording only, and the registered values are correct for hybrid vs BM25 | Fold into **PAPER-05** (the Limitations checklist), for example "Accuracy tests against BM25 rest on 7–8 discordant queries (against dense, 12–17)". Once reworded, the trace entry must be updated. |
 | ISSUE-01 (RESOLVED by TRACE-01, 2026-09-30; had been escalated to P0 by PAPER-02) | VERIFY-02 | The claim trace does not cover the **Conclusion**. Its stated coverage is "Abstract, §1–§5, Tables 1–3, Appendix A, Appendix B". The Conclusion's 9 numbers (46, 34, 50, 12, 9, 15, 20, 11, 134) are unregistered, and so are most Limitations numbers (only the POSIX counts 3 and 4 are). All 9 Conclusion numbers were checked by hand against `review_r1_e_ood_operating_points.json` today and are **correct**. | `paper/CLAIMS_TRACE.md` header; no "Conclusion" location in the trace; grep of `trace_claims.js` | No. It is a process gap: a future edit could drift unnoticed. It matters for FINAL-01. | **TRACE-01 (P1, code):** register the Conclusion, Limitations and Ethics numbers in `trace_claims.js` and extend its coverage line. Do it before PAPER-06, so that the Phase 1 edits are checked. Needs approval to be added to the backlog. |
@@ -557,12 +598,12 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **Author action:** PAPER-07. Submit `research/paper/acl_latex/main_review.pdf` (SHA-256 prefix
   `7c129b946bcd928b`) to the EACL 2027 SRW mentorship programme by **Nov 6**, and tell Claude when it
   is done, so it can be recorded.
-- **Recommended Claude task:** E1-05 (P0). Write the scoring design by reading the code: how the
-  frozen pipeline computes s and the fused top-1 score for a query, what a new script needs, and the
-  risks. **No code written, nothing scored.**
-- **Then:** E1-06 (the scorer, proven on the v0.2 benchmark only).
+- **Recommended Claude task:** E1-06 (P0). Write
+  `research/experiments/e1_score_queries.js` to the specification in `E1_SCORING_DESIGN.md` §5.
+  - Prove it on the 209 v0.2 queries only (0 mismatches), and run the synthetic edge cases.
+  - **No CLINC input; no existing file changed.**
+- **Then:** E1-07 (the analysis protocol).
 - **Phase 1 is complete** apart from the author's submission.
-- **E1-01 and E1-04** are unblocked in parallel.
 - **LIT-01** (P2) is in the backlog.
 
 Waiting for the author's instruction.
