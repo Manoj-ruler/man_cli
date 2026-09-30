@@ -393,8 +393,32 @@ v0.2 thresholds frozen?
   - The author approves the protocol.
 - **Deliverable:** `E1_PROTOCOL.md` (complete).
 
+### E1-07b: Analysis code written and tested before the freeze (added 2026-09-30, ISSUE-08)
+- **Priority:** P1. **Type:** code. **Depends on:** E1-06 and E1-07.
+- **Files:** a new script, `research/experiments/e1_analyze.js`.
+- **Steps:**
+  1. Implement exactly the quantities in protocol §6.2–§6.5, plus the logical checks in §6.8. Reuse
+     the `phase1_common.js` statistics.
+  2. The input is the scorer's per-query files plus the P1 metadata (intent, domain, subgroup).
+  3. Test it on **synthetic score files only**. They are generated in the scratchpad with known
+     answers, and cover at least these cases:
+     - hand-computable rates;
+     - a threshold tie;
+     - a query with no tokens;
+     - a lexical-null query;
+     - a degenerate bootstrap;
+     - a deliberately broken nesting, which the logical checks must catch.
+  4. **Never run it on CLINC**, or on any E1 output.
+- **Acceptance:**
+  - Every §6 quantity has an output field with its numerator and denominator.
+  - The synthetic tests match their known answers.
+  - The logical checks fail on the broken case.
+  - No existing file changed; no CLINC input.
+- **Deliverable:** the committed script and the synthetic test log in `PROGRESS.md`. The script is
+  frozen with the protocol at E1-09, and E1-13 runs it unchanged.
+
 ### E1-08: Protocol review for leakage, selection bias and ambiguity
-- **Priority:** P0. **Type:** verify. **Depends on:** E1-07.
+- **Priority:** P0. **Type:** verify. **Depends on:** E1-07 and E1-07b.
 - **Steps:** check the protocol against a written checklist:
   1. no threshold is tuned on E1 data;
   2. exclusions are class-level and were decided without scores;
@@ -412,7 +436,8 @@ v0.2 thresholds frozen?
 ### E1-09: Freeze the protocol (gate G-E1)
 - **Priority:** P0. **Type:** verify. **Depends on:** E1-08, plus the author's explicit approval.
 - **Steps:**
-  1. Commit `e1/` (the protocol, exclusions, thresholds and scoring design).
+  1. Commit `e1/` (the protocol, exclusions, thresholds and scoring design), together with
+     `e1_score_queries.js` and `e1_analyze.js` (E1-07b). Record the SHA-256 of both scripts.
   2. Create the git tag `e1-protocol-v1` and push the branch and tag.
   3. Record the commit hash and the date.
   4. External preregistration (e.g. OSF) is optional decision **D9**.
@@ -469,7 +494,8 @@ v0.2 thresholds frozen?
 ### E1-13: Run the planned analysis
 - **Priority:** P0. **Type:** experiment. **Depends on:** E1-12.
 - **Steps:**
-  1. Compute exactly the protocol's metrics.
+  1. Compute exactly the protocol's metrics, by running the frozen `e1_analyze.js` (E1-07b)
+     unchanged.
   2. Label anything not in the protocol "post hoc".
   3. Record deviations, if any, with approval.
 - **Acceptance:**
@@ -603,3 +629,4 @@ v0.2 thresholds frozen?
 | D7 | E1 uses the frozen **v0.2** thresholds even if the final paper reports v0.2.1 | E1-02 | Yes: v0.2 is frozen and pre-annotation; state this in the protocol |
 | D8 | Each paper edit's text (Phase 1 and Phase 4) | per task | — |
 | D9 | External preregistration (e.g. OSF), beyond the git tag | E1-09 | Optional; a git tag is sufficient for SRW |
+| D10 | E1's primary comparison and multiplicity | E1-07 | **Decided (a), 2026-09-30:** one primary comparison, R2 − R3 on P1, with a paired cluster-bootstrap interval. P2's pairs are secondary (exact McNemar, Holm over 3); everything else is descriptive. |

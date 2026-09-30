@@ -7,7 +7,8 @@
 - §3 (exclusions) was approved on 2026-09-30 (D3 = Rule A with subgroup S).
 - §5 (scoring): the design was written in E1-05, and the scorer was implemented and passed its guard
   in E1-06 (both 2026-09-30).
-- §6 (analysis and outputs, E1-07) is not written yet.
+- §6 (analysis and outputs) was approved on 2026-09-30 (D10 = a). The analysis code is written
+  before the freeze (E1-07b).
 - **Nothing may be scored until the whole protocol is frozen** (E1-09, gate G-E1).
 
 ## 1. Question
@@ -188,3 +189,232 @@ The full data flow, risks and specification are in `e1/E1_SCORING_DESIGN.md`.
   - the replica's substring bonus can still fire. For example, "the" gives a fused score of 1, so
     R3 would accept it.
   - **§6 must pre-specify:** how many such queries there are, and how each rule decides on them.
+
+## 6. Analysis and outputs (E1-07; approved by the author on 2026-09-30, D10 = a)
+
+The analysis code, `research/experiments/e1_analyze.js`, is written and tested on synthetic data
+only, **before the freeze** (E1-07b, ISSUE-08). It is frozen with this protocol, and E1-13 runs it
+unchanged.
+
+Everything below is fixed before any CLINC query is scored.
+
+- **Anything computed that is not listed here is labelled "post hoc"** in every output.
+- All code reuses the project's existing statistics helpers (`research/experiments/phase1_common.js`):
+  - `wilson` (95%, z = 1.96);
+  - `exactMcNemar` (two-sided exact binomial);
+  - `mulberry32` and `percentile` (linear interpolation).
+
+### 6.1 Units, identifiers and denominators
+
+| Set | Unit | n | Clusters | Identifier |
+|---|---|---|---|---|
+| P1 (`test`) | query | 4,500 | 150 intents × 30 queries | `test:<i>`, the 0-based index into `data_full.json` `test` |
+| P2 (`oos_test`) | query | 1,000 | none | `oos_test:<i>` |
+| P1 domains (descriptive) | query | 450 per domain | 15 intents per domain, 10 domains (`domains.json`) | — |
+| S-clear | query | 180 | 6 intents | — |
+| S-borderline | query | 210 | 7 intents | — |
+| P1 without S-clear | query | 4,320 | 144 intents | — |
+| P1 without S-clear and S-borderline | query | 4,110 | 137 intents | — |
+
+**Every query in P1 and P2 is out of scope for this tool** (§2, §3). A rejection is therefore
+always a correct decision, and **the rejection rate is the only outcome**. There is no in-scope
+query in E1 (§2.4, point 2).
+
+### 6.2 Decision rules (exactly as in §1, §4 and §5)
+
+Each rule is computed per query from the scorer's output:
+
+| Rule | Reject iff | Thresholds |
+|---|---|---|
+| R1 | `s < 2.0` (unrounded) | — |
+| R1-CLI | `confidence < 30 \|\| command_shipped === null` | — |
+| R2(t) | `s4 < t` | t ∈ {6.4952, 7.1978}. The fold map is 6.4952 for folds 0, 1, 2 and 4, and 7.1978 for fold 3. |
+| R3(u) | `fused4 < u` | u ∈ {0.9179, 0.9219, 0.8841, 0.9247, 0.9219} for folds 0–4 |
+
+- **Primary thresholds (D2 = a): the medians, R2 at 6.4952 and R3 at 0.9219.** Unless a threshold
+  is named, "R2" and "R3" below mean these.
+- **Ties at a threshold:** a score exactly equal to a threshold is **not** rejected (strict `<`,
+  as in the tuning code). The same applies to R1 at exactly 2.0.
+- **Queries with no tokens** and **lexical-null queries** are kept and decided by each rule as
+  above (§5). A query is lexical-null when all its lexical scores are equal (`lexical_all_equal`),
+  so that norm_lex = 0 for every candidate.
+
+### 6.3 Primary outcome: the rejection rate of each rule, per population
+
+- **Point estimate:** k/n. It is reported as a count, as a rate to 4 dp, and as a percentage.
+  - For R2 and R3 this is the rate at the median threshold. By D2's monotonicity it equals the
+    median of the five per-fold rates.
+- **Intervals:**
+  - **P1: a cluster bootstrap over intents. This is the primary interval (§2.2).**
+    - Resample the 150 intents with replacement: B = 10,000, `mulberry32` seed 42.
+    - The statistic is the pooled rate over all queries of the resampled intents.
+    - The interval is the 2.5th–97.5th percentile.
+    - The Wilson interval is also shown, labelled "ignores clustering; too narrow".
+  - **P2:** the Wilson 95% interval.
+- **Five-threshold sensitivity (R2, R3):**
+  - the rate at each of the five per-fold thresholds;
+  - the minimum and maximum over the five, labelled "sensitivity range, not an interval".
+  - For R2 there are only two distinct values: the rates at 6.4952 and at 7.1978.
+
+### 6.4 The primary comparison, and multiplicity (decision D10 = a, author, 2026-09-30)
+
+There is **one pre-specified primary comparison**:
+
+- **the paired difference in rejection rate, R2 − R3, on P1**;
+- with a paired cluster-bootstrap 95% interval. The same resampled intents are used for both
+  rules, with the same B and seed as above.
+
+It answers §2.3, point 2: does the tuned shipped threshold keep its lead over the hybrid detector
+on requests nobody screened?
+
+**Pre-stated reading:**
+
+| Interval | Reading |
+|---|---|
+| Entirely above 0 | R2's lead holds on external data |
+| Includes 0 | No evidence of a difference |
+| Entirely below 0 | The lead reverses |
+
+- The size of the difference is reported whatever the interval.
+- **Degenerate case:** if every bootstrap value is identical (for example, both rules reject
+  everything), the interval is reported as degenerate. No reading is made beyond the point estimate.
+
+**Secondary comparisons.** These are labelled secondary, and no claim rests on them alone:
+
+- **P2, all three pairs** (R2 − R3, R3 − R1, R2 − R1):
+  - the paired difference;
+  - the exact McNemar p-value, **Holm-adjusted across these three tests**;
+  - the discordant counts (a_only, b_only).
+  - The P2 R2 − R3 result is described as a **replication check** on the second population, not as
+    a second primary result.
+- **P1, the other two pairs** (R3 − R1, R2 − R1):
+  - the paired cluster-bootstrap interval only.
+  - Exact McNemar is also shown, labelled "ignores clustering".
+- **The full 2×2 agreement table** for every pair, in each population.
+
+**Alternatives considered and not chosen:**
+
+- **(b) Fully descriptive.** Every estimate has an interval, and there is no primary test.
+- **(c) Two primary comparisons.** R2 − R3 on P1 and on P2, Holm-adjusted over 2.
+
+### 6.5 Other pre-specified quantities (descriptive)
+
+1. **R1 vs R1-CLI.** Count the queries with 2.0 ≤ s < 2.36, per population. Because the rules are
+   nested (6.8), this equals R1-CLI's rejections minus R1's.
+2. **Subgroup S** (§3):
+   - rates for S-clear and for S-borderline;
+   - the P1 rates recomputed **without S-clear** and **without S-clear and S-borderline**, with
+     cluster-bootstrap intervals (144 and 137 intents);
+   - the primary comparison (R2 − R3) recomputed on both reduced sets.
+3. **Per domain (P1):** k/450 and the rate for each rule and domain. There are no tests and no
+   intervals.
+4. **Ties:** the number of queries with `s4` exactly equal to 6.4952 or to 7.1978, or with `fused4`
+   exactly equal to any R3 threshold, per population and threshold. None of them is rejected.
+5. **Queries with no tokens:**
+   - their count, per population;
+   - each rule's decision on them;
+   - if there are any, each rule's rate with them removed (a sensitivity line).
+6. **Lexical-null queries:**
+   - their count and share, per population;
+   - each rule's rate on the **overlap subset** (all other queries);
+   - the primary comparison recomputed on that subset.
+
+   The rules can differ only on the overlap subset (E1-05).
+7. **Score distributions:** the median, the quartiles and the 5th/95th percentiles of `s`, `s4` and
+   `fused4`, per population.
+8. **Comparison with v0.2 (descriptive; different populations, no test).**
+   - Each E1 rate is placed beside the committed v0.2 rates, with its interval:
+
+     | Rule | v0.2, all 50 | v0.2, 15 unscreened | v0.2, 35 added |
+     |---|---|---|---|
+     | R1 | 17 | 4 | 13 |
+     | R2 | 46 | 12 | 34 |
+     | R3 | 34 | 9 | 25 |
+
+     Sources: `results/review_r1/review_r1_e_ood_operating_points.json`
+     (`versions.v0.2.committed_operating_points`, `nested_tuned_baseline_threshold`,
+     `rejections_by_source`).
+   - The E1 difference R2 − R3 is placed beside v0.2's: 24 points on 50, and 20 points on the 15
+     unscreened.
+   - **Stated caveats:**
+     - v0.2's rates are out-of-fold: each query met its own fold's threshold. E1 applies all five
+       thresholds to queries that were in no fold. Both are out-of-sample, but they are not the
+       same procedure.
+     - CLINC is general-domain (§2.4).
+   - **Every E1 rate is reported next to the v0.2 false-rejection counts: 0, 20 and 11 of 134 for
+     R1, R2 and R3.** E1 cannot measure false rejections (§2.4).
+
+### 6.6 Expected directions (written before running; interpretation aids, not pass/fail criteria)
+
+- **ED-1 (screening).** If v0.2's score screening inflated the tuned shipped threshold:
+  - R2's rejection rate on P1 and P2 will be **below 92%** (46/50);
+  - and R2 − R3 will be **smaller than v0.2's 24 points**, or reversed.
+- **ED-2 (a property of the scores).** If R2's lead reflects how well the two scores separate
+  out-of-scope requests, rather than the screening, R2 − R3 will be **above 0** on P1 (the primary
+  interval) and on P2.
+  - ED-1 and ED-2 can both hold: a smaller lead that is still positive.
+- **ED-3 (vocabulary): a floor that holds by construction, not an expectation.** Every rule
+  rejects every lexical-null query (6.8, item 4; for R3, provided its dense scores are not all
+  equal). So:
+  - every rule's rate is **at least the lexical-null share** (6.5, point 6);
+  - the rules can differ **only** on the overlap subset.
+
+  If that share is high, the overall rates say little about the rules, and the overlap-subset
+  results carry the comparison. **No direction is stated for absolute rates** compared with v0.2.
+- **ED-4 (subgroup S).** S intents ask for things a shell could do, and their wording is closer to
+  command descriptions. Rejection on S-clear is expected to be **lower** than on the rest of P1, for
+  every rule.
+- **ED-5 (P1 vs P2).** No direction is stated.
+
+### 6.7 Outputs (new, versioned; none exists before the freeze)
+
+All outputs go in `research/results/e1_clinc150_v1/`:
+
+| File | Task | Content |
+|---|---|---|
+| `data/p1_queries.json`, `data/p2_queries.json`, `data/DATA_PROVENANCE.md` | E1-10 | `{id, text, intent, domain, subgroup}` (P1) and `{id, text}` (P2), taken unchanged from the committed `data_full.json`. The provenance file gives source hashes and counts. |
+| `guard_v0_2.json` | E1-11 | The scorer's `--guard` run, in the same session as the scoring. It must pass. |
+| `scores_p1.json`, `scores_p2.json` | E1-11 | The scorer's per-query output (E1-06). |
+| `decisions_p1.json`, `decisions_p2.json` | E1-11 | Per query: R1, R1-CLI, R2 at both distinct thresholds, and R3 at all five. |
+| `RUN_MANIFEST.json` | E1-11 | See the list below. |
+| `summary.json`, `summary.md` | E1-13 | Every quantity in 6.3–6.5, with numerator, denominator and interval. |
+| `DEVIATIONS.md` | E1-13 | Present even if empty. |
+
+**The run manifest records:**
+
+- the commit hash, and the protocol tag `e1-protocol-v1`;
+- the Node version;
+- the SHA-256 of `data_full.json`, `domains.json` and the three scoring inputs;
+- the model-cache result;
+- the SHA-256 of `e1_score_queries.js` and of the analysis script;
+- B, the seed, and the start and end times.
+
+### 6.8 Logical checks (E1-12)
+
+These are implied by the code. **If any fails, the run is BLOCKED as an implementation error**, and
+results are never corrected by hand.
+
+1. Every query rejected by R1 is rejected by R1-CLI.
+2. Every query rejected by R1 is rejected by R2 at both thresholds, since s < 2.0 implies
+   s4 ≤ 2.0 < 6.4952.
+3. R2(6.4952) ⊆ R2(7.1978), and R3 is nested in the order of its thresholds.
+4. Every lexical-null query has s = 0. Every lexical-null query whose dense scores are not all equal
+   has `fused4` = 0.5, so R3 rejects it at every threshold.
+5. The row counts are 4,500 and 1,000. No score is NaN or missing.
+
+### 6.9 Deviation policy
+
+- **Any change after the freeze is a numbered deviation** (DEV-E1-01, …). It records:
+  - what changed;
+  - why;
+  - whether any E1 outcome had been seen;
+  - the author's approval.
+
+  It is logged in `PROGRESS.md` (Deviations, E1) and in `DEVIATIONS.md`.
+- **Populations, exclusions, thresholds, α, rounding, the primary comparison and B/seed are never
+  changed after outcomes are seen.** If a change is unavoidable (for example, a scoring bug), the
+  analysis is re-run from the frozen code plus the fix, and **both** the original and the corrected
+  results are reported.
+- **Failures:**
+  - a failed pre-flight or guard stops the run (BLOCKED plus a new issue);
+  - nothing is scored until the failure is fixed and recorded.

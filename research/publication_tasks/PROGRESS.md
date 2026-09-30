@@ -6,7 +6,7 @@
 |---|---|---|---|
 | 0 State verification | VERIFY-01 to 04 | 2 | 0 |
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
-| 2 E1 protocol | E1-01 to 09 | 6 | 0 |
+| 2 E1 protocol | E1-01 to 09, plus E1-07b | 7 | 0 |
 | 3 E1 execution | E1-10 to 14 | 0 | 0 |
 | 4 Integration | INTEG-01 to 07 | 0 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
@@ -618,6 +618,37 @@ Recorded by VERIFY-01 on 2026-09-30.
      updates): **pass**.
 - **Not exercised:** the pre-flight failure paths (a wrong platform, a changed input hash, a missing
   model). They are straightforward checks, but they have not been tested.
+- **Committed:** in `189f830`.
+
+### E1-07: analysis protocol, metrics and output specification (DONE 2026-09-30)
+
+- **Deliverable:** `E1_PROTOCOL.md` §6, approved by the author ("D10 = a, approve §6, add
+  E1-07b"). It covers:
+  - 6.1, units and denominators;
+  - 6.2, the decision rules;
+  - 6.3, the primary outcome and its intervals;
+  - 6.4, the primary comparison and multiplicity;
+  - 6.5, the other pre-specified quantities;
+  - 6.6, the expected directions;
+  - 6.7, outputs;
+  - 6.8, logical checks;
+  - 6.9, the deviation policy.
+- **Nothing was scored**, and no CLINC query or outcome was read.
+- **The v0.2 reference values quoted in §6.5** come from
+  `results/review_r1/review_r1_e_ood_operating_points.json` (`versions.v0.2`):
+  - `committed_operating_points`: R1 17/50, R3 34/50;
+  - `nested_tuned_baseline_threshold`: R2 46/50;
+  - `rejections_by_source`: 4/12/9 of the 15 original, 13/34/25 of the 35 added;
+  - `controls_excluded`: false rejections 0/20/11 of 134.
+
+  The statistics helpers are in `phase1_common.js:63-99`, and the domain sizes (10 × 15 intents)
+  come from `domains.json`.
+- **A correction while drafting:** ED-3 was first written as an expectation. It was changed to a
+  floor that holds by construction, since every rule rejects every lexical-null query.
+- **Acceptance criteria:**
+  1. Every metric is defined, with its denominators (§6.1–§6.5): **pass**.
+  2. The output paths are new and versioned (`research/results/e1_clinc150_v1/`, §6.7): **pass**.
+  3. The author approved the protocol (D10 = a): **pass**.
 
 ## Decisions
 
@@ -636,12 +667,15 @@ Recorded by VERIFY-01 on 2026-09-30.
 | D7 | E1 uses the **frozen v0.2 thresholds**, even if the final paper reports v0.2.1 | 2026-09-30 | author |
 | D2 | **(a)**: apply all five per-fold thresholds. The primary result is the median rate, which equals the rate at the median threshold (R2 6.4952, R3 0.9219); the min–max is a sensitivity range. | 2026-09-30 | author |
 | — | ISSUE-06 **option 1**: R1 stays s < 2.0 (primary); add R1-CLI (s < 2.36) as secondary; correct the approved §1 wording ("on the benchmark, equivalently") | 2026-09-30 | author |
+| D10 | **(a)**: one pre-specified primary comparison, R2 − R3 on P1, with a paired cluster-bootstrap 95% interval (B = 10,000, seed 42). P2's three pairs are secondary (exact McNemar, Holm over 3); all else is descriptive. §6 is approved as drafted. | 2026-09-30 | author |
+| — | ISSUE-08: **add E1-07b** (P1). `e1_analyze.js` is written and tested on synthetic data before the freeze, frozen at E1-09, and run unchanged at E1-13. E1-08 now depends on E1-07b. | 2026-09-30 | author |
 | D3 | **Rule A** (exclude an intent iff a Windows-visible corpus record performs its typical request; the benchmark's own OOD definition): **0 exclusions**, P1 = all 150 intents and 4,500 queries. **Subgroup S** is reported, not excluded: S-clear = date, calculator, measurement_conversion, flip_coin, roll_dice, timer; S-borderline = time, timezone, alarm, reminder_update, weather, exchange_rate, current_location. A sensitivity check drops S-clear, then S-clear and S-borderline. | 2026-09-30 | author |
 
 ## Issues
 
 | ID | Found in | Issue | Evidence | Blocks? | Proposed task |
 |---|---|---|---|---|---|
+| ISSUE-08 (RESOLVED by adding E1-07b, author, 2026-09-30) | E1-07 | The plan writes the E1 analysis code after the freeze (E1-11/E1-13). The protocol text fixes every metric, but code written after the freeze still leaves room for undeclared implementation choices, such as bootstrap indexing or how ties are handled in code. | `TASKS.md` E1-11 and E1-13; protocol §6 | No | **Proposed E1-07b (P1, code):** write `research/experiments/e1_analyze.js` **before** the freeze. Test it only on synthetic score files, including the 6.8 logical checks, never on CLINC. Freeze it with the protocol, so that E1-13 only runs frozen code. **This changes the plan, so it needs the author's approval.** |
 | ISSUE-07 | E1-05 | Two scoring inputs are not covered by the analysis freeze's input hashes: `cli/data/custom_snippets.json` (the packaged snippet in the lexical index) and `research/models/corpus_embeddings.json`. The freeze hashes only `commands.json` (`ANALYSIS_FREEZE_v1.0.md:372`). Both files are tracked in git, but `termassist sync` overwrites the snippet file (`cli/index.js:30-40`), and any change to it alters every score. | `E1_SCORING_DESIGN.md` §3, §4 (risk 2), §6; SHA-256 values recorded there | No | **No plan change.** The E1-06 scorer asserts the three SHA-256 values before scoring, and E1-09 lists them among E1's frozen inputs. `ANALYSIS_FREEZE_v1.0.md` is not touched. |
 | ISSUE-05 | PAPER-05 | Possible related-work gap. A web search during Stage 4.5 (2026-09-29, the D1 originality check) returned an arXiv paper titled "Execution-Based Evaluation of Natural Language to Bash and PowerShell for Incident Remediation" (arXiv 2405.06807). It is **unverified**: I have not read or checked it, and the paper does not cite it. If it is real and relevant, it is a public NL-to-**PowerShell** benchmark, which a reviewer may expect in §2 given the tool's Windows corpus. It does **not** contradict §3's or the Limitations' "natural-language-to-**Bash** benchmarks target Linux". | the Stage 4.5 web-search result list, 2026-09-29 (in the session record) | No: the current wording is accurate. It is a completeness risk. | **LIT-01 (P2):** verify arXiv 2405.06807 against its primary record (authors, venue, content). If it holds, decide with the author whether to cite it in §2, and whether its PowerShell data could serve any purpose. That would be a new dataset, which needs approval under the plan's rules. Run it before FINAL-03. |
 | ISSUE-04 (RESOLVED by PAPER-05, 2026-09-30) | TRACE-01 | Limitations says "Accuracy tests rest on 7--8 discordant queries". That is true for **hybrid vs BM25** (0+7 on v0.1, 1+7 on v0.2) but **not** for hybrid vs dense, which rests on 3+9 = 12 (v0.1) and 3+14 = 17 (v0.2), per freeze §4. The sentence generalises. | `phase1_t1_controls_excluded.json` comparisons; freeze §4 table | No: it concerns the wording only, and the registered values are correct for hybrid vs BM25 | Fold into **PAPER-05** (the Limitations checklist), for example "Accuracy tests against BM25 rest on 7–8 discordant queries (against dense, 12–17)". Once reworded, the trace entry must be updated. |
@@ -658,17 +692,8 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **Author action:** PAPER-07. Submit `research/paper/acl_latex/main_review.pdf` (SHA-256 prefix
   `7c129b946bcd928b`) to the EACL 2027 SRW mentorship programme by **Nov 6**, and tell Claude when it
   is done, so it can be recorded.
-- **Recommended Claude task:** E1-07 (P0). Complete `E1_PROTOCOL.md` §6, the analysis
-  protocol. It must include:
-  - the primary rates with Wilson and cluster-bootstrap intervals;
-  - McNemar between rules;
-  - D2's median and range;
-  - R1-CLI and the [2.0, 2.36) count;
-  - the subgroup-S sensitivity check;
-  - ties at exact threshold values;
-  - the no-token and zero-overlap counts;
-  - expected-direction statements;
-  - the output files.
+- **Recommended Claude task:** E1-07b (P1). Write `research/experiments/e1_analyze.js` to
+  protocol §6, and test it on synthetic score files only. **No CLINC input.**
 - **Then:** E1-08 (protocol review) and E1-09 (the freeze and tag).
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
