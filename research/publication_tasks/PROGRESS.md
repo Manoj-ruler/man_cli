@@ -8,7 +8,7 @@
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
 | 3 E1 execution | E1-10 to 14 | 5 (**complete**) | 0 |
-| 4 Integration | INTEG-01 to 07 | 6 | 0 |
+| 4 Integration | INTEG-01 to 07 | 7 (**complete**) | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
 
 ## Planning entry (2026-09-30)
@@ -1212,6 +1212,57 @@ Recorded by VERIFY-01 on 2026-09-30.
   0 name hits in the review PDF.
 - **Acceptance criteria:** the search finds only correct uses in the body, and only E1 is called
   pre-planned: **pass**. The Abstract item was moved to INTEG-07 with the author's approval.
+- **Committed:** in `2b13c32`.
+
+### INTEG-07: the Abstract, Discussion and Conclusion (DONE 2026-10-01)
+
+- **Draft shown first; approved** ("approve P5, P6, abstract = β, skip P8").
+- **Edits to `content.tex`:**
+  - **P5, the Discussion.** "Out-of-scope rejection needed a better threshold, not a new
+    retriever: … at least as well … (in-sample) …" became "Out-of-scope rejection depended mostly
+    on the threshold: … Which score to threshold is not settled: the shipped score did at least as
+    well as the hybrid's feature at equal false-rejection counts on our benchmark (in-sample), but
+    worse on the external requests at equal v0.2 cost." It contains no numerals.
+  - **P6, the Conclusion.**
+    - The lead now reads "a better retriever was not needed for out-of-scope requests, although on
+      external requests the hybrid's feature rejected more at equal cost".
+    - New sentence: "In an analysis frozen before scoring, on external general-domain requests, the
+      threshold still rejects more at its operating point (86% vs. 78%), but at equal v0.2 cost
+      the hybrid's feature rejects more (77% vs. 65%)."
+  - **P10, the Abstract (β).**
+    - The clause "on the 15 original ones … reject 4, 12 and 9" is replaced by: "On 4,500
+      unscreened external requests (pre-specified check), the threshold still beats the detector
+      (86% vs. 78%) but, at equal cost, loses (65% vs. 77%)."
+    - "All analyses are exploratory" → "Other analyses are exploratory".
+    - Trims: "runs its choice on Enter", "calibration error", "(outside our test family)",
+      "cross-validated threshold", "a hybrid detector", "everyday ones".
+    - **The abstract is 200 words** (limit 200; same counting rule as before).
+    - Correction while drafting: the first candidate said "5,500". The rates are P1's, so the
+      sentence says **4,500**. A second candidate's "runs it on Enter" was ambiguous and was not
+      used.
+  - **P8:** skipped, by the author's decision.
+- **Trace:**
+  - the "…a hybrid detector 34 and 11" snippet is updated;
+  - the retired abstract entry "4, 12 and 9" stays traced in §5 and the Conclusion;
+  - new entries cover the abstract's external-check sentence (4500, 86, 78, 65, 77) and the
+    Conclusion sentence (86, 78, 77, 65), all from `summary.json` P1;
+  - **the result is `208 snippets, 595 numbers, 0 problem(s)`.** Coverage: Conclusion 13 numerals,
+    0 unregistered; Discussion 0.
+- **Search:** "All analyses are exploratory" now has 0 hits. Together with INTEG-06, only the
+  external check is described as pre-specified.
+- **Build:**
+  - `endofbody` is now on **page 8**, left column, at about 15% (y = 665.3 pt; measured on a
+    scratch copy with a `\pdfsavepos` marker). That is within the limit of 8. **About 96 column
+    lines remain**, down from about 147.
+  - The jump of about one column, against about 5 added lines, comes from float reflow.
+  - 0 overfull boxes and 0 undefined references; underfull warnings 22 / 17.
+  - All edits are present in the review PDF, checked in context because of column interleaving and
+    hyphenation. 0 name hits.
+- **Acceptance criteria:**
+  1. The abstract is ≤ 200 words (200), and every number is traced: **pass**.
+  2. "All analyses are exploratory" is replaced, and only E1 is called pre-specified: **pass**.
+  3. The body is ≤ 8 pages: **pass**.
+  4. The edits were drafted first: **pass**.
 
 ## Decisions
 
@@ -1281,15 +1332,15 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
 - **E1-10 to E1-13 are done.** The results are computed; see the E1-13 entry.
 - **Phase 3 is complete.** E1-14's memo is approved.
 - **INTEG-01 is done** (D12 = B).
-- **INTEG-02 to INTEG-06 are done.**
-- **Recommended Claude task:** INTEG-07 (P1), the Abstract, Discussion and Conclusion (plan
-  items P5, P6, P8 and P10). It covers:
-  - the Discussion's "better threshold, not a new retriever" passage;
-  - the Conclusion lead and the out-of-scope sentence;
-  - the optional contribution clause;
-  - the Abstract: replace "All analyses are exploratory", and decide whether to add an E1
-    sentence, within 200 words.
-  - Draft first; the build must stay ≤ 8 pages, and the trace at 0 problems.
+- **Phase 4 is complete** (INTEG-01 to 07). The paper is consistent end to end on E1.
+- **Recommended Claude task:** FINAL-01 (P0), the claim trace and number-to-artefact check. Record
+  the final counts (currently 208 / 595 / 0), and spot-check a random sample of trace rows
+  against their source files by hand.
+- **Then:** FINAL-02 (P0), the build, page limit, abstract length and anonymity. It should include
+  the reduced page headroom (about 96 lines) and Table 8's float placement. After that come
+  LIT-01 (before FINAL-03), FINAL-03 to 06.
+- **Author:** the paper is now in a consistent state for **PAPER-07**, the mentorship submission
+  due Nov 6. The review PDF is at `9158a9c`+, with the latest build in this commit.
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 

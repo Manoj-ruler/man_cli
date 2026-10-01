@@ -9,18 +9,19 @@
 
 \begin{abstract}
 Natural-language shell assistants are usually built by generation. We audit a published closed-set
-alternative: a BM25 retriever over a fixed Windows command list that shows users a confidence and runs the
-chosen command on Enter. Its confidence is no better than a constant forecaster, and wrong answers
+alternative: a BM25 retriever over a fixed Windows command list that shows users a confidence and runs its
+choice on Enter. Its confidence is no better than a constant forecaster, and wrong answers
 average 86\% confidence (v0.1). Under cross-validation on two benchmark versions (the second adds 59
 out-of-scope and ambiguous queries), excluding 25 verbatim-copy controls, isotonic recalibration cuts
-the shipped confidence's expected calibration error by 79\% and 78\%, to about a calibrated
-forecaster's noise floor (outside our corrected test family). On v0.2, a cross-validated rejection threshold on the
+the shipped confidence's calibration error by 79\% and 78\%, to about a calibrated
+forecaster's noise floor (outside our test family). On v0.2, a cross-validated threshold on the
 shipped score rejects 46 of 50 out-of-scope requests but also 20 of 134
-in-scope ones; the fixed rule rejects 17 and none, a hybrid BM25--MiniLM detector 34 and 11. Most
-out-of-scope requests are everyday, not computing, ones (AI-assigned labels); the 35 added were screened for low scores, and on the 15
-original ones the fixed rule, threshold and detector reject 4, 12 and 9. The hybrid's confidence
+in-scope ones; the fixed rule rejects 17 and none, a hybrid detector 34 and 11. Most
+out-of-scope requests are everyday ones (AI-assigned labels), and the 35 added were screened for low scores. On
+4,500 unscreened external requests (pre-specified check), the threshold still beats the detector (86\% vs.\ 78\%)
+but, at equal cost, loses (65\% vs.\ 77\%). The hybrid's confidence
 ranks its own errors better, but its accuracy gain is fragile; both systems sometimes return
-destructive commands for benign requests. All analyses are exploratory; a two-annotator study is under way.
+destructive commands for benign requests. Other analyses are exploratory; a two-annotator study is under way.
 \end{abstract}
 
 \section{Introduction}
@@ -372,10 +373,11 @@ OS-level sandbox), all gold commands and 14 of 15 hybrid answers exited successf
 For a shipped closed-set assistant the three problems separate cleanly. The displayed confidence was the weakest
 part, and standard recalibration on held-out labels repairs most of it on our benchmark (a result outside the
 corrected family); on queries like these, the number a user sees can become informative without changing the
-retriever. Whether a better-calibrated number changes what users run is untested. Out-of-scope rejection needed a
-better threshold, not a new retriever: the shipped score, thresholded well, separated out-of-scope requests at least
-as well as the hybrid's feature at equal false-rejection counts (in-sample), and the tuned threshold rejected more out-of-scope requests by refusing
-more in-scope queries, a trade-off that should be set by the relative cost of a wrong command and a refusal. The
+retriever. Whether a better-calibrated number changes what users run is untested. Out-of-scope rejection depended
+mostly on the threshold: tuned on the shipped score, it rejected more out-of-scope requests by refusing more in-scope
+queries, a trade-off that should be set by the relative cost of a wrong command and a refusal. Which score to
+threshold is not settled: the shipped score did at least as well as the hybrid's feature at equal false-rejection
+counts on our benchmark (in-sample), but worse on the external requests at equal v0.2 cost. The
 hybrid's value, with the one encoder we tested, lies in ranking its own errors, which matters for abstention. For
 users of a tool that runs a command on Enter, the risky wrong answers suggest safeguards independent of calibration.
 The tool runs a command only after a single Enter on a prompt pre-filled with it; beyond that, it could show the risk level and
@@ -385,11 +387,14 @@ commands, or require higher confidence before returning a high-risk command. We 
 \section{Conclusion}
 
 On our benchmark, the three reliability problems of a shipped closed-set retriever had three different remedies,
-and a better retriever was not the remedy for out-of-scope requests. A published natural-language command retriever shows its users a confidence that, on our benchmark, is no better
+and a better retriever was not needed for out-of-scope requests, although on external requests the hybrid's
+feature rejected more at equal cost. A published natural-language command retriever shows its users a confidence that, on our benchmark, is no better
 than a constant forecaster. On the same benchmark, post-hoc recalibration fixes most of that. A threshold on the
 shipped score, tuned by cross-validation, rejects more out-of-scope requests than a hybrid detector (on v0.2, 46 vs.\
 34 of 50, and 12 vs.\ 9 on the 15 not screened by retrieval score) but refuses more in-scope queries (20 vs.\ 11 of 134), and
-most of these requests are everyday rather than terminal tasks. The hybrid, with one small encoder (MiniLM), mainly improves how
+most of these requests are everyday rather than terminal tasks. In an analysis frozen before scoring, on external
+general-domain requests, the threshold still rejects more at its operating point (86\% vs.\ 78\%), but at equal
+v0.2 cost the hybrid's feature rejects more (77\% vs.\ 65\%). The hybrid, with one small encoder (MiniLM), mainly improves how
 confidence ranks its own errors. Next steps, in order:
 finish the two-annotator label study and release a corrected benchmark; extend the pre-specified external check,
 so far general-domain, to answerable and terminal-task out-of-scope queries judged by people; build an independent
