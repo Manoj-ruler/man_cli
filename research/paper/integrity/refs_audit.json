@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-09-29T17:36:14.395Z",
-  "n": 30,
+  "checked_at": "2026-10-01T05:39:08.662Z",
+  "n": 31,
   "refs": [
     {
       "key": "lin-etal-2018-nl2bash",
@@ -238,8 +238,17 @@
         },
         {
           "src": "s2",
-          "url": "https://api.semanticscholar.org/graph/v1/paper/search/match?fields=title,authors,year,venue,externalIds,publicationVenue&query=QuoteBench%3A%20How%20Matched%20Scores%20Can%20Hide%20Command-Path%20Failures",
-          "error": "API_UNAVAILABLE"
+          "url": "https://www.semanticscholar.org/paper/e7d6ca8aa75f77924658aebfae4f477941959885",
+          "title": "QuoteBench: How Matched Scores Can Hide Command-Path Failures",
+          "authors": [
+            "li",
+            "zhang",
+            "tresp",
+            "yang"
+          ],
+          "year": 2026,
+          "venue": "",
+          "s2_status": "S2_VERIFIED"
         }
       ],
       "checks": [
@@ -248,6 +257,69 @@
           "title_match": true,
           "authors_match": true,
           "author_count": "4 vs bib 4",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "4 vs bib 4",
+          "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "vo2024execution",
+      "bib": {
+        "title": "Execution-Based Evaluation of Natural Language to Bash and PowerShell for Incident Remediation",
+        "authors": [
+          "vo",
+          "paulovicks",
+          "sheinin"
+        ],
+        "year": "2024",
+        "venue": ""
+      },
+      "sources": [
+        {
+          "src": "arxiv",
+          "url": "https://arxiv.org/abs/2405.06807",
+          "title": "Execution-Based Evaluation of Natural Language to Bash and PowerShell for Incident Remediation",
+          "authors": [
+            "vo",
+            "paulovicks",
+            "sheinin"
+          ],
+          "year": "2024"
+        },
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/aa495354c4ff85c4ba272082f7ae74486a869cf5",
+          "title": "Execution-Based Evaluation of Natural Language to Bash and PowerShell for Incident Remediation",
+          "authors": [
+            "vo",
+            "paulovicks",
+            "sheinin"
+          ],
+          "year": 2024,
+          "venue": "",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "arxiv",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "3 vs bib 3",
+          "year_match": true
+        },
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "3 vs bib 3",
           "year_match": true
         }
       ],
@@ -367,13 +439,32 @@
         },
         {
           "src": "s2",
-          "url": "https://api.semanticscholar.org/graph/v1/paper/search/match?fields=title,authors,year,venue,externalIds,publicationVenue&query=With%20Little%20Power%20Comes%20Great%20Responsibility",
-          "error": "API_UNAVAILABLE"
+          "url": "https://www.semanticscholar.org/paper/186d26390779f7c54930e05812cfe85e6973961f",
+          "title": "With Little Power Comes Great Responsibility",
+          "authors": [
+            "card",
+            "henderson",
+            "khandelwal",
+            "jia",
+            "mahowald",
+            "jurafsky"
+          ],
+          "year": 2020,
+          "venue": "Conference on Empirical Methods in Natural Language Processing",
+          "doi": "10.18653/v1/2020.emnlp-main.745",
+          "s2_status": "S2_VERIFIED"
         }
       ],
       "checks": [
         {
           "src": "crossref",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "6 vs bib 6",
+          "year_match": true
+        },
+        {
+          "src": "s2",
           "title_match": true,
           "authors_match": true,
           "author_count": "6 vs bib 6",
@@ -412,13 +503,28 @@
         },
         {
           "src": "s2",
-          "url": "https://api.semanticscholar.org/graph/v1/paper/search/match?fields=title,authors,year,venue,externalIds,publicationVenue&query=The%20Probabilistic%20Relevance%20Framework%3A%20BM25%20and%20Beyond",
-          "error": "API_UNAVAILABLE"
+          "url": "https://www.semanticscholar.org/paper/47ced790a563344efae66588b5fb7fe6cca29ed3",
+          "title": "The Probabilistic Relevance Framework: BM25 and Beyond",
+          "authors": [
+            "robertson",
+            "zaragoza"
+          ],
+          "year": 2009,
+          "venue": "Foundations and Trends in Information Retrieval",
+          "doi": "10.1561/1500000019",
+          "s2_status": "S2_VERIFIED"
         }
       ],
       "checks": [
         {
           "src": "crossref",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "2 vs bib 2",
+          "year_match": true
+        },
+        {
+          "src": "s2",
           "title_match": true,
           "authors_match": true,
           "author_count": "2 vs bib 2",
@@ -944,13 +1050,28 @@
         },
         {
           "src": "s2",
-          "url": "https://api.semanticscholar.org/graph/v1/paper/search/match?fields=title,authors,year,venue,externalIds,publicationVenue&query=Bias-Reduced%20Uncertainty%20Estimation%20for%20Deep%20Neural%20Classifiers",
-          "error": "API_UNAVAILABLE"
+          "url": "https://www.semanticscholar.org/paper/dfb58733b367005945a2f2c2028145e4678efd7a",
+          "title": "Bias-Reduced Uncertainty Estimation for Deep Neural Classifiers",
+          "authors": [
+            "geifman",
+            "uziel",
+            "el yaniv"
+          ],
+          "year": 2018,
+          "venue": "International Conference on Learning Representations",
+          "s2_status": "S2_VERIFIED"
         }
       ],
       "checks": [
         {
           "src": "arxiv",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "3 vs bib 3",
+          "year_match": false
+        },
+        {
+          "src": "s2",
           "title_match": true,
           "authors_match": true,
           "author_count": "3 vs bib 3",
@@ -995,13 +1116,33 @@
         },
         {
           "src": "s2",
-          "url": "https://api.semanticscholar.org/graph/v1/paper/search/match?fields=title,authors,year,venue,externalIds,publicationVenue&query=Overcoming%20Common%20Flaws%20in%20the%20Evaluation%20of%20Selective%20Classification%20Systems",
-          "error": "API_UNAVAILABLE"
+          "url": "https://www.semanticscholar.org/paper/aa0d360e558bcc1a0ba8c979bbf9856051328c88",
+          "title": "Overcoming Common Flaws in the Evaluation of Selective Classification Systems",
+          "authors": [
+            "traub",
+            "bungert",
+            "luth",
+            "baumgartner",
+            "maier hein",
+            "maier hein",
+            "jaeger"
+          ],
+          "year": 2024,
+          "venue": "Neural Information Processing Systems",
+          "doi": "10.48550/arXiv.2407.01032",
+          "s2_status": "S2_VERIFIED"
         }
       ],
       "checks": [
         {
           "src": "arxiv",
+          "title_match": true,
+          "authors_match": false,
+          "author_count": "7 vs bib 7",
+          "year_match": true
+        },
+        {
+          "src": "s2",
           "title_match": true,
           "authors_match": false,
           "author_count": "7 vs bib 7",

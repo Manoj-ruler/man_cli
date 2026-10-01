@@ -1,26 +1,26 @@
 # Current task
 
-**Last completed:** LIT-01 (2026-10-01).
+**Last completed:** FINAL-03 (2026-10-01): the scoped integrity rerun **passes after one
+correction**.
 
-- arXiv 2405.06807 is verified and cited once in §2 (`vo2024execution`). Its data is not used.
-- The literature date is now October 2026.
-- ISSUE-05 is resolved.
+- 31/31 references are verified, with 0 regressions.
+- 100% of the changed passages are checked.
+- The "exactly those that share no word" wording in §5 and Appendix C was corrected for three
+  greetings accepted through an accidental substring match.
 - Trace: 208 / 595 / 0. The body ends on page 8 of 8. Anonymity passes.
 
 **Author actions:**
 
-- **PAPER-07 (by Nov 6):** the committed review PDF is ready to submit. It now includes this
-  citation.
+- **PAPER-07 (by Nov 6):** submit the current review PDF, which includes the FINAL-03 correction.
 - **ISSUE-11 = a:** send the drafted annotator messages. Adjudication waits.
 - Decide whether to commit `research/results/annotation/`.
 - **Optional:** add a `\clearpage` before Appendix C, for Table 8's placement.
 
-**Next (recommended): FINAL-03, the scoped rerun of Stage 4.5 integrity.** Status: NOT STARTED. It
-waits for "Start FINAL-03".
+**Next (recommended): FINAL-04, the reproduction docs and a clean-clone rerun that includes E1.**
+Status: NOT STARTED. It waits for "Start FINAL-04".
 
-- Check 100% of the paragraphs changed since `research/paper/STAGE4_5_INTEGRITY_REPORT.md` (PAPER-01
-  to 08, INTEG-03 to 07, LIT-01) against their sources: no claim without a source, and no source
-  misrepresented.
-- Re-verify every reference with `research/paper/integrity/verify_refs.js`, including
-  `vo2024execution`.
-- **Acceptance:** 100% of the changed paragraphs are checked, and every reference is still verified.
+- Add an E1 section to `research/REPRODUCE.md`: the order of commands, the frozen tag, the
+  `git diff` check, the expected hashes, and the model cache.
+- Clone the repository fresh into the scratchpad, copy the verified model cache offline (no
+  download), and re-run the E1 pipeline. The outputs must match the committed
+  `research/results/e1_clinc150_v1/`, apart from timestamps.

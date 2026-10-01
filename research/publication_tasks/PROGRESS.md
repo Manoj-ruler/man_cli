@@ -9,7 +9,7 @@
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
 | 3 E1 execution | E1-10 to 14 | 5 (**complete**) | 0 |
 | 4 Integration | INTEG-01 to 07 | 7 (**complete**) | 0 |
-| 5 Final checks | FINAL-01 to 06, plus LIT-01 | 3 | 0 |
+| 5 Final checks | FINAL-01 to 06, plus LIT-01 | 4 | 0 |
 
 ## Planning entry (2026-09-30)
 
@@ -1364,6 +1364,31 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **ISSUE-05 is resolved.**
 - **Acceptance criteria:** the paper was verified against its primary record, a cite or not-cite
   recommendation was made with a reason, it ran before FINAL-03, and the author decided: **pass**.
+- **Committed:** in `b60ffeb`, with the bibliography files in `9637ab3`.
+
+### FINAL-03: scoped rerun of the Stage 4.5 integrity check (DONE 2026-10-01)
+
+- **Deliverable:** `research/paper/FINAL03_SCOPED_INTEGRITY.md`. The baseline is the report at
+  `607525a`.
+- **References:** the fresh `verify_refs.js` run checked all 31 cited keys (`refs_audit.json`,
+  2026-10-01).
+  - **31/31 found, 0 regressions.**
+  - `vo2024execution` matches on both arXiv and S2.
+  - All remaining partial flags were already adjudicated in the baseline report (ll. 54–67).
+- **Changed passages:** 33 diff hunks, 100% checked.
+  - Numbers are covered by the trace.
+  - The non-numeric claims were checked against their sources, including **git ancestry** for
+    "frozen … before any of its queries was scored": the tag `970c54f` precedes `86114a2` and
+    `63d71af`.
+- **One integrity error found and corrected** (author: "approve fix"). §5 and Appendix C said the
+  fixed rule rejects "exactly" the requests that share no word with the corpus.
+  - An independent recount found that 3 of the 1,142 such P1 requests ("ya", "bye", "hola!") are
+    accepted through the substring bonus. P2 is exact.
+  - Both sentences now state the exception ("three short greetings … accidental substring match").
+- **After the correction:** trace 208 / 595 / 0; body on page 8 (limit 8); 0 overfull boxes;
+  anonymity PASS.
+- **Acceptance criteria:** 100% of the changed paragraphs are checked, and every reference is still
+  verified: **pass**.
 
 ## Decisions
 
@@ -1434,13 +1459,15 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
 - **Phase 3 is complete.** E1-14's memo is approved.
 - **INTEG-01 is done** (D12 = B).
 - **Phase 4 is complete** (INTEG-01 to 07). The paper is consistent end to end on E1.
-- **FINAL-01, FINAL-02 and LIT-01 are done.**
-- **Recommended Claude task:** FINAL-03 (P0), the scoped Stage 4.5 integrity rerun.
-  - Every paragraph changed since that report (INTEG-03 to 07, LIT-01, PAPER-01 to 08) is
-    checked against its sources.
-  - Every reference is re-verified (`research/paper/integrity/verify_refs.js`), including the new
-    `vo2024execution`.
-- **Then:** FINAL-04 to 06.
+- **FINAL-01 to FINAL-03 and LIT-01 are done.**
+- **Recommended Claude task:** FINAL-04 (P1), the reproduction docs and a clean-clone rerun that
+  includes E1. It covers:
+  - an E1 section in `research/REPRODUCE.md`;
+  - a fresh clone into the scratchpad that reproduces `e1_clinc150_v1` byte-identically, apart
+    from timestamps. This needs the pinned model cache, which can be copied offline, so nothing
+    is downloaded.
+- **Then:** FINAL-05 (consistency of paper, code and artefacts) and FINAL-06 (submission
+  checklist).
 - **Author:** the paper is now in a consistent state for **PAPER-07**, the mentorship submission
   due Nov 6. The review PDF is at `9158a9c`+, with the latest build in this commit.
 - **Phase 1 is complete** apart from the author's submission.

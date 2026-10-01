@@ -293,8 +293,9 @@ detector's gain over the fixed rule on the same 15 queries has $p=0.25$ in the v
 run, because each run tunes its own thresholds; neither is significant, and the second is not a replication.)
 
 On the external check (Appendix~\ref{app:external}), the fixed rule rejects only 25\% of the 4,500 CLINC150
-requests from known intents and 19\% of the 1,000 others: exactly those that share no word, after stop-words,
-with the corpus. At their v0.2 operating points the tuned threshold rejects 86\% and the detector 78\%
+requests from known intents and 19\% of the 1,000 others: those that share no word, after stop-words,
+with the corpus, except three short greetings (e.g., ``bye'') accepted through an accidental substring match
+(\S\ref{sec:system}). At their v0.2 operating points the tuned threshold rejects 86\% and the detector 78\%
 (difference $+8.3$ points, interval [5.0, 11.6]; 83\% and 78\% on the 1,000), a smaller lead than on v0.2. At
 equal v0.2 cost, however, the hybrid's feature rejects more than the shipped score (77\% vs.\ 65\%, $-12.5$
 points [$-16.2$, $-8.9$]; 77\% vs.\ 60\% on the 1,000). On these requests, then, the benchmark's ordering of
@@ -652,8 +653,9 @@ accuracy by query type, the risk-coverage curves and the ablation; they include 
 
 \section{External Check on CLINC150}
 \label{app:external}
-Table~\ref{tab:external} gives the pre-specified results (\S\ref{sec:methods}). The fixed rule rejects exactly
-the requests that share no word with the corpus, so every rule rejects at least that share.
+Table~\ref{tab:external} gives the pre-specified results (\S\ref{sec:methods}). The fixed rule rejects only
+requests that share no word with the corpus, all of them except three short greetings accepted through an
+accidental substring match; every rule rejects the rest of that group, so its share is a floor for every rule.
 
 \begin{table*}[t]
   \centering
