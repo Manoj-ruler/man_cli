@@ -1,4 +1,4 @@
-\begin{thebibliography}{30}
+\begin{thebibliography}{31}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Agarwal et~al.(2020)Agarwal, Barroso, Chakraborti, Dow, Fadnis,
@@ -173,6 +173,12 @@ Jeremias Traub, Till~J. Bungert, Carsten~T. L{\"u}th, Michael Baumgartner,
   systems.
 \newblock In \emph{Advances in Neural Information Processing Systems},
   volume~37, pages 2323--2347.
+
+\bibitem[{Vo et~al.(2024)Vo, Paulovicks, and Sheinin}]{vo2024execution}
+Ngoc Phuoc~An Vo, Brent Paulovicks, and Vadim Sheinin. 2024.
+\newblock \href {https://arxiv.org/abs/2405.06807} {Execution-based evaluation
+  of natural language to {B}ash and {PowerShell} for incident remediation}.
+\newblock \emph{Preprint}, arXiv:2405.06807.
 
 \bibitem[{Wang et~al.(2020)Wang, Wei, Dong, Bao, Yang, and
   Zhou}]{wang2020minilm}
