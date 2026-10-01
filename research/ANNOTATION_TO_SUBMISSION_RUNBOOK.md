@@ -17,6 +17,28 @@ The rehearsal found and fixed one bug that would have aborted the real run:
 answered, keep each annotator's confirmation in `coordinator/` (it is gitignored) so the paper can
 state it.
 
+**2026-10-01: both main sheets are back.**
+
+- **Steps 1–2 are done.** Both validate with 0 errors and 0 warnings.
+- A **pre-adjudication** run of step 5 (without `--adjudication`, as protocol §4 allows) wrote
+  `research/results/annotation/`. It is not yet committed.
+- **Step 3 is on hold (ISSUE-11).** Annotator 2's `record_ids` appear misplaced on about 12–15
+  rows, and the adjudication sheet shows record ids.
+  - A record_ids-only correction, with the labels locked, and an independence confirmation from
+    both annotators were requested. The drafts are in `coordinator/MESSAGE_DRAFTS_2026-10-01.md`.
+  - The return checks are listed there.
+
+**The external check (E1) does not depend on this study.** E1 uses the frozen **v0.2** thresholds
+(decision D7), so steps 7–9 do not re-run it, and the label-study update in step 10 must leave the E1
+passages and their numbers unchanged:
+
+- §4 "External check";
+- §5;
+- Appendix C;
+- the E1 sentences in the Abstract, Discussion, Conclusion and Limitations.
+
+`trace_claims.js` checks those numbers.
+
 ## Before the main sheets go out (you; now done)
 
 - **G0:** each annotator confirms privately that they did the practice sheet alone and without AI
@@ -48,7 +70,7 @@ All commands run from the repository root. Put the files under
 | 10 | Draft the paper update | `node research/experiments/draft_label_study_update.js` | Writes `paper/drafts/LABEL_STUDY_UPDATE_DRAFT.md`, with current and proposed text for the 5 label-study passages. Wording follows the pre-declared outcome, and it lists the `trace_claims` registrations. Settle its G0 note, then ask Claude to apply it together with the v0.2.1 numbers. Then run `trace_claims.js` (0 problems) and `bash build.sh` (≤ 8 pages). |
 | 11 | Scoped re-review, then Stage 4.5 again | Ask Claude (ARS reviewer re-review, integrity final-check) | Rerun `STAGE4_5_INTEGRITY_REPORT.md` with 100% of the changed paragraphs |
 | 12 | AI-use disclosure | **Done 2026-09-30.** The author answered; the statement is in the camera-ready Acknowledgements (`\aiacknowledgements` in `main.tex`). | Recheck that it still describes the uses after step 10 |
-| 13 | Clean-clone reproduction (REPRO-01) | Follow `research/REPRODUCE.md` in a fresh clone | Tests: `node --test "research/tests/*.test.js"` gives 23/23. Freeze inputs: `verify_freeze_inputs.js` gives 27/27. |
+| 13 | Clean-clone reproduction (REPRO-01) | Follow `research/REPRODUCE.md` in a fresh clone | Tests: `node --test "research/tests/*.test.js"` gives 24/24 (this row said 23/23 until 2026-10-01; the suite now has 24 tests, as `REPRODUCE.md` also states). Freeze inputs: `verify_freeze_inputs.js` gives 27/27. E1: `REPRODUCE.md` step 9, where `compare_reproduction.js` gives 0 DIFFERENT (verified 2026-10-01). |
 
 Everything after step 13 is yours: submitting the paper, and publishing CLI 1.1 (`PRODUCT_1_1.md` on
 the local `product/1.1` branch).

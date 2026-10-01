@@ -1,12 +1,11 @@
 # Current task
 
-**Last completed:** FINAL-04 (2026-10-01).
+**Last completed:** FINAL-05 (2026-10-01).
 
-- `REPRODUCE.md` gained step 9 (E1).
-- A clean clone, with an offline `npm ci` and a copied verified model cache, re-ran the whole E1
-  pipeline.
-- **`compare_reproduction.js` reports 0 DIFFERENT** (8 volatile-only). A negative control confirms
-  the comparison still catches real changes.
+- Every artefact the paper names exists.
+- `ARCHITECTURE.md` (new §6) and the runbook now cover E1. Stale facts were corrected: the trace
+  counts, the module counts, and tests 24/24.
+- Freeze inputs: 27/27.
 
 **Author actions:**
 
@@ -15,11 +14,11 @@
 - Decide whether to commit `research/results/annotation/`.
 - **Optional:** add a `\clearpage` before Appendix C, for Table 8's placement.
 
-**Next (recommended): FINAL-05, a consistency review of the paper, code and artefacts.** Status:
-NOT STARTED. It waits for "Start FINAL-05".
+**Next (recommended): FINAL-06, the submission checklist** (P0; the last task). Status: NOT
+STARTED. It waits for "Start FINAL-06".
 
-- Every artefact the paper mentions exists at the stated path.
-- Names, versions and counts are consistent across the paper, the README files, `REPRODUCE.md`, the
-  task documents and the result files. This includes the corpus sizes, the benchmark versions, the
-  E1 tag and paths, and the tool's release statement.
-- Discrepancies are listed, and fixed only with approval where they touch the paper.
+- Draft the ACL Responsible NLP checklist answers from the paper and the ledgers, including AI use
+  (`research/paper/AI_DISCLOSURE_LEDGER.md`).
+- Confirm the final anonymous PDF: the build, anonymity, the page limit and the trace.
+- Record the supplementary-material decision (the author's).
+- **Submission itself is the author's action.**

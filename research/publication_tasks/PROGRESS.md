@@ -9,7 +9,7 @@
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
 | 3 E1 execution | E1-10 to 14 | 5 (**complete**) | 0 |
 | 4 Integration | INTEG-01 to 07 | 7 (**complete**) | 0 |
-| 5 Final checks | FINAL-01 to 06, plus LIT-01 | 5 | 0 |
+| 5 Final checks | FINAL-01 to 06, plus LIT-01 | 6 | 0 |
 
 ## Planning entry (2026-09-30)
 
@@ -1434,6 +1434,46 @@ Recorded by VERIFY-01 on 2026-09-30.
   2. A fresh clone reproduces `e1_clinc150_v1`, with the data verified against the recorded hashes:
      **pass**.
   3. `compare_reproduction.js` reports 0 DIFFERENT: **pass**.
+- **Committed:** in `c67770d`.
+
+### FINAL-05: consistency review of the paper, code and artefacts (DONE 2026-10-01)
+
+- **Artefacts the paper names** (`\texttt`, `\input`, `\includegraphics`, `\url` and `\href` in
+  `content.tex`, `main.tex` and `main_review.tex`; scratchpad `final05_artefacts.js`):
+  - **all 12 figure PNGs and `table_sensitivity.tex` exist** (tracked);
+  - the other `\texttt` items are commands or flags (`sudo reboot`, `-WhatIf`, …), the model id
+    `Xenova/all-MiniLM-L6-v2` (a Hugging Face id, not a repository path), and the author e-mail
+    (camera-ready only);
+  - no `\url` or `\href` appears.
+  - The items Contribution 3 promises to release exist: both benchmark versions
+    (`datasets/termassist_bench_v0.{1,2}_validated.*`), the code, and the claim trace
+    (`paper/CLAIMS_TRACE.md`, `trace_claims.js`).
+- **`research/ARCHITECTURE.md`** (it had 0 E1 mentions; now 14):
+  - E1 is added to the data-flow diagram, with a new **§6, "The external check on CLINC150 (E1)"**
+    (protocol and tag, data, scoring, analysis, checks, records, reproduction). "The paper" is now
+    §7.
+  - Frozen inputs now include the E1 protocol and scripts and the CLINC150 copy. Regenerated
+    outputs note that E1 has its own sequence.
+  - **Stale facts corrected:**
+    - the claim-trace counts, 176 / 475 → **208 / 595**, plus the coverage check;
+    - the shared-module user counts, now that the E1 scripts exist: `phase1_common` 9 → 10,
+      `hybrid_fusion` 9 → 10, `lexical_search` 4 → 5, `dense_search` 4 → 6 (counted by
+      `require('./…')`);
+    - the integrity records now include `FINAL03_SCOPED_INTEGRITY.md`.
+- **`research/ANNOTATION_TO_SUBMISSION_RUNBOOK.md`** (0 E1 mentions; now 5):
+  - a 2026-10-01 status: both returns are back, steps 1–2 are done, the pre-adjudication analysis
+    has run, and step 3 is held for ISSUE-11;
+  - **E1 is independent of the label study** (D7, the frozen v0.2 thresholds). Steps 7–10 must
+    leave the E1 passages unchanged;
+  - step 13 now includes the E1 reproduction.
+  - **Stale fact corrected:** the tests are **24/24**. The row said 23/23; the suite was re-run
+    today and gives 24 pass, 0 fail.
+- **Freeze check:** `verify_freeze_inputs.js` gives **27/27 unchanged**.
+- **Trace:** 208 / 595 / 0.
+- **Acceptance criteria:**
+  1. Every artefact the paper mentions exists: **pass**.
+  2. `ARCHITECTURE.md` and the runbook mention E1: **pass**.
+  3. The freeze check reports 27/27: **pass**.
 
 ## Decisions
 
@@ -1504,13 +1544,13 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
 - **Phase 3 is complete.** E1-14's memo is approved.
 - **INTEG-01 is done** (D12 = B).
 - **Phase 4 is complete** (INTEG-01 to 07). The paper is consistent end to end on E1.
-- **FINAL-01 to FINAL-04 and LIT-01 are done.**
-- **Recommended Claude task:** FINAL-05 (P1), a consistency review of the paper, code and
-  artefacts. Every artefact the paper mentions must exist at the stated path, with names, versions
-  and counts consistent across the paper, the README files, the task documents and the results.
-- **Then:** FINAL-06 (P0), the submission checklist: the ACL Responsible NLP answers, including
-  AI use from `AI_DISCLOSURE_LEDGER.md`; the final anonymous PDF; and the supplementary-material
-  decision.
+- **FINAL-01 to FINAL-05 and LIT-01 are done.**
+- **Recommended Claude task:** FINAL-06 (P0), the submission checklist. It covers:
+  - drafting the ACL Responsible NLP checklist answers, including AI use from
+    `research/paper/AI_DISCLOSURE_LEDGER.md`;
+  - confirming the final anonymous PDF;
+  - recording the supplementary-material decision (the author's).
+  - **Submission itself is the author's action.**
 - **Author:** the paper is now in a consistent state for **PAPER-07**, the mentorship submission
   due Nov 6. The review PDF is at `9158a9c`+, with the latest build in this commit.
 - **Phase 1 is complete** apart from the author's submission.
