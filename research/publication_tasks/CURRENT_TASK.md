@@ -1,12 +1,11 @@
 # Current task
 
-**Last completed:** INTEG-04 (2026-10-01). The E1 results are in the paper:
+**Last completed:** INTEG-05 (2026-10-01).
 
-- the §5 paragraph, and two §5 sentences scoped to the benchmark;
-- † marks in Table 1;
-- Appendix C with Table 8.
-
-Trace: 206 snippets, 588 numbers, 0 problems. The body ends on page 7 of 8.
+- The Limitations are updated: "Out-of-scope evidence" is revised, a new "External check" bullet
+  says E1 does not establish terminal-task performance, "Exploratory statistics" excepts the
+  external check, and the annotation study is described as "not yet complete".
+- Trace: 207 snippets, 590 numbers, 0 problems. The body ends on page 7 of 8.
 
 **Open, outside the task list (ISSUE-11 = a):** the author sends the drafted annotator messages.
 Adjudication waits.
@@ -16,13 +15,13 @@ Adjudication waits.
 - whether to commit `research/results/annotation/`;
 - PAPER-07, the mentorship submission, by Nov 6.
 
-**Next (recommended): INTEG-05, the Limitations** (general-domain vs terminal-specific
-out-of-scope; plan item P9). Status: NOT STARTED. It waits for "Start INTEG-05".
+**Next (recommended): INTEG-06, keep "pre-planned" and "exploratory" apart throughout.**
+Status: NOT STARTED. It waits for "Start INTEG-06".
 
-- Update the "Out-of-scope evidence" bullet: the screening bias now has partial external evidence,
-  and the detector-features item showed no sign of flattering on the external set.
-- Add E1's own limits: general-domain only, no false rejections measured, P2 assumed out of scope,
-  and the 10 vs 11 cost tie.
-- **Acceptance:** it states explicitly that E1 does not establish performance on terminal-task
-  out-of-scope requests.
-- The Limitations do not count toward the page limit. The draft is shown first.
+- Search `content.tex` for "confirm", "pre-registered", "planned", "specified in advance",
+  "exploratory" and "frozen". List each hit and whether it is correct.
+- The known remaining items are the Abstract's "All analyses are exploratory" (an INTEG-07
+  overlap) and the Conclusion's next step "confirm the findings with an analysis specified in
+  advance".
+- **Acceptance:** only E1 is called pre-planned, and every other use is correct. The draft is
+  shown first.

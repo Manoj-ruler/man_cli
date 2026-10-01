@@ -405,21 +405,29 @@ safety set; and study whether calibrated confidence and risk prompts change what
 \begin{itemize}
   \item \textbf{Small, dependent, partly AI-authored benchmark.} 150 and 209 queries, the second containing the first;
   59 queries drafted by an AI agent, whose labels were checked only by one partially independent reviewer
-  ($\kappa=0.63$, interval [0.39, 1.00], $n=14$); the two-annotator study has no results yet. Two items have gold
+  ($\kappa=0.63$, interval [0.39, 1.00], $n=14$); the two-annotator study is not yet complete. Two items have gold
   commands outside the corpus and one an acceptable command. Queries were written by the authors and an AI agent,
   not collected from users, so calibration and out-of-scope rates depend on this mix. A few accepted commands are
   POSIX-only and would not run in PowerShell; the shipped tool is credited with 3 such answers on v0.1 and 4 on v0.2
   (e.g., \texttt{sudo reboot} for the bare query ``system''), so its accuracy is slightly overstated. The tool, its
   corpus and the benchmark were built by the same people, so queries may follow the corpus's phrasing more closely
   than users' would; we exclude verbatim copies of corpus intents, but milder overlap may remain.
-  \item \textbf{Exploratory statistics.} Every analysis was specified after results were seen, including the Holm
+  \item \textbf{Exploratory statistics.} Every analysis except the external check (Appendix~\ref{app:external}) was specified after results were seen, including the Holm
   family, the controls exclusion, the equal-false-rejection comparison (whose thresholds are chosen in-sample) and
   the sensitivity subsets. Accuracy tests rest on 7--8 discordant queries against BM25 and 12--17 against dense. Headline results use one fold partition
   (seed 42); Appendix~\ref{app:secondary} repeats every fold-dependent step on 20 partitions, as point estimates.
-  \item \textbf{Out-of-scope evidence.} Only 10 out-of-scope queries are terminal tasks outside the corpus; the kind
-  labels are AI-assigned; the added queries were checked with raw retrieval scores, which favors the shipped score;
-  and the hybrid detector's features were chosen on the full data, which may flatter its out-of-scope counts and
-  AUROC, the ambiguity-detection results and A4/A5; we have no bound on this bias.
+  \item \textbf{Out-of-scope evidence.} Only 10 of the benchmark's out-of-scope queries are terminal tasks outside
+  the corpus; the kind labels are AI-assigned; the added queries were checked with raw retrieval scores, which favors
+  the shipped score; and the hybrid detector's features were chosen on the full data, which may flatter its
+  out-of-scope counts and AUROC, the ambiguity-detection results and A4/A5. The external check bears on the last
+  two: on unscreened requests the shipped score lost its advantage at equal cost, and the detector rejected more,
+  not less, than on v0.2. It does not bound either bias, since its population differs.
+  \item \textbf{External check.} Its requests are general-domain, written for a task assistant, so it does not
+  establish how the rules handle out-of-scope terminal tasks, the case that matters most for a command tool. It has
+  no in-scope queries, so it measures rejection but not the cost in refused requests; the false-rejection counts
+  are v0.2's. The requests outside CLINC150's intents are assumed out of scope, not checked one by one; the
+  equal-cost thresholds are set in-sample on v0.2 and refuse 10 and 11 in-scope queries rather than exactly the
+  same number; and, like the rest of the study, the check covers one tool and one corpus.
   \item \textbf{Scope.} One tool, evaluated with its repository corpus rather than the smaller released one
   (\S\ref{sec:system}), one platform (Windows; results depend on the platform-filtered corpus), 279 commands,
   one small sentence encoder and one fusion rule, exact-match scoring against gold commands, and single-machine

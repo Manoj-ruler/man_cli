@@ -8,7 +8,7 @@
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
 | 3 E1 execution | E1-10 to 14 | 5 (**complete**) | 0 |
-| 4 Integration | INTEG-01 to 07 | 4 | 0 |
+| 4 Integration | INTEG-01 to 07 | 5 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
 
 ## Planning entry (2026-09-30)
@@ -1138,6 +1138,44 @@ Recorded by VERIFY-01 on 2026-09-30.
   appendix section.
 - **Acceptance criteria:** every E1 number is registered against `summary.json`, the trace has 0
   problems, and the build is ≤ 8 pages: **pass**.
+- **Committed:** in `9158a9c`.
+
+### INTEG-05: Limitations, general-domain vs terminal-specific out-of-scope requests (DONE 2026-10-01)
+
+- **Draft shown first; approved with option C** ("approve, include C").
+- **Edits to `content.tex` (the Limitations, which do not count toward the page limit):**
+  - **A. "Out-of-scope evidence"** now reads "Only 10 of the benchmark's out-of-scope queries …".
+    It adds that the external check bears on the screening and feature-selection biases: the
+    shipped score lost its advantage at equal cost on unscreened requests, and the detector
+    rejected more, not less, than on v0.2. It also says the check "does not bound either bias,
+    since its population differs". The old clause "we have no bound on this bias" was replaced.
+  - **B. A new "External check" bullet,** stating that:
+    - the check is general-domain, so it "does not establish how the rules handle out-of-scope
+      terminal tasks";
+    - it has no in-scope queries, so the false-rejection counts are v0.2's;
+    - the requests outside CLINC150's intents are assumed out of scope;
+    - the equal-cost thresholds are in-sample and refuse 10 and 11;
+    - it covers one tool and one corpus.
+  - **C (consistency, approved):**
+    - "Exploratory statistics" now reads "Every analysis **except the external check (Appendix C)**
+      was specified after results were seen" (brought forward from INTEG-06);
+    - "the two-annotator study has no results yet" became "**is not yet complete**". That is
+      accurate, since adjudication is pending (ISSUE-11), and it reports nothing about κ or labels.
+- **Trace:**
+  - the "Only 10 …" snippet is updated;
+  - a new 'Limitations' entry registers 10 and 11 from `summary.json`
+    (`matched_thresholds_derivation`);
+  - "1,000" was kept out of the Limitations, so the numeral-coverage tokenizer does not split it;
+  - **the result is `207 snippets, 590 numbers, 0 problem(s)`.** The coverage check gives
+    Limitations 22 numerals, 0 unregistered.
+- **Build:**
+  - `endofbody` is on page 7 in both `.aux` files;
+  - 0 overfull boxes and 0 undefined references; underfull 20 / 16, unchanged from INTEG-04;
+  - all three edits render. The except clause spans a column line break, so the flat search missed
+    it, and it was verified by context;
+  - 0 name hits in the review PDF.
+- **Acceptance criteria:** it states explicitly that E1 does not establish performance on
+  terminal-task out-of-scope requests: **pass**. The trace and the build pass.
 
 ## Decisions
 
@@ -1207,14 +1245,15 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
 - **E1-10 to E1-13 are done.** The results are computed; see the E1-13 entry.
 - **Phase 3 is complete.** E1-14's memo is approved.
 - **INTEG-01 is done** (D12 = B).
-- **INTEG-02 to INTEG-04 are done.**
-- **Recommended Claude task:** INTEG-05 (P1), the Limitations (plan item P9).
-  - Update "Out-of-scope evidence": the screening bias now has external evidence, and the
-    detector-features item showed no sign of flattering on the external set.
-  - Add E1's own limits: general-domain, no false rejections, P2 assumed out of scope, the 10 vs
-    11 cost tie.
-  - Acceptance: it states explicitly that E1 does not establish performance on terminal-task
-    out-of-scope requests.
+- **INTEG-02 to INTEG-05 are done.**
+- **Recommended Claude task:** INTEG-06 (P1), keeping pre-planned and exploratory apart.
+  - Search `content.tex` for "confirm", "pre-registered", "planned", "specified in advance",
+    "exploratory" and "frozen".
+  - The known remaining items are:
+    - the Abstract's "All analyses are exploratory" (this edit belongs to INTEG-07, P10);
+    - the Conclusion's next step "confirm the findings with an analysis specified in advance"
+      (P7).
+  - Line 176 and the Limitations are already fixed.
   - Draft first.
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
