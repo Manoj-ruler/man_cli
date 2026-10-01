@@ -1,23 +1,26 @@
 # Current task
 
-**Last completed:** INTEG-02 (2026-10-01). The placement plan is approved, and INTEG-07 is now P1.
+**Last completed:** INTEG-03 (2026-10-01).
 
-**Open, outside the task list (ISSUE-11 = a):** the author sends the two drafted messages, in
-`research/datasets/annotation/coordinator/MESSAGE_DRAFTS_2026-10-01.md` (gitignored).
+- The §4 "External check" paragraph is added, and line 176 is scoped ("outside the external check").
+- Trace: 190 snippets, 508 numbers, 0 problems. The body ends on page 7 of 8.
 
-- Message 1 goes to annotator 2: a record_ids-only re-check, with the labels locked.
-- Message 2 goes to both annotators: an independence confirmation.
-- **Adjudication waits for the replies.** The checks to run on return are listed in the drafts file.
+**Open, outside the task list (ISSUE-11 = a):** the author sends the drafted annotator messages
+(`research/datasets/annotation/coordinator/MESSAGE_DRAFTS_2026-10-01.md`). Adjudication waits.
 
 **Also open:**
 
-- whether to commit the pre-adjudication analysis outputs in `research/results/annotation/`
-  (no identities);
+- whether to commit `research/results/annotation/`;
 - PAPER-07, the mentorship submission, by Nov 6.
 
-**Next (recommended): INTEG-03, the E1 methods paragraph** (plan item P1, about 8 lines in §4).
-Status: NOT STARTED. It waits for "Start INTEG-03".
+**Next (recommended): INTEG-04, the E1 results in §5, with every number traced.** Status: NOT
+STARTED. It waits for "Start INTEG-04".
 
-- **The draft is shown to the author before anything in `content.tex` changes.**
-- After it is approved: apply it, rebuild with `build.sh` (the body must stay ≤ 8 pages), and check
-  that `trace_claims.js` reports 0 problems.
+- **Plan items:**
+  - P2: rephrase the §5 out-of-scope sentences ("But the gain comes from the threshold, not the
+    hybrid"; "The shipped score is never worse at the points we checked") to scope them to the
+    benchmark, and add about 3 E1 result sentences;
+  - P3: the Table 1 status cells for the equal-false-rejection and AUROC rows;
+  - P4: a new appendix section with the E1 table.
+- **Each piece is drafted and shown first.** After approval, it is applied with trace entries for
+  every E1 number (`summary.json`), the build check (≤ 8 pages) and the trace check (0 problems).

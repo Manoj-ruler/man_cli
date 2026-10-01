@@ -173,8 +173,19 @@ correctness AUROC, measures ranking alone. Accuracy differences use the exact Mc
 Wilson intervals \citep{wilson1927probable}, and effects paired percentile bootstraps (10,000 resamples, seed 42),
 which are not dual to the exact test. A family of four comparisons per version (accuracy vs.\ BM25 and vs.\ dense,
 out-of-scope rejection by the hybrid detector, hybrid ECE reduction) is Holm-corrected \citep{holm1979simple}; it
-was fixed after the raw results were seen, so \emph{all significance statements are exploratory}. The shipped
+was fixed after the raw results were seen, so \emph{all significance statements outside the external check are exploratory}. The shipped
 confidence's recalibration and the tuned shipped threshold are outside this family.
+
+\paragraph{External check.} One analysis was specified and frozen in a tagged commit before any of its
+queries was scored. It applies the out-of-scope rules, unchanged, to the two test sets of CLINC150
+\citep{larson-etal-2019-evaluation}, requests written for a general-purpose task assistant: 4,500 from 150
+intents and 1,000 outside them. Both sets are treated as out of scope: no corpus record performs any intent's
+request (checked per intent before scoring, so no intent was excluded), and the 1,000 are assumed to be. The
+check therefore measures rejection only, not refused in-scope queries, and is general-domain rather than
+terminal-specific. The tuned thresholds are v0.2's, unchanged; all five per-fold values are applied and the
+median rate is reported. The primary comparison is the tuned threshold against the detector; a secondary one
+compares the two scores at equal v0.2 cost, each thresholded to refuse at most 11 of v0.2's 159 in-scope
+queries. Intervals on the 4,500 resample intents.
 
 \section{Results}
 \label{sec:results}

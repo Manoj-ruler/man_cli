@@ -8,7 +8,7 @@
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
 | 3 E1 execution | E1-10 to 14 | 5 (**complete**) | 0 |
-| 4 Integration | INTEG-01 to 07 | 2 | 0 |
+| 4 Integration | INTEG-01 to 07 | 3 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
 
 ## Planning entry (2026-09-30)
@@ -1060,6 +1060,41 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **Plan change approved:** INTEG-07 is raised from P2 to **P1**, its scope now includes the
   Discussion (P5), and it depends on INTEG-04. `TASKS.md` is updated.
 - **Acceptance criteria:** the placement plan is approved: **pass**.
+- **Committed:** in `fc0f655`.
+
+### INTEG-03: the E1 methods paragraph (DONE 2026-10-01)
+
+- **The draft was shown first, and the author approved it** ("approve, include the line-176 fix").
+- **Edits to `content.tex`:**
+  1. A new last paragraph of §4, "External check" (156 words). It covers:
+     - the analysis, specified and frozen in a tagged commit before scoring;
+     - the CLINC150 test sets (4,500 from 150 intents, and 1,000 outside them), with the citation;
+     - out of scope treated by a per-intent check with no exclusions, and the 1,000 assumed;
+     - rejection only, and general-domain scope;
+     - v0.2 thresholds unchanged, all five applied, the median reported;
+     - the primary comparison, and the secondary one at equal v0.2 cost (at most 11 of 159);
+     - intervals that resample intents.
+     - It names no repository, URL or tag, for anonymity.
+  2. **Line 176:** "all significance statements are exploratory" became "all significance
+     statements **outside the external check** are exploratory". This was brought forward from
+     INTEG-06 with approval, so the paper is never internally inconsistent.
+- **Trace:** a new INTEG-03 block in `trace_claims.js` registers the paragraph's numbers (4500,
+  150, 1000, 5, 11, 159, 4500) against `research/results/e1_clinc150_v1/summary.json`. The
+  numbers shown with thousands commas are registered as 4500 and 1000, with a note.
+  - **The result is `190 snippets, 508 numbers, 0 problem(s)`**, up from 186 and 501.
+- **Build** (`build.sh`, run with Git's bash because the default `bash` is WSL):
+  - **the body ends on page 7 (limit 8)** for both PDFs, which now have 14 pages (13 before; the
+    extra page is uncounted back matter);
+  - 0 overfull boxes, 0 undefined and 0 multiply-defined references;
+  - underfull warnings rose from 15 to 19 in the review log. Two are in the Metrics paragraph,
+    whose line 176 is now longer (badness 1540 and 2253); the new paragraph has none. They are
+    cosmetic, and FINAL-02 checks overfull only.
+- **Rendering and anonymity:** the paragraph renders in §4 of `main_review.pdf`, and the review
+  PDF text contains neither the tool's nor the author's name (0 hits).
+- **Acceptance criteria:**
+  1. The paragraph states that E1 was planned in advance, the frozen thresholds, the class-level
+     exclusions and the general-domain scope: **pass**.
+  2. The trace and the build pass: **pass**.
 
 ## Decisions
 
@@ -1129,13 +1164,13 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
 - **E1-10 to E1-13 are done.** The results are computed; see the E1-13 entry.
 - **Phase 3 is complete.** E1-14's memo is approved.
 - **INTEG-01 is done** (D12 = B).
-- **INTEG-02 is done:** the plan is approved, and INTEG-07 is now P1.
-- **Recommended Claude task:** INTEG-03 (P0), the E1 methods paragraph in §4 (plan item P1, about
-  8 lines).
-  - Show the draft to the author **before** applying it.
-  - Then rebuild and check the page limit.
-  - Register any numbers in the claim trace, or leave that to INTEG-04 if the paragraph has none
-    that need tracing.
+- **INTEG-02 and INTEG-03 are done.**
+- **Recommended Claude task:** INTEG-04 (P0), the E1 results in §5 (plan items P2–P4):
+  - rephrase ll. 257 and 265, which are now shifted by the new §4 paragraph;
+  - add the E1 result sentences;
+  - change the Table 1 status cells;
+  - add the appendix table.
+  - Draft first. Register every E1 number. Trace 0 problems; body ≤ 8 pages.
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 

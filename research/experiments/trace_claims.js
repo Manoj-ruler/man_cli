@@ -330,6 +330,15 @@ add('Fig. accuracy caption', '$n=135$ and $159$, including the 25 canonical cont
   add('Limitations', 'functional evaluation covers 15 queries and treats exit code 0 as success', [['15', F('functional/functional-eval-results.json', 'summary.n_evaluated')], ['0', X(/gold_functional_success: goldResult\.exitCode === (\d+)/.test(fs.readFileSync(rel('research/experiments/run_functional_eval.js'), 'utf8')) ? +RegExp.$1 : NaN, 'research/experiments/run_functional_eval.js: success = exitCode === 0')]]);
 }
 
+// INTEG-03 (2026-10-01): the §4 "External check" paragraph (E1, protocol frozen at tag e1-protocol-v1).
+// Source: research/results/e1_clinc150_v1/summary.json, written by the frozen e1_analyze.js.
+{ const s1 = 'e1_clinc150_v1/summary.json', comma = 'displayed with a thousands comma';
+  add('§4 external check', 'requests written for a general-purpose task assistant: 4,500 from 150 intents and 1,000 outside them', [['4500', F(s1, 'P1.n')], ['150', F(s1, 'P1.bootstrap.clusters')], ['1000', F(s1, 'P2.n')]], comma + '; 150 = intent clusters in P1');
+  add('§4 external check', 'all five per-fold values are applied and the median rate is reported', [['5', F(s1, 'thresholds.R2.length')]], 'number word "five" in the paper');
+  add('§4 external check', "each thresholded to refuse at most 11 of v0.2's 159 in-scope queries", [['11', F(s1, 'matched_thresholds_derivation.m')], ['159', F(s1, 'matched_thresholds_derivation.n_in_scope')]]);
+  add('§4 external check', 'Intervals on the 4,500 resample intents', [['4500', F(s1, 'P1.n')]], comma);
+}
+
 // Coverage check (TRACE-01): every numeral in the Conclusion, Limitations and Ethics must be registered
 // above at that location, or be a listed design constant. Identifiers (v0.1, A4, TA-B145, model names)
 // are not numerals; number words ("Two items") are not checked, as elsewhere in this trace.
