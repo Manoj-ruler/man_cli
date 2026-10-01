@@ -8,7 +8,7 @@
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
 | 3 E1 execution | E1-10 to 14 | 5 (**complete**) | 0 |
-| 4 Integration | INTEG-01 to 07 | 3 | 0 |
+| 4 Integration | INTEG-01 to 07 | 4 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
 
 ## Planning entry (2026-09-30)
@@ -1095,6 +1095,49 @@ Recorded by VERIFY-01 on 2026-09-30.
   1. The paragraph states that E1 was planned in advance, the frozen thresholds, the class-level
      exclusions and the general-domain scope: **pass**.
   2. The trace and the build pass: **pass**.
+- **Committed:** in `30f409d`.
+
+### INTEG-04: E1 results, with numbers registered (DONE 2026-10-01)
+
+- **Draft shown first, approved as written** ("approve"). It used "the benchmark's ordering … is
+  reversed", and the † approach for Table 1.
+- **Edits to `content.tex`:**
+  - **A.** Two §5 sentences are scoped:
+    - "But the gain comes from the threshold, not the hybrid" → "On this benchmark, the gain …";
+    - "The shipped score is never worse at the points we checked" → "On the benchmark, the
+      shipped score …".
+  - **B.** A new paragraph closes §5's out-of-scope part, covering:
+    - R1 at 25% / 19%, exactly the lexical-null queries;
+    - R2 at 86% and R3 at 78% at the v0.2 operating points (+8.3 [5.0, 11.6]; 83% / 78% on P2);
+    - at equal v0.2 cost, the hybrid's feature at 77% vs the shipped score at 65% (−12.5
+      [−16.2, −8.9]; 77% / 60% on P2): "the benchmark's ordering of the two scores is reversed";
+    - the caveats: screening vs population, and no false rejections measured.
+  - **C.** Table 1 gets † on three Status cells ("threshold, not hybrid", "descriptive",
+    "robust"), and a caption note: "On the benchmark; on external requests at equal v0.2 cost the
+    hybrid's feature rejects more (Appendix C)". The meaning of the existing Status words is
+    unchanged.
+  - **D.** A new **Appendix C, "External Check on CLINC150"** (`app:external`), with Table 8
+    (`tab:external`): R1, R1-CLI, R2 and R3 with intervals and five-fold ranges, the primary
+    comparison, the P2 replication, the matched comparison, and the without-S sensitivity. The
+    caption covers the method, the 10 vs 11 tie, and "frozen before scoring, with no deviations".
+- **Pre-check:** all 60 planned numbers were checked against `summary.json` with the trace's
+  rounding rule before the draft was shown: 0 mismatches.
+- **Trace:**
+  - a new INTEG-04 block in `trace_claims.js` registers every new number, including the code
+    constants 2.0 and 30, the p mantissa and exponent, and the S-intent count 13;
+  - the coverage text now includes Appendix C;
+  - **the result is `206 snippets, 588 numbers, 0 problem(s)`**, up from 190 and 508.
+- **Build** (Git bash):
+  - `endofbody` is on **page 7** in both `main.aux` and `main_review.aux` (limit 8);
+  - 14 pages each;
+  - 0 overfull boxes, 0 undefined and 0 multiply-defined references;
+  - underfull warnings: 20 in the review log and 16 in the camera-ready log. They are cosmetic.
+- **Rendering:** the §5 paragraph, the † caption note, Appendix C (page 11) and Table 8 are all
+  present in the review PDF. There are 0 tool-name or author-name hits.
+- **Cosmetic, for FINAL-02:** Table 8 (`table*`) floats to page 14, three pages after its
+  appendix section.
+- **Acceptance criteria:** every E1 number is registered against `summary.json`, the trace has 0
+  problems, and the build is ≤ 8 pages: **pass**.
 
 ## Decisions
 
@@ -1164,13 +1207,15 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
 - **E1-10 to E1-13 are done.** The results are computed; see the E1-13 entry.
 - **Phase 3 is complete.** E1-14's memo is approved.
 - **INTEG-01 is done** (D12 = B).
-- **INTEG-02 and INTEG-03 are done.**
-- **Recommended Claude task:** INTEG-04 (P0), the E1 results in §5 (plan items P2–P4):
-  - rephrase ll. 257 and 265, which are now shifted by the new §4 paragraph;
-  - add the E1 result sentences;
-  - change the Table 1 status cells;
-  - add the appendix table.
-  - Draft first. Register every E1 number. Trace 0 problems; body ≤ 8 pages.
+- **INTEG-02 to INTEG-04 are done.**
+- **Recommended Claude task:** INTEG-05 (P1), the Limitations (plan item P9).
+  - Update "Out-of-scope evidence": the screening bias now has external evidence, and the
+    detector-features item showed no sign of flattering on the external set.
+  - Add E1's own limits: general-domain, no false rejections, P2 assumed out of scope, the 10 vs
+    11 cost tie.
+  - Acceptance: it states explicitly that E1 does not establish performance on terminal-task
+    out-of-scope requests.
+  - Draft first.
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 

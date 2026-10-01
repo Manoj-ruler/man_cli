@@ -339,6 +339,37 @@ add('Fig. accuracy caption', '$n=135$ and $159$, including the 25 canonical cont
   add('§4 external check', 'Intervals on the 4,500 resample intents', [['4500', F(s1, 'P1.n')]], comma);
 }
 
+// INTEG-04 (2026-10-01): E1 results in §5, the Table 1 dagger note, and Appendix C (Table tab:external).
+// Every value is read from research/results/e1_clinc150_v1/summary.json (frozen analysis; no deviations).
+{ const s1 = 'e1_clinc150_v1/summary.json', comma = 'displayed with a thousands comma';
+  const rt = (p, k, f = 'rate') => pct(F(s1, `${p}.rates.${k}.${f}`));
+  const cb = (p, k, end) => pct(F(s1, `${p}.rates.${k}.cluster_bootstrap95.${end}`));
+  const wl = (p, k, end) => pct(F(s1, `${p}.rates.${k}.wilson95.${end}`));
+  const ft = (p, k, end) => pct(F(s1, `${p}.five_threshold_sensitivity.${k}.${end}`));
+  const mo = (p, path) => pct(F(s1, `${p}.matched_operating_point.${path}`));
+  const prim = path => pct(F(s1, `P1.primary_comparison.${path}`));
+  const p2m = F(s1, 'P2.matched_operating_point.comparison.exact_mcnemar_p').v;
+  const cliThr = +(/match\.confidence < (\d+)/.exec(fs.readFileSync(rel('cli/index.js'), 'utf8')) || [])[1];
+  // §5 paragraph
+  add('§5 external check', 'the fixed rule rejects only 25\\% of the 4,500 CLINC150 requests from known intents and 19\\% of the 1,000 others', [['25', rt('P1', 'R1')], ['4500', F(s1, 'P1.n')], ['19', rt('P2', 'R1')], ['1000', F(s1, 'P2.n')]], comma);
+  add('§5 external check', 'the tuned threshold rejects 86\\% and the detector 78\\%', [['86', rt('P1', 'R2')], ['78', rt('P1', 'R3')]]);
+  add('§5 external check', '(difference $+8.3$ points, interval [5.0, 11.6]; 83\\% and 78\\% on the 1,000)', [['+8.3', prim('difference')], ['5.0', prim('ci95.lo')], ['11.6', prim('ci95.hi')], ['83', rt('P2', 'R2')], ['78', rt('P2', 'R3')], ['1000', F(s1, 'P2.n')]], 'primary comparison (protocol §6.4); ' + comma);
+  add('§5 external check', "the hybrid's feature rejects more than the shipped score (77\\% vs.\\ 65\\%, $-12.5$ points [$-16.2$, $-8.9$]; 77\\% vs.\\ 60\\% on the 1,000)", [['77', mo('P1', 'rates.R3m.rate')], ['65', mo('P1', 'rates.R2m.rate')], ['-12.5', mo('P1', 'comparison.difference')], ['-16.2', mo('P1', 'comparison.ci95_cluster_bootstrap.lo')], ['-8.9', mo('P1', 'comparison.ci95_cluster_bootstrap.hi')], ['77', mo('P2', 'rates.R3m.rate')], ['60', mo('P2', 'rates.R2m.rate')], ['1000', F(s1, 'P2.n')]], 'matched operating points, secondary (protocol §6.4); ' + comma);
+  // Appendix C table and caption
+  add('App. C', '\\textbf{Known intents} ($n=4{,}500$) & \\textbf{Outside them} ($n=1{,}000$)', [['4500', F(s1, 'P1.n')], ['1000', F(s1, 'P2.n')]], comma);
+  add('App. C', 'Fixed rule ($s<2.0$) & 25.3 [21.8, 29.0] & 19.1 [16.8, 21.7]', [['2.0', X(num(/bestScore < ([\d.]+)\)/), 'cli/search.js:124 minimum score')], ['25.3', rt('P1', 'R1')], ['21.8', cb('P1', 'R1', 'lo')], ['29.0', cb('P1', 'R1', 'hi')], ['19.1', rt('P2', 'R1')], ['16.8', wl('P2', 'R1', 'lo')], ['21.7', wl('P2', 'R1', 'hi')]]);
+  add('App. C', 'CLI 30\\% rule & 25.5 [22.1, 29.2] & 19.8 [17.5, 22.4]', [['30', X(cliThr, 'cli/index.js:58 refusal threshold')], ['25.5', rt('P1', 'R1_CLI')], ['22.1', cb('P1', 'R1_CLI', 'lo')], ['29.2', cb('P1', 'R1_CLI', 'hi')], ['19.8', rt('P2', 'R1_CLI')], ['17.5', wl('P2', 'R1_CLI', 'lo')], ['22.4', wl('P2', 'R1_CLI', 'hi')]]);
+  add('App. C', 'Tuned threshold (range over the five folds) & 86.0 [83.0, 88.8] (86.0--92.2) & 83.4 [81.0, 85.6] (83.4--89.4)', [['86.0', rt('P1', 'R2')], ['83.0', cb('P1', 'R2', 'lo')], ['88.8', cb('P1', 'R2', 'hi')], ['86.0', ft('P1', 'R2', 'min_rate')], ['92.2', ft('P1', 'R2', 'max_rate')], ['83.4', rt('P2', 'R2')], ['81.0', wl('P2', 'R2', 'lo')], ['85.6', wl('P2', 'R2', 'hi')], ['83.4', ft('P2', 'R2', 'min_rate')], ['89.4', ft('P2', 'R2', 'max_rate')]]);
+  add('App. C', 'Hybrid detector (range over the five folds) & 77.8 [74.1, 81.3] (69.3--78.2) & 78.1 [75.4, 80.6] (69.3--78.6)', [['77.8', rt('P1', 'R3')], ['74.1', cb('P1', 'R3', 'lo')], ['81.3', cb('P1', 'R3', 'hi')], ['69.3', ft('P1', 'R3', 'min_rate')], ['78.2', ft('P1', 'R3', 'max_rate')], ['78.1', rt('P2', 'R3')], ['75.4', wl('P2', 'R3', 'lo')], ['80.6', wl('P2', 'R3', 'hi')], ['69.3', ft('P2', 'R3', 'min_rate')], ['78.6', ft('P2', 'R3', 'max_rate')]]);
+  add('App. C', 'Tuned minus detector, points (primary) & $+$8.3 [5.0, 11.6] & $+$5.3 (Holm $p=.001$)', [['+8.3', prim('difference')], ['5.0', prim('ci95.lo')], ['11.6', prim('ci95.hi')], ['+5.3', pct(F(s1, 'P2.secondary_p2[0].difference'))], ['.001', F(s1, 'P2.secondary_p2[0].holm_adjusted_p')]]);
+  add('App. C', 'Equal v0.2 cost: shipped score / hybrid feature & 64.6 / 77.1 & 59.7 / 77.0', [['64.6', mo('P1', 'rates.R2m.rate')], ['77.1', mo('P1', 'rates.R3m.rate')], ['59.7', mo('P2', 'rates.R2m.rate')], ['77.0', mo('P2', 'rates.R3m.rate')]]);
+  add('App. C', '\\quad difference, points & $-$12.5 [$-$16.2, $-$8.9] & $-$17.3 ($p=6\\times10^{-19}$)', [['-12.5', mo('P1', 'comparison.difference')], ['-16.2', mo('P1', 'comparison.ci95_cluster_bootstrap.lo')], ['-8.9', mo('P1', 'comparison.ci95_cluster_bootstrap.hi')], ['-17.3', mo('P2', 'comparison.difference')], ['6', X(p2m / 1e-19, `results/${s1} :: P2.matched_operating_point.comparison.exact_mcnemar_p = ${p2m} (mantissa)`)], ['-19', X(Math.floor(Math.log10(p2m)), 'exponent of the same p')]]);
+  add('App. C', 'bootstrap over the 150 intents', [['150', F(s1, 'P1.bootstrap.clusters')]]);
+  add('App. C', 'the median of the five per-fold rates', [['5', F(s1, 'thresholds.R2.length')]], 'number word "five"');
+  add('App. C', "each score's threshold refuses at most 11 of v0.2's 159 in-scope queries (10 for the shipped score, because of a tie)", [['11', F(s1, 'matched_thresholds_derivation.m')], ['159', F(s1, 'matched_thresholds_derivation.n_in_scope')], ['10', F(s1, 'matched_thresholds_derivation.s4.in_scope_rejected_of_159')]]);
+  add('App. C', 'Removing the 13 intents a stock shell could answer leaves the primary difference at $+$7.5 [4.2, 10.9]', [['13', X(F(s1, 'P1_extras.subgroup_S.S_clear.intents').v + F(s1, 'P1_extras.subgroup_S.S_borderline.intents').v, `computed: S_clear.intents + S_borderline.intents, results/${s1} :: P1_extras.subgroup_S`)], ['+7.5', pct(F(s1, 'P1_extras.sensitivity_without_S.without_S_clear_and_S_borderline.primary_comparison.difference'))], ['4.2', pct(F(s1, 'P1_extras.sensitivity_without_S.without_S_clear_and_S_borderline.primary_comparison.ci95.lo'))], ['10.9', pct(F(s1, 'P1_extras.sensitivity_without_S.without_S_clear_and_S_borderline.primary_comparison.ci95.hi'))]], 'sensitivity (descriptive), protocol §6.5 point 2');
+}
+
 // Coverage check (TRACE-01): every numeral in the Conclusion, Limitations and Ethics must be registered
 // above at that location, or be a listed design constant. Identifiers (v0.1, A4, TA-B145, model names)
 // are not numerals; number words ("Two items") are not checked, as elsewhere in this trace.
@@ -399,7 +430,7 @@ const md = [
   `**Status: ${bad ? bad + ' PROBLEM(S)' : 'all ' + nNum + ' numbers in ' + E.length + ' snippets match'}.**`,
   '',
   'Coverage: every number in the Abstract, §1–§5, §6 Discussion (no numerals), §7 Conclusion, Limitations, Ethical Considerations,',
-  'Tables 1–3, Appendix A and the Appendix B text and Tables 5 and 7.',
+  'Tables 1–3, Appendix A, the Appendix B text and Tables 5 and 7, and Appendix C (the external check) with its table.',
   `Automatic coverage check (numerals only; identifiers and number words excluded): ${coverageLine}.`,
   'Not traced here, with the reason:',
   '- Table 6 (`table_sensitivity.tex`) is generated from `stats/sensitivity-bare-keyword-results.json` by its own',

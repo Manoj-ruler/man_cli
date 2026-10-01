@@ -203,10 +203,10 @@ Table~\ref{tab:claims} summarizes every claim; the population throughout is non-
     Shipped confidence: ECE before $\to$ after isotonic & .323$\to$.069; $-$79\% [44, 84] & .293$\to$.063; $-$78\% [52, 87] & robust \\
     Shipped confidence: Brier skill vs.\ no-skill, raw / recalibrated & $-$.23 [$-$.45, .01] / .20 [.04, .36] & $-$.06 [$-$.26, .15] / .33 [.19, .46] & raw: no skill; recal.: robust \\
     Hybrid confidence: ECE before $\to$ after isotonic (pre-named test) & .329$\to$.108; $-$67\% [43, 83] & .368$\to$.071; $-$81\% [62, 86] & robust \\
-    Out-of-scope rejected: fixed rule / tuned threshold / hybrid detector & 4 / 10 / 7 of 15 & 17 / 46 / 34 of 50 & threshold, not hybrid \\
+    Out-of-scope rejected: fixed rule / tuned threshold / hybrid detector & 4 / 10 / 7 of 15 & 17 / 46 / 34 of 50 & threshold, not hybrid$^\dagger$ \\
     False rejections of in-scope: fixed / tuned / hybrid & 0 / 9 / 6 of 110 & 0 / 20 / 11 of 134 & cost of tuning \\
-    Out-of-scope rejected at equal false rejections, shipped score / hybrid feature (in-sample) & 10 / 7 at 6 & 33 / 33 at 7; 43 / 37 at 15 & descriptive \\
-    Out-of-scope AUROC (pooled): shipped score minus hybrid feature & +.102 [.006, .222] & +.067 [.015, .127] & robust \\
+    Out-of-scope rejected at equal false rejections, shipped score / hybrid feature (in-sample) & 10 / 7 at 6 & 33 / 33 at 7; 43 / 37 at 15 & descriptive$^\dagger$ \\
+    Out-of-scope AUROC (pooled): shipped score minus hybrid feature & +.102 [.006, .222] & +.067 [.015, .127] & robust$^\dagger$ \\
     Hybrid minus shipped AURC (tie-aware) & $-$.115 [$-$.177, $-$.054] & $-$.075 [$-$.126, $-$.024] & robust \\
     Hybrid minus shipped AUGRC (tie-aware) & $-$.048 [$-$.073, $-$.024] & $-$.030 [$-$.050, $-$.011] & robust \\
     Hybrid minus shipped correctness AUROC & +.099 [.008, .190] & +.058 [$-$.001, .118] & weak on v0.2 \\
@@ -218,7 +218,9 @@ Table~\ref{tab:claims} summarizes every claim; the population throughout is non-
   15 and 50 out-of-scope ones. No rule ever rejects a control, and controls are never discordant, so the accuracy
   $p$-values equal the Holm table's (Appendix~\ref{app:secondary}), which also holds the pre-named ECE test. Status
   ``robust'' means the interval excludes zero on both versions; ``fragile'' means the result depends on a few
-  queries. The equal-false-rejection row picks each score's threshold on the same data (\S\ref{sec:ood}).}
+  queries. The equal-false-rejection row picks each score's threshold on the same data (\S\ref{sec:ood}).
+  $^\dagger$On the benchmark; on external requests at equal v0.2 cost the hybrid's feature rejects more
+  (Appendix~\ref{app:external}).}
   \label{tab:claims}
 \end{table*}
 
@@ -265,7 +267,7 @@ untested.
 \label{sec:ood}
 The shipped fixed rule rejects 17 of v0.2's 50 out-of-scope requests. The hybrid detector rejects 34 (two-sided
 exact McNemar against the fixed rule, Holm-adjusted $p=0.00006$), at a cost of 11 false rejections among 134 in-scope queries, three of
-which the hybrid had answered correctly. But the gain comes from the threshold, not the hybrid. The shipped score
+which the hybrid had answered correctly. On this benchmark, the gain comes from the threshold, not the hybrid. The shipped score
 itself separates out-of-scope requests better than the hybrid's fused score (pooled AUROC 0.956 vs.\ 0.889 on v0.2,
 0.939 vs.\ 0.837 on v0.1), and a threshold on the shipped score tuned exactly like the detector rejects 46 of 50
 (McNemar $p=0.004$ against the detector) at 20 false rejections ($p=0.093$); on v0.1 it rejects 10 of 15 and the
@@ -273,7 +275,7 @@ detector 7 ($p=0.25$), at 9 and 6 false rejections. The two tuned rules thus sit
 Compared at equal false-rejection counts, with each score's threshold picked on the same data (an in-sample,
 descriptive comparison), the shipped score and the hybrid's feature reject 23 and 21 of 50 with no false
 rejections, 33 and 33 at 7, and 43 and 37 at 15 (v0.1: 5 and 1 at none, 10 and 7 at 6); no control is among these
-false rejections. The shipped score is never worse at the points we checked, and the tuned threshold's larger count
+false rejections. On the benchmark, the shipped score is never worse at the points we checked, and the tuned threshold's larger count
 comes mostly from accepting more false rejections.
 
 By kind of request (labels assigned by an AI assistant, unchecked), the fixed rule, tuned threshold and detector
@@ -287,6 +289,15 @@ run, Table~\ref{tab:claims}); on the 35 added ones, 13, 34 and 25. The
 threshold's lead over the detector therefore also appears on the unscreened queries, though 15 queries are few. (The
 detector's gain over the fixed rule on the same 15 queries has $p=0.25$ in the v0.1 run and $p=0.0625$ in the v0.2
 run, because each run tunes its own thresholds; neither is significant, and the second is not a replication.)
+
+On the external check (Appendix~\ref{app:external}), the fixed rule rejects only 25\% of the 4,500 CLINC150
+requests from known intents and 19\% of the 1,000 others: exactly those that share no word, after stop-words,
+with the corpus. At their v0.2 operating points the tuned threshold rejects 86\% and the detector 78\%
+(difference $+8.3$ points, interval [5.0, 11.6]; 83\% and 78\% on the 1,000), a smaller lead than on v0.2. At
+equal v0.2 cost, however, the hybrid's feature rejects more than the shipped score (77\% vs.\ 65\%, $-12.5$
+points [$-16.2$, $-8.9$]; 77\% vs.\ 60\% on the 1,000). On these requests, then, the benchmark's ordering of
+the two scores is reversed. That fits the screening caveat above, but the populations also differ, and the
+check measures no false rejections.
 
 \paragraph{What the hybrid adds.} The hybrid's confidence ranks its own errors better than the shipped confidence:
 tie-aware AURC and AUGRC are lower on both versions with intervals excluding zero (Table~\ref{tab:claims}), and
@@ -624,3 +635,34 @@ accuracy by query type, the risk-coverage curves and the ablation; they include 
   Right: v0.2.}
   \label{fig:ablation}
 \end{figure*}
+
+\section{External Check on CLINC150}
+\label{app:external}
+Table~\ref{tab:external} gives the pre-specified results (\S\ref{sec:methods}). The fixed rule rejects exactly
+the requests that share no word with the corpus, so every rule rejects at least that share.
+
+\begin{table*}[t]
+  \centering
+  \small
+  \begin{tabular}{@{}lcc@{}}
+    \toprule
+    \textbf{Rejected (\%)} & \textbf{Known intents} ($n=4{,}500$) & \textbf{Outside them} ($n=1{,}000$) \\
+    \midrule
+    Fixed rule ($s<2.0$) & 25.3 [21.8, 29.0] & 19.1 [16.8, 21.7] \\
+    CLI 30\% rule & 25.5 [22.1, 29.2] & 19.8 [17.5, 22.4] \\
+    Tuned threshold (range over the five folds) & 86.0 [83.0, 88.8] (86.0--92.2) & 83.4 [81.0, 85.6] (83.4--89.4) \\
+    Hybrid detector (range over the five folds) & 77.8 [74.1, 81.3] (69.3--78.2) & 78.1 [75.4, 80.6] (69.3--78.6) \\
+    Tuned minus detector, points (primary) & $+$8.3 [5.0, 11.6] & $+$5.3 (Holm $p=.001$) \\
+    Equal v0.2 cost: shipped score / hybrid feature & 64.6 / 77.1 & 59.7 / 77.0 \\
+    \quad difference, points & $-$12.5 [$-$16.2, $-$8.9] & $-$17.3 ($p=6\times10^{-19}$) \\
+    \bottomrule
+  \end{tabular}
+  \caption{External check on CLINC150 \citep{larson-etal-2019-evaluation}: out-of-scope requests rejected, with
+  95\% intervals (known intents: bootstrap over the 150 intents; outside them: Wilson; $p$: exact McNemar).
+  Thresholds are v0.2's, unchanged; the median of the five per-fold rates is shown, with their range. ``Equal
+  v0.2 cost'': each score's threshold refuses at most 11 of v0.2's 159 in-scope queries (10 for the shipped
+  score, because of a tie). The protocol, including the primary comparison, was frozen before scoring, with no
+  deviations. Removing the 13 intents a stock shell could answer leaves the primary difference at $+$7.5 [4.2,
+  10.9].}
+  \label{tab:external}
+\end{table*}
