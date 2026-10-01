@@ -38,10 +38,11 @@ versions recorded in commit trailers are:
 |-------|---------|
 | Claude Opus 4.8 | 6 |
 | Claude Sonnet 5 | 17 |
-| Claude Opus 5.5 | 38 |
+| Claude Opus 5.5 | 92 (38 as of 2026-09-29) |
 
-The history runs from 2026-04-14 to 2026-09-29. It shows which model committed each change, not every
-chat.
+The history runs from 2026-04-14 to 2026-10-01. The counts are as of commit `511f411` (updated
+2026-10-01, FINAL-06; the first version of this ledger ran to 2026-09-29). It shows which model
+committed each change, not every chat.
 
 | # | Category | Operation | Affected targets | Research or manuscript | Evidence |
 |---|----------|-----------|------------------|------------------------|----------|
@@ -53,6 +54,8 @@ chat.
 | U6 | Research assistance: ideas | OTHER_CONFIRMED (AI-suggested analyses) | RESEARCH_PROCESS: analyses proposed in the simulated reviews and then adopted. Examples: tie-aware selective metrics (T3), the calibration noise floor and no-skill reference, comparing out-of-scope rules at equal false-rejection counts (REV-14/22), seed-repeat CV (S11) | Research | `review_round*/`, `PLAN_TASKS.md` |
 | U7 | Citation checking | CHECKED_CITATIONS | REFERENCE_OR_CITATION: citations verified against primary records (T6, Stage 4.5) | Manuscript | `T6_LITERATURE_VERIFICATION.md`, `STAGE4_5_INTEGRITY_REPORT.md` |
 | U8 | Research assistance: literature search | SEARCHED | REFERENCE_OR_CITATION | Manuscript | `PHASE14_LITERATURE_RECHECK.md`. ACL requires no special disclosure for this use; it is recorded for completeness. |
+| U10 | Research assistance: the external check (E1) | GENERATED, ANALYSED, OTHER_CONFIRMED (AI-designed analysis, adopted with the author's approval at each step) | RESEARCH_PROCESS, CODE, RESULTS, WHOLE_PAPER: the E1 protocol (question, scope, exclusions, threshold handling, the analysis plan, including the equal-cost comparison proposed in the protocol review), the scorer, analysis, preparation and check scripts, the run, the results memo, and the §4, §5, Appendix C, Discussion, Conclusion, Limitations and Abstract text that reports it (2026-09-30 to 2026-10-01) | Research and manuscript | `research/publication_tasks/` (`PROGRESS.md` records each decision with the author's approval: D2–D4, D7, D10–D12); tag `e1-protocol-v1`; `research/results/e1_clinc150_v1/` |
+| U11 | Coordination support for the annotation study | ANALYSED, CHECKED | RESEARCH_PROCESS: validating the returned sheets, running the pre-declared pre-adjudication analysis, a data-quality review of the record ids, and drafting messages to annotators for the author to send (2026-10-01). **No label was assigned, changed or judged by the assistant**, and no AI output is used as an annotation. | Research | gitignored `research/datasets/annotation/coordinator/`; `PROGRESS.md` ISSUE-11 |
 | U9 | Other: product code outside the study | GENERATED | CODE: the tool's optional web dashboard (Next.js app, API routes, Supabase), built in April 2026 with **Google Antigravity** using Gemini and Claude models | Neither. The paper does not evaluate the dashboard; it mentions only that the query-sync feature is off by default. | The author, 2026-09-30. The dashboard commits (2026-04-14 onward) carry no AI trailer. |
 
 **Not used:** AI image generation. Every figure is an SVG drawn directly from the committed result
@@ -74,8 +77,8 @@ author. The author confirms this in question 3 below.
 
 | Field | State |
 |-------|-------|
-| Tool name | KNOWN: Claude (Anthropic) through Claude Code, with models Opus 4.8, Sonnet 5 and Opus 5.5 (U1–U8); Google Antigravity, with Gemini and Claude models (U9) |
-| Content produced, and where | KNOWN: U1–U6 and U9 above |
+| Tool name | KNOWN: Claude (Anthropic) through Claude Code, with models Opus 4.8, Sonnet 5 and Opus 5.5 (U1–U8, U10, U11); Google Antigravity, with Gemini and Claude models (U9) |
+| Content produced, and where | KNOWN: U1–U6 and U9–U11 above |
 | Conditional: author confirms that the generated text was checked for accuracy and carries citations for its sources and ideas | KNOWN(true): the author, 2026-09-30 |
 | Completeness of the tool inventory (no other AI tool) | KNOWN: the author, 2026-09-30. For code and data, the git trailers record only Claude models. |
 
@@ -111,6 +114,8 @@ This is the camera-ready Acknowledgements text; the source is `acl_latex/main.te
 > - simulated rounds of peer review whose suggestions led to several reported analyses: the
 >   tie-aware selective metrics, the calibration noise floor and no-skill reference, the comparison
 >   of out-of-scope rules at equal false-rejection counts, and the seed-repeat cross-validation;
+> - designed, with the author's approval at each step, the pre-specified external check, including
+>   its equal-cost comparison (added 2026-10-01, approved by the author; U10);
 > - checked the references and citations against their primary sources.
 >
 > No other AI tool was used for this paper's text, code or data. The tool's optional web dashboard,

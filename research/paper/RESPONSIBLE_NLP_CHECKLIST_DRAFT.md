@@ -10,7 +10,9 @@
 - **Supplementary material: none at review.** This is consistent with the Ethics statement, which
   says code and data are withheld from the review version for anonymity.
 
-**Still open:** D1–D5 (the author's facts), and the AI-ledger update (E1).
+**Still open:** D1–D5 (the author's facts).
+
+**Done:** the AI-ledger update and the camera-ready clause (approved 2026-10-01; E1 below).
 
 **Source of the questions:** https://aclrollingreview.org/responsibleNLPresearch/, read
 2026-10-01. The page shows no version date. **Author action:** check the questions against the

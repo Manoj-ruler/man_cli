@@ -1557,11 +1557,20 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
   - **supplementary material: none at review.**
   - Every new value is traced: 212 snippets, 602 numbers, 0 problems. The body ends on page 8 of 8.
     Anonymity PASS.
-- **Still open:**
-  - D1–D5: the human label check (§3: one partially independent reviewer, κ = 0.63, n = 14), on
-    recruitment and pay, consent, ethics review, demographics and instructions;
-  - item 5, the AI-ledger update: Opus 5.5 commits 38 → 91, E1 and annotation-review rows, and the
-    optional camera-ready clause.
+- **The AI ledger is updated (author: "approve ledger update and the camera-ready clause"):**
+  - `AI_DISCLOSURE_LEDGER.md`: the commit counts are as of `511f411` (Opus 4.8: 6, Sonnet 5: 17,
+    **Opus 5.5: 92**, against 38 on 2026-09-29); the history runs to 2026-10-01;
+  - **U10:** E1, designed and run by the assistant with the author's approval at each step;
+  - **U11:** annotation coordination support. **No label was assigned, changed or judged by the
+    assistant.**
+  - The fact ledger's tool and content rows are updated, and the rendered statement copy gains the
+    new clause.
+  - **`main.tex` `\aiacknowledgements`** gains "designed, with the author's approval at each step,
+    the pre-specified external check, including its equal-cost comparison". It is present in the
+    camera-ready PDF and absent from the review PDF; the anonymity scan passes.
+- **Build:** the body ends on page 8 of 8, with 0 overfull boxes. **Trace:** 212 / 602 / 0.
+- **Still open:** D1–D5, about the human label check (§3: one partially independent reviewer,
+  κ = 0.63, n = 14): recruitment and pay, consent, ethics review, demographics and instructions.
 - **Not done, pending explicit instruction:** adding LICENSE files to the public repository.
 - **Author:** the paper is now in a consistent state for **PAPER-07**, the mentorship submission
   due Nov 6. The review PDF is at `9158a9c`+, with the latest build in this commit.
