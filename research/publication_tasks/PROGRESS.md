@@ -9,7 +9,7 @@
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
 | 3 E1 execution | E1-10 to 14 | 5 (**complete**) | 0 |
 | 4 Integration | INTEG-01 to 07 | 7 (**complete**) | 0 |
-| 5 Final checks | FINAL-01 to 06 | 1 | 0 |
+| 5 Final checks | FINAL-01 to 06 | 2 | 0 |
 
 ## Planning entry (2026-09-30)
 
@@ -1294,6 +1294,39 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **Observation (cosmetic, no action):** some trace source labels use `versions.v0.x` as shorthand
   for a v0.1/v0.2 pair. The checker resolves them correctly, but the label is not a literal path.
 - **Acceptance criteria:** the trace reports 0 problems, and the counts are recorded: **pass**.
+- **Committed:** in `6a3e935`.
+
+### FINAL-02: build, page limit, abstract length, anonymity (DONE 2026-10-01)
+
+- **`build.sh`** (Git bash) at `6a3e935`: "main: body text ends on page 8 (limit 8)" and
+  "main_review: body text ends on page 8 (limit 8)"; "Built main.pdf and main_review.pdf"; exit 0.
+- **Logs** (`main.log` / `main_review.log`):
+  - **0 overfull boxes** (hbox and vbox);
+  - 0 undefined and 0 multiply-defined references;
+  - 0 missing characters and 0 float warnings;
+  - underfull 17 / 22, cosmetic.
+- **`pdfinfo`:** both PDFs are A4 (595.276 × 841.89 pt) with 14 pages.
+- **Abstract:** **200 words** (limit 200; the project's counting rule).
+- **Anonymity** (the Node scanner, with pdftotext raw and layout modes, normalisation, and 15
+  identifying strings):
+  - **positive control PASS:** the camera-ready PDF contains termassist 3, manoj 8, gaddam 8,
+    claude 24 and acknowledg 4;
+  - **the review PDF has 0 hits for all 15 strings: PASS.**
+- **Rebuilt PDFs:** their text is identical to HEAD (pdftotext comparison); only internal
+  timestamps differed. The committed copies were restored, so no PDF changes are committed.
+- **Cosmetic, optional:** Appendix C starts on page 12, but Table 8 (`table*`) is placed on page 14,
+  queued behind Appendix B's Figure 6. A `\clearpage` before Appendix C would flush the queued
+  floats, so that the table sits next to its section. This is offered to the author and not
+  applied; appendices do not count toward the limit.
+- **Headroom note:** the body ends on page 8, left column, at about 15% (FINAL-02 re-check of
+  INTEG-07's measurement), leaving about 96 column lines. Any later body addition must re-run
+  `build.sh`.
+- **Acceptance criteria:**
+  1. The body is ≤ 8 pages: **pass**.
+  2. No overfull boxes: **pass**.
+  3. The abstract is ≤ 200 words: **pass**.
+  4. The review PDF is free of the tool's and author's names, with the positive control passing:
+     **pass**.
 
 ## Decisions
 
@@ -1364,10 +1397,12 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
 - **Phase 3 is complete.** E1-14's memo is approved.
 - **INTEG-01 is done** (D12 = B).
 - **Phase 4 is complete** (INTEG-01 to 07). The paper is consistent end to end on E1.
-- **FINAL-01 is done:** 208 / 595 / 0, and the 25-row independent spot check agrees on all rows.
-- **Recommended Claude task:** FINAL-02 (P0), the build, page limit, abstract length and
-  anonymity. It should include the reduced page headroom (about 96 lines) and Table 8's float
-  placement. After that come LIT-01 (before FINAL-03), and FINAL-03 to 06.
+- **FINAL-01 and FINAL-02 are done.**
+- **Recommended Claude task:** LIT-01 (P2), which must run before FINAL-03. Verify arXiv
+  2405.06807 against its primary record, and recommend whether to cite it.
+  - **It needs web access** (the arXiv abstract page or API). It is read-only, with no downloads.
+- **Then:** FINAL-03 (P0), the scoped Stage 4.5 integrity rerun over the changed paragraphs; then
+  FINAL-04 to 06.
 - **Author:** the paper is now in a consistent state for **PAPER-07**, the mentorship submission
   due Nov 6. The review PDF is at `9158a9c`+, with the latest build in this commit.
 - **Phase 1 is complete** apart from the author's submission.
