@@ -9,7 +9,7 @@
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
 | 3 E1 execution | E1-10 to 14 | 5 (**complete**) | 0 |
 | 4 Integration | INTEG-01 to 07 | 7 (**complete**) | 0 |
-| 5 Final checks | FINAL-01 to 06 | 0 | 0 |
+| 5 Final checks | FINAL-01 to 06 | 1 | 0 |
 
 ## Planning entry (2026-09-30)
 
@@ -1263,6 +1263,37 @@ Recorded by VERIFY-01 on 2026-09-30.
   2. "All analyses are exploratory" is replaced, and only E1 is called pre-specified: **pass**.
   3. The body is ≤ 8 pages: **pass**.
   4. The edits were drafted first: **pass**.
+- **Committed:** in `de18ad7`.
+
+### FINAL-01: claim trace and number-to-artefact check (DONE 2026-10-01)
+
+- **`node research/experiments/trace_claims.js`, at commit `de18ad7`:**
+  - **208 snippets, 595 numbers, 0 problems** ("Status: all 595 numbers in 208 snippets match");
+  - coverage check: Discussion 0 numerals; Conclusion 13, 0 unregistered; Limitations 22, 0
+    unregistered; Ethics 0;
+  - `CLAIMS_TRACE.md` was regenerated unchanged (no diff).
+- **Independent spot check:** 25 rows of `CLAIMS_TRACE.md` drawn with seed 20261001 (scratchpad
+  `final01_spot.js`, `final01_manual.js` and `final01_last2.js`). They were re-read with separate
+  code, not `trace_claims.js`, using an independent path resolver and rounding check.
+  - **15 file-backed rows:** 13 agree automatically.
+    - Examples: Abstract 17 and 11; κ 0.63; Table 1 .19 and .008; §5 0.323, −0.06, 0.101 and 21;
+      §5 risky 22; §4 150; App. C −8.9.
+    - The other 2 cite the descriptive shorthand `versions.v0.x`, which is not a literal path. Both
+      were resolved by hand and agree: row 295, Table 2 hybrid **79/110**; row 410, §5 **45**
+      (0.4477).
+  - **10 computed or code rows, resolved by hand; all agree:**
+    - 431 corpus records, and 134 Windows-only (145 cross-platform);
+    - the κ target 0.7, from `KAPPA_RESULTS_NOTES.md`;
+    - §5 risky 14 = 0.933 × 15;
+    - Table 3: 23;
+    - single-keyword hits 0 of 20, giving 0%;
+    - App. B: 91 (0.9134), and 9 (hybrid within the floor on "9/20");
+    - Limitations: 59 = 209 − 150;
+    - App. C: 13 = 6 + 7 S intents.
+  - **25/25 agree.**
+- **Observation (cosmetic, no action):** some trace source labels use `versions.v0.x` as shorthand
+  for a v0.1/v0.2 pair. The checker resolves them correctly, but the label is not a literal path.
+- **Acceptance criteria:** the trace reports 0 problems, and the counts are recorded: **pass**.
 
 ## Decisions
 
@@ -1333,12 +1364,10 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
 - **Phase 3 is complete.** E1-14's memo is approved.
 - **INTEG-01 is done** (D12 = B).
 - **Phase 4 is complete** (INTEG-01 to 07). The paper is consistent end to end on E1.
-- **Recommended Claude task:** FINAL-01 (P0), the claim trace and number-to-artefact check. Record
-  the final counts (currently 208 / 595 / 0), and spot-check a random sample of trace rows
-  against their source files by hand.
-- **Then:** FINAL-02 (P0), the build, page limit, abstract length and anonymity. It should include
-  the reduced page headroom (about 96 lines) and Table 8's float placement. After that come
-  LIT-01 (before FINAL-03), FINAL-03 to 06.
+- **FINAL-01 is done:** 208 / 595 / 0, and the 25-row independent spot check agrees on all rows.
+- **Recommended Claude task:** FINAL-02 (P0), the build, page limit, abstract length and
+  anonymity. It should include the reduced page headroom (about 96 lines) and Table 8's float
+  placement. After that come LIT-01 (before FINAL-03), and FINAL-03 to 06.
 - **Author:** the paper is now in a consistent state for **PAPER-07**, the mentorship submission
   due Nov 6. The review PDF is at `9158a9c`+, with the latest build in this commit.
 - **Phase 1 is complete** apart from the author's submission.
