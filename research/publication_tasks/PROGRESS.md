@@ -9,7 +9,7 @@
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
 | 3 E1 execution | E1-10 to 14 | 5 (**complete**) | 0 |
 | 4 Integration | INTEG-01 to 07 | 7 (**complete**) | 0 |
-| 5 Final checks | FINAL-01 to 06 | 2 | 0 |
+| 5 Final checks | FINAL-01 to 06, plus LIT-01 | 3 | 0 |
 
 ## Planning entry (2026-09-30)
 
@@ -1327,6 +1327,43 @@ Recorded by VERIFY-01 on 2026-09-30.
   3. The abstract is ≤ 200 words: **pass**.
   4. The review PDF is free of the tool's and author's names, with the positive control passing:
      **pass**.
+- **Committed:** in `ed60f0a`.
+
+### LIT-01: verify arXiv 2405.06807, ISSUE-05 (DONE 2026-10-01)
+
+- **Verified, read-only** (arXiv API, the abstract page, the v2 HTML and the GitHub repository page;
+  no downloads):
+  - "Execution-Based Evaluation of Natural Language to Bash and PowerShell for Incident
+    Remediation", by Ngoc Phuoc An Vo, Brent Paulovicks and Vadim Sheinin;
+  - v1 2024-05-10, v2 2024-12-16; cs.CL and cs.SE; DOI 10.48550/arXiv.2405.06807;
+  - **no venue is stated.** Semantic Scholar returned HTTP 429 and was not retried.
+- **What it is:** execution-based evaluation of LLM-generated code, with 125 cases (50 + 50 Bash,
+  **25 PowerShell**) and 7 LLMs. It runs in podman containers on a RedHat base image, and does not
+  say which OS runs PowerShell.
+  - The referenced repository `IBM/nl2bash-eabench` is public, but its top level shows only Bash
+    suites; no PowerShell set is visible.
+- **Recommendation and decision:** cite it (author: "approve citation"). Its data is not used. It
+  does not contradict the paper.
+- **Edits:**
+  - **§2:** "…constrained decoding, QuoteBench … failures, and an execution-based evaluation
+    covers generated PowerShell as well as Bash \citep{vo2024execution}." This adds about one body
+    line.
+  - **`references.bib`:** a new `@misc{vo2024execution}` (arXiv preprint convention), with a source
+    comment "verified 2026-10-01".
+  - **Limitations:** "last updated in September 2026" → **"October 2026"**. The literature check
+    is now dated 2026-10-01.
+  - **`trace_claims.js`:** the literature-date rule now expects October, and derives it from the
+    latest bib "verified" date.
+  - **`T6_LITERATURE_VERIFICATION.md`:** §8, a LIT-01 addendum with the full record. It is
+    LF-normalised, with no BOM.
+- **Checks:**
+  - trace: 208 snippets, 595 numbers, 0 problems;
+  - build: the body ends on page 8 (limit 8) in both PDFs; 0 overfull boxes, 0 undefined
+    citations; BibTeX 0 warnings; `vo2024execution` is in the `.bbl` and renders as "Vo et al.";
+  - anonymity: the positive control PASS, and the review PDF is clean.
+- **ISSUE-05 is resolved.**
+- **Acceptance criteria:** the paper was verified against its primary record, a cite or not-cite
+  recommendation was made with a reason, it ran before FINAL-03, and the author decided: **pass**.
 
 ## Decisions
 
@@ -1365,7 +1402,7 @@ Recorded by VERIFY-01 on 2026-09-30.
 | C-1 (APPROVED 2026-09-30; the fix goes in E1-07c) | E1-08 | `e1_analyze.js` gives the recomputed R2 − R3 comparisons (reduced S sets, overlap subset) the primary-reading text | `E1_PROTOCOL_REVIEW.md` §4 | Yes: a code change before the freeze | Relabel them "sensitivity (descriptive)" in E1-07c |
 | ISSUE-08 (RESOLVED by adding E1-07b, author, 2026-09-30) | E1-07 | The plan writes the E1 analysis code after the freeze (E1-11/E1-13). The protocol text fixes every metric, but code written after the freeze still leaves room for undeclared implementation choices, such as bootstrap indexing or how ties are handled in code. | `TASKS.md` E1-11 and E1-13; protocol §6 | No | **Proposed E1-07b (P1, code):** write `research/experiments/e1_analyze.js` **before** the freeze. Test it only on synthetic score files, including the 6.8 logical checks, never on CLINC. Freeze it with the protocol, so that E1-13 only runs frozen code. **This changes the plan, so it needs the author's approval.** |
 | ISSUE-07 | E1-05 | Two scoring inputs are not covered by the analysis freeze's input hashes: `cli/data/custom_snippets.json` (the packaged snippet in the lexical index) and `research/models/corpus_embeddings.json`. The freeze hashes only `commands.json` (`ANALYSIS_FREEZE_v1.0.md:372`). Both files are tracked in git, but `termassist sync` overwrites the snippet file (`cli/index.js:30-40`), and any change to it alters every score. | `E1_SCORING_DESIGN.md` §3, §4 (risk 2), §6; SHA-256 values recorded there | No | **No plan change.** The E1-06 scorer asserts the three SHA-256 values before scoring, and E1-09 lists them among E1's frozen inputs. `ANALYSIS_FREEZE_v1.0.md` is not touched. |
-| ISSUE-05 | PAPER-05 | Possible related-work gap. A web search during Stage 4.5 (2026-09-29, the D1 originality check) returned an arXiv paper titled "Execution-Based Evaluation of Natural Language to Bash and PowerShell for Incident Remediation" (arXiv 2405.06807). It is **unverified**: I have not read or checked it, and the paper does not cite it. If it is real and relevant, it is a public NL-to-**PowerShell** benchmark, which a reviewer may expect in §2 given the tool's Windows corpus. It does **not** contradict §3's or the Limitations' "natural-language-to-**Bash** benchmarks target Linux". | the Stage 4.5 web-search result list, 2026-09-29 (in the session record) | No: the current wording is accurate. It is a completeness risk. | **LIT-01 (P2):** verify arXiv 2405.06807 against its primary record (authors, venue, content). If it holds, decide with the author whether to cite it in §2, and whether its PowerShell data could serve any purpose. That would be a new dataset, which needs approval under the plan's rules. Run it before FINAL-03. |
+| ISSUE-05 (RESOLVED by LIT-01, 2026-10-01: verified, and cited in §2 as `vo2024execution`; data not used) | PAPER-05 | Possible related-work gap. A web search during Stage 4.5 (2026-09-29, the D1 originality check) returned an arXiv paper titled "Execution-Based Evaluation of Natural Language to Bash and PowerShell for Incident Remediation" (arXiv 2405.06807). It is **unverified**: I have not read or checked it, and the paper does not cite it. If it is real and relevant, it is a public NL-to-**PowerShell** benchmark, which a reviewer may expect in §2 given the tool's Windows corpus. It does **not** contradict §3's or the Limitations' "natural-language-to-**Bash** benchmarks target Linux". | the Stage 4.5 web-search result list, 2026-09-29 (in the session record) | No: the current wording is accurate. It is a completeness risk. | **LIT-01 (P2):** verify arXiv 2405.06807 against its primary record (authors, venue, content). If it holds, decide with the author whether to cite it in §2, and whether its PowerShell data could serve any purpose. That would be a new dataset, which needs approval under the plan's rules. Run it before FINAL-03. |
 | ISSUE-04 (RESOLVED by PAPER-05, 2026-09-30) | TRACE-01 | Limitations says "Accuracy tests rest on 7--8 discordant queries". That is true for **hybrid vs BM25** (0+7 on v0.1, 1+7 on v0.2) but **not** for hybrid vs dense, which rests on 3+9 = 12 (v0.1) and 3+14 = 17 (v0.2), per freeze §4. The sentence generalises. | `phase1_t1_controls_excluded.json` comparisons; freeze §4 table | No: it concerns the wording only, and the registered values are correct for hybrid vs BM25 | Fold into **PAPER-05** (the Limitations checklist), for example "Accuracy tests against BM25 rest on 7–8 discordant queries (against dense, 12–17)". Once reworded, the trace entry must be updated. |
 | ISSUE-01 (RESOLVED by TRACE-01, 2026-09-30; had been escalated to P0 by PAPER-02) | VERIFY-02 | The claim trace does not cover the **Conclusion**. Its stated coverage is "Abstract, §1–§5, Tables 1–3, Appendix A, Appendix B". The Conclusion's 9 numbers (46, 34, 50, 12, 9, 15, 20, 11, 134) are unregistered, and so are most Limitations numbers (only the POSIX counts 3 and 4 are). All 9 Conclusion numbers were checked by hand against `review_r1_e_ood_operating_points.json` today and are **correct**. | `paper/CLAIMS_TRACE.md` header; no "Conclusion" location in the trace; grep of `trace_claims.js` | No. It is a process gap: a future edit could drift unnoticed. It matters for FINAL-01. | **TRACE-01 (P1, code):** register the Conclusion, Limitations and Ethics numbers in `trace_claims.js` and extend its coverage line. Do it before PAPER-06, so that the Phase 1 edits are checked. Needs approval to be added to the backlog. |
 | ISSUE-02 | VERIFY-02 | "Wrong answers average 86% confidence" (Abstract; Contribution 1) is **v0.1 only**; the sentence gives no version. On v0.2 the value is 79.50. | Trace entry "Abstract; §1 C1 = 86" (v0.1 source); a new computation from `results/v0.2/reproduction-results.json` | No, but it is an accuracy-of-wording risk a reviewer could catch | **PAPER-08 (P1, paper):** add the version to the 86% in the Abstract and in Contribution 1, or give both values. The abstract has **1 word** of headroom (VERIFY-01), so the fix must trim elsewhere. If 79.50 is quoted, it must be registered in the trace. Could be folded into PAPER-02 (Contribution 1) plus an abstract edit. Needs approval. |
@@ -1397,12 +1434,13 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
 - **Phase 3 is complete.** E1-14's memo is approved.
 - **INTEG-01 is done** (D12 = B).
 - **Phase 4 is complete** (INTEG-01 to 07). The paper is consistent end to end on E1.
-- **FINAL-01 and FINAL-02 are done.**
-- **Recommended Claude task:** LIT-01 (P2), which must run before FINAL-03. Verify arXiv
-  2405.06807 against its primary record, and recommend whether to cite it.
-  - **It needs web access** (the arXiv abstract page or API). It is read-only, with no downloads.
-- **Then:** FINAL-03 (P0), the scoped Stage 4.5 integrity rerun over the changed paragraphs; then
-  FINAL-04 to 06.
+- **FINAL-01, FINAL-02 and LIT-01 are done.**
+- **Recommended Claude task:** FINAL-03 (P0), the scoped Stage 4.5 integrity rerun.
+  - Every paragraph changed since that report (INTEG-03 to 07, LIT-01, PAPER-01 to 08) is
+    checked against its sources.
+  - Every reference is re-verified (`research/paper/integrity/verify_refs.js`), including the new
+    `vo2024execution`.
+- **Then:** FINAL-04 to 06.
 - **Author:** the paper is now in a consistent state for **PAPER-07**, the mentorship submission
   due Nov 6. The review PDF is at `9158a9c`+, with the latest build in this commit.
 - **Phase 1 is complete** apart from the author's submission.

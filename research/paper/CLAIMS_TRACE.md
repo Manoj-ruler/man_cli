@@ -522,7 +522,7 @@ Not traced here, with the reason:
 | Limitations | 20 | 20 | results/seed_repeat/seed_repeat_cv.json :: seeds (length) |
 | Limitations | 10 | 10 | computed: near_ood.n + unsupported_tool_ood.n, results/review_r1/review_r1_e_ood_operating_points.json :: versions.v0.2.rejections_by_kind (AI-assigned kinds) |
 | Limitations | 279 | 279 | cli/data/commands.json, records visible on win32 |
-| Limitations | 2026 | 2026 | latest literature-search date 2026-09: references.bib "verified 2026-09-28" (fresh search section) and PHASE14_LITERATURE_RECHECK.md (2026-09-14); month must be September — PAPER-03 (b) |
+| Limitations | 2026 | 2026 | latest literature-search date 2026-10: references.bib "verified" dates (latest: vo2024execution, verified 2026-10-01, LIT-01) and PHASE14_LITERATURE_RECHECK.md; month must be October — PAPER-03 (b); month updated by LIT-01 |
 | Limitations | 15 | 15 | results/functional/functional-eval-results.json :: summary.n_evaluated |
 | Limitations | 0 | 0 | research/experiments/run_functional_eval.js: success = exitCode === 0 |
 | §4 external check | 4500 | 4500 | results/e1_clinc150_v1/summary.json :: P1.n — displayed with a thousands comma; 150 = intent clusters in P1 |

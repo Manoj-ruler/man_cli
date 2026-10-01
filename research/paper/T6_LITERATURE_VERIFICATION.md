@@ -131,3 +131,24 @@ already exists (NLC2CMD, 2020), and so does published lexical-plus-semantic shel
   platform-specific corpus.
 
 The R2 report lists 18 further references; they are triaged with the suggested items in T21.
+
+## 8. LIT-01 addendum (2026-10-01): arXiv 2405.06807 (ISSUE-05)
+
+- **Record** (read-only; arXiv API and abstract page): "Execution-Based Evaluation of Natural Language
+  to Bash and PowerShell for Incident Remediation".
+  - Authors: Ngoc Phuoc An Vo, Brent Paulovicks, Vadim Sheinin.
+  - Versions: v1 2024-05-10, v2 2024-12-16. Subjects: cs.CL, cs.SE. DOI 10.48550/arXiv.2405.06807.
+  - **No venue or journal reference is stated** on arXiv or in the paper (v2 HTML). Semantic Scholar
+    rate-limited the request (HTTP 429), so it was not checked there.
+- **Content:** execution-based evaluation of **LLM-generated** code, with 125 handcrafted cases (50
+  single-line Bash, 50 multi-line Bash, 25 PowerShell) and 7 LLMs, zero- and few-shot. It runs in
+  podman containers on a RedHat base image. The paper does not say which OS runs the PowerShell
+  cases.
+- **Data:** the paper points to `github.com/IBM/nl2bash-eabench`, which is public. Its top level
+  shows only `bash_1` to `bash_3`; no PowerShell set is visible as of 2026-10-01.
+- **Decision (author: "approve citation"):** it is cited once in §2, as `vo2024execution`, for
+  "an execution-based evaluation covers generated PowerShell as well as Bash".
+  - Its data is **not** used.
+  - The Limitations sentence "public natural-language-to-Bash benchmarks target Linux" stays
+    accurate.
+  - The literature date in the Limitations becomes October 2026.

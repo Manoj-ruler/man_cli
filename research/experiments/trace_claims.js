@@ -331,7 +331,7 @@ add('Fig. accuracy caption', '$n=135$ and $159$, including the 25 canonical cont
   add('Limitations', 'results depend on the platform-filtered corpus), 279 commands', [['279', X(winVisible.length, 'cli/data/commands.json, records visible on win32')]]);
   { const bib = fs.readFileSync(rel('research/paper/acl_latex/references.bib'), 'utf8'), rc = fs.readFileSync(rel('research/paper/PHASE14_LITERATURE_RECHECK.md'), 'utf8');
     const last = [...bib.matchAll(/verified (\d{4})-(\d{2})-\d{2}/g), ...rc.matchAll(/re-check \((\d{4})-(\d{2})-\d{2}\)/g)].map(m => m[1] + '-' + m[2]).sort().pop();
-    add('Limitations', 'last updated in September 2026', [['2026', X(last === '2026-09' ? 2026 : NaN, `latest literature-search date ${last}: references.bib "verified 2026-09-28" (fresh search section) and PHASE14_LITERATURE_RECHECK.md (2026-09-14); month must be September`)]], 'PAPER-03 (b)'); }
+    add('Limitations', 'last updated in October 2026', [['2026', X(last === '2026-10' ? 2026 : NaN, `latest literature-search date ${last}: references.bib "verified" dates (latest: vo2024execution, verified 2026-10-01, LIT-01) and PHASE14_LITERATURE_RECHECK.md; month must be October`)]], 'PAPER-03 (b); month updated by LIT-01'); }
   add('Limitations', 'functional evaluation covers 15 queries and treats exit code 0 as success', [['15', F('functional/functional-eval-results.json', 'summary.n_evaluated')], ['0', X(/gold_functional_success: goldResult\.exitCode === (\d+)/.test(fs.readFileSync(rel('research/experiments/run_functional_eval.js'), 'utf8')) ? +RegExp.$1 : NaN, 'research/experiments/run_functional_eval.js: success = exitCode === 0')]]);
 }
 
