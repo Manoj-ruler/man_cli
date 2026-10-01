@@ -16,6 +16,9 @@ Method: a fresh `git clone` from GitHub on Windows with Git's default `core.auto
 | `trace_claims.js` | 475 numbers, 0 problems |
 | Paper build | Clean; body ends on page 7 of 8 |
 
+**E1 (the external check on CLINC150)** was verified separately on 2026-10-01, in a fresh clone:
+`compare_reproduction.js` reports 0 DIFFERENT (step 9).
+
 The run found three problems, all fixed:
 
 - Two checks recorded raw-byte input hashes that differ in a CRLF checkout. They now use
@@ -211,6 +214,67 @@ files with each other still run.
 To test it first on a synthetic build, pass `--dry-run --bench-dir <dir>`. Its outputs go outside
 `research/` and are stamped SYNTHETIC. A dry run on 2026-09-29 completed in 152 s.
 
+### 9. The external check on CLINC150 (E1)
+
+E1 is the paper's pre-specified external check (§4 "External check", §5, Appendix C).
+
+- **The protocol and both E1 scripts are frozen** at the git tag `e1-protocol-v1` (commit `970c54f`):
+  `research/publication_tasks/e1/E1_PROTOCOL.md`.
+- **The CLINC150 data is committed**, unmodified, in `research/data_external/clinc150/` (CC BY 3.0;
+  hashes in `PROVENANCE.md`). **Nothing is downloaded.**
+- **Prerequisites:** steps 1–2 above (the research dependencies and the verified model cache), and
+  Windows with Node 24.2.0.
+
+The E1 scripts never overwrite a file, so move the committed outputs aside first. Git keeps the
+committed versions for the comparison. Do this in a scratch clone rather than your working copy.
+
+```bash
+# 0. the frozen set must equal the tag (the authoritative "unchanged" check)
+git diff --exit-code e1-protocol-v1 -- research/publication_tasks/e1 research/experiments/e1_score_queries.js research/experiments/e1_analyze.js
+# move the committed outputs aside; restore the two hand-written files
+mv research/results/e1_clinc150_v1 ../e1_clinc150_v1.committed
+git checkout -- research/results/e1_clinc150_v1/.gitattributes research/results/e1_clinc150_v1/DEVIATIONS.md
+E=research/results/e1_clinc150_v1
+node research/experiments/e1_prepare_data.js --out-dir $E/data                 # checks the data hashes against PROVENANCE.md
+node research/experiments/e1_score_queries.js --guard --out $E/guard_v0_2.json # must report 0 mismatches / 209
+node research/experiments/e1_score_queries.js --input $E/data/p1_queries.json --out $E/scores_p1.json
+node research/experiments/e1_score_queries.js --input $E/data/p2_queries.json --out $E/scores_p2.json
+node research/experiments/e1_analyze.js --scores-p1 $E/scores_p1.json --scores-p2 $E/scores_p2.json --meta-p1 $E/data/p1_queries.json --out-dir $E --stage decisions
+node research/experiments/e1_analyze.js --scores-p1 $E/scores_p1.json --scores-p2 $E/scores_p2.json --meta-p1 $E/data/p1_queries.json --out-dir $E --stage summary
+node research/experiments/compare_reproduction.js
+```
+
+**Expected:**
+
+- `e1_prepare_data.js`: 18 checks pass. `p1_queries.json` has SHA-256 `5d047d26…47d2` and
+  `p2_queries.json` has `d6f0c207…c344`.
+- The guard: 0 mismatches / 209 for `s4`, `confidence` and `fused4`. Every scorer pre-flight
+  reports OK: win32, the three scoring-input hashes, the model cache, and α.
+- `e1_analyze.js`: logical checks pass at both stages.
+- `compare_reproduction.js`: **0 DIFFERENT.**
+  - The two query files, both decision files and `DEVIATIONS.md` are byte-identical.
+  - The scores, guard, logical checks, summary, data provenance and manifest are VOLATILE-ONLY.
+- **The E1 volatile fields** are `generated_at`; the manifest's `started`, `finished`, `commit`
+  and `tag_at_head`; `input_files_sha256`, which hashes files containing timestamps; and
+  `script_sha256`.
+  - `script_sha256` holds raw-byte hashes, which change on a CRLF checkout. Step 0 checks the
+    scripts instead.
+  - In `.md` files, the ISO-8601 timestamp is the only volatile part.
+
+**Verified 2026-10-01 (FINAL-04):**
+
+- **Setup:**
+  - a fresh `git clone` of commit `0a45e34`, on Windows with `core.autocrlf=true`;
+  - `npm ci --offline`, installing from the local npm cache and verified against the lockfile's
+    integrity hashes, with no network;
+  - the model cache copied offline and verified (4/4 SHA-256).
+- **Results:**
+  - Step 0: exit 0. Freeze inputs: 27/27 unchanged.
+  - The data hashes are as above. The guard: 0/209.
+  - **`compare_reproduction.js`: 0 DIFFERENT** (8 VOLATILE-ONLY; the rest unchanged).
+- **A negative control confirmed that the comparison still catches real changes.** Changing one
+  count in `summary.json` and one digit in `summary.md` made both files DIFFERENT, with exit 1.
+
 ## What does not reproduce exactly, by design
 
 - **Latency.** Every latency or millisecond value is a single wall-clock measurement on one machine.
@@ -218,7 +282,8 @@ To test it first on a synthetic build, pass `--dry-run --bench-dir <dir>`. Its o
     busy machine.
   - Treat reported latencies as indicative only; do not compare them exactly.
 - **Timestamps and the recorded commit.** Any `generated_at`-style field, and the `git_commit` in
-  `baseline/reproduction-metadata.json`.
+  `baseline/reproduction-metadata.json`. For E1, also the manifest's checkout and raw-hash fields
+  (step 9).
 - **Other operating systems.** See Requirements.
 
 ## Not covered by these runners

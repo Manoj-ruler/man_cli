@@ -12,7 +12,13 @@ const { execFileSync } = require('child_process');
 const fs = require('fs');
 
 // keys whose values are expected to differ between runs; matched against the last path segment
-const VOLATILE = /^(generated_at|generatedAt|timestamp|run_at|date|created_at|updated_at|.*_ms|.*latency.*|.*Latency.*|elapsed.*|duration.*|wall_clock.*|mean_ms|median_ms|p95_ms|p50_ms|node_version|hostname|git_commit)$/;
+const VOLATILE = /^(generated_at|generatedAt|timestamp|run_at|date|created_at|updated_at|.*_ms|.*latency.*|.*Latency.*|elapsed.*|duration.*|wall_clock.*|mean_ms|median_ms|p95_ms|p50_ms|node_version|hostname|git_commit|started|finished|commit|tag_at_head|input_files_sha256|script_sha256)$/;
+// FINAL-04 (2026-10-01), for research/results/e1_clinc150_v1/RUN_MANIFEST.json: started/finished are timestamps;
+// commit/tag_at_head depend on the checkout; input_files_sha256 hashes files that contain timestamps; and
+// script_sha256 hashes raw bytes, which change on a CRLF checkout. The scripts themselves are checked with
+// `git diff --exit-code e1-protocol-v1 -- ...` (REPRODUCE.md, E1 section), not through these hashes.
+// Text files (e.g. summary.md, DATA_PROVENANCE.md) whose only difference is an ISO-8601 timestamp count as volatile.
+const maskTimestamps = s => s.replace(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z/g, '<timestamp>');
 // table columns (CSV header cell or Markdown header cell) holding measured timings
 const VOLATILE_COLUMN = /latency|\(ms\)/i;
 
@@ -67,6 +73,8 @@ for (const { code, file } of changed) {
   } else if ((file.endsWith('.csv') || file.endsWith('.md')) && diffTable(before, now, file) !== null) {
     const d = diffTable(before, now, file);
     rows.push(d.length ? { file, status: 'DIFFERENT', detail: d.slice(0, 5) } : { file, status: 'VOLATILE-ONLY' });
+  } else if (maskTimestamps(now) === maskTimestamps(before)) {
+    rows.push({ file, status: 'VOLATILE-ONLY' });
   } else {
     const A = before.split('\n'), B = now.split('\n');
     const lines = []; for (let i = 0; i < Math.max(A.length, B.length) && lines.length < 3; i++) if (A[i] !== B[i]) lines.push(`line ${i + 1}: ${JSON.stringify((A[i] || '').slice(0, 70))} -> ${JSON.stringify((B[i] || '').slice(0, 70))}`);

@@ -9,7 +9,7 @@
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
 | 3 E1 execution | E1-10 to 14 | 5 (**complete**) | 0 |
 | 4 Integration | INTEG-01 to 07 | 7 (**complete**) | 0 |
-| 5 Final checks | FINAL-01 to 06, plus LIT-01 | 4 | 0 |
+| 5 Final checks | FINAL-01 to 06, plus LIT-01 | 5 | 0 |
 
 ## Planning entry (2026-09-30)
 
@@ -1389,6 +1389,51 @@ Recorded by VERIFY-01 on 2026-09-30.
   anonymity PASS.
 - **Acceptance criteria:** 100% of the changed paragraphs are checked, and every reference is still
   verified: **pass**.
+- **Committed:** in `0a45e34`.
+
+### FINAL-04: reproduction docs and a clean-clone rerun that includes E1 (DONE 2026-10-01)
+
+- **`research/REPRODUCE.md`:**
+  - a new **step 9, "The external check on CLINC150 (E1)"**, with the command order, expected
+    values, volatile fields and a verification record;
+  - a header line on E1's separate verification;
+  - an E1 note under "does not reproduce exactly".
+- **`research/experiments/compare_reproduction.js`** (not a frozen file):
+  - new volatile JSON keys `started`, `finished`, `commit`, `tag_at_head`, `input_files_sha256` and
+    `script_sha256`. They appear only in E1's `RUN_MANIFEST.json` and `summary.json`; a search of
+    `research/` found no other file using them.
+  - **text files that differ only in ISO-8601 timestamps** are treated as volatile.
+  - The scripts themselves are checked by `git diff` against the frozen tag, not by the raw hashes.
+- **Clean-clone run** (in the scratchpad):
+  - a `git clone` of `0a45e34`, with `core.autocrlf=true`;
+  - step 0, `git diff --exit-code e1-protocol-v1 -- <frozen set>`: **exit 0**;
+  - freeze inputs: **27/27 unchanged**;
+  - `npm ci --offline`: 80 packages from the local npm cache, integrity-checked against the
+    lockfile, with **no network** (`@xenova/transformers` 2.17.2);
+  - the model cache was copied offline and verified: **4/4 SHA-256**.
+  - Pipeline, after moving the committed outputs aside:
+    - `e1_prepare_data.js`: 18 checks pass. The data SHA-256 values **equal the recorded ones**
+      (`5d047d26…`, `d6f0c207…`);
+    - guard: **0/209** on all three scores;
+    - scoring of P1 and P2: pre-flight OK;
+    - decisions and summary: logical checks pass.
+    - Step 1's PowerShell exit code was −1 because the display pipe was truncated after the files
+      were written. The files were verified by hash.
+  - **`compare_reproduction.js`: 0 DIFFERENT, 8 VOLATILE-ONLY, exit 0.** Both query files, both
+    decision files and `DEVIATIONS.md` are unchanged.
+  - **Negative control:** a tampered count in `summary.json` and a tampered digit in `summary.md`
+    were both reported **DIFFERENT** (exit 1). They were restored byte for byte.
+  - As expected, the raw-byte `script_sha256` values differ in the CRLF checkout, while the
+    git-tag diff is clean.
+  - The documented `git checkout --` restore of `.gitattributes` and `DEVIATIONS.md` was verified.
+- **A difference from REPRO-01 (2026-09-30):** that run used a GitHub clone, a networked
+  `npm ci` and a Hub model download. This one used a local clone of the same pushed commit, an
+  offline `npm ci` and a copied verified cache. No file was downloaded.
+- **Acceptance criteria:**
+  1. An E1 section is added: **pass**.
+  2. A fresh clone reproduces `e1_clinc150_v1`, with the data verified against the recorded hashes:
+     **pass**.
+  3. `compare_reproduction.js` reports 0 DIFFERENT: **pass**.
 
 ## Decisions
 
@@ -1459,15 +1504,13 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
 - **Phase 3 is complete.** E1-14's memo is approved.
 - **INTEG-01 is done** (D12 = B).
 - **Phase 4 is complete** (INTEG-01 to 07). The paper is consistent end to end on E1.
-- **FINAL-01 to FINAL-03 and LIT-01 are done.**
-- **Recommended Claude task:** FINAL-04 (P1), the reproduction docs and a clean-clone rerun that
-  includes E1. It covers:
-  - an E1 section in `research/REPRODUCE.md`;
-  - a fresh clone into the scratchpad that reproduces `e1_clinc150_v1` byte-identically, apart
-    from timestamps. This needs the pinned model cache, which can be copied offline, so nothing
-    is downloaded.
-- **Then:** FINAL-05 (consistency of paper, code and artefacts) and FINAL-06 (submission
-  checklist).
+- **FINAL-01 to FINAL-04 and LIT-01 are done.**
+- **Recommended Claude task:** FINAL-05 (P1), a consistency review of the paper, code and
+  artefacts. Every artefact the paper mentions must exist at the stated path, with names, versions
+  and counts consistent across the paper, the README files, the task documents and the results.
+- **Then:** FINAL-06 (P0), the submission checklist: the ACL Responsible NLP answers, including
+  AI use from `AI_DISCLOSURE_LEDGER.md`; the final anonymous PDF; and the supplementary-material
+  decision.
 - **Author:** the paper is now in a consistent state for **PAPER-07**, the mentorship submission
   due Nov 6. The review PDF is at `9158a9c`+, with the latest build in this commit.
 - **Phase 1 is complete** apart from the author's submission.

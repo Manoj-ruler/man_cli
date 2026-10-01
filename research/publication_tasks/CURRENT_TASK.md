@@ -1,26 +1,25 @@
 # Current task
 
-**Last completed:** FINAL-03 (2026-10-01): the scoped integrity rerun **passes after one
-correction**.
+**Last completed:** FINAL-04 (2026-10-01).
 
-- 31/31 references are verified, with 0 regressions.
-- 100% of the changed passages are checked.
-- The "exactly those that share no word" wording in §5 and Appendix C was corrected for three
-  greetings accepted through an accidental substring match.
-- Trace: 208 / 595 / 0. The body ends on page 8 of 8. Anonymity passes.
+- `REPRODUCE.md` gained step 9 (E1).
+- A clean clone, with an offline `npm ci` and a copied verified model cache, re-ran the whole E1
+  pipeline.
+- **`compare_reproduction.js` reports 0 DIFFERENT** (8 volatile-only). A negative control confirms
+  the comparison still catches real changes.
 
 **Author actions:**
 
-- **PAPER-07 (by Nov 6):** submit the current review PDF, which includes the FINAL-03 correction.
+- **PAPER-07 (by Nov 6):** submit the current review PDF.
 - **ISSUE-11 = a:** send the drafted annotator messages. Adjudication waits.
 - Decide whether to commit `research/results/annotation/`.
 - **Optional:** add a `\clearpage` before Appendix C, for Table 8's placement.
 
-**Next (recommended): FINAL-04, the reproduction docs and a clean-clone rerun that includes E1.**
-Status: NOT STARTED. It waits for "Start FINAL-04".
+**Next (recommended): FINAL-05, a consistency review of the paper, code and artefacts.** Status:
+NOT STARTED. It waits for "Start FINAL-05".
 
-- Add an E1 section to `research/REPRODUCE.md`: the order of commands, the frozen tag, the
-  `git diff` check, the expected hashes, and the model cache.
-- Clone the repository fresh into the scratchpad, copy the verified model cache offline (no
-  download), and re-run the E1 pipeline. The outputs must match the committed
-  `research/results/e1_clinc150_v1/`, apart from timestamps.
+- Every artefact the paper mentions exists at the stated path.
+- Names, versions and counts are consistent across the paper, the README files, `REPRODUCE.md`, the
+  task documents and the result files. This includes the corpus sizes, the benchmark versions, the
+  E1 tag and paths, and the tool's release statement.
+- Discrepancies are listed, and fixed only with approval where they touch the paper.
