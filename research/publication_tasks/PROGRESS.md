@@ -8,7 +8,7 @@
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
 | 3 E1 execution | E1-10 to 14 | 5 (**complete**) | 0 |
-| 4 Integration | INTEG-01 to 07 | 5 | 0 |
+| 4 Integration | INTEG-01 to 07 | 6 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
 
 ## Planning entry (2026-09-30)
@@ -1176,6 +1176,42 @@ Recorded by VERIFY-01 on 2026-09-30.
   - 0 name hits in the review PDF.
 - **Acceptance criteria:** it states explicitly that E1 does not establish performance on
   terminal-task out-of-scope requests: **pass**. The trace and the build pass.
+- **Committed:** in `22c5b88`.
+
+### INTEG-06: keep "pre-planned" and "exploratory" apart, in the body (DONE 2026-10-01)
+
+- **Searched `content.tex`** (case-insensitive) for: confirm, pre-registered, preregistered,
+  planned, in advance, exploratory, frozen, pre-specified, pre-named, post hoc, "before
+  (any|scoring|results)" and "after results".
+- **Correct as they stand:**
+  - post-hoc recalibration, a method name (ll. 47, 79, 141, 389);
+  - "post hoc bootstrap" (l. 133);
+  - the sensitivity table, labelled post hoc (l. 535);
+  - l. 176 and l. 415, fixed earlier;
+  - the E1 passages (ll. 179, 183, 649, 672);
+  - the Holm caption "exploratory" (l. 519);
+  - "-Confirm" and "explicit confirmation", which are about safety prompts (ll. 382, 448).
+- **Edits (draft shown first; approved as "approve 1–2, abstract = a"):**
+  1. "pre-named" → **"Holm-family"** in four places: the Table 1 row (l. 205), the Table 1 caption
+     (l. 219), §5 (l. 259), and Appendix B's "gives the Holm family" (l. 497). The family was fixed
+     after the raw results were seen (l. 176), so "pre-named" could be misread as pre-specified
+     beside E1.
+  2. **Conclusion next steps:** "confirm the findings with an analysis specified in advance; add
+     answerable and terminal-task out-of-scope queries judged by people" became "extend the
+     pre-specified external check, so far general-domain, to answerable and terminal-task
+     out-of-scope queries judged by people".
+- **Plan adjustment (author):** the Abstract's "All analyses are exploratory" (l. 23) is moved to
+  INTEG-07's acceptance, so that the abstract is reworked once, together with the E1-sentence
+  decision. `TASKS.md` is updated in both tasks.
+- **Re-search after the edits:**
+  - no "pre-named" and no "confirm the findings" remain;
+  - "pre-specified" and "frozen" refer only to E1 (ll. 179, 394, 649, 672);
+  - the only remaining "All analyses are exploratory" is the Abstract (l. 23), which is INTEG-07.
+- **Trace:** 207 snippets, 590 numbers, 0 problems. No trace snippet quoted the changed phrases.
+- **Build:** the body ends on page 7 in both PDFs; 0 overfull boxes and 0 undefined references;
+  0 name hits in the review PDF.
+- **Acceptance criteria:** the search finds only correct uses in the body, and only E1 is called
+  pre-planned: **pass**. The Abstract item was moved to INTEG-07 with the author's approval.
 
 ## Decisions
 
@@ -1245,16 +1281,15 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
 - **E1-10 to E1-13 are done.** The results are computed; see the E1-13 entry.
 - **Phase 3 is complete.** E1-14's memo is approved.
 - **INTEG-01 is done** (D12 = B).
-- **INTEG-02 to INTEG-05 are done.**
-- **Recommended Claude task:** INTEG-06 (P1), keeping pre-planned and exploratory apart.
-  - Search `content.tex` for "confirm", "pre-registered", "planned", "specified in advance",
-    "exploratory" and "frozen".
-  - The known remaining items are:
-    - the Abstract's "All analyses are exploratory" (this edit belongs to INTEG-07, P10);
-    - the Conclusion's next step "confirm the findings with an analysis specified in advance"
-      (P7).
-  - Line 176 and the Limitations are already fixed.
-  - Draft first.
+- **INTEG-02 to INTEG-06 are done.**
+- **Recommended Claude task:** INTEG-07 (P1), the Abstract, Discussion and Conclusion (plan
+  items P5, P6, P8 and P10). It covers:
+  - the Discussion's "better threshold, not a new retriever" passage;
+  - the Conclusion lead and the out-of-scope sentence;
+  - the optional contribution clause;
+  - the Abstract: replace "All analyses are exploratory", and decide whether to add an E1
+    sentence, within 200 words.
+  - Draft first; the build must stay ≤ 8 pages, and the trace at 0 problems.
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 

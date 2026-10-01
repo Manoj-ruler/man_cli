@@ -577,6 +577,8 @@ v0.2 thresholds frozen?
 - **Priority:** P1. **Type:** paper. **Depends on:** INTEG-04.
 - **Acceptance:** a search for "confirm", "pre-registered", "planned" and "exploratory" finds only
   correct uses. Only E1 is called pre-planned.
+  - *The Abstract's "All analyses are exploratory" was moved to INTEG-07, by the author's decision
+    of 2026-10-01; INTEG-06 covers the body.*
 
 ### INTEG-07: Update the abstract, Discussion and Conclusion
 *(Raised from P2 to P1, and its scope widened, on 2026-10-01 with the author's approval, in the
@@ -587,6 +589,9 @@ INTEG-02 plan. It is required under D12 = B: the Conclusion lead is rephrased, a
   out-of-scope sentence), P8 (an optional contribution clause) and P10 (the abstract).
 - **Acceptance:**
   - The abstract is at most 200 words, and every number is traced.
+  - **The abstract no longer says "All analyses are exploratory"** (moved here from INTEG-06,
+    author decision "abstract = a", 2026-10-01). Only the external check may be described as
+    pre-specified.
   - The body stays within 8 pages (`build.sh`).
   - Each edit is shown to the author as a draft before it is applied.
 

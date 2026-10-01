@@ -202,7 +202,7 @@ Table~\ref{tab:claims} summarizes every claim; the population throughout is non-
     \midrule
     Shipped confidence: ECE before $\to$ after isotonic & .323$\to$.069; $-$79\% [44, 84] & .293$\to$.063; $-$78\% [52, 87] & robust \\
     Shipped confidence: Brier skill vs.\ no-skill, raw / recalibrated & $-$.23 [$-$.45, .01] / .20 [.04, .36] & $-$.06 [$-$.26, .15] / .33 [.19, .46] & raw: no skill; recal.: robust \\
-    Hybrid confidence: ECE before $\to$ after isotonic (pre-named test) & .329$\to$.108; $-$67\% [43, 83] & .368$\to$.071; $-$81\% [62, 86] & robust \\
+    Hybrid confidence: ECE before $\to$ after isotonic (Holm-family test) & .329$\to$.108; $-$67\% [43, 83] & .368$\to$.071; $-$81\% [62, 86] & robust \\
     Out-of-scope rejected: fixed rule / tuned threshold / hybrid detector & 4 / 10 / 7 of 15 & 17 / 46 / 34 of 50 & threshold, not hybrid$^\dagger$ \\
     False rejections of in-scope: fixed / tuned / hybrid & 0 / 9 / 6 of 110 & 0 / 20 / 11 of 134 & cost of tuning \\
     Out-of-scope rejected at equal false rejections, shipped score / hybrid feature (in-sample) & 10 / 7 at 6 & 33 / 33 at 7; 43 / 37 at 15 & descriptive$^\dagger$ \\
@@ -216,7 +216,7 @@ Table~\ref{tab:claims} summarizes every claim; the population throughout is non-
   \end{tabular}
   \caption{Claims with 95\% bootstrap intervals, all on non-control queries: 110 and 134 in-scope queries plus the
   15 and 50 out-of-scope ones. No rule ever rejects a control, and controls are never discordant, so the accuracy
-  $p$-values equal the Holm table's (Appendix~\ref{app:secondary}), which also holds the pre-named ECE test. Status
+  $p$-values equal the Holm table's (Appendix~\ref{app:secondary}), which also holds the Holm-family ECE test. Status
   ``robust'' means the interval excludes zero on both versions; ``fragile'' means the result depends on a few
   queries. The equal-false-rejection row picks each score's threshold on the same data (\S\ref{sec:ood}).
   $^\dagger$On the benchmark; on external requests at equal v0.2 cost the hybrid's feature rejects more
@@ -256,7 +256,7 @@ it has the worst Brier score of the three in every case. The hybrid's own confid
 Brier skill is $-0.32$ and $-0.30$, both intervals excluding zero; after recalibration its ECE falls from 0.329 to
 0.108 and from 0.368 to 0.071, above the noise floor's 95th percentile on v0.1 (0.089) and within it on v0.2
 (0.079). Its raw ECE is the same under all three estimators; after recalibration, equal-mass bins give 0.108 and
-0.058 and the sweep 0.055 and 0.071. This hybrid reduction is the pre-named comparison, tested with controls included, and it survives Holm
+0.058 and the sweep 0.055 and 0.071. This hybrid reduction is the Holm-family comparison, tested with controls included, and it survives Holm
 correction on both versions (Table~\ref{tab:holm}). Recalibration changes the number shown, not the answer or its
 ranking: correctness AUROC even drops (shipped, v0.1: 0.742 to 0.686), because each fold gets its own map.
 The maps are fit on benchmark queries written by the authors and an AI agent, so they hold for queries like these;
@@ -391,8 +391,8 @@ shipped score, tuned by cross-validation, rejects more out-of-scope requests tha
 34 of 50, and 12 vs.\ 9 on the 15 not screened by retrieval score) but refuses more in-scope queries (20 vs.\ 11 of 134), and
 most of these requests are everyday rather than terminal tasks. The hybrid, with one small encoder (MiniLM), mainly improves how
 confidence ranks its own errors. Next steps, in order:
-finish the two-annotator label study and release a corrected benchmark; confirm the findings with an analysis
-specified in advance; add answerable and terminal-task out-of-scope queries judged by people; build an independent
+finish the two-annotator label study and release a corrected benchmark; extend the pre-specified external check,
+so far general-domain, to answerable and terminal-task out-of-scope queries judged by people; build an independent
 safety set; and study whether calibrated confidence and risk prompts change what users run.
 
 % Invisible marker: build.sh reads its page number to check the 8-page limit. Per the ACL formatting
@@ -494,7 +494,7 @@ Table~\ref{tab:spec} specifies the research system; the published tool is specif
 \section{Secondary Analyses}
 \label{app:secondary}
 
-\paragraph{Holm family.} Table~\ref{tab:holm} gives the pre-named family, computed with the canonical controls
+\paragraph{Holm family.} Table~\ref{tab:holm} gives the Holm family, computed with the canonical controls
 included; the controls never enter discordant pairs, so accuracy $p$-values are the same without them. The
 calibration $p$ is a bootstrap bound (one-sided, resolution $10^{-4}$), so its Holm value is also a bound.
 
