@@ -1496,6 +1496,7 @@ Recorded by VERIFY-01 on 2026-09-30.
 | D9 | External preregistration: **none; the git tag only** | 2026-09-30 | author |
 | — | INTEG-02 placement plan approved; **INTEG-07 raised to P1**, with the Discussion rephrase added to its scope | 2026-10-01 | author ("approve plan, INTEG-07 = P1") |
 | — | ISSUE-11 = (a): a record_ids-only correction requested from annotator 2, labels locked; independence confirmation from both annotators. The drafts are in the gitignored coordinator folder, and the author sends them. | 2026-10-01 | author |
+| — | FINAL-06: the Appendix A artifacts/licenses/compute paragraph is approved, with **code under MIT and the benchmark under CC BY 4.0**; B4 confirmed; **no supplementary material at review** | 2026-10-01 | author ("approve 1 with MIT and CC BY 4.0, B4 yes, supplementary none") |
 | D12 | How the paper words the claims E1 weakens: **option B, a proportionate reframe.** The v0.2 claims are scoped to the benchmark, E1 is reported as a pre-specified external check, and ll. 257, 265 and 353–355 and the Conclusion lead are rephrased. The Limitations, the next steps and "exploratory" are updated. | 2026-09-30 | author ("D12 = B") |
 | D11 | E1-08 findings: **ISSUE-10 = (b).** The primary reading and ED-2 are reworded, and a secondary matched-operating-point comparison R2m − R3m is added (m = 11; thresholds from v0.2's 159 in-scope queries only). **ISSUE-09 = (a):** P2's out-of-scope status is stated as assumed. **C-1 is approved.** **E1-07c is added.** | 2026-09-30 | author ("ISSUE-10 = b, ISSUE-09 = a, approve C-1, add E1-07c") |
 | D10 | **(a)**: one pre-specified primary comparison, R2 − R3 on P1, with a paired cluster-bootstrap 95% interval (B = 10,000, seed 42). P2's three pairs are secondary (exact McNemar, Holm over 3); all else is descriptive. §6 is approved as drafted. | 2026-09-30 | author |
@@ -1545,12 +1546,23 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
 - **INTEG-01 is done** (D12 = B).
 - **Phase 4 is complete** (INTEG-01 to 07). The paper is consistent end to end on E1.
 - **FINAL-01 to FINAL-05 and LIT-01 are done.**
-- **Recommended Claude task:** FINAL-06 (P0), the submission checklist. It covers:
-  - drafting the ACL Responsible NLP checklist answers, including AI use from
-    `research/paper/AI_DISCLOSURE_LEDGER.md`;
-  - confirming the final anonymous PDF;
-  - recording the supplementary-material decision (the author's).
-  - **Submission itself is the author's action.**
+- **In progress: FINAL-06.** The checklist draft (`research/paper/RESPONSIBLE_NLP_CHECKLIST_DRAFT.md`)
+  is committed.
+- **Decided (2026-10-01):**
+  - the Appendix A "Artifacts, licenses and compute" paragraph is **applied**: CLINC150 CC BY 3.0;
+    all-MiniLM-L6-v2, 22.7M parameters, Apache 2.0; `@xenova/transformers` 2.17.2;
+    `onnxruntime-node` 1.14.0; Node.js 24.2.0; CPU on one Windows machine with no GPU; **code MIT,
+    benchmark CC BY 4.0**;
+  - B4 is confirmed;
+  - **supplementary material: none at review.**
+  - Every new value is traced: 212 snippets, 602 numbers, 0 problems. The body ends on page 8 of 8.
+    Anonymity PASS.
+- **Still open:**
+  - D1–D5: the human label check (§3: one partially independent reviewer, κ = 0.63, n = 14), on
+    recruitment and pay, consent, ethics review, demographics and instructions;
+  - item 5, the AI-ledger update: Opus 5.5 commits 38 → 91, E1 and annotation-review rows, and the
+    optional camera-ready clause.
+- **Not done, pending explicit instruction:** adding LICENSE files to the public repository.
 - **Author:** the paper is now in a consistent state for **PAPER-07**, the mentorship submission
   due Nov 6. The review PDF is at `9158a9c`+, with the latest build in this commit.
 - **Phase 1 is complete** apart from the author's submission.

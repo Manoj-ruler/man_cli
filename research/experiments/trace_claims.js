@@ -372,6 +372,18 @@ add('Fig. accuracy caption', '$n=135$ and $159$, including the 25 canonical cont
   add('App. C', 'bootstrap over the 150 intents', [['150', F(s1, 'P1.bootstrap.clusters')]]);
   add('App. C', 'the median of the five per-fold rates', [['5', F(s1, 'thresholds.R2.length')]], 'number word "five"');
   add('App. C', "each score's threshold refuses at most 11 of v0.2's 159 in-scope queries (10 for the shipped score, because of a tie)", [['11', F(s1, 'matched_thresholds_derivation.m')], ['159', F(s1, 'matched_thresholds_derivation.n_in_scope')], ['10', F(s1, 'matched_thresholds_derivation.s4.in_scope_rejected_of_159')]]);
+  // FINAL-06 (2026-10-01): Appendix A "Artifacts, licenses and compute" (author-approved; licenses chosen by the author).
+  { const lock = RD('research/package-lock.json').packages, nvmrc = fs.readFileSync(rel('research/.nvmrc'), 'utf8').trim();
+    const prov = fs.readFileSync(rel('research/data_external/clinc150/PROVENANCE.md'), 'utf8');
+    const ck = fs.readFileSync(rel('research/paper/RESPONSIBLE_NLP_CHECKLIST_DRAFT.md'), 'utf8');
+    const ccBy = (/Creative Commons Attribution (\d\.\d)/.exec(prov) || [])[1];
+    const params = +((/parameter count is \*\*(\d+(?:\.\d+)?)M\*\*/.exec(ck) || [])[1]);
+    const benchLic = (/benchmark under CC BY (\d\.\d)/.exec(ck) || [])[1];
+    add('App. A', 'CLINC150 is distributed under CC BY 3.0', [['3.0', X(ccBy, 'research/data_external/clinc150/PROVENANCE.md licence line')]]);
+    add('App. A', '(22.7M parameters; Apache 2.0)', [['22.7', X(params, 'Hugging Face model card sentence-transformers/all-MiniLM-L6-v2, read 2026-10-01; recorded in research/paper/RESPONSIBLE_NLP_CHECKLIST_DRAFT.md (C1)')], ['2.0', X('2.0', 'Apache 2.0, model card (license field), recorded in the checklist draft (B2)')]]);
+    add('App. A', '2.17.2 with \\texttt{onnxruntime-node} 1.14.0 on Node.js 24.2.0', [['2.17.2', X(lock['node_modules/@xenova/transformers'].version, 'research/package-lock.json')], ['1.14.0', X(lock['node_modules/onnxruntime-node'].version, 'research/package-lock.json')], ['24.2.0', X(nvmrc, 'research/.nvmrc')]]);
+    add('App. A', 'our benchmark under CC BY 4.0', [['4.0', X(benchLic, 'author decision 2026-10-01, recorded in research/paper/RESPONSIBLE_NLP_CHECKLIST_DRAFT.md (B2)')]]);
+  }
   add('Limitations', 'equal-cost thresholds are set in-sample on v0.2 and refuse 10 and 11 in-scope queries rather than exactly the same number', [['10', F(s1, 'matched_thresholds_derivation.s4.in_scope_rejected_of_159')], ['11', F(s1, 'matched_thresholds_derivation.fused4.in_scope_rejected_of_159')]], 'INTEG-05: matched operating points (protocol §6.4)');
   add('App. C', 'Removing the 13 intents a stock shell could answer leaves the primary difference at $+$7.5 [4.2, 10.9]', [['13', X(F(s1, 'P1_extras.subgroup_S.S_clear.intents').v + F(s1, 'P1_extras.subgroup_S.S_borderline.intents').v, `computed: S_clear.intents + S_borderline.intents, results/${s1} :: P1_extras.subgroup_S`)], ['+7.5', pct(F(s1, 'P1_extras.sensitivity_without_S.without_S_clear_and_S_borderline.primary_comparison.difference'))], ['4.2', pct(F(s1, 'P1_extras.sensitivity_without_S.without_S_clear_and_S_borderline.primary_comparison.ci95.lo'))], ['10.9', pct(F(s1, 'P1_extras.sensitivity_without_S.without_S_clear_and_S_borderline.primary_comparison.ci95.hi'))]], 'sensitivity (descriptive), protocol §6.5 point 2');
 }
