@@ -8,7 +8,7 @@
 | 1 Contribution | PAPER-01 to 08, TRACE-01 | 8 (PAPER-07 is the author's) | 0 |
 | 2 E1 protocol | E1-01 to 09, plus E1-07b and E1-07c | 11 (**complete**; frozen at `e1-protocol-v1`) | 0 |
 | 3 E1 execution | E1-10 to 14 | 5 (**complete**) | 0 |
-| 4 Integration | INTEG-01 to 07 | 1 | 0 |
+| 4 Integration | INTEG-01 to 07 | 2 | 0 |
 | 5 Final checks | FINAL-01 to 06 | 0 | 0 |
 
 ## Planning entry (2026-09-30)
@@ -1036,6 +1036,30 @@ Recorded by VERIFY-01 on 2026-09-30.
   - Update the Limitations, the next steps and the "exploratory" disclosure.
 - **Acceptance criteria:** `CLAIM_EVIDENCE_MAP.md` has E1 rows, and the author has decided the
   wording (D12 = B): **pass**.
+- **Committed:** in `b8ce7df`.
+
+### INTEG-02: page budget and placement (DONE 2026-10-01)
+
+- **Deliverable:** `e1_run/INTEG_02_PLACEMENT_PLAN.md`, **approved** ("approve plan, INTEG-07 =
+  P1").
+- **Measurement** (read-only; a scratch copy with a `\pdfsavepos` marker at `endofbody`; built as
+  `build.sh` does; 13 pages, the same size as the committed review PDF):
+  - the body ends on **page 7, right column, at y = 667.6 pt** (the text block is 69.3–773.9 pt), so
+    about 106 pt of that column is used;
+  - the free counted space is about **2,007 pt, or about 147 column lines**.
+  - The page-text layout confirms that the Conclusion starts at the bottom of the left column, and
+    that the Limitations follow.
+- **The plan (option B), about 22–23 counted lines; it fits without trimming:**
+  - P1: §4 E1 paragraph (INTEG-03);
+  - P2 to P4: the §5 rephrasing and E1 sentences, the Table 1 status cells, and an appendix table
+    (INTEG-04);
+  - P5, P6 and P8: the Discussion, Conclusion and an optional contribution clause (INTEG-07);
+  - P7, P9 and P10: the next steps, the Limitations and the abstract's "exploratory"
+    (INTEG-05, 06 and 07).
+  - Trim candidates are listed in case floats move.
+- **Plan change approved:** INTEG-07 is raised from P2 to **P1**, its scope now includes the
+  Discussion (P5), and it depends on INTEG-04. `TASKS.md` is updated.
+- **Acceptance criteria:** the placement plan is approved: **pass**.
 
 ## Decisions
 
@@ -1056,6 +1080,8 @@ Recorded by VERIFY-01 on 2026-09-30.
 | — | ISSUE-06 **option 1**: R1 stays s < 2.0 (primary); add R1-CLI (s < 2.36) as secondary; correct the approved §1 wording ("on the benchmark, equivalently") | 2026-09-30 | author |
 | D6 | **Freeze the E1 protocol (gate G-E1):** approved. Tag `e1-protocol-v1` → `970c54f` | 2026-09-30 | author ("Approve freeze, D9 = git tag only. Start E1-09") |
 | D9 | External preregistration: **none; the git tag only** | 2026-09-30 | author |
+| — | INTEG-02 placement plan approved; **INTEG-07 raised to P1**, with the Discussion rephrase added to its scope | 2026-10-01 | author ("approve plan, INTEG-07 = P1") |
+| — | ISSUE-11 = (a): a record_ids-only correction requested from annotator 2, labels locked; independence confirmation from both annotators. The drafts are in the gitignored coordinator folder, and the author sends them. | 2026-10-01 | author |
 | D12 | How the paper words the claims E1 weakens: **option B, a proportionate reframe.** The v0.2 claims are scoped to the benchmark, E1 is reported as a pre-specified external check, and ll. 257, 265 and 353–355 and the Conclusion lead are rephrased. The Limitations, the next steps and "exploratory" are updated. | 2026-09-30 | author ("D12 = B") |
 | D11 | E1-08 findings: **ISSUE-10 = (b).** The primary reading and ED-2 are reworded, and a secondary matched-operating-point comparison R2m − R3m is added (m = 11; thresholds from v0.2's 159 in-scope queries only). **ISSUE-09 = (a):** P2's out-of-scope status is stated as assumed. **C-1 is approved.** **E1-07c is added.** | 2026-09-30 | author ("ISSUE-10 = b, ISSUE-09 = a, approve C-1, add E1-07c") |
 | D10 | **(a)**: one pre-specified primary comparison, R2 − R3 on P1, with a paired cluster-bootstrap 95% interval (B = 10,000, seed 42). P2's three pairs are secondary (exact McNemar, Holm over 3); all else is descriptive. §6 is approved as drafted. | 2026-09-30 | author |
@@ -1066,6 +1092,7 @@ Recorded by VERIFY-01 on 2026-09-30.
 
 | ID | Found in | Issue | Evidence | Blocks? | Proposed task |
 |---|---|---|---|---|---|
+| ISSUE-11 (**DECIDED (a)**, author, 2026-10-01: a record_ids-only correction from annotator 2, labels locked, plus an independence confirmation from both. The message drafts are in the gitignored `coordinator/MESSAGE_DRAFTS_2026-10-01.md`, and the author sends them. **Adjudication waits** for the return.) | Annotation review (2026-10-01; author request, outside the task list) | **Two parts.** (1) The Tier-1 sheets came back. Both validate (0 errors and 0 warnings each), and the pre-declared analysis gives κ = 0.980 [0.937, 1.000], with both criteria met. There are 4 REVERSED ambiguous targets (TA-B205, B206, B207, B209), 1 CONTESTED (TA-B203) and 3 disputed v0.1 controls (TA-B103, B094, B106). (2) **Annotator 2's `record_ids` look misplaced on about 12–15 rows:** the records do not perform the row's request, while the label and comment fit it. The adjudication sheet shows record ids, so three REVERSED items and the CONTESTED item would show misleading ids. | `research/results/annotation/` (untracked); the gitignored `coordinator/RETURN_REVIEW_2026-10-01.md` | It blocks adjudication, and so v0.2.1 and any paper use of the study | Options: **(a) a record_ids-only data-entry correction from annotator 2 (recommended)**, with the labels locked as received, plus a routine independence confirmation from both; (b) proceed and disclose; (c) remove ids from the adjudication sheet (a protocol amendment). This is the author's decision. |
 | ISSUE-10 (DECIDED (b) 2026-09-30; the text is applied; the code goes in E1-07c) | E1-08 | **Operating-point confound (checklist item 7).** E1 counts only rejections of out-of-scope requests, so the rule set to reject more scores higher. R2 and R3 sit at different v0.2 operating points (20 vs 11 false rejections of 134). The primary comparison's reading, "R2's lead holds", could therefore be misread as "R2 is the better rule". A threshold matched to m in-scope rejections depends only on v0.2's in-scope scores, so it is free of the screening under test. | `E1_PROTOCOL_REVIEW.md` §4; `review_r1_e_ood_operating_points.json` `in_sample_matched_false_rejection` | **Yes: it blocks E1-08, and so E1-09** | Options: (a) text only, plus output strings; **(b) recommended:** (a) plus a pre-specified secondary R2m − R3m comparison at matched operating points (m = 11, thresholds from v0.2's in-scope queries only); (c) like (b), but co-primary. Every option needs a code task, **E1-07c**. |
 | ISSUE-09 (RESOLVED (a) 2026-09-30; the text is in protocol §2.1, §2.4 point 6 and §6.1) | E1-08 | P2 (`oos_test`) is assumed out of scope for this corpus, but this was not checked query by query; P1 was checked at class level (Rule A). | `E1_PROTOCOL_REVIEW.md` §4 | Yes, until decided | **(a) recommended:** state it as an assumption and a limitation (§2.4, §6.1). (b) The author reviews the 1,000 queries against a pre-specified rule, and flagged queries become a sensitivity line (no AI annotation). |
 | C-1 (APPROVED 2026-09-30; the fix goes in E1-07c) | E1-08 | `e1_analyze.js` gives the recomputed R2 − R3 comparisons (reduced S sets, overlap subset) the primary-reading text | `E1_PROTOCOL_REVIEW.md` §4 | Yes: a code change before the freeze | Relabel them "sensitivity (descriptive)" in E1-07c |
@@ -1102,12 +1129,13 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
 - **E1-10 to E1-13 are done.** The results are computed; see the E1-13 entry.
 - **Phase 3 is complete.** E1-14's memo is approved.
 - **INTEG-01 is done** (D12 = B).
-- **Recommended Claude task:** INTEG-02 (P0), the page budget and placement.
-  - Measure the current body length.
-  - Draft a placement plan for option B: which sentences go where in §3, §4, §5, the Discussion,
-    the Conclusion and the Limitations, and an appendix table for E1.
-  - Estimate the length, and name what could be trimmed if the body would exceed 8 pages.
-  - **It is a plan for approval. No paper edits.**
+- **INTEG-02 is done:** the plan is approved, and INTEG-07 is now P1.
+- **Recommended Claude task:** INTEG-03 (P0), the E1 methods paragraph in §4 (plan item P1, about
+  8 lines).
+  - Show the draft to the author **before** applying it.
+  - Then rebuild and check the page limit.
+  - Register any numbers in the claim trace, or leave that to INTEG-04 if the paragraph has none
+    that need tracing.
 - **Phase 1 is complete** apart from the author's submission.
 - **LIT-01** (P2) is in the backlog.
 

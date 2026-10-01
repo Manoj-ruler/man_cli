@@ -578,9 +578,17 @@ v0.2 thresholds frozen?
 - **Acceptance:** a search for "confirm", "pre-registered", "planned" and "exploratory" finds only
   correct uses. Only E1 is called pre-planned.
 
-### INTEG-07: Update the abstract and conclusion (only if E1 changes the headline)
-- **Priority:** P2. **Type:** paper. **Depends on:** INTEG-01.
-- **Acceptance:** the abstract is at most 200 words and every number is traced.
+### INTEG-07: Update the abstract, Discussion and Conclusion
+*(Raised from P2 to P1, and its scope widened, on 2026-10-01 with the author's approval, in the
+INTEG-02 plan. It is required under D12 = B: the Conclusion lead is rephrased, and the abstract's
+"All analyses are exploratory" must change once E1 is in the paper.)*
+- **Priority:** P1. **Type:** paper. **Depends on:** INTEG-01 and INTEG-04.
+- **Scope:** INTEG-02 plan items P5 (the Discussion, ll. 353–355), P6 (the Conclusion lead and the
+  out-of-scope sentence), P8 (an optional contribution clause) and P10 (the abstract).
+- **Acceptance:**
+  - The abstract is at most 200 words, and every number is traced.
+  - The body stays within 8 pages (`build.sh`).
+  - Each edit is shown to the author as a draft before it is applied.
 
 ---
 
