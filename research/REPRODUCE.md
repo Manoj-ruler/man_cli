@@ -19,6 +19,35 @@ Method: a fresh `git clone` from GitHub on Windows with Git's default `core.auto
 **E1 (the external check on CLINC150)** was verified separately on 2026-10-01, in a fresh clone:
 `compare_reproduction.js` reports 0 DIFFERENT (step 9).
 
+**Re-verified 2026-10-02 (runbook step 13), after the annotation study.**
+
+Setup:
+
+- a fresh local `git clone` of `0162be5` (not yet on GitHub), with `core.autocrlf=true`;
+- `npm ci --offline` in `research/` and `cli/`;
+- the model cache copied offline and verified.
+
+| Check | Result |
+|-------|--------|
+| Step 0: freeze inputs; E1 tag diff | 27/27 unchanged; 0 |
+| Steps 3 and 3b (`run_all`, `run_all_v0_2`, `run_review_r1`, release and gold-platform checks) | all exit 0 |
+| Step 8: `run_v0_2_1.js`, after removing the committed `results/v0.2.1/` | exit 0 |
+| `build_v0_2_1.js` test build (from the committed relabel proposal) | queries, CSV and review file byte-identical to the committed v0.2.1; `_meta.total_queries` now 207 (ISSUE-13 fix) |
+| Step 4: `compare_reproduction.js` | 121 files changed: 78 VOLATILE-ONLY, the rest identical, **3 flagged DIFFERENT, all volatile by derivation** (see below) |
+| `freeze_analysis_report.js --version 2.0` to a scratch file | differs from `ANALYSIS_FREEZE_v2.0.md` only in the commit line, one measured latency, and the hashes of regenerated timing-bearing files |
+| Step 7 tests; `trace_claims.js` | 24/24; 253 snippets, 755 numbers, 0 problems |
+| Step 9: E1 | 18 data checks; guard 0/209; logical checks pass; **0 DIFFERENT** (12 VOLATILE-ONLY) |
+| Annotation (`analyze_annotation.js`, `recheck_counts.js`; needs the gitignored returns, so run in the coordinator's checkout) | `research/results/annotation/` unchanged against HEAD |
+
+**The 3 flagged files:**
+
+- `release_check/published_corpus_check.json` and `system_audit/gold_platform_check.json` differ only in
+  `input_sha256` entries for the two `reproduction-results.json` files (and `generated_at`). Those two files
+  are themselves VOLATILE-ONLY, because they hold per-query latencies.
+- `v0.2.1/RUN_MANIFEST.json` has identical input hashes. It differs in `commit`, `seconds` and
+  `generated_at`, and in 30 `output_sha256` entries, every one for a VOLATILE-ONLY file.
+- `compare_reproduction.js` does not yet treat a hash of a volatile-only file as volatile (ISSUE-14).
+
 The run found three problems, all fixed:
 
 - Two checks recorded raw-byte input hashes that differ in a CRLF checkout. They now use
