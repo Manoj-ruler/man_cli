@@ -22,5 +22,8 @@
 
 1. **D1–D5:** annotator recruitment and pay, consent, ethics review, demographics, codebook release. These are
    needed for an Ethics sentence and the Responsible NLP checklist (section D).
-2. **PAPER-07 by Nov 6:** submit the current `main_review.pdf` (SHA-256 prefix `ce804bdfdfed7564`).
-3. The optional Table 8 `\clearpage`, and LICENSE files (only on explicit instruction).
+2. **PAPER-07 by Nov 6:** submit the current `main_review.pdf` (16 pages; SHA-256 prefix `4f382b14962bff32`).
+3. LICENSE files (only on explicit instruction).
+
+**Done 2026-10-02:** the Table 8 `\clearpage`, at the author's request (`8fafee8`). Appendices C and D start
+on page 15, and Tables 8 and 9 are on page 16.
