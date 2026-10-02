@@ -1,0 +1,256 @@
+{
+  "stamp": null,
+  "generated_by": "research/experiments/analyze_annotation.js (protocol section 4)",
+  "primary_definition": "78 items = 58 targets + 20 controls; TA-B187 excluded (known platform-mismatch defect)",
+  "inputs": {
+    "annotator_1": {
+      "file": "annotator_1.csv",
+      "sha256": "ab6b5360e617b454b07862d59b8bd78e03484ef3a1ba1db8f0a6bcfcefffbd67"
+    },
+    "annotator_2": {
+      "file": "annotator_2.csv",
+      "sha256": "564f5c8088eb0d18e031f5d0b1789070ce88c9189cb02801debcaa32cf2eca18"
+    },
+    "adjudication": null
+  },
+  "primary": {
+    "n": 78,
+    "percent_agreement": 98.7,
+    "kappa": 0.98,
+    "ci95": [
+      0.9371,
+      1
+    ],
+    "degenerate": false,
+    "confusion_rows_annotator1_cols_annotator2": {
+      "CLEAR": {
+        "CLEAR": 21,
+        "AMBIGUOUS": 0,
+        "OOD": 0
+      },
+      "AMBIGUOUS": {
+        "CLEAR": 1,
+        "AMBIGUOUS": 20,
+        "OOD": 0
+      },
+      "OOD": {
+        "CLEAR": 0,
+        "AMBIGUOUS": 0,
+        "OOD": 36
+      }
+    }
+  },
+  "targets_only": {
+    "n": 58,
+    "percent_agreement": 98.3,
+    "kappa": 0.9674,
+    "ci95": [
+      0.8967,
+      1
+    ]
+  },
+  "criteria": {
+    "kappa_ge_0_70": {
+      "value": 0.9800307219662059,
+      "target": 0.7,
+      "met": true
+    },
+    "ood_confirmed_ge_90pct": {
+      "value": 1,
+      "target": 0.9,
+      "met": true
+    }
+  },
+  "all_pre_declared_criteria_met": true,
+  "outcomes_targets": {
+    "by_original_class": {
+      "OOD": {
+        "CONFIRMED": 35,
+        "REVERSED": 0,
+        "CONTESTED": 0
+      },
+      "AMBIGUOUS": {
+        "CONFIRMED": 18,
+        "REVERSED": 4,
+        "CONTESTED": 1
+      }
+    },
+    "ood_confirmation": {
+      "n": 35,
+      "both_agree_with_original": 35,
+      "annotator_1": 35,
+      "annotator_2": 35,
+      "rate": 1
+    }
+  },
+  "secondary": {
+    "kappa_ood_vs_not": {
+      "kappa": 1,
+      "ci95": [
+        1,
+        1
+      ]
+    },
+    "kappa_ambiguous_vs_not": {
+      "kappa": 0.9669,
+      "ci95": [
+        0.885,
+        1
+      ]
+    },
+    "kappa_annotator1_vs_original": 0.8607,
+    "kappa_annotator2_vs_original": 0.841,
+    "agreement_when_both_confidence_ge_2": {
+      "n": 78,
+      "agree": 77,
+      "pct": 98.7
+    },
+    "agreement_when_any_confidence_1": {
+      "n": 0,
+      "agree": 0,
+      "pct": null
+    },
+    "contested_targets_record_id_relation": {
+      "disjoint records (disagree about the LIST)": 1
+    }
+  },
+  "controls": {
+    "n": 20,
+    "annotators_disagree": 0,
+    "both_not_clear": 3,
+    "attention_checks_canonical": {
+      "n": 4,
+      "annotator_1_not_clear": 0,
+      "annotator_2_not_clear": 0
+    },
+    "flagged_ids": [
+      "TA-B103",
+      "TA-B094",
+      "TA-B106"
+    ]
+  },
+  "benchmark_defect_items": [
+    {
+      "id": "TA-B187",
+      "original": "AMBIGUOUS",
+      "annotator_1": "OOD",
+      "annotator_2": "AMBIGUOUS",
+      "note": "excluded from primary kappa; reported here only"
+    }
+  ],
+  "comparison_with_first_blind_review": {
+    "n": 14,
+    "first_vs_a1": 11,
+    "first_vs_a2": 11,
+    "a1_vs_a2": 14,
+    "first_vs_original": 11,
+    "a1_vs_original": 12,
+    "a2_vs_original": 12,
+    "rows": [
+      {
+        "id": "TA-B209",
+        "original": "AMBIGUOUS",
+        "first_review": "AMBIGUOUS",
+        "a1": "CLEAR",
+        "a2": "CLEAR"
+      },
+      {
+        "id": "TA-B198",
+        "original": "AMBIGUOUS",
+        "first_review": "AMBIGUOUS",
+        "a1": "AMBIGUOUS",
+        "a2": "AMBIGUOUS"
+      },
+      {
+        "id": "TA-B177",
+        "original": "OOD",
+        "first_review": "OOD",
+        "a1": "OOD",
+        "a2": "OOD"
+      },
+      {
+        "id": "TA-B159",
+        "original": "OOD",
+        "first_review": "OOD",
+        "a1": "OOD",
+        "a2": "OOD"
+      },
+      {
+        "id": "TA-B206",
+        "original": "AMBIGUOUS",
+        "first_review": "CLEAR",
+        "a1": "CLEAR",
+        "a2": "CLEAR"
+      },
+      {
+        "id": "TA-B160",
+        "original": "OOD",
+        "first_review": "OOD",
+        "a1": "OOD",
+        "a2": "OOD"
+      },
+      {
+        "id": "TA-B181",
+        "original": "OOD",
+        "first_review": "OOD",
+        "a1": "OOD",
+        "a2": "OOD"
+      },
+      {
+        "id": "TA-B194",
+        "original": "AMBIGUOUS",
+        "first_review": "AMBIGUOUS",
+        "a1": "AMBIGUOUS",
+        "a2": "AMBIGUOUS"
+      },
+      {
+        "id": "TA-B165",
+        "original": "OOD",
+        "first_review": "OOD",
+        "a1": "OOD",
+        "a2": "OOD"
+      },
+      {
+        "id": "TA-B171",
+        "original": "OOD",
+        "first_review": "OOD",
+        "a1": "OOD",
+        "a2": "OOD"
+      },
+      {
+        "id": "TA-B191",
+        "original": "AMBIGUOUS",
+        "first_review": "CLEAR",
+        "a1": "AMBIGUOUS",
+        "a2": "AMBIGUOUS"
+      },
+      {
+        "id": "TA-B173",
+        "original": "OOD",
+        "first_review": "OOD",
+        "a1": "OOD",
+        "a2": "OOD"
+      },
+      {
+        "id": "TA-B201",
+        "original": "AMBIGUOUS",
+        "first_review": "CLEAR",
+        "a1": "AMBIGUOUS",
+        "a2": "AMBIGUOUS"
+      },
+      {
+        "id": "TA-B154",
+        "original": "OOD",
+        "first_review": "OOD",
+        "a1": "OOD",
+        "a2": "OOD"
+      }
+    ]
+  },
+  "adjudication": null,
+  "final_status_counts": {
+    "CONFIRMED": 53,
+    "EXCLUDED_CONTESTED (no adjudication)": 1,
+    "REVERSED_NOT_RELABELED (no adjudication)": 4
+  }
+}

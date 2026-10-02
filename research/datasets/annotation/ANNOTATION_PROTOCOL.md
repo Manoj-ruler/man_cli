@@ -266,5 +266,38 @@ both sheets and the practice set. Each teaches the same rule as the example it r
   bare-name target TA-B201 "pip". Report agreement on these four items descriptively; the primary
   analysis is unchanged.
 
+**Amendment 6 (written down here on 2026-10-02; the date of the original decision is not recorded): record ids
+enter no statistic.** `research/experiments/analyze_annotation.js` (line 118) cites an "Amendment 6" that was
+never written into this protocol. Its implemented rule is:
+
+- annotators' and the adjudicator's record ids are carried into `relabel_proposal.json` only;
+- they do not enter κ or any other statistic.
+
+This entry records that rule as the code implements it; it changes nothing.
+
+**Amendment 7 (2026-10-02, after labels exist; approved by the author): no record ids on the adjudication sheet,
+and the no-adjudicator fallback.**
+
+- **Why.**
+  - One annotator's `record_ids` were misplaced on about 12–15 rows (records that do not perform the row's
+    request, while the label and comment fit it).
+  - A requested record-id-only correction from that annotator came back with changed labels, confidence and
+    comments, and is **not used**.
+  - The labels used are the original returns, unchanged.
+  - Showing record ids for only one annotator would be unbalanced.
+- **Rule.** If an adjudication sheet is built, it shows both annotators' labels, confidence and comments, but
+  **no record ids for either annotator**. Labels, and therefore κ, are unaffected (Amendment 6).
+- **No third reader is available** (the author, 2026-10-02). §4's fallback applies, as defined in Amendment 3:
+  - CONTESTED targets are **excluded** from the revised benchmark and reported (TA-B203);
+  - REVERSED targets are **reported but not relabelled** (TA-B205, TA-B206, TA-B207, TA-B209);
+  - no adjudication sheet is built, so the rule above takes effect only if an adjudicator becomes available later.
+- **The final analysis** is `analyze_annotation.js` without `--adjudication`, run on the original returns:
+  - κ = 0.980 [0.937, 1.000] over 78 items;
+  - both pre-declared criteria are met;
+  - results in `research/results/annotation/`.
+- **Disclosure for the paper**, when the study is reported: independence rests on the annotators'
+  confirmation (the author reports both confirmed); the record-id episode and the unused re-check are stated
+  neutrally, with no identity.
+
 Timeline: EACL SRW mentorship deadline Nov 6, 2026; direct submission Dec 15, 2026 (from
 PUBLICATION_ROADMAP.md).

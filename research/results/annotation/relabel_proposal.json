@@ -1,0 +1,19 @@
+{
+  "stamp": null,
+  "status": "PROPOSAL ONLY -- v0.2 stays frozen; any accepted change becomes benchmark v0.2.1 with a new hash and changelog",
+  "adjudication_supplied": false,
+  "relabel": [],
+  "excluded_pending": [
+    {
+      "id": "TA-B203",
+      "query": "stop a process",
+      "original": "AMBIGUOUS",
+      "basis": "EXCLUDED_CONTESTED (no adjudication)"
+    }
+  ],
+  "benchmark_defects_to_correct_or_drop": [
+    "TA-B187 (gold and all acceptable commands are Linux/macOS-only records)",
+    "TA-B145 (gold not a corpus record)",
+    "TA-B149 (one acceptable command not a corpus record)"
+  ]
+}

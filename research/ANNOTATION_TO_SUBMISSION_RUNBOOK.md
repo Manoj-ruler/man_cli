@@ -28,6 +28,16 @@ state it.
     both annotators were requested. The drafts are in `coordinator/MESSAGE_DRAFTS_2026-10-01.md`.
   - The return checks are listed there.
 
+**2026-10-02 update:**
+
+- The re-check came back with changed labels and comments, and is **not used** (ISSUE-12).
+- The author reports that the annotators confirmed independence.
+- **No third reader is available.** Protocol Amendment 7 applies, and steps 3–4 are **skipped**:
+  - TA-B203 (CONTESTED) is excluded;
+  - the 4 REVERSED items are reported and not relabelled.
+- **The step-5 result is final** (without adjudication): κ = 0.980, and both criteria (G1) are met.
+- The next human step is step 7 (v0.2.1), which is the author's decision.
+
 **The external check (E1) does not depend on this study.** E1 uses the frozen **v0.2** thresholds
 (decision D7), so steps 7–9 do not re-run it, and the label-study update in step 10 must leave the E1
 passages and their numbers unchanged:

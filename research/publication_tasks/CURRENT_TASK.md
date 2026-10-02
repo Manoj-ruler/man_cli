@@ -2,27 +2,24 @@
 
 **FINAL-06: the submission checklist.** Status: **IN PROGRESS.** Only D1–D5 remain.
 
-**Done (2026-10-01):**
+**The annotation study (2026-10-02):**
 
-- the checklist draft;
-- the Appendix A artifacts, licenses and compute paragraph (code MIT, benchmark CC BY 4.0);
-- B4 confirmed;
-- no supplementary material at review;
-- **the AI-use ledger updated** (Opus 5.5: 92 commits; U10 E1; U11 annotation support), and the
-  camera-ready statement clause added.
-- **Checks:** trace 212 / 602 / 0; the body ends on page 8 of 8; the anonymity scan passes.
+- Protocol Amendment 7 is in place, and there is no third reader.
+- **The final result is κ = 0.980 [0.937, 1.000]** over 78 items, with both pre-declared criteria
+  met. TA-B203 is excluded, and TA-B205, B206, B207 and B209 are reported, not relabelled.
+- The re-check file is unused (ISSUE-12).
+- The results are committed in `research/results/annotation/`.
+- **Not yet in the paper.** The paper says only that the study is "not yet complete". Reporting it
+  (runbook steps 7–10: v0.2.1, the re-analysis, freeze v2.0, the paper update) is a separate
+  decision for the author.
 
-**The author needs to supply D1–D5** for the human label work. The paper reports one partially
-independent reviewer (κ = 0.63, n = 14), and the two-annotator study is not yet complete.
+**The author needs to supply D1–D5** for the checklist: recruitment and pay, consent, ethics or IRB
+review, demographics, and whether the codebook will be released. This covers the first reviewer
+and the two annotators.
 
-- How were they recruited, and were they paid (how much)?
-- Consent.
-- Any ethics or IRB review.
-- Basic demographics.
-- Whether the instructions (codebook) will be released.
-- Or say what to answer if the annotation study is reported later.
+**Other author actions:**
 
-**Optional:** LICENSE files in the repository (only on explicit instruction).
-
-**Other author actions:** PAPER-07 by Nov 6; ISSUE-11 (the annotator messages); whether to commit
-`research/results/annotation/`; the optional Table 8 `\clearpage`.
+- PAPER-07 by Nov 6;
+- the optional Table 8 `\clearpage`;
+- LICENSE files (only on explicit instruction);
+- whether and when to run the v0.2.1 / paper-update steps for the annotation study.
