@@ -56,6 +56,7 @@ committed each change, not every chat.
 | U8 | Research assistance: literature search | SEARCHED | REFERENCE_OR_CITATION | Manuscript | `PHASE14_LITERATURE_RECHECK.md`. ACL requires no special disclosure for this use; it is recorded for completeness. |
 | U10 | Research assistance: the external check (E1) | GENERATED, ANALYSED, OTHER_CONFIRMED (AI-designed analysis, adopted with the author's approval at each step) | RESEARCH_PROCESS, CODE, RESULTS, WHOLE_PAPER: the E1 protocol (question, scope, exclusions, threshold handling, the analysis plan, including the equal-cost comparison proposed in the protocol review), the scorer, analysis, preparation and check scripts, the run, the results memo, and the §4, §5, Appendix C, Discussion, Conclusion, Limitations and Abstract text that reports it (2026-09-30 to 2026-10-01) | Research and manuscript | `research/publication_tasks/` (`PROGRESS.md` records each decision with the author's approval: D2–D4, D7, D10–D12); tag `e1-protocol-v1`; `research/results/e1_clinc150_v1/` |
 | U11 | Coordination support for the annotation study | ANALYSED, CHECKED | RESEARCH_PROCESS: validating the returned sheets, running the pre-declared pre-adjudication analysis, a data-quality review of the record ids, and drafting messages to annotators for the author to send (2026-10-01). **No label was assigned, changed or judged by the assistant**, and no AI output is used as an annotation. | Research | gitignored `research/datasets/annotation/coordinator/`; `PROGRESS.md` ISSUE-11 |
+| U12 | Research assistance: annotation materials | GENERATED (adopted by the author) | RESEARCH_PROCESS: the annotation codebook (`ANNOTATION_CODEBOOK.md`) with worked examples W1–W13, the annotator handbook (`ANNOTATOR_GUIDELINES.md`) with teaching examples H1–H6, the practice set and the sheet generator; commits `e50f170`, `2d8fa7c`, `03527ee` (Claude Sonnet 5) and `9f06c2d` (Claude Opus 5.5). No label was assigned, changed or judged by the assistant. | Research | Protocol §1 point 2 and Amendment 4. **Disclosed in the paper body** (Limitations, Ethics, Appendix D) and in the statement (clause approved by the author 2026-10-02: "approve the AI statement clause"). |
 | U9 | Other: product code outside the study | GENERATED | CODE: the tool's optional web dashboard (Next.js app, API routes, Supabase), built in April 2026 with **Google Antigravity** using Gemini and Claude models | Neither. The paper does not evaluate the dashboard; it mentions only that the query-sync feature is off by default. | The author, 2026-09-30. The dashboard commits (2026-04-14 onward) carry no AI trailer. |
 
 **Not used:** AI image generation. Every figure is an SVG drawn directly from the committed result
@@ -77,8 +78,8 @@ author. The author confirms this in question 3 below.
 
 | Field | State |
 |-------|-------|
-| Tool name | KNOWN: Claude (Anthropic) through Claude Code, with models Opus 4.8, Sonnet 5 and Opus 5.5 (U1–U8, U10, U11); Google Antigravity, with Gemini and Claude models (U9) |
-| Content produced, and where | KNOWN: U1–U6 and U9–U11 above |
+| Tool name | KNOWN: Claude (Anthropic) through Claude Code, with models Opus 4.8, Sonnet 5 and Opus 5.5 (U1–U8, U10–U12); Google Antigravity, with Gemini and Claude models (U9) |
+| Content produced, and where | KNOWN: U1–U6 and U9–U12 above |
 | Conditional: author confirms that the generated text was checked for accuracy and carries citations for its sources and ideas | KNOWN(true): the author, 2026-09-30 |
 | Completeness of the tool inventory (no other AI tool) | KNOWN: the author, 2026-09-30. For code and data, the git trailers record only Claude models. |
 
@@ -116,6 +117,10 @@ This is the camera-ready Acknowledgements text; the source is `acl_latex/main.te
 >   of out-of-scope rules at equal false-rejection counts, and the seed-repeat cross-validation;
 > - designed, with the author's approval at each step, the pre-specified external check, including
 >   its equal-cost comparison (added 2026-10-01, approved by the author; U10);
+> - drafted the annotation codebook, its worked examples and the annotator handbook, and supported
+>   the two-annotator study's coordination (checking the returned sheets and running its pre-declared
+>   analysis), without assigning, changing or judging any label (added 2026-10-02, approved by the
+>   author; U11, U12);
 > - checked the references and citations against their primary sources.
 >
 > No other AI tool was used for this paper's text, code or data. The tool's optional web dashboard,
