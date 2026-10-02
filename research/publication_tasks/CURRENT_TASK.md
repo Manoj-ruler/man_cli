@@ -1,24 +1,23 @@
 # Current task
 
-**Runbook steps 7–12: report the annotation study.** Steps 7–12 are **DONE (2026-10-02)**.
+**Runbook steps 7–12: report the annotation study.** Status: **DONE (2026-10-02).**
 
-- **Step 10:** the paper reports the study and v0.2.1 (D13 = A). Trace: 0 problems. The body ends on page 8.
-- **Step 12:** the AI clause is in the camera-ready (`5ca157c`); ledger row U12 is added.
-- **Step 11:** `research/paper/STEP11_SCOPED_REVIEW_AND_INTEGRITY.md`. Integrity **PASS**; the review
-  outcome is **minor revision**.
+- **Step 10:** the paper reports the two-annotator study and the corrected benchmark v0.2.1 (D13 = A; full
+  disclosure).
+- **Step 11:** integrity PASS. The scoped review fixes R1–R5 are applied; R7 was skipped by the author.
+- **Step 12:** the AI clause is in the camera-ready, and ledger row U12 is added.
+- **Checks:**
+  - trace: 253 snippets, 755 numbers, 0 problems;
+  - the body ends on page 8 of 8;
+  - 0 overfull boxes;
+  - abstract: 197 words;
+  - review PDF anonymous.
 
-**Waiting on the author: approve the step-11 text fixes** (none is applied):
+**Next, for the author:**
 
-- **R1 (Major):** one App. D sentence on why v0.2 stays the analysed version (frozen analysis; E1 thresholds).
-- **R2:** "label-corrected" → "corrected" (abstract, §5, table caption).
-- **R3:** the targets-only κ (0.97) in §3.
-- **R4:** the first-reviewer agreement, 11 of 14, in App. D.
-- **R5:** drop the duplicated independence clause in App. D.
-- **R7 (optional):** the two exploratory checks (reversed-item sensitivity; v0.2.1 on v0.2's folds).
-
-**Still open:**
-
-- **D1–D5 (R6):** annotator recruitment and pay, consent, ethics review, demographics, codebook release.
-- PAPER-07 by Nov 6. The review PDF has changed since `9d64ae5`.
-- The optional Table 8 `\clearpage`.
-- LICENSE files (only on explicit instruction).
+1. **D1–D5:** annotator recruitment and pay, consent, ethics review, demographics, codebook release. These
+   are needed for the Ethics sentence and the Responsible NLP checklist (section D).
+2. **Runbook step 13:** the clean-clone reproduction (REPRO-01), now including v0.2.1 and the annotation
+   results. It runs on "Start".
+3. **PAPER-07 by Nov 6:** the review PDF has changed. Submit the current `main_review.pdf`.
+4. The optional Table 8 `\clearpage`, and LICENSE files (only on explicit instruction).

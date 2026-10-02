@@ -79,3 +79,22 @@ Limitations ("blinding and independence rest on the annotators' own compliance")
 
 **Review outcome:** **minor revision** of the step-10 text. R1–R5 are text fixes for the author to approve;
 R1 is the only one with substantive weight. R6 is open (D1–D5), and R7 is optional.
+
+## 3. Outcome (author: "approve R1–R5, skip R7")
+
+| ID | Outcome |
+|---|---|
+| R1 | **Fixed.** App. D: "We keep v0.2 as the analysed version because the main analysis was frozen on it before the annotation study and the external check's thresholds come from it." |
+| R2 | **Fixed.** "label-corrected" → "corrected" in the abstract, §5 and the `tab:v021` caption (0 occurrences left). |
+| R3 | **Fixed.** §3: "78 items; 0.97 on the 58 queries alone" (traced to `targets_only.kappa`, `targets_only.n`). |
+| R4 | **Fixed.** App. D: "and each agrees with the first reviewer on 11" (traced to `first_vs_a1` = `first_vs_a2`). |
+| R5 | **Fixed.** The duplicated independence clause is removed from the App. D Disclosures. |
+| R6 | Open: D1–D5 (author facts). |
+| R7 | Skipped by the author. |
+
+**After the fixes:**
+
+- Trace: 253 snippets, 755 numbers, 0 problems.
+- Build: the body ends on page 8 (limit 8); 0 overfull boxes and 0 undefined references in both PDFs.
+- Abstract: 197 words.
+- Anonymity: the review PDF has 0 hits; the positive control passes.

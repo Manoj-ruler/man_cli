@@ -1552,6 +1552,7 @@ Recorded by VERIFY-01 on 2026-09-30.
   - Abstract: 197 words.
   - Anonymity: the review PDF has 0 hits for all 15 strings; the camera-ready positive control finds them.
   - E1 passages: unchanged (no E1 sentence was edited).
+- **Step 11 fixes applied (author: "approve R1–R5, skip R7"):** R1–R5 fixed in content.tex. Trace: 253/755/0. The body ends on page 8. Abstract: 197 words. Anonymity clean. R7 skipped; R6 = D1–D5 still open.
 - **Step 11 DONE (2026-10-02; author: "start step 11"):** `research/paper/STEP11_SCOPED_REVIEW_AND_INTEGRITY.md`. **Integrity: PASS** (100% of changed passages; refs unchanged since FINAL-03; trace 252/752/0). **Scoped review** (ARS reviewer loaded; re-review mode inapplicable without a round-1 roadmap, so a scoped five-lens review in one context, disclosed as non-independent): **minor revision**. Proposed text fixes for the author: R1 (Major) the reason v0.2 stays primary; R2 "label-corrected" -> "corrected"; R3 targets-only kappa in §3; R4 first-reviewer agreement 11/14; R5 duplicate independence clause. R6 = D1-D5 (open); R7 optional exploratory checks. DA counter-argument (re-check and independence) adjudicated: not critical. Earlier note: A claim-by-claim
   pre-check was done while applying (the items above).
 - **Step 12 DONE** (author: "approve the AI statement clause", commit `5ca157c`; ledger U12). Earlier note: the camera-ready `\aiacknowledgements` does not mention the annotation materials. The

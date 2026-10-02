@@ -13,7 +13,7 @@ alternative: a BM25 retriever over a fixed Windows command list that shows users
 choice on Enter. Its confidence is no better than a constant forecaster, and wrong answers
 average 86\% confidence (v0.1). Under cross-validation on two benchmark versions (the second adds 59
 out-of-scope and ambiguous queries), excluding 25 verbatim-copy controls, isotonic recalibration cuts
-the shipped confidence's calibration error by 79\% and 78\% (58\% on a label-corrected v0.2),
+the shipped confidence's calibration error by 79\% and 78\% (58\% on a corrected v0.2),
 outside our test family. On v0.2, a cross-validated threshold on the
 shipped score rejects 46 of 50 out-of-scope requests but also 20 of 134
 in-scope ones; the fixed rule rejects 17 and none, a hybrid detector 34 and 11. Most
@@ -139,7 +139,7 @@ terminal task) and disagreed on 3 of 6 ambiguous ones. We then wrote a codebook 
 fixed a two-annotator protocol with two criteria ($\kappa\geq0.7$; both annotators keep at least 90\% of out-of-scope
 labels). Two annotators, who both confirmed working independently and were not shown the original labels, labeled
 58 AI-authored queries (one more, \qid{187}, has the defect above) and 20 controls using the codebook and the
-corpus: $\kappa=0.98$ (95\% interval [0.94, 1.00], 78 items), and both kept all 35 out-of-scope labels, so both
+corpus: $\kappa=0.98$ (95\% interval [0.94, 1.00], 78 items; 0.97 on the 58 queries alone), and both kept all 35 out-of-scope labels, so both
 criteria were met. Both judged 4 of the 23 ambiguous queries clear and split on one; with no third reader, the
 protocol keeps the 4 labels and drops the split item. Benchmark v0.2.1 applies this and corrects \qid{145} and
 \qid{149} (Appendix~\ref{app:labels}).
@@ -257,7 +257,7 @@ Figure~\ref{fig:shipped} shows the gap: 77\% and 63\% of non-control queries fal
 0.069 on v0.1 and 0.063 on v0.2, reductions of 79\% and 78\%, within the noise floor's 95th percentile
 (0.105 and 0.080) on this fold partition; across 20 partitions the reduction is at least 45\% and 63\%, but the
 recalibrated ECE is within that percentile on only 18 and 13 of them (Appendix~\ref{app:secondary}). On the
-label-corrected v0.2.1, whose stratified folds differ, the reduction is 58\% (to 0.119, above the 95th percentile
+corrected v0.2.1, whose stratified folds differ, the reduction is 58\% (to 0.119, above the 95th percentile
 0.085), and the recalibrated ECE is within that percentile on 4 of 20 partitions (Appendix~\ref{app:labels}). Equal-mass bins give 0.110 and 0.070 (noise-floor 95th percentiles 0.122 and 0.092) and the
 bin-count sweep 0.060 and 0.047; before recalibration all three estimators give the same 0.323 and 0.293. Brier skill becomes positive (0.20 and 0.33, intervals excluding zero), so the
 recalibrated number carries information about correctness.
@@ -718,12 +718,13 @@ none available, the pre-declared fallback drops contested items and keeps revers
 $\kappa=0.967$ [0.897, 1.000]. Both annotators kept all 35 out-of-scope labels. Of the 23 ambiguous queries, 18
 were confirmed; both annotators judged four clear (``search for a file'', ``list running processes'', ``check
 network connection'', ``copy a file''), which are reported, not relabeled; one, ``stop a process'', was contested
-and dropped. On the 14 queries the first reviewer also labeled, the two annotators agree on all 14.
+and dropped. On the 14 queries the first reviewer also labeled, the two annotators agree on all 14, and each
+agrees with the first reviewer on 11.
 
 \paragraph{Disclosures.} The codebook was written after the first check exposed disagreements, and its worked
 examples were written by an AI assistant; it adopts the benchmark's own definitions, so some agreement is by
-construction. The repository is public, so blinding to the original labels rests on the annotators' compliance,
-and independence on their confirmation to the author. One annotator was asked to re-check a column listing the
+construction. The repository is public, so blinding to the original labels rests on the annotators' compliance.
+One annotator was asked to re-check a column listing the
 corpus records consulted, which enters no statistic; the returned file also changed labels and comments and
 closely matched the other annotator's sheet (37 of 79 comments identical to it and 11 more matching its
 beginning), so it was not used. The original returns, in which no comment matches the other annotator's, are the
@@ -731,7 +732,8 @@ basis of every statistic, and both annotators confirmed they worked independentl
 
 \paragraph{Benchmark v0.2.1.} v0.2.1 has 207 queries: it replaces \qid{145}'s gold command with a corpus record,
 removes \qid{149}'s non-corpus acceptable command, and drops \qid{187} and the contested query. \qid{145}'s status
-moves from needs-correction to correct; no other label changes.
+moves from needs-correction to correct; no other label changes. We keep v0.2 as the analysed version because the
+main analysis was frozen on it before the annotation study and the external check's thresholds come from it.
 Every analysis was re-run with unchanged code. Removing two queries redraws the stratified folds (37 of the 207
 queries keep theirs), so the differences in Table~\ref{tab:v021} mix the corrections with a new partition. On all 20
 partitions of v0.2.1, the hybrid's confidence still ranks its errors better and the tuned threshold still rejects
@@ -767,7 +769,7 @@ correction ($p=0.070$).
     Fixed rule: OOD; refused & 17/50; 0 & 17/50; 0 \\
     \bottomrule
   \end{tabular}
-  \caption{Benchmark v0.2 against the label-corrected v0.2.1, every analysis re-run with unchanged code (seed 42
+  \caption{Benchmark v0.2 against the corrected v0.2.1, every analysis re-run with unchanged code (seed 42
   unless stated; ``in floor'': partitions whose recalibrated ECE is within the noise floor's 95th percentile;
   ``refused'': in-scope queries rejected).}
   \label{tab:v021}
