@@ -15,14 +15,12 @@
   - E1: 0 DIFFERENT.
   - Tests 24/24; trace 0 problems.
   - The annotation results are unchanged.
-  - Three files were flagged by the comparison tool; they are volatile by derivation (ISSUE-14).
+  - The comparison exits 0 after the ISSUE-14 fix; the 3 hash-only files are VOLATILE (derived), and the
+    negative controls pass.
 
 **Waiting on the author:**
 
-1. **ISSUE-14:** extend `compare_reproduction.js` so that hashes of volatile-only files count as volatile
-   ((a), recommended), or keep the manual note ((b)).
-2. **D1–D5:** annotator recruitment and pay, consent, ethics review, demographics, codebook release. These are
+1. **D1–D5:** annotator recruitment and pay, consent, ethics review, demographics, codebook release. These are
    needed for an Ethics sentence and the Responsible NLP checklist (section D).
-3. **Push** `research/improvement`: the commits since `be706df` are local only.
-4. **PAPER-07 by Nov 6:** submit the current `main_review.pdf` (SHA-256 prefix `ce804bdfdfed7564`).
-5. The optional Table 8 `\clearpage`, and LICENSE files (only on explicit instruction).
+2. **PAPER-07 by Nov 6:** submit the current `main_review.pdf` (SHA-256 prefix `ce804bdfdfed7564`).
+3. The optional Table 8 `\clearpage`, and LICENSE files (only on explicit instruction).

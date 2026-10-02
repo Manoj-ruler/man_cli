@@ -3,6 +3,9 @@
 //   IDENTICAL      no change (after normalizing line endings)
 //   VOLATILE-ONLY  only fields that legitimately change between runs differ: timestamps and
 //                  measured wall-clock timings (see VOLATILE below)
+//   VOLATILE (derived)  a JSON file whose only other differences are SHA-256 entries (a key under a
+//                  "*sha256*" object) naming files that this same run classified VOLATILE-ONLY or
+//                  VOLATILE (derived): the hash of a file that holds timings changes with it (ISSUE-14)
 //   DIFFERENT      anything else; the first differing JSON paths are listed
 // Usage, from the repository root of the checkout that was re-run:
 //   node research/experiments/compare_reproduction.js
@@ -12,7 +15,8 @@ const { execFileSync } = require('child_process');
 const fs = require('fs');
 
 // keys whose values are expected to differ between runs; matched against the last path segment
-const VOLATILE = /^(generated_at|generatedAt|timestamp|run_at|date|created_at|updated_at|.*_ms|.*latency.*|.*Latency.*|elapsed.*|duration.*|wall_clock.*|mean_ms|median_ms|p95_ms|p50_ms|node_version|hostname|git_commit|started|finished|commit|tag_at_head|input_files_sha256|script_sha256)$/;
+const VOLATILE = /^(generated_at|generatedAt|timestamp|run_at|date|created_at|updated_at|.*_ms|.*latency.*|.*Latency.*|elapsed.*|duration.*|wall_clock.*|mean_ms|median_ms|p95_ms|p50_ms|node_version|hostname|git_commit|started|finished|commit|tag_at_head|input_files_sha256|script_sha256|seconds)$/;
+// ISSUE-14 (2026-10-02): "seconds" is a run's wall-clock duration (research/results/v0.2.1/RUN_MANIFEST.json).
 // FINAL-04 (2026-10-01), for research/results/e1_clinc150_v1/RUN_MANIFEST.json: started/finished are timestamps;
 // commit/tag_at_head depend on the checkout; input_files_sha256 hashes files that contain timestamps; and
 // script_sha256 hashes raw bytes, which change on a CRLF checkout. The scripts themselves are checked with
@@ -42,21 +46,23 @@ const git = args => execFileSync('git', args, { encoding: 'utf8', maxBuffer: 1 <
 const changed = git(['status', '--porcelain']).split('\n').filter(Boolean)
   .map(l => ({ code: l.slice(0, 2).trim(), file: l.slice(3).trim() }));
 
-function diffJson(a, b, p = '$', out = []) {
-  if (out.length > 8) return out;
-  if (typeof a !== typeof b || Array.isArray(a) !== Array.isArray(b) || (a === null) !== (b === null)) { out.push({ path: p, a, b }); return out; }
+// every differing leaf, with its key chain (keys may contain dots, e.g. file names)
+function diffJson(a, b, p = '$', out = [], keys = []) {
+  if (typeof a !== typeof b || Array.isArray(a) !== Array.isArray(b) || (a === null) !== (b === null)) { out.push({ path: p, keys, a, b }); return out; }
   if (a && typeof a === 'object') {
-    const keys = new Set([...Object.keys(a), ...Object.keys(b)]);
-    for (const k of keys) {
+    const ks = new Set([...Object.keys(a), ...Object.keys(b)]);
+    for (const k of ks) {
       if (VOLATILE.test(k)) continue;
-      if (!(k in a) || !(k in b)) { out.push({ path: `${p}.${k}`, a: a[k], b: b[k] }); continue; }
-      diffJson(a[k], b[k], Array.isArray(a) ? `${p}[${k}]` : `${p}.${k}`, out);
+      if (!(k in a) || !(k in b)) { out.push({ path: `${p}.${k}`, keys: [...keys, k], a: a[k], b: b[k] }); continue; }
+      diffJson(a[k], b[k], Array.isArray(a) ? `${p}[${k}]` : `${p}.${k}`, out, [...keys, k]);
     }
     return out;
   }
-  if (a !== b) out.push({ path: p, a, b });
+  if (a !== b) out.push({ path: p, keys, a, b });
   return out;
 }
+// a differing entry that is a SHA-256 of a named file: { object key matching /sha256/i } -> { file name }
+const hashTarget = d => (d.keys.length >= 2 && /sha256/i.test(d.keys[d.keys.length - 2]) && /\.[a-z]+$/i.test(d.keys[d.keys.length - 1]) ? d.keys[d.keys.length - 1] : null);
 
 const rows = [];
 for (const { code, file } of changed) {
@@ -69,7 +75,7 @@ for (const { code, file } of changed) {
     let a, b;
     try { a = JSON.parse(before); b = JSON.parse(now); } catch { rows.push({ file, status: 'DIFFERENT', detail: 'not parseable JSON' }); continue; }
     const d = diffJson(a, b);
-    rows.push(d.length ? { file, status: 'DIFFERENT', detail: d.slice(0, 5).map(x => `${x.path}: ${JSON.stringify(x.a)?.slice(0, 60)} -> ${JSON.stringify(x.b)?.slice(0, 60)}`) } : { file, status: 'VOLATILE-ONLY' });
+    rows.push(d.length ? { file, status: 'DIFFERENT', diffs: d, detail: d.slice(0, 5).map(x => `${x.path}: ${JSON.stringify(x.a)?.slice(0, 60)} -> ${JSON.stringify(x.b)?.slice(0, 60)}`) } : { file, status: 'VOLATILE-ONLY' });
   } else if ((file.endsWith('.csv') || file.endsWith('.md')) && diffTable(before, now, file) !== null) {
     const d = diffTable(before, now, file);
     rows.push(d.length ? { file, status: 'DIFFERENT', detail: d.slice(0, 5) } : { file, status: 'VOLATILE-ONLY' });
@@ -82,9 +88,37 @@ for (const { code, file } of changed) {
   }
 }
 
+// ISSUE-14: promote a DIFFERENT JSON file to VOLATILE (derived) when every remaining difference is a
+// SHA-256 entry naming a file this run classified as volatile. A hash of an IDENTICAL or unchanged file,
+// or of a DIFFERENT file, stays a difference. Repeated until nothing changes (one manifest may hash another).
+const norm = f => f.replace(/\\/g, '/');
+const statusOf = new Map(rows.map(r => [norm(r.file), r]));
+const resolveTarget = (file, name) => {
+  name = norm(name);
+  const dir = norm(file).split('/').slice(0, -1);
+  const cands = [name];
+  for (let i = dir.length; i >= 0; i--) cands.push([...dir.slice(0, i), name].join('/'));
+  for (const c of cands) if (statusOf.has(c)) return statusOf.get(c);
+  const suffix = [...statusOf.keys()].filter(k => k.endsWith('/' + name));
+  return suffix.length === 1 ? statusOf.get(suffix[0]) : null;
+};
+const isVolatile = r => r && (r.status === 'VOLATILE-ONLY' || r.status === 'VOLATILE (derived)');
+for (let changedSome = true; changedSome;) {
+  changedSome = false;
+  for (const r of rows) {
+    if (r.status !== 'DIFFERENT' || !r.diffs) continue;
+    const targets = r.diffs.map(x => { const t = hashTarget(x); return t ? resolveTarget(r.file, t) : null; });
+    if (targets.every(isVolatile)) {
+      r.status = 'VOLATILE (derived)';
+      r.detail = [`only SHA-256 entries differ, each for a file classified volatile in this run: ${[...new Set(targets.map(t => norm(t.file)))].length} file(s)`];
+      changedSome = true;
+    }
+  }
+}
+
 const by = s => rows.filter(r => r.status === s);
 console.log(`files changed by the run: ${changed.length}`);
-for (const s of ['VOLATILE-ONLY', 'NEW (untracked)', 'NOT IN HEAD', 'DIFFERENT']) {
+for (const s of ['VOLATILE-ONLY', 'VOLATILE (derived)', 'NEW (untracked)', 'NOT IN HEAD', 'DIFFERENT']) {
   const r = by(s); if (!r.length) continue;
   console.log(`\n${s} (${r.length})`);
   r.forEach(x => { console.log(`  ${x.file}`); (Array.isArray(x.detail) ? x.detail : x.detail ? [x.detail] : []).forEach(d => console.log(`      ${d}`)); });

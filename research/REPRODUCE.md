@@ -46,7 +46,16 @@ Setup:
   are themselves VOLATILE-ONLY, because they hold per-query latencies.
 - `v0.2.1/RUN_MANIFEST.json` has identical input hashes. It differs in `commit`, `seconds` and
   `generated_at`, and in 30 `output_sha256` entries, every one for a VOLATILE-ONLY file.
-- `compare_reproduction.js` does not yet treat a hash of a volatile-only file as volatile (ISSUE-14).
+- **ISSUE-14, fixed the same day.** `compare_reproduction.js` now reports such files as **VOLATILE
+  (derived)**: every remaining difference is a SHA-256 entry naming a file that the same run classified as
+  volatile. `seconds` (run duration) is also volatile.
+  - Hashes of unchanged or IDENTICAL files, role-keyed hashes, and every other field stay strict.
+  - On the same clone state, it gives **exit 0, with these 3 files VOLATILE (derived)**.
+  - **Negative controls**, each caught as DIFFERENT with exit 1:
+    - a non-hash field added to `published_corpus_check.json`;
+    - a changed `output_sha256` entry for a file the run left unchanged;
+    - a changed score in `baseline/reproduction-results.json`, which also makes both files that hash it
+      DIFFERENT.
 
 The run found three problems, all fixed:
 
