@@ -1,25 +1,33 @@
 # Current task
 
-**FINAL-06: the submission checklist.** Status: **IN PROGRESS.** Only D1–D5 remain.
+**Runbook steps 7–10: report the annotation study.** Status: **IN PROGRESS.** Steps 7–9 are done and
+step 10 is drafted. **Waiting on the author.**
 
-**The annotation study (2026-10-02):**
+**Done (2026-10-02):**
 
-- Protocol Amendment 7 is in place, and there is no third reader.
-- **The final result is κ = 0.980 [0.937, 1.000]** over 78 items, with both pre-declared criteria
-  met. TA-B203 is excluded, and TA-B205, B206, B207 and B209 are reported, not relabelled.
-- The re-check file is unused (ISSUE-12).
-- The results are committed in `research/results/annotation/`.
-- **Not yet in the paper.** The paper says only that the study is "not yet complete". Reporting it
-  (runbook steps 7–10: v0.2.1, the re-analysis, freeze v2.0, the paper update) is a separate
-  decision for the author.
+- v0.2.1 has 207 queries (`be706df`).
+- The re-run is in `research/results/v0.2.1/` (`5ab3913`).
+- `ANALYSIS_FREEZE_v2.0.md` is generated (`9d64ae5`). 0 VERIFY markers remain: 12 sentences held and 6 were
+  reworded in the generator (`d14d9ec`).
 
-**The author needs to supply D1–D5** for the checklist: recruitment and pay, consent, ethics or IRB
-review, demographics, and whether the codebook will be released. This covers the first reviewer
-and the two annotators.
+**Proposal for approval:** `research/paper/drafts/LABEL_STUDY_UPDATE_PROPOSAL.md`. The paper is not edited.
+
+**Decisions for the author:**
+
+1. **D13:** how v0.2.1 is reported. **A (recommended):** v0.2 stays the analysed version, plus a new
+   Appendix D (v0.2 vs v0.2.1) and the calibration weakening stated in the abstract and §5. B: switch to
+   v0.2.1. C: the study only.
+2. **G0 wording:** what exactly the annotators confirmed (alone? without AI tools? main sheet?).
+3. **Re-check disclosure:** the full version (the match to the other sheet, 48 of 79 comments) is
+   recommended over the minimal one.
+4. **ISSUE-13:** `_meta.total_queries` = 209 in the v0.2.1 JSON. (a) is recommended.
+5. **D1–D5** are still open; they are needed for the Ethics sentence about the annotators.
+
+**After approval:** apply the text, register the trace (0 problems), build (≤ 8 pages), then runbook step 11
+(Stage 4.5 on the changed paragraphs) and step 12 (the AI statement recheck: codebook worked examples).
 
 **Other author actions:**
 
 - PAPER-07 by Nov 6;
 - the optional Table 8 `\clearpage`;
-- LICENSE files (only on explicit instruction);
-- whether and when to run the v0.2.1 / paper-update steps for the annotation study.
+- LICENSE files (only on explicit instruction).

@@ -38,6 +38,17 @@ state it.
 - **The step-5 result is final** (without adjudication): κ = 0.980, and both criteria (G1) are met.
 - The next human step is step 7 (v0.2.1), which is the author's decision.
 
+**2026-10-02, later:** steps 7–9 are done and step 10 is drafted.
+
+- **Step 7:** v0.2.1, 207 queries (`be706df`).
+- **Step 8:** `research/results/v0.2.1/` (`5ab3913`).
+- **Step 9:** `ANALYSIS_FREEZE_v2.0.md` (`9d64ae5`). Every [VERIFY] sentence is now computed or checked in the
+  generator (`d14d9ec`), and 0 markers remain.
+- **Step 10:** the generated draft does not fully match the paper and needs corrections. The corrected
+  proposal is `paper/drafts/LABEL_STUDY_UPDATE_PROPOSAL.md`.
+  - It includes decision D13: how v0.2.1 is reported. The re-run weakens the v0.2 calibration result.
+  - The paper is edited only after the author approves.
+
 **The external check (E1) does not depend on this study.** E1 uses the frozen **v0.2** thresholds
 (decision D7), so steps 7–9 do not re-run it, and the label-study update in step 10 must leave the E1
 passages and their numbers unchanged:
