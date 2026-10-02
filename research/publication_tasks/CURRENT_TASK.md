@@ -1,33 +1,32 @@
 # Current task
 
-**Runbook steps 7–10: report the annotation study.** Status: **IN PROGRESS.** Steps 7–9 are done and
-step 10 is drafted. **Waiting on the author.**
+**Runbook steps 7–10: report the annotation study.** Status: **DONE (2026-10-02).** Author: "D13 = A, full
+disclosure, ISSUE-13 = a".
 
-**Done (2026-10-02):**
+- The paper reports the two-annotator study:
+  - §3, §5, the Abstract, the Conclusion, Limitations and Ethics;
+  - the new Appendix D, with Table `tab:v021` (v0.2 against v0.2.1 for every Table 1 claim);
+  - the full disclosure of the unused re-check.
+- **E1 passages are unchanged.**
+- **Checks:**
+  - trace: 252 snippets, 752 numbers, 0 problems;
+  - the body ends on page 8;
+  - 0 overfull boxes;
+  - abstract: 197 words;
+  - review PDF anonymous.
 
-- v0.2.1 has 207 queries (`be706df`).
-- The re-run is in `research/results/v0.2.1/` (`5ab3913`).
-- `ANALYSIS_FREEZE_v2.0.md` is generated (`9d64ae5`). 0 VERIFY markers remain: 12 sentences held and 6 were
-  reworded in the generator (`d14d9ec`).
+**Waiting on the author:**
 
-**Proposal for approval:** `research/paper/drafts/LABEL_STUDY_UPDATE_PROPOSAL.md`. The paper is not edited.
-
-**Decisions for the author:**
-
-1. **D13:** how v0.2.1 is reported. **A (recommended):** v0.2 stays the analysed version, plus a new
-   Appendix D (v0.2 vs v0.2.1) and the calibration weakening stated in the abstract and §5. B: switch to
-   v0.2.1. C: the study only.
-2. **G0 wording:** what exactly the annotators confirmed (alone? without AI tools? main sheet?).
-3. **Re-check disclosure:** the full version (the match to the other sheet, 48 of 79 comments) is
-   recommended over the minimal one.
-4. **ISSUE-13:** `_meta.total_queries` = 209 in the v0.2.1 JSON. (a) is recommended.
-5. **D1–D5** are still open; they are needed for the Ethics sentence about the annotators.
-
-**After approval:** apply the text, register the trace (0 problems), build (≤ 8 pages), then runbook step 11
-(Stage 4.5 on the changed paragraphs) and step 12 (the AI statement recheck: codebook worked examples).
+1. **Step 12:** approve the AI-statement clause and ledger row U12 in
+   `research/paper/drafts/AI_STATEMENT_STEP12_DRAFT.md`. The codebook, its examples and the handbook were
+   drafted by Claude, and the camera-ready statement does not mention them yet.
+2. **Step 11:** "Start" the ARS scoped re-review and the Stage 4.5 integrity check on the changed paragraphs.
+   A claim-by-claim pre-check was done while applying.
+3. **D1–D5:** annotator recruitment and pay, consent, ethics review, demographics, and codebook release.
+   They are needed for an Ethics sentence about the annotators.
 
 **Other author actions:**
 
-- PAPER-07 by Nov 6;
-- the optional Table 8 `\clearpage`;
+- PAPER-07 by Nov 6. The review PDF has changed, so resubmit the new one if already uploaded.
+- The optional Table 8 `\clearpage`.
 - LICENSE files (only on explicit instruction).

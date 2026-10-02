@@ -1481,7 +1481,9 @@ Recorded by VERIFY-01 on 2026-09-30.
   - TA-B145's gold is restored to `tac-0370`.
   - TA-B149's non-corpus acceptable command is removed.
   - TA-B187 (Linux-only gold) and TA-B203 (CONTESTED) are dropped.
-  - No label changed. Manifest `total_queries` = 207; `_meta.total_queries` still says 209 (ISSUE-13).
+  - No annotation relabel. TA-B145's review status moved from NEEDS_CORRECTION to CORRECT with its new gold
+    (correction 2026-10-02: this line first said "no label changed"). Manifest `total_queries` = 207;
+    `_meta.total_queries` still says 209 (ISSUE-13).
 - **Step 8** (`5ab3913`): `run_v0_2_1.js` wrote `research/results/v0.2.1/`: 42 files plus `RUN_MANIFEST.json`.
   The freeze inputs are still 27/27. E1 is not re-run (D7).
 - **Step 9** (`d14d9ec` generator, `9d64ae5` report): `ANALYSIS_FREEZE_v2.0.md`, with **0 [VERIFY] markers
@@ -1515,8 +1517,47 @@ Recorded by VERIFY-01 on 2026-09-30.
   - The folds are redrawn: 37 of 207 queries keep their fold.
   - The ranking, out-of-scope and fragile-accuracy conclusions hold. The abstract's "to about a calibrated
     forecaster's noise floor" does not hold on v0.2.1.
-- **The paper is not edited.** Waiting on D13, the G0 wording, the disclosure choice and approval of the
-  proposal text.
+- **Author decision (2026-10-02): "D13 = A, full disclosure, ISSUE-13 = a".**
+- **Step 10 applied (option A):**
+  - abstract: "(58\% on a label-corrected v0.2)" and "Two annotators' labels agree ($\kappa=0.98$)"; 197 words;
+  - §3: the annotation protocol and result;
+  - §5 Recalibration: the v0.2.1 sentence;
+  - Conclusion: "release the corrected benchmark (v0.2.1)";
+  - Limitations: the benchmark bullet and the exploratory-statistics bullet;
+  - Ethics: the AI-written codebook examples;
+  - **new Appendix D** (`app:labels`): protocol, results, disclosures, benchmark v0.2.1, and Table `tab:v021`.
+    The table has v0.2 against v0.2.1 for every Table 1 claim plus accuracy.
+- **G0 wording, as reported by the author:** "who both confirmed working independently". AI tools are not
+  mentioned, because the author did not report a confirmation about them.
+- **Full disclosure of the re-check.** `recheck_counts.js` reads the gitignored returns and writes counts only
+  to `research/results/annotation/recheck_counts.json`:
+  - in the re-check, 37 of 79 comments are identical to annotator 1's and 11 more match its beginning;
+  - in the original returns, 0 and 0.
+  - **Correction:** ISSUE-12 and the proposal said "48 identical". 48 is identical-or-beginning, not
+    identical; the paper states 37 + 11.
+- **Found and fixed while applying:**
+  - the appendix table first omitted AUGRC, Brier skill, OOD AUROC and the equal-false-rejection rows. All
+    Table 1 rows are now included; the AUGRC interval reaches zero on v0.2.1 (stated in the text);
+  - "v0.2.1 corrects them" → "corrects or drops them";
+  - "no label changes" → TA-B145's status change is stated;
+  - the v0.2.1 AUGRC point −0.0205 is a rounding tie. It is shown as −.020 under the trace rule (the
+    freeze prints −0.021); this is noted in the trace.
+- **ISSUE-13 = (a), applied:**
+  - `build_v0_2_1.js` sets `total_queries` from its output;
+  - `CHANGELOG_v0.2.1.md` records the error;
+  - the committed benchmark file is unchanged.
+- **Checks:**
+  - `trace_claims.js`: 252 snippets, 752 numbers, 0 problems. A tamper test on one table cell is caught.
+  - `build.sh`: the body ends on page 8 (limit 8); 0 overfull boxes and 0 undefined references in both PDFs.
+  - Abstract: 197 words.
+  - Anonymity: the review PDF has 0 hits for all 15 strings; the camera-ready positive control finds them.
+  - E1 passages: unchanged (no E1 sentence was edited).
+- **Step 11** (ARS scoped re-review and Stage 4.5 on the changed paragraphs): not started. A claim-by-claim
+  pre-check was done while applying (the items above).
+- **Step 12:** the camera-ready `\aiacknowledgements` does not mention the annotation materials. The
+  codebook, its worked examples and the handbook were drafted by Claude (commit `e50f170`, co-authored by
+  Claude Sonnet 5; protocol Amendment 4), and there is the U11 coordination support. The clause is drafted
+  for the author and **not applied**.
 
 ## Decisions
 
@@ -1541,6 +1582,7 @@ Recorded by VERIFY-01 on 2026-09-30.
 | — | ISSUE-11 = (a): a record_ids-only correction requested from annotator 2, labels locked; independence confirmation from both annotators. The drafts are in the gitignored coordinator folder, and the author sends them. | 2026-10-01 | author |
 | — | Annotation study: **protocol Amendment 7** (no record ids on any adjudication sheet); **no third reader**, so the §4 fallback applies (TA-B203 excluded; 4 REVERSED reported, not relabelled), and the pre-adjudication analysis (κ = 0.980) is final; commit the ISSUE-11/12 records and `research/results/annotation/` | 2026-10-02 | author ("approve amendment, no third reader, commit both") |
 | — | FINAL-06: the Appendix A artifacts/licenses/compute paragraph is approved, with **code under MIT and the benchmark under CC BY 4.0**; B4 confirmed; **no supplementary material at review** | 2026-10-01 | author ("approve 1 with MIT and CC BY 4.0, B4 yes, supplementary none") |
+| D13 | How v0.2.1 is reported: **A**. v0.2 stays the analysed version (frozen v1.0; E1 thresholds, D7); the two-annotator study is reported in §3 and the new Appendix D, with Table tab:v021 giving v0.2 against v0.2.1 for every Table 1 claim; the calibration weakening is stated in the abstract and §5. **Full disclosure** of the unused re-check (its match to the other annotator's sheet). **ISSUE-13 = (a).** | 2026-10-02 | author ("D13 = A, full disclosure, ISSUE-13 = a") |
 | D12 | How the paper words the claims E1 weakens: **option B, a proportionate reframe.** The v0.2 claims are scoped to the benchmark, E1 is reported as a pre-specified external check, and ll. 257, 265 and 353–355 and the Conclusion lead are rephrased. The Limitations, the next steps and "exploratory" are updated. | 2026-09-30 | author ("D12 = B") |
 | D11 | E1-08 findings: **ISSUE-10 = (b).** The primary reading and ED-2 are reworded, and a secondary matched-operating-point comparison R2m − R3m is added (m = 11; thresholds from v0.2's 159 in-scope queries only). **ISSUE-09 = (a):** P2's out-of-scope status is stated as assumed. **C-1 is approved.** **E1-07c is added.** | 2026-09-30 | author ("ISSUE-10 = b, ISSUE-09 = a, approve C-1, add E1-07c") |
 | D10 | **(a)**: one pre-specified primary comparison, R2 − R3 on P1, with a paired cluster-bootstrap 95% interval (B = 10,000, seed 42). P2's three pairs are secondary (exact McNemar, Holm over 3); all else is descriptive. §6 is approved as drafted. | 2026-09-30 | author |
@@ -1551,8 +1593,8 @@ Recorded by VERIFY-01 on 2026-09-30.
 
 | ID | Found in | Issue | Evidence | Blocks? | Proposed task |
 |---|---|---|---|---|---|
-| ISSUE-13 | Runbook step 9 (2026-10-02) | `termassist_bench_v0.2.1_validated.json` `_meta.total_queries` says **209**, but the file has 207 queries. `build_v0_2_1.js:147` copies the parent's `_meta` and does not override this field. The manifest (`VALIDATED_BENCHMARK_MANIFEST_v0.2.1.json`) correctly says 207. No analysis reads the field; the freeze reads the query arrays. | `grep total_queries research/experiments/*.js`; `_meta` of the v0.2.1 JSON | No: metadata only | Options: (a) **recommended:** fix `build_v0_2_1.js` to set `total_queries` from the output, record it in `CHANGELOG_v0.2.1.md`, and leave the committed file (its SHA-256 is in `RUN_MANIFEST.json` and freeze v2.0); (b) also rebuild the file, which changes its hash and needs steps 8–9 re-run; (c) leave it and disclose it in the changelog only. This is the author's decision. |
-| ISSUE-12 (**RESOLVED 2026-10-02.** The author reports that the file was sent directly by annotator 2 and that the annotators confirmed independence. The original labels stay locked; the re-check is unused and will be disclosed neutrally. **Author: "approve amendment, no third reader, commit both"**, giving protocol **Amendment 7**: no record ids on any adjudication sheet, and the no-adjudicator fallback (TA-B203 excluded; TA-B205, B206, B207 and B209 reported, not relabelled). The pre-adjudication analysis, κ = 0.980, is final.) | Annotation, re-check return (2026-10-02) | **Annotator 2's record-id re-check is not a record-id-only correction, and it reproduces annotator 1's returned sheet almost exactly.** Compared with A2's original: 2 labels changed (both to A1's), 2 confidences, 28 id cells and all 79 comments. Against A1: labels 79/79, id sets 78/79, and 48 comments identical to A1's (0 in A2's original return). The cause cannot be determined from the files: **(i) a file mix-up when sending** (A1's sheet attached instead of A2's), or **(ii) A2 had access to A1's sheet** (a breach of "work alone"). | The gitignored `coordinator/RECHECK_REVIEW_2026-10-02.md`; scratchpad `recheck_diff.js` | **Yes:** adjudication, any reporting of the study, and v0.2.1 | The re-check file is not used; the original labels stay locked. First, the author checks which file was attached to the message to A2. Then the author decides: a neutral process question to A2; the independence confirmation (message 2) from both; and how adjudication treats record ids (for example, omitting them for both annotators, as a dated amendment). Under (ii), the paper must disclose the independence breach, and κ may not be reportable as an independent reliability estimate. |
+| ISSUE-13 (**RESOLVED (a) 2026-10-02:** the builder is fixed and the changelog note is added; the committed file is unchanged) | Runbook step 9 (2026-10-02) | `termassist_bench_v0.2.1_validated.json` `_meta.total_queries` says **209**, but the file has 207 queries. `build_v0_2_1.js:147` copies the parent's `_meta` and does not override this field. The manifest (`VALIDATED_BENCHMARK_MANIFEST_v0.2.1.json`) correctly says 207. No analysis reads the field; the freeze reads the query arrays. | `grep total_queries research/experiments/*.js`; `_meta` of the v0.2.1 JSON | No: metadata only | Options: (a) **recommended:** fix `build_v0_2_1.js` to set `total_queries` from the output, record it in `CHANGELOG_v0.2.1.md`, and leave the committed file (its SHA-256 is in `RUN_MANIFEST.json` and freeze v2.0); (b) also rebuild the file, which changes its hash and needs steps 8–9 re-run; (c) leave it and disclose it in the changelog only. This is the author's decision. |
+| ISSUE-12 (**RESOLVED 2026-10-02.** The author reports that the file was sent directly by annotator 2 and that the annotators confirmed independence. The original labels stay locked; the re-check is unused and will be disclosed neutrally. **Author: "approve amendment, no third reader, commit both"**, giving protocol **Amendment 7**: no record ids on any adjudication sheet, and the no-adjudicator fallback (TA-B203 excluded; TA-B205, B206, B207 and B209 reported, not relabelled). The pre-adjudication analysis, κ = 0.980, is final.) | Annotation, re-check return (2026-10-02) | **Annotator 2's record-id re-check is not a record-id-only correction, and it reproduces annotator 1's returned sheet almost exactly.** Compared with A2's original: 2 labels changed (both to A1's), 2 confidences, 28 id cells and all 79 comments. Against A1: labels 79/79, id sets 78/79, and 48 comments identical to A1's (0 in A2's original return) [correction 2026-10-02: 37 identical and 11 more matching the beginning of A1's comment; 48 counts both; recheck_counts.json]. The cause cannot be determined from the files: **(i) a file mix-up when sending** (A1's sheet attached instead of A2's), or **(ii) A2 had access to A1's sheet** (a breach of "work alone"). | The gitignored `coordinator/RECHECK_REVIEW_2026-10-02.md`; scratchpad `recheck_diff.js` | **Yes:** adjudication, any reporting of the study, and v0.2.1 | The re-check file is not used; the original labels stay locked. First, the author checks which file was attached to the message to A2. Then the author decides: a neutral process question to A2; the independence confirmation (message 2) from both; and how adjudication treats record ids (for example, omitting them for both annotators, as a dated amendment). Under (ii), the paper must disclose the independence breach, and κ may not be reportable as an independent reliability estimate. |
 | ISSUE-11 (**CLOSED 2026-10-02 by ISSUE-12 / Amendment 7:** the correction was not usable, and record ids are shown on no adjudication sheet. Originally **DECIDED (a)**, author, 2026-10-01: a record_ids-only correction from annotator 2, labels locked, plus an independence confirmation from both. The message drafts are in the gitignored `coordinator/MESSAGE_DRAFTS_2026-10-01.md`, and the author sends them. **Adjudication waits** for the return.) | Annotation review (2026-10-01; author request, outside the task list) | **Two parts.** (1) The Tier-1 sheets came back. Both validate (0 errors and 0 warnings each), and the pre-declared analysis gives κ = 0.980 [0.937, 1.000], with both criteria met. There are 4 REVERSED ambiguous targets (TA-B205, B206, B207, B209), 1 CONTESTED (TA-B203) and 3 disputed v0.1 controls (TA-B103, B094, B106). (2) **Annotator 2's `record_ids` look misplaced on about 12–15 rows:** the records do not perform the row's request, while the label and comment fit it. The adjudication sheet shows record ids, so three REVERSED items and the CONTESTED item would show misleading ids. | `research/results/annotation/` (untracked); the gitignored `coordinator/RETURN_REVIEW_2026-10-01.md` | It blocks adjudication, and so v0.2.1 and any paper use of the study | Options: **(a) a record_ids-only data-entry correction from annotator 2 (recommended)**, with the labels locked as received, plus a routine independence confirmation from both; (b) proceed and disclose; (c) remove ids from the adjudication sheet (a protocol amendment). This is the author's decision. |
 | ISSUE-10 (DECIDED (b) 2026-09-30; the text is applied; the code goes in E1-07c) | E1-08 | **Operating-point confound (checklist item 7).** E1 counts only rejections of out-of-scope requests, so the rule set to reject more scores higher. R2 and R3 sit at different v0.2 operating points (20 vs 11 false rejections of 134). The primary comparison's reading, "R2's lead holds", could therefore be misread as "R2 is the better rule". A threshold matched to m in-scope rejections depends only on v0.2's in-scope scores, so it is free of the screening under test. | `E1_PROTOCOL_REVIEW.md` §4; `review_r1_e_ood_operating_points.json` `in_sample_matched_false_rejection` | **Yes: it blocks E1-08, and so E1-09** | Options: (a) text only, plus output strings; **(b) recommended:** (a) plus a pre-specified secondary R2m − R3m comparison at matched operating points (m = 11, thresholds from v0.2's in-scope queries only); (c) like (b), but co-primary. Every option needs a code task, **E1-07c**. |
 | ISSUE-09 (RESOLVED (a) 2026-09-30; the text is in protocol §2.1, §2.4 point 6 and §6.1) | E1-08 | P2 (`oos_test`) is assumed out of scope for this corpus, but this was not checked query by query; P1 was checked at class level (Rule A). | `E1_PROTOCOL_REVIEW.md` §4 | Yes, until decided | **(a) recommended:** state it as an assumption and a limitation (§2.4, §6.1). (b) The author reviews the 1,000 queries against a pre-specified rule, and flagged queries become a sensitivity line (no AI annotation). |
@@ -1576,13 +1618,12 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
 
 ## Next
 
-- **Runbook steps 7–9 are done, and step 10 is drafted (2026-10-02).** The author decides:
-  - D13 (how v0.2.1 is reported; A is recommended);
-  - the G0 wording;
-  - the re-check disclosure wording;
-  - ISSUE-13;
-  - approval of `paper/drafts/LABEL_STUDY_UPDATE_PROPOSAL.md`.
-  - After that: apply it, then trace (0 problems), build (≤ 8 pages), and runbook steps 11–12.
+- **Runbook steps 7–10 are done (2026-10-02).** The paper reports the study and v0.2.1 (D13 = A).
+  - Trace: 0 problems. The body ends on page 8. The abstract is 197 words.
+- **Waiting on the author:**
+  - approval of the step-12 AI-statement clause and ledger row U12;
+  - "Start" for step 11 (the ARS scoped re-review plus Stage 4.5 on the changed paragraphs).
+  - D1–D5 are still open.
 - **Author action:** PAPER-07. Submit `research/paper/acl_latex/main_review.pdf` (SHA-256 prefix
   `7c129b946bcd928b`) to the EACL 2027 SRW mentorship programme by **Nov 6**, and tell Claude when it
   is done, so it can be recorded.

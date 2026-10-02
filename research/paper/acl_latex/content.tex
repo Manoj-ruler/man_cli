@@ -13,15 +13,15 @@ alternative: a BM25 retriever over a fixed Windows command list that shows users
 choice on Enter. Its confidence is no better than a constant forecaster, and wrong answers
 average 86\% confidence (v0.1). Under cross-validation on two benchmark versions (the second adds 59
 out-of-scope and ambiguous queries), excluding 25 verbatim-copy controls, isotonic recalibration cuts
-the shipped confidence's calibration error by 79\% and 78\%, to about a calibrated
-forecaster's noise floor (outside our test family). On v0.2, a cross-validated threshold on the
+the shipped confidence's calibration error by 79\% and 78\% (58\% on a label-corrected v0.2),
+outside our test family. On v0.2, a cross-validated threshold on the
 shipped score rejects 46 of 50 out-of-scope requests but also 20 of 134
 in-scope ones; the fixed rule rejects 17 and none, a hybrid detector 34 and 11. Most
 out-of-scope requests are everyday ones (AI-assigned labels), and the 35 added were screened for low scores. On
 4,500 unscreened external requests (pre-specified check), the threshold still beats the detector (86\% vs.\ 78\%)
 but, at equal cost, loses (65\% vs.\ 77\%). The hybrid's confidence
 ranks its own errors better, but its accuracy gain is fragile; both systems sometimes return
-destructive commands for benign requests. Other analyses are exploratory; a two-annotator study is under way.
+destructive commands for benign requests. Two annotators' labels agree ($\kappa=0.98$); other analyses are exploratory.
 \end{abstract}
 
 \section{Introduction}
@@ -135,7 +135,14 @@ v0.2 and change no comparison. One partially independent reviewer, shown only th
 stratified sample of 14 AI-authored queries: Cohen's $\kappa=0.63$ \citep{cohen1960coefficient} (post hoc bootstrap
 95\% interval [0.39, 1.00]), below our 0.7 target. The reviewer agreed with all 8 out-of-scope labels (exact 95\%
 interval for the agreement rate [63, 100]\%; 7 everyday requests and one far-from-corpus computing task, none a
-terminal task) and disagreed on 3 of 6 ambiguous ones. A two-annotator study with a written codebook is under way.
+terminal task) and disagreed on 3 of 6 ambiguous ones. We then wrote a codebook and, before any label existed,
+fixed a two-annotator protocol with two criteria ($\kappa\geq0.7$; both annotators keep at least 90\% of out-of-scope
+labels). Two annotators, who both confirmed working independently and were not shown the original labels, labeled
+58 AI-authored queries (one more, \qid{187}, has the defect above) and 20 controls using the codebook and the
+corpus: $\kappa=0.98$ (95\% interval [0.94, 1.00], 78 items), and both kept all 35 out-of-scope labels, so both
+criteria were met. Both judged 4 of the 23 ambiguous queries clear and split on one; with no third reader, the
+protocol keeps the 4 labels and drops the split item. Benchmark v0.2.1 applies this and corrects \qid{145} and
+\qid{149} (Appendix~\ref{app:labels}).
 
 \section{Methods}
 \label{sec:methods}
@@ -249,7 +256,9 @@ Figure~\ref{fig:shipped} shows the gap: 77\% and 63\% of non-control queries fal
 \paragraph{Recalibration.} Isotonic regression fit on development folds lowers the shipped confidence's ECE to
 0.069 on v0.1 and 0.063 on v0.2, reductions of 79\% and 78\%, within the noise floor's 95th percentile
 (0.105 and 0.080) on this fold partition; across 20 partitions the reduction is at least 45\% and 63\%, but the
-recalibrated ECE is within that percentile on only 18 and 13 of them (Appendix~\ref{app:secondary}). Equal-mass bins give 0.110 and 0.070 (noise-floor 95th percentiles 0.122 and 0.092) and the
+recalibrated ECE is within that percentile on only 18 and 13 of them (Appendix~\ref{app:secondary}). On the
+label-corrected v0.2.1, whose stratified folds differ, the reduction is 58\% (to 0.119, above the 95th percentile
+0.085), and the recalibrated ECE is within that percentile on 4 of 20 partitions (Appendix~\ref{app:labels}). Equal-mass bins give 0.110 and 0.070 (noise-floor 95th percentiles 0.122 and 0.092) and the
 bin-count sweep 0.060 and 0.047; before recalibration all three estimators give the same 0.323 and 0.293. Brier skill becomes positive (0.20 and 0.33, intervals excluding zero), so the
 recalibrated number carries information about correctness.
 Platt scaling and histogram binning, fit on the same folds, give ECEs with overlapping bootstrap intervals (v0.1:
@@ -398,7 +407,7 @@ most of these requests are everyday rather than terminal tasks. In an analysis f
 general-domain requests, the threshold still rejects more at its operating point (86\% vs.\ 78\%), but at equal
 v0.2 cost the hybrid's feature rejects more (77\% vs.\ 65\%). The hybrid, with one small encoder (MiniLM), mainly improves how
 confidence ranks its own errors. Next steps, in order:
-finish the two-annotator label study and release a corrected benchmark; extend the pre-specified external check,
+release the corrected benchmark (v0.2.1); extend the pre-specified external check,
 so far general-domain, to answerable and terminal-task out-of-scope queries judged by people; build an independent
 safety set; and study whether calibrated confidence and risk prompts change what users run.
 
@@ -411,15 +420,19 @@ safety set; and study whether calibrated confidence and risk prompts change what
 
 \begin{itemize}
   \item \textbf{Small, dependent, partly AI-authored benchmark.} 150 and 209 queries, the second containing the first;
-  59 queries drafted by an AI agent, whose labels were checked only by one partially independent reviewer
-  ($\kappa=0.63$, interval [0.39, 1.00], $n=14$); the two-annotator study is not yet complete. Two items have gold
-  commands outside the corpus and one an acceptable command. Queries were written by the authors and an AI agent,
+  59 queries drafted by an AI agent. Two annotators agree on their labels ($\kappa=0.98$), but the codebook uses the
+  benchmark's own definitions, so agreement is partly by construction; its worked examples were written by an AI
+  assistant, and it was written after the first check ($\kappa=0.63$, $n=14$); blinding and independence rest on the
+  annotators' own compliance, as the repository is public; and with no third reader, 4 labels both annotators
+  questioned were kept. Two items have gold commands outside the corpus and one an acceptable command; v0.2.1
+  corrects or drops them, and its re-run weakens the v0.2 calibration result (Appendix~\ref{app:labels}). Queries were written by the authors and an AI agent,
   not collected from users, so calibration and out-of-scope rates depend on this mix. A few accepted commands are
   POSIX-only and would not run in PowerShell; the shipped tool is credited with 3 such answers on v0.1 and 4 on v0.2
   (e.g., \texttt{sudo reboot} for the bare query ``system''), so its accuracy is slightly overstated. The tool, its
   corpus and the benchmark were built by the same people, so queries may follow the corpus's phrasing more closely
   than users' would; we exclude verbatim copies of corpus intents, but milder overlap may remain.
-  \item \textbf{Exploratory statistics.} Every analysis except the external check (Appendix~\ref{app:external}) was specified after results were seen, including the Holm
+  \item \textbf{Exploratory statistics.} Every analysis except the external check (Appendix~\ref{app:external}) and the two-annotator analysis
+  (Appendix~\ref{app:labels}) was specified after results were seen, including the Holm
   family, the controls exclusion, the equal-false-rejection comparison (whose thresholds are chosen in-sample) and
   the sensitivity subsets. Accuracy tests rest on 7--8 discordant queries against BM25 and 12--17 against dense. Headline results use one fold partition
   (seed 42); Appendix~\ref{app:secondary} repeats every fold-dependent step on 20 partitions, as point estimates.
@@ -457,7 +470,8 @@ study does not change the published package, so its findings apply to current us
 tool is, if anything, less accurate and less calibrated (\S\ref{sec:system}). No command was run on a user's system:
 the functional check ran commands in disposable temporary directories on our own machine, not in an OS-level
 sandbox. We disclose that part of the benchmark was
-written by an AI agent and that our own label check fell below target. Code, benchmark files, result files and a
+written by an AI agent, that our first label check fell below target, and that the annotation codebook's worked
+examples were written by an AI assistant. Code, benchmark files, result files and a
 reproduction guide will be released with the camera-ready version; they are withheld from the review version for
 anonymity.
 
@@ -687,4 +701,74 @@ accidental substring match; every rule rejects the rest of that group, so its sh
   deviations. Removing the 13 intents a stock shell could answer leaves the primary difference at $+$7.5 [4.2,
   10.9].}
   \label{tab:external}
+\end{table*}
+
+\section{Two-Annotator Study and Benchmark v0.2.1}
+\label{app:labels}
+
+\paragraph{Protocol.} The protocol was committed before any label existed. Two annotators labeled each query clear,
+ambiguous or out of scope relative to the corpus, from a written codebook and the corpus, without the original
+labels: the 59 AI-authored queries and 20 controls (4 of them verbatim attention checks). \qid{187}, whose gold
+command is outside the Windows corpus, is excluded from the primary statistic as a known defect. The primary
+statistic is unweighted Cohen's $\kappa$ over the remaining 78 items, with a bootstrap interval. A third reader was
+to resolve items on which the annotators disagree (contested) or agree against the original label (reversed); with
+none available, the pre-declared fallback drops contested items and keeps reversed items' labels.
+
+\paragraph{Results.} $\kappa=0.980$ [0.937, 1.000] (98.7\% agreement); on the 58 AI-authored queries alone,
+$\kappa=0.967$ [0.897, 1.000]. Both annotators kept all 35 out-of-scope labels. Of the 23 ambiguous queries, 18
+were confirmed; both annotators judged four clear (``search for a file'', ``list running processes'', ``check
+network connection'', ``copy a file''), which are reported, not relabeled; one, ``stop a process'', was contested
+and dropped. On the 14 queries the first reviewer also labeled, the two annotators agree on all 14.
+
+\paragraph{Disclosures.} The codebook was written after the first check exposed disagreements, and its worked
+examples were written by an AI assistant; it adopts the benchmark's own definitions, so some agreement is by
+construction. The repository is public, so blinding to the original labels rests on the annotators' compliance,
+and independence on their confirmation to the author. One annotator was asked to re-check a column listing the
+corpus records consulted, which enters no statistic; the returned file also changed labels and comments and
+closely matched the other annotator's sheet (37 of 79 comments identical to it and 11 more matching its
+beginning), so it was not used. The original returns, in which no comment matches the other annotator's, are the
+basis of every statistic, and both annotators confirmed they worked independently.
+
+\paragraph{Benchmark v0.2.1.} v0.2.1 has 207 queries: it replaces \qid{145}'s gold command with a corpus record,
+removes \qid{149}'s non-corpus acceptable command, and drops \qid{187} and the contested query. \qid{145}'s status
+moves from needs-correction to correct; no other label changes.
+Every analysis was re-run with unchanged code. Removing two queries redraws the stratified folds (37 of the 207
+queries keep theirs), so the differences in Table~\ref{tab:v021} mix the corrections with a new partition. On all 20
+partitions of v0.2.1, the hybrid's confidence still ranks its errors better and the tuned threshold still rejects
+more out-of-scope requests than the detector. The calibration result weakens: the recalibrated shipped ECE is within
+the noise floor's 95th percentile on 4 of 20 partitions (v0.2: 13), with a median reduction of 67\% (v0.2: 78\%).
+The AUGRC difference's interval now reaches zero, and the hybrid's accuracy gain over dense no longer survives Holm
+correction ($p=0.070$).
+
+\begin{table*}[t]
+  \centering
+  \small
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}lcc@{}}
+    \toprule
+    \textbf{Non-control queries} & \textbf{v0.2} & \textbf{v0.2.1} \\
+    \midrule
+    Shipped ECE, raw $\to$ isotonic & .293$\to$.063 & .286$\to$.119 \\
+    \quad reduction (\%) & 78 [52, 87] & 58 [35, 76] \\
+    \quad 20 partitions: median (\%); in floor & 78; 13 & 67; 4 \\
+    Shipped Brier skill, raw / recalibrated & $-$.06 [$-$.26, .15] / .33 [.19, .46] & $-$.03 [$-$.23, .16] / .37 [.21, .50] \\
+    Hybrid ECE, raw $\to$ isotonic & .368$\to$.071 & .384$\to$.064 \\
+    OOD AUROC, shipped $-$ hybrid & $+$.067 [.015, .127] & $+$.063 [.010, .121] \\
+    OOD at equal false rejections, shipped / hybrid & 33 / 33 at 7; 43 / 37 at 15 & 33 / 34 at 7; 43 / 37 at 15 \\
+    AURC, hybrid $-$ shipped & $-$.075 [$-$.126, $-$.024] & $-$.057 [$-$.109, $-$.005] \\
+    AUGRC, hybrid $-$ shipped & $-$.030 [$-$.050, $-$.011] & $-$.020 [$-$.042, .001] \\
+    Corr.\ AUROC, hybrid $-$ shipped & .058 [$-$.001, .118] & .051 [$-$.008, .111] \\
+    Accuracy: BM25 / dense / hybrid & 95 / 90 / 101 & 95 / 89 / 98 \\
+    \quad of in-scope queries & 134 & 132 \\
+    Hybrid $-$ BM25, pp (exact $p$) & $+$4.5 (.070) & $+$2.3 (.549) \\
+    Hybrid $-$ dense, pp (Holm $p$) & $+$8.2 (.025) & $+$6.8 (.070) \\
+    Tuned threshold: OOD; refused & 46/50; 20 & 44/50; 21 \\
+    Hybrid detector: OOD; refused & 34/50; 11 & 34/50; 9 \\
+    Fixed rule: OOD; refused & 17/50; 0 & 17/50; 0 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Benchmark v0.2 against the label-corrected v0.2.1, every analysis re-run with unchanged code (seed 42
+  unless stated; ``in floor'': partitions whose recalibrated ECE is within the noise floor's 95th percentile;
+  ``refused'': in-scope queries rejected).}
+  \label{tab:v021}
 \end{table*}

@@ -323,7 +323,7 @@ add('Fig. accuracy caption', '$n=135$ and $159$, including the 25 canonical cont
   add('Conclusion', '46 vs.\\ 34 of 50, and 12 vs.\\ 9 on the 15 not screened by retrieval score', [['46', F(e, 'versions.v0.2.nested_tuned_baseline_threshold.ood_rejected.k')], ['34', F(e, 'versions.v0.2.committed_operating_points.tuned_detector_nested.ood_rejected.k')], ['50', F(e, 'versions.v0.2.n_ood')], ['12', F(e, 'versions.v0.2.rejections_by_source.original_v0_1_items.tuned_shipped_threshold')], ['9', F(e, 'versions.v0.2.rejections_by_source.original_v0_1_items.hybrid_detector')], ['15', F(e, 'versions.v0.2.rejections_by_source.original_v0_1_items.n')]]);
   add('Conclusion', 'refuses more in-scope queries (20 vs.\\ 11 of 134)', [['20', F(e, 'versions.v0.2.controls_excluded.false_rejected.tuned_shipped_threshold')], ['11', F(e, 'versions.v0.2.controls_excluded.false_rejected.hybrid_detector')], ['134', F(e, 'versions.v0.2.controls_excluded.n_non_ood')]]);
   add('Limitations', '150 and 209 queries, the second containing the first; 59 queries drafted by an AI agent', [['150', X(D1.ids.length, 'computed: v0.1 ids (results/hybrid/folds.json)')], ['209', X(D2.ids.length, 'computed: v0.2 ids (results/v0.2/folds.json)')], ['59', X(D2.ids.length - D1.ids.length, 'computed: 209 minus 150')]]);
-  add('Limitations', '($\\kappa=0.63$, interval [0.39, 1.00], $n=14$)', [['0.63', F(kf, 'kappa.point')], ['0.39', F(kf, 'kappa.bootstrap_ci95[0]')], ['1.00', F(kf, 'kappa.bootstrap_ci95[1]')], ['14', F(kf, 'kappa.n')]]);
+  add('Limitations', 'it was written after the first check ($\\kappa=0.63$, $n=14$)', [['0.63', F(kf, 'kappa.point')], ['14', F(kf, 'kappa.n')]], 'runbook step 10 (2026-10-02): the interval moved out with the two-annotator result');
   const discD = v => { const c = R(t1).versions[v].comparisons.dense_to_hybrid.controls_excluded; return c.a_only_correct + c.b_only_correct; };
   add('Limitations', 'Accuracy tests rest on 7--8 discordant queries against BM25 and 12--17 against dense', [['7', X(disc('v0.1'), `computed: a_only_correct + b_only_correct, results/${t1} :: versions.v0.1.comparisons.BM25_to_hybrid.controls_excluded`)], ['8', X(disc('v0.2'), '... versions.v0.2')], ['12', X(discD('v0.1'), `computed: a_only_correct + b_only_correct, results/${t1} :: versions.v0.1.comparisons.dense_to_hybrid.controls_excluded`)], ['17', X(discD('v0.2'), '... versions.v0.2')]], 'reworded in PAPER-05 (ISSUE-04)');
   add('Limitations', 'repeats every fold-dependent step on 20 partitions', [['20', X(R('seed_repeat/seed_repeat_cv.json').seeds.length, 'results/seed_repeat/seed_repeat_cv.json :: seeds (length)')]]);
@@ -386,6 +386,82 @@ add('Fig. accuracy caption', '$n=135$ and $159$, including the 25 canonical cont
   }
   add('Limitations', 'equal-cost thresholds are set in-sample on v0.2 and refuse 10 and 11 in-scope queries rather than exactly the same number', [['10', F(s1, 'matched_thresholds_derivation.s4.in_scope_rejected_of_159')], ['11', F(s1, 'matched_thresholds_derivation.fused4.in_scope_rejected_of_159')]], 'INTEG-05: matched operating points (protocol §6.4)');
   add('App. C', 'Removing the 13 intents a stock shell could answer leaves the primary difference at $+$7.5 [4.2, 10.9]', [['13', X(F(s1, 'P1_extras.subgroup_S.S_clear.intents').v + F(s1, 'P1_extras.subgroup_S.S_borderline.intents').v, `computed: S_clear.intents + S_borderline.intents, results/${s1} :: P1_extras.subgroup_S`)], ['+7.5', pct(F(s1, 'P1_extras.sensitivity_without_S.without_S_clear_and_S_borderline.primary_comparison.difference'))], ['4.2', pct(F(s1, 'P1_extras.sensitivity_without_S.without_S_clear_and_S_borderline.primary_comparison.ci95.lo'))], ['10.9', pct(F(s1, 'P1_extras.sensitivity_without_S.without_S_clear_and_S_borderline.primary_comparison.ci95.hi'))]], 'sensitivity (descriptive), protocol §6.5 point 2');
+}
+
+// Runbook step 10 (2026-10-02, author: "D13 = A, full disclosure"): the two-annotator study and the
+// label-corrected benchmark v0.2.1. Annotation numbers come from research/results/annotation/; v0.2.1
+// numbers from research/results/v0.2.1/ (the v0.2 layout, re-run on v0.2.1); v0.2 numbers in Table 9
+// from the same fields as the entries above.
+{ const A = RD('research/results/annotation/annotation_results.json'), aSrc = 'research/results/annotation/annotation_results.json :: ';
+  const AN = (p, v) => X(v === undefined ? g(A, p) : v, aSrc + p);
+  const amb = A.outcomes_targets.by_original_class.AMBIGUOUS, ambN = amb.CONFIRMED + amb.REVERSED + amb.CONTESTED;
+  const W = 'v0.2.1/', fr = (f, k) => { const [x, n] = String(g(R(f), k)).split('/').map(Number); return X(n === 20 ? x : NaN, `results/${f} :: ${k} ("k/n" string, n = 20)`); };
+  const srW = 'v0.2.1/seed_repeat/seed_repeat_cv.json', sr2 = 'seed_repeat/seed_repeat_cv.json';
+  add('Abstract', '(58\\% on a label-corrected v0.2)', [['58', pct(F(W + b, bs('v0.2', 'relative_ece_reduction_equal_width.point')))]]);
+  add('Abstract', "Two annotators' labels agree ($\\kappa=0.98$)", [['0.98', AN('primary.kappa')]]);
+  add('§3 annotation', 'two criteria ($\\kappa\\geq0.7$; both annotators keep at least 90\\% of out-of-scope labels)', [['0.7', AN('criteria.kappa_ge_0_70.target')], ['90', pct(AN('criteria.ood_confirmed_ge_90pct.target'))]]);
+  add('§3 annotation', '58 AI-authored queries', [['58', AN('targets_only.n')]]);
+  add('§3 annotation', 'and 20 controls using the codebook', [['20', AN('controls.n')]]);
+  add('§3 annotation', '$\\kappa=0.98$ (95\\% interval [0.94, 1.00], 78 items), and both kept all 35 out-of-scope labels', [['0.98', AN('primary.kappa')], ['0.94', AN('primary.ci95[0]')], ['1.00', AN('primary.ci95[1]')], ['78', AN('primary.n')], ['35', AN('outcomes_targets.ood_confirmation.both_agree_with_original')]]);
+  add('§3 annotation', 'Both judged 4 of the 23 ambiguous queries clear', [['4', AN('outcomes_targets.by_original_class.AMBIGUOUS.REVERSED')], ['23', AN('outcomes_targets.by_original_class.AMBIGUOUS', ambN)]]);
+  add('§3 annotation', 'the protocol keeps the 4 labels', [['4', AN('final_status_counts.REVERSED_NOT_RELABELED (no adjudication)', A.final_status_counts['REVERSED_NOT_RELABELED (no adjudication)'])]]);
+  add('§5 recalibration', 'the reduction is 58\\% (to 0.119, above the 95th percentile 0.085)', [['58', pct(F(W + b, bs('v0.2', 'relative_ece_reduction_equal_width.point')))], ['0.119', F(W + b, bs('v0.2', 'isotonic.ece_equal_width_10'))], ['0.085', F(W + b, bs('v0.2', 'noise_floor_perfectly_calibrated.equal_width_10.p95'))]]);
+  add('§5 recalibration', 'within that percentile on 4 of 20 partitions', [['4', fr(srW, 'versions.v0.2.summary.seeds_shipped_within_floor_p95')], ['20', X(R(srW).seeds.length, `results/${srW} :: seeds (length)`)]]);
+  add('Limitations', 'Two annotators agree on their labels ($\\kappa=0.98$)', [['0.98', AN('primary.kappa')]]);
+  add('Limitations', 'with no third reader, 4 labels both annotators questioned were kept', [['4', AN('outcomes_targets.by_original_class.AMBIGUOUS.REVERSED')]]);
+  // Appendix D text
+  const cmpA = A.comparison_with_first_blind_review;
+  add('App. D', 'the 59 AI-authored queries and 20 controls (4 of them verbatim attention checks)', [['59', X(D2.ids.length - D1.ids.length, 'computed: v0.2 ids minus v0.1 ids (the AI-authored additions)')], ['20', AN('controls.n')], ['4', AN('controls.attention_checks_canonical.n')]]);
+  add('App. D', 'over the remaining 78 items', [['78', AN('primary.n')]]);
+  add('App. D', '$\\kappa=0.980$ [0.937, 1.000] (98.7\\% agreement); on the 58 AI-authored queries alone, $\\kappa=0.967$ [0.897, 1.000]. Both annotators kept all 35 out-of-scope labels. Of the 23 ambiguous queries, 18 were confirmed', [['0.980', AN('primary.kappa')], ['0.937', AN('primary.ci95[0]')], ['1.000', AN('primary.ci95[1]')], ['98.7', AN('primary.percent_agreement')], ['58', AN('targets_only.n')], ['0.967', AN('targets_only.kappa')], ['0.897', AN('targets_only.ci95[0]')], ['1.000', AN('targets_only.ci95[1]')], ['35', AN('outcomes_targets.ood_confirmation.both_agree_with_original')], ['23', AN('outcomes_targets.by_original_class.AMBIGUOUS', ambN)], ['18', AN('outcomes_targets.by_original_class.AMBIGUOUS.CONFIRMED')]]);
+  add('App. D', 'On the 14 queries the first reviewer also labeled, the two annotators agree on all 14', [['14', AN('comparison_with_first_blind_review.n')], ['14', X(cmpA.a1_vs_a2 === cmpA.n ? cmpA.a1_vs_a2 : NaN, aSrc + 'comparison_with_first_blind_review.a1_vs_a2 (equals n)')]]);
+  { const rc = 'research/results/annotation/recheck_counts.json', RC = RD(rc);
+    const id = RC.comments_identical_to_other_annotator, px = RC.comments_equal_to_or_start_of_other_annotators;
+    add('App. D', '(37 of 79 comments identical to it and 11 more matching its beginning)', [['37', X(id.recheck, rc + ' :: comments_identical_to_other_annotator.recheck')], ['79', X(RC.rows, rc + ' :: rows')], ['11', X(px.recheck - id.recheck, rc + ' :: comments_equal_to_or_start_of_other_annotators.recheck minus the identical ones')]], 'counts from recheck_counts.js over the gitignored returns');
+    add('App. D', 'The original returns, in which no comment matches the other annotator', [], `guard: ${rc} original_return counts are ${id.original_return} and ${px.original_return}`);
+    if (id.original_return !== 0 || px.original_return !== 0) E.push({ where: 'App. D', snippet: '__original returns share comments__', items: [], note: 'the original returns do share comment text: reword' }); }
+  const q21 = RD('research/datasets/termassist_bench_v0.2.1_validated.json').queries;
+  const fa = R('v0.2/folds.json').assignment, fb = R(W + 'v0.2/folds.json').assignment, common = Object.keys(fb).filter(id => id in fa);
+  add('App. D', 'v0.2.1 has 207 queries', [['207', X(q21.length, 'research/datasets/termassist_bench_v0.2.1_validated.json :: queries (length)')]]);
+  add('App. D', '(37 of the 207 queries keep theirs)', [['37', X(common.filter(id => fa[id] === fb[id]).length, 'computed: same fold in results/v0.2/folds.json and results/v0.2.1/v0.2/folds.json')], ['207', X(common.length, 'computed: ids in both fold files')]]);
+  add('App. D', 'On all 20 partitions of v0.2.1', [['20', X(['seeds_aurc_diff_negative', 'seeds_augrc_diff_negative', 'seeds_corr_auroc_diff_positive', 'seeds_tuned_rejects_more_ood_than_detector'].every(k => g(R(srW), 'versions.v0.2.summary.' + k) === '20/20') ? 20 : NaN, `results/${srW} :: versions.v0.2.summary: AURC, AUGRC, correctness AUROC and tuned-vs-detector counts all "20/20"`)]]);
+  add('App. D', "within the noise floor's 95th percentile on 4 of 20 partitions (v0.2: 13), with a median reduction of 67\\% (v0.2: 78\\%)", [['4', fr(srW, 'versions.v0.2.summary.seeds_shipped_within_floor_p95')], ['20', X(R(srW).seeds.length, `results/${srW} :: seeds (length)`)], ['13', fr(sr2, 'versions.v0.2.summary.seeds_shipped_within_floor_p95')], ['67', pct(F(srW, 'versions.v0.2.summary.shipped_reduction.median'))], ['78', pct(F(sr2, 'versions.v0.2.summary.shipped_reduction.median'))]]);
+  add('App. D', 'no longer survives Holm correction ($p=0.070$)', [['0.070', F(W + 'stats/holm-correction-results.json', 'versions.v0.2[1].holm_p')]]);
+  // Appendix D table (tab:v021): each row's v0.2 cell, then its v0.2.1 cell (same fields, two result roots)
+  { const T = 'App. D table', cal = (P, k) => F(P + b, bs('v0.2', k)), hc = (P, k) => F(P + b, hs('v0.2', k));
+    const aurc = (P, k) => F(P + t3, `versions.v0.2.selective.controls_excluded.aurc_difference_hybrid_minus_baseline.${k}`);
+    const cau = (P, k) => F(P + c, `versions.v0.2.controls_excluded.${k}`);
+    const acc = (P, A_, k = 'hits') => F(P + t1, `versions.v0.2.accuracy.${A_}.controls_excluded.${k}`);
+    const dpp = (P, k) => F(P + t1, `versions.v0.2.comparisons.${k}.controls_excluded.delta_pp`);
+    const gx = P => F(P + 'review_r1/review_r1_g_test_sensitivity.json', 'versions.v0.2.tests.accuracy_hybrid_vs_bm25.exact');
+    const hd = P => F(P + 'stats/holm-correction-results.json', 'versions.v0.2[1].holm_p');
+    const oo = (P, k) => F(P + e, `versions.v0.2.${k}`);
+    const red = (P, k) => pct(cal(P, `relative_ece_reduction_equal_width.${k}`));
+    add(T, 'Shipped ECE, raw $\\to$ isotonic & .293$\\to$.063 & .286$\\to$.119', [['.293', cal('', 'uncalibrated.ece_equal_width_10')], ['.063', cal('', 'isotonic.ece_equal_width_10')], ['.286', cal(W, 'uncalibrated.ece_equal_width_10')], ['.119', cal(W, 'isotonic.ece_equal_width_10')]]);
+    add(T, '\\quad reduction (\\%) & 78 [52, 87] & 58 [35, 76]', [['78', red('', 'point')], ['52', red('', 'ci95[0]')], ['87', red('', 'ci95[1]')], ['58', red(W, 'point')], ['35', red(W, 'ci95[0]')], ['76', red(W, 'ci95[1]')]]);
+    add(T, '\\quad 20 partitions: median (\\%); in floor & 78; 13 & 67; 4', [['20', X(R(srW).seeds.length, `results/${srW} :: seeds (length)`)], ['78', pct(F(sr2, 'versions.v0.2.summary.shipped_reduction.median'))], ['13', fr(sr2, 'versions.v0.2.summary.seeds_shipped_within_floor_p95')], ['67', pct(F(srW, 'versions.v0.2.summary.shipped_reduction.median'))], ['4', fr(srW, 'versions.v0.2.summary.seeds_shipped_within_floor_p95')]]);
+    add(T, 'Hybrid ECE, raw $\\to$ isotonic & .368$\\to$.071 & .384$\\to$.064', [['.368', hc('', 'uncalibrated.ece_equal_width_10')], ['.071', hc('', 'isotonic.ece_equal_width_10')], ['.384', hc(W, 'uncalibrated.ece_equal_width_10')], ['.064', hc(W, 'isotonic.ece_equal_width_10')]]);
+    const bsk = (P, k) => F(P + b, bs('v0.2', `brier_skill_vs_no_skill.${k}`));
+    add(T, 'Shipped Brier skill, raw / recalibrated & $-$.06 [$-$.26, .15] / .33 [.19, .46] & $-$.03 [$-$.23, .16] / .37 [.21, .50]', [['-.06', bsk('', 'uncalibrated.point')], ['-.26', bsk('', 'uncalibrated.ci95[0]')], ['.15', bsk('', 'uncalibrated.ci95[1]')], ['.33', bsk('', 'isotonic.point')], ['.19', bsk('', 'isotonic.ci95[0]')], ['.46', bsk('', 'isotonic.ci95[1]')], ['-.03', bsk(W, 'uncalibrated.point')], ['-.23', bsk(W, 'uncalibrated.ci95[0]')], ['.16', bsk(W, 'uncalibrated.ci95[1]')], ['.37', bsk(W, 'isotonic.point')], ['.21', bsk(W, 'isotonic.ci95[0]')], ['.50', bsk(W, 'isotonic.ci95[1]')]]);
+    const oa = (P, k) => neg(F(P + e, `versions.v0.2.controls_excluded.auroc.${k}`));
+    add(T, 'OOD AUROC, shipped $-$ hybrid & $+$.067 [.015, .127] & $+$.063 [.010, .121]', [['+.067', oa('', 'difference_detector_minus_baseline')], ['.015', oa('', 'difference_ci95[1]')], ['.127', oa('', 'difference_ci95[0]')], ['+.063', oa(W, 'difference_detector_minus_baseline')], ['.010', oa(W, 'difference_ci95[1]')], ['.121', oa(W, 'difference_ci95[0]')]]);
+    const mq = (P, key, k) => F(P + e, `versions.v0.2.in_sample_matched_false_rejection.${key}.${k}`);
+    const mcell = P => ['five_pct', 'ten_pct'].flatMap(key => [[String(mq(P, key, 'baseline_score.ood_rejected').v), mq(P, key, 'baseline_score.ood_rejected')], [String(mq(P, key, 'detector_feature.ood_rejected').v), mq(P, key, 'detector_feature.ood_rejected')], [String(mq(P, key, 'max_false_rejections').v), mq(P, key, 'max_false_rejections')]]);
+    add(T, 'OOD at equal false rejections, shipped / hybrid & 33 / 33 at 7; 43 / 37 at 15 & 33 / 34 at 7; 43 / 37 at 15', [...mcell(''), ...mcell(W)].map(([, s], i) => [['33', '33', '7', '43', '37', '15', '33', '34', '7', '43', '37', '15'][i], s]), 'in-sample matched operating points (five_pct, ten_pct), as Table 1 row 6');
+    const ag = (P, k) => F(P + 'phase1/phase1_t3b_augrc.json', `versions.v0.2.controls_excluded.augrc_difference_hybrid_minus_baseline.${k}`);
+    add(T, 'AUGRC, hybrid $-$ shipped & $-$.030 [$-$.050, $-$.011] & $-$.020 [$-$.042, .001]', [['-.030', ag('', 'point')], ['-.050', ag('', 'ci95[0]')], ['-.011', ag('', 'ci95[1]')], ['-.020', ag(W, 'point')], ['-.042', ag(W, 'ci95[0]')], ['.001', ag(W, 'ci95[1]')]], 'v0.2.1 point is stored as -0.0205 (4 decimals): the trace rule rounds the half to -.020; ANALYSIS_FREEZE_v2.0 prints -0.021 (toFixed)');
+    add(T, 'AURC, hybrid $-$ shipped & $-$.075 [$-$.126, $-$.024] & $-$.057 [$-$.109, $-$.005]', [['-.075', aurc('', 'point')], ['-.126', aurc('', 'ci95[0]')], ['-.024', aurc('', 'ci95[1]')], ['-.057', aurc(W, 'point')], ['-.109', aurc(W, 'ci95[0]')], ['-.005', aurc(W, 'ci95[1]')]]);
+    add(T, 'Corr.\\ AUROC, hybrid $-$ shipped & .058 [$-$.001, .118] & .051 [$-$.008, .111]', [['.058', cau('', 'difference')], ['-.001', cau('', 'difference_ci95[0]')], ['.118', cau('', 'difference_ci95[1]')], ['.051', cau(W, 'difference')], ['-.008', cau(W, 'difference_ci95[0]')], ['.111', cau(W, 'difference_ci95[1]')]]);
+    add(T, 'Accuracy: BM25 / dense / hybrid & 95 / 90 / 101 & 95 / 89 / 98', [['95', acc('', 'A0')], ['90', acc('', 'A2')], ['101', acc('', 'A3')], ['95', acc(W, 'A0')], ['89', acc(W, 'A2')], ['98', acc(W, 'A3')]]);
+    add(T, '\\quad of in-scope queries & 134 & 132', [['134', acc('', 'A3', 'n')], ['132', acc(W, 'A3', 'n')]]);
+    add(T, 'Hybrid $-$ BM25, pp (exact $p$) & $+$4.5 (.070) & $+$2.3 (.549)', [['+4.5', dpp('', 'BM25_to_hybrid')], ['.070', gx('')], ['+2.3', dpp(W, 'BM25_to_hybrid')], ['.549', gx(W)]]);
+    add(T, 'Hybrid $-$ dense, pp (Holm $p$) & $+$8.2 (.025) & $+$6.8 (.070)', [['+8.2', dpp('', 'dense_to_hybrid')], ['.025', hd('')], ['+6.8', dpp(W, 'dense_to_hybrid')], ['.070', hd(W)]]);
+    for (const [lab, k, frk] of [['Tuned threshold', 'nested_tuned_baseline_threshold.ood_rejected.k', 'tuned_shipped_threshold'], ['Hybrid detector', 'committed_operating_points.tuned_detector_nested.ood_rejected.k', 'hybrid_detector'], ['Fixed rule', 'committed_operating_points.baseline_rule_bm25_lt_2.ood_rejected.k', 'fixed_rule']]) {
+      const cellOf = P => [oo(P, k), oo(P, 'n_ood'), oo(P, `controls_excluded.false_rejected.${frk}`)];
+      const [a2, n2, f2] = cellOf(''), [a21, n21, f21] = cellOf(W);
+      add(T, `${lab}: OOD; refused & ${a2.v}/${n2.v}; ${f2.v} & ${a21.v}/${n21.v}; ${f21.v}`, [[String(a2.v), a2], [String(n2.v), n2], [String(f2.v), f2], [String(a21.v), a21], [String(n21.v), n21], [String(f21.v), f21]], 'snippet built from the values; a changed value no longer matches the paper, so drift is still caught');
+    }
+  }
 }
 
 // Coverage check (TRACE-01): every numeral in the Conclusion, Limitations and Ethics must be registered

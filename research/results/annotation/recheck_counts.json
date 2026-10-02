@@ -1,0 +1,22 @@
+{
+  "generated_by": "research/experiments/recheck_counts.js",
+  "note": "Counts only. The re-check file is not used in any statistic (protocol Amendment 7); these counts support its disclosure.",
+  "rows": 79,
+  "comments_identical_to_other_annotator": {
+    "original_return": 0,
+    "recheck": 37
+  },
+  "comments_equal_to_or_start_of_other_annotators": {
+    "original_return": 0,
+    "recheck": 48
+  },
+  "recheck_vs_original": {
+    "labels_changed": 2,
+    "comments_changed": 79
+  },
+  "input_sha256_prefix": {
+    "annotator_1": "ab6b5360e617",
+    "annotator_2": "564f5c8088eb",
+    "recheck": "57cb23e0afb7"
+  }
+}

@@ -48,6 +48,10 @@ state it.
   proposal is `paper/drafts/LABEL_STUDY_UPDATE_PROPOSAL.md`.
   - It includes decision D13: how v0.2.1 is reported. The re-run weakens the v0.2 calibration result.
   - The paper is edited only after the author approves.
+- **Step 10 applied** (author: "D13 = A, full disclosure, ISSUE-13 = a").
+  - Trace: 0 problems (252 snippets, 752 numbers). The body ends on page 8. The abstract is 197 words.
+  - Next: step 11 (on "Start") and step 12 (the statement clause is drafted in
+    `paper/drafts/AI_STATEMENT_STEP12_DRAFT.md`).
 
 **The external check (E1) does not depend on this study.** E1 uses the frozen **v0.2** thresholds
 (decision D7), so steps 7–9 do not re-run it, and the label-study update in step 10 must leave the E1
