@@ -1,0 +1,102 @@
+{
+  "generated_at": "2026-10-02T10:56:56.829Z",
+  "status": "post hoc, exploratory (answers review round 1)",
+  "task": "T18 / REV-26: paired bootstrap CI for the correctness-AUROC difference (hybrid minus shipped baseline)",
+  "bootstrap": {
+    "B": 10000,
+    "seed": 42,
+    "method": "paired over query ids"
+  },
+  "reproduction_checks": [
+    {
+      "label": "v0.1 all hybrid correctness AUROC",
+      "got": 0.8581,
+      "want": 0.8581
+    },
+    {
+      "label": "v0.1 all baseline correctness AUROC",
+      "got": 0.7548,
+      "want": 0.7548
+    },
+    {
+      "label": "v0.1 controls_excluded hybrid correctness AUROC",
+      "got": 0.8407,
+      "want": 0.8407
+    },
+    {
+      "label": "v0.1 controls_excluded baseline correctness AUROC",
+      "got": 0.7417,
+      "want": 0.7417
+    },
+    {
+      "label": "v0.2 all hybrid correctness AUROC",
+      "got": 0.8932,
+      "want": 0.8932
+    },
+    {
+      "label": "v0.2 all baseline correctness AUROC",
+      "got": 0.8407,
+      "want": 0.8407
+    },
+    {
+      "label": "v0.2 controls_excluded hybrid correctness AUROC",
+      "got": 0.8811,
+      "want": 0.8811
+    },
+    {
+      "label": "v0.2 controls_excluded baseline correctness AUROC",
+      "got": 0.8306,
+      "want": 0.8306
+    }
+  ],
+  "versions": {
+    "v0.1": {
+      "all": {
+        "n": 150,
+        "hybrid": 0.8581,
+        "baseline": 0.7548,
+        "difference": 0.1033,
+        "difference_ci95": [
+          0.0207,
+          0.1874
+        ],
+        "share_of_resamples_le_0": 0.0082
+      },
+      "controls_excluded": {
+        "n": 125,
+        "hybrid": 0.8407,
+        "baseline": 0.7417,
+        "difference": 0.0989,
+        "difference_ci95": [
+          0.0077,
+          0.1904
+        ],
+        "share_of_resamples_le_0": 0.0179
+      }
+    },
+    "v0.2": {
+      "all": {
+        "n": 207,
+        "hybrid": 0.8932,
+        "baseline": 0.8407,
+        "difference": 0.0525,
+        "difference_ci95": [
+          -0.0048,
+          0.1094
+        ],
+        "share_of_resamples_le_0": 0.0357
+      },
+      "controls_excluded": {
+        "n": 182,
+        "hybrid": 0.8811,
+        "baseline": 0.8306,
+        "difference": 0.0506,
+        "difference_ci95": [
+          -0.0078,
+          0.1111
+        ],
+        "share_of_resamples_le_0": 0.0461
+      }
+    }
+  }
+}

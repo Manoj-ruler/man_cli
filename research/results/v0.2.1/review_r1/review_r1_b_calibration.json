@@ -1,0 +1,593 @@
+{
+  "generated_at": "2026-10-02T10:56:54.789Z",
+  "status": "post hoc, exploratory (answers review round 1)",
+  "task": "T18 / REV-15: calibration estimators, noise floor, no-skill reference, intervals",
+  "bootstrap": {
+    "B": 10000,
+    "seed": 42
+  },
+  "simulations": {
+    "n": 2000,
+    "seed": 7
+  },
+  "reproduction_checks": [
+    {
+      "label": "v0.1 baseline_confidence ECE before",
+      "got": 0.2691,
+      "want": 0.2691
+    },
+    {
+      "label": "v0.1 baseline_confidence ECE after",
+      "got": 0.1165,
+      "want": 0.1165
+    },
+    {
+      "label": "v0.1 baseline_confidence Brier after",
+      "got": 0.1734,
+      "want": 0.1734
+    },
+    {
+      "label": "v0.1 baseline_confidence excl. ECE before",
+      "got": 0.323,
+      "want": 0.323
+    },
+    {
+      "label": "v0.1 baseline_confidence excl. ECE after",
+      "got": 0.0692,
+      "want": 0.0692
+    },
+    {
+      "label": "v0.1 hybrid_reliability ECE before",
+      "got": 0.2741,
+      "want": 0.2741
+    },
+    {
+      "label": "v0.1 hybrid_reliability ECE after",
+      "got": 0.0537,
+      "want": 0.0537
+    },
+    {
+      "label": "v0.1 hybrid_reliability Brier after",
+      "got": 0.1224,
+      "want": 0.1224
+    },
+    {
+      "label": "v0.1 hybrid_reliability excl. ECE before",
+      "got": 0.329,
+      "want": 0.329
+    },
+    {
+      "label": "v0.1 hybrid_reliability excl. ECE after",
+      "got": 0.1084,
+      "want": 0.1084
+    },
+    {
+      "label": "v0.2 baseline_confidence ECE before",
+      "got": 0.2513,
+      "want": 0.2513
+    },
+    {
+      "label": "v0.2 baseline_confidence ECE after",
+      "got": 0.0598,
+      "want": 0.0598
+    },
+    {
+      "label": "v0.2 baseline_confidence Brier after",
+      "got": 0.1438,
+      "want": 0.1438
+    },
+    {
+      "label": "v0.2 baseline_confidence excl. ECE before",
+      "got": 0.2858,
+      "want": 0.2858
+    },
+    {
+      "label": "v0.2 baseline_confidence excl. ECE after",
+      "got": 0.1192,
+      "want": 0.1192
+    },
+    {
+      "label": "v0.2 hybrid_reliability ECE before",
+      "got": 0.3378,
+      "want": 0.3378
+    },
+    {
+      "label": "v0.2 hybrid_reliability ECE after",
+      "got": 0.059,
+      "want": 0.059
+    },
+    {
+      "label": "v0.2 hybrid_reliability Brier after",
+      "got": 0.1199,
+      "want": 0.1199
+    },
+    {
+      "label": "v0.2 hybrid_reliability excl. ECE before",
+      "got": 0.3842,
+      "want": 0.3842
+    },
+    {
+      "label": "v0.2 hybrid_reliability excl. ECE after",
+      "got": 0.0642,
+      "want": 0.0642
+    }
+  ],
+  "versions": {
+    "v0.1": {
+      "baseline_confidence": {
+        "all": {
+          "n": 150,
+          "accuracy": 0.6467,
+          "uncalibrated": {
+            "ece_equal_width_10": 0.2691,
+            "ece_equal_mass_10": 0.2691,
+            "ece_sweep": 0.2691,
+            "sweep_bins": 12,
+            "brier": 0.2543
+          },
+          "isotonic": {
+            "ece_equal_width_10": 0.1165,
+            "ece_equal_mass_10": 0.1062,
+            "ece_sweep": 0.052,
+            "sweep_bins": 2,
+            "brier": 0.1734
+          },
+          "no_skill_out_of_fold": {
+            "ece_equal_width_10": 0.0001,
+            "ece_equal_mass_10": 0.0808,
+            "ece_sweep": 0.0001,
+            "sweep_bins": 1,
+            "brier": 0.2311
+          },
+          "noise_floor_perfectly_calibrated": {
+            "equal_width_10": {
+              "mean": 0.0615,
+              "p95": 0.0941
+            },
+            "equal_mass_10": {
+              "mean": 0.0665,
+              "p95": 0.1006
+            }
+          },
+          "relative_ece_reduction_equal_width": {
+            "point": 0.5673,
+            "ci95": [
+              0.2586,
+              0.752
+            ]
+          },
+          "brier_skill_vs_no_skill": {
+            "isotonic": {
+              "point": 0.2497,
+              "ci95": [
+                0.0867,
+                0.4031
+              ]
+            },
+            "uncalibrated": {
+              "point": -0.1001,
+              "ci95": [
+                -0.2727,
+                0.0914
+              ]
+            }
+          }
+        },
+        "controls_excluded": {
+          "n": 125,
+          "accuracy": 0.576,
+          "uncalibrated": {
+            "ece_equal_width_10": 0.323,
+            "ece_equal_mass_10": 0.323,
+            "ece_sweep": 0.323,
+            "sweep_bins": 10,
+            "brier": 0.3051
+          },
+          "isotonic": {
+            "ece_equal_width_10": 0.0692,
+            "ece_equal_mass_10": 0.1103,
+            "ece_sweep": 0.0595,
+            "sweep_bins": 2,
+            "brier": 0.1977
+          },
+          "no_skill_out_of_fold": {
+            "ece_equal_width_10": 0.0006,
+            "ece_equal_mass_10": 0.1041,
+            "ece_sweep": 0.0006,
+            "sweep_bins": 1,
+            "brier": 0.2487
+          },
+          "noise_floor_perfectly_calibrated": {
+            "equal_width_10": {
+              "mean": 0.0641,
+              "p95": 0.1048
+            },
+            "equal_mass_10": {
+              "mean": 0.0836,
+              "p95": 0.1223
+            }
+          },
+          "relative_ece_reduction_equal_width": {
+            "point": 0.7856,
+            "ci95": [
+              0.4417,
+              0.8435
+            ]
+          },
+          "brier_skill_vs_no_skill": {
+            "isotonic": {
+              "point": 0.2048,
+              "ci95": [
+                0.04,
+                0.3593
+              ]
+            },
+            "uncalibrated": {
+              "point": -0.227,
+              "ci95": [
+                -0.4529,
+                0.0119
+              ]
+            }
+          }
+        }
+      },
+      "hybrid_reliability": {
+        "all": {
+          "n": 150,
+          "accuracy": 0.6933,
+          "uncalibrated": {
+            "ece_equal_width_10": 0.2741,
+            "ece_equal_mass_10": 0.2741,
+            "ece_sweep": 0.2741,
+            "sweep_bins": 8,
+            "brier": 0.2573
+          },
+          "isotonic": {
+            "ece_equal_width_10": 0.0537,
+            "ece_equal_mass_10": 0.073,
+            "ece_sweep": 0.0604,
+            "sweep_bins": 2,
+            "brier": 0.1224
+          },
+          "no_skill_out_of_fold": {
+            "ece_equal_width_10": 0.03,
+            "ece_equal_mass_10": 0.0383,
+            "ece_sweep": 0,
+            "sweep_bins": 1,
+            "brier": 0.2134
+          },
+          "noise_floor_perfectly_calibrated": {
+            "equal_width_10": {
+              "mean": 0.0392,
+              "p95": 0.0671
+            },
+            "equal_mass_10": {
+              "mean": 0.0512,
+              "p95": 0.0779
+            }
+          },
+          "relative_ece_reduction_equal_width": {
+            "point": 0.8042,
+            "ci95": [
+              0.5664,
+              0.9056
+            ]
+          },
+          "brier_skill_vs_no_skill": {
+            "isotonic": {
+              "point": 0.4262,
+              "ci95": [
+                0.2541,
+                0.5831
+              ]
+            },
+            "uncalibrated": {
+              "point": -0.2057,
+              "ci95": [
+                -0.3427,
+                -0.0414
+              ]
+            }
+          }
+        },
+        "controls_excluded": {
+          "n": 125,
+          "accuracy": 0.632,
+          "uncalibrated": {
+            "ece_equal_width_10": 0.329,
+            "ece_equal_mass_10": 0.329,
+            "ece_sweep": 0.329,
+            "sweep_bins": 6,
+            "brier": 0.3087
+          },
+          "isotonic": {
+            "ece_equal_width_10": 0.1084,
+            "ece_equal_mass_10": 0.1084,
+            "ece_sweep": 0.0548,
+            "sweep_bins": 2,
+            "brier": 0.1448
+          },
+          "no_skill_out_of_fold": {
+            "ece_equal_width_10": 0.0003,
+            "ece_equal_mass_10": 0.0483,
+            "ece_sweep": 0.0003,
+            "sweep_bins": 1,
+            "brier": 0.2337
+          },
+          "noise_floor_perfectly_calibrated": {
+            "equal_width_10": {
+              "mean": 0.054,
+              "p95": 0.0888
+            },
+            "equal_mass_10": {
+              "mean": 0.0665,
+              "p95": 0.1003
+            }
+          },
+          "relative_ece_reduction_equal_width": {
+            "point": 0.6706,
+            "ci95": [
+              0.4304,
+              0.8303
+            ]
+          },
+          "brier_skill_vs_no_skill": {
+            "isotonic": {
+              "point": 0.3803,
+              "ci95": [
+                0.2042,
+                0.5422
+              ]
+            },
+            "uncalibrated": {
+              "point": -0.3211,
+              "ci95": [
+                -0.5001,
+                -0.1055
+              ]
+            }
+          }
+        }
+      }
+    },
+    "v0.2": {
+      "baseline_confidence": {
+        "all": {
+          "n": 207,
+          "accuracy": 0.5797,
+          "uncalibrated": {
+            "ece_equal_width_10": 0.2513,
+            "ece_equal_mass_10": 0.2513,
+            "ece_sweep": 0.2513,
+            "sweep_bins": 9,
+            "brier": 0.2266
+          },
+          "isotonic": {
+            "ece_equal_width_10": 0.0598,
+            "ece_equal_mass_10": 0.079,
+            "ece_sweep": 0.0368,
+            "sweep_bins": 2,
+            "brier": 0.1438
+          },
+          "no_skill_out_of_fold": {
+            "ece_equal_width_10": 0.0454,
+            "ece_equal_mass_10": 0.0454,
+            "ece_sweep": 0,
+            "sweep_bins": 1,
+            "brier": 0.2449
+          },
+          "noise_floor_perfectly_calibrated": {
+            "equal_width_10": {
+              "mean": 0.0414,
+              "p95": 0.0689
+            },
+            "equal_mass_10": {
+              "mean": 0.0521,
+              "p95": 0.0785
+            }
+          },
+          "relative_ece_reduction_equal_width": {
+            "point": 0.7619,
+            "ci95": [
+              0.4853,
+              0.8353
+            ]
+          },
+          "brier_skill_vs_no_skill": {
+            "isotonic": {
+              "point": 0.4128,
+              "ci95": [
+                0.2692,
+                0.5445
+              ]
+            },
+            "uncalibrated": {
+              "point": 0.0744,
+              "ci95": [
+                -0.0942,
+                0.2424
+              ]
+            }
+          }
+        },
+        "controls_excluded": {
+          "n": 182,
+          "accuracy": 0.522,
+          "uncalibrated": {
+            "ece_equal_width_10": 0.2858,
+            "ece_equal_mass_10": 0.2858,
+            "ece_sweep": 0.2858,
+            "sweep_bins": 8,
+            "brier": 0.2578
+          },
+          "isotonic": {
+            "ece_equal_width_10": 0.1192,
+            "ece_equal_mass_10": 0.0944,
+            "ece_sweep": 0.0489,
+            "sweep_bins": 3,
+            "brier": 0.1589
+          },
+          "no_skill_out_of_fold": {
+            "ece_equal_width_10": 0.0002,
+            "ece_equal_mass_10": 0.0391,
+            "ece_sweep": 0.0002,
+            "sweep_bins": 1,
+            "brier": 0.2504
+          },
+          "noise_floor_perfectly_calibrated": {
+            "equal_width_10": {
+              "mean": 0.0545,
+              "p95": 0.0851
+            },
+            "equal_mass_10": {
+              "mean": 0.0634,
+              "p95": 0.0929
+            }
+          },
+          "relative_ece_reduction_equal_width": {
+            "point": 0.583,
+            "ci95": [
+              0.3475,
+              0.755
+            ]
+          },
+          "brier_skill_vs_no_skill": {
+            "isotonic": {
+              "point": 0.3654,
+              "ci95": [
+                0.2147,
+                0.4999
+              ]
+            },
+            "uncalibrated": {
+              "point": -0.0294,
+              "ci95": [
+                -0.2325,
+                0.1647
+              ]
+            }
+          }
+        }
+      },
+      "hybrid_reliability": {
+        "all": {
+          "n": 207,
+          "accuracy": 0.5942,
+          "uncalibrated": {
+            "ece_equal_width_10": 0.3378,
+            "ece_equal_mass_10": 0.3378,
+            "ece_sweep": 0.3378,
+            "sweep_bins": 8,
+            "brier": 0.2997
+          },
+          "isotonic": {
+            "ece_equal_width_10": 0.059,
+            "ece_equal_mass_10": 0.0559,
+            "ece_sweep": 0.0397,
+            "sweep_bins": 3,
+            "brier": 0.1199
+          },
+          "no_skill_out_of_fold": {
+            "ece_equal_width_10": 0.0284,
+            "ece_equal_mass_10": 0.0351,
+            "ece_sweep": 0,
+            "sweep_bins": 1,
+            "brier": 0.2417
+          },
+          "noise_floor_perfectly_calibrated": {
+            "equal_width_10": {
+              "mean": 0.0433,
+              "p95": 0.0669
+            },
+            "equal_mass_10": {
+              "mean": 0.0461,
+              "p95": 0.07
+            }
+          },
+          "relative_ece_reduction_equal_width": {
+            "point": 0.8252,
+            "ci95": [
+              0.6615,
+              0.8843
+            ]
+          },
+          "brier_skill_vs_no_skill": {
+            "isotonic": {
+              "point": 0.5038,
+              "ci95": [
+                0.3685,
+                0.6249
+              ]
+            },
+            "uncalibrated": {
+              "point": -0.2399,
+              "ci95": [
+                -0.4084,
+                -0.0687
+              ]
+            }
+          }
+        },
+        "controls_excluded": {
+          "n": 182,
+          "accuracy": 0.5385,
+          "uncalibrated": {
+            "ece_equal_width_10": 0.3842,
+            "ece_equal_mass_10": 0.3842,
+            "ece_sweep": 0.3842,
+            "sweep_bins": 7,
+            "brier": 0.3409
+          },
+          "isotonic": {
+            "ece_equal_width_10": 0.0642,
+            "ece_equal_mass_10": 0.0713,
+            "ece_sweep": 0.0437,
+            "sweep_bins": 3,
+            "brier": 0.1347
+          },
+          "no_skill_out_of_fold": {
+            "ece_equal_width_10": 0.0001,
+            "ece_equal_mass_10": 0.0243,
+            "ece_sweep": 0.0001,
+            "sweep_bins": 1,
+            "brier": 0.2489
+          },
+          "noise_floor_perfectly_calibrated": {
+            "equal_width_10": {
+              "mean": 0.0494,
+              "p95": 0.0769
+            },
+            "equal_mass_10": {
+              "mean": 0.057,
+              "p95": 0.0841
+            }
+          },
+          "relative_ece_reduction_equal_width": {
+            "point": 0.8328,
+            "ci95": [
+              0.656,
+              0.8908
+            ]
+          },
+          "brier_skill_vs_no_skill": {
+            "isotonic": {
+              "point": 0.4589,
+              "ci95": [
+                0.32,
+                0.5891
+              ]
+            },
+            "uncalibrated": {
+              "point": -0.3695,
+              "ci95": [
+                -0.5782,
+                -0.1603
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

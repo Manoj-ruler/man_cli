@@ -1,0 +1,73 @@
+{
+  "experiment_id": "bootstrap-ci",
+  "method": "percentile bootstrap, 10k resamples, seed 42; paired over non-OOD ids for accuracy deltas; over pooled held-out predictions for ECE",
+  "versions": [
+    {
+      "benchmark": "v0.1",
+      "n_bootstrap": 10000,
+      "seed": 42,
+      "accuracy_delta_A0_to_A3": {
+        "n": 135,
+        "point_delta": 0.0519,
+        "ci_lower": 0.0222,
+        "ci_upper": 0.0889
+      },
+      "accuracy_delta_A2_to_A3": {
+        "n": 135,
+        "point_delta": 0.0444,
+        "ci_lower": -0.0074,
+        "ci_upper": 0.0963
+      },
+      "ece_hybrid_reliability_before": {
+        "point": 0.2741,
+        "ci_lower": 0.2083,
+        "ci_upper": 0.3439
+      },
+      "ece_hybrid_reliability_after": {
+        "point": 0.0537,
+        "ci_lower": 0.0255,
+        "ci_upper": 0.1131
+      },
+      "ece_reduction_paired": {
+        "point_reduction": 0.2205,
+        "ci_lower": 0.1278,
+        "ci_upper": 0.2829,
+        "one_sided_p": 0.0001
+      }
+    },
+    {
+      "benchmark": "v0.2",
+      "n_bootstrap": 10000,
+      "seed": 42,
+      "accuracy_delta_A0_to_A3": {
+        "n": 157,
+        "point_delta": 0.0191,
+        "ci_lower": -0.0191,
+        "ci_upper": 0.0637
+      },
+      "accuracy_delta_A2_to_A3": {
+        "n": 157,
+        "point_delta": 0.0573,
+        "ci_lower": 0.0127,
+        "ci_upper": 0.1083
+      },
+      "ece_hybrid_reliability_before": {
+        "point": 0.3378,
+        "ci_lower": 0.2802,
+        "ci_upper": 0.3954
+      },
+      "ece_hybrid_reliability_after": {
+        "point": 0.059,
+        "ci_lower": 0.039,
+        "ci_upper": 0.113
+      },
+      "ece_reduction_paired": {
+        "point_reduction": 0.2787,
+        "ci_lower": 0.1994,
+        "ci_upper": 0.324,
+        "one_sided_p": 0.0001
+      }
+    }
+  ],
+  "generated_at": "2026-10-02T10:56:17.253Z"
+}

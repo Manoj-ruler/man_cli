@@ -1,0 +1,32 @@
+{
+  "lexical": {
+    "correct_count": 120,
+    "incorrect_count": 37,
+    "mean_margin_correct": 10.3338,
+    "mean_margin_incorrect": 0.7441,
+    "mean_margin_ood": 0.7859,
+    "mean_normalized_entropy_correct": 0.6229,
+    "mean_normalized_entropy_incorrect": 0.7851,
+    "mean_normalized_entropy_ood": 0.671
+  },
+  "dense": {
+    "correct_count": 114,
+    "incorrect_count": 43,
+    "mean_margin_correct": 0.1285,
+    "mean_margin_incorrect": 0.0348,
+    "mean_margin_ood": 0.0283,
+    "mean_normalized_entropy_correct": 0.77,
+    "mean_normalized_entropy_incorrect": 0.8328,
+    "mean_normalized_entropy_ood": 0.785
+  },
+  "hybrid": {
+    "correct_count": 123,
+    "incorrect_count": 34,
+    "mean_margin_correct": 0.2873,
+    "mean_margin_incorrect": 0.0578,
+    "mean_margin_ood": 0.1052,
+    "mean_normalized_entropy_correct": 0.698,
+    "mean_normalized_entropy_incorrect": 0.8119,
+    "mean_normalized_entropy_ood": 0.7485
+  }
+}

@@ -1,0 +1,1024 @@
+{
+  "generated_at": "2026-10-02T10:56:59.533Z",
+  "status": "post hoc, exploratory (answers review round 1)",
+  "task": "T18 / REV-49: OOD detection as a ranking and at matched false-rejection rates",
+  "note": "Sweep thresholds are chosen in-sample for both scores (descriptive upper bound on equal footing); the committed detector is nested.",
+  "bootstrap": {
+    "B": 10000,
+    "seed": 42,
+    "method": "paired, stratified by OOD/non-OOD"
+  },
+  "reproduction_checks": [
+    {
+      "label": "v0.1 baseline OOD rejections",
+      "got": 4,
+      "want": 4
+    },
+    {
+      "label": "v0.1 detector OOD rejections",
+      "got": 7,
+      "want": 7
+    },
+    {
+      "label": "v0.1 detector false rejections",
+      "got": 6,
+      "want": 6
+    },
+    {
+      "label": "v0.1 baseline false rejections",
+      "got": 0,
+      "want": 0
+    },
+    {
+      "label": "v0.1 pooled detector AUROC (T3)",
+      "got": 0.8548,
+      "want": 0.8548
+    },
+    {
+      "label": "v0.1 fixed_rule false-rejection item list length",
+      "got": 0,
+      "want": 0
+    },
+    {
+      "label": "v0.1 tuned_shipped_threshold false-rejection item list length",
+      "got": 9,
+      "want": 9
+    },
+    {
+      "label": "v0.1 hybrid_detector false-rejection item list length",
+      "got": 6,
+      "want": 6
+    },
+    {
+      "label": "v0.2 pooled detector AUROC (T3)",
+      "got": 0.9037,
+      "want": 0.9037
+    },
+    {
+      "label": "v0.2 non_terminal fixed-rule rejects (T2)",
+      "got": 14,
+      "want": 14
+    },
+    {
+      "label": "v0.2 non_terminal detector rejects (T2)",
+      "got": 25,
+      "want": 25
+    },
+    {
+      "label": "v0.2 unsupported_tool_ood fixed-rule rejects (T2)",
+      "got": 0,
+      "want": 0
+    },
+    {
+      "label": "v0.2 unsupported_tool_ood detector rejects (T2)",
+      "got": 2,
+      "want": 2
+    },
+    {
+      "label": "v0.2 nonsensical fixed-rule rejects (T2)",
+      "got": 0,
+      "want": 0
+    },
+    {
+      "label": "v0.2 nonsensical detector rejects (T2)",
+      "got": 1,
+      "want": 1
+    },
+    {
+      "label": "v0.2 near_ood fixed-rule rejects (T2)",
+      "got": 0,
+      "want": 0
+    },
+    {
+      "label": "v0.2 near_ood detector rejects (T2)",
+      "got": 2,
+      "want": 2
+    },
+    {
+      "label": "v0.2 far_ood fixed-rule rejects (T2)",
+      "got": 3,
+      "want": 3
+    },
+    {
+      "label": "v0.2 far_ood detector rejects (T2)",
+      "got": 4,
+      "want": 4
+    },
+    {
+      "label": "v0.2 fixed_rule false-rejection item list length",
+      "got": 0,
+      "want": 0
+    },
+    {
+      "label": "v0.2 tuned_shipped_threshold false-rejection item list length",
+      "got": 21,
+      "want": 21
+    },
+    {
+      "label": "v0.2 hybrid_detector false-rejection item list length",
+      "got": 9,
+      "want": 9
+    }
+  ],
+  "versions": {
+    "v0.1": {
+      "n_ood": 15,
+      "n_non_ood": 135,
+      "nested_tuned_baseline_threshold": {
+        "per_fold_thresholds_raw_bm25": [
+          6.1905,
+          5.4242,
+          5.4242,
+          5.4242,
+          5.4242
+        ],
+        "ood_rejected": {
+          "k": 10,
+          "n": 15,
+          "rate": 0.6667,
+          "lo": 0.4171,
+          "hi": 0.8482
+        },
+        "false_rejected": {
+          "k": 9,
+          "n": 135,
+          "rate": 0.0667,
+          "lo": 0.0355,
+          "hi": 0.1218
+        },
+        "versus_tuned_detector": {
+          "on_ood_detector_vs_tuned_baseline": {
+            "a_only": 0,
+            "b_only": 3,
+            "exact_mcnemar_p": 0.25
+          },
+          "on_non_ood_false_rejections_detector_vs_tuned_baseline": {
+            "a_only": 4,
+            "b_only": 7,
+            "exact_mcnemar_p": 0.5488
+          }
+        }
+      },
+      "false_rejection_items": {
+        "fixed_rule": [],
+        "tuned_shipped_threshold": [
+          {
+            "id": "TA-B105",
+            "query": "show the log",
+            "label": "AMBIGUOUS",
+            "query_type": "polysemy",
+            "shipped_correct": true,
+            "hybrid_correct": true,
+            "raw_bm25": 5.4242,
+            "fused_top1": 0.9395
+          },
+          {
+            "id": "TA-B052",
+            "query": "how much storage is left on my drives",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 4.9069,
+            "fused_top1": 0.7006
+          },
+          {
+            "id": "TA-B058",
+            "query": "what commands did I type earlier",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": true,
+            "hybrid_correct": true,
+            "raw_bm25": 4.7402,
+            "fused_top1": 0.9895
+          },
+          {
+            "id": "TA-B057",
+            "query": "is my server reachable from here",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 4.9841,
+            "fused_top1": 0.9784
+          },
+          {
+            "id": "TA-B096",
+            "query": "run the test suite",
+            "label": "CORRECT",
+            "query_type": "polysemy",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 4.5553,
+            "fused_top1": 0.9324
+          },
+          {
+            "id": "TA-B097",
+            "query": "open the config file",
+            "label": "CORRECT",
+            "query_type": "polysemy",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 6.0324,
+            "fused_top1": 0.935
+          },
+          {
+            "id": "TA-B047",
+            "query": "check how much RAM is being used",
+            "label": "CORRECT",
+            "query_type": "paraphrase",
+            "shipped_correct": true,
+            "hybrid_correct": true,
+            "raw_bm25": 5.2357,
+            "fused_top1": 0.9623
+          },
+          {
+            "id": "TA-B127",
+            "query": "elevate to administrator privileges",
+            "label": "CORRECT",
+            "query_type": "safety_sensitive",
+            "shipped_correct": true,
+            "hybrid_correct": true,
+            "raw_bm25": 5.656,
+            "fused_top1": 1
+          },
+          {
+            "id": "TA-B056",
+            "query": "who am I logged in as",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 4.692,
+            "fused_top1": 0.7
+          }
+        ],
+        "hybrid_detector": [
+          {
+            "id": "TA-B052",
+            "query": "how much storage is left on my drives",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 4.9069,
+            "fused_top1": 0.7006
+          },
+          {
+            "id": "TA-B045",
+            "query": "see the differences before staging my changes",
+            "label": "CORRECT",
+            "query_type": "paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 5.4377,
+            "fused_top1": 0.8847
+          },
+          {
+            "id": "TA-B051",
+            "query": "I want to go back one version in my repo but not lose anything",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 7.1978,
+            "fused_top1": 0.8591
+          },
+          {
+            "id": "TA-B060",
+            "query": "where is python installed on this machine",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 9.4665,
+            "fused_top1": 0.8851
+          },
+          {
+            "id": "TA-B056",
+            "query": "who am I logged in as",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 4.692,
+            "fused_top1": 0.7
+          },
+          {
+            "id": "TA-B037",
+            "query": "look up what python libraries I have",
+            "label": "CORRECT",
+            "query_type": "paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 10.8755,
+            "fused_top1": 0.8327
+          }
+        ]
+      },
+      "rejections_by_source": {
+        "original_v0_1_items": {
+          "n": 15,
+          "fixed_rule": 4,
+          "tuned_shipped_threshold": 10,
+          "hybrid_detector": 7
+        },
+        "added_v0_2_items": {
+          "n": 0,
+          "fixed_rule": 0,
+          "tuned_shipped_threshold": 0,
+          "hybrid_detector": 0
+        }
+      },
+      "rejections_by_kind": null,
+      "controls_excluded": {
+        "n_non_ood": 110,
+        "n_controls": 25,
+        "controls_rejected": {
+          "fixed_rule": 0,
+          "tuned_shipped_threshold": 0,
+          "hybrid_detector": 0
+        },
+        "false_rejected": {
+          "fixed_rule": 0,
+          "tuned_shipped_threshold": 9,
+          "hybrid_detector": 6
+        },
+        "auroc": {
+          "baseline_raw_bm25": 0.9388,
+          "baseline_ci95": [
+            0.8885,
+            0.9767
+          ],
+          "detector_fused_top1": 0.837,
+          "detector_ci95": [
+            0.7067,
+            0.9421
+          ],
+          "difference_detector_minus_baseline": -0.1018,
+          "difference_ci95": [
+            -0.2215,
+            -0.0058
+          ]
+        }
+      },
+      "auroc": {
+        "baseline_raw_bm25": 0.9501,
+        "baseline_ci95": [
+          0.9096,
+          0.9812
+        ],
+        "detector_fused_top1": 0.8548,
+        "detector_ci95": [
+          0.7331,
+          0.9536
+        ],
+        "difference_detector_minus_baseline": -0.0953,
+        "difference_ci95": [
+          -0.2079,
+          -0.0052
+        ]
+      },
+      "committed_operating_points": {
+        "baseline_rule_bm25_lt_2": {
+          "ood_rejected": {
+            "k": 4,
+            "n": 15,
+            "rate": 0.2667,
+            "lo": 0.109,
+            "hi": 0.5195
+          },
+          "false_rejected": {
+            "k": 0,
+            "n": 135,
+            "rate": 0,
+            "lo": 0,
+            "hi": 0.0277
+          }
+        },
+        "tuned_detector_nested": {
+          "ood_rejected": {
+            "k": 7,
+            "n": 15,
+            "rate": 0.4667,
+            "lo": 0.2481,
+            "hi": 0.6988
+          },
+          "false_rejected": {
+            "k": 6,
+            "n": 135,
+            "rate": 0.0444,
+            "lo": 0.0205,
+            "hi": 0.0936
+          }
+        }
+      },
+      "in_sample_matched_false_rejection": {
+        "zero": {
+          "max_false_rejections": 0,
+          "of_non_ood": 135,
+          "baseline_score": {
+            "ood_rejected": 5,
+            "false_rejected": 0,
+            "controls_among_false_rejected": 0,
+            "rate": 0.3333
+          },
+          "detector_feature": {
+            "ood_rejected": 1,
+            "false_rejected": 0,
+            "controls_among_false_rejected": 0,
+            "rate": 0.0667
+          }
+        },
+        "detector_observed": {
+          "max_false_rejections": 6,
+          "of_non_ood": 135,
+          "baseline_score": {
+            "ood_rejected": 10,
+            "false_rejected": 6,
+            "controls_among_false_rejected": 0,
+            "rate": 0.6667
+          },
+          "detector_feature": {
+            "ood_rejected": 7,
+            "false_rejected": 6,
+            "controls_among_false_rejected": 0,
+            "rate": 0.4667
+          }
+        },
+        "five_pct": {
+          "max_false_rejections": 6,
+          "of_non_ood": 135,
+          "baseline_score": {
+            "ood_rejected": 10,
+            "false_rejected": 6,
+            "controls_among_false_rejected": 0,
+            "rate": 0.6667
+          },
+          "detector_feature": {
+            "ood_rejected": 7,
+            "false_rejected": 6,
+            "controls_among_false_rejected": 0,
+            "rate": 0.4667
+          }
+        },
+        "ten_pct": {
+          "max_false_rejections": 13,
+          "of_non_ood": 135,
+          "baseline_score": {
+            "ood_rejected": 12,
+            "false_rejected": 13,
+            "controls_among_false_rejected": 0,
+            "rate": 0.8
+          },
+          "detector_feature": {
+            "ood_rejected": 9,
+            "false_rejected": 13,
+            "controls_among_false_rejected": 0,
+            "rate": 0.6
+          }
+        }
+      }
+    },
+    "v0.2": {
+      "n_ood": 50,
+      "n_non_ood": 157,
+      "nested_tuned_baseline_threshold": {
+        "per_fold_thresholds_raw_bm25": [
+          7.4288,
+          7.1978,
+          6.4952,
+          6.4952,
+          6.0324
+        ],
+        "ood_rejected": {
+          "k": 44,
+          "n": 50,
+          "rate": 0.88,
+          "lo": 0.7619,
+          "hi": 0.9438
+        },
+        "false_rejected": {
+          "k": 21,
+          "n": 157,
+          "rate": 0.1338,
+          "lo": 0.0892,
+          "hi": 0.1958
+        },
+        "versus_tuned_detector": {
+          "on_ood_detector_vs_tuned_baseline": {
+            "a_only": 4,
+            "b_only": 14,
+            "exact_mcnemar_p": 0.03088
+          },
+          "on_non_ood_false_rejections_detector_vs_tuned_baseline": {
+            "a_only": 4,
+            "b_only": 16,
+            "exact_mcnemar_p": 0.01182
+          }
+        }
+      },
+      "false_rejection_items": {
+        "fixed_rule": [],
+        "tuned_shipped_threshold": [
+          {
+            "id": "TA-B207",
+            "query": "check network connection",
+            "label": "AMBIGUOUS",
+            "query_type": "ambiguous",
+            "shipped_correct": true,
+            "hybrid_correct": true,
+            "raw_bm25": 6.7309,
+            "fused_top1": 1
+          },
+          {
+            "id": "TA-B198",
+            "query": "security",
+            "label": "AMBIGUOUS",
+            "query_type": "ambiguous",
+            "shipped_correct": true,
+            "hybrid_correct": true,
+            "raw_bm25": 4.4265,
+            "fused_top1": 0.9599
+          },
+          {
+            "id": "TA-B205",
+            "query": "search for a file",
+            "label": "AMBIGUOUS",
+            "query_type": "ambiguous",
+            "shipped_correct": true,
+            "hybrid_correct": false,
+            "raw_bm25": 4.8965,
+            "fused_top1": 0.9843
+          },
+          {
+            "id": "TA-B199",
+            "query": "encoding",
+            "label": "AMBIGUOUS",
+            "query_type": "ambiguous",
+            "shipped_correct": true,
+            "hybrid_correct": true,
+            "raw_bm25": 4.8587,
+            "fused_top1": 1
+          },
+          {
+            "id": "TA-B105",
+            "query": "show the log",
+            "label": "AMBIGUOUS",
+            "query_type": "polysemy",
+            "shipped_correct": true,
+            "hybrid_correct": true,
+            "raw_bm25": 5.4242,
+            "fused_top1": 0.9568
+          },
+          {
+            "id": "TA-B096",
+            "query": "run the test suite",
+            "label": "CORRECT",
+            "query_type": "polysemy",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 4.5553,
+            "fused_top1": 0.9324
+          },
+          {
+            "id": "TA-B057",
+            "query": "is my server reachable from here",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 4.9841,
+            "fused_top1": 0.9846
+          },
+          {
+            "id": "TA-B095",
+            "query": "kill the application",
+            "label": "CORRECT",
+            "query_type": "polysemy",
+            "shipped_correct": true,
+            "hybrid_correct": true,
+            "raw_bm25": 6.1905,
+            "fused_top1": 1
+          },
+          {
+            "id": "TA-B076",
+            "query": "clean up docker",
+            "label": "CORRECT",
+            "query_type": "ambiguous",
+            "shipped_correct": false,
+            "hybrid_correct": true,
+            "raw_bm25": 5.4377,
+            "fused_top1": 0.8526
+          },
+          {
+            "id": "TA-B051",
+            "query": "I want to go back one version in my repo but not lose anything",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 7.1978,
+            "fused_top1": 0.8591
+          },
+          {
+            "id": "TA-B065",
+            "query": "get the hash fingerprint of this file",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": true,
+            "raw_bm25": 6.8938,
+            "fused_top1": 1
+          },
+          {
+            "id": "TA-B058",
+            "query": "what commands did I type earlier",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": true,
+            "hybrid_correct": true,
+            "raw_bm25": 4.7402,
+            "fused_top1": 0.9895
+          },
+          {
+            "id": "TA-B052",
+            "query": "how much storage is left on my drives",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 4.9069,
+            "fused_top1": 0.7756
+          },
+          {
+            "id": "TA-B097",
+            "query": "open the config file",
+            "label": "CORRECT",
+            "query_type": "polysemy",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 6.0324,
+            "fused_top1": 0.9535
+          },
+          {
+            "id": "TA-B047",
+            "query": "check how much RAM is being used",
+            "label": "CORRECT",
+            "query_type": "paraphrase",
+            "shipped_correct": true,
+            "hybrid_correct": true,
+            "raw_bm25": 5.2357,
+            "fused_top1": 0.9473
+          },
+          {
+            "id": "TA-B059",
+            "query": "get a quick summary of processor specs",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": true,
+            "raw_bm25": 5.702,
+            "fused_top1": 0.9976
+          },
+          {
+            "id": "TA-B053",
+            "query": "what services are accepting connections right now",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 6.4952,
+            "fused_top1": 1
+          },
+          {
+            "id": "TA-B127",
+            "query": "elevate to administrator privileges",
+            "label": "CORRECT",
+            "query_type": "safety_sensitive",
+            "shipped_correct": true,
+            "hybrid_correct": true,
+            "raw_bm25": 5.656,
+            "fused_top1": 1
+          },
+          {
+            "id": "TA-B045",
+            "query": "see the differences before staging my changes",
+            "label": "CORRECT",
+            "query_type": "paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 5.4377,
+            "fused_top1": 0.8847
+          },
+          {
+            "id": "TA-B056",
+            "query": "who am I logged in as",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 4.692,
+            "fused_top1": 0.7
+          },
+          {
+            "id": "TA-B054",
+            "query": "grab the newest version of a github project",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 5.5525,
+            "fused_top1": 0.932
+          }
+        ],
+        "hybrid_detector": [
+          {
+            "id": "TA-B060",
+            "query": "where is python installed on this machine",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 9.4665,
+            "fused_top1": 0.9179
+          },
+          {
+            "id": "TA-B076",
+            "query": "clean up docker",
+            "label": "CORRECT",
+            "query_type": "ambiguous",
+            "shipped_correct": false,
+            "hybrid_correct": true,
+            "raw_bm25": 5.4377,
+            "fused_top1": 0.8526
+          },
+          {
+            "id": "TA-B138",
+            "query": "deploy my kubernetes cluster to production with rolling updates",
+            "label": "CORRECT",
+            "query_type": "complex_multi_intent",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 8.578,
+            "fused_top1": 0.891
+          },
+          {
+            "id": "TA-B051",
+            "query": "I want to go back one version in my repo but not lose anything",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 7.1978,
+            "fused_top1": 0.8591
+          },
+          {
+            "id": "TA-B037",
+            "query": "look up what python libraries I have",
+            "label": "CORRECT",
+            "query_type": "paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 10.8755,
+            "fused_top1": 0.7708
+          },
+          {
+            "id": "TA-B052",
+            "query": "how much storage is left on my drives",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 4.9069,
+            "fused_top1": 0.7756
+          },
+          {
+            "id": "TA-B045",
+            "query": "see the differences before staging my changes",
+            "label": "CORRECT",
+            "query_type": "paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 5.4377,
+            "fused_top1": 0.8847
+          },
+          {
+            "id": "TA-B056",
+            "query": "who am I logged in as",
+            "label": "CORRECT",
+            "query_type": "low_overlap_paraphrase",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 4.692,
+            "fused_top1": 0.7
+          },
+          {
+            "id": "TA-B069",
+            "query": "stop the docker service",
+            "label": "CORRECT",
+            "query_type": "ambiguous",
+            "shipped_correct": false,
+            "hybrid_correct": false,
+            "raw_bm25": 12.1439,
+            "fused_top1": 0.9063
+          }
+        ]
+      },
+      "rejections_by_source": {
+        "original_v0_1_items": {
+          "n": 15,
+          "fixed_rule": 4,
+          "tuned_shipped_threshold": 12,
+          "hybrid_detector": 9
+        },
+        "added_v0_2_items": {
+          "n": 35,
+          "fixed_rule": 13,
+          "tuned_shipped_threshold": 32,
+          "hybrid_detector": 25
+        }
+      },
+      "rejections_by_kind": {
+        "non_terminal": {
+          "n": 34,
+          "fixed_rule": 14,
+          "tuned_shipped_threshold": 32,
+          "hybrid_detector": 25
+        },
+        "unsupported_tool_ood": {
+          "n": 5,
+          "fixed_rule": 0,
+          "tuned_shipped_threshold": 4,
+          "hybrid_detector": 2
+        },
+        "nonsensical": {
+          "n": 1,
+          "fixed_rule": 0,
+          "tuned_shipped_threshold": 1,
+          "hybrid_detector": 1
+        },
+        "near_ood": {
+          "n": 5,
+          "fixed_rule": 0,
+          "tuned_shipped_threshold": 3,
+          "hybrid_detector": 2
+        },
+        "far_ood": {
+          "n": 5,
+          "fixed_rule": 3,
+          "tuned_shipped_threshold": 4,
+          "hybrid_detector": 4
+        }
+      },
+      "controls_excluded": {
+        "n_non_ood": 132,
+        "n_controls": 25,
+        "controls_rejected": {
+          "fixed_rule": 0,
+          "tuned_shipped_threshold": 0,
+          "hybrid_detector": 0
+        },
+        "false_rejected": {
+          "fixed_rule": 0,
+          "tuned_shipped_threshold": 21,
+          "hybrid_detector": 9
+        },
+        "auroc": {
+          "baseline_raw_bm25": 0.9559,
+          "baseline_ci95": [
+            0.9282,
+            0.9781
+          ],
+          "detector_fused_top1": 0.893,
+          "detector_ci95": [
+            0.8324,
+            0.9461
+          ],
+          "difference_detector_minus_baseline": -0.0629,
+          "difference_ci95": [
+            -0.1208,
+            -0.0103
+          ]
+        }
+      },
+      "auroc": {
+        "baseline_raw_bm25": 0.9629,
+        "baseline_ci95": [
+          0.9391,
+          0.9815
+        ],
+        "detector_fused_top1": 0.9037,
+        "detector_ci95": [
+          0.8468,
+          0.9519
+        ],
+        "difference_detector_minus_baseline": -0.0592,
+        "difference_ci95": [
+          -0.1134,
+          -0.0122
+        ]
+      },
+      "committed_operating_points": {
+        "baseline_rule_bm25_lt_2": {
+          "ood_rejected": {
+            "k": 17,
+            "n": 50,
+            "rate": 0.34,
+            "lo": 0.2244,
+            "hi": 0.4785
+          },
+          "false_rejected": {
+            "k": 0,
+            "n": 157,
+            "rate": 0,
+            "lo": 0,
+            "hi": 0.0239
+          }
+        },
+        "tuned_detector_nested": {
+          "ood_rejected": {
+            "k": 34,
+            "n": 50,
+            "rate": 0.68,
+            "lo": 0.5419,
+            "hi": 0.7924
+          },
+          "false_rejected": {
+            "k": 9,
+            "n": 157,
+            "rate": 0.0573,
+            "lo": 0.0304,
+            "hi": 0.1053
+          }
+        }
+      },
+      "in_sample_matched_false_rejection": {
+        "zero": {
+          "max_false_rejections": 0,
+          "of_non_ood": 157,
+          "baseline_score": {
+            "ood_rejected": 23,
+            "false_rejected": 0,
+            "controls_among_false_rejected": 0,
+            "rate": 0.46
+          },
+          "detector_feature": {
+            "ood_rejected": 13,
+            "false_rejected": 0,
+            "controls_among_false_rejected": 0,
+            "rate": 0.26
+          }
+        },
+        "detector_observed": {
+          "max_false_rejections": 9,
+          "of_non_ood": 157,
+          "baseline_score": {
+            "ood_rejected": 37,
+            "false_rejected": 9,
+            "controls_among_false_rejected": 0,
+            "rate": 0.74
+          },
+          "detector_feature": {
+            "ood_rejected": 37,
+            "false_rejected": 9,
+            "controls_among_false_rejected": 0,
+            "rate": 0.74
+          }
+        },
+        "five_pct": {
+          "max_false_rejections": 7,
+          "of_non_ood": 157,
+          "baseline_score": {
+            "ood_rejected": 33,
+            "false_rejected": 7,
+            "controls_among_false_rejected": 0,
+            "rate": 0.66
+          },
+          "detector_feature": {
+            "ood_rejected": 34,
+            "false_rejected": 7,
+            "controls_among_false_rejected": 0,
+            "rate": 0.68
+          }
+        },
+        "ten_pct": {
+          "max_false_rejections": 15,
+          "of_non_ood": 157,
+          "baseline_score": {
+            "ood_rejected": 43,
+            "false_rejected": 15,
+            "controls_among_false_rejected": 0,
+            "rate": 0.86
+          },
+          "detector_feature": {
+            "ood_rejected": 37,
+            "false_rejected": 15,
+            "controls_among_false_rejected": 0,
+            "rate": 0.74
+          }
+        }
+      }
+    }
+  }
+}

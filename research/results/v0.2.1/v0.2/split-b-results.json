@@ -1,0 +1,89 @@
+{
+  "experiment_id": "E-GEN-splitB-v0.2",
+  "split": "GroupKFold by intent_group_id (intent-held-out)",
+  "k": 5,
+  "group_count": 170,
+  "fold_sizes": [
+    42,
+    42,
+    41,
+    41,
+    41
+  ],
+  "groups_split_across_folds": 0,
+  "per_fold_alpha_and_acc": [
+    {
+      "test_fold": 0,
+      "selected_alpha": 0.5,
+      "non_ood_accuracy": 0.8438,
+      "non_ood_total": 32
+    },
+    {
+      "test_fold": 1,
+      "selected_alpha": 0.5,
+      "non_ood_accuracy": 0.8125,
+      "non_ood_total": 32
+    },
+    {
+      "test_fold": 2,
+      "selected_alpha": 0.5,
+      "non_ood_accuracy": 0.8387,
+      "non_ood_total": 31
+    },
+    {
+      "test_fold": 3,
+      "selected_alpha": 0.5,
+      "non_ood_accuracy": 0.7419,
+      "non_ood_total": 31
+    },
+    {
+      "test_fold": 4,
+      "selected_alpha": 0.5,
+      "non_ood_accuracy": 0.7419,
+      "non_ood_total": 31
+    }
+  ],
+  "splitB": {
+    "hybrid_non_ood_accuracy": 0.7958,
+    "ood_detection": {
+      "precision": 0.7447,
+      "recall": 0.7,
+      "f1": 0.7216,
+      "mean_auroc": 0.9038,
+      "confusion": {
+        "tp": 35,
+        "fp": 12,
+        "fn": 15,
+        "tn": 145
+      }
+    },
+    "ambiguity_detection": {
+      "precision": 0.3562,
+      "recall": 0.7222,
+      "f1": 0.4771,
+      "mean_auroc": 0.72,
+      "confusion": {
+        "tp": 26,
+        "fp": 47,
+        "fn": 10,
+        "tn": 124
+      }
+    },
+    "calibration_ece_before": 0.3238,
+    "calibration_ece_after": 0.0909
+  },
+  "splitA_reference": {
+    "hybrid_non_ood_accuracy": 0.7838,
+    "ood_auroc": 0.8988,
+    "ood_f1": 0.7312,
+    "ambiguity_f1": 0.4386,
+    "calibration_ece_before": 0.3378,
+    "calibration_ece_after": 0.059
+  },
+  "generalization_delta": {
+    "hybrid_accuracy": 0.012,
+    "ood_auroc": 0.005,
+    "calibration_ece_after": 0.0319
+  },
+  "generated_at": "2026-10-02T10:56:16.404Z"
+}

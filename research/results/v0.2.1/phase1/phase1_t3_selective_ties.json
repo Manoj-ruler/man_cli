@@ -1,0 +1,420 @@
+{
+  "status": "post hoc, exploratory (research/PLAN_TASKS.md Phase 1)",
+  "generated_by": "research/experiments/phase1_t3_selective_ties.js",
+  "task": "T3: tie-aware risk-coverage, AURC and AUROC with bootstrap CIs",
+  "method": "expected risk under uniformly random order within tie blocks (exact); AURC = mean expected risk over coverage k=1..n; oracle AURC ranks all correct answers first; bootstrap percentile CIs, stratified for detection AUROC",
+  "bootstrap": {
+    "B": 10000,
+    "seed": 42
+  },
+  "reproduction_checks": [
+    {
+      "label": "v0.1 committed ID-ordered risk-coverage curve",
+      "ok": true
+    },
+    {
+      "label": "v0.1 OOD mean-over-folds AUROC",
+      "ok": true
+    },
+    {
+      "label": "v0.1 ambiguity mean-over-folds AUROC",
+      "ok": true
+    },
+    {
+      "label": "v0.2 committed ID-ordered risk-coverage curve",
+      "ok": true
+    },
+    {
+      "label": "v0.2 OOD mean-over-folds AUROC",
+      "ok": true
+    },
+    {
+      "label": "v0.2 ambiguity mean-over-folds AUROC",
+      "ok": true
+    }
+  ],
+  "versions": {
+    "v0.1": {
+      "selective": {
+        "all": {
+          "hybrid": {
+            "n": 150,
+            "errors": 46,
+            "distinct_confidence_values": 51,
+            "largest_tie_block": {
+              "size": 96,
+              "share": 0.64,
+              "confidence": 1,
+              "errors_inside": 8
+            },
+            "expected_risk": {
+              "cov25": 0.0833,
+              "cov50": 0.0833,
+              "cov75": 0.1593,
+              "cov100": 0.3067
+            },
+            "cov50_best_worst_over_tie_orders": {
+              "k": 75,
+              "best": 0,
+              "worst": 0.1067,
+              "tie_block_size": 96,
+              "tie_block_confidence": 1
+            },
+            "aurc": 0.1247,
+            "aurc_ci95": [
+              0.0738,
+              0.1849
+            ],
+            "oracle_aurc": 0.0538,
+            "excess_aurc": 0.0709,
+            "correctness_auroc": 0.8581,
+            "correctness_auroc_ci95": [
+              0.7887,
+              0.9205
+            ]
+          },
+          "baseline": {
+            "n": 150,
+            "errors": 53,
+            "distinct_confidence_values": 25,
+            "largest_tie_block": {
+              "size": 110,
+              "share": 0.7333,
+              "confidence": 1,
+              "errors_inside": 22
+            },
+            "expected_risk": {
+              "cov25": 0.2,
+              "cov50": 0.2,
+              "cov75": 0.2124,
+              "cov100": 0.3533
+            },
+            "cov50_best_worst_over_tie_orders": {
+              "k": 75,
+              "best": 0,
+              "worst": 0.2933,
+              "tie_block_size": 110,
+              "tie_block_confidence": 1
+            },
+            "aurc": 0.2208,
+            "aurc_ci95": [
+              0.1531,
+              0.2967
+            ],
+            "oracle_aurc": 0.0726,
+            "excess_aurc": 0.1481,
+            "correctness_auroc": 0.7548,
+            "correctness_auroc_ci95": [
+              0.6801,
+              0.8251
+            ]
+          },
+          "aurc_difference_hybrid_minus_baseline": {
+            "point": -0.0961,
+            "ci95": [
+              -0.1483,
+              -0.0453
+            ]
+          }
+        },
+        "controls_excluded": {
+          "hybrid": {
+            "n": 125,
+            "errors": 46,
+            "distinct_confidence_values": 51,
+            "largest_tie_block": {
+              "size": 71,
+              "share": 0.568,
+              "confidence": 1,
+              "errors_inside": 8
+            },
+            "expected_risk": {
+              "cov25": 0.1127,
+              "cov50": 0.1127,
+              "cov75": 0.2447,
+              "cov100": 0.368
+            },
+            "cov50_best_worst_over_tie_orders": {
+              "k": 63,
+              "best": 0,
+              "worst": 0.127,
+              "tie_block_size": 71,
+              "tie_block_confidence": 1
+            },
+            "aurc": 0.1709,
+            "aurc_ci95": [
+              0.1048,
+              0.2472
+            ],
+            "oracle_aurc": 0.0795,
+            "excess_aurc": 0.0914,
+            "correctness_auroc": 0.8407,
+            "correctness_auroc_ci95": [
+              0.7648,
+              0.9078
+            ]
+          },
+          "baseline": {
+            "n": 125,
+            "errors": 53,
+            "distinct_confidence_values": 25,
+            "largest_tie_block": {
+              "size": 85,
+              "share": 0.68,
+              "confidence": 1,
+              "errors_inside": 22
+            },
+            "expected_risk": {
+              "cov25": 0.2588,
+              "cov50": 0.2588,
+              "cov75": 0.2979,
+              "cov100": 0.424
+            },
+            "cov50_best_worst_over_tie_orders": {
+              "k": 63,
+              "best": 0,
+              "worst": 0.3492,
+              "tie_block_size": 85,
+              "tie_block_confidence": 1
+            },
+            "aurc": 0.2859,
+            "aurc_ci95": [
+              0.1999,
+              0.3799
+            ],
+            "oracle_aurc": 0.1079,
+            "excess_aurc": 0.1779,
+            "correctness_auroc": 0.7417,
+            "correctness_auroc_ci95": [
+              0.6616,
+              0.8173
+            ]
+          },
+          "aurc_difference_hybrid_minus_baseline": {
+            "point": -0.115,
+            "ci95": [
+              -0.1769,
+              -0.0537
+            ]
+          }
+        }
+      },
+      "detection_auroc": {
+        "ood": {
+          "feature": "top1_score",
+          "positives": 15,
+          "pooled_auroc": 0.8548,
+          "ci95": [
+            0.7319,
+            0.9526
+          ],
+          "mean_over_folds_auroc_committed": 0.8673
+        },
+        "ambiguity": {
+          "feature": "margin",
+          "positives": 14,
+          "pooled_auroc": 0.7899,
+          "ci95": [
+            0.6712,
+            0.8871
+          ],
+          "mean_over_folds_auroc_committed": 0.784
+        }
+      },
+      "id_ordered_cov50_committed": {
+        "coverage": 0.5,
+        "risk": 0.1067,
+        "threshold_score": 1
+      }
+    },
+    "v0.2": {
+      "selective": {
+        "all": {
+          "hybrid": {
+            "n": 207,
+            "errors": 84,
+            "distinct_confidence_values": 79,
+            "largest_tie_block": {
+              "size": 110,
+              "share": 0.5314,
+              "confidence": 1,
+              "errors_inside": 10
+            },
+            "expected_risk": {
+              "cov25": 0.0909,
+              "cov50": 0.0909,
+              "cov75": 0.2387,
+              "cov100": 0.4058
+            },
+            "cov50_best_worst_over_tie_orders": {
+              "k": 104,
+              "best": 0.0385,
+              "worst": 0.0962,
+              "tie_block_size": 110,
+              "tie_block_confidence": 1
+            },
+            "aurc": 0.1661,
+            "aurc_ci95": [
+              0.1154,
+              0.2241
+            ],
+            "oracle_aurc": 0.0975,
+            "excess_aurc": 0.0686,
+            "correctness_auroc": 0.8932,
+            "correctness_auroc_ci95": [
+              0.8464,
+              0.9357
+            ]
+          },
+          "baseline": {
+            "n": 207,
+            "errors": 87,
+            "distinct_confidence_values": 32,
+            "largest_tie_block": {
+              "size": 127,
+              "share": 0.6135,
+              "confidence": 1,
+              "errors_inside": 21
+            },
+            "expected_risk": {
+              "cov25": 0.1654,
+              "cov50": 0.1654,
+              "cov75": 0.2645,
+              "cov100": 0.4203
+            },
+            "cov50_best_worst_over_tie_orders": {
+              "k": 104,
+              "best": 0,
+              "worst": 0.2019,
+              "tie_block_size": 127,
+              "tie_block_confidence": 1
+            },
+            "aurc": 0.2171,
+            "aurc_ci95": [
+              0.1571,
+              0.2828
+            ],
+            "oracle_aurc": 0.1052,
+            "excess_aurc": 0.1119,
+            "correctness_auroc": 0.8407,
+            "correctness_auroc_ci95": [
+              0.7863,
+              0.8903
+            ]
+          },
+          "aurc_difference_hybrid_minus_baseline": {
+            "point": -0.051,
+            "ci95": [
+              -0.0955,
+              -0.0063
+            ]
+          }
+        },
+        "controls_excluded": {
+          "hybrid": {
+            "n": 182,
+            "errors": 84,
+            "distinct_confidence_values": 79,
+            "largest_tie_block": {
+              "size": 85,
+              "share": 0.467,
+              "confidence": 1,
+              "errors_inside": 10
+            },
+            "expected_risk": {
+              "cov25": 0.1176,
+              "cov50": 0.1319,
+              "cov75": 0.292,
+              "cov100": 0.4615
+            },
+            "cov50_best_worst_over_tie_orders": {
+              "k": 91,
+              "best": 0.1319,
+              "worst": 0.1319,
+              "tie_block_size": 0
+            },
+            "aurc": 0.2131,
+            "aurc_ci95": [
+              0.1509,
+              0.2834
+            ],
+            "oracle_aurc": 0.1295,
+            "excess_aurc": 0.0836,
+            "correctness_auroc": 0.8811,
+            "correctness_auroc_ci95": [
+              0.8304,
+              0.9263
+            ]
+          },
+          "baseline": {
+            "n": 182,
+            "errors": 87,
+            "distinct_confidence_values": 32,
+            "largest_tie_block": {
+              "size": 102,
+              "share": 0.5604,
+              "confidence": 1,
+              "errors_inside": 21
+            },
+            "expected_risk": {
+              "cov25": 0.2059,
+              "cov50": 0.2059,
+              "cov75": 0.3431,
+              "cov100": 0.478
+            },
+            "cov50_best_worst_over_tie_orders": {
+              "k": 91,
+              "best": 0.1099,
+              "worst": 0.2308,
+              "tie_block_size": 102,
+              "tie_block_confidence": 1
+            },
+            "aurc": 0.2697,
+            "aurc_ci95": [
+              0.1988,
+              0.348
+            ],
+            "oracle_aurc": 0.14,
+            "excess_aurc": 0.1297,
+            "correctness_auroc": 0.8306,
+            "correctness_auroc_ci95": [
+              0.773,
+              0.8845
+            ]
+          },
+          "aurc_difference_hybrid_minus_baseline": {
+            "point": -0.0566,
+            "ci95": [
+              -0.1088,
+              -0.0048
+            ]
+          }
+        }
+      },
+      "detection_auroc": {
+        "ood": {
+          "feature": "top1_score",
+          "positives": 50,
+          "pooled_auroc": 0.9037,
+          "ci95": [
+            0.8459,
+            0.9527
+          ],
+          "mean_over_folds_auroc_committed": 0.8988
+        },
+        "ambiguity": {
+          "feature": "margin",
+          "positives": 36,
+          "pooled_auroc": 0.7221,
+          "ci95": [
+            0.6308,
+            0.8097
+          ],
+          "mean_over_folds_auroc_committed": 0.7194
+        }
+      },
+      "id_ordered_cov50_committed": null
+    }
+  },
+  "generated_at": "2026-10-02T10:56:34.385Z"
+}

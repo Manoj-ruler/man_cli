@@ -1,0 +1,473 @@
+{
+  "experiment_id": "E4-v0.2-hybrid-fusion-nested-5fold-cv",
+  "benchmark_version": "v0.2",
+  "protocol": "nested 5-fold CV: alpha selected per test-fold using only the other 4 folds (dev); evaluated once on held-out test fold.",
+  "alpha_grid": [
+    0,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9,
+    1
+  ],
+  "fold_seed": 42,
+  "per_fold_results": [
+    {
+      "test_fold": 0,
+      "selected_alpha": 0.5,
+      "dev_accuracy_at_selected_alpha": 0.8064516129032258,
+      "dev_curve": [
+        {
+          "alpha": 0,
+          "dev_non_ood_accuracy": 0.7419354838709677
+        },
+        {
+          "alpha": 0.1,
+          "dev_non_ood_accuracy": 0.782258064516129
+        },
+        {
+          "alpha": 0.2,
+          "dev_non_ood_accuracy": 0.782258064516129
+        },
+        {
+          "alpha": 0.3,
+          "dev_non_ood_accuracy": 0.7903225806451613
+        },
+        {
+          "alpha": 0.4,
+          "dev_non_ood_accuracy": 0.7983870967741935
+        },
+        {
+          "alpha": 0.5,
+          "dev_non_ood_accuracy": 0.8064516129032258
+        },
+        {
+          "alpha": 0.6,
+          "dev_non_ood_accuracy": 0.7983870967741935
+        },
+        {
+          "alpha": 0.7,
+          "dev_non_ood_accuracy": 0.7903225806451613
+        },
+        {
+          "alpha": 0.8,
+          "dev_non_ood_accuracy": 0.7903225806451613
+        },
+        {
+          "alpha": 0.9,
+          "dev_non_ood_accuracy": 0.7903225806451613
+        },
+        {
+          "alpha": 1,
+          "dev_non_ood_accuracy": 0.7661290322580645
+        }
+      ],
+      "test_non_ood_accuracy": 0.7575757575757576,
+      "test_non_ood_total": 33,
+      "test_non_ood_hits": 25,
+      "test_by_query_type": {
+        "ambiguous": {
+          "total": 6,
+          "hits": 5
+        },
+        "single_keyword": {
+          "total": 3,
+          "hits": 0
+        },
+        "polysemy": {
+          "total": 4,
+          "hits": 3
+        },
+        "canonical": {
+          "total": 4,
+          "hits": 4
+        },
+        "low_overlap_paraphrase": {
+          "total": 2,
+          "hits": 0
+        },
+        "paraphrase": {
+          "total": 5,
+          "hits": 4
+        },
+        "complex_multi_intent": {
+          "total": 4,
+          "hits": 4
+        },
+        "safety_sensitive": {
+          "total": 5,
+          "hits": 5
+        }
+      }
+    },
+    {
+      "test_fold": 1,
+      "selected_alpha": 0.5,
+      "dev_accuracy_at_selected_alpha": 0.8174603174603174,
+      "dev_curve": [
+        {
+          "alpha": 0,
+          "dev_non_ood_accuracy": 0.7380952380952381
+        },
+        {
+          "alpha": 0.1,
+          "dev_non_ood_accuracy": 0.7777777777777778
+        },
+        {
+          "alpha": 0.2,
+          "dev_non_ood_accuracy": 0.7936507936507936
+        },
+        {
+          "alpha": 0.3,
+          "dev_non_ood_accuracy": 0.8095238095238095
+        },
+        {
+          "alpha": 0.4,
+          "dev_non_ood_accuracy": 0.8095238095238095
+        },
+        {
+          "alpha": 0.5,
+          "dev_non_ood_accuracy": 0.8174603174603174
+        },
+        {
+          "alpha": 0.6,
+          "dev_non_ood_accuracy": 0.8095238095238095
+        },
+        {
+          "alpha": 0.7,
+          "dev_non_ood_accuracy": 0.7936507936507936
+        },
+        {
+          "alpha": 0.8,
+          "dev_non_ood_accuracy": 0.7936507936507936
+        },
+        {
+          "alpha": 0.9,
+          "dev_non_ood_accuracy": 0.8015873015873016
+        },
+        {
+          "alpha": 1,
+          "dev_non_ood_accuracy": 0.7936507936507936
+        }
+      ],
+      "test_non_ood_accuracy": 0.7096774193548387,
+      "test_non_ood_total": 31,
+      "test_non_ood_hits": 22,
+      "test_by_query_type": {
+        "ambiguous": {
+          "total": 6,
+          "hits": 4
+        },
+        "polysemy": {
+          "total": 5,
+          "hits": 4
+        },
+        "single_keyword": {
+          "total": 3,
+          "hits": 0
+        },
+        "canonical": {
+          "total": 3,
+          "hits": 3
+        },
+        "complex_multi_intent": {
+          "total": 3,
+          "hits": 2
+        },
+        "paraphrase": {
+          "total": 6,
+          "hits": 5
+        },
+        "low_overlap_paraphrase": {
+          "total": 2,
+          "hits": 1
+        },
+        "safety_sensitive": {
+          "total": 3,
+          "hits": 3
+        }
+      }
+    },
+    {
+      "test_fold": 2,
+      "selected_alpha": 0.5,
+      "dev_accuracy_at_selected_alpha": 0.7857142857142857,
+      "dev_curve": [
+        {
+          "alpha": 0,
+          "dev_non_ood_accuracy": 0.7142857142857143
+        },
+        {
+          "alpha": 0.1,
+          "dev_non_ood_accuracy": 0.753968253968254
+        },
+        {
+          "alpha": 0.2,
+          "dev_non_ood_accuracy": 0.7619047619047619
+        },
+        {
+          "alpha": 0.3,
+          "dev_non_ood_accuracy": 0.7777777777777778
+        },
+        {
+          "alpha": 0.4,
+          "dev_non_ood_accuracy": 0.7777777777777778
+        },
+        {
+          "alpha": 0.5,
+          "dev_non_ood_accuracy": 0.7857142857142857
+        },
+        {
+          "alpha": 0.6,
+          "dev_non_ood_accuracy": 0.7857142857142857
+        },
+        {
+          "alpha": 0.7,
+          "dev_non_ood_accuracy": 0.7698412698412699
+        },
+        {
+          "alpha": 0.8,
+          "dev_non_ood_accuracy": 0.7698412698412699
+        },
+        {
+          "alpha": 0.9,
+          "dev_non_ood_accuracy": 0.7777777777777778
+        },
+        {
+          "alpha": 1,
+          "dev_non_ood_accuracy": 0.753968253968254
+        }
+      ],
+      "test_non_ood_accuracy": 0.8387096774193549,
+      "test_non_ood_total": 31,
+      "test_non_ood_hits": 26,
+      "test_by_query_type": {
+        "ambiguous": {
+          "total": 9,
+          "hits": 8
+        },
+        "single_keyword": {
+          "total": 1,
+          "hits": 0
+        },
+        "safety_sensitive": {
+          "total": 2,
+          "hits": 2
+        },
+        "low_overlap_paraphrase": {
+          "total": 3,
+          "hits": 1
+        },
+        "paraphrase": {
+          "total": 8,
+          "hits": 8
+        },
+        "complex_multi_intent": {
+          "total": 1,
+          "hits": 1
+        },
+        "canonical": {
+          "total": 5,
+          "hits": 5
+        },
+        "polysemy": {
+          "total": 2,
+          "hits": 1
+        }
+      }
+    },
+    {
+      "test_fold": 3,
+      "selected_alpha": 0.3,
+      "dev_accuracy_at_selected_alpha": 0.7857142857142857,
+      "dev_curve": [
+        {
+          "alpha": 0,
+          "dev_non_ood_accuracy": 0.7301587301587301
+        },
+        {
+          "alpha": 0.1,
+          "dev_non_ood_accuracy": 0.7698412698412699
+        },
+        {
+          "alpha": 0.2,
+          "dev_non_ood_accuracy": 0.7698412698412699
+        },
+        {
+          "alpha": 0.3,
+          "dev_non_ood_accuracy": 0.7857142857142857
+        },
+        {
+          "alpha": 0.4,
+          "dev_non_ood_accuracy": 0.7777777777777778
+        },
+        {
+          "alpha": 0.5,
+          "dev_non_ood_accuracy": 0.7777777777777778
+        },
+        {
+          "alpha": 0.6,
+          "dev_non_ood_accuracy": 0.7698412698412699
+        },
+        {
+          "alpha": 0.7,
+          "dev_non_ood_accuracy": 0.7619047619047619
+        },
+        {
+          "alpha": 0.8,
+          "dev_non_ood_accuracy": 0.7619047619047619
+        },
+        {
+          "alpha": 0.9,
+          "dev_non_ood_accuracy": 0.7698412698412699
+        },
+        {
+          "alpha": 1,
+          "dev_non_ood_accuracy": 0.753968253968254
+        }
+      ],
+      "test_non_ood_accuracy": 0.8064516129032258,
+      "test_non_ood_total": 31,
+      "test_non_ood_hits": 25,
+      "test_by_query_type": {
+        "ambiguous": {
+          "total": 8,
+          "hits": 6
+        },
+        "single_keyword": {
+          "total": 1,
+          "hits": 0
+        },
+        "polysemy": {
+          "total": 3,
+          "hits": 1
+        },
+        "canonical": {
+          "total": 7,
+          "hits": 7
+        },
+        "safety_sensitive": {
+          "total": 4,
+          "hits": 4
+        },
+        "complex_multi_intent": {
+          "total": 4,
+          "hits": 4
+        },
+        "low_overlap_paraphrase": {
+          "total": 3,
+          "hits": 2
+        },
+        "paraphrase": {
+          "total": 1,
+          "hits": 1
+        }
+      }
+    },
+    {
+      "test_fold": 4,
+      "selected_alpha": 0.5,
+      "dev_accuracy_at_selected_alpha": 0.7936507936507936,
+      "dev_curve": [
+        {
+          "alpha": 0,
+          "dev_non_ood_accuracy": 0.7063492063492064
+        },
+        {
+          "alpha": 0.1,
+          "dev_non_ood_accuracy": 0.7698412698412699
+        },
+        {
+          "alpha": 0.2,
+          "dev_non_ood_accuracy": 0.7777777777777778
+        },
+        {
+          "alpha": 0.3,
+          "dev_non_ood_accuracy": 0.7857142857142857
+        },
+        {
+          "alpha": 0.4,
+          "dev_non_ood_accuracy": 0.7857142857142857
+        },
+        {
+          "alpha": 0.5,
+          "dev_non_ood_accuracy": 0.7936507936507936
+        },
+        {
+          "alpha": 0.6,
+          "dev_non_ood_accuracy": 0.7857142857142857
+        },
+        {
+          "alpha": 0.7,
+          "dev_non_ood_accuracy": 0.7698412698412699
+        },
+        {
+          "alpha": 0.8,
+          "dev_non_ood_accuracy": 0.7698412698412699
+        },
+        {
+          "alpha": 0.9,
+          "dev_non_ood_accuracy": 0.7777777777777778
+        },
+        {
+          "alpha": 1,
+          "dev_non_ood_accuracy": 0.753968253968254
+        }
+      ],
+      "test_non_ood_accuracy": 0.8064516129032258,
+      "test_non_ood_total": 31,
+      "test_non_ood_hits": 25,
+      "test_by_query_type": {
+        "ambiguous": {
+          "total": 5,
+          "hits": 5
+        },
+        "single_keyword": {
+          "total": 2,
+          "hits": 0
+        },
+        "canonical": {
+          "total": 6,
+          "hits": 6
+        },
+        "paraphrase": {
+          "total": 5,
+          "hits": 5
+        },
+        "low_overlap_paraphrase": {
+          "total": 5,
+          "hits": 3
+        },
+        "complex_multi_intent": {
+          "total": 3,
+          "hits": 2
+        },
+        "polysemy": {
+          "total": 4,
+          "hits": 3
+        },
+        "safety_sensitive": {
+          "total": 1,
+          "hits": 1
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "mean_test_non_ood_accuracy": 0.7838,
+    "std_test_non_ood_accuracy": 0.0452,
+    "selected_alpha_per_fold": [
+      0.5,
+      0.5,
+      0.5,
+      0.3,
+      0.5
+    ]
+  },
+  "generated_at": "2026-10-02T10:56:11.883Z"
+}
