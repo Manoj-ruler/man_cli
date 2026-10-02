@@ -23,3 +23,11 @@ Built 2026-10-02 by `research/experiments/build_v0_2_1.js` from frozen v0.2 (JSO
 
 These items now have gold commands but kept their v0.2 risk_level, which was set for their old label. Check each before any safety analysis on v0.2.1.
 
+
+## Known metadata error (ISSUE-13, 2026-10-02)
+
+The committed `termassist_bench_v0.2.1_validated.json` has `_meta.total_queries: 209`, copied from v0.2 by the
+builder. The file contains **207** queries, as stated above and in `VALIDATED_BENCHMARK_MANIFEST_v0.2.1.json`.
+No analysis reads this field. The file is left as committed, because its SHA-256 is recorded in
+`research/results/v0.2.1/RUN_MANIFEST.json` and `ANALYSIS_FREEZE_v2.0.md`. `build_v0_2_1.js` now sets the
+field from its output, so a rebuild gives 207 there and therefore a different file hash.

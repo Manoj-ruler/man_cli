@@ -144,7 +144,9 @@ if (problems.length) { problems.forEach(p => console.error('INVARIANT  ' + p)); 
 // ---- write ----
 const csvHeaders = ['id', 'query', 'gold_intent', 'gold_command', 'acceptable_commands', 'category', 'difficulty', 'query_type', 'risk_level', 'known_task', 'ambiguity', 'requires_rejection', 'source_intent_id', 'notes', 'annotation_status'];
 const csvEsc = v => { if (v === null || v === undefined) return ''; const s = Array.isArray(v) ? v.join('; ') : String(v); return s.includes(',') || s.includes('"') || s.includes('\n') ? '"' + s.replace(/"/g, '""') + '"' : s; };
-const meta = { ...bench._meta, name: 'TermAssist-Bench v0.2.1 (Validated)', version: '0.2.1-validated', created_at: `${date}T00:00:00.000Z`,
+// total_queries is set from the output: the parent's value (209) was carried over in the committed
+// 2026-10-02 build (ISSUE-13; recorded in CHANGELOG_v0.2.1.md, file left as committed).
+const meta = { ...bench._meta, name: 'TermAssist-Bench v0.2.1 (Validated)', version: '0.2.1-validated', created_at: `${date}T00:00:00.000Z`, total_queries: outQ.length,
   description: 'v0.2 with the adjudicated relabels from the two-annotator study and the declared defect fixes. v0.2 stays frozen; see CHANGELOG_v0.2.1.md.',
   parent: { version: '0.2.0-validated', json_sha256_lf: before.json, csv_sha256_lf: before.csv },
   build_inputs: { relabel_proposal_sha256_lf: sha256LF(proposalPath), fixes_sha256_lf: sha256LF(fixesPath), manual_sha256_lf: manualPath ? sha256LF(manualPath) : null } };
