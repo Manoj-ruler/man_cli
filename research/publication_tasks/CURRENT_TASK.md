@@ -1,25 +1,29 @@
 # Current task
 
-**FINAL-06: the submission checklist.** Status: **IN PROGRESS.** D1–D5 are answered (2026-10-05), and the
-text is drafted.
+**No task is in progress.** FINAL-06 was the last open task, and it is **DONE (2026-10-05).**
 
-**Waiting on the author:** approve `research/paper/drafts/ETHICS_D1_D5_DRAFT.md`. It proposes:
+**State of the paper:**
 
-1. §3: the annotators are members of the project team who had not worked on the tool, the benchmark or the
-   paper (about +1 body line; page 8 has room).
-2. Limitations: they are friends of the author and team members, not external annotators.
-3. Ethics: unpaid volunteers; consented; not data subjects; no demographics; no ethics review; the codebook
-   and guidelines are released.
-4. Appendix D: one sentence in the Protocol paragraph.
-5. Checklist section D: D1 yes, D2 yes, D3 yes, D4 no (stated), D5 no (stated).
+- It reports the main audit, the pre-specified external check (E1), the two-annotator study and the
+  corrected benchmark v0.2.1.
+- The annotator facts (D1–D5) are stated in §3, Limitations, Ethics and Appendix D.
+- **Checks:**
+  - trace: 253 snippets, 755 numbers, 0 problems;
+  - the body ends on page 8 of 8;
+  - 0 overfull boxes;
+  - abstract: 197 words;
+  - review PDF anonymous.
+- The Responsible NLP checklist is complete: `research/paper/RESPONSIBLE_NLP_CHECKLIST_DRAFT.md`.
+- Everything reproduces from a clean clone (runbook step 13, 2026-10-02).
 
-**After approval:** apply the text, run the trace (0 problems), build (≤ 8 pages), run the anonymity scan,
-complete the checklist, and close FINAL-06.
+**Author actions:**
 
-**Other author actions:**
+1. **PAPER-07 by Nov 6:** submit `research/paper/acl_latex/main_review.pdf` (16 pages; SHA-256 prefix
+   `7617358db62f761a`) to the EACL 2027 SRW mentorship programme. Copy the checklist answers into the
+   form, and check its question numbering against the form. Tell Claude when it is submitted.
+2. **Ethics review (D4):** the paper says no ethics board reviewed the annotation. If your institution
+   requires review or grants an exemption, tell Claude, so that the sentence can be updated.
+3. **Optional:** LICENSE files (MIT for the code, CC BY 4.0 for the benchmark), only on your instruction;
+   machine details (CPU, RAM) for Appendix A.
 
-- **PAPER-07 by Nov 6:** submit `main_review.pdf`. The hash will change once the text above is applied.
-- LICENSE files (only on explicit instruction).
-
-**Done:** runbook steps 7–13 (the annotation study reported and reproduced; ISSUE-13 and ISSUE-14 resolved);
-the Table 8 `\clearpage`.
+**After the mentorship feedback:** a revision round (new tasks), then the camera-ready pass.

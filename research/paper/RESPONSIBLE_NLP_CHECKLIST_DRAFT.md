@@ -1,6 +1,6 @@
 # ACL Responsible NLP Research checklist: draft answers (FINAL-06)
 
-**Drafted:** 2026-10-01, for the EACL 2027 SRW long paper. **Status: DRAFT for the author.**
+**Drafted:** 2026-10-01, for the EACL 2027 SRW long paper. **Completed:** 2026-10-05 (FINAL-06). **Status: ready for the author to copy into the submission form.**
 
 **Author decisions, 2026-10-01:**
 
@@ -10,7 +10,7 @@
 - **Supplementary material: none at review.** This is consistent with the Ethics statement, which
   says code and data are withheld from the review version for anonymity.
 
-**Still open:** D1–D5 (the author's facts).
+**D1–D5: answered by the author on 2026-10-05** and stated in the paper (section D below). **Nothing is open** except the two optional items marked [AUTHOR] (LICENSE files; machine details).
 
 **Done:** the AI-ledger update and the camera-ready clause (approved 2026-10-01; E1 below).
 
@@ -20,7 +20,8 @@ actual EACL 2027 SRW submission form, which may number or word them differently.
 
 **Conventions:**
 
-- Section pointers refer to `research/paper/acl_latex/content.tex` at commit `d95babd`.
+- Section pointers refer to `research/paper/acl_latex/content.tex` at commit `d95babd`. Section D was
+  rewritten on 2026-10-05 against the current text.
 - **[GAP]** means the paper does not yet answer the question; a fix is proposed.
 - **[AUTHOR]** means only the author knows the fact. Nothing here was guessed.
 
@@ -62,8 +63,8 @@ The audited tool is the authors' own; it is anonymised in the review version.
 - `sentence-transformers/all-MiniLM-L6-v2` and its ONNX conversion `Xenova/all-MiniLM-L6-v2`:
   Apache 2.0 (model cards, read 2026-10-01);
 - the audited tool: MIT (`cli/package.json`).
-- **[AUTHOR]** The repository has no LICENSE file. The licence for the released benchmark, code
-  and results must be chosen. The released CLINC150 copy keeps CC BY 3.0, with attribution.
+- **[AUTHOR]** The licences are chosen (2026-10-01: MIT for the code, CC BY 4.0 for the benchmark) and stated in
+  Appendix A. The repository still has no LICENSE file; one is added only on the author's instruction. The released CLINC150 copy keeps CC BY 3.0, with attribution.
 - *Proposed fix:* the Appendix A addition below.
 
 **B3. Consistent with intended use: Yes.** CLINC150 was built to evaluate intent classification
@@ -82,7 +83,8 @@ stated purpose.
   requests written for benchmarks, not user data (§3, §4)."
 
 **B5. Documentation: Yes.** §3 covers the benchmark versions, the construction, the AI-authored
-part and the labels. Appendix A specifies the system. The reproduction guide and the claim trace
+part and the labels. Appendix A specifies the system. Appendix D documents the two-annotator study and
+the corrected benchmark v0.2.1 (its changes are listed in `research/datasets/CHANGELOG_v0.2.1.md`). The reproduction guide and the claim trace
 are released with the camera-ready version (Ethics).
 
 **B6. Statistics and splits: Yes.**
@@ -91,6 +93,7 @@ are released with the camera-ready version (Ethics).
 - §4: five folds (seed 42, stratified) and Split B (Appendix B).
 - §4 "External check": 4,500 + 1,000 queries and 150 intents.
 - Tables 1 and 8.
+- Appendix D: v0.2.1 has 207 queries; Table 9 compares v0.2 with v0.2.1.
 
 ## C. Computational experiments (Yes)
 
@@ -128,26 +131,30 @@ hours is stated, since none was measured. The notes below are kept for the recor
   1.14.0 (from `research/package-lock.json`), and Node.js 24.2.0 (`research/.nvmrc`).
 - *Proposed fix:* the Appendix A addition below.
 
-## D. Human annotators (Yes: the label check in §3; the two-annotator study is not yet complete)
+## D. Human annotators (Yes: the first label check and the two-annotator study, §3 and Appendix D)
 
-The paper reports one human label check: **one partially independent reviewer, κ = 0.63, on 14
-items (§3)**. The two-annotator study is described only as "not yet complete" (Limitations). If its
-results enter the paper later, D1–D5 must cover the two annotators and the adjudicator too.
+The paper reports two human label checks:
 
-- **D1. Full instructions:** the paper does not include them.
-  - The codebook and the annotator guidelines exist (`research/datasets/annotation/`). The first
-    reviewer's definitions are described in `ANNOTATION_PROTOCOL.md` §0.
-  - **[AUTHOR]** Decide whether to release them as supplementary material or on the camera-ready
-    version, and answer accordingly.
-- **D2. Recruitment and pay: [AUTHOR].** It is not in the paper. The facts are needed: how the
-  reviewer and the annotators were recruited, and whether and how much they were paid.
-- **D3. Consent: [AUTHOR].** The annotators label requests and are not data subjects. State
-  whether they agreed to their labels being used and reported.
-- **D4. Ethics review: [AUTHOR].** Was any ethics or IRB review sought, or was the work exempt?
-  For the initial submission, give no identifying institutional details.
-- **D5. Annotator demographics: [AUTHOR].** It is not in the paper. The protocol requires "no
-  prior involvement" and CLI familiarity (`ANNOTATION_PROTOCOL.md` §2), but the actual
-  characteristics are the author's to report.
+- one partially independent reviewer (κ = 0.63 on 14 items, §3);
+- the two-annotator study (κ = 0.98 on 78 items; §3, Appendix D).
+
+No third reader took part, so there is no adjudicator. The facts below are the author's answers of
+2026-10-05; they are stated in the paper's Ethical Considerations, Limitations and Appendix D.
+
+- **D1. Full instructions: Yes.** The annotation codebook and the annotator guidelines are released with
+  the benchmark (`research/datasets/annotation/ANNOTATION_CODEBOOK.md`, `ANNOTATOR_GUIDELINES.md`). The
+  Ethics section says so. Appendix D summarises the protocol and discloses that the codebook's worked
+  examples were written by an AI assistant.
+- **D2. Recruitment and pay: Yes, reported.** The first reviewer and the two annotators are **unpaid
+  volunteers**. The two annotators are friends of the author and members of the project team who did no
+  work on the tool, the benchmark or the paper (Ethics; §3; Limitations; Appendix D). No payment was made,
+  so no rate applies.
+- **D3. Consent: Yes.** They agreed to their labels being used and reported (Ethics). They labeled
+  requests and are not data subjects.
+- **D4. Ethics review: No.** No ethics board reviewed the annotation, and the paper says so (Ethics). If
+  the author's institution turns out to require review or to grant an exemption, this answer and the
+  Ethics sentence must be updated.
+- **D5. Annotator demographics: No.** None were collected, and the paper says so (Ethics).
 
 ## E. AI assistants
 
@@ -156,8 +163,8 @@ results enter the paper later, D1–D5 must cover the two annotators and the adj
 - The camera-ready Acknowledgements (`\aiacknowledgements` in `main.tex`) disclose it. It is
   omitted from the review version for anonymity.
 - The ledger is `research/paper/AI_DISCLOSURE_LEDGER.md`.
-- *Suggested form answer:* the rendered statement from the ledger. See FINAL-06 note 3 on updating
-  it to cover the work done since 2026-09-29.
+- *Suggested form answer:* the rendered statement from the ledger. It was updated on 2026-10-01 (the
+  external check) and 2026-10-02 (the annotation materials and coordination; ledger rows U10–U12).
 
 ## Proposed Appendix A addition (closes B2, C1 and C4; appendices do not count toward the page limit)
 

@@ -137,7 +137,8 @@ stratified sample of 14 AI-authored queries: Cohen's $\kappa=0.63$ \citep{cohen1
 interval for the agreement rate [63, 100]\%; 7 everyday requests and one far-from-corpus computing task, none a
 terminal task) and disagreed on 3 of 6 ambiguous ones. We then wrote a codebook and, before any label existed,
 fixed a two-annotator protocol with two criteria ($\kappa\geq0.7$; both annotators keep at least 90\% of out-of-scope
-labels). Two annotators, who both confirmed working independently and were not shown the original labels, labeled
+labels). Two annotators from our project team, who had not worked on the tool, the benchmark or this paper, both
+confirmed working independently and were not shown the original labels; they labeled
 58 AI-authored queries (one more, \qid{187}, has the defect above) and 20 controls using the codebook and the
 corpus: $\kappa=0.98$ (95\% interval [0.94, 1.00], 78 items; 0.97 on the 58 queries alone), and both kept all 35 out-of-scope labels, so both
 criteria were met. Both judged 4 of the 23 ambiguous queries clear and split on one; with no third reader, the
@@ -422,8 +423,9 @@ safety set; and study whether calibrated confidence and risk prompts change what
   \item \textbf{Small, dependent, partly AI-authored benchmark.} 150 and 209 queries, the second containing the first;
   59 queries drafted by an AI agent. Two annotators agree on their labels ($\kappa=0.98$), but the codebook uses the
   benchmark's own definitions, so agreement is partly by construction; its worked examples were written by an AI
-  assistant, and it was written after the first check ($\kappa=0.63$, $n=14$); blinding and independence rest on the
-  annotators' own compliance, as the repository is public; and with no third reader, 4 labels both annotators
+  assistant, and it was written after the first check ($\kappa=0.63$, $n=14$); the annotators are friends of the
+  author and members of the project team, not external annotators, and blinding and independence rest on their own
+  compliance, as the repository is public; and with no third reader, 4 labels both annotators
   questioned were kept. Two items have gold commands outside the corpus and one an acceptable command; v0.2.1
   corrects or drops them, and its re-run weakens the v0.2 calibration result (Appendix~\ref{app:labels}). Queries were written by the authors and an AI agent,
   not collected from users, so calibration and out-of-scope rates depend on this mix. A few accepted commands are
@@ -471,7 +473,11 @@ tool is, if anything, less accurate and less calibrated (\S\ref{sec:system}). No
 the functional check ran commands in disposable temporary directories on our own machine, not in an OS-level
 sandbox. We disclose that part of the benchmark was
 written by an AI agent, that our first label check fell below target, and that the annotation codebook's worked
-examples were written by an AI assistant. Code, benchmark files, result files and a
+examples were written by an AI assistant. The first reviewer and the two annotators are unpaid volunteers who agreed
+to their labels being used and reported; the two annotators are friends of the author and members of the project
+team who did no work on the tool, the benchmark or this paper. They labeled requests and are not data subjects; we
+collected no demographic data, and no ethics board reviewed the annotation. The codebook and the annotator
+guidelines are released with the benchmark. Code, benchmark files, result files and a
 reproduction guide will be released with the camera-ready version; they are withheld from the review version for
 anonymity.
 
@@ -714,7 +720,9 @@ labels: the 59 AI-authored queries and 20 controls (4 of them verbatim attention
 command is outside the Windows corpus, is excluded from the primary statistic as a known defect. The primary
 statistic is unweighted Cohen's $\kappa$ over the remaining 78 items, with a bootstrap interval. A third reader was
 to resolve items on which the annotators disagree (contested) or agree against the original label (reversed); with
-none available, the pre-declared fallback drops contested items and keeps reversed items' labels.
+none available, the pre-declared fallback drops contested items and keeps reversed items' labels. Both annotators
+are unpaid members of our project team and friends of the author; neither had worked on the tool, the benchmark or
+this paper, which the protocol requires.
 
 \paragraph{Results.} $\kappa=0.980$ [0.937, 1.000] (98.7\% agreement); on the 58 AI-authored queries alone,
 $\kappa=0.967$ [0.897, 1.000]. Both annotators kept all 35 out-of-scope labels. Of the 23 ambiguous queries, 18

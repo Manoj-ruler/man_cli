@@ -1577,6 +1577,33 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **Not re-run in the clone:** the PDF build (verified in the working copy at `0162be5`: page 8, 0 overfull boxes).
 - **Acceptance:** every result reproduces up to volatile fields: **pass**. `REPRODUCE.md` and the runbook are updated.
 
+### FINAL-06: the submission checklist (DONE 2026-10-05)
+
+- **Author:** "approve all five, apply and push" (the D1–D5 text).
+- **Paper text applied:**
+  - §3: the annotators are from the project team and had not worked on the tool, the benchmark or the paper;
+  - Limitations: they are friends of the author and team members, not external annotators;
+  - Ethics: unpaid volunteers; consented; not data subjects; no demographics collected; no ethics board
+    reviewed the annotation; the codebook and guidelines are released with the benchmark;
+  - Appendix D: one sentence in the Protocol paragraph.
+- **Checklist** ():
+  - section D is complete: D1 yes, D2 yes, D3 yes, D4 no (stated), D5 no (stated);
+  - the status lines, B2, B5, B6 and E1 are brought up to date;
+  - two optional [AUTHOR] items remain: LICENSE files and machine details.
+- **Checks:**
+  - trace: 253 snippets, 755 numbers, 0 problems; coverage: Limitations 22 numerals and Ethics 0, none unregistered;
+  - build: the body ends on page 8 (limit 8); 0 overfull boxes and 0 undefined references in both PDFs;
+  - abstract: 197 words;
+  - anonymity: the review PDF has 0 hits for all 15 strings; the positive control passes.
+- **Review PDF:** , SHA-256 prefix .
+- **Acceptance criteria:**
+  1. The checklist answers are drafted, including AI use from the ledger: **pass**.
+  2. The anonymous PDF is final: **pass** (as of this commit; any later text change rebuilds it).
+  3. The supplementary-material decision is recorded (none at review): **pass**.
+  4. Submission is the author's action.
+- **Note for the author:** D4 says no ethics board reviewed the annotation. If the author's institution
+  requires review or grants an exemption, the Ethics sentence and D4 must be updated.
+
 ## Decisions
 
 | ID | Decision | Date | By |
@@ -1641,6 +1668,7 @@ that is logged here as DEV-E1-01, … (protocol §6.9).
 - **Runbook step 13 is done (2026-10-02):** a clean-clone reproduction of everything, including v0.2.1, freeze v2.0 and E1. ISSUE-14 is resolved (a): the comparison now exits 0, and the negative controls pass.
 - **Runbook steps 7–10 are done (2026-10-02).** The paper reports the study and v0.2.1 (D13 = A).
   - Trace: 0 problems. The body ends on page 8. The abstract is 197 words.
+- **FINAL-06 is done (2026-10-05).** The D1–D5 text is applied and the checklist is complete. Every task in the plan is now done except the author's own actions: PAPER-07 (submit by Nov 6) and, optionally, LICENSE files.
 - **D1–D5 answered (2026-10-05).** The Ethics, §3, Limitations and Appendix D text and checklist section D are drafted in `paper/drafts/ETHICS_D1_D5_DRAFT.md`, waiting for approval.
 - **Waiting on the author:**
   - approval of the step-12 AI-statement clause and ledger row U12;
