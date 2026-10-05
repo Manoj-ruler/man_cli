@@ -1586,7 +1586,7 @@ Recorded by VERIFY-01 on 2026-09-30.
   - Ethics: unpaid volunteers; consented; not data subjects; no demographics collected; no ethics board
     reviewed the annotation; the codebook and guidelines are released with the benchmark;
   - Appendix D: one sentence in the Protocol paragraph.
-- **Checklist** ():
+- **Checklist** (`research/paper/RESPONSIBLE_NLP_CHECKLIST_DRAFT.md`):
   - section D is complete: D1 yes, D2 yes, D3 yes, D4 no (stated), D5 no (stated);
   - the status lines, B2, B5, B6 and E1 are brought up to date;
   - two optional [AUTHOR] items remain: LICENSE files and machine details.
@@ -1595,7 +1595,7 @@ Recorded by VERIFY-01 on 2026-09-30.
   - build: the body ends on page 8 (limit 8); 0 overfull boxes and 0 undefined references in both PDFs;
   - abstract: 197 words;
   - anonymity: the review PDF has 0 hits for all 15 strings; the positive control passes.
-- **Review PDF:** , SHA-256 prefix .
+- **Review PDF:** `main_review.pdf`, SHA-256 prefix `7617358db62f761a`.
 - **Acceptance criteria:**
   1. The checklist answers are drafted, including AI use from the ledger: **pass**.
   2. The anonymous PDF is final: **pass** (as of this commit; any later text change rebuilds it).
