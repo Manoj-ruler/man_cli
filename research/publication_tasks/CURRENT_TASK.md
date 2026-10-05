@@ -1,29 +1,25 @@
 # Current task
 
-**Runbook steps 7–13** (report the annotation study, then reproduce everything): **DONE (2026-10-02).**
+**FINAL-06: the submission checklist.** Status: **IN PROGRESS.** D1–D5 are answered (2026-10-05), and the
+text is drafted.
 
-- **Steps 10–12:** the paper reports the two-annotator study and v0.2.1.
-  - Trace: 253 snippets, 755 numbers, 0 problems.
-  - The body ends on page 8 of 8.
-  - The abstract is 197 words.
-  - The review PDF is anonymous.
-  - The AI clause is in the camera-ready.
-- **Step 13:** a fresh-clone reproduction of `0162be5`.
-  - All steps exit 0.
-  - v0.2.1 and its benchmark rebuild reproduce.
-  - Freeze v2.0 reproduces up to volatile fields.
-  - E1: 0 DIFFERENT.
-  - Tests 24/24; trace 0 problems.
-  - The annotation results are unchanged.
-  - The comparison exits 0 after the ISSUE-14 fix; the 3 hash-only files are VOLATILE (derived), and the
-    negative controls pass.
+**Waiting on the author:** approve `research/paper/drafts/ETHICS_D1_D5_DRAFT.md`. It proposes:
 
-**Waiting on the author:**
+1. §3: the annotators are members of the project team who had not worked on the tool, the benchmark or the
+   paper (about +1 body line; page 8 has room).
+2. Limitations: they are friends of the author and team members, not external annotators.
+3. Ethics: unpaid volunteers; consented; not data subjects; no demographics; no ethics review; the codebook
+   and guidelines are released.
+4. Appendix D: one sentence in the Protocol paragraph.
+5. Checklist section D: D1 yes, D2 yes, D3 yes, D4 no (stated), D5 no (stated).
 
-1. **D1–D5:** annotator recruitment and pay, consent, ethics review, demographics, codebook release. These are
-   needed for an Ethics sentence and the Responsible NLP checklist (section D).
-2. **PAPER-07 by Nov 6:** submit the current `main_review.pdf` (16 pages; SHA-256 prefix `4f382b14962bff32`).
-3. LICENSE files (only on explicit instruction).
+**After approval:** apply the text, run the trace (0 problems), build (≤ 8 pages), run the anonymity scan,
+complete the checklist, and close FINAL-06.
 
-**Done 2026-10-02:** the Table 8 `\clearpage`, at the author's request (`8fafee8`). Appendices C and D start
-on page 15, and Tables 8 and 9 are on page 16.
+**Other author actions:**
+
+- **PAPER-07 by Nov 6:** submit `main_review.pdf`. The hash will change once the text above is applied.
+- LICENSE files (only on explicit instruction).
+
+**Done:** runbook steps 7–13 (the annotation study reported and reproduced; ISSUE-13 and ISSUE-14 resolved);
+the Table 8 `\clearpage`.
