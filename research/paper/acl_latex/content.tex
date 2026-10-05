@@ -51,7 +51,7 @@ hybrid lexical--dense retriever each contribute?}
 \paragraph{Contributions.} (1) An audit of a published tool's confidence: it is no better than a constant
 forecaster, wrong answers average 86\% confidence (v0.1), and some wrong answers are destructive commands. (2) An
 attribution of what fixes what, under cross-validation on two benchmark versions with verbatim-copy controls
-excluded: standard recalibration largely corrects the confidence level, a tuned threshold on the shipped score handles
+excluded: standard recalibration substantially reduces the confidence's calibration error, a tuned threshold on the shipped score handles
 out-of-scope requests at a cost in refused in-scope queries, and a hybrid retriever (a research prototype with one small
 MiniLM encoder, not part of the package) mainly improves how confidence ranks the system's own errors. (3) The two
 benchmark versions, the code, and a trace from every reported number to its result file, released with the
@@ -95,7 +95,7 @@ combination is what is new here, not any single method.
 \label{sec:system}
 
 \paragraph{The published tool.} Queries are tokenized (lowercase, all characters except ASCII letters, digits,
-spaces and hyphens removed, 16-word stopword list), so non-English queries are refused. Each record's intent,
+spaces and hyphens removed, 16-word stopword list), so queries in non-Latin scripts are refused. Each record's intent,
 category and description is scored with BM25 ($k_1=1.2$, $b=0.75$), plus $+15$ when the query, stripped to
 letters and digits, is a substring of the equally stripped intent or contains it; this can fire on an accidental
 substring (the bare query ``tar'' matches ``start''). Confidence is $\min(\mathrm{round}(s/8\times100),100)$ for
@@ -171,7 +171,7 @@ which checks for tuning leakage across intents but cannot test unseen commands, 
 gold intent (Appendix~\ref{app:secondary}).
 
 \paragraph{Metrics and statistics.} Expected calibration error (ECE) uses 10 equal-width bins
-\citep{naeini2015ece,guo2017calibration}; we also report equal-mass and sweep estimates, a noise floor (the ECE of a
+\citep{naeini2015ece,guo2017calibration}; we also report equal-mass and sweep \citep{roelofs2022mitigating} estimates, a noise floor (the ECE of a
 perfectly calibrated forecaster with the same confidences and $n$, simulated), and Brier skill
 \citep{brier1950verification} against an out-of-fold no-skill forecaster that predicts the development base rate.
 Confidence often ties at its maximum (64\% of the hybrid's and 73\% of the shipped values on all 150 v0.1
@@ -228,7 +228,7 @@ Table~\ref{tab:claims} summarizes every claim; the population throughout is non-
   15 and 50 out-of-scope ones. No rule ever rejects a control, and controls are never discordant, so the accuracy
   $p$-values equal the Holm table's (Appendix~\ref{app:secondary}), which also holds the Holm-family ECE test. Status
   ``robust'' means the interval excludes zero on both versions; ``fragile'' means the result depends on a few
-  queries. The equal-false-rejection row picks each score's threshold on the same data (\S\ref{sec:ood}).
+  queries. Table~\ref{tab:v021} gives the corrected v0.2.1, where the AUGRC interval reaches zero. The equal-false-rejection row picks each score's threshold on the same data (\S\ref{sec:ood}).
   $^\dagger$On the benchmark; on external requests at equal v0.2 cost the hybrid's feature rejects more
   (Appendix~\ref{app:external}).}
   \label{tab:claims}
@@ -401,7 +401,8 @@ commands, or require higher confidence before returning a high-risk command. We 
 On our benchmark, the three reliability problems of a shipped closed-set retriever had three different remedies,
 and a better retriever was not needed for out-of-scope requests, although on external requests the hybrid's
 feature rejected more at equal cost. A published natural-language command retriever shows its users a confidence that, on our benchmark, is no better
-than a constant forecaster. On the same benchmark, post-hoc recalibration fixes most of that. A threshold on the
+than a constant forecaster. On the same benchmark, post-hoc recalibration fixes most of that on v0.1 and v0.2, and less on the corrected
+v0.2.1. A threshold on the
 shipped score, tuned by cross-validation, rejects more out-of-scope requests than a hybrid detector (on v0.2, 46 vs.\
 34 of 50, and 12 vs.\ 9 on the 15 not screened by retrieval score) but refuses more in-scope queries (20 vs.\ 11 of 134), and
 most of these requests are everyday rather than terminal tasks. In an analysis frozen before scoring, on external
@@ -423,8 +424,8 @@ safety set; and study whether calibrated confidence and risk prompts change what
   \item \textbf{Small, dependent, partly AI-authored benchmark.} 150 and 209 queries, the second containing the first;
   59 queries drafted by an AI agent. Two annotators agree on their labels ($\kappa=0.98$), but the codebook uses the
   benchmark's own definitions, so agreement is partly by construction; its worked examples were written by an AI
-  assistant, and it was written after the first check ($\kappa=0.63$, $n=14$); the annotators are friends of the
-  author and members of the project team, not external annotators, and blinding and independence rest on their own
+  assistant, and it was written after the first check ($\kappa=0.63$, $n=14$); the annotators are friends of
+  \authorrel{} and members of the project team, not external annotators, and blinding and independence rest on their own
   compliance, as the repository is public; and with no third reader, 4 labels both annotators
   questioned were kept. Two items have gold commands outside the corpus and one an acceptable command; v0.2.1
   corrects or drops them, and its re-run weakens the v0.2 calibration result (Appendix~\ref{app:labels}). Queries were written by the authors and an AI agent,
@@ -474,7 +475,7 @@ the functional check ran commands in disposable temporary directories on our own
 sandbox. We disclose that part of the benchmark was
 written by an AI agent, that our first label check fell below target, and that the annotation codebook's worked
 examples were written by an AI assistant. The first reviewer and the two annotators are unpaid volunteers who agreed
-to their labels being used and reported; the two annotators are friends of the author and members of the project
+to their labels being used and reported; the two annotators are friends of \authorrel{} and members of the project
 team who did no work on the tool, the benchmark or this paper. They labeled requests and are not data subjects; we
 collected no demographic data, and no ethics board reviewed the annotation. The codebook and the annotator
 guidelines are released with the benchmark. Code, benchmark files, result files and a
@@ -721,7 +722,7 @@ command is outside the Windows corpus, is excluded from the primary statistic as
 statistic is unweighted Cohen's $\kappa$ over the remaining 78 items, with a bootstrap interval. A third reader was
 to resolve items on which the annotators disagree (contested) or agree against the original label (reversed); with
 none available, the pre-declared fallback drops contested items and keeps reversed items' labels. Both annotators
-are unpaid members of our project team and friends of the author; neither had worked on the tool, the benchmark or
+are unpaid members of our project team and friends of \authorrel{}; neither had worked on the tool, the benchmark or
 this paper, which the protocol requires.
 
 \paragraph{Results.} $\kappa=0.980$ [0.937, 1.000] (98.7\% agreement); on the 58 AI-authored queries alone,

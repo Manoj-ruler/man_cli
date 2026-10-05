@@ -1,4 +1,4 @@
-\begin{thebibliography}{31}
+\begin{thebibliography}{32}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Agarwal et~al.(2020)Agarwal, Barroso, Chakraborti, Dow, Fadnis,
@@ -157,6 +157,15 @@ Stephen Robertson and Hugo Zaragoza. 2009.
   relevance framework: {BM25} and beyond}.
 \newblock \emph{Foundations and Trends in Information Retrieval},
   3(4):333--389.
+
+\bibitem[{Roelofs et~al.(2022)Roelofs, Cain, Shlens, and
+  Mozer}]{roelofs2022mitigating}
+Rebecca Roelofs, Nicholas Cain, Jonathon Shlens, and Michael~C. Mozer. 2022.
+\newblock \href {https://proceedings.mlr.press/v151/roelofs22a.html}
+  {Mitigating bias in calibration error estimation}.
+\newblock In \emph{International Conference on Artificial Intelligence and
+  Statistics ({AISTATS})}, volume 151 of \emph{Proceedings of Machine Learning
+  Research}, pages 4036--4054.
 
 \bibitem[{Somov and Tutubalina(2025)}]{somov2025texttosql}
 Oleg Somov and Elena Tutubalina. 2025.

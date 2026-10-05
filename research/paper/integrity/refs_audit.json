@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-10-01T05:39:08.662Z",
-  "n": 31,
+  "checked_at": "2026-10-05T09:56:31.698Z",
+  "n": 32,
   "refs": [
     {
       "key": "lin-etal-2018-nl2bash",
@@ -104,34 +104,13 @@
         },
         {
           "src": "s2",
-          "url": "https://www.semanticscholar.org/paper/642e280df732665249315d6c144871f0e2ceeae6",
-          "title": "NeurIPS 2020 NLC2CMD Competition: Translating Natural Language to Bash Commands",
-          "authors": [
-            "agarwal",
-            "chakraborti",
-            "fu",
-            "gros",
-            "lin",
-            "maene",
-            "talamadupula",
-            "teng",
-            "white"
-          ],
-          "year": 2021,
-          "venue": "Neural Information Processing Systems",
-          "s2_status": "S2_VERIFIED"
+          "url": "https://api.semanticscholar.org/graph/v1/paper/search/match?fields=title,authors,year,venue,externalIds,publicationVenue&query=NeurIPS%202020%20NLC2CMD%20Competition%3A%20Translating%20Natural%20Language%20to%20Bash%20Commands",
+          "error": "API_UNAVAILABLE"
         }
       ],
       "checks": [
         {
           "src": "arxiv",
-          "title_match": true,
-          "authors_match": true,
-          "author_count": "9 vs bib 9",
-          "year_match": true
-        },
-        {
-          "src": "s2",
           "title_match": true,
           "authors_match": true,
           "author_count": "9 vs bib 9",
@@ -369,19 +348,20 @@
           "url": "https://www.semanticscholar.org/paper/a96ab23aea50f1444639bd05a9deaa6d9d3a3166",
           "title": "BashCoder-R1: Towards Robust and Explainable Bash Script Generation with Robustness-Aware Group Relative Policy Optimization",
           "authors": [
-            "yang",
-            "zhang",
             "yu",
             "wang",
-            "ma",
             "xu",
             "zhang",
             "wang",
+            "ma",
+            "yang",
             "deng",
-            "wang"
+            "wang",
+            "zhang"
           ],
-          "year": null,
+          "year": 2026,
           "venue": "",
+          "doi": "10.1145/3832094",
           "s2_status": "S2_VERIFIED"
         }
       ],
@@ -396,9 +376,9 @@
         {
           "src": "s2",
           "title_match": true,
-          "authors_match": false,
+          "authors_match": true,
           "author_count": "10 vs bib 10",
-          "year_match": null
+          "year_match": true
         }
       ],
       "exists": true
@@ -1906,6 +1886,48 @@
           "authors_match": true,
           "author_count": "8 vs bib 8",
           "year_match": true
+        }
+      ],
+      "exists": true
+    },
+    {
+      "key": "roelofs2022mitigating",
+      "bib": {
+        "title": "Mitigating Bias in Calibration Error Estimation",
+        "authors": [
+          "roelofs",
+          "cain",
+          "shlens",
+          "mozer"
+        ],
+        "year": "2022",
+        "venue": "International Conference on Artificial Intelligence and Statistics (AISTATS)",
+        "volume": "151",
+        "pages": "4036--4054"
+      },
+      "sources": [
+        {
+          "src": "s2",
+          "url": "https://www.semanticscholar.org/paper/25b4230d029ed49205ea42eaa57fc83326e86bb5",
+          "title": "Mitigating bias in calibration error estimation",
+          "authors": [
+            "roelofs",
+            "cain",
+            "shlens",
+            "mozer"
+          ],
+          "year": 2020,
+          "venue": "International Conference on Artificial Intelligence and Statistics",
+          "s2_status": "S2_VERIFIED"
+        }
+      ],
+      "checks": [
+        {
+          "src": "s2",
+          "title_match": true,
+          "authors_match": true,
+          "author_count": "4 vs bib 4",
+          "year_match": false
         }
       ],
       "exists": true

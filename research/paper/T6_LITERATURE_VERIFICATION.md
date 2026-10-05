@@ -152,3 +152,21 @@ The R2 report lists 18 further references; they are triaged with the suggested i
   - The Limitations sentence "public natural-language-to-Bash benchmarks target Linux" stays
     accurate.
   - The literature date in the Limitations becomes October 2026.
+
+## 9. Final-audit addendum (2026-10-05): the ECE-sweep reference (audit finding F6)
+
+The paper reports "sweep" ECE estimates (§4, §5), and `research/experiments/review_r1_common.js` attributes
+the estimator to Roelofs et al. The paper had no citation for it.
+
+- **Reference:** Roelofs, Cain, Shlens and Mozer, "Mitigating Bias in Calibration Error Estimation".
+- **Primary records checked on 2026-10-05:**
+  - arXiv 2012.08668 v3: the title and the four authors match; the abstract describes the sweep and monotonic
+    binning;
+  - the PMLR v151 proceedings page (`proceedings.mlr.press/v151/roelofs22a.html`): the same title and
+    authors, AISTATS, publication date 2022-05-03, pages 4036–4054;
+  - Semantic Scholar: title and authors match. It lists the year as 2020 (the arXiv year); the venue year
+    2022 is taken from PMLR.
+- **Decision (author: "apply all the fixes"):** it is cited once in §4, as `roelofs2022mitigating`, where
+  the sweep estimate is introduced.
+- **`integrity/verify_refs.js` re-run:** 32 of 32 cited references found; no change for the other 31 against
+  the 2026-10-01 audit.

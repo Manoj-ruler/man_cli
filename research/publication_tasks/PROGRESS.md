@@ -1604,6 +1604,41 @@ Recorded by VERIFY-01 on 2026-09-30.
 - **Note for the author:** D4 says no ethics board reviewed the annotation. If the author's institution
   requires review or grants an exemption, the Ethics sentence and D4 must be updated.
 
+### Final publication audit and its fixes (DONE 2026-10-05; author request, outside the task list)
+
+- **Audit** (`research/paper/final_audit/`, of the paper at `5c7a641`): four reports plus two read-only
+  scripts. **Verdict: READY WITH MINOR FIXES; no blocker.**
+  - **Independent recomputation** (`scripts/audit_recompute.js`, no project helpers): 48 comparisons, all
+    consistent with the paper, including the per-fold thresholds re-derived from raw scores, the
+    external-check rates and κ.
+  - **Trace coverage** (`scripts/audit_coverage.js`): 706 numerals; 580 pinned at their location; 107
+    registered elsewhere; 19 design constants; 1 result statement without an entry.
+  - **Methods against code:** folds, tuning on development folds, calibrators, bootstrap, McNemar, Holm and
+    the external-check freeze all match.
+  - **Integrity:** no Critical or Major issue. The known limitations are all disclosed in the paper.
+  - **Released system:** npm 1.0.1 is the latest version; `search.js` is identical to master; the corpus is
+    identical in the fields the tool reads. The released corpus has 380 records against the 431 evaluated,
+    which the paper states.
+- **Findings and outcomes** (author: "apply all the fixes, commit the audit and push"):
+  - **F1 (factual error):** "non-English queries are refused" was false (the tool answers "como instalar
+    python" at 66% confidence). Now "queries in non-Latin scripts are refused".
+  - **F2:** the calibration summaries are qualified for v0.2.1 (Contribution 2, Conclusion).
+  - **F3:** the Table 1 caption points to Table 9.
+  - **F4:** the α = 0.1 statement is registered in the trace.
+  - **F5:** "friends of the author" uses `\authorrel`, so the review version says "one of the authors".
+  - **F6:** the sweep estimator is cited (`roelofs2022mitigating`), verified against arXiv 2012.08668 and
+    PMLR v151 (`T6_LITERATURE_VERIFICATION.md` §9); `verify_refs.js` gives 32 of 32.
+  - **Not applied:** F7, F10, F11 and the optional items.
+- **Checks after the fixes:**
+  - trace: 254 snippets, 756 numbers, 0 problems;
+  - build: the body ends on page 8; 0 overfull boxes, 0 undefined references, 0 BibTeX warnings; 17 pages;
+  - abstract: 197 words;
+  - anonymity: the review PDF has 0 hits;
+  - tests 24/24; freeze inputs 27/27; the E1 files equal the tag.
+- **Review PDF:** SHA-256 prefix `b5eaebd7e55d828a`.
+- **For the author to verify outside the repository:** the venue's page limit, template and anonymity rules;
+  the mentorship deadline; the checklist form; the ethics-review requirement.
+
 ## Decisions
 
 | ID | Decision | Date | By |
